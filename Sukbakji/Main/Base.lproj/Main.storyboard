@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v5e-mJ-xTe">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--홈-->
+        <scene sceneID="XcF-vf-v8m">
+            <objects>
+                <viewController id="uM3-4Q-a3E" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qWW-oL-Gja">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Mtk-N0-ntX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="홈" image="Sukbakji_Home" id="5yO-kN-xDo">
+                        <color key="badgeColor" name="Coquelicot"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aWw-Ip-WhH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1801" y="-1287"/>
+        </scene>
+        <!--Main Tab View Controller-->
+        <scene sceneID="Ths-7K-IB5">
+            <objects>
+                <tabBarController storyboardIdentifier="MainTabVC" automaticallyAdjustsScrollViewInsets="NO" id="v5e-mJ-xTe" customClass="MainTabViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zrv-rw-pNa">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="Coquelicot"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="uM3-4Q-a3E" kind="relationship" relationship="viewControllers" id="0Tn-dv-4OW"/>
+                        <segue destination="zMY-ZM-z6h" kind="relationship" relationship="viewControllers" id="Ebs-eF-Kn8"/>
+                        <segue destination="rrj-ed-jw5" kind="relationship" relationship="viewControllers" id="zEC-Un-0gN"/>
+                        <segue destination="3zS-NU-e5M" kind="relationship" relationship="viewControllers" id="1aC-X2-que"/>
+                        <segue destination="OzF-qj-b7f" kind="relationship" relationship="viewControllers" id="tz4-tH-9Fj"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RoL-Ba-gQr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="912" y="4"/>
+        </scene>
+        <!--게시판-->
+        <scene sceneID="eb1-n2-koD">
+            <objects>
+                <viewController id="rrj-ed-jw5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8Al-ER-NaU">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="0r7-hR-rq6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="게시판" image="Sukbakji_Board" id="suU-6k-cCB">
+                        <color key="badgeColor" name="Coquelicot"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k1r-LQ-OXK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1801" y="4"/>
+        </scene>
+        <!--채팅-->
+        <scene sceneID="wVp-cq-aPL">
+            <objects>
+                <viewController id="3zS-NU-e5M" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ojw-bb-2xp">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="msF-vX-cfV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="채팅" image="Sukbakji_Chatting" id="Cde-my-INk">
+                        <color key="badgeColor" name="Coquelicot"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ji-Iv-bdV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1801" y="649"/>
+        </scene>
+        <!--디렉토리-->
+        <scene sceneID="7hA-bI-evj">
+            <objects>
+                <viewController id="OzF-qj-b7f" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a1q-rw-OZv">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="v5V-Kv-iRd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="디렉토리" image="Sukbakji_Book" id="cvm-1b-2LM">
+                        <color key="badgeColor" name="Coquelicot"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Af4-B3-XuA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1801" y="1294"/>
+        </scene>
+        <!--캘린더-->
+        <scene sceneID="kxA-Ns-ncc">
+            <objects>
+                <viewController id="zMY-ZM-z6h" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dKE-NY-gRu">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vtf-yV-D00"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="캘린더" image="Sukbakji_Calendar" id="01g-bL-7C4">
+                        <color key="badgeColor" red="0.62368756530000002" green="0.62310129400000003" blue="0.64314001799999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="86o-m4-rCH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1801" y="-641"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Sukbakji_Board" width="32" height="32"/>
+        <image name="Sukbakji_Book" width="32" height="32"/>
+        <image name="Sukbakji_Calendar" width="32" height="32"/>
+        <image name="Sukbakji_Chatting" width="32" height="32"/>
+        <image name="Sukbakji_Home" width="32" height="32"/>
+        <namedColor name="Coquelicot">
+            <color red="0.92549019607843142" green="0.28627450980392155" blue="0.031372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
