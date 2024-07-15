@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14862C44CE59003AFCB7 /* Home.storyboard */; };
+		C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14882C44CE64003AFCB7 /* Calendar.storyboard */; };
+		C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */; };
+		C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */; };
+		C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CA82C45757200D4339D /* FavoriteLabViewController.swift */; };
+		C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CAA2C4575B600D4339D /* FavoriteBoardViewController.swift */; };
+		C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CAC2C4575E000D4339D /* HotFeedViewController.swift */; };
+		C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CAE2C4576E900D4339D /* FavoriteBoardTableViewCell.swift */; };
+		C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */; };
+		C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */; };
 		C7A7BC302C3AF321007E66DA /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7A7BC272C3AF321007E66DA /* Pretendard-Light.otf */; };
 		C7A7BC312C3AF321007E66DA /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7A7BC282C3AF321007E66DA /* Pretendard-Black.otf */; };
 		C7A7BC322C3AF321007E66DA /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7A7BC292C3AF321007E66DA /* Pretendard-Medium.otf */; };
@@ -27,6 +37,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C71E14862C44CE59003AFCB7 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		C71E14882C44CE64003AFCB7 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		C74D4CA82C45757200D4339D /* FavoriteLabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabViewController.swift; sourceTree = "<group>"; };
+		C74D4CAA2C4575B600D4339D /* FavoriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardViewController.swift; sourceTree = "<group>"; };
+		C74D4CAC2C4575E000D4339D /* HotFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotFeedViewController.swift; sourceTree = "<group>"; };
+		C74D4CAE2C4576E900D4339D /* FavoriteBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardTableViewCell.swift; sourceTree = "<group>"; };
+		C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotFeedTableViewCell.swift; sourceTree = "<group>"; };
+		C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7A7BC272C3AF321007E66DA /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Light.otf"; path = "../../../../../Downloads/Pretendard-1.3.9/public/static/Pretendard-Light.otf"; sourceTree = "<group>"; };
 		C7A7BC282C3AF321007E66DA /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Black.otf"; path = "../../../../../Downloads/Pretendard-1.3.9/public/static/Pretendard-Black.otf"; sourceTree = "<group>"; };
 		C7A7BC292C3AF321007E66DA /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Medium.otf"; path = "../../../../../Downloads/Pretendard-1.3.9/public/static/Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -59,6 +79,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C71E14842C44CE44003AFCB7 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C71E14862C44CE59003AFCB7 /* Home.storyboard */,
+				C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */,
+				C74D4CAA2C4575B600D4339D /* FavoriteBoardViewController.swift */,
+				C74D4CAC2C4575E000D4339D /* HotFeedViewController.swift */,
+				C74D4CA82C45757200D4339D /* FavoriteLabViewController.swift */,
+				C74D4CAE2C4576E900D4339D /* FavoriteBoardTableViewCell.swift */,
+				C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */,
+				C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C71E14852C44CE4B003AFCB7 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				C71E14882C44CE64003AFCB7 /* Calendar.storyboard */,
+				C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		C763D71E2C3BBA8900201913 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +149,8 @@
 		C7F4552B2C39B8EE00A4D0EE /* Sukbakji */ = {
 			isa = PBXGroup;
 			children = (
+				C71E14852C44CE4B003AFCB7 /* Calendar */,
+				C71E14842C44CE44003AFCB7 /* Home */,
 				C763D71E2C3BBA8900201913 /* Main */,
 				C7A7BC262C3AF2D4007E66DA /* Font */,
 				C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */,
@@ -176,9 +222,11 @@
 			files = (
 				C7F455392C39B8F000A4D0EE /* LaunchScreen.storyboard in Resources */,
 				C7A7BC302C3AF321007E66DA /* Pretendard-Light.otf in Resources */,
+				C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */,
 				C7A7BC342C3AF321007E66DA /* Pretendard-ExtraLight.otf in Resources */,
 				C7A7BC382C3AF321007E66DA /* Pretendard-Thin.otf in Resources */,
 				C7A7BC332C3AF321007E66DA /* Pretendard-Bold.otf in Resources */,
+				C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */,
 				C7A7BC352C3AF321007E66DA /* Pretendard-Regular.otf in Resources */,
 				C7F455362C39B8F000A4D0EE /* Assets.xcassets in Resources */,
 				C7A7BC372C3AF321007E66DA /* Pretendard-ExtraBold.otf in Resources */,
@@ -196,11 +244,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
+				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
+				C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */,
 				C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
+				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,
+				C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */,
+				C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */,
+				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
+				C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

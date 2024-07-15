@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Bold.otf">
+            <string>Pretendard-Bold</string>
+        </array>
+        <array key="Pretendard-Medium.otf">
+            <string>Pretendard-Medium</string>
+        </array>
+        <array key="Pretendard-SemiBold.otf">
+            <string>Pretendard-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="HomeVC" id="Y6W-OH-hqX" customClass="HomeViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="1516"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sb3-SE-keZ">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="1516"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rQ-PM-1zG">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1516"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Homelogo" translatesAutoresizingMaskIntoConstraints="NO" id="Y8M-5P-cnS">
+                                                <rect key="frame" x="24" y="8" width="70" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="5Ru-ii-mn5"/>
+                                                    <constraint firstAttribute="width" constant="70" id="mhJ-7j-Xh2"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zbb-t8-zym">
+                                                <rect key="frame" x="289" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="ccF-39-LU5"/>
+                                                    <constraint firstAttribute="width" constant="48" id="qz3-Pj-1n5"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Notification"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4H-J0-OMa">
+                                                <rect key="frame" x="337" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="hJ4-zg-3Wi"/>
+                                                    <constraint firstAttribute="height" constant="48" id="pbH-Su-7p8"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Mypage"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLA-AN-gMc">
+                                                <rect key="frame" x="0.0" y="48" width="393" height="1.3333333333333357"/>
+                                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1.2" id="098-QE-gbB"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="누니 님, 반가워요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmu-8g-YBJ">
+                                                <rect key="frame" x="24" y="69.333333333333329" width="99" height="17"/>
+                                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="14"/>
+                                                <color key="textColor" red="0.87058823529411766" green="0.25490196078431371" blue="0.011764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="석박지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBQ-Dx-6u5">
+                                                <rect key="frame" x="24" y="92.333333333333329" width="47" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="uVd-x7-Ce5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="18"/>
+                                                <color key="textColor" red="0.87058823529999996" green="0.25490196079999999" blue="0.01176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="와 함께" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NV1-Ro-PWR">
+                                                <rect key="frame" x="71" y="92.333333333333329" width="51" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="DaL-or-CNO"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="18"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 일정을 확인해 보세요!🏃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1us-Vb-J3Q">
+                                                <rect key="frame" x="23.999999999999986" y="118.33333333333331" width="226.66666666666663" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="f2Z-un-e7T"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="18"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVm-t7-APb">
+                                                <rect key="frame" x="24" y="152.33333333333334" width="345" height="97"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다가오는 일정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4n8-fa-Niy">
+                                                        <rect key="frame" x="26" y="12" width="77" height="17"/>
+                                                        <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
+                                                        <color key="textColor" red="0.46274509803921571" green="0.46274509803921571" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성신여자대학교 원서 접수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGM-BB-26M">
+                                                        <rect key="frame" x="26" y="60" width="179.66666666666666" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D-5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7g-ck-qDr">
+                                                        <rect key="frame" x="26" y="34" width="31.666666666666671" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                                        <color key="textColor" name="Coquelicot"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Layer" translatesAutoresizingMaskIntoConstraints="NO" id="qh3-5i-DsT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="6" height="97"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="6" id="e6q-Yf-TdK"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="iGM-BB-26M" firstAttribute="top" secondItem="l7g-ck-qDr" secondAttribute="bottom" constant="5" id="1Gd-kn-MCY"/>
+                                                    <constraint firstItem="qh3-5i-DsT" firstAttribute="top" secondItem="oVm-t7-APb" secondAttribute="top" id="2wK-MH-bfX"/>
+                                                    <constraint firstItem="l7g-ck-qDr" firstAttribute="leading" secondItem="qh3-5i-DsT" secondAttribute="trailing" constant="20" id="Luv-Kw-Fgs"/>
+                                                    <constraint firstItem="l7g-ck-qDr" firstAttribute="top" secondItem="4n8-fa-Niy" secondAttribute="bottom" constant="5" id="P3K-xw-WUS"/>
+                                                    <constraint firstItem="qh3-5i-DsT" firstAttribute="leading" secondItem="oVm-t7-APb" secondAttribute="leading" id="X1w-gU-KUs"/>
+                                                    <constraint firstItem="4n8-fa-Niy" firstAttribute="top" secondItem="oVm-t7-APb" secondAttribute="top" constant="12" id="Xhe-LR-cAH"/>
+                                                    <constraint firstItem="4n8-fa-Niy" firstAttribute="leading" secondItem="qh3-5i-DsT" secondAttribute="trailing" constant="20" id="Yoh-ld-DE3"/>
+                                                    <constraint firstAttribute="bottom" secondItem="qh3-5i-DsT" secondAttribute="bottom" id="aM8-fp-q5g"/>
+                                                    <constraint firstAttribute="height" constant="97" id="aV7-ak-ZbP"/>
+                                                    <constraint firstItem="iGM-BB-26M" firstAttribute="leading" secondItem="qh3-5i-DsT" secondAttribute="trailing" constant="20" id="xOx-71-wxx"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="석박지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zuv-cG-Bv0">
+                                                <rect key="frame" x="24" y="277.33333333333331" width="47" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="19b-ep-hcS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="18"/>
+                                                <color key="textColor" red="0.87058823529999996" green="0.25490196079999999" blue="0.01176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가 Pick!했어요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGO-xK-xBQ">
+                                                <rect key="frame" x="71" y="277.33333333333331" width="108" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="rry-ki-btD"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="18"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hlb-ia-Vz4">
+                                                <rect key="frame" x="352.66666666666669" y="283.33333333333331" width="16.333333333333314" height="14"/>
+                                                <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                <color key="textColor" red="0.46274509800000002" green="0.46274509800000002" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_AD" translatesAutoresizingMaskIntoConstraints="NO" id="3m0-mT-a3N">
+                                                <rect key="frame" x="24" y="315.33333333333331" width="345" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="0Md-4Q-nKV"/>
+                                                </constraints>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylx-Sr-WKR">
+                                                <rect key="frame" x="0.0" y="1040.3333333333333" width="393" height="64"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ua1-nV-urV">
+                                                        <rect key="frame" x="188.66666666666666" y="23.333333333333485" width="16" height="17"/>
+                                                        <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
+                                                        <color key="textColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="10p-7W-5z0"/>
+                                                    <constraint firstItem="Ua1-nV-urV" firstAttribute="centerX" secondItem="ylx-Sr-WKR" secondAttribute="centerX" id="bt1-Yp-upl"/>
+                                                    <constraint firstItem="Ua1-nV-urV" firstAttribute="centerY" secondItem="ylx-Sr-WKR" secondAttribute="centerY" id="qol-2B-bJn"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRc-CD-U69">
+                                                <rect key="frame" x="143" y="1386.3333333333333" width="107" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="uDJ-Fc-gTt"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="개인정보처리방침">
+                                                    <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                    <color key="baseForegroundColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5z-bh-UJS">
+                                                <rect key="frame" x="0.0" y="443.33333333333326" width="393" height="209"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="209" id="LeL-TP-EEi"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="Oun-0l-DCA" kind="embed" id="vWJ-Jy-WW4"/>
+                                                </connections>
+                                            </containerView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VrQ-r4-1AY">
+                                                <rect key="frame" x="0.0" y="652.33333333333337" width="393" height="388.00000000000011"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="388" id="hd0-sw-rRQ"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="sBN-F8-1OE" kind="embed" id="HaS-Eg-is0"/>
+                                                </connections>
+                                            </containerView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="khr-i7-lcE">
+                                                <rect key="frame" x="0.0" y="1132.3333333333333" width="393" height="254"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="254" id="0Gs-Aa-j5B"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="glx-MM-EFL" kind="embed" id="bbC-bc-34P"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="oVm-t7-APb" firstAttribute="top" secondItem="1us-Vb-J3Q" secondAttribute="bottom" constant="8" id="0FA-fi-8ve"/>
+                                            <constraint firstItem="tBQ-Dx-6u5" firstAttribute="top" secondItem="lmu-8g-YBJ" secondAttribute="bottom" constant="6" id="0NZ-uA-MXA"/>
+                                            <constraint firstItem="3m0-mT-a3N" firstAttribute="top" secondItem="Zuv-cG-Bv0" secondAttribute="bottom" constant="12" id="0hX-bt-vcS"/>
+                                            <constraint firstAttribute="trailing" secondItem="ylx-Sr-WKR" secondAttribute="trailing" id="7nN-XL-yur"/>
+                                            <constraint firstAttribute="trailing" secondItem="K4H-J0-OMa" secondAttribute="trailing" constant="8" id="Azp-OI-gaf"/>
+                                            <constraint firstItem="Zuv-cG-Bv0" firstAttribute="top" secondItem="oVm-t7-APb" secondAttribute="bottom" constant="28" id="DC2-SA-y2U"/>
+                                            <constraint firstItem="khr-i7-lcE" firstAttribute="top" secondItem="ylx-Sr-WKR" secondAttribute="bottom" constant="28" id="G7D-Tj-rbr"/>
+                                            <constraint firstItem="NV1-Ro-PWR" firstAttribute="top" secondItem="lmu-8g-YBJ" secondAttribute="bottom" constant="6" id="GUQ-U4-WQn"/>
+                                            <constraint firstItem="1us-Vb-J3Q" firstAttribute="top" secondItem="tBQ-Dx-6u5" secondAttribute="bottom" id="Gjb-Zi-GT3"/>
+                                            <constraint firstItem="lmu-8g-YBJ" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" constant="24" id="JIu-9A-6Mg"/>
+                                            <constraint firstItem="3m0-mT-a3N" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" constant="24" id="JZW-MF-UH4"/>
+                                            <constraint firstAttribute="trailing" secondItem="Hlb-ia-Vz4" secondAttribute="trailing" constant="24" id="LfM-ww-haM"/>
+                                            <constraint firstItem="TLA-AN-gMc" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" id="LnP-Hg-k11"/>
+                                            <constraint firstItem="fRc-CD-U69" firstAttribute="centerX" secondItem="5rQ-PM-1zG" secondAttribute="centerX" id="LnS-Nw-gAe"/>
+                                            <constraint firstItem="oVm-t7-APb" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" constant="24" id="M1N-PX-o7e"/>
+                                            <constraint firstItem="lmu-8g-YBJ" firstAttribute="top" secondItem="TLA-AN-gMc" secondAttribute="bottom" constant="20" id="NN9-De-kqO"/>
+                                            <constraint firstItem="K4H-J0-OMa" firstAttribute="leading" secondItem="Zbb-t8-zym" secondAttribute="trailing" id="O9f-hi-NoT"/>
+                                            <constraint firstItem="khr-i7-lcE" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" id="SmJ-HR-A78"/>
+                                            <constraint firstAttribute="trailing" secondItem="3m0-mT-a3N" secondAttribute="trailing" constant="24" id="T9d-rw-ppi"/>
+                                            <constraint firstAttribute="trailing" secondItem="VrQ-r4-1AY" secondAttribute="trailing" id="U4O-Ow-Ve8"/>
+                                            <constraint firstItem="Y8M-5P-cnS" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" constant="24" id="UkN-ql-9kI"/>
+                                            <constraint firstItem="tBQ-Dx-6u5" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" constant="24" id="XOD-Ze-oCo"/>
+                                            <constraint firstItem="Zuv-cG-Bv0" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" constant="24" id="cCV-N7-D8K"/>
+                                            <constraint firstItem="Zbb-t8-zym" firstAttribute="top" secondItem="5rQ-PM-1zG" secondAttribute="top" id="dPU-pY-yNQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="fRc-CD-U69" secondAttribute="bottom" constant="103.67" id="dWb-jW-4W3"/>
+                                            <constraint firstAttribute="trailing" secondItem="TLA-AN-gMc" secondAttribute="trailing" id="ddQ-ot-vHa"/>
+                                            <constraint firstItem="VrQ-r4-1AY" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" id="deF-JM-qeQ"/>
+                                            <constraint firstItem="1us-Vb-J3Q" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" constant="24" id="gKm-7F-W9F"/>
+                                            <constraint firstItem="NV1-Ro-PWR" firstAttribute="leading" secondItem="tBQ-Dx-6u5" secondAttribute="trailing" id="hqA-FY-Tkw"/>
+                                            <constraint firstItem="hGO-xK-xBQ" firstAttribute="top" secondItem="oVm-t7-APb" secondAttribute="bottom" constant="28" id="kZa-oI-TIJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="x5z-bh-UJS" secondAttribute="trailing" id="ljM-Cl-dZS"/>
+                                            <constraint firstItem="Y8M-5P-cnS" firstAttribute="top" secondItem="5rQ-PM-1zG" secondAttribute="top" constant="8" id="miB-Aa-Ixw"/>
+                                            <constraint firstItem="TLA-AN-gMc" firstAttribute="top" secondItem="Y8M-5P-cnS" secondAttribute="bottom" constant="8" id="nlo-HI-SYm"/>
+                                            <constraint firstItem="hGO-xK-xBQ" firstAttribute="leading" secondItem="Zuv-cG-Bv0" secondAttribute="trailing" id="oBH-zf-pE0"/>
+                                            <constraint firstItem="x5z-bh-UJS" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" id="oih-WL-B45"/>
+                                            <constraint firstAttribute="trailing" secondItem="oVm-t7-APb" secondAttribute="trailing" constant="24" id="osi-oP-711"/>
+                                            <constraint firstItem="ylx-Sr-WKR" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" id="rnF-Tp-1dn"/>
+                                            <constraint firstItem="ylx-Sr-WKR" firstAttribute="top" secondItem="VrQ-r4-1AY" secondAttribute="bottom" id="rul-4T-5f6"/>
+                                            <constraint firstAttribute="trailing" secondItem="khr-i7-lcE" secondAttribute="trailing" id="uE2-kg-qaY"/>
+                                            <constraint firstItem="Hlb-ia-Vz4" firstAttribute="top" secondItem="oVm-t7-APb" secondAttribute="bottom" constant="34" id="uQl-IC-VPM"/>
+                                            <constraint firstItem="x5z-bh-UJS" firstAttribute="top" secondItem="3m0-mT-a3N" secondAttribute="bottom" constant="28" id="vfX-15-vew"/>
+                                            <constraint firstItem="fRc-CD-U69" firstAttribute="top" secondItem="khr-i7-lcE" secondAttribute="bottom" id="wvd-Nt-dfc"/>
+                                            <constraint firstItem="K4H-J0-OMa" firstAttribute="top" secondItem="5rQ-PM-1zG" secondAttribute="top" id="xMe-vv-emY"/>
+                                            <constraint firstItem="VrQ-r4-1AY" firstAttribute="top" secondItem="x5z-bh-UJS" secondAttribute="bottom" id="zFX-dY-uY8"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="5rQ-PM-1zG" firstAttribute="trailing" secondItem="d64-GA-A8g" secondAttribute="trailing" id="LM5-Hx-Jzg"/>
+                                    <constraint firstItem="5rQ-PM-1zG" firstAttribute="height" secondItem="RWt-hl-I3w" secondAttribute="height" priority="250" id="QVe-lh-ogC"/>
+                                    <constraint firstItem="5rQ-PM-1zG" firstAttribute="bottom" secondItem="d64-GA-A8g" secondAttribute="bottom" id="Uhc-FM-ZUU"/>
+                                    <constraint firstItem="5rQ-PM-1zG" firstAttribute="width" secondItem="RWt-hl-I3w" secondAttribute="width" id="azT-5I-wbH"/>
+                                    <constraint firstItem="5rQ-PM-1zG" firstAttribute="leading" secondItem="d64-GA-A8g" secondAttribute="leading" id="jjk-hr-1Cv"/>
+                                    <constraint firstItem="5rQ-PM-1zG" firstAttribute="top" secondItem="d64-GA-A8g" secondAttribute="top" id="mmF-IH-iwL"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="d64-GA-A8g"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="RWt-hl-I3w"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sb3-SE-keZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="8AS-cL-cDn"/>
+                            <constraint firstItem="sb3-SE-keZ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="fHY-u4-AA7"/>
+                            <constraint firstAttribute="bottom" secondItem="sb3-SE-keZ" secondAttribute="bottom" id="tqd-PU-5EJ"/>
+                            <constraint firstItem="sb3-SE-keZ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="xlb-bf-fzh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vRz-q5-AJN"/>
+                    <size key="freeformSize" width="393" height="1516"/>
+                    <connections>
+                        <outlet property="UpComingView" destination="oVm-t7-APb" id="ojx-nT-XYG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1043.5114503816794" y="-2.8169014084507045"/>
+        </scene>
+        <!--Favorite Board View Controller-->
+        <scene sceneID="qrr-ex-eSR">
+            <objects>
+                <viewController storyboardIdentifier="FavoriteBoardVC" id="Oun-0l-DCA" customClass="FavoriteBoardViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NfF-4g-cjb">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="209"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgz-eL-2j5">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="209"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="즐겨찾는 게시판" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9D-dj-8J9">
+                                        <rect key="frame" x="24" y="28" width="114" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="w86-Xd-5ZL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Favorite" translatesAutoresizingMaskIntoConstraints="NO" id="LqW-8D-aLr">
+                                        <rect key="frame" x="141" y="31" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="WOz-vj-aK0"/>
+                                            <constraint firstAttribute="height" constant="20" id="w4a-N5-18r"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USy-DS-rNO">
+                                        <rect key="frame" x="309" y="28" width="64" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="0cX-uc-s8M"/>
+                                            <constraint firstAttribute="width" constant="64" id="pgk-W4-gkm"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="Sukbakji_More" imagePlacement="trailing" title="더보기 ">
+                                            <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                            <color key="baseForegroundColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="r8j-eB-2ju">
+                                        <rect key="frame" x="0.0" y="66" width="393" height="115"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteBoard_TableViewCell" rowHeight="56" id="7DA-Dw-TBq" customClass="FavoriteBoardTableViewCell" customModule="Sukbakji" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="56"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7DA-Dw-TBq" id="Q6N-MW-UsA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="353" height="56"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgN-yi-qAf">
+                                                            <rect key="frame" x="18" y="18" width="59" height="20"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="취업정보" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGb-Ln-Fl6">
+                                                                    <rect key="frame" x="8.6666666666666679" y="-3" width="41.666666666666657" height="26"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="26" id="JLs-Jy-lFi"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                                    <color key="textColor" red="0.2901960784" green="0.44705882349999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.91372549020000005" green="0.92156862750000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="59" id="gJF-fb-O0k"/>
+                                                                <constraint firstAttribute="height" constant="20" id="hBL-GQ-4Yc"/>
+                                                                <constraint firstItem="mGb-Ln-Fl6" firstAttribute="centerX" secondItem="qgN-yi-qAf" secondAttribute="centerX" id="sbJ-YH-zd3"/>
+                                                                <constraint firstItem="mGb-Ln-Fl6" firstAttribute="centerY" secondItem="qgN-yi-qAf" secondAttribute="centerY" id="tYq-YQ-rjo"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="궁금한 점이 있습니다. 답변 부탁드려요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfu-A1-9RK">
+                                                            <rect key="frame" x="88.999999999999986" y="15" width="210.66666666666663" height="26"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="26" id="QMP-Uy-qsv"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="14"/>
+                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="qgN-yi-qAf" firstAttribute="leading" secondItem="Q6N-MW-UsA" secondAttribute="leading" constant="18" id="CNH-Kr-xf8"/>
+                                                        <constraint firstItem="qgN-yi-qAf" firstAttribute="centerY" secondItem="Q6N-MW-UsA" secondAttribute="centerY" id="VGr-rA-6Ex"/>
+                                                        <constraint firstItem="wfu-A1-9RK" firstAttribute="leading" secondItem="qgN-yi-qAf" secondAttribute="trailing" constant="12" id="oWd-Sc-OkT"/>
+                                                        <constraint firstItem="wfu-A1-9RK" firstAttribute="centerY" secondItem="Q6N-MW-UsA" secondAttribute="centerY" id="w7O-Lm-9sC"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="C9D-dj-8J9" firstAttribute="leading" secondItem="xgz-eL-2j5" secondAttribute="leading" constant="24" id="AJL-7G-tKs"/>
+                                    <constraint firstItem="r8j-eB-2ju" firstAttribute="top" secondItem="C9D-dj-8J9" secondAttribute="bottom" constant="12" id="L4m-Pj-NFQ"/>
+                                    <constraint firstItem="C9D-dj-8J9" firstAttribute="top" secondItem="xgz-eL-2j5" secondAttribute="top" constant="28" id="Pf6-33-2PB"/>
+                                    <constraint firstItem="LqW-8D-aLr" firstAttribute="top" secondItem="xgz-eL-2j5" secondAttribute="top" constant="31" id="eK8-aN-WVz"/>
+                                    <constraint firstItem="USy-DS-rNO" firstAttribute="top" secondItem="xgz-eL-2j5" secondAttribute="top" constant="28" id="gNx-d4-nLd"/>
+                                    <constraint firstAttribute="height" constant="209" id="lKV-lA-0cD"/>
+                                    <constraint firstAttribute="trailing" secondItem="r8j-eB-2ju" secondAttribute="trailing" id="mAk-wB-d3C"/>
+                                    <constraint firstItem="r8j-eB-2ju" firstAttribute="leading" secondItem="xgz-eL-2j5" secondAttribute="leading" id="mqd-rj-js5"/>
+                                    <constraint firstAttribute="bottom" secondItem="r8j-eB-2ju" secondAttribute="bottom" constant="28" id="owW-8P-Rx6"/>
+                                    <constraint firstAttribute="trailing" secondItem="USy-DS-rNO" secondAttribute="trailing" constant="20" id="tbH-2U-gE0"/>
+                                    <constraint firstItem="LqW-8D-aLr" firstAttribute="leading" secondItem="C9D-dj-8J9" secondAttribute="trailing" constant="3" id="xwV-DJ-AIi"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="U6d-WS-RSn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="xgz-eL-2j5" secondAttribute="bottom" id="1A2-hH-K3C"/>
+                            <constraint firstAttribute="trailing" secondItem="xgz-eL-2j5" secondAttribute="trailing" id="lRf-ap-tPf"/>
+                            <constraint firstItem="xgz-eL-2j5" firstAttribute="top" secondItem="NfF-4g-cjb" secondAttribute="top" id="oeS-4a-49K"/>
+                            <constraint firstItem="xgz-eL-2j5" firstAttribute="leading" secondItem="NfF-4g-cjb" secondAttribute="leading" id="sxF-X0-rKJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="FavoriteBoardTV" destination="r8j-eB-2ju" id="Dgc-A0-Ldw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kvQ-wf-LYC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="410" y="-151"/>
+        </scene>
+        <!--Hot Feed View Controller-->
+        <scene sceneID="R9O-Wb-G85">
+            <objects>
+                <viewController storyboardIdentifier="HotFeedVC" id="sBN-F8-1OE" customClass="HotFeedViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kh1-HU-1GQ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="388"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="실시간 인기글" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="om7-Ii-T3r">
+                                <rect key="frame" x="24.000000000000007" y="28" width="97.666666666666686" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="Pfh-jS-eI9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Fire" translatesAutoresizingMaskIntoConstraints="NO" id="fz0-YI-wxo">
+                                <rect key="frame" x="124.66666666666669" y="31" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="MeW-In-s5n"/>
+                                    <constraint firstAttribute="height" constant="20" id="OzR-bv-BUx"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcm-na-KAh">
+                                <rect key="frame" x="309" y="28" width="64" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="e2W-wO-CfE"/>
+                                    <constraint firstAttribute="width" constant="64" id="q4S-FK-NA5"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_More" imagePlacement="trailing" title="더보기 ">
+                                    <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                    <color key="baseForegroundColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="oSQ-7A-jr2">
+                                <rect key="frame" x="0.0" y="66" width="393" height="322"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HotFeed_TableViewCell" rowHeight="147" id="S55-R0-M9g" customClass="HotFeedTableViewCell" customModule="Sukbakji" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="55.333332061767578" width="353" height="147"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S55-R0-M9g" id="8gX-AG-xTr">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="147"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcc-nY-xhJ">
+                                                    <rect key="frame" x="18" y="16" width="71" height="20"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="조회수 TOP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fhh-lW-ny1">
+                                                            <rect key="frame" x="7.0000000000000036" y="-3" width="57.333333333333343" height="26"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="26" id="gdP-ot-dmB"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                            <color key="textColor" red="0.98039215690000003" green="0.31372549020000001" blue="0.058823529409999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.99215686270000003" green="0.91372549020000005" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Fhh-lW-ny1" firstAttribute="centerX" secondItem="rcc-nY-xhJ" secondAttribute="centerX" id="Dk6-U0-DEj"/>
+                                                        <constraint firstAttribute="height" constant="20" id="LJa-pe-8pF"/>
+                                                        <constraint firstAttribute="width" constant="71" id="Zcf-b0-Ox3"/>
+                                                        <constraint firstItem="Fhh-lW-ny1" firstAttribute="centerY" secondItem="rcc-nY-xhJ" secondAttribute="centerY" id="tvR-dC-JjP"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9H-rd-ZfZ">
+                                                    <rect key="frame" x="95" y="16" width="59" height="20"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="취업정보" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCc-Sd-nSO">
+                                                            <rect key="frame" x="8.6666666666666714" y="-3" width="41.666666666666664" height="26"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="26" id="OOS-pm-iR0"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                            <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="KCc-Sd-nSO" firstAttribute="centerY" secondItem="I9H-rd-ZfZ" secondAttribute="centerY" id="6mK-68-7ym"/>
+                                                        <constraint firstItem="KCc-Sd-nSO" firstAttribute="centerX" secondItem="I9H-rd-ZfZ" secondAttribute="centerX" id="Ogu-nJ-y0w"/>
+                                                        <constraint firstAttribute="width" constant="59" id="l0O-St-0BC"/>
+                                                        <constraint firstAttribute="height" constant="20" id="t3e-5q-RNe"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="궁금한 점이 있습니다. 답변 부탁드려요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Bd-dH-vVo">
+                                                    <rect key="frame" x="18" y="48" width="210.66666666666666" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="744-DY-rSv"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="14"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1285" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odD-gE-JL1">
+                                                    <rect key="frame" x="307" y="117" width="28" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14" id="tTS-YZ-Xhj"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                    <color key="textColor" red="1" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가고 싶은 연구실이 있는데 어떻게 컨택을 하면 좋을까요? 처음이라 어떻게 하면 좋을지 조언 부탁드립니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3h-i4-cqU">
+                                                    <rect key="frame" x="18" y="66" width="317" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="vVK-8j-knv"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Comment" translatesAutoresizingMaskIntoConstraints="NO" id="hVz-3i-t7j">
+                                                    <rect key="frame" x="245" y="118" width="12" height="12"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_View" translatesAutoresizingMaskIntoConstraints="NO" id="vcz-c2-NEl">
+                                                    <rect key="frame" x="292" y="118" width="12" height="12"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="125" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joz-Vs-xuF">
+                                                    <rect key="frame" x="260" y="117" width="20" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14" id="x9U-4A-83w"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                    <color key="textColor" red="0.2901960784" green="0.44705882349999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rcc-nY-xhJ" firstAttribute="top" secondItem="8gX-AG-xTr" secondAttribute="top" constant="16" id="1rO-CE-c8C"/>
+                                                <constraint firstItem="rcc-nY-xhJ" firstAttribute="leading" secondItem="8gX-AG-xTr" secondAttribute="leading" constant="18" id="5Rm-YT-11f"/>
+                                                <constraint firstItem="vcz-c2-NEl" firstAttribute="leading" secondItem="joz-Vs-xuF" secondAttribute="trailing" constant="12" id="8qt-eW-TbV"/>
+                                                <constraint firstItem="W3h-i4-cqU" firstAttribute="leading" secondItem="8gX-AG-xTr" secondAttribute="leading" constant="18" id="B7v-Ie-BTa"/>
+                                                <constraint firstAttribute="bottom" secondItem="hVz-3i-t7j" secondAttribute="bottom" constant="17" id="LQg-ce-bXX"/>
+                                                <constraint firstItem="I9H-rd-ZfZ" firstAttribute="top" secondItem="8gX-AG-xTr" secondAttribute="top" constant="16" id="MW0-N7-Q4W"/>
+                                                <constraint firstAttribute="bottom" secondItem="joz-Vs-xuF" secondAttribute="bottom" constant="16" id="UBM-Ie-20Y"/>
+                                                <constraint firstItem="W3h-i4-cqU" firstAttribute="top" secondItem="4Bd-dH-vVo" secondAttribute="bottom" constant="1" id="Zs9-1N-nTz"/>
+                                                <constraint firstItem="joz-Vs-xuF" firstAttribute="leading" secondItem="hVz-3i-t7j" secondAttribute="trailing" constant="3" id="h7P-Ez-F23"/>
+                                                <constraint firstItem="4Bd-dH-vVo" firstAttribute="top" secondItem="rcc-nY-xhJ" secondAttribute="bottom" constant="12" id="juN-fZ-a4u"/>
+                                                <constraint firstItem="I9H-rd-ZfZ" firstAttribute="leading" secondItem="rcc-nY-xhJ" secondAttribute="trailing" constant="6" id="kzT-wJ-4DZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="odD-gE-JL1" secondAttribute="trailing" constant="18" id="lbn-mx-EDa"/>
+                                                <constraint firstAttribute="bottom" secondItem="odD-gE-JL1" secondAttribute="bottom" constant="16" id="pXV-DR-mdg"/>
+                                                <constraint firstAttribute="trailing" secondItem="W3h-i4-cqU" secondAttribute="trailing" constant="18" id="q1O-J3-vs8"/>
+                                                <constraint firstItem="4Bd-dH-vVo" firstAttribute="leading" secondItem="8gX-AG-xTr" secondAttribute="leading" constant="18" id="uDT-Yz-8mm"/>
+                                                <constraint firstItem="odD-gE-JL1" firstAttribute="leading" secondItem="vcz-c2-NEl" secondAttribute="trailing" constant="3" id="wo6-9u-wRh"/>
+                                                <constraint firstAttribute="bottom" secondItem="vcz-c2-NEl" secondAttribute="bottom" constant="17" id="zR0-Py-UJ1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="TSg-8p-qsk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oSQ-7A-jr2" firstAttribute="leading" secondItem="kh1-HU-1GQ" secondAttribute="leading" id="5T8-Ot-WB0"/>
+                            <constraint firstItem="fz0-YI-wxo" firstAttribute="top" secondItem="kh1-HU-1GQ" secondAttribute="top" constant="31" id="9DV-eI-At5"/>
+                            <constraint firstAttribute="trailing" secondItem="Bcm-na-KAh" secondAttribute="trailing" constant="20" id="AsO-Om-e95"/>
+                            <constraint firstAttribute="bottom" secondItem="oSQ-7A-jr2" secondAttribute="bottom" id="ZjQ-dg-DkI"/>
+                            <constraint firstItem="om7-Ii-T3r" firstAttribute="top" secondItem="kh1-HU-1GQ" secondAttribute="top" constant="28" id="cZN-G0-ysM"/>
+                            <constraint firstItem="Bcm-na-KAh" firstAttribute="top" secondItem="kh1-HU-1GQ" secondAttribute="top" constant="28" id="feH-Pd-TNq"/>
+                            <constraint firstItem="oSQ-7A-jr2" firstAttribute="top" secondItem="om7-Ii-T3r" secondAttribute="bottom" constant="12" id="fqz-VH-OcD"/>
+                            <constraint firstItem="om7-Ii-T3r" firstAttribute="leading" secondItem="kh1-HU-1GQ" secondAttribute="leading" constant="24" id="m6F-mH-XSR"/>
+                            <constraint firstAttribute="trailing" secondItem="oSQ-7A-jr2" secondAttribute="trailing" id="s5e-gh-LpM"/>
+                            <constraint firstItem="fz0-YI-wxo" firstAttribute="leading" secondItem="om7-Ii-T3r" secondAttribute="trailing" constant="3" id="uGJ-9i-W6A"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="HotFeedTV" destination="oSQ-7A-jr2" id="BEv-tr-zTB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mah-Xv-Uv5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1680" y="60"/>
+        </scene>
+        <!--Favorite Lab View Controller-->
+        <scene sceneID="ZRy-Gm-mNY">
+            <objects>
+                <viewController storyboardIdentifier="FavoriteLabVC" id="glx-MM-EFL" customClass="FavoriteLabViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z8G-6z-IYf">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="254"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="즐겨찾는 연구실" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJO-nL-9Wf">
+                                <rect key="frame" x="24" y="0.0" width="114" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="56Y-1h-2Cr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Lab" translatesAutoresizingMaskIntoConstraints="NO" id="CGu-1V-58X">
+                                <rect key="frame" x="141" y="3" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="CnA-Lg-KDz"/>
+                                    <constraint firstAttribute="width" constant="20" id="Oqs-ps-Csa"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBt-q8-zgC">
+                                <rect key="frame" x="309" y="0.0" width="64" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="OF1-7S-To7"/>
+                                    <constraint firstAttribute="width" constant="64" id="d3m-Z2-Wj5"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_More" imagePlacement="trailing" title="더보기 ">
+                                    <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                    <color key="baseForegroundColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                            </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="Y6R-ND-Mqz">
+                                <rect key="frame" x="35" y="226" width="323" height="4"/>
+                                <color key="progressTintColor" red="1" green="0.43921568630000002" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Gsb-QI-Gdm">
+                                <rect key="frame" x="0.0" y="38" width="393" height="172"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="172" id="2v2-eU-eOb"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="O1T-zg-TZV">
+                                    <size key="itemSize" width="300" height="172"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoriteLab_CollectionViewCell" id="qeR-Vu-Cck" customClass="FavoriteLabCollectionViewCell" customModule="Sukbakji" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="172"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EZz-tr-1yk">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="172"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgv-Hy-liG">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성신여자대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bm-yg-xA4">
+                                                            <rect key="frame" x="16" y="16" width="72.666666666666671" height="14"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="14" id="8fv-c9-pbQ"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="화학에너지융합학부 에너지재료연구실" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yd0-9V-Iec">
+                                                            <rect key="frame" x="16" y="36" width="209.33333333333334" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="18" id="HVq-GF-5Wv"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="14"/>
+                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Yd0-9V-Iec" firstAttribute="leading" secondItem="hgv-Hy-liG" secondAttribute="leading" constant="16" id="OZb-Oj-oLb"/>
+                                                        <constraint firstItem="3bm-yg-xA4" firstAttribute="top" secondItem="hgv-Hy-liG" secondAttribute="top" constant="16" id="PLu-cb-47a"/>
+                                                        <constraint firstItem="Yd0-9V-Iec" firstAttribute="top" secondItem="3bm-yg-xA4" secondAttribute="bottom" constant="6" id="cHl-0W-puC"/>
+                                                        <constraint firstItem="3bm-yg-xA4" firstAttribute="leading" secondItem="hgv-Hy-liG" secondAttribute="leading" constant="16" id="jcG-pU-GGp"/>
+                                                        <constraint firstAttribute="height" constant="70" id="oaO-bf-zx3"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oDV-vh-2tg">
+                                                    <rect key="frame" x="16" y="82" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="JkE-ew-lGE"/>
+                                                        <constraint firstAttribute="width" constant="40" id="p9O-hR-omC"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="구본재" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcB-0Z-51f">
+                                                    <rect key="frame" x="68" y="84.666666666666671" width="36.333333333333343" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="arz-wg-Cq3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="14"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="교수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpY-QC-pkj">
+                                                    <rect key="frame" x="108.33333333333333" y="86" width="20.999999999999986" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14" id="uhW-Pa-5dq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성신여자대학교 화학에너지융합학부" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0y-rX-fVl">
+                                                    <rect key="frame" x="68" y="105.66666666666667" width="169" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14" id="7Zz-kn-wSh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-Nq-tG7">
+                                                    <rect key="frame" x="16" y="134" width="53" height="20"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#열화학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGK-Md-8fY">
+                                                            <rect key="frame" x="7.3333333333333321" y="-3" width="38.666666666666671" height="26"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="26" id="OO8-Gr-Ru7"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                            <color key="textColor" red="0.98039215690000003" green="0.31372549020000001" blue="0.058823529409999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.99215686270000003" green="0.91372549020000005" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="53" id="8hh-fg-RsW"/>
+                                                        <constraint firstItem="IGK-Md-8fY" firstAttribute="centerY" secondItem="MVg-Nq-tG7" secondAttribute="centerY" id="UIa-vA-Dul"/>
+                                                        <constraint firstAttribute="height" constant="20" id="a7Q-ax-mvN"/>
+                                                        <constraint firstItem="IGK-Md-8fY" firstAttribute="centerX" secondItem="MVg-Nq-tG7" secondAttribute="centerX" id="eIw-NP-AMV"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ceV-RF-zY8">
+                                                    <rect key="frame" x="75" y="134" width="63" height="20"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#전기화학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2W-Ng-9F0">
+                                                            <rect key="frame" x="7" y="-3" width="49" height="26"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="26" id="z58-GT-1yH"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                                            <color key="textColor" red="0.98039215690000003" green="0.31372549020000001" blue="0.058823529409999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.99215686270000003" green="0.91372549020000005" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="63" id="5jO-CP-0wI"/>
+                                                        <constraint firstItem="H2W-Ng-9F0" firstAttribute="centerY" secondItem="ceV-RF-zY8" secondAttribute="centerY" id="hoc-Vy-BEn"/>
+                                                        <constraint firstItem="H2W-Ng-9F0" firstAttribute="centerX" secondItem="ceV-RF-zY8" secondAttribute="centerX" id="htn-YD-Zyk"/>
+                                                        <constraint firstAttribute="height" constant="20" id="iho-2Y-EnM"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ceV-RF-zY8" firstAttribute="leading" secondItem="MVg-Nq-tG7" secondAttribute="trailing" constant="6" id="2rL-cj-Kjm"/>
+                                                <constraint firstItem="fcB-0Z-51f" firstAttribute="top" secondItem="hgv-Hy-liG" secondAttribute="bottom" constant="14.5" id="67T-y9-MjK"/>
+                                                <constraint firstAttribute="trailing" secondItem="hgv-Hy-liG" secondAttribute="trailing" id="CRX-qM-BV1"/>
+                                                <constraint firstItem="WpY-QC-pkj" firstAttribute="leading" secondItem="fcB-0Z-51f" secondAttribute="trailing" constant="4" id="GBO-Ey-KoP"/>
+                                                <constraint firstItem="WpY-QC-pkj" firstAttribute="top" secondItem="hgv-Hy-liG" secondAttribute="bottom" constant="16" id="J2c-hg-9WU"/>
+                                                <constraint firstItem="hgv-Hy-liG" firstAttribute="leading" secondItem="EZz-tr-1yk" secondAttribute="leading" id="Nql-rX-ts8"/>
+                                                <constraint firstItem="fcB-0Z-51f" firstAttribute="leading" secondItem="oDV-vh-2tg" secondAttribute="trailing" constant="12" id="WYz-aX-xDy"/>
+                                                <constraint firstItem="hgv-Hy-liG" firstAttribute="top" secondItem="EZz-tr-1yk" secondAttribute="top" id="Zil-Ra-SSj"/>
+                                                <constraint firstItem="oDV-vh-2tg" firstAttribute="leading" secondItem="EZz-tr-1yk" secondAttribute="leading" constant="16" id="bVH-K7-8bC"/>
+                                                <constraint firstItem="ceV-RF-zY8" firstAttribute="top" secondItem="oDV-vh-2tg" secondAttribute="bottom" constant="12" id="crF-c8-b90"/>
+                                                <constraint firstItem="y0y-rX-fVl" firstAttribute="top" secondItem="fcB-0Z-51f" secondAttribute="bottom" constant="4" id="e13-xC-wJN"/>
+                                                <constraint firstItem="MVg-Nq-tG7" firstAttribute="top" secondItem="oDV-vh-2tg" secondAttribute="bottom" constant="12" id="eIG-Pp-1XA"/>
+                                                <constraint firstItem="MVg-Nq-tG7" firstAttribute="leading" secondItem="EZz-tr-1yk" secondAttribute="leading" constant="16" id="gZM-wH-cPY"/>
+                                                <constraint firstItem="oDV-vh-2tg" firstAttribute="top" secondItem="hgv-Hy-liG" secondAttribute="bottom" constant="12" id="iYl-Tx-Ik0"/>
+                                                <constraint firstItem="y0y-rX-fVl" firstAttribute="leading" secondItem="oDV-vh-2tg" secondAttribute="trailing" constant="12" id="sd3-cv-0ht"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ItO-33-2jk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CGu-1V-58X" firstAttribute="leading" secondItem="tJO-nL-9Wf" secondAttribute="trailing" constant="3" id="3ai-ra-Uo0"/>
+                            <constraint firstItem="tJO-nL-9Wf" firstAttribute="leading" secondItem="z8G-6z-IYf" secondAttribute="leading" constant="24" id="5Xt-KP-YWJ"/>
+                            <constraint firstAttribute="trailing" secondItem="Gsb-QI-Gdm" secondAttribute="trailing" id="8bo-F6-96G"/>
+                            <constraint firstItem="Y6R-ND-Mqz" firstAttribute="top" secondItem="Gsb-QI-Gdm" secondAttribute="bottom" constant="16" id="KeP-yt-0v2"/>
+                            <constraint firstItem="Gsb-QI-Gdm" firstAttribute="leading" secondItem="z8G-6z-IYf" secondAttribute="leading" id="Kle-lc-lBi"/>
+                            <constraint firstItem="CGu-1V-58X" firstAttribute="top" secondItem="z8G-6z-IYf" secondAttribute="top" constant="3" id="OUu-WT-YR5"/>
+                            <constraint firstItem="tJO-nL-9Wf" firstAttribute="top" secondItem="z8G-6z-IYf" secondAttribute="top" id="dv2-mX-4eU"/>
+                            <constraint firstAttribute="trailing" secondItem="QBt-q8-zgC" secondAttribute="trailing" constant="20" id="i6B-oq-YIi"/>
+                            <constraint firstItem="QBt-q8-zgC" firstAttribute="top" secondItem="z8G-6z-IYf" secondAttribute="top" id="jeQ-0v-2dg"/>
+                            <constraint firstItem="Y6R-ND-Mqz" firstAttribute="leading" secondItem="z8G-6z-IYf" secondAttribute="leading" constant="35" id="klu-89-xry"/>
+                            <constraint firstAttribute="trailing" secondItem="Y6R-ND-Mqz" secondAttribute="trailing" constant="35" id="tWx-KT-7bC"/>
+                            <constraint firstItem="Gsb-QI-Gdm" firstAttribute="top" secondItem="tJO-nL-9Wf" secondAttribute="bottom" constant="12" id="tgE-z5-ptn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="FavoriteLabCV" destination="Gsb-QI-Gdm" id="W4w-TF-9Bu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2iH-t4-Pf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="409.92366412213738" y="348.59154929577466"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Sukbakji_AD" width="342" height="100"/>
+        <image name="Sukbakji_Comment" width="12" height="12"/>
+        <image name="Sukbakji_Favorite" width="20" height="20.5"/>
+        <image name="Sukbakji_Fire" width="20" height="20.5"/>
+        <image name="Sukbakji_Homelogo" width="88" height="40"/>
+        <image name="Sukbakji_Lab" width="20" height="20.5"/>
+        <image name="Sukbakji_Layer" width="6" height="97"/>
+        <image name="Sukbakji_More" width="5.5" height="9"/>
+        <image name="Sukbakji_Mypage" width="48" height="48"/>
+        <image name="Sukbakji_Notification" width="48" height="48"/>
+        <image name="Sukbakji_View" width="12" height="12"/>
+        <namedColor name="Coquelicot">
+            <color red="0.92549019607843142" green="0.28627450980392155" blue="0.031372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
