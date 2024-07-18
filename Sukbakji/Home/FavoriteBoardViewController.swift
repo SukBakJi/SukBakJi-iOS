@@ -13,9 +13,6 @@ class FavoriteBoardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        FavoriteBoardTV.rowHeight = UITableView.automaticDimension
-        FavoriteBoardTV.estimatedRowHeight = UITableView.automaticDimension
         
         FavoriteBoardTV.delegate = self
         FavoriteBoardTV.dataSource = self

@@ -19,6 +19,11 @@ class FavoriteBoardTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        // 셀을 초기화 해주는 코드 작성
+    }
 
 }
 

@@ -9,13 +9,19 @@ import UIKit
 
 class FavoriteLabViewController: UIViewController {
     
-    
     @IBOutlet weak var FavoriteLabCV: UICollectionView!
+    @IBOutlet weak var FavoriteLabPV: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        FavoriteLabCV.delegate = self
+        FavoriteLabCV.dataSource = self
+        
+        FavoriteLabCV.layer.masksToBounds = false// any value you want
+        FavoriteLabCV.layer.shadowOpacity = 0.2// any value you want
+        FavoriteLabCV.layer.shadowRadius = 2 // any value you want
+        FavoriteLabCV.layer.shadowOffset = .init(width: 0, height: 1)
     }
     
 

@@ -15,7 +15,7 @@ class HotFeedViewController: UIViewController {
         super.viewDidLoad()
 
         HotFeedTV.rowHeight = UITableView.automaticDimension
-        HotFeedTV.estimatedRowHeight = UITableView.automaticDimension
+        HotFeedTV.estimatedRowHeight = 56
         
         HotFeedTV.delegate = self
         HotFeedTV.dataSource = self
