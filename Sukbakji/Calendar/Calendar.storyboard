@@ -3,10 +3,17 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-SemiBold.otf">
+            <string>Pretendard-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Calendar View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -15,16 +22,259 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="캘린더" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyn-7a-BXm">
+                                <rect key="frame" x="24" y="59" width="52" height="24"/>
+                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbR-hx-jzC">
+                                <rect key="frame" x="289" y="47" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="6h8-Wj-HUQ"/>
+                                    <constraint firstAttribute="height" constant="48" id="8OJ-45-7G1"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Notification"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAG-9f-CTY">
+                                <rect key="frame" x="337" y="47" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="MGf-BR-QVi"/>
+                                    <constraint firstAttribute="width" constant="48" id="qdg-If-wyM"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Mypage"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2024년 6월" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8v-fs-46g">
+                                <rect key="frame" x="24" y="112.33333333333333" width="92" height="21.999999999999986"/>
+                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대학교를 설정하세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLo-U5-lKD">
+                                <rect key="frame" x="208" y="113.33333333333333" width="133" height="19.999999999999986"/>
+                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
+                                <color key="textColor" name="Coquelicot"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HtH-D9-z2I">
+                                <rect key="frame" x="0.0" y="91" width="393" height="1.3333333333333286"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1.2" id="i2u-hJ-GrK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ap4-9F-iIL">
+                                <rect key="frame" x="349" y="113.33333333333333" width="20" height="19.999999999999986"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="aqh-qa-45T"/>
+                                    <constraint firstAttribute="width" constant="20" id="qtv-Xt-b7d"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Down"/>
+                                <connections>
+                                    <action selector="School_Select_Tapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="499-X7-UvV"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mD1-h1-lCE">
+                                <rect key="frame" x="24" y="154.33333333333337" width="345" height="342"/>
+                                <color key="backgroundColor" name="ViewBackground"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="342" id="5Xn-D2-bC7"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다가오는 일정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xA-DT-6vj">
+                                <rect key="frame" x="24" y="524.33333333333337" width="98" height="22"/>
+                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Date" translatesAutoresizingMaskIntoConstraints="NO" id="maH-ut-seE">
+                                <rect key="frame" x="126" y="525.33333333333337" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="m3B-kR-hZf"/>
+                                    <constraint firstAttribute="width" constant="20" id="nkY-6m-zNP"/>
+                                </constraints>
+                            </imageView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ko-fx-FgE">
+                                <rect key="frame" x="0.0" y="546.33333333333337" width="393" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="paj-s0-9Ad"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="k3J-di-o93" kind="embed" id="wWO-PG-0gB"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yb3-b6-E9F">
+                                <rect key="frame" x="309" y="674.33333333333337" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Y7E-ob-VGK"/>
+                                    <constraint firstAttribute="height" constant="60" id="fpN-xU-Ka7"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Alarm"/>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qAG-9f-CTY" firstAttribute="centerY" secondItem="Cyn-7a-BXm" secondAttribute="centerY" id="1kb-1r-M9e"/>
+                            <constraint firstItem="2xA-DT-6vj" firstAttribute="top" secondItem="mD1-h1-lCE" secondAttribute="bottom" constant="28" id="2WL-v3-h5V"/>
+                            <constraint firstItem="maH-ut-seE" firstAttribute="leading" secondItem="2xA-DT-6vj" secondAttribute="trailing" constant="4" id="5Ni-ZY-Rc2"/>
+                            <constraint firstItem="Cyn-7a-BXm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="60K-jn-bi5"/>
+                            <constraint firstItem="ap4-9F-iIL" firstAttribute="centerY" secondItem="O8v-fs-46g" secondAttribute="centerY" id="9ES-g4-TrY"/>
+                            <constraint firstItem="UbR-hx-jzC" firstAttribute="centerY" secondItem="Cyn-7a-BXm" secondAttribute="centerY" id="9NX-ya-04U"/>
+                            <constraint firstItem="Cyn-7a-BXm" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="9W5-7w-4GE"/>
+                            <constraint firstItem="HtH-D9-z2I" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="C4u-dy-zfh"/>
+                            <constraint firstItem="maH-ut-seE" firstAttribute="centerY" secondItem="2xA-DT-6vj" secondAttribute="centerY" id="DJe-YP-QMQ"/>
+                            <constraint firstAttribute="trailing" secondItem="HtH-D9-z2I" secondAttribute="trailing" id="GtQ-sw-me3"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ap4-9F-iIL" secondAttribute="trailing" constant="24" id="HLH-2G-G1g"/>
+                            <constraint firstItem="ap4-9F-iIL" firstAttribute="leading" secondItem="oLo-U5-lKD" secondAttribute="trailing" constant="8" id="HYU-6c-ir1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yb3-b6-E9F" secondAttribute="trailing" constant="24" id="KvK-sn-zan"/>
+                            <constraint firstItem="qAG-9f-CTY" firstAttribute="leading" secondItem="UbR-hx-jzC" secondAttribute="trailing" id="LOY-oL-JgA"/>
+                            <constraint firstItem="HtH-D9-z2I" firstAttribute="top" secondItem="Cyn-7a-BXm" secondAttribute="bottom" constant="8" id="LWk-Sc-3ad"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mD1-h1-lCE" secondAttribute="trailing" constant="24" id="SzJ-Xp-ZZd"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qAG-9f-CTY" secondAttribute="trailing" constant="8" id="V7j-DJ-02J"/>
+                            <constraint firstItem="O8v-fs-46g" firstAttribute="top" secondItem="HtH-D9-z2I" secondAttribute="bottom" constant="20" id="Xad-Cg-UMS"/>
+                            <constraint firstItem="4Ko-fx-FgE" firstAttribute="top" secondItem="2xA-DT-6vj" secondAttribute="bottom" id="asY-ZL-UXV"/>
+                            <constraint firstItem="O8v-fs-46g" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="d0v-Ha-zVn"/>
+                            <constraint firstItem="oLo-U5-lKD" firstAttribute="centerY" secondItem="O8v-fs-46g" secondAttribute="centerY" id="eQs-MF-aN2"/>
+                            <constraint firstItem="mD1-h1-lCE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="gIU-bm-UVf"/>
+                            <constraint firstItem="mD1-h1-lCE" firstAttribute="top" secondItem="O8v-fs-46g" secondAttribute="bottom" constant="20" id="gVM-r8-MxV"/>
+                            <constraint firstItem="2xA-DT-6vj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="h0q-ve-uLF"/>
+                            <constraint firstItem="4Ko-fx-FgE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="i08-g0-ShQ"/>
+                            <constraint firstItem="yb3-b6-E9F" firstAttribute="top" secondItem="4Ko-fx-FgE" secondAttribute="bottom" id="o8N-fV-sm1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4Ko-fx-FgE" secondAttribute="trailing" id="sra-IP-aEe"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="DateView" destination="mD1-h1-lCE" id="y1U-eu-2xh"/>
+                        <outlet property="dayLabel" destination="O8v-fs-46g" id="BfU-2k-f8Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="105" y="4"/>
+            <point key="canvasLocation" x="104.58015267175573" y="3.5211267605633805"/>
+        </scene>
+        <!--Date View Controller-->
+        <scene sceneID="mSF-ch-gdE">
+            <objects>
+                <viewController storyboardIdentifier="DateVC" id="k3J-di-o93" customClass="DateViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eD5-q3-bwL">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8vT-pn-iSa">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zn7-zC-YGx">
+                                    <size key="itemSize" width="200" height="108"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Date_CollectionViewCell" id="pak-zq-ATA" customClass="DateCollectionViewCell" customModule="Sukbakji" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="15.666666666666666" width="200" height="97"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MDq-EY-LwI">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="97"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Layer" translatesAutoresizingMaskIntoConstraints="NO" id="ysy-pA-bMZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="6" height="97"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="6" id="j63-an-9Qn"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대학교를 설정하고 일정을 확인해 보세요!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCb-30-vAz">
+                                                    <rect key="frame" x="16" y="16" width="168" height="52"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="52" id="NqJ-3l-LCC"/>
+                                                        <constraint firstAttribute="width" constant="168" id="wy7-2P-DdU"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ysy-pA-bMZ" firstAttribute="leading" secondItem="MDq-EY-LwI" secondAttribute="leading" id="Qfa-nV-MXg"/>
+                                                <constraint firstItem="ysy-pA-bMZ" firstAttribute="top" secondItem="MDq-EY-LwI" secondAttribute="top" id="aV3-ap-nRO"/>
+                                                <constraint firstItem="gCb-30-vAz" firstAttribute="leading" secondItem="ysy-pA-bMZ" secondAttribute="trailing" constant="10" id="sya-A0-81u"/>
+                                                <constraint firstAttribute="bottom" secondItem="ysy-pA-bMZ" secondAttribute="bottom" id="tdz-xO-pdE"/>
+                                                <constraint firstItem="gCb-30-vAz" firstAttribute="top" secondItem="MDq-EY-LwI" secondAttribute="top" constant="16" id="uru-sJ-g5J"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OTR-Wg-zka"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8vT-pn-iSa" secondAttribute="trailing" id="2Yf-Mq-wLR"/>
+                            <constraint firstAttribute="bottom" secondItem="8vT-pn-iSa" secondAttribute="bottom" id="2aM-NT-6fr"/>
+                            <constraint firstItem="8vT-pn-iSa" firstAttribute="top" secondItem="eD5-q3-bwL" secondAttribute="top" id="Svs-Pw-lQC"/>
+                            <constraint firstItem="8vT-pn-iSa" firstAttribute="leading" secondItem="eD5-q3-bwL" secondAttribute="leading" id="bNF-B8-sgg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="DateCV" destination="8vT-pn-iSa" id="N5g-zg-pE2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2DC-pa-TSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="134"/>
+        </scene>
+        <!--School Select View Controller-->
+        <scene sceneID="oVB-8j-EKz">
+            <objects>
+                <viewController storyboardIdentifier="SchoolSelectVC" id="xNI-U2-oCk" customClass="SchoolSelectViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WZn-GS-Bbp">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZa-Tr-HXx">
+                                <rect key="frame" x="175.66666666666666" y="59" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KZF-Ly-ifc"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="JZa-Tr-HXx" firstAttribute="centerX" secondItem="WZn-GS-Bbp" secondAttribute="centerX" id="U5b-Be-uIO"/>
+                            <constraint firstItem="JZa-Tr-HXx" firstAttribute="top" secondItem="KZF-Ly-ifc" secondAttribute="top" id="dAH-1y-70w"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="PO7-T6-a8B"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gfq-jP-Z4t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1390" y="4"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Sukbakji_Alarm" width="68" height="68"/>
+        <image name="Sukbakji_Date" width="20" height="20.5"/>
+        <image name="Sukbakji_Down" width="20" height="20.5"/>
+        <image name="Sukbakji_Layer" width="6" height="97"/>
+        <image name="Sukbakji_Mypage" width="48" height="48"/>
+        <image name="Sukbakji_Notification" width="48" height="48"/>
+        <namedColor name="Coquelicot">
+            <color red="0.92549019607843142" green="0.28627450980392155" blue="0.031372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ViewBackground">
+            <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

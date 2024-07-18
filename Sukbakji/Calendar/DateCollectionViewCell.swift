@@ -1,28 +1,29 @@
 //
-//  FavoriteLabCollectionViewCell.swift
+//  DateCollectionViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 7/16/24.
+//  Created by jaegu park on 7/18/24.
 //
 
 import UIKit
 
-class FavoriteLabCollectionViewCell: UICollectionViewCell {
+class DateCollectionViewCell: UICollectionViewCell {
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.layer.cornerRadius = 15
+        contentView.layer.cornerRadius = 5
         contentView.layer.masksToBounds = true
         
-        layer.cornerRadius = 15
+        layer.cornerRadius = 5
         layer.masksToBounds = false
     }
 }
 
-extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension DateViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -30,7 +31,7 @@ extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 172)
+        return CGSize(width: 200, height: 108)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -38,7 +39,7 @@ extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: FavoriteLabCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteLab_CollectionViewCell", for: indexPath) as! FavoriteLabCollectionViewCell
+        let cell: DateCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Date_CollectionViewCell", for: indexPath) as! DateCollectionViewCell
         
         return cell
     }

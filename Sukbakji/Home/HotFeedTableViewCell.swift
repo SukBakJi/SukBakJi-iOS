@@ -19,7 +19,6 @@ class HotFeedTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }
 
 extension HotFeedViewController: UITableViewDelegate, UITableViewDataSource {
