@@ -119,6 +119,18 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Alarm"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEF-sb-R0s">
+                                <rect key="frame" x="309" y="520.66666666666663" width="64" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="Xfv-Pq-iMa"/>
+                                    <constraint firstAttribute="width" constant="64" id="gbW-f0-HL9"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_More" imagePlacement="trailing" title="더보기 ">
+                                    <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                    <color key="baseForegroundColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -138,6 +150,8 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yb3-b6-E9F" secondAttribute="trailing" constant="24" id="KvK-sn-zan"/>
                             <constraint firstItem="qAG-9f-CTY" firstAttribute="leading" secondItem="UbR-hx-jzC" secondAttribute="trailing" id="LOY-oL-JgA"/>
                             <constraint firstItem="HtH-D9-z2I" firstAttribute="top" secondItem="Cyn-7a-BXm" secondAttribute="bottom" constant="8" id="LWk-Sc-3ad"/>
+                            <constraint firstItem="MEF-sb-R0s" firstAttribute="centerY" secondItem="2xA-DT-6vj" secondAttribute="centerY" id="PhC-Tj-puy"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="MEF-sb-R0s" secondAttribute="trailing" constant="20" id="QWs-7W-UA8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mD1-h1-lCE" secondAttribute="trailing" constant="24" id="SzJ-Xp-ZZd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qAG-9f-CTY" secondAttribute="trailing" constant="8" id="V7j-DJ-02J"/>
                             <constraint firstItem="O8v-fs-46g" firstAttribute="top" secondItem="HtH-D9-z2I" secondAttribute="bottom" constant="20" id="Xad-Cg-UMS"/>
@@ -239,6 +253,7 @@
         <image name="Sukbakji_Date" width="20" height="20.5"/>
         <image name="Sukbakji_Down" width="20" height="20.5"/>
         <image name="Sukbakji_Layer" width="6" height="97"/>
+        <image name="Sukbakji_More" width="5.5" height="9"/>
         <image name="Sukbakji_Mypage" width="48" height="48"/>
         <image name="Sukbakji_Notification" width="48" height="48"/>
         <namedColor name="Coquelicot">
