@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
+		C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */; };
+		C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */; };
+		C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716EF172C50FB1200474228 /* SchoolDateViewController.swift */; };
 		C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14862C44CE59003AFCB7 /* Home.storyboard */; };
 		C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14882C44CE64003AFCB7 /* Calendar.storyboard */; };
 		C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */; };
@@ -41,6 +45,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E927070D6FD31E7F56AC090 /* Pods-Sukbakji.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.release.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.release.xcconfig"; sourceTree = "<group>"; };
+		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
+		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
+		C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateViewController.swift; sourceTree = "<group>"; };
+		C716EF172C50FB1200474228 /* SchoolDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDateViewController.swift; sourceTree = "<group>"; };
 		C71E14862C44CE59003AFCB7 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		C71E14882C44CE64003AFCB7 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -81,12 +91,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58D31CF4877F1948B0BBDBEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A7354ED8CCE70303B1993A7F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */,
+				1E927070D6FD31E7F56AC090 /* Pods-Sukbakji.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C71E14842C44CE44003AFCB7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +139,9 @@
 				C78DE55D2C481F8C00A58395 /* DateViewController.swift */,
 				C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */,
 				C727767D2C48CFDE000A6B25 /* SchoolSelectViewController.swift */,
+				C716EF172C50FB1200474228 /* SchoolDateViewController.swift */,
+				C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */,
+				C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -155,6 +186,8 @@
 			children = (
 				C7F4552B2C39B8EE00A4D0EE /* Sukbakji */,
 				C7F4552A2C39B8EE00A4D0EE /* Products */,
+				A7354ED8CCE70303B1993A7F /* Pods */,
+				58D31CF4877F1948B0BBDBEF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,6 +222,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7F4553D2C39B8F000A4D0EE /* Build configuration list for PBXNativeTarget "Sukbakji" */;
 			buildPhases = (
+				05C3530C28A71B785F170F89 /* [CP] Check Pods Manifest.lock */,
 				C7F455252C39B8EE00A4D0EE /* Sources */,
 				C7F455262C39B8EE00A4D0EE /* Frameworks */,
 				C7F455272C39B8EE00A4D0EE /* Resources */,
@@ -259,12 +293,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		05C3530C28A71B785F170F89 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sukbakji-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C7F455252C39B8EE00A4D0EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */,
+				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
+				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
@@ -278,6 +339,7 @@
 				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,
 				C727767E2C48CFDE000A6B25 /* SchoolSelectViewController.swift in Sources */,
 				C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */,
+				C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */,
 				C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
 				C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */,
@@ -343,7 +405,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -406,7 +468,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -427,6 +489,7 @@
 		};
 		C7F4553E2C39B8F000A4D0EE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -455,6 +518,7 @@
 		};
 		C7F4553F2C39B8F000A4D0EE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E927070D6FD31E7F56AC090 /* Pods-Sukbakji.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
