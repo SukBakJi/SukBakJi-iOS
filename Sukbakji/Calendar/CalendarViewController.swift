@@ -11,6 +11,7 @@ class CalendarViewController: UIViewController {
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var DateView: UIView!
+    @IBOutlet weak var AlertView: UIView!
     
     private lazy var weekStackView = UIStackView()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -24,6 +25,7 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
         
         DateView.layer.cornerRadius = 10
+        AlertView.layer.cornerRadius = 10
         
         self.configure()
     }
@@ -135,7 +137,13 @@ class CalendarViewController: UIViewController {
     }
     
     @IBAction func School_Select_Tapped(_ sender: Any) {
-
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SchoolSelectVC") as? SchoolSelectViewController else {
+            return
+        }
+        self.present(nextVC, animated: true)
+    }
+    
+    @IBAction func Alarm_Tapped(_ sender: Any) {
     }
 }
 
