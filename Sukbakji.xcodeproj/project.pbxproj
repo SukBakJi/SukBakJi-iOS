@@ -32,6 +32,9 @@
 		C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */; };
 		C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */; };
 		C727767E2C48CFDE000A6B25 /* SchoolSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727767D2C48CFDE000A6B25 /* SchoolSelectViewController.swift */; };
+		C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */; };
+		C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */; };
+		C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */; };
 		C7347E3A2C4D452100688768 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E312C4D410200688768 /* Pretendard-Black.otf */; };
 		C7347E3B2C4D452400688768 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E372C4D410300688768 /* Pretendard-Bold.otf */; };
 		C7347E3C2C4D452600688768 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E362C4D410300688768 /* Pretendard-ExtraBold.otf */; };
@@ -88,6 +91,9 @@
 		C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		C727767D2C48CFDE000A6B25 /* SchoolSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectViewController.swift; sourceTree = "<group>"; };
+		C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAlertViewController.swift; sourceTree = "<group>"; };
+		C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarViewController.swift; sourceTree = "<group>"; };
+		C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDeleteAlertViewController.swift; sourceTree = "<group>"; };
 		C7347E312C4D410200688768 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		C7347E322C4D410200688768 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		C7347E332C4D410200688768 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -208,8 +214,11 @@
 				C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */,
 				C727767D2C48CFDE000A6B25 /* SchoolSelectViewController.swift */,
 				C716EF172C50FB1200474228 /* SchoolDateViewController.swift */,
+				C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */,
+				C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */,
 				C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */,
 				C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */,
+				C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -426,10 +435,12 @@
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				412BFBDB2C5225730099E442 /* SignUpViewController.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* Constants.swift in Sources */,
+				C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				7BFDEC312C52250A007280F8 /* BoardMasterViewController.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
+				C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
 				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,
@@ -448,6 +459,7 @@
 				C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */,
 				C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
+				C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,
 				C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */,
 			);
