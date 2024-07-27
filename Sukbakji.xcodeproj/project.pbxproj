@@ -17,6 +17,11 @@
 		41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */; };
 		41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */; };
 		412BFBE32C5225B90099E442 /* SelectSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBE22C5225B90099E442 /* SelectSignUpViewController.swift */; };
+		7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */; };
+		7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */; };
+		7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */; };
+		7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */; };
+		7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */; };
 		7BFDEC2B2C5224EF007280F8 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */; };
 		7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2C2C5224F7007280F8 /* BoardMainViewController.swift */; };
 		7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */; };
@@ -78,6 +83,11 @@
 		41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignUpViewController.swift; sourceTree = "<group>"; };
 		41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		412BFBE22C5225B90099E442 /* SelectSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSignUpViewController.swift; sourceTree = "<group>"; };
+		7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotBoardViewController.swift; sourceTree = "<group>"; };
+		7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrittenBoardViewController.swift; sourceTree = "<group>"; };
+		7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedBoardViewController.swift; sourceTree = "<group>"; };
+		7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentedBoardViewController.swift; sourceTree = "<group>"; };
+		7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentReviewWriteBoardViewController.swift; sourceTree = "<group>"; };
 		7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		7BFDEC2C2C5224F7007280F8 /* BoardMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainViewController.swift; sourceTree = "<group>"; };
 		7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDoctoralViewController.swift; sourceTree = "<group>"; };
@@ -188,17 +198,62 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7B3E3D252C541F35002D6A43 /* Free */ = {
+			isa = PBXGroup;
+			children = (
+				7BFDEC342C52251F007280F8 /* BoardFreeViewController.swift */,
+			);
+			path = Free;
+			sourceTree = "<group>";
+		};
+		7B969F5E2C541E6000F34A18 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7BFDEC2C2C5224F7007280F8 /* BoardMainViewController.swift */,
+				7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */,
+				7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */,
+				7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */,
+				7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */,
+				7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		7B969F5F2C541E6600F34A18 /* Admission */ = {
+			isa = PBXGroup;
+			children = (
+				7BFDEC322C522517007280F8 /* BoardAdmissionViewController.swift */,
+			);
+			path = Admission;
+			sourceTree = "<group>";
+		};
+		7B969F602C541E7500F34A18 /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				7BFDEC302C52250A007280F8 /* BoardMasterViewController.swift */,
+			);
+			path = Master;
+			sourceTree = "<group>";
+		};
+		7B969F612C541E7F00F34A18 /* Doctoral */ = {
+			isa = PBXGroup;
+			children = (
+				7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */,
+			);
+			path = Doctoral;
+			sourceTree = "<group>";
+		};
 		7BFDEC292C5224CD007280F8 /* Board */ = {
 			isa = PBXGroup;
 			children = (
 				7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */,
-				7BFDEC2C2C5224F7007280F8 /* BoardMainViewController.swift */,
-				7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */,
-				7BFDEC302C52250A007280F8 /* BoardMasterViewController.swift */,
-				7BFDEC322C522517007280F8 /* BoardAdmissionViewController.swift */,
-				7BFDEC342C52251F007280F8 /* BoardFreeViewController.swift */,
-				7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */,
+				7B969F5E2C541E6000F34A18 /* Main */,
+				7B969F612C541E7F00F34A18 /* Doctoral */,
+				7B969F602C541E7500F34A18 /* Master */,
+				7B969F5F2C541E6600F34A18 /* Admission */,
+				7B3E3D252C541F35002D6A43 /* Free */,
 				7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */,
+				7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -461,9 +516,11 @@
 				C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
+				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,
 				7BFDEC312C52250A007280F8 /* BoardMasterViewController.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
 				C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */,
+				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
@@ -471,6 +528,7 @@
 				C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */,
 				C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */,
 				41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */,
+				7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */,
 				C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */,
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
@@ -481,10 +539,12 @@
 				C78DE55A2C48176C00A58395 /* CalendarCollectionViewCell.swift in Sources */,
 				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,
 				7BFDEC2B2C5224EF007280F8 /* BoardViewController.swift in Sources */,
+				7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */,
 				C727767E2C48CFDE000A6B25 /* SchoolSelectViewController.swift in Sources */,
 				C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */,
 				C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */,
 				C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */,
+				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
 				C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,

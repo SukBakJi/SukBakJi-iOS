@@ -1,6 +1,13 @@
+//
+//  EmploymentReviewWriteBoardViewController.swift
+//  Sukbakji
+//
+//  Created by KKM on 7/27/24.
+//
+
 import SwiftUI
 
-struct BoardWriteBoardViewController: View {
+struct EmploymentReviewWriteBoardViewController: View {
     
     @State private var selectedCategory: Int? = nil
     @State private var titleText: String = "" // 제목 텍스트 필드의 상태를 관리하기 위한 변수
@@ -89,24 +96,7 @@ struct BoardWriteBoardViewController: View {
     }
 }
 
-struct SeoBakji: View {
-    var body: some View {
-        VStack(alignment: .center, spacing: 8) {
-            Text("석박지")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
-            + Text("에서\n이야기를 나눠 보세요")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color.black)
-        }
-        .padding(.horizontal, 24)
-        .padding(.top, 20)
-        .padding(.bottom, 16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-}
-
-struct WriteBoardDetail: View {
+struct fieldOfSupportWriteBoardDetail: View {
     
     let category: [String] = ["박사", "석사", "입학예정"]
     
@@ -168,6 +158,9 @@ struct WriteBoardDetail: View {
                     .padding(.bottom, 12)
                     .padding(.top, 20)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
+                    
+                    // 지원분야, 직무, 채용 형태, 최종학력 추가
+                    
                     
                     DropDownMenuView(selectedOptionIndex: $selectedOptionIndex, showValidationError: $showValidationError) // 전달 추가
                     
@@ -260,7 +253,7 @@ struct WriteBoardDetail: View {
     }
 }
 
-struct DropDownMenu: View {
+struct fieldOfSupportDropDown: View {
     
     let options: [String]
     var menuWidth: CGFloat = 150
@@ -347,21 +340,7 @@ struct DropDownMenu: View {
 }
 
 
-struct DropDownMenuView: View {
-    @Binding var selectedOptionIndex: Int? // Binding 추가
-    @Binding var showValidationError: Bool // Validation error state
-    @State private var showDropdown = false
-    
-    var body: some View {
-        DropDownMenu(options: ["질문 게시판", "취업후기 게시판", "대학원생활 게시판", "연구주제 게시판"],
-                     selectedOptionIndex: $selectedOptionIndex, // Binding 전달
-                     showDropdown: $showDropdown,
-                     showValidationError: $showValidationError)
-    }
-}
-
-
 #Preview {
-    BoardWriteBoardViewController()
+    EmploymentReviewWriteBoardViewController()
 }
 
