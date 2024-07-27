@@ -11,7 +11,6 @@ import DropDown
 class FirstAcademicVerificationViewController: UIViewController {
     
     private let dropDown = DropDown()
-    private var isDropdownShown = false
     private let itemList = [" 학사 졸업 또는 재학", " 석사 재학", " 석사 졸업", " 박사 재학", " 박사 졸업", " 석박사 통합 재학"]
     
     // MARK: - ImageView
@@ -21,30 +20,26 @@ class FirstAcademicVerificationViewController: UIViewController {
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
     private let nameDot = UIImageView().then {
         $0.image = UIImage(named: "dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
     private let belongDot = UIImageView().then {
         $0.image = UIImage(named: "dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
     private let VerificationDot = UIImageView().then {
         $0.image = UIImage(named: "dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
     private let arrowView = UIImageView().then {
-        //$0.image = UIImage(named: "down-arrow")
+        $0.image = UIImage(named: "down-arrow")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +52,6 @@ class FirstAcademicVerificationViewController: UIViewController {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.numberOfLines = 0
     }
-    
     private let subtitlelabel = UILabel().then {
         $0.text = "현재 소속을 선택하고 인증으로 넘어가 주세요"
         $0.textColor = .gray500
@@ -65,21 +59,18 @@ class FirstAcademicVerificationViewController: UIViewController {
         $0.font = UIFont(name: "Pretendard-Regular", size: 14)
         $0.numberOfLines = 0
     }
-    
     private let nameLabel = UILabel().then {
         $0.text = "이름"
         $0.textAlignment = .center
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.numberOfLines = 0
     }
-    
     private let belongLabel = UILabel().then {
         $0.text = "현재 소속"
         $0.textAlignment = .center
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.numberOfLines = 0
     }
-    
     private let VerificationLabel = UILabel().then {
         $0.text = "학력 인증"
         $0.textAlignment = .center
@@ -104,8 +95,6 @@ class FirstAcademicVerificationViewController: UIViewController {
         $0.backgroundColor = .gray50
         $0.textColor = .gray500
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
-        //$0.isUserInteractionEnabled = false
-        //$0.addTarget(self, action: #selector(self.textFieldDidChange(_:), for: )
     }
     
     // MARK: - Button
@@ -116,20 +105,19 @@ class FirstAcademicVerificationViewController: UIViewController {
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         $0.backgroundColor = .gray50
         $0.setTitleColor(.gray500, for: .normal)
-        
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 10
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         $0.frame.size.width = 342
         $0.frame.size.height = 44
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
-        
         $0.addTarget(self, action: #selector(showDropDown), for: .touchUpInside)
+        
     }
-    
     private let VerificationButton = UIButton().then {
         $0.setImage(UIImage(named: "Verification-off"), for: .normal)
         $0.addTarget(self, action: #selector(VerificationButtonTapped), for: .touchUpInside)
+        $0.isEnabled = false
     }
     
     // MARK: - view
@@ -152,8 +140,7 @@ class FirstAcademicVerificationViewController: UIViewController {
         self.title = "회원가입"
     }
     
-    // MARK: - functional
-    
+    // MARK: - Screen transition
     @objc private func VerificationButtonTapped() {
         let SecondAcademicVerificationVC = SecondAcademicVerificationViewController()
         self.navigationController?.pushViewController(SecondAcademicVerificationVC, animated: true)
@@ -162,6 +149,7 @@ class FirstAcademicVerificationViewController: UIViewController {
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
+    // MARK: - functional
     
     // MARK: - DropDown
     @objc func showDropDown() {
@@ -185,41 +173,43 @@ class FirstAcademicVerificationViewController: UIViewController {
         dropDown.bottomOffset = CGPointMake(0, belongSelectButton.bounds.height)
         
         dropDown.selectionAction = { [weak self] (index, item) in
-            self!.belongSelectButton.setTitle(item, for: .normal)
-            //self!.arrowView.image = UIImage.init(named: "down-arrow")
-            self!.VerificationButton.setImage(UIImage(named: "Verification-on"), for: .normal)
+            guard let self = self else { return }
+            self.belongSelectButton.setTitle(item, for: .normal)
+            self.VerificationButton.setImage(UIImage(named: "Verification-on"), for: .normal)
+            self.VerificationButton.isEnabled = true
+            self.arrowView.image = UIImage(named: "down-arrow")
         }
         
-        dropDown.cancelAction = { [weak self] in
-            self!.arrowView.image = UIImage.init(named: "up-arrow")
-        }
         dropDown.willShowAction = {
-            self.arrowView.image = UIImage.init(named: "down-arrow")
+            self.arrowView.image = UIImage(named: "up-arrow")
+        }
+        dropDown.cancelAction = {
+            self.arrowView.image = UIImage(named: "down-arrow")
         }
         
     }
-        // MARK: - addView
-        func setupViews() {
-            containerView.addSubview(titleLabel)
-            containerView.addSubview(subtitlelabel)
-            
-            view.addSubview(containerView)
-            view.addSubview(progressBar)
-            
-            view.addSubview(nameLabel)
-            view.addSubview(nameDot)
-            view.addSubview(nameTextField)
-            view.addSubview(belongLabel)
-            view.addSubview(belongDot)
-            view.addSubview(belongSelectButton)
-            view.addSubview(arrowView)
-            
-            view.addSubview(VerificationLabel)
-            view.addSubview(VerificationDot)
-            view.addSubview(VerificationButton)
-        }
+    // MARK: - addView
+    func setupViews() {
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(subtitlelabel)
         
-        // MARK: - setLayout
+        view.addSubview(containerView)
+        view.addSubview(progressBar)
+        
+        view.addSubview(nameLabel)
+        view.addSubview(nameDot)
+        view.addSubview(nameTextField)
+        view.addSubview(belongLabel)
+        view.addSubview(belongDot)
+        view.addSubview(belongSelectButton)
+        view.addSubview(arrowView)
+        
+        view.addSubview(VerificationLabel)
+        view.addSubview(VerificationDot)
+        view.addSubview(VerificationButton)
+    }
+    
+    // MARK: - setLayout
     func setupLayout() {
         let leftPadding = 24
         
@@ -299,11 +289,3 @@ class FirstAcademicVerificationViewController: UIViewController {
     }
     
 }
-
-// MARK: - Extension
-//extension FirstAcademicVerificationViewController: UITextFieldDelegate {
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//            //textField.resignFirstResponder()
-//        }
-//  }
-

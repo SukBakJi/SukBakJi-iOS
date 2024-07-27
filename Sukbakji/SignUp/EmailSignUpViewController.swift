@@ -1,17 +1,13 @@
 //
-//  processLoginViewController.swift
+//  SignUpViewController.swift
 //  SeokBakJi
 //
-//  Created by 오현민 on 7/16/24.
+//  Created by 오현민 on 7/18/24.
 //
 
-import Foundation
-import SnapKit
-import Then
 import UIKit
 
-
-class EmailLoginViewController: UIViewController {
+class EmailSignUpViewController: UIViewController {
     
     // MARK: - ImageView
     private let emailDot = UIImageView().then {
@@ -21,6 +17,12 @@ class EmailLoginViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let passwordDot = UIImageView().then {
+        $0.image = UIImage(named: "dot-badge")
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private let checkPasswordDot = UIImageView().then {
         $0.image = UIImage(named: "dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
@@ -38,7 +40,13 @@ class EmailLoginViewController: UIViewController {
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    private let correctIcon = UIImageView().then {
+        $0.image = UIImage(named: "correctCircle")
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     // MARK: - Label
     private let emailLabel = UILabel().then {
         $0.text = "이메일"
@@ -47,7 +55,7 @@ class EmailLoginViewController: UIViewController {
         $0.numberOfLines = 0
     }
     private let emailWarningLabel = UILabel().then {
-        $0.text = "이메일을 입력해 주세요"
+        $0.text = "올바르지 않은 형식의 이메일입니다"
         $0.textAlignment = .left
         $0.textColor = .warning400
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
@@ -60,17 +68,23 @@ class EmailLoginViewController: UIViewController {
         $0.numberOfLines = 0
     }
     private let passwordWarningLabel = UILabel().then {
-        $0.text = "비밀번호를 입력해 주세요"
+        $0.text = "비밀번호는 6자리 이상 입력해야 합니다"
         $0.textAlignment = .left
         $0.textColor = .warning400
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
         $0.numberOfLines = 0
     }
-    private let signUpLabel = UILabel().then {
-        $0.text = "아직 석박지 계정이 없다면?"
-        $0.textAlignment = .center
-        $0.textColor = .gray500
-        $0.font = UIFont(name: "Pretendard-Regular", size: 12)
+    private let checkPasswordLabel = UILabel().then {
+        $0.text = "비밀번호 확인"
+        $0.textAlignment = .left
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.numberOfLines = 0
+    }
+    private let checkPasswordWarningLabel = UILabel().then {
+        $0.text = "입력한 비밀번호와 일치하지 않습니다"
+        $0.textAlignment = .left
+        $0.textColor = .warning400
+        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
         $0.numberOfLines = 0
     }
     
@@ -93,7 +107,7 @@ class EmailLoginViewController: UIViewController {
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
     }
     private let passwordTextField = UITextField().then {
-        $0.placeholder = "비밀번호를 입력해 주세요"
+        $0.placeholder = "비밀번호를 6자리 이상 입력해 주세요"
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.clearButtonMode = .whileEditing
         $0.isSecureTextEntry = true
@@ -110,50 +124,36 @@ class EmailLoginViewController: UIViewController {
         $0.textColor = .gray500
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
     }
-    // MARK: - Button
-    private let autoLoginCheckBox = UIButton().then {
-        $0.setImage(UIImage(named: "state=off"), for: .normal)
-        $0.setImage(UIImage(named: "state=on"), for: .selected)
-        $0.setTitle("자동 로그인", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.titleLabel?.textAlignment = .center
-        $0.setTitleColor(.gray600, for: .normal)
-        $0.contentHorizontalAlignment = .left
-        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-        $0.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
+    private let checkPasswordTextField = UITextField().then {
+        $0.placeholder = "비밀번호를 한 번 더 입력해 주세요"
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.clearButtonMode = .whileEditing
+        $0.isSecureTextEntry = true
+        
+        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
+        $0.leftViewMode = .always
+        $0.borderStyle = .none
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 10
+        $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        $0.frame.size.width = 342
+        $0.frame.size.height = 44
+        $0.backgroundColor = .gray50
+        $0.textColor = .gray500
+        $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
     }
-    private let loginButton = UIButton().then {
-        $0.setTitle("로그인", for: .normal)
+    
+    // MARK: - Button
+    private var eyeButton = UIButton(type: .custom)
+    private let nextButton = UIButton().then {
+        $0.setTitle("다음으로", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.titleLabel?.textAlignment = .center
         $0.layer.cornerRadius = 8
-        
         $0.backgroundColor = .gray200
         $0.setTitleColor(.gray500, for: .normal)
-    }
-    private let emailFindButton = UIButton().then {
-        $0.setTitle("이메일 찾기", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 12)
-        $0.titleLabel?.textAlignment = .center
-        $0.setTitleColor(.gray600, for: .normal)
-    }
-    private let passwordFindButton = UIButton().then {
-        $0.setTitle("비밀번호 재설정", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 12)
-        $0.titleLabel?.textAlignment = .center
-        $0.setTitleColor(.gray600, for: .normal)
-    }
-    private let signUpButton = UIButton().then {
-        $0.setTitle("회원가입", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 12)
-        $0.titleLabel?.textAlignment = .center
-        $0.setTitleColor(.gray600, for: .normal)
-    }
-    private var eyeButton = UIButton(type: .custom)
-
-    // MARK: - View
-    private let verticalSeparator = UIView().then {
-        $0.backgroundColor = .gray500
+        $0.adjustsImageWhenHighlighted = false
+        $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - viewDidLoad()
@@ -161,29 +161,37 @@ class EmailLoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        setTextFieldDelegate()
         setUpNavigationBar()
         setPasswordShownButtonImage()
         setupViews()
         setupLayout()
-        setTextFieldDelegate()
+        
     }
     
     // MARK: - setTextField
     private func setTextFieldDelegate() {
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        checkPasswordTextField.delegate = self
     }
     
     // MARK: - navigationBar Title
     private func setUpNavigationBar(){
-        self.title = "이메일로 로그인"
+        self.title = "회원가입"
+    }
+    
+    // MARK: - Screen transition
+    @objc private func nextButtonTapped() {
+        let FirstAcademicVerificationVC = FirstAcademicVerificationViewController()
+        self.navigationController?.pushViewController(FirstAcademicVerificationVC, animated: true)
+        
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     // MARK: - Functional
-    @objc private func checkBoxTapped(_ sender: UIButton) {
-        sender.isSelected.toggle()
-    }
-   
     private func setPasswordShownButtonImage() {
         eyeButton = UIButton.init(primaryAction: UIAction(handler: { [self]_ in passwordTextField.isSecureTextEntry.toggle()
             self.eyeButton.isSelected.toggle()
@@ -192,16 +200,15 @@ class EmailLoginViewController: UIViewController {
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.imagePadding = 10
         buttonConfiguration.baseBackgroundColor = .clear
-        buttonConfiguration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 35)
         
         eyeButton.setImage((UIImage(named: "Password-hidden")), for: .normal)
         self.eyeButton.setImage(UIImage(named: "Password-shown"), for: .selected)
         self.eyeButton.configuration = buttonConfiguration
-
+        
         self.passwordTextField.rightView = eyeButton
         self.passwordTextField.rightViewMode = .whileEditing
     }
-
+    
     // MARK: - addView
     func setupViews() {
         view.addSubview(emailDot)
@@ -212,23 +219,21 @@ class EmailLoginViewController: UIViewController {
         view.addSubview(passwordLabel)
         view.addSubview(passwordTextField)
         
-        view.addSubview(autoLoginCheckBox)
-        view.addSubview(loginButton)
+        view.addSubview(checkPasswordDot)
+        view.addSubview(checkPasswordLabel)
+        view.addSubview(checkPasswordTextField)
         
-        view.addSubview(emailFindButton)
-        view.addSubview(verticalSeparator)
-        view.addSubview(passwordFindButton)
-        view.addSubview(signUpLabel)
-        view.addSubview(signUpButton)
+        view.addSubview(nextButton)
     }
     
     // MARK: - setLayout
     func setupLayout() {
+        
         emailLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalToSuperview().inset(24)
         }
-
+        
         emailDot.snp.makeConstraints { make in
             make.top.equalTo(emailLabel.snp.top)
             make.leading.equalTo(emailLabel.snp.trailing).offset(4)
@@ -256,50 +261,32 @@ class EmailLoginViewController: UIViewController {
             make.height.equalTo(44)
         }
         
-        autoLoginCheckBox.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(16)
+        checkPasswordLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(20)
             make.leading.equalToSuperview().inset(24)
-            make.width.equalTo(310)
         }
         
-        loginButton.snp.makeConstraints { make in
-            make.top.equalTo(autoLoginCheckBox.snp.bottom).offset(40)
+        checkPasswordDot.snp.makeConstraints { make in
+            make.top.equalTo(checkPasswordLabel.snp.top)
+            make.leading.equalTo(checkPasswordLabel.snp.trailing).offset(4)
+        }
+        
+        checkPasswordTextField.snp.makeConstraints { make in
+            make.top.equalTo(checkPasswordLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(44)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.top.equalTo(checkPasswordTextField.snp.bottom).offset(54)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
-        
-        emailFindButton.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(20)
-            make.trailing.equalTo(verticalSeparator.snp.leading).offset(-8)
-            make.height.equalTo(14)
-        }
-        
-        verticalSeparator.snp.makeConstraints { make in
-            make.centerX.equalTo(loginButton.snp.centerX)
-            make.centerY.equalTo(emailFindButton)
-            make.width.equalTo(0.5)
-            make.height.equalTo(14)
-        }
-        
-        passwordFindButton.snp.makeConstraints { make in
-            make.leading.equalTo(verticalSeparator.snp.trailing).offset(8)
-            make.centerY.equalTo(emailFindButton)
-            make.height.equalTo(14)
-        }
-        
-        signUpLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailFindButton.snp.bottom).offset(16)
-            make.leading.equalToSuperview().inset(103)
-        }
-        
-        signUpButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(101)
-            make.centerY.equalTo(signUpLabel)
-        }
     }
 }
+
 // MARK: - extension
-extension EmailLoginViewController: UITextFieldDelegate {
+extension EmailSignUpViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.addBorder([.bottom], color: .blue400, width: 0.5)
         print("쓰기시작")
@@ -313,5 +300,3 @@ extension EmailLoginViewController: UITextFieldDelegate {
     }
     
 }
-
-
