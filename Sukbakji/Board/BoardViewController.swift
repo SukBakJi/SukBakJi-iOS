@@ -11,7 +11,7 @@ import SwiftUI
 
 struct BoardViewController: View {
     @State private var selectedButton: String? = "메인" // 기본값을 '메인'으로 설정
-
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -66,9 +66,6 @@ struct BoardViewController: View {
                         .padding(.leading, 24) // HStack의 좌측 여백을 24로 고정
                         .padding(.trailing, 24) // HStack의 우측 여백을 24로 고정
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        //                    Divider()
-                        //                        .background(Color.gray)
                     }
                     .background(Color.white) // 상단 영역의 배경색을 흰색으로 설정
                     .fixedSize(horizontal: false, vertical: true) // 상단 영역의 높이는 내용에 맞게 조정
@@ -76,27 +73,26 @@ struct BoardViewController: View {
                 .background(Color.white)
                 
                 // 구분선 아래의 내용
-                ScrollView {
-                    VStack {
-                        switch selectedButton {
-                        case "메인":
-                            MainView()
-                        case "박사":
-                            DoctoralView()
-                        case "석사":
-                            MasterView()
-                        case "입학 예정":
-                            AdmissionView()
-                        case "자유":
-                            FreeView()
-                        default:
-                            Text("여기에 컨텐츠를 추가하세요")
-                                .font(.body)
-                                .foregroundColor(.secondary)
-                        }
+                VStack {
+                    switch selectedButton {
+                    case "메인":
+                        MainView()
+                    case "박사":
+                        DoctoralView()
+                    case "석사":
+                        MasterView()
+                    case "입학 예정":
+                        AdmissionView()
+                    case "자유":
+                        FreeView()
+                    default:
+                        Text("여기에 컨텐츠를 추가하세요")
+                            .font(.body)
+                            .foregroundColor(.secondary)
                     }
-                    .padding(.top, 2)
                 }
+                .padding(.top, 2)
+                
             }
         }
     }
