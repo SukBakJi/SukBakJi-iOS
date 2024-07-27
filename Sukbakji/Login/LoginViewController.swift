@@ -28,13 +28,11 @@ class LoginViewController: UIViewController {
         let rangeText = (fullText as NSString).range(of: "로그인")
         attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: rangeText)
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
-        
         $0.attributedText = attributedString
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-Bold", size: 26)
         $0.numberOfLines = 0
     }
-    
     private let signUpLabel = UILabel().then {
         $0.text = "아직 석박지 계정이 없다면?"
         $0.textAlignment = .center
@@ -48,7 +46,6 @@ class LoginViewController: UIViewController {
         $0.setTitle("카카오톡으로 로그인", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.titleLabel?.textAlignment = .center
-        
         $0.setImage(UIImage(named: "Kakao"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: -150, bottom: 0, right: 0)
@@ -59,12 +56,10 @@ class LoginViewController: UIViewController {
         $0.layer.borderWidth = 1.25
         $0.layer.borderColor = UIColor.kakaoBorder.cgColor
     }
-    
     private let appleLoginButton = UIButton().then {
         $0.setTitle("Apple로 로그인", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.titleLabel?.textAlignment = .center
-        
         $0.setImage(UIImage(named: "Apple"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: -185, bottom: 0, right: 0)
@@ -75,12 +70,10 @@ class LoginViewController: UIViewController {
         $0.layer.borderWidth = 1.25
         $0.layer.borderColor = UIColor.black.cgColor
     }
-    
     private let emailLoginButton = UIButton().then {
         $0.setTitle("이메일로 로그인", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.titleLabel?.textAlignment = .center
-        
         $0.setImage(UIImage(named: "Mail"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: -180, bottom: 0, right: 0)
@@ -92,14 +85,12 @@ class LoginViewController: UIViewController {
         $0.layer.borderColor = UIColor.gray300.cgColor
         $0.addTarget(self, action: #selector(emailLoginButtonTapped), for: .touchUpInside)
     }
-    
     private let signUpButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
         $0.setTitleColor(.gray600, for: .normal)
         $0.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
-    
     private let findAccountButton = UIButton().then {
         $0.setTitle("계정 찾기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
@@ -121,29 +112,24 @@ class LoginViewController: UIViewController {
     private func setUpNavigationBar(){
         self.title = "이메일로 로그인"
     }
-    
     override func viewWillAppear(_ animated: Bool) {
       navigationController?.setNavigationBarHidden(true, animated: true) // 뷰 컨트롤러가 나타날 때 숨기기
     }
-
     override func viewWillDisappear(_ animated: Bool) {
       navigationController?.setNavigationBarHidden(false, animated: true) // 뷰 컨트롤러가 사라질 때 나타내기
     }
     
-    // MARK: - Functional
-    
+    // MARK: - Screen transition
     // 회원가입
     @objc private func signUpButtonTapped() {
         // 회원가입 뷰 띄우기
-        let signUpVC = SignUpViewController()
-        self.navigationController?.pushViewController(signUpVC, animated: true)
+        let SignUpVC = SignUpViewController()
+        self.navigationController?.pushViewController(SignUpVC, animated: true)
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
-    
-    // 이메일로 로그인
     @objc private func emailLoginButtonTapped() {
         let EmailLoginVC = EmailLoginViewController()
         self.navigationController?.pushViewController(EmailLoginVC, animated: true)
@@ -153,6 +139,8 @@ class LoginViewController: UIViewController {
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
 
+    // MARK: - Functional
+    
     // MARK: - addView
     func setupViews() {
         view.addSubview(symbolImageView)
@@ -218,8 +206,3 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController: UISheetPresentationControllerDelegate {
-    func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
-    
-    }
-}
