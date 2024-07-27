@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBD52C5225010099E442 /* LoginViewController.swift */; };
 		412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBD72C5225250099E442 /* EmailLoginViewController.swift */; };
-		412BFBDB2C5225730099E442 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBDA2C5225730099E442 /* SignUpViewController.swift */; };
 		412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBDC2C52257F0099E442 /* SuccessSignUpViewController.swift */; };
 		412BFBDF2C5225920099E442 /* SecondAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBDE2C5225920099E442 /* SecondAcademicVerificationViewController.swift */; };
 		412BFBE12C5225A20099E442 /* FirstAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBE02C5225A20099E442 /* FirstAcademicVerificationViewController.swift */; };
-		412BFBE32C5225B90099E442 /* SelectSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBE22C5225B90099E442 /* SelectSignUpViewController.swift */; };
+		412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBE52C52A5E30099E442 /* addBorder+.swift */; };
+		41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */; };
+		41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */; };
+		41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
 		C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */; };
 		C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */; };
@@ -55,11 +57,13 @@
 		1E927070D6FD31E7F56AC090 /* Pods-Sukbakji.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.release.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.release.xcconfig"; sourceTree = "<group>"; };
 		412BFBD52C5225010099E442 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		412BFBD72C5225250099E442 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
-		412BFBDA2C5225730099E442 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		412BFBDC2C52257F0099E442 /* SuccessSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessSignUpViewController.swift; sourceTree = "<group>"; };
 		412BFBDE2C5225920099E442 /* SecondAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondAcademicVerificationViewController.swift; sourceTree = "<group>"; };
 		412BFBE02C5225A20099E442 /* FirstAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAcademicVerificationViewController.swift; sourceTree = "<group>"; };
-		412BFBE22C5225B90099E442 /* SelectSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSignUpViewController.swift; sourceTree = "<group>"; };
+		412BFBE52C52A5E30099E442 /* addBorder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "addBorder+.swift"; sourceTree = "<group>"; };
+		41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignUpViewController.swift; sourceTree = "<group>"; };
+		41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
@@ -124,13 +128,30 @@
 		412BFBD92C52252C0099E442 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				412BFBDA2C5225730099E442 /* SignUpViewController.swift */,
+				41EE13362C54016C0037EDD6 /* PopUp */,
 				412BFBDC2C52257F0099E442 /* SuccessSignUpViewController.swift */,
 				412BFBDE2C5225920099E442 /* SecondAcademicVerificationViewController.swift */,
+				41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */,
+				41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */,
 				412BFBE02C5225A20099E442 /* FirstAcademicVerificationViewController.swift */,
-				412BFBE22C5225B90099E442 /* SelectSignUpViewController.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		412BFBE42C52A5D20099E442 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				412BFBE52C52A5E30099E442 /* addBorder+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		41EE13362C54016C0037EDD6 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */,
+			);
+			path = PopUp;
 			sourceTree = "<group>";
 		};
 		58D31CF4877F1948B0BBDBEF /* Frameworks */ = {
@@ -243,6 +264,7 @@
 				C71E14842C44CE44003AFCB7 /* Home */,
 				C763D71E2C3BBA8900201913 /* Main */,
 				C7A7BC262C3AF2D4007E66DA /* Font */,
+				412BFBE42C52A5D20099E442 /* Extension */,
 				C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */,
 				C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */,
 				C7F455352C39B8F000A4D0EE /* Assets.xcassets */,
@@ -385,17 +407,19 @@
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
 				412BFBE12C5225A20099E442 /* FirstAcademicVerificationViewController.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
-				412BFBE32C5225B90099E442 /* SelectSignUpViewController.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
-				412BFBDB2C5225730099E442 /* SignUpViewController.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
+				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */,
 				C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */,
+				41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */,
 				C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
+				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
+				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				C78DE55A2C48176C00A58395 /* CalendarCollectionViewCell.swift in Sources */,
 				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,

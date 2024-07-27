@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         let mainViewController = UINavigationController(rootViewController: LoginViewController())
-        //let mainViewController = UINavigationController(rootViewController: successSignUpViewController())
+        //let mainViewController = UINavigationController(rootViewController: SecondAcademicVerificationViewController())
         
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
