@@ -15,7 +15,7 @@ class MainTabViewController: UITabBarController {
         tabBar.tintColor = UIColor(named: "Coquelicot")
         tabBar.unselectedItemTintColor = UIColor(red: 190/255, green: 190/255, blue: 190/255, alpha: 1.0)
         tabBar.backgroundColor = .white
-        tabBar.layer.cornerRadius = 25
+        tabBar.layer.cornerRadius = 20
         tabBar.layer.masksToBounds = false
         tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
@@ -38,8 +38,8 @@ class MainTabViewController: UITabBarController {
     func changeHeightOfTabbar() {
         if UIDevice().userInterfaceIdiom == .phone {
             var tabFrame = tabBar.frame
-            tabFrame.size.height = 100
-            tabFrame.origin.y = view.frame.size.height - 100
+            tabFrame.size.height = 95
+            tabFrame.origin.y = view.frame.size.height - 85
             tabBar.frame = tabFrame
         }
     }
