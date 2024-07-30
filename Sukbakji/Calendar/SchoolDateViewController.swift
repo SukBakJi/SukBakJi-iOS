@@ -21,6 +21,7 @@ class SchoolDateViewController: UIViewController {
         super.viewDidLoad()
 
         RecruitTF.addBottomShadow()
+        RecruitTF.isEnabled = false
         
         initUI()
         setDropdown()

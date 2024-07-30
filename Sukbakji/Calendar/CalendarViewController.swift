@@ -144,6 +144,10 @@ class CalendarViewController: UIViewController {
     }
     
     @IBAction func Alarm_Tapped(_ sender: Any) {
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "CalendarFBCVC") as? CalendarFBCViewController else {
+            return
+        }
+        self.present(nextVC, animated: false)
     }
 }
 
