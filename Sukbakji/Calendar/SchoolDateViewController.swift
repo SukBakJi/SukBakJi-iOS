@@ -11,6 +11,8 @@ import DropDown
 class SchoolDateViewController: UIViewController {
     
     @IBOutlet weak var RecruitTF: UITextField!
+    @IBOutlet weak var recruitFirstButton: UIButton!
+    @IBOutlet weak var recruitSecondButton: UIButton!
     
     let drop = DropDown()
     let recruitType = ["   일반전형", "   외국인전형", "   학부 대학원 연계과정"]
@@ -22,6 +24,24 @@ class SchoolDateViewController: UIViewController {
         
         initUI()
         setDropdown()
+        
+        recruitFirstButton.isEnabled = false
+        recruitFirstButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        recruitSecondButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+    }
+    
+    @objc func buttonTapped(_ sender: UIButton) {
+        if recruitFirstButton.image(for: .normal) == UIImage(named: "Sukbakji_RadioButton") && recruitSecondButton.image(for: .normal) == UIImage(named: "Sukbakji_RadioButton2") {
+            recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
+            recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
+            recruitFirstButton.isEnabled = true
+            recruitSecondButton.isEnabled = false
+        } else {
+            recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
+            recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
+            recruitFirstButton.isEnabled = false
+            recruitSecondButton.isEnabled = true
+        }
     }
     
     func initUI() {

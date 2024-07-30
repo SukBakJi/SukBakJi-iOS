@@ -1252,7 +1252,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대학교 선택" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czf-uY-DTt">
-                                <rect key="frame" x="150.33333333333334" y="59" width="92.333333333333343" height="24"/>
+                                <rect key="frame" x="151" y="59" width="91.333333333333314" height="24"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1268,7 +1268,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일정을 선택해 주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUm-Tp-Rq3">
-                                <rect key="frame" x="138" y="116.33333333333333" width="150.33333333333337" height="20.999999999999986"/>
+                                <rect key="frame" x="138" y="116.33333333333333" width="148.66666666666663" height="20.999999999999986"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="mUA-V8-rXb"/>
                                 </constraints>
@@ -1286,7 +1286,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해당 학교의 모집전형을 선택해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60P-c7-dBq">
-                                <rect key="frame" x="24" y="145.33333333333334" width="205.66666666666666" height="17"/>
+                                <rect key="frame" x="24" y="145.33333333333334" width="204.33333333333334" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="Qal-AC-Byr"/>
                                 </constraints>
@@ -1301,7 +1301,7 @@
                                         <rect key="frame" x="16" y="17" width="20" height="20"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2025년 전기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIZ-sh-9WU">
-                                        <rect key="frame" x="44.000000000000007" y="16.333333333333314" width="81.666666666666686" height="21"/>
+                                        <rect key="frame" x="44.000000000000007" y="16.333333333333314" width="84.666666666666686" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="9DW-Fi-5A2"/>
                                         </constraints>
@@ -1310,7 +1310,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집전형을 선택해 주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOo-ua-K6q">
-                                        <rect key="frame" x="133.66666666666663" y="16.333333333333314" width="161.33333333333337" height="21"/>
+                                        <rect key="frame" x="136.66666666666666" y="16.333333333333314" width="159.99999999999997" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="JvF-OY-yao"/>
                                         </constraints>
@@ -1349,13 +1349,13 @@
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_RadioButton"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2025년 전기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDx-A8-ykI">
-                                <rect key="frame" x="57.000000000000007" y="334.33333333333331" width="81.666666666666686" height="18.666666666666686"/>
+                                <rect key="frame" x="57.000000000000007" y="335.33333333333331" width="84.666666666666686" height="18.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8k-BN-pfd">
-                                <rect key="frame" x="158.66666666666666" y="333.33333333333331" width="25" height="25"/>
+                                <rect key="frame" x="161.66666666666666" y="333.33333333333331" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="bZP-Wp-oWu"/>
                                     <constraint firstAttribute="width" constant="25" id="tN1-uX-WOm"/>
@@ -1364,7 +1364,7 @@
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_RadioButton2"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2025년 후기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL1-87-Kav">
-                                <rect key="frame" x="191.66666666666666" y="334.33333333333331" width="81.666666666666657" height="18.666666666666686"/>
+                                <rect key="frame" x="194.66666666666666" y="335.33333333333331" width="84.666666666666657" height="18.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                 <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1376,7 +1376,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Dot" translatesAutoresizingMaskIntoConstraints="NO" id="MDr-To-ZxQ">
-                                <rect key="frame" x="90.333333333333329" y="385" width="4" height="4"/>
+                                <rect key="frame" x="90.333333333333329" y="386" width="4" height="4"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   모집전형을 선택해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tn7-aa-UTz">
                                 <rect key="frame" x="24" y="423.33333333333331" width="345" height="44"/>
@@ -1445,7 +1445,7 @@
                             <constraint firstItem="X8k-BN-pfd" firstAttribute="leading" secondItem="bDx-A8-ykI" secondAttribute="trailing" constant="20" id="75r-xb-W5T"/>
                             <constraint firstItem="Tn7-aa-UTz" firstAttribute="leading" secondItem="oB5-NA-Hgg" secondAttribute="leading" constant="24" id="8yU-Kg-Me4"/>
                             <constraint firstItem="oB5-NA-Hgg" firstAttribute="trailing" secondItem="Tn7-aa-UTz" secondAttribute="trailing" constant="24" id="99z-me-nfk"/>
-                            <constraint firstItem="bDx-A8-ykI" firstAttribute="top" secondItem="NZ1-12-95Z" secondAttribute="bottom" constant="13" id="9aT-eE-2fA"/>
+                            <constraint firstItem="bDx-A8-ykI" firstAttribute="top" secondItem="NZ1-12-95Z" secondAttribute="bottom" constant="14" id="9aT-eE-2fA"/>
                             <constraint firstItem="MKR-0b-cAs" firstAttribute="leading" secondItem="oB5-NA-Hgg" secondAttribute="leading" constant="24" id="AK6-dA-MJh"/>
                             <constraint firstItem="bDx-A8-ykI" firstAttribute="leading" secondItem="MKR-0b-cAs" secondAttribute="trailing" constant="8" id="Aue-g8-tDO"/>
                             <constraint firstItem="ANv-Ai-JIh" firstAttribute="leading" secondItem="oB5-NA-Hgg" secondAttribute="leading" constant="24" id="EKR-ix-PAk"/>
@@ -1463,7 +1463,7 @@
                             <constraint firstItem="6YR-le-hBv" firstAttribute="leading" secondItem="oB5-NA-Hgg" secondAttribute="leading" constant="8" id="Vy4-01-djr"/>
                             <constraint firstItem="X8k-BN-pfd" firstAttribute="top" secondItem="NZ1-12-95Z" secondAttribute="bottom" constant="12" id="XNg-Io-Gzt"/>
                             <constraint firstItem="fQr-Uv-3wI" firstAttribute="top" secondItem="Tn7-aa-UTz" secondAttribute="bottom" constant="6" id="YVq-6Z-VX8"/>
-                            <constraint firstItem="WL1-87-Kav" firstAttribute="top" secondItem="NZ1-12-95Z" secondAttribute="bottom" constant="13" id="bOC-dX-w00"/>
+                            <constraint firstItem="WL1-87-Kav" firstAttribute="top" secondItem="NZ1-12-95Z" secondAttribute="bottom" constant="14" id="bOC-dX-w00"/>
                             <constraint firstItem="o1h-KO-HOn" firstAttribute="top" secondItem="60P-c7-dBq" secondAttribute="bottom" constant="24" id="e3f-fA-2z6"/>
                             <constraint firstItem="Tn7-aa-UTz" firstAttribute="top" secondItem="yk4-w7-hwH" secondAttribute="bottom" constant="12" id="h4H-uw-xp0"/>
                             <constraint firstItem="ThJ-NJ-qme" firstAttribute="top" secondItem="fQr-Uv-3wI" secondAttribute="bottom" constant="210" id="iV9-5U-bll"/>
@@ -1488,6 +1488,8 @@
                     </view>
                     <connections>
                         <outlet property="RecruitTF" destination="Tn7-aa-UTz" id="h0d-ek-Rcq"/>
+                        <outlet property="recruitFirstButton" destination="MKR-0b-cAs" id="OcG-LP-BcP"/>
+                        <outlet property="recruitSecondButton" destination="X8k-BN-pfd" id="bxl-nw-zSF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jui-Cm-yDh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
