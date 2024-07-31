@@ -70,9 +70,9 @@ struct BoardQnABoardViewController: View {
             }
             .alert(isPresented: $showAlert) {
                 Alert(
-                    title: Text("공지사항"),
+                    title: Text("공지"),
                     message: Text("게시판 내 개인정보 유추 금지와 관련하여 안내드립니다"),
-                    dismissButton: .default(Text("확인"))
+                    dismissButton: .default(Text("확인했어요"))
                 )
             }
         }
@@ -122,7 +122,7 @@ struct Board: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
                         .inset(by: 0.5)
-                        .stroke(Constants.Gray100, lineWidth: 1)
+                        .stroke(Constants.Gray300, lineWidth: 1) // 원래 색상 Gray100
                 )
                 .padding(.horizontal, 24) // 사각형 바깥쪽 좌우 여백을 24로 지정
             }
@@ -133,10 +133,11 @@ struct Board: View {
 
 struct overlayButton: View {
     var body: some View {
-            Button(action: {
-                // 버튼 클릭 시 동작할 코드를 여기에 작성합니다.
-                print("글쓰기 버튼 tapped!")
-            }) {
+        Button(action: {
+            // 버튼 클릭 시 동작할 코드를 여기에 작성합니다.
+            print("글쓰기 버튼 tapped!")
+        }) {
+            NavigationLink(destination: BoardWriteBoardViewController()) {
                 ZStack {
                     Circle()
                         .frame(width: 60, height: 60)
@@ -150,6 +151,7 @@ struct overlayButton: View {
                 }
                 .buttonStyle(PlainButtonStyle()) // 버튼의 기본 스타일을 제거합니다.
             }
+        }
     }
 }
 
@@ -159,7 +161,7 @@ struct noticeView: View {
     var body: some View {
         Button(action: {
             showAlert = true
-            print("공지사항 글 tapped")
+            print("질문게시판 공지사항 글 tapped")
         }) {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .center, spacing: 0) {

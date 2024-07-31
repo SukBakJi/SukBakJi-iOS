@@ -8,11 +8,13 @@
 import UIKit
 
 class SchoolDeleteAlertViewController: UIViewController {
-
+    
+    @IBOutlet weak var deleteView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        deleteView.layer.cornerRadius = 10
     }
     
 

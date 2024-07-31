@@ -23,6 +23,6 @@ class SchoolSelectViewController: UIViewController {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SchoolDateVC") as? SchoolDateViewController else {
             return
         }
-        self.present(nextVC, animated: true)
+        self.present(nextVC, animated: false)
     }
 }
