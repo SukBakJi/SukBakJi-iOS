@@ -34,6 +34,7 @@ class AlarmViewController: UIViewController {
 
         SchoolTF.addBottomShadow()
         SchoolTF.isEnabled = false
+        AlarmDateTF.isEnabled = false
         AlarmNameTF.addBottomShadow()
         AlarmDateTF.addBottomShadow()
         DatePicker.isHidden = true
