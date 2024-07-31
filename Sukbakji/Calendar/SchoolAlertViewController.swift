@@ -8,22 +8,21 @@
 import UIKit
 
 class SchoolAlertViewController: UIViewController {
-
+    
+    @IBOutlet weak var alertView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        alertView.layer.cornerRadius = 10
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func ok_Button(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("DismissOneMore"), object: nil, userInfo: nil)
+        self.presentingViewController?.dismiss(animated: false)
     }
-    */
-
+    
+    @IBAction func cancel_Tapped(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: false)
+    }
 }

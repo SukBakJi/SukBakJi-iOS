@@ -14,8 +14,14 @@ class SchoolDateViewController: UIViewController {
     @IBOutlet weak var recruitFirstButton: UIButton!
     @IBOutlet weak var recruitSecondButton: UIButton!
     
+    @IBOutlet weak var recruitDayLabel: UILabel!
+    @IBOutlet weak var recruitTypeLabel: UILabel!
+    
+    @IBOutlet weak var warningImage: UIImageView!
+    @IBOutlet weak var warningLabel: UILabel!
+    
     let drop = DropDown()
-    let recruitType = ["   일반전형", "   외국인전형", "   학부 대학원 연계과정"]
+    let recruitType = ["  일반전형", "  외국인전형", "  학부 대학원 연계과정"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +29,26 @@ class SchoolDateViewController: UIViewController {
         RecruitTF.addBottomShadow()
         RecruitTF.isEnabled = false
         
+        warningImage.isHidden = true
+        warningLabel.isHidden = true
+        
         initUI()
         setDropdown()
         
         recruitFirstButton.isEnabled = false
         recruitFirstButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         recruitSecondButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(self.didDismissDetailNotification(_:)),
+                  name: NSNotification.Name("DismissOneMore"),
+                  object: nil
+        )
+    }
+    
+    @objc func didDismissDetailNotification(_ notification: Notification) {
+        self.presentingViewController?.dismiss(animated: false)
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
@@ -37,11 +57,13 @@ class SchoolDateViewController: UIViewController {
             recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
             recruitFirstButton.isEnabled = true
             recruitSecondButton.isEnabled = false
+            recruitDayLabel.text = "2025년 후기"
         } else {
             recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
             recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
             recruitFirstButton.isEnabled = false
             recruitSecondButton.isEnabled = true
+            recruitDayLabel.text = "2025년 전기"
         }
     }
     
@@ -70,7 +92,9 @@ class SchoolDateViewController: UIViewController {
         // Item 선택 시 처리
         drop.selectionAction = { [weak self] (index, item) in
             //선택한 Item을 TextField에 넣어준다.
-            self!.RecruitTF.text = " \(item)"
+            self?.RecruitTF.text = " \(item)"
+            self?.recruitTypeLabel.text = " \(item)"
+            self?.recruitTypeLabel.textColor = UIColor(named: "Coquelicot")
         }
         
         // 취소 시 처리
@@ -83,7 +107,17 @@ class SchoolDateViewController: UIViewController {
     }
     
     @IBAction func back_Tapped(_ sender: Any) {
-        self.presentingViewController?.dismiss(animated: true)
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SchoolAlertVC") as? SchoolAlertViewController else {
+            return
+        }
+        self.present(nextVC, animated: false)
+    }
+    
+    @IBAction func next_Tapped(_ sender: Any) {
+        if RecruitTF.text == "" {
+            warningImage.isHidden = false
+            warningLabel.isHidden = false
+        }
     }
 }
 

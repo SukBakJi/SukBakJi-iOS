@@ -67,7 +67,7 @@ class CalendarViewController: UIViewController {
             let label = UILabel()
             label.text = dayOfTheWeek[i]
             label.textAlignment = .center
-            label.font = .monospacedSystemFont(ofSize: 14, weight: .semibold)
+            label.font = UIFont(name: "SUITE-SemiBold", size: 14)
             self.weekStackView.addArrangedSubview(label)
             
             if i == 0 {

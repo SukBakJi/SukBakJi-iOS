@@ -29,7 +29,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     private func configureDay() {
         self.addSubview(self.dayLabel)
         self.dayLabel.textColor = .black
-        self.dayLabel.font = .monospacedSystemFont(ofSize: 14, weight: .medium)
+        self.dayLabel.font = UIFont(name: "SUITE-Medium", size: 14)
         self.dayLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.dayLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),

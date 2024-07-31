@@ -9,4 +9,5 @@ target 'Sukbakji' do
  pod 'Then'
  pod 'SnapKit', '~> 5.7.0'
  pod 'DropDown', '2.3.13'
+ pod 'Alamofire'
 end
