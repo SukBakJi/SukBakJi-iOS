@@ -152,7 +152,6 @@ class EmailSignUpViewController: UIViewController {
         $0.layer.cornerRadius = 8
         $0.backgroundColor = .gray200
         $0.setTitleColor(.gray500, for: .normal)
-        $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
@@ -191,7 +190,7 @@ class EmailSignUpViewController: UIViewController {
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
-    // MARK: - Functional
+    // MARK: - ButtonConfigration
     private func setPasswordShownButtonImage() {
         eyeButton = UIButton.init(primaryAction: UIAction(handler: { [self]_ in passwordTextField.isSecureTextEntry.toggle()
             self.eyeButton.isSelected.toggle()

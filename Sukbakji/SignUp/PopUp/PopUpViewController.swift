@@ -15,6 +15,8 @@ class PopUpViewController: UIViewController {
     private let desc: String
     private let rangeText: String
     private var popupView: PopUpView!
+    
+    var onMove: (() -> Void)?
 
     init(desc: String, rangeText: String) {
         self.desc = desc
@@ -41,7 +43,13 @@ class PopUpViewController: UIViewController {
         }
         
         self.popupView.onClose = { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+            self?.dismiss(animated: false, completion: nil)
+        }
+        
+        self.popupView.onMove = { [weak self] in
+            self?.dismiss(animated: true, completion: {
+                self?.onMove?()
+            })
         }
     }
     
@@ -86,6 +94,7 @@ class PopUpViewController: UIViewController {
         }
         
         var onClose: (() -> Void)?
+        var onMove: (() -> Void)?
         
         init(desc: String, rangeText: String) {
             super.init(frame: .zero)
@@ -93,6 +102,7 @@ class PopUpViewController: UIViewController {
             let fullText = desc
             let attributedString = NSMutableAttributedString(string: fullText)
             let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 4
             let rangeText = (fullText as NSString).range(of: rangeText)
             attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: rangeText)
             attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
@@ -112,9 +122,11 @@ class PopUpViewController: UIViewController {
         @objc private func closeButtonTapped() {
             onClose?()
         }
+        
         @objc private func moveButtonTapped() {
-            // Add action for moveButton here
+            onMove?()
         }
+        
         private func setupViews() {
             addSubview(popupView)
             popupView.addSubview(titleLabel)
