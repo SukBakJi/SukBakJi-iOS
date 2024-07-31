@@ -2,8 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>SUITE-SemiBold.otf</string>
+		<string>SUITE-Regular.otf</string>
+		<string>SUITE-Medium.otf</string>
+		<string>SUITE-Light.otf</string>
+		<string>SUITE-Heavy.otf</string>
+		<string>SUITE-ExtraBold.otf</string>
+		<string>SUITE-Bold.otf</string>
 		<string>Pretendard-Black.otf</string>
 		<string>Pretendard-Bold.otf</string>
 		<string>Pretendard-ExtraBold.otf</string>

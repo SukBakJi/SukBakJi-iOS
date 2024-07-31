@@ -595,15 +595,18 @@
                             <constraint firstItem="wGh-1F-Ddq" firstAttribute="centerX" secondItem="ejc-yw-Vgw" secondAttribute="centerX" id="vNU-Yi-hXa"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dateView" destination="wGh-1F-Ddq" id="LXQ-tS-xfx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3w-VE-rAn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2053" y="1330"/>
+            <point key="canvasLocation" x="2053" y="1311"/>
         </scene>
         <!--School Alert View Controller-->
         <scene sceneID="mpa-7Z-cjp">
             <objects>
-                <viewController storyboardIdentifier="SchoolAlertVC" id="fgD-wN-86Y" customClass="SchoolAlertViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SchoolAlertVC" modalPresentationStyle="overCurrentContext" id="fgD-wN-86Y" customClass="SchoolAlertViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MvN-mb-9ym">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -637,6 +640,9 @@
                                                     <color key="baseForegroundColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="baseBackgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="cancel_Tapped:" destination="fgD-wN-86Y" eventType="touchUpInside" id="HJO-hC-Qvk"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0m-Ce-zi0">
                                                 <rect key="frame" x="134.66666666666666" y="0.0" width="122.33333333333334" height="48"/>
@@ -645,6 +651,9 @@
                                                     <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="16"/>
                                                     <color key="baseBackgroundColor" name="Coquelicot"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ok_Button:" destination="fgD-wN-86Y" eventType="touchUpInside" id="7kt-Hv-XdK"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -675,6 +684,9 @@
                             <constraint firstItem="Jcr-hx-pW8" firstAttribute="centerX" secondItem="MvN-mb-9ym" secondAttribute="centerX" id="xAE-TT-SRv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="alertView" destination="Jcr-hx-pW8" id="GP2-j6-O7O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Snp-tm-YHN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1047,6 +1059,9 @@
                             <constraint firstItem="YUi-dI-iXu" firstAttribute="centerY" secondItem="25Z-kU-TUG" secondAttribute="centerY" id="gDj-4x-8AE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="deleteView" destination="YUi-dI-iXu" id="Trl-M5-Js1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ep-rG-wmD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1229,37 +1244,37 @@
                         <viewLayoutGuide key="safeArea" id="hiP-h5-6f6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="mGE-eZ-x2d" firstAttribute="top" secondItem="Nn6-ap-OgL" secondAttribute="bottom" constant="12" id="4S1-MF-gUR"/>
                             <constraint firstItem="ZMO-qs-1zy" firstAttribute="top" secondItem="Eds-PX-7ct" secondAttribute="bottom" constant="20" id="7BF-dW-KuI"/>
                             <constraint firstItem="Ckg-qP-D6E" firstAttribute="top" secondItem="ZMO-qs-1zy" secondAttribute="bottom" constant="8" id="7Qs-vI-iMk"/>
                             <constraint firstItem="8VV-vd-Odu" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="24" id="8OT-E3-zoo"/>
                             <constraint firstItem="w2B-UB-w3p" firstAttribute="centerY" secondItem="ono-yN-ela" secondAttribute="centerY" id="Avw-EE-Ezf"/>
+                            <constraint firstItem="OCl-V5-Iuy" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" id="BUZ-O0-2gB"/>
+                            <constraint firstItem="Rv2-uV-lEU" firstAttribute="top" secondItem="Ckg-qP-D6E" secondAttribute="bottom" constant="24" id="Bxe-NM-YmS"/>
                             <constraint firstItem="ZMO-qs-1zy" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="24" id="CBn-Uo-WmH"/>
-                            <constraint firstItem="Nn6-ap-OgL" firstAttribute="top" secondItem="Rv2-uV-lEU" secondAttribute="bottom" constant="8" id="EfM-80-guG"/>
+                            <constraint firstItem="OCl-V5-Iuy" firstAttribute="trailing" secondItem="hiP-h5-6f6" secondAttribute="trailing" id="CgJ-rb-wZC"/>
                             <constraint firstItem="hiP-h5-6f6" firstAttribute="trailing" secondItem="8VV-vd-Odu" secondAttribute="trailing" constant="24" id="GDI-By-nGM"/>
                             <constraint firstItem="ono-yN-ela" firstAttribute="top" secondItem="hiP-h5-6f6" secondAttribute="top" id="HNV-aM-Hdo"/>
-                            <constraint firstItem="mhk-fc-6nS" firstAttribute="top" secondItem="Nn6-ap-OgL" secondAttribute="bottom" constant="12" id="IxO-VI-9ay"/>
-                            <constraint firstItem="Rv2-uV-lEU" firstAttribute="top" secondItem="Ckg-qP-D6E" secondAttribute="bottom" constant="24" id="KJa-NW-XZJ"/>
                             <constraint firstItem="mhk-fc-6nS" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="36" id="Kl0-Vk-mbl"/>
-                            <constraint firstItem="OCl-V5-Iuy" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" id="SEn-js-E19"/>
                             <constraint firstItem="Eds-PX-7ct" firstAttribute="top" secondItem="w2B-UB-w3p" secondAttribute="bottom" id="SXb-RX-83q"/>
+                            <constraint firstItem="Nn6-ap-OgL" firstAttribute="top" secondItem="Rv2-uV-lEU" secondAttribute="bottom" constant="8" id="Tn4-Zq-cW7"/>
                             <constraint firstItem="Eds-PX-7ct" firstAttribute="leading" secondItem="2sz-xF-qOo" secondAttribute="leading" id="WiR-zt-c5j"/>
-                            <constraint firstItem="Rv2-uV-lEU" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="24" id="ZNM-Ab-IEo"/>
-                            <constraint firstItem="Nn6-ap-OgL" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" id="ZTE-oY-YtS"/>
                             <constraint firstItem="ono-yN-ela" firstAttribute="centerX" secondItem="2sz-xF-qOo" secondAttribute="centerX" id="aN8-DN-jcf"/>
                             <constraint firstItem="hiP-h5-6f6" firstAttribute="trailing" secondItem="Y5S-uR-WAq" secondAttribute="trailing" constant="24" id="bFK-fg-RiE"/>
                             <constraint firstItem="zcW-8G-Mef" firstAttribute="top" secondItem="Eds-PX-7ct" secondAttribute="bottom" constant="22" id="e0a-jY-6RO"/>
-                            <constraint firstItem="Nn6-ap-OgL" firstAttribute="trailing" secondItem="hiP-h5-6f6" secondAttribute="trailing" id="fZP-PS-ehv"/>
-                            <constraint firstAttribute="trailing" secondItem="OCl-V5-Iuy" secondAttribute="trailing" id="jI2-wK-Puv"/>
+                            <constraint firstItem="Rv2-uV-lEU" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="24" id="gc4-RH-IgG"/>
                             <constraint firstItem="hiP-h5-6f6" firstAttribute="trailing" secondItem="zcW-8G-Mef" secondAttribute="trailing" constant="30" id="jvF-dd-6CP"/>
-                            <constraint firstItem="OCl-V5-Iuy" firstAttribute="top" secondItem="Y5S-uR-WAq" secondAttribute="bottom" id="lBq-ef-z1P"/>
+                            <constraint firstItem="Nn6-ap-OgL" firstAttribute="trailing" secondItem="hiP-h5-6f6" secondAttribute="trailing" id="nCg-KL-fG4"/>
+                            <constraint firstItem="Nn6-ap-OgL" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" id="oUU-FO-U7x"/>
+                            <constraint firstItem="mhk-fc-6nS" firstAttribute="top" secondItem="Nn6-ap-OgL" secondAttribute="bottom" constant="12" id="oyk-Yl-gDu"/>
                             <constraint firstItem="w2B-UB-w3p" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="8" id="q6G-9e-CX3"/>
+                            <constraint firstItem="Y5S-uR-WAq" firstAttribute="top" secondItem="Nn6-ap-OgL" secondAttribute="bottom" id="qcE-1W-bbC"/>
                             <constraint firstItem="Y5S-uR-WAq" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="24" id="raf-7o-hdQ"/>
                             <constraint firstItem="Ckg-qP-D6E" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="24" id="s1X-h0-OXo"/>
-                            <constraint firstItem="mGE-eZ-x2d" firstAttribute="top" secondItem="Nn6-ap-OgL" secondAttribute="bottom" constant="12" id="tVx-zn-Yoz"/>
                             <constraint firstItem="hiP-h5-6f6" firstAttribute="trailing" secondItem="mGE-eZ-x2d" secondAttribute="trailing" constant="30" id="vth-K5-dEu"/>
                             <constraint firstAttribute="trailing" secondItem="Eds-PX-7ct" secondAttribute="trailing" id="wvx-Si-3R6"/>
+                            <constraint firstItem="OCl-V5-Iuy" firstAttribute="top" secondItem="Y5S-uR-WAq" secondAttribute="bottom" id="yYM-D8-jwy"/>
                             <constraint firstItem="8VV-vd-Odu" firstAttribute="top" secondItem="OCl-V5-Iuy" secondAttribute="bottom" constant="20" id="yly-0N-HoX"/>
-                            <constraint firstItem="Y5S-uR-WAq" firstAttribute="top" secondItem="Nn6-ap-OgL" secondAttribute="bottom" id="zlN-jc-a2Y"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -1446,6 +1461,9 @@
                                     <color key="baseForegroundColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="baseBackgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="next_Tapped:" destination="p0f-qx-fJd" eventType="touchUpInside" id="js7-h6-59D"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Warning" translatesAutoresizingMaskIntoConstraints="NO" id="fQr-Uv-3wI">
                                 <rect key="frame" x="28" y="473.33333333333331" width="12" height="12"/>
@@ -1524,8 +1542,12 @@
                     </view>
                     <connections>
                         <outlet property="RecruitTF" destination="Tn7-aa-UTz" id="h0d-ek-Rcq"/>
+                        <outlet property="recruitDayLabel" destination="qIZ-sh-9WU" id="XJW-yV-JKb"/>
                         <outlet property="recruitFirstButton" destination="MKR-0b-cAs" id="OcG-LP-BcP"/>
                         <outlet property="recruitSecondButton" destination="X8k-BN-pfd" id="bxl-nw-zSF"/>
+                        <outlet property="recruitTypeLabel" destination="zOo-ua-K6q" id="B6Y-Hs-oVY"/>
+                        <outlet property="warningImage" destination="fQr-Uv-3wI" id="hzy-zD-HvI"/>
+                        <outlet property="warningLabel" destination="HPy-AU-QvD" id="yKj-GA-1ci"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jui-Cm-yDh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

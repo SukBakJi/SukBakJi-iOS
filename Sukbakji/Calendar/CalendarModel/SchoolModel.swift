@@ -7,10 +7,19 @@
 
 import Foundation
 
-struct SchoolModel : Codable {
-    var content : [SchoolResponse]
+struct SchoolModel : Encodable {
+    let search: String
+}
+
+struct SchoolResultModel : Codable {
+    let status: String
+    var schools: [SchoolResponse]
 }
 
 struct SchoolResponse : Codable {
-    let schoolName: String
+    let name: String
+    let code: String
+    let office: String
+    let level: Int
+    let address: String
 }
