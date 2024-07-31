@@ -80,6 +80,7 @@ class FirstAcademicVerificationViewController: UIViewController {
     
     // MARK: - TextField
     private let nameTextField = UITextField().then {
+        $0.placeholder = "이름을 입력해 주세요"
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.clearButtonMode = .whileEditing
         
@@ -91,9 +92,9 @@ class FirstAcademicVerificationViewController: UIViewController {
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         $0.frame.size.width = 342
         $0.frame.size.height = 44
-        
         $0.backgroundColor = .gray50
         $0.textColor = .gray500
+        $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
     }
     
@@ -175,6 +176,7 @@ class FirstAcademicVerificationViewController: UIViewController {
         dropDown.selectionAction = { [weak self] (index, item) in
             guard let self = self else { return }
             self.belongSelectButton.setTitle(item, for: .normal)
+            self.belongSelectButton.setTitleColor(.black, for: .normal)
             self.VerificationButton.setImage(UIImage(named: "Verification-on"), for: .normal)
             self.VerificationButton.isEnabled = true
             self.arrowView.image = UIImage(named: "down-arrow")

@@ -12,6 +12,7 @@ import UniformTypeIdentifiers
 class SecondAcademicVerificationViewController: UIViewController {
     
     private var isUpload = false
+    private var isConfirm = false
     
     // MARK: - imageView
     private let noticeImageView = UIImageView().then {
@@ -103,15 +104,6 @@ class SecondAcademicVerificationViewController: UIViewController {
         $0.tag = 3
         $0.addTarget(self, action: #selector(changeTabBarView), for: .touchUpInside)
     }
-    private let anyDocument = UIButton().then {
-        $0.setTitle("자유", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setTitleColor(.gray600, for: .normal)
-        $0.frame.size.width = 48
-        $0.frame.size.height = 40
-        $0.tag = 4
-        $0.addTarget(self, action: #selector(changeTabBarView), for: .touchUpInside)
-    }
     private let uploadButton = UIButton().then {
         $0.setImage(UIImage(named: "upload"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
@@ -201,10 +193,14 @@ class SecondAcademicVerificationViewController: UIViewController {
         editButton.menu = menu
         editButton.showsMenuAsPrimaryAction = true
     }
+    
+    // MARK: - 전환셋업
     private func DidUploadSetUp() {
         uploadButton.layer.isHidden = true
         uploadedFileView.layer.isHidden = false
         nextButton.isEnabled = true
+        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.backgroundColor = .orange700
     }
     private func notUploadSetUp() {
         uploadButton.layer.isHidden = false
@@ -228,66 +224,98 @@ class SecondAcademicVerificationViewController: UIViewController {
         self.title = "학력인증"
     }
     
+    // MARK: - Functional
+    
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
-        //let FirstAcademicVerificationVC = FirstAcademicVerificationViewController()
-        //self.navigationController?.pushViewController(FirstAcademicVerificationVC, animated: true)
+        let UploadCompletedpopUpVC = UploadCompletedPopUpViewController()
+        UploadCompletedpopUpVC.modalPresentationStyle = .overFullScreen
+        self.present(UploadCompletedpopUpVC, animated: false)
         
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .black
-        self.navigationItem.backBarButtonItem = backBarButtonItem
+        UploadCompletedpopUpVC.onClose = {
+            self.isConfirm = true
+            let ResearchTopicVC = ResearchTopicViewController()
+            self.navigationController?.pushViewController(ResearchTopicVC, animated: true)
+            
+            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+            backBarButtonItem.tintColor = .black
+            self.navigationItem.backBarButtonItem = backBarButtonItem
+            
+        }
+        
     }
+    
     
     // MARK: - TabBar
     @objc private func changeTabBarView(_ sender: UIButton) {
         switch sender.tag {
         case 1:
             if isUpload {
-                let PopUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 재학증명서 페이지로 이동할까요?", rangeText: "재학증명서")
-                PopUpVC.modalPresentationStyle = .overFullScreen
-                self.present(PopUpVC, animated: true)
-            } 
-            // 이동할게요 누르면
-            subNoticeLabel.text = "학교에서 공식적으로 발급한 재학증명서를 제출해 주세요!"
-            changeTabBar(studentDocument)
+                // 팝업 띄우기
+                let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 재학증명서 페이지로 이동할까요?", rangeText: "재학증명서")
+                popUpVC.modalPresentationStyle = .overFullScreen
+                self.present(popUpVC, animated: false)
+                
+                // 이동할게요 눌렀을 때
+                popUpVC.onMove = {
+                    self.isUpload = false
+                    self.subNoticeLabel.text = "학교에서 공식적으로 발급한 재학증명서를 제출해 주세요!"
+                    self.changeTabBar(self.studentDocument)
+                    self.notUploadSetUp()
+                }
+            } else {
+                subNoticeLabel.text = "학교에서 공식적으로 발급한 재학증명서를 제출해 주세요!"
+                changeTabBar(studentDocument)
+            }
             
         case 2:
             if isUpload {
-                let PopUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 학생증 인증 페이지로 이동할까요?", rangeText: "학생증 인")
-                PopUpVC.modalPresentationStyle = .overFullScreen
-                self.present(PopUpVC, animated: true)
+                let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 학생증 인증 페이지로 이동할까요?", rangeText: "학생증 인증")
+                popUpVC.modalPresentationStyle = .overFullScreen
+                self.present(popUpVC, animated: false)
+                
+                popUpVC.onMove = {
+                    self.isUpload = false
+                    self.subNoticeLabel.text = "학생증을 스캔 후 첨부하여 인증해 주세요!"
+                    self.changeTabBar(self.studentID)
+                    self.notUploadSetUp()
+                }
+            } else {
+                subNoticeLabel.text = "학생증을 스캔 후 첨부하여 인증해 주세요!"
+                changeTabBar(studentID)
             }
-            subNoticeLabel.text = "학생증을 스캔 후 첨부하여 인증해 주세요!"
-            changeTabBar(studentID)
             
         case 3:
             if isUpload {
-                let PopUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 졸업증명서 페이지로 이동할까요?", rangeText: "졸업증명서")
-                PopUpVC.modalPresentationStyle = .overFullScreen
-                self.present(PopUpVC, animated: true)
-            } else {
+                let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 졸업증명서 페이지로 이동할까요?", rangeText: "졸업증명서")
+                popUpVC.modalPresentationStyle = .overFullScreen
+                self.present(popUpVC, animated: false)
                 
+                popUpVC.onMove = {
+                    self.isUpload = false
+                    self.subNoticeLabel.text = "학교에서 공식적으로 발급한 졸업증명서를 제출해 주세요!"
+                    self.changeTabBar(self.graduateDocument)
+                    self.notUploadSetUp()
+                }
+            } else {
+                subNoticeLabel.text = "학교에서 공식적으로 발급한 졸업증명서를 제출해 주세요!"
+                changeTabBar(graduateDocument)
             }
-            subNoticeLabel.text = "학교에서 공식적으로 발급한 졸업증명서를 제출해 주세요!"
-            changeTabBar(graduateDocument)
-            
-        case 4:
-            if isUpload {
-                let PopUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 자유 인증 페이지로 이동할까요?", rangeText: "자유 인증")
-                PopUpVC.modalPresentationStyle = .overFullScreen
-                self.present(PopUpVC, animated: true)
-            }
-            subNoticeLabel.text = "자유 문서를 제출해 주세요!"
-            changeTabBar(anyDocument)
             
         default:
             break
         }
     }
-
+    
+    private func navigateToSecondAcademicVerificationViewController() {
+        let secondAVC = SecondAcademicVerificationViewController()
+        self.navigationController?.pushViewController(secondAVC, animated: true)
+    }
+    
+    
     private func changeTabBar(_ button: UIButton) {
         // 모든 버튼에서 기존의 하이라이트를 제거
-        [studentDocument, studentID, graduateDocument, anyDocument].forEach { btn in
+        [studentDocument, studentID, graduateDocument].forEach { btn in
             btn.setTitleColor(.gray600, for: .normal)
             btn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
             btn.layer.addBorder([.bottom], color: .white, width: 3)
@@ -299,9 +327,9 @@ class SecondAcademicVerificationViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         button.layer.addBorder([.bottom], color: .orange700, width: 3)
     }
-
+    
     // MARK: - Functional
-
+    
     // MARK: - addView
     func setupViews() {
         view.addSubview(containerView)
@@ -312,7 +340,6 @@ class SecondAcademicVerificationViewController: UIViewController {
         customTabBarView.addSubview(studentDocument)
         customTabBarView.addSubview(studentID)
         customTabBarView.addSubview(graduateDocument)
-        customTabBarView.addSubview(anyDocument)
         
         view.addSubview(noticeImageView)
         view.addSubview(noticeLabel)
@@ -374,12 +401,6 @@ class SecondAcademicVerificationViewController: UIViewController {
             make.width.equalTo(88)
         }
         
-        anyDocument.snp.makeConstraints { make in
-            make.centerY.equalTo(customTabBarView)
-            make.leading.equalTo(graduateDocument.snp.trailing).offset(16)
-            make.height.equalTo(40)
-            make.width.equalTo(48)
-        }
         
         noticeImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(leftPadding)
@@ -507,33 +528,33 @@ extension SecondAcademicVerificationViewController: UIImagePickerControllerDeleg
             // 파일명 가져오기
             let fileName = imageURL.lastPathComponent
             let maxLength = 18
-                        let truncatedFileName: String
-                        if fileName.count > maxLength {
-                            let fileExtension = fileName.split(separator: ".").last ?? ""
-                            let namePart = fileName.prefix(fileName.count - fileExtension.count - 1)
-                            let shortenedNamePart = namePart.prefix(maxLength - fileExtension.count - 3) // 공간을 위해 3자를 예약
-                            truncatedFileName = "\(shortenedNamePart)...\(fileExtension)"
-                        } else {
-                            truncatedFileName = fileName
-                        }
+            let truncatedFileName: String
+            if fileName.count > maxLength {
+                let fileExtension = fileName.split(separator: ".").last ?? ""
+                let namePart = fileName.prefix(fileName.count - fileExtension.count - 1)
+                let shortenedNamePart = namePart.prefix(maxLength - fileExtension.count - 3) // 공간을 위해 3자를 예약
+                truncatedFileName = "\(shortenedNamePart)...\(fileExtension)"
+            } else {
+                truncatedFileName = fileName
+            }
             fileNameLabel.text = truncatedFileName
             print("업로드 파일명 : \(truncatedFileName)")
             
             // 파일 크기 가져오기
             do {
                 let fileAttributes = try FileManager.default.attributesOfItem(atPath: imageURL.path)
-                                if let fileSize = fileAttributes[FileAttributeKey.size] as? NSNumber {
-                                    let sizeInBytes = fileSize.intValue
-                                    let sizeInKB = Double(sizeInBytes) / 1024.0
-                                    
-                                    isUpload = true
-                                    
-                                    if isUpload {
-                                        fileSizeLabel.text = (String(format:"%.0f KB", sizeInKB))
-                                        print(String(format: "업로드 파일 크기: %.0f KB", sizeInKB))
-                                        DidUploadSetUp()
-                                    }
-                                    
+                if let fileSize = fileAttributes[FileAttributeKey.size] as? NSNumber {
+                    let sizeInBytes = fileSize.intValue
+                    let sizeInKB = Double(sizeInBytes) / 1024.0
+                    
+                    isUpload = true
+                    
+                    if isUpload {
+                        fileSizeLabel.text = (String(format:"%.0f KB", sizeInKB))
+                        print(String(format: "업로드 파일 크기: %.0f KB", sizeInKB))
+                        DidUploadSetUp()
+                    }
+                    
                 }
             } catch {
                 print("Error getting file size: \(error)")
