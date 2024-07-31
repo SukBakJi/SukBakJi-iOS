@@ -16,7 +16,11 @@
 		41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */; };
 		41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */; };
 		41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */; };
-		412BFBE32C5225B90099E442 /* SelectSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BFBE22C5225B90099E442 /* SelectSignUpViewController.swift */; };
+		41EE13442C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE13432C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift */; };
+		41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE13462C54ECCD0037EDD6 /* ResearchTopicViewController.swift */; };
+		41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE13492C5510A80037EDD6 /* TagCell.swift */; };
+		41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		41EE134E2C5529B20037EDD6 /* SelectResearchTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE134D2C5529B20037EDD6 /* SelectResearchTopicViewController.swift */; };
 		7BFDEC2B2C5224EF007280F8 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */; };
 		7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2C2C5224F7007280F8 /* BoardMainViewController.swift */; };
 		7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */; };
@@ -77,7 +81,11 @@
 		41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignUpViewController.swift; sourceTree = "<group>"; };
 		41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		412BFBE22C5225B90099E442 /* SelectSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSignUpViewController.swift; sourceTree = "<group>"; };
+		41EE13432C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadCompletedPopUpViewController.swift; sourceTree = "<group>"; };
+		41EE13462C54ECCD0037EDD6 /* ResearchTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicViewController.swift; sourceTree = "<group>"; };
+		41EE13492C5510A80037EDD6 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		41EE134D2C5529B20037EDD6 /* SelectResearchTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectResearchTopicViewController.swift; sourceTree = "<group>"; };
 		7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		7BFDEC2C2C5224F7007280F8 /* BoardMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainViewController.swift; sourceTree = "<group>"; };
 		7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDoctoralViewController.swift; sourceTree = "<group>"; };
@@ -154,12 +162,14 @@
 		412BFBD92C52252C0099E442 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				41EE13482C5510960037EDD6 /* TopicCell */,
+				41EE13452C54EC8A0037EDD6 /* AcadmicVerification */,
 				41EE13362C54016C0037EDD6 /* PopUp */,
 				412BFBDC2C52257F0099E442 /* SuccessSignUpViewController.swift */,
-				412BFBDE2C5225920099E442 /* SecondAcademicVerificationViewController.swift */,
 				41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */,
 				41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */,
-				412BFBE02C5225A20099E442 /* FirstAcademicVerificationViewController.swift */,
+				41EE13462C54ECCD0037EDD6 /* ResearchTopicViewController.swift */,
+				41EE134D2C5529B20037EDD6 /* SelectResearchTopicViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -176,8 +186,27 @@
 			isa = PBXGroup;
 			children = (
 				41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */,
+				41EE13432C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift */,
 			);
 			path = PopUp;
+			sourceTree = "<group>";
+		};
+		41EE13452C54EC8A0037EDD6 /* AcadmicVerification */ = {
+			isa = PBXGroup;
+			children = (
+				412BFBDE2C5225920099E442 /* SecondAcademicVerificationViewController.swift */,
+				412BFBE02C5225A20099E442 /* FirstAcademicVerificationViewController.swift */,
+			);
+			path = AcadmicVerification;
+			sourceTree = "<group>";
+		};
+		41EE13482C5510960037EDD6 /* TopicCell */ = {
+			isa = PBXGroup;
+			children = (
+				41EE13492C5510A80037EDD6 /* TagCell.swift */,
+				41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift */,
+			);
+			path = TopicCell;
 			sourceTree = "<group>";
 		};
 		58D31CF4877F1948B0BBDBEF /* Frameworks */ = {
@@ -448,16 +477,18 @@
 			files = (
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
 				412BFBDF2C5225920099E442 /* SecondAcademicVerificationViewController.swift in Sources */,
+				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */,
 				C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */,
 				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
+				41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */,
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
 				412BFBE12C5225A20099E442 /* FirstAcademicVerificationViewController.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
-				412BFBDB2C5225730099E442 /* SignUpViewController.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* Constants.swift in Sources */,
+				41EE134E2C5529B20037EDD6 /* SelectResearchTopicViewController.swift in Sources */,
 				C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
@@ -471,12 +502,14 @@
 				C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */,
 				C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */,
 				41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */,
+				41EE13442C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift in Sources */,
 				C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */,
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
 				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
 				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
+				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				C78DE55A2C48176C00A58395 /* CalendarCollectionViewCell.swift in Sources */,
 				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,
