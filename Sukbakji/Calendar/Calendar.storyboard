@@ -1134,24 +1134,62 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="x3e-ot-3xn"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FWq-S3-yb3">
-                                    <size key="itemSize" width="128" height="29"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FWq-S3-yb3">
+                                    <size key="itemSize" width="136" height="29"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="12" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="yDW-xB-Rh8">
-                                        <rect key="frame" x="0.0" y="12" width="127.99999999999997" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2uD-hN-eYn">
-                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="29"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="SchoolSelect_CollectionViewCell" id="4Xw-VM-vpD" customClass="SchoolSelectCollectionViewCell" customModule="Sukbakji" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="12" width="136" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="O1P-qT-CME">
+                                            <rect key="frame" x="0.0" y="0.0" width="136" height="29"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O47-z3-NBU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="136" height="29"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성신여자대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVQ-qh-3Bt">
+                                                            <rect key="frame" x="16" y="6" width="85" height="17"/>
+                                                            <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9M-oG-Wd2">
+                                                            <rect key="frame" x="107" y="4.6666666666666679" width="20" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="K0M-ST-n4M"/>
+                                                                <constraint firstAttribute="width" constant="20" id="Yfj-Wl-zYn"/>
+                                                            </constraints>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain" image="Sukbakji_DeleteWhite"/>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="Coquelicot"/>
+                                                    <constraints>
+                                                        <constraint firstItem="KVQ-qh-3Bt" firstAttribute="centerY" secondItem="O47-z3-NBU" secondAttribute="centerY" id="4s5-Oy-pXm"/>
+                                                        <constraint firstItem="b9M-oG-Wd2" firstAttribute="leading" secondItem="KVQ-qh-3Bt" secondAttribute="trailing" constant="6" id="78M-aW-FT3"/>
+                                                        <constraint firstItem="b9M-oG-Wd2" firstAttribute="centerY" secondItem="O47-z3-NBU" secondAttribute="centerY" id="gp2-Wj-9tg"/>
+                                                        <constraint firstItem="KVQ-qh-3Bt" firstAttribute="leading" secondItem="O47-z3-NBU" secondAttribute="leading" constant="16" id="lxV-u0-JQT"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="O47-z3-NBU" secondAttribute="trailing" id="Eld-De-JNm"/>
+                                                <constraint firstItem="O47-z3-NBU" firstAttribute="leading" secondItem="O1P-qT-CME" secondAttribute="leading" id="b4A-jb-9md"/>
+                                                <constraint firstItem="O47-z3-NBU" firstAttribute="top" secondItem="O1P-qT-CME" secondAttribute="top" id="na2-AY-vk8"/>
+                                                <constraint firstAttribute="bottom" secondItem="O47-z3-NBU" secondAttribute="bottom" id="ofc-St-A9K"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="schoolView" destination="O47-z3-NBU" id="TwE-sk-S1I"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y5S-uR-WAq">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y5S-uR-WAq">
                                 <rect key="frame" x="24" y="267.33333333333331" width="345" height="48"/>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1182,7 +1220,7 @@
                                     <constraint firstAttribute="height" constant="360" id="RQ0-bn-Up4"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="y2o-2i-egD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SchoolSelect_TableViewCell" rowHeight="60" id="y2o-2i-egD" customClass="SchoolSelectTableViewCell" customModule="Sukbakji" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y2o-2i-egD" id="6Ff-pR-OAn">
@@ -1215,6 +1253,7 @@
                                                 <constraint firstItem="iQR-Qc-UpX" firstAttribute="leading" secondItem="6Ff-pR-OAn" secondAttribute="leadingMargin" constant="12" id="vhr-9T-3gf"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -1240,6 +1279,38 @@
                                     <constraint firstAttribute="width" constant="100" id="XLE-X6-J8s"/>
                                 </constraints>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="210-Gh-o40">
+                                <rect key="frame" x="68" y="267.33333333333331" width="271" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="vZo-DJ-pvT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_NoResults" translatesAutoresizingMaskIntoConstraints="NO" id="91B-pI-hjl">
+                                <rect key="frame" x="180.66666666666666" y="351.33333333333331" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="QO9-XW-9o2"/>
+                                    <constraint firstAttribute="height" constant="32" id="ZHH-9Z-USW"/>
+                                </constraints>
+                            </imageView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZeW-AZ-0ak">
+                                <rect key="frame" x="63.333333333333343" y="403.33333333333331" width="266.33333333333326" height="21.666666666666686"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="석박지대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycQ-u2-X7c">
+                                        <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="21.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                        <color key="textColor" name="Coquelicot"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="에 대한 검색 결과 없어요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGT-NO-vDg">
+                                        <rect key="frame" x="93.666666666666671" y="0.0" width="172.66666666666663" height="21.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hiP-h5-6f6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1254,11 +1325,16 @@
                             <constraint firstItem="ZMO-qs-1zy" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="24" id="CBn-Uo-WmH"/>
                             <constraint firstItem="OCl-V5-Iuy" firstAttribute="trailing" secondItem="hiP-h5-6f6" secondAttribute="trailing" id="CgJ-rb-wZC"/>
                             <constraint firstItem="hiP-h5-6f6" firstAttribute="trailing" secondItem="8VV-vd-Odu" secondAttribute="trailing" constant="24" id="GDI-By-nGM"/>
+                            <constraint firstItem="210-Gh-o40" firstAttribute="leading" secondItem="mhk-fc-6nS" secondAttribute="trailing" constant="8" id="H4p-nb-a7l"/>
                             <constraint firstItem="ono-yN-ela" firstAttribute="top" secondItem="hiP-h5-6f6" secondAttribute="top" id="HNV-aM-Hdo"/>
+                            <constraint firstItem="91B-pI-hjl" firstAttribute="centerX" secondItem="2sz-xF-qOo" secondAttribute="centerX" id="J09-5I-oWb"/>
                             <constraint firstItem="mhk-fc-6nS" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="36" id="Kl0-Vk-mbl"/>
                             <constraint firstItem="Eds-PX-7ct" firstAttribute="top" secondItem="w2B-UB-w3p" secondAttribute="bottom" id="SXb-RX-83q"/>
                             <constraint firstItem="Nn6-ap-OgL" firstAttribute="top" secondItem="Rv2-uV-lEU" secondAttribute="bottom" constant="8" id="Tn4-Zq-cW7"/>
                             <constraint firstItem="Eds-PX-7ct" firstAttribute="leading" secondItem="2sz-xF-qOo" secondAttribute="leading" id="WiR-zt-c5j"/>
+                            <constraint firstItem="ZeW-AZ-0ak" firstAttribute="centerX" secondItem="2sz-xF-qOo" secondAttribute="centerX" id="XFp-FB-fO9"/>
+                            <constraint firstItem="91B-pI-hjl" firstAttribute="top" secondItem="210-Gh-o40" secondAttribute="bottom" constant="36" id="YtO-wq-TP0"/>
+                            <constraint firstItem="210-Gh-o40" firstAttribute="top" secondItem="Nn6-ap-OgL" secondAttribute="bottom" id="Z4T-KA-hsQ"/>
                             <constraint firstItem="ono-yN-ela" firstAttribute="centerX" secondItem="2sz-xF-qOo" secondAttribute="centerX" id="aN8-DN-jcf"/>
                             <constraint firstItem="hiP-h5-6f6" firstAttribute="trailing" secondItem="Y5S-uR-WAq" secondAttribute="trailing" constant="24" id="bFK-fg-RiE"/>
                             <constraint firstItem="zcW-8G-Mef" firstAttribute="top" secondItem="Eds-PX-7ct" secondAttribute="bottom" constant="22" id="e0a-jY-6RO"/>
@@ -1270,13 +1346,21 @@
                             <constraint firstItem="w2B-UB-w3p" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="8" id="q6G-9e-CX3"/>
                             <constraint firstItem="Y5S-uR-WAq" firstAttribute="top" secondItem="Nn6-ap-OgL" secondAttribute="bottom" id="qcE-1W-bbC"/>
                             <constraint firstItem="Y5S-uR-WAq" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="24" id="raf-7o-hdQ"/>
+                            <constraint firstItem="ZeW-AZ-0ak" firstAttribute="top" secondItem="91B-pI-hjl" secondAttribute="bottom" constant="20" id="ru7-cD-yHE"/>
                             <constraint firstItem="Ckg-qP-D6E" firstAttribute="leading" secondItem="hiP-h5-6f6" secondAttribute="leading" constant="24" id="s1X-h0-OXo"/>
                             <constraint firstItem="hiP-h5-6f6" firstAttribute="trailing" secondItem="mGE-eZ-x2d" secondAttribute="trailing" constant="30" id="vth-K5-dEu"/>
                             <constraint firstAttribute="trailing" secondItem="Eds-PX-7ct" secondAttribute="trailing" id="wvx-Si-3R6"/>
                             <constraint firstItem="OCl-V5-Iuy" firstAttribute="top" secondItem="Y5S-uR-WAq" secondAttribute="bottom" id="yYM-D8-jwy"/>
+                            <constraint firstItem="mGE-eZ-x2d" firstAttribute="leading" secondItem="210-Gh-o40" secondAttribute="trailing" id="ykC-oU-BLe"/>
                             <constraint firstItem="8VV-vd-Odu" firstAttribute="top" secondItem="OCl-V5-Iuy" secondAttribute="bottom" constant="20" id="yly-0N-HoX"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="SchoolTV" destination="OCl-V5-Iuy" id="li2-4P-gEF"/>
+                        <outlet property="noResultImage" destination="91B-pI-hjl" id="FYe-xf-b9Z"/>
+                        <outlet property="noResultSV" destination="ZeW-AZ-0ak" id="Bzx-UT-Uiu"/>
+                        <outlet property="schoolCV" destination="Nn6-ap-OgL" id="G9T-X1-j9w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GP7-1N-uQ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1564,12 +1648,14 @@
         <image name="Sukbakji_Date" width="20" height="20.5"/>
         <image name="Sukbakji_Delete" width="12" height="12"/>
         <image name="Sukbakji_Delete2" width="12" height="12"/>
+        <image name="Sukbakji_DeleteWhite" width="12" height="12.5"/>
         <image name="Sukbakji_Dot" width="4" height="4"/>
         <image name="Sukbakji_Down" width="20" height="20.5"/>
         <image name="Sukbakji_Down2" width="12" height="12"/>
         <image name="Sukbakji_Layer" width="6" height="97"/>
         <image name="Sukbakji_Myalarm" width="68" height="68"/>
         <image name="Sukbakji_Mypage" width="48" height="48"/>
+        <image name="Sukbakji_NoResults" width="32" height="32"/>
         <image name="Sukbakji_Notification" width="48" height="48"/>
         <image name="Sukbakji_Progress1" width="100" height="20"/>
         <image name="Sukbakji_Progress2" width="100" height="20"/>
