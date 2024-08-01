@@ -38,6 +38,9 @@ class AlarmDateViewController: UIViewController {
     private func configure() {
         self.configureDismissButton()
         self.configureYearLabel()
+        self.configureNextButton()
+        self.configureMonthLabel()
+        self.configurePreviousButton()
         self.configureWeekStackView()
         self.configureWeekLabel()
         self.configureCollectionView()
@@ -66,6 +69,42 @@ class AlarmDateViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.yearLabel.topAnchor.constraint(equalTo: self.dateView.topAnchor, constant: 56),
             self.yearLabel.leadingAnchor.constraint(equalTo: self.dateView.leadingAnchor, constant: 20),
+        ])
+    }
+    
+    private func configureNextButton() {
+        self.dateView.addSubview(self.nextButton)
+        self.nextButton.setImage(UIImage(named: "Sukbakji_Right"), for: .normal)
+        self.nextButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.nextButton.topAnchor.constraint(equalTo: self.dismissButton.bottomAnchor, constant: 24),
+            self.nextButton.widthAnchor.constraint(equalToConstant: 20),
+            self.nextButton.heightAnchor.constraint(equalToConstant: 20),
+            self.nextButton.trailingAnchor.constraint(equalTo: self.dateView.trailingAnchor, constant: -18),
+        ])
+    }
+    
+    private func configureMonthLabel() {
+        self.dateView.addSubview(self.monthLabel)
+        self.monthLabel.text = "7월"
+        self.monthLabel.textColor = .black
+        self.monthLabel.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        self.monthLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.monthLabel.topAnchor.constraint(equalTo: self.dismissButton.bottomAnchor, constant: 24),
+            self.monthLabel.trailingAnchor.constraint(equalTo: self.nextButton.leadingAnchor, constant: -4),
+        ])
+    }
+    
+    private func configurePreviousButton() {
+        self.dateView.addSubview(self.previousButton)
+        self.previousButton.setImage(UIImage(named: "Sukbakji_LeftDisabled"), for: .normal)
+        self.previousButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.previousButton.topAnchor.constraint(equalTo: self.dismissButton.bottomAnchor, constant: 24),
+            self.previousButton.widthAnchor.constraint(equalToConstant: 20),
+            self.previousButton.heightAnchor.constraint(equalToConstant: 20),
+            self.previousButton.trailingAnchor.constraint(equalTo: self.monthLabel.leadingAnchor, constant: -4),
         ])
     }
     
@@ -108,7 +147,7 @@ class AlarmDateViewController: UIViewController {
         self.collectionView.register(AlarmDateCollectionViewCell.self, forCellWithReuseIdentifier: AlarmDateCollectionViewCell.identifier)
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.weekStackView.bottomAnchor, constant: 16),
+            self.collectionView.topAnchor.constraint(equalTo: self.weekStackView.bottomAnchor, constant: 0),
             self.collectionView.leadingAnchor.constraint(equalTo: self.dateView.leadingAnchor, constant: 8),
             self.collectionView.trailingAnchor.constraint(equalTo: self.dateView.trailingAnchor, constant: -8),
             self.collectionView.bottomAnchor.constraint(equalTo: self.dateView.bottomAnchor,  constant: 8)

@@ -8,11 +8,19 @@
 import UIKit
 
 class SchoolSelectViewController: UIViewController {
-
+    
+    @IBOutlet weak var schoolCV: UICollectionView!
+    @IBOutlet weak var SchoolTV: UITableView!
+    @IBOutlet weak var noResultImage: UIImageView!
+    @IBOutlet weak var noResultSV: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.schoolCV.dataSource = self
+        self.schoolCV.delegate = self
+        self.SchoolTV.dataSource = self
+        self.SchoolTV.delegate = self
     }
     
     @IBAction func back_Tapped(_ sender: Any) {
