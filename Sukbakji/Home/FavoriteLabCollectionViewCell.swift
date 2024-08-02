@@ -19,10 +19,33 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let visibleCells = FavoriteLabCV.indexPathsForVisibleItems
+        guard !visibleCells.isEmpty else { return }
+        
+        // 현재 보이는 셀의 중앙 인덱스를 구함
+        let firstVisibleIndex = visibleCells.min()?.row ?? 0
+        let lastVisibleIndex = visibleCells.max()?.row ?? 0
+        let currentIndex = (firstVisibleIndex + lastVisibleIndex) / 2
+        
+        // ProgressView 업데이트
+        let progress = Float(currentIndex) / Float(5 - 1)
+        FavoriteLabPV.setProgress(progress, animated: true)
+        
+        // 컬렉션 뷰 끝에 도달했는지 확인
+        let contentOffsetX = scrollView.contentOffset.x
+        let contentWidth = scrollView.contentSize.width
+        let scrollViewWidth = scrollView.frame.size.width
+        
+        if contentOffsetX + scrollViewWidth >= contentWidth {
+            FavoriteLabPV.setProgress(1.0, animated: true)
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
