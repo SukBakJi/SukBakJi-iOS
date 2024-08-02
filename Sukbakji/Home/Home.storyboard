@@ -1049,7 +1049,7 @@
                                         <rect key="frame" x="0.0" y="66" width="393" height="115"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <containerView key="tableFooterView" opaque="NO" contentMode="scaleToFill" id="Lf7-sL-EMn">
-                                            <rect key="frame" x="0.0" y="129.33333015441895" width="393" height="44"/>
+                                            <rect key="frame" x="0.0" y="129" width="393" height="44"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         </containerView>
                                         <prototypes>
