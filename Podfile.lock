@@ -1,28 +1,36 @@
 PODS:
   - Alamofire (5.9.1)
   - DropDown (2.3.13)
+  - Pageboy (4.2.0)
   - SnapKit (5.7.1)
+  - Tabman (3.2.0):
+    - Pageboy (~> 4.2.0)
   - Then (3.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - DropDown (= 2.3.13)
   - SnapKit (~> 5.7.0)
+  - Tabman (~> 3.0)
   - Then
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - DropDown
+    - Pageboy
     - SnapKit
+    - Tabman
     - Then
 
 SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  Pageboy: 7f7886f61c76633df635861bf7839caf2cabdb3e
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  Tabman: 49f9181a2bfe5c29d002864dac2de8e0b7ea9180
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 5b6fdf9169769e4dfeeaf716cbc405a48c18adaf
+PODFILE CHECKSUM: b691600a85b6f203b2fbf336fdcf4fd4eebc8eb4
 
 COCOAPODS: 1.15.2

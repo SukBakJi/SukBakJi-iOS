@@ -30,6 +30,12 @@ class HomeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    @IBAction func info_Tapped(_ sender: Any) {
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageVC") as? MypageViewController else { return }
+        
+        self.present(nextVC, animated: true)
     }
 }
