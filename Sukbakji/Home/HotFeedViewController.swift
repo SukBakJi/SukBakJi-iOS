@@ -22,7 +22,7 @@ class HotFeedViewController: UIViewController {
         HotFeedTV.layer.masksToBounds = false// any value you want
         HotFeedTV.layer.shadowOpacity = 0.2// any value you want
         HotFeedTV.layer.shadowRadius = 2 // any value you want
-        HotFeedTV.layer.shadowOffset = .init(width: 0, height: 1)
+        HotFeedTV.layer.shadowOffset = .init(width: 0, height: 0.5)
         HotFeedTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
     }
     

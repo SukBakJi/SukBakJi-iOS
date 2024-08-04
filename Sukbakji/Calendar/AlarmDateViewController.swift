@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol dateProtocol:AnyObject {
+    func dateSend(data: String)
+}
+
 class AlarmDateViewController: UIViewController {
     
     @IBOutlet weak var dateView: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
     
     private lazy var dismissButton = UIButton()
     private lazy var yearLabel = UILabel()
@@ -26,6 +31,8 @@ class AlarmDateViewController: UIViewController {
     private var calendarMonth = Date()
     
     private var days = [String]()
+    
+    weak var delegate: dateProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,7 +154,7 @@ class AlarmDateViewController: UIViewController {
         self.collectionView.register(AlarmDateCollectionViewCell.self, forCellWithReuseIdentifier: AlarmDateCollectionViewCell.identifier)
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.weekStackView.bottomAnchor, constant: 0),
+            self.collectionView.topAnchor.constraint(equalTo: self.weekStackView.bottomAnchor, constant: 20),
             self.collectionView.leadingAnchor.constraint(equalTo: self.dateView.leadingAnchor, constant: 8),
             self.collectionView.trailingAnchor.constraint(equalTo: self.dateView.trailingAnchor, constant: -8),
             self.collectionView.bottomAnchor.constraint(equalTo: self.dateView.bottomAnchor,  constant: 8)
@@ -206,6 +213,17 @@ class AlarmDateViewController: UIViewController {
 }
 
 extension AlarmDateViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        dateLabel.text = "\(yearLabel.text ?? "") \(monthLabel.text ?? "") \(days[indexPath.item])일"
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+            if let text = self.dateLabel.text {
+                self.delegate?.dateSend(data: text)
+            }
+            self.presentingViewController?.dismiss(animated: false)
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.days.count

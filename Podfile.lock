@@ -1,6 +1,35 @@
 PODS:
   - Alamofire (5.9.1)
   - DropDown (2.3.13)
+  - MaterialComponents/Availability (124.2.0)
+  - MaterialComponents/BottomSheet (124.2.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/Elevation (124.2.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (124.2.0)
+  - MaterialComponents/private/Color (124.2.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/KeyboardWatcher (124.2.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (124.2.0)
+  - MaterialComponents/ShadowElevations (124.2.0)
+  - MaterialComponents/ShadowLayer (124.2.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (124.2.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (124.2.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
   - Pageboy (4.2.0)
   - SnapKit (5.7.1)
   - Tabman (3.2.0):
@@ -10,6 +39,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - DropDown (= 2.3.13)
+  - MaterialComponents/BottomSheet
   - SnapKit (~> 5.7.0)
   - Tabman (~> 3.0)
   - Then
@@ -18,6 +48,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - DropDown
+    - MaterialComponents
     - Pageboy
     - SnapKit
     - Tabman
@@ -26,11 +57,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   Pageboy: 7f7886f61c76633df635861bf7839caf2cabdb3e
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   Tabman: 49f9181a2bfe5c29d002864dac2de8e0b7ea9180
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: b691600a85b6f203b2fbf336fdcf4fd4eebc8eb4
+PODFILE CHECKSUM: 787f3e7b38c247adb1d4816f84da188315184477
 
 COCOAPODS: 1.15.2

@@ -19,7 +19,7 @@ class FavoriteBoardViewController: UIViewController {
         FavoriteBoardTV.layer.masksToBounds = false// any value you want
         FavoriteBoardTV.layer.shadowOpacity = 0.2// any value you want
         FavoriteBoardTV.layer.shadowRadius = 2 // any value you want
-        FavoriteBoardTV.layer.shadowOffset = .init(width: 0, height: 1)
+        FavoriteBoardTV.layer.shadowOffset = .init(width: 0, height: 0.5)
         FavoriteBoardTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
     }
 }

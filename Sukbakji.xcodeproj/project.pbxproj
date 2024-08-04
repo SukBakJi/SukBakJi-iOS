@@ -85,6 +85,9 @@
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
+		C7DCEF792C5FCDE7001D38AA /* DateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */; };
+		C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */; };
+		C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */; };
 		C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */; };
 		C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */; };
 		C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F455302C39B8EE00A4D0EE /* ViewController.swift */; };
@@ -176,6 +179,9 @@
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
+		C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListViewController.swift; sourceTree = "<group>"; };
+		C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListTableViewCell.swift; sourceTree = "<group>"; };
+		C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		C7F455292C39B8EE00A4D0EE /* Sukbakji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sukbakji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -363,8 +369,10 @@
 				C72F14DA2C5948CA0017B57E /* CalendarModel */,
 				C71E14882C44CE64003AFCB7 /* Calendar.storyboard */,
 				C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */,
-				C72F14DD2C594DAA0017B57E /* CalendarFBCViewController.swift */,
 				C78DE5592C48176C00A58395 /* CalendarCollectionViewCell.swift */,
+				C72F14DD2C594DAA0017B57E /* CalendarFBCViewController.swift */,
+				C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */,
+				C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */,
 				C78DE55D2C481F8C00A58395 /* DateViewController.swift */,
 				C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */,
 				C727767D2C48CFDE000A6B25 /* SchoolSelectViewController.swift */,
@@ -373,10 +381,11 @@
 				C716EF172C50FB1200474228 /* SchoolDateViewController.swift */,
 				C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */,
 				C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */,
+				C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */,
+				C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */,
 				C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */,
 				C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */,
 				C75C45832C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift */,
-				C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */,
 				C73F89832C5E834D007ECFE7 /* MyAlarmViewController.swift */,
 			);
 			path = Calendar;
@@ -608,6 +617,7 @@
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
 				412BFBDF2C5225920099E442 /* SecondAcademicVerificationViewController.swift in Sources */,
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
+				C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */,
 				7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */,
 				C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */,
 				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
@@ -637,6 +647,7 @@
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
 				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,
 				C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */,
+				C7DCEF792C5FCDE7001D38AA /* DateListViewController.swift in Sources */,
 				C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */,
 				41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */,
 				41EE13442C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift in Sources */,
@@ -665,6 +676,7 @@
 				C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */,
 				C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
+				C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
 				C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,

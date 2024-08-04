@@ -8,14 +8,14 @@
 import UIKit
 import DropDown
 
-class AlarmViewController: UIViewController {
+class AlarmViewController: UIViewController, dateProtocol {
     
     @IBOutlet weak var SchoolTF: UITextField!
     @IBOutlet weak var AlarmNameTF: UITextField!
     @IBOutlet weak var AlarmDateTF: UITextField!
     
     @IBOutlet weak var timeButton: UIButton!
-    
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var DatePicker: UIPickerView!
     
     let drop = DropDown()
@@ -28,6 +28,11 @@ class AlarmViewController: UIViewController {
     var day: String = "오전"
     var hour: String = "8"
     var minute: String = "00"
+    
+    func dateSend(data: String) {
+        AlarmDateTF.text = "   \(data)"
+        dateLabel.text = "\(data)"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +108,7 @@ class AlarmViewController: UIViewController {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "AlarmDateVC") as? AlarmDateViewController else {
             return
         }
+        nextVC.delegate = self
         self.present(nextVC, animated: false)
     }
     
