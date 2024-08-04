@@ -39,7 +39,7 @@ class CalendarViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     private func configure() {

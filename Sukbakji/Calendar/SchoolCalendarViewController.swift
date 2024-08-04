@@ -8,22 +8,22 @@
 import UIKit
 
 class SchoolCalendarViewController: UIViewController {
-
+    
+    @IBOutlet weak var schoolCalendarTV: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        schoolCalendarTV.delegate = self
+        schoolCalendarTV.dataSource = self
+        schoolCalendarTV.layer.masksToBounds = false// any value you want
+        schoolCalendarTV.layer.shadowOpacity = 0.2// any value you want
+        schoolCalendarTV.layer.shadowRadius = 2 // any value you want
+        schoolCalendarTV.layer.shadowOffset = .init(width: 0, height: 0.5)
+        schoolCalendarTV.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func back_Tapped(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true)
     }
-    */
-
 }
