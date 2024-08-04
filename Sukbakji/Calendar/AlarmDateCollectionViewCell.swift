@@ -29,15 +29,29 @@ class AlarmDateCollectionViewCell: UICollectionViewCell {
         self.dayLabel.text = nil
     }
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                self.dayView.layer.cornerRadius = self.dayView.frame.size.height / 2
+                self.dayView.clipsToBounds = true
+                self.dayView.backgroundColor = UIColor(named: "Coquelicot")
+                self.dayLabel.textColor = .white
+            } else {
+                self.dayView.backgroundColor = .white
+                self.dayLabel.textColor = .black
+            }
+        }
+    }
+    
     private func configureView() {
         self.addSubview(self.dayView)
         self.dayView.backgroundColor = .white
         self.dayView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.dayView.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+            self.dayView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             self.dayView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
             self.dayView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-            self.dayView.bottomAnchor.constraint(equalTo: self.bottomAnchor,  constant: 0)
+            self.dayView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ])
     }
     
