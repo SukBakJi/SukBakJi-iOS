@@ -8,10 +8,15 @@
 import UIKit
 
 class HotFeedTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var labelHotView: UIView!
+    @IBOutlet weak var labelTypeView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        labelHotView.layer.cornerRadius = 5
+        labelTypeView.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

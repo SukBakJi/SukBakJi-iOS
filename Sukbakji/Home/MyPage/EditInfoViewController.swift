@@ -12,6 +12,7 @@ class EditInfoViewController: UIViewController {
     @IBOutlet weak var idTF: UITextField!
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var belongTF: UITextField!
+    @IBOutlet weak var researchTopicCV: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,9 @@ class EditInfoViewController: UIViewController {
         idTF.addBottomShadow()
         nameTF.addBottomShadow()
         belongTF.addBottomShadow()
+        
+        researchTopicCV.delegate = self
+        researchTopicCV.dataSource = self
     }
     
 

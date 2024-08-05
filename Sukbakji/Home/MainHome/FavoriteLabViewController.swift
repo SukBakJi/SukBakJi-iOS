@@ -21,7 +21,7 @@ class FavoriteLabViewController: UIViewController {
         FavoriteLabCV.layer.masksToBounds = false// any value you want
         FavoriteLabCV.layer.shadowOpacity = 0.2// any value you want
         FavoriteLabCV.layer.shadowRadius = 2 // any value you want
-        FavoriteLabCV.layer.shadowOffset = .init(width: 0, height: 1)
+        FavoriteLabCV.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         FavoriteLabPV.setProgress(0, animated: true)
     }

@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
         UpComingView.layer.masksToBounds = false// any value you want
         UpComingView.layer.shadowOpacity = 0.2// any value you want
         UpComingView.layer.shadowRadius = 2 // any value you want
-        UpComingView.layer.shadowOffset = .init(width: 0, height: 1)
+        UpComingView.layer.shadowOffset = .init(width: 0, height: 0.2)
     }
 
     override func viewWillAppear(_ animated: Bool) {

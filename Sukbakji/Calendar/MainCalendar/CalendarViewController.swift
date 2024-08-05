@@ -13,6 +13,8 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var DateView: UIView!
     @IBOutlet weak var AlertView: UIView!
     
+    @IBOutlet weak var alarmButton: UIButton!
+    
     private lazy var weekStackView = UIStackView()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -28,6 +30,12 @@ class CalendarViewController: UIViewController {
         AlertView.layer.cornerRadius = 10
         
         self.configure()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        alarmButton.frame = CGRect(x: 309, y: 672, width: 60, height: 60)
     }
     
     override func viewWillAppear(_ animated: Bool) {
