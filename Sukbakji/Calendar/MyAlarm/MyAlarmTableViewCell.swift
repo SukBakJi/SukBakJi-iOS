@@ -1,13 +1,13 @@
 //
-//  FavoriteBoardTableViewCell.swift
+//  MyAlarmTableViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 7/16/24.
+//  Created by jaegu park on 8/5/24.
 //
 
 import UIKit
 
-class FavoriteBoardTableViewCell: UITableViewCell {
+class MyAlarmTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,30 +19,25 @@ class FavoriteBoardTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        // 셀을 초기화 해주는 코드 작성
-    }
 
 }
 
-extension FavoriteBoardViewController: UITableViewDelegate, UITableViewDataSource {
+extension MyAlarmViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56
+        return 120
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -50,7 +45,7 @@ extension FavoriteBoardViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: FavoriteBoardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteBoard_TableViewCell", for: indexPath) as! FavoriteBoardTableViewCell
+        let cell: MyAlarmTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MyAlarm_TableViewCell", for: indexPath) as! MyAlarmTableViewCell
         
         cell.selectionStyle = .none
         

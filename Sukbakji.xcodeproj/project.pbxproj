@@ -88,6 +88,10 @@
 		C7DCEF792C5FCDE7001D38AA /* DateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */; };
 		C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */; };
 		C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */; };
+		C7DCEF812C5FD710001D38AA /* MyAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */; };
+		C7E3EF522C60A85D00DDC36B /* ADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF512C60A85D00DDC36B /* ADViewController.swift */; };
+		C7E3EF542C60A87000DDC36B /* ADCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF532C60A87000DDC36B /* ADCollectionViewCell.swift */; };
+		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
 		C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */; };
 		C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */; };
 		C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F455302C39B8EE00A4D0EE /* ViewController.swift */; };
@@ -182,6 +186,10 @@
 		C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListViewController.swift; sourceTree = "<group>"; };
 		C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListTableViewCell.swift; sourceTree = "<group>"; };
 		C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarTableViewCell.swift; sourceTree = "<group>"; };
+		C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmTableViewCell.swift; sourceTree = "<group>"; };
+		C7E3EF512C60A85D00DDC36B /* ADViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADViewController.swift; sourceTree = "<group>"; };
+		C7E3EF532C60A87000DDC36B /* ADCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7F455292C39B8EE00A4D0EE /* Sukbakji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sukbakji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -346,19 +354,8 @@
 			isa = PBXGroup;
 			children = (
 				C71E14862C44CE59003AFCB7 /* Home.storyboard */,
-				C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */,
-				C74D4CAA2C4575B600D4339D /* FavoriteBoardViewController.swift */,
-				C74D4CAC2C4575E000D4339D /* HotFeedViewController.swift */,
-				C74D4CA82C45757200D4339D /* FavoriteLabViewController.swift */,
-				C74D4CAE2C4576E900D4339D /* FavoriteBoardTableViewCell.swift */,
-				C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */,
-				C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */,
-				C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */,
-				C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */,
-				C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */,
-				C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */,
-				C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */,
-				C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */,
+				C7E3EF552C60ABE300DDC36B /* MainHome */,
+				C7E3EF562C60B9BF00DDC36B /* MyPage */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -366,27 +363,13 @@
 		C71E14852C44CE4B003AFCB7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				C72F14DA2C5948CA0017B57E /* CalendarModel */,
 				C71E14882C44CE64003AFCB7 /* Calendar.storyboard */,
-				C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */,
-				C78DE5592C48176C00A58395 /* CalendarCollectionViewCell.swift */,
-				C72F14DD2C594DAA0017B57E /* CalendarFBCViewController.swift */,
-				C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */,
-				C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */,
-				C78DE55D2C481F8C00A58395 /* DateViewController.swift */,
-				C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */,
-				C727767D2C48CFDE000A6B25 /* SchoolSelectViewController.swift */,
-				C7996CAF2C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift */,
-				C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */,
-				C716EF172C50FB1200474228 /* SchoolDateViewController.swift */,
-				C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */,
-				C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */,
-				C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */,
-				C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */,
-				C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */,
-				C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */,
-				C75C45832C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift */,
-				C73F89832C5E834D007ECFE7 /* MyAlarmViewController.swift */,
+				C72F14DA2C5948CA0017B57E /* CalendarModel */,
+				C7E3EF592C60BF4200DDC36B /* MainCalendar */,
+				C7E3EF5A2C60BF7F00DDC36B /* SchoolSelect */,
+				C7E3EF5B2C60BFF300DDC36B /* SchoolCalendar */,
+				C7E3EF5D2C60C03300DDC36B /* AlarmSetting */,
+				C7E3EF5E2C60C04C00DDC36B /* MyAlarm */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -440,6 +423,91 @@
 				C7347E302C4D40F300688768 /* Pretendard */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		C7E3EF552C60ABE300DDC36B /* MainHome */ = {
+			isa = PBXGroup;
+			children = (
+				C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */,
+				C7E3EF512C60A85D00DDC36B /* ADViewController.swift */,
+				C7E3EF532C60A87000DDC36B /* ADCollectionViewCell.swift */,
+				C74D4CAA2C4575B600D4339D /* FavoriteBoardViewController.swift */,
+				C74D4CAE2C4576E900D4339D /* FavoriteBoardTableViewCell.swift */,
+				C74D4CAC2C4575E000D4339D /* HotFeedViewController.swift */,
+				C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */,
+				C74D4CA82C45757200D4339D /* FavoriteLabViewController.swift */,
+				C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */,
+			);
+			path = MainHome;
+			sourceTree = "<group>";
+		};
+		C7E3EF562C60B9BF00DDC36B /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */,
+				C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */,
+				C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */,
+				C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */,
+				C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */,
+				C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */,
+				C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		C7E3EF592C60BF4200DDC36B /* MainCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */,
+				C78DE5592C48176C00A58395 /* CalendarCollectionViewCell.swift */,
+				C72F14DD2C594DAA0017B57E /* CalendarFBCViewController.swift */,
+				C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */,
+				C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */,
+				C78DE55D2C481F8C00A58395 /* DateViewController.swift */,
+				C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */,
+			);
+			path = MainCalendar;
+			sourceTree = "<group>";
+		};
+		C7E3EF5A2C60BF7F00DDC36B /* SchoolSelect */ = {
+			isa = PBXGroup;
+			children = (
+				C727767D2C48CFDE000A6B25 /* SchoolSelectViewController.swift */,
+				C7996CAF2C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift */,
+				C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */,
+				C716EF172C50FB1200474228 /* SchoolDateViewController.swift */,
+				C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */,
+			);
+			path = SchoolSelect;
+			sourceTree = "<group>";
+		};
+		C7E3EF5B2C60BFF300DDC36B /* SchoolCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */,
+				C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */,
+				C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */,
+			);
+			path = SchoolCalendar;
+			sourceTree = "<group>";
+		};
+		C7E3EF5D2C60C03300DDC36B /* AlarmSetting */ = {
+			isa = PBXGroup;
+			children = (
+				C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */,
+				C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */,
+				C75C45832C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift */,
+			);
+			path = AlarmSetting;
+			sourceTree = "<group>";
+		};
+		C7E3EF5E2C60C04C00DDC36B /* MyAlarm */ = {
+			isa = PBXGroup;
+			children = (
+				C73F89832C5E834D007ECFE7 /* MyAlarmViewController.swift */,
+				C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */,
+			);
+			path = MyAlarm;
 			sourceTree = "<group>";
 		};
 		C7F455202C39B8EE00A4D0EE = {
@@ -649,6 +717,7 @@
 				C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */,
 				C7DCEF792C5FCDE7001D38AA /* DateListViewController.swift in Sources */,
 				C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */,
+				C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */,
 				41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */,
 				41EE13442C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift in Sources */,
 				7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */,
@@ -658,7 +727,9 @@
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
 				C72F14DE2C594DAA0017B57E /* CalendarFBCViewController.swift in Sources */,
 				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
+				C7E3EF542C60A87000DDC36B /* ADCollectionViewCell.swift in Sources */,
 				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
+				C7DCEF812C5FD710001D38AA /* MyAlarmTableViewCell.swift in Sources */,
 				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
@@ -674,6 +745,7 @@
 				C75C45842C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift in Sources */,
 				C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */,
 				C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */,
+				C7E3EF522C60A85D00DDC36B /* ADViewController.swift in Sources */,
 				C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */,
