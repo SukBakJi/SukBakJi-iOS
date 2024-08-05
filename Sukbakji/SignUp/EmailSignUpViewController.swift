@@ -109,7 +109,6 @@ class EmailSignUpViewController: UIViewController {
     private let passwordTextField = UITextField().then {
         $0.placeholder = "비밀번호를 6자리 이상 입력해 주세요"
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.clearButtonMode = .whileEditing
         $0.isSecureTextEntry = true
         
         $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
@@ -127,7 +126,6 @@ class EmailSignUpViewController: UIViewController {
     private let checkPasswordTextField = UITextField().then {
         $0.placeholder = "비밀번호를 한 번 더 입력해 주세요"
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.clearButtonMode = .whileEditing
         $0.isSecureTextEntry = true
         
         $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
@@ -144,7 +142,29 @@ class EmailSignUpViewController: UIViewController {
     }
     
     // MARK: - Button
-    private var eyeButton = UIButton(type: .custom)
+    private var eyeButton = UIButton().then {
+        $0.setImage(UIImage(named: "Password-hidden"), for: .normal)
+        $0.setImage(UIImage(named: "Password-shown"), for: .selected)
+        $0.adjustsImageWhenHighlighted = false
+        $0.addTarget(self, action: #selector(eyeButtonTapped(_:)), for: .touchUpInside)
+    }
+    private var clearButton = UIButton().then {
+        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+        $0.addTarget(self, action: #selector(clearButtonTapped(_:)), for: .touchUpInside)
+    }
+    private var eyeSecondButton = UIButton().then {
+        $0.setImage(UIImage(named: "Password-hidden"), for: .normal)
+        $0.setImage(UIImage(named: "Password-shown"), for: .selected)
+        $0.adjustsImageWhenHighlighted = false
+        $0.addTarget(self, action: #selector(eyeSecondButtonTapped(_:)), for: .touchUpInside)
+    }
+    private var clearSecondButton = UIButton().then {
+        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+        $0.addTarget(self, action: #selector(clearSecondButtonTapped(_:)), for: .touchUpInside)
+    }
+    
     private let nextButton = UIButton().then {
         $0.setTitle("다음으로", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
@@ -155,6 +175,16 @@ class EmailSignUpViewController: UIViewController {
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
+    // MARK: - View
+    private let passwordRightView = UIView().then {
+        $0.backgroundColor = .clear
+        $0.isHidden = true
+    }
+    private let checkPasswordRightView = UIView().then {
+        $0.backgroundColor = .clear
+        $0.isHidden = true
+    }
+    
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -162,7 +192,6 @@ class EmailSignUpViewController: UIViewController {
         
         setTextFieldDelegate()
         setUpNavigationBar()
-        setPasswordShownButtonImage()
         setupViews()
         setupLayout()
         
@@ -173,6 +202,11 @@ class EmailSignUpViewController: UIViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         checkPasswordTextField.delegate = self
+        
+        if let clearButton = emailTextField.value(forKeyPath: "_clearButton") as? UIButton {
+            clearButton.setImage(UIImage(named: "clear"), for: .normal)
+            clearButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -12, bottom: 0, right: 0)
+        }
     }
     
     // MARK: - navigationBar Title
@@ -182,30 +216,27 @@ class EmailSignUpViewController: UIViewController {
     
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
-        let FirstAcademicVerificationVC = FirstAcademicVerificationViewController()
-        self.navigationController?.pushViewController(FirstAcademicVerificationVC, animated: true)
+        let AcademicVerificationVC = AcademicVerificationViewController()
+        self.navigationController?.pushViewController(AcademicVerificationVC, animated: true)
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
-    
-    // MARK: - ButtonConfigration
-    private func setPasswordShownButtonImage() {
-        eyeButton = UIButton.init(primaryAction: UIAction(handler: { [self]_ in passwordTextField.isSecureTextEntry.toggle()
-            self.eyeButton.isSelected.toggle()
-        }))
-        
-        var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.imagePadding = 10
-        buttonConfiguration.baseBackgroundColor = .clear
-        
-        eyeButton.setImage((UIImage(named: "Password-hidden")), for: .normal)
-        self.eyeButton.setImage(UIImage(named: "Password-shown"), for: .selected)
-        self.eyeButton.configuration = buttonConfiguration
-        
-        self.passwordTextField.rightView = eyeButton
-        self.passwordTextField.rightViewMode = .whileEditing
+    // MARK: - Functional
+    @objc private func eyeButtonTapped(_ sender: UIButton) {
+        passwordTextField.isSecureTextEntry.toggle()
+        sender.isSelected.toggle()
+    }
+    @objc private func clearButtonTapped(_ sender: UIButton) {
+        passwordTextField.text = ""
+    }
+    @objc private func eyeSecondButtonTapped(_ sender: UIButton) {
+        checkPasswordTextField.isSecureTextEntry.toggle()
+        sender.isSelected.toggle()
+    }
+    @objc private func clearSecondButtonTapped(_ sender: UIButton) {
+        checkPasswordTextField.text = ""
     }
     
     // MARK: - addView
@@ -223,6 +254,14 @@ class EmailSignUpViewController: UIViewController {
         view.addSubview(checkPasswordTextField)
         
         view.addSubview(nextButton)
+        
+        view.addSubview(passwordRightView)
+        passwordRightView.addSubview(eyeButton)
+        passwordRightView.addSubview(clearButton)
+        
+        view.addSubview(checkPasswordRightView)
+        checkPasswordRightView.addSubview(eyeSecondButton)
+        checkPasswordRightView.addSubview(clearSecondButton)
     }
     
     // MARK: - setLayout
@@ -281,6 +320,44 @@ class EmailSignUpViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
+        
+        passwordRightView.snp.makeConstraints { make in
+            make.centerY.equalTo(passwordTextField)
+            make.trailing.equalTo(passwordTextField.snp.trailing).inset(12)
+            make.width.equalTo(32)
+            make.height.equalTo(12)
+        }
+        
+        clearButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.width.height.equalTo(12)
+        }
+        
+        eyeButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalTo(clearButton.snp.leading).offset(-8)
+            make.width.height.equalTo(12)
+        }
+        
+        checkPasswordRightView.snp.makeConstraints { make in
+            make.centerY.equalTo(checkPasswordTextField)
+            make.trailing.equalTo(checkPasswordTextField.snp.trailing).inset(12)
+            make.width.equalTo(32)
+            make.height.equalTo(12)
+        }
+        
+        clearSecondButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.width.height.equalTo(12)
+        }
+        
+        eyeSecondButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalTo(clearSecondButton.snp.leading).offset(-8)
+            make.width.height.equalTo(12)
+        }
     }
 }
 
@@ -288,13 +365,23 @@ class EmailSignUpViewController: UIViewController {
 extension EmailSignUpViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.addBorder([.bottom], color: .blue400, width: 0.5)
-        print("쓰기시작")
+        if textField == passwordTextField {
+            passwordRightView.isHidden = false
+        }
+        if textField == checkPasswordTextField {
+            checkPasswordRightView.isHidden = false
+        }
         
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.layer.addBorder([.bottom], color: .gray300, width: 0.5)
-        print("쓰기끝")
+        if textField == passwordTextField {
+            passwordRightView.isHidden = true
+        }
+        if textField == checkPasswordTextField {
+            checkPasswordRightView.isHidden = true
+        }
         return true
     }
     
