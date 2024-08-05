@@ -8,7 +8,6 @@
 import UIKit
 
 class ResearchTopicViewController: UIViewController {
-    
     // MARK: - ImageView
     private let progressBar = UIImageView().then {
         $0.image = UIImage(named: "ProgressBar_2")
@@ -22,7 +21,13 @@ class ResearchTopicViewController: UIViewController {
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+    private let deletedAlert = UIImageView().then {
+        $0.image = UIImage(named: "deletedAlert")
+        $0.alpha = 0
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     // MARK: - Label
     private let titleLabel = UILabel().then {
         $0.text = "연구하고 싶은 주제가 무엇인가요?"
@@ -43,14 +48,13 @@ class ResearchTopicViewController: UIViewController {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.numberOfLines = 0
     }
-    private let topicsViewLabel = UILabel().then {
+    private let descLabel = UILabel().then {
         $0.text = "연구 주제를 검색 후 선택해 주세요 (최대 5개)"
         $0.textColor = .gray500
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-Regular", size: 14)
         $0.numberOfLines = 0
     }
-    
     // MARK: - Button
     private let nextButton = UIButton().then {
         $0.setTitle("가입하기", for: .normal)
@@ -67,11 +71,8 @@ class ResearchTopicViewController: UIViewController {
     }
     // MARK: - view
     private let containerView = UIView()
-    private let topicsView = UIView().then {
-        //$0.backgroundColor = .green
-        $0.frame.size.width = UIScreen.main.bounds.size.width - 48
-        $0.frame.size.height = 88
-        $0.layer.addBorder([.bottom], color: .gray300, width: 1)
+    private let underLine = UIView().then {
+        $0.backgroundColor = .gray300
     }
     
     // MARK: - viewDidLoad
@@ -85,13 +86,8 @@ class ResearchTopicViewController: UIViewController {
         setUpNavigationBar()
         setupViews()
         setupLayout()
-        
+        updateCollectionViewHeight()
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        updateTopicsViewHeight()
-    }
-    
     // MARK: - navigationBar Title
     private func setUpNavigationBar(){
         self.title = "회원가입"
@@ -114,35 +110,23 @@ class ResearchTopicViewController: UIViewController {
     
     // MARK: - addView
     func setupViews() {
+        view.addSubview(containerView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(subtitlelabel)
         
-        view.addSubview(containerView)
         view.addSubview(progressBar)
+        view.addSubview(topicDot)
+        view.addSubview(topicLabel)
         
         view.addSubview(collectionView)
-        
-        view.addSubview(topicLabel)
-        view.addSubview(topicDot)
-        view.addSubview(topicsView)
-        topicsView.addSubview(collectionView)
-        //view.addSubview(topicsViewLabel)
+        view.addSubview(underLine)
         view.addSubview(plusButton)
-        view.addSubview(nextButton)
-    }
-    
-    // MARK: - setLayout
-    func updateTopicsViewHeight() {
-        topicsView.snp.remakeConstraints { make in
-            make.top.equalTo(topicLabel.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(collectionView.contentSize.height)
-        }
-        print(collectionView.contentSize.height)
-    }
-    func setupLayout() {
-        let leftPadding = 24
         
+        view.addSubview(nextButton)
+        view.addSubview(deletedAlert)
+    }
+    // MARK: - setLayout
+    func setupLayout() {
         containerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.equalToSuperview()
@@ -150,23 +134,18 @@ class ResearchTopicViewController: UIViewController {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(leftPadding)
+            make.leading.equalToSuperview().inset(24)
             make.top.equalToSuperview().inset(20)
         }
         
         subtitlelabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(leftPadding)
+            make.leading.equalToSuperview().inset(24)
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
         }
         
         progressBar.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(leftPadding)
+            make.leading.equalToSuperview().inset(24)
             make.top.equalTo(containerView.snp.bottom).offset(8)
-        }
-        
-        topicLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(leftPadding)
-            make.top.equalTo(progressBar.snp.bottom).offset(40)
         }
         
         topicDot.snp.makeConstraints { make in
@@ -174,51 +153,72 @@ class ResearchTopicViewController: UIViewController {
             make.leading.equalTo(topicLabel.snp.trailing).offset(4)
         }
         
-        topicsView.snp.makeConstraints { make in
-            make.top.equalTo(topicLabel.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(leftPadding)
-            //make.height.equalTo(0)
+        topicLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(24)
+            make.top.equalTo(progressBar.snp.bottom).offset(40)
         }
         
-        //        topicsViewLabel.snp.makeConstraints { make in
-        //            make.centerY.equalTo(topicsView)
-        //            make.leading.equalTo(topicsView.snp.leading).offset(16)
-        //        }
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(topicLabel.snp.bottom).offset(15)
+            make.leading.equalTo(underLine.snp.leading)
+            make.width.equalTo(342)
+            make.height.equalTo(40) // 임시 높이
+        }
+        underLine.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(342)
+            make.height.equalTo(1)
+        }
         
         plusButton.snp.makeConstraints { make in
-            make.bottom.equalTo(topicsView)
-            make.trailing.equalTo(topicsView)
-            make.width.height.equalTo(48)
+            make.bottom.equalTo(underLine)
+            make.trailing.equalTo(underLine)
+            make.width.height.equalTo(44)
         }
         
         nextButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(80)
-            make.trailing.leading.equalToSuperview().inset(leftPadding)
+            make.trailing.leading.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
         
-        collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(topicsView)
-            
+        deletedAlert.snp.makeConstraints { make in
+            make.bottom.equalTo(nextButton.snp.top).offset(-20)
+            make.centerX.equalToSuperview()
         }
     }
     
     
     // MARK: - CollectionView
-    let tagList = ["#HCI", "#인공지능", "#모빌리티", "#사용성평가", "#디자인"]
-    
+    //let tagList = ["#HCI", "#인공지능", "#모빌리티", "#사용성평가", "#디자인"]
+    var tagList = ["#HCI", "#인공지능", "#모빌리티", "#사용성평가", "#디자인"]
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
         let layout = LeftAlignedCollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 13
         layout.minimumInteritemSpacing = 10
         layout.sectionInset = UIEdgeInsets(top: 5, left: 2, bottom: 5, right: 2)
         
         $0.isScrollEnabled = false
         $0.collectionViewLayout = layout
-        $0.backgroundColor = .systemBackground
+        $0.backgroundColor = .clear
         $0.register(TagCell.self, forCellWithReuseIdentifier: "TagCell")
     }
+    // 콜렉션뷰 높이 구하기
+    func calculateCollectionViewHeight() -> CGFloat {
+        collectionView.layoutIfNeeded()
+        let contentHeight = collectionView.collectionViewLayout.collectionViewContentSize.height
+        return contentHeight + 10
+    }
+    // 구한 높이 + 10으로 콜렉션뷰 높이 바꿔주기
+    func updateCollectionViewHeight() {
+        let height = calculateCollectionViewHeight()
+        collectionView.snp.updateConstraints { make in
+            make.height.equalTo(height)
+        }
+    }
+    
 }
 
 extension ResearchTopicViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -228,11 +228,34 @@ extension ResearchTopicViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell",
+                                                      for: indexPath) as! TagCell
         cell.tagLabel.text = tagList[indexPath.item]
+        cell.removeButton.tag = indexPath.item
+        cell.removeButton.addTarget(self, action: #selector(removeButtonTapped(_:)), for:.touchUpInside)
         return cell
     }
     
+    @objc func removeButtonTapped(_ sender: UIButton) {
+        let index = sender.tag
+        tagList.remove(at: index)
+        collectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+        updateCollectionViewHeight()
+        showImageView()
+    }
+    
+    private func showImageView() {
+        UIView.animate(withDuration: 0, animations: {
+                   self.deletedAlert.alpha = 1 // 이미지뷰를 표시
+               }) { _ in
+                   DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                       UIView.animate(withDuration: 0.5) {
+                           self.deletedAlert.alpha = 0 // 이미지뷰를 서서히 숨김
+                       }
+                   }
+               }
+           
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let label = UILabel().then {
@@ -245,3 +268,4 @@ extension ResearchTopicViewController: UICollectionViewDataSource, UICollectionV
         return CGSize(width: size.width + 52 , height: size.height + 12)
     }
 }
+
