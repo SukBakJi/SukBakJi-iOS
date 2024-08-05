@@ -10,4 +10,6 @@ target 'Sukbakji' do
  pod 'SnapKit', '~> 5.7.0'
  pod 'DropDown', '2.3.13'
  pod 'Alamofire'
+ pod 'Tabman', '~> 3.0'
+ pod 'MaterialComponents/BottomSheet'
 end

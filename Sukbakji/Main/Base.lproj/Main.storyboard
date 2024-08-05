@@ -33,7 +33,7 @@
                     <connections>
                         <segue destination="z5g-c0-8O5" kind="relationship" relationship="viewControllers" id="0Tn-dv-4OW"/>
                         <segue destination="izy-0S-ez8" kind="relationship" relationship="viewControllers" id="Ebs-eF-Kn8"/>
-                        <segue destination="rrj-ed-jw5" kind="relationship" relationship="viewControllers" id="zEC-Un-0gN"/>
+                        <segue destination="Bzy-yW-f8o" kind="relationship" relationship="viewControllers" id="zEC-Un-0gN"/>
                         <segue destination="3zS-NU-e5M" kind="relationship" relationship="viewControllers" id="1aC-X2-que"/>
                         <segue destination="OzF-qj-b7f" kind="relationship" relationship="viewControllers" id="tz4-tH-9Fj"/>
                     </connections>
@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="912" y="4"/>
         </scene>
-        <!--게시판-->
+        <!--View Controller-->
         <scene sceneID="eb1-n2-koD">
             <objects>
                 <viewController id="rrj-ed-jw5" sceneMemberID="viewController">
@@ -52,13 +52,11 @@
                         <viewLayoutGuide key="safeArea" id="0r7-hR-rq6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="게시판" image="Sukbakji_Board" id="suU-6k-cCB">
-                        <color key="badgeColor" name="Coquelicot"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="Cvy-JA-w8a"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1r-LQ-OXK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1801" y="4"/>
+            <point key="canvasLocation" x="2727.4809160305344" y="3.5211267605633805"/>
         </scene>
         <!--채팅-->
         <scene sceneID="wVp-cq-aPL">
@@ -147,6 +145,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tku-dK-0sA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2553" y="-642"/>
+        </scene>
+        <!--게시판-->
+        <scene sceneID="OZp-by-yEx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bzy-yW-f8o" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="게시판" image="Sukbakji_Board" id="suU-6k-cCB">
+                        <color key="badgeColor" name="Coquelicot"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="P9z-EV-wAz">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rrj-ed-jw5" kind="relationship" relationship="rootViewController" id="PBP-mn-jGV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AbH-Ri-l72" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800.7633587786258" y="3.5211267605633805"/>
         </scene>
     </scenes>
     <resources>
