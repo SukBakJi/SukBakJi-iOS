@@ -103,8 +103,8 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Screen transition
     @objc private func EmailSignUpButtonTapped() {
-        let EmailSignUpVC = EmailSignUpViewController()
-        self.navigationController?.pushViewController(EmailSignUpVC, animated: true)
+        let TOSVC = TOSViewController()
+        self.navigationController?.pushViewController(TOSVC, animated: true)
         self.dismiss(animated: true)
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)

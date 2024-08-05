@@ -18,25 +18,63 @@ class successSignUpViewController: UIViewController {
     }
     
     // MARK: - Label
-    private let sucessLabel = UILabel().then {
+    private let successLabel = UILabel().then {
         let fullText = "석박지의 새로운 회원이\n되신 걸 환영합니다!"
         let attributedString = NSMutableAttributedString(string: fullText)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 10
         let rangeText = (fullText as NSString).range(of: "석박지")
-        attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: rangeText)
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(.foregroundColor, 
+                                      value: UIColor.orange700, range: rangeText)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, 
+                                      value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
         $0.attributedText = attributedString
         $0.textAlignment = .center
         $0.font = UIFont(name: "Pretendard-Bold", size: 26)
         $0.numberOfLines = 0
     }
+    private let pointLabel = UILabel().then {
+        let fullText = "석박지 가입을 축하하는 마음을 담아\n1000 포인트를 드려요"
+        let attributedString = NSMutableAttributedString(string: fullText)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 8
+        
+        let rangeText = (fullText as NSString).range(of: "1000 포인트")
+        attributedString.addAttribute(.foregroundColor,
+                                      value: UIColor.orange700,
+                                      range: rangeText)
+        attributedString.addAttribute(NSAttributedString.Key.init(kCTFontAttributeName as String),
+                                      value: UIFont(name: "Pretendard-SemiBold", size: 14)!,
+                                      range: rangeText)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle,
+                                      value: paragraphStyle,
+                                      range: NSMakeRange(0, attributedString.length))
+        
+        let rangeText2 = (fullText as NSString).range(of: "석박지 가입을 축하하는 마음을 담아")
+        attributedString.addAttribute(.foregroundColor,
+                                      value: UIColor.gray600,
+                                      range: rangeText2)
+        attributedString.addAttribute(NSAttributedString.Key.init(kCTFontAttributeName as String),
+                                      value: UIFont(name: "Pretendard-Regular", size: 14)!,
+                                      range: rangeText2)
+        let rangeText3 = (fullText as NSString).range(of: "를 드려요")
+        attributedString.addAttribute(.foregroundColor,
+                                      value: UIColor.gray600,
+                                      range: rangeText3)
+        attributedString.addAttribute(NSAttributedString.Key.init(kCTFontAttributeName as String),
+                                      value: UIFont(name: "Pretendard-Regular", size: 14)!,
+                                      range: rangeText3)
+        
+        $0.attributedText = attributedString
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+    }
     
     // MARK: - Button
     private let nextButton = UIButton().then {
         $0.setTitle("석박지 시작하기", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
+        $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.titleLabel?.textAlignment = .center
         $0.layer.cornerRadius = 8
         
@@ -62,7 +100,8 @@ class successSignUpViewController: UIViewController {
     // MARK: - addView
     func setupViews() {
         view.addSubview(RocketImage)
-        view.addSubview(sucessLabel)
+        view.addSubview(successLabel)
+        view.addSubview(pointLabel)
         view.addSubview(nextButton)
     }
    
@@ -71,17 +110,21 @@ class successSignUpViewController: UIViewController {
         
         RocketImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(167)
-            make.height.width.equalTo(300)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(133)
+            make.height.width.equalTo(170)
         }
         
-        sucessLabel.snp.makeConstraints { make in
+        successLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(RocketImage.snp.bottom).offset(20)
+            make.top.equalTo(RocketImage.snp.bottom).offset(48)
         }
         
+        pointLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(successLabel.snp.bottom).offset(33)
+        }
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(sucessLabel.snp.bottom).offset(129)
+            make.top.equalTo(pointLabel.snp.bottom).offset(142)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }

@@ -11,7 +11,6 @@ class TagCell: UICollectionViewCell {
     
     let removeButton = UIButton().then {
         $0.setImage(UIImage(named: "cross"), for: .normal)
-        $0.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
     }
     
     override init(frame: CGRect) {
@@ -39,7 +38,4 @@ class TagCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func removeButtonTapped() {
-        print("아하하하하핫")
-    }
 }
