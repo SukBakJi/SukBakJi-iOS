@@ -1,18 +1,18 @@
 //
-//  SchoolSearchPost.swift
+//  AlarmPostAPI.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 7/31/24.
+//  Created by jaegu park on 8/6/24.
 //
 
 import Foundation
 import Alamofire
 
-class APISchoolPost {
-    static let instance = APISchoolPost()
+class APIAlarmPost {
+    static let instance = APIAlarmPost()
     
-    func SendingPostReborn(search: String, parameters: SchoolModel, handler: @escaping (_ result: SchoolResultModel)->(Void)) {
-        let url = "http://jrady721.cafe24.com/api/school/\(search)"
+    func SendingPostAlarm(parameters: AlarmPostModel, handler: @escaping (_ result: AlarmPostResult)->(Void)) {
+        let url = APIConstants.baseURL
         let headers:HTTPHeaders = [
             "content-type": "application/json"
         ]
@@ -25,7 +25,7 @@ class APISchoolPost {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .fragmentsAllowed)
                     print(json)
                     
-                    let jsonresult = try JSONDecoder().decode(SchoolResultModel.self, from: data!)
+                    let jsonresult = try JSONDecoder().decode(AlarmPostResult.self, from: data!)
                     handler(jsonresult)
                     print(jsonresult)
                 } catch {
@@ -34,6 +34,19 @@ class APISchoolPost {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    private func judgeStatus<T:Codable> (by statusCode: Int, _ data: Data, _ type: T.Type) -> NetworkResult<Any> {
+        let decoder = JSONDecoder()
+        guard let decodedData = try? decoder.decode(type.self, from: data)
+        else { return .pathErr }
+        
+        switch statusCode {
+        case 200 ..< 300: return .success(decodedData as Any)
+        case 400 ..< 500: return .pathErr
+        case 500: return .serverErr
+        default: return .networkFail
         }
     }
 }
