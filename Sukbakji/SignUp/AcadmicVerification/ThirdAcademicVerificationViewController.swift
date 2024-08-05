@@ -1,5 +1,5 @@
 //
-//  FirstAcademicVerificationViewController.swift
+//  ThirdAcademicVerificationViewController.swift
 //  SukBakJi
 //
 //  Created by 오현민 on 7/24/24.
@@ -8,8 +8,7 @@
 import UIKit
 import UniformTypeIdentifiers
 
-// 대학생
-class FirstAcademicVerificationViewController: UIViewController {
+class ThirdAcademicVerificationViewController: UIViewController {
     
     private var isUpload = false
     private var isConfirm = false
@@ -29,11 +28,11 @@ class FirstAcademicVerificationViewController: UIViewController {
     }
     // MARK: - Label
     private let titleLabel = UILabel().then {
-        let fullText = "학사 졸업 또는 재학 중이시군요!"
+        let fullText = "대학원 졸업생이시군요!"
         let attributedString = NSMutableAttributedString(string: fullText)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 10
-        let rangeText = (fullText as NSString).range(of: "학사 졸업 또는 재학")
+        let rangeText = (fullText as NSString).range(of: "대학원 졸업생")
         attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: rangeText)
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         $0.attributedText = attributedString
@@ -42,7 +41,7 @@ class FirstAcademicVerificationViewController: UIViewController {
         $0.numberOfLines = 0
     }
     private let subtitlelabel = UILabel().then {
-        $0.text = "대학생 학력 인증을 진행할게요 🙌"
+        $0.text = "대학원생 졸업 인증을 진행할게요 🙌"
         $0.textColor = .gray500
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-Regular", size: 14)
@@ -55,7 +54,7 @@ class FirstAcademicVerificationViewController: UIViewController {
         $0.numberOfLines = 0
     }
     private let subNoticeLabel = UILabel().then {
-        $0.text = "학교에서 공식적으로 발급한 재학증명서를 제출해 주세요!"
+        $0.text = "학교에서 공식적으로 발급한 졸업증명서를 제출해 주세요!"
         $0.textColor = .gray600
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
@@ -75,8 +74,8 @@ class FirstAcademicVerificationViewController: UIViewController {
     }
     
     // MARK: - button
-    private let studentDocument = UIButton().then {
-        $0.setTitle("재학증명서", for: .normal)
+    private let graduateDocument = UIButton().then {
+        $0.setTitle("졸업증명서", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.setTitleColor(.orange700, for: .normal)
         $0.backgroundColor = .clear
@@ -84,24 +83,6 @@ class FirstAcademicVerificationViewController: UIViewController {
         $0.frame.size.height = 40
         $0.layer.addBorder([.bottom], color: .orange700, width: 3)
         $0.tag = 1
-        $0.addTarget(self, action: #selector(changeTabBarView), for: .touchUpInside)
-    }
-    private let studentID = UIButton().then {
-        $0.setTitle("학생증", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setTitleColor(.gray600, for: .normal)
-        $0.frame.size.width = 61
-        $0.frame.size.height = 40
-        $0.tag = 2
-        $0.addTarget(self, action: #selector(changeTabBarView), for: .touchUpInside)
-    }
-    private let graduateDocument = UIButton().then {
-        $0.setTitle("졸업증명서", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setTitleColor(.gray600, for: .normal)
-        $0.frame.size.width = 88
-        $0.frame.size.height = 40
-        $0.tag = 3
         $0.addTarget(self, action: #selector(changeTabBarView), for: .touchUpInside)
     }
     private let uploadButton = UIButton().then {
@@ -251,42 +232,6 @@ class FirstAcademicVerificationViewController: UIViewController {
         switch sender.tag {
         case 1:
             if isUpload {
-                // 팝업 띄우기
-                let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 재학증명서 페이지로 이동할까요?", rangeText: "재학증명서")
-                popUpVC.modalPresentationStyle = .overFullScreen
-                self.present(popUpVC, animated: false)
-                
-                // 이동할게요 눌렀을 때
-                popUpVC.onMove = {
-                    self.isUpload = false
-                    self.subNoticeLabel.text = "학교에서 공식적으로 발급한 재학증명서를 제출해 주세요!"
-                    self.changeTabBar(self.studentDocument)
-                    self.notUploadSetUp()
-                }
-            } else {
-                subNoticeLabel.text = "학교에서 공식적으로 발급한 재학증명서를 제출해 주세요!"
-                changeTabBar(studentDocument)
-            }
-            
-        case 2:
-            if isUpload {
-                let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 학생증 인증 페이지로 이동할까요?", rangeText: "학생증 인증")
-                popUpVC.modalPresentationStyle = .overFullScreen
-                self.present(popUpVC, animated: false)
-                
-                popUpVC.onMove = {
-                    self.isUpload = false
-                    self.subNoticeLabel.text = "학생증을 스캔 후 첨부하여 인증해 주세요!"
-                    self.changeTabBar(self.studentID)
-                    self.notUploadSetUp()
-                }
-            } else {
-                subNoticeLabel.text = "학생증을 스캔 후 첨부하여 인증해 주세요!"
-                changeTabBar(studentID)
-            }
-            
-        case 3:
-            if isUpload {
                 let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 졸업증명서 페이지로 이동할까요?", rangeText: "졸업증명서")
                 popUpVC.modalPresentationStyle = .overFullScreen
                 self.present(popUpVC, animated: false)
@@ -306,10 +251,10 @@ class FirstAcademicVerificationViewController: UIViewController {
             break
         }
     }
-    
+
     private func changeTabBar(_ button: UIButton) {
         // 모든 버튼에서 기존의 하이라이트를 제거
-        [studentDocument, studentID, graduateDocument].forEach { btn in
+        [graduateDocument].forEach { btn in
             btn.setTitleColor(.gray600, for: .normal)
             btn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
             btn.layer.addBorder([.bottom], color: .white, width: 3)
@@ -331,8 +276,6 @@ class FirstAcademicVerificationViewController: UIViewController {
         containerView.addSubview(subtitlelabel)
         
         view.addSubview(customTabBarView)
-        customTabBarView.addSubview(studentDocument)
-        customTabBarView.addSubview(studentID)
         customTabBarView.addSubview(graduateDocument)
         
         view.addSubview(noticeImageView)
@@ -374,27 +317,12 @@ class FirstAcademicVerificationViewController: UIViewController {
             make.height.equalTo(43)
         }
         
-        studentDocument.snp.makeConstraints { make in
+        graduateDocument.snp.makeConstraints { make in
             make.centerY.equalTo(customTabBarView)
             make.leading.equalTo(customTabBarView.snp.leading).offset(leftPadding)
             make.height.equalTo(40)
             make.width.equalTo(88)
         }
-        
-        studentID.snp.makeConstraints { make in
-            make.centerY.equalTo(customTabBarView)
-            make.leading.equalTo(studentDocument.snp.trailing).offset(16)
-            make.height.equalTo(40)
-            make.width.equalTo(61)
-        }
-        
-        graduateDocument.snp.makeConstraints { make in
-            make.centerY.equalTo(customTabBarView)
-            make.leading.equalTo(studentID.snp.trailing).offset(16)
-            make.height.equalTo(40)
-            make.width.equalTo(88)
-        }
-        
         
         noticeImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(leftPadding)
@@ -458,7 +386,7 @@ class FirstAcademicVerificationViewController: UIViewController {
 }
 
 // MARK: - UIDocumentPickerDelegate Extension
-extension FirstAcademicVerificationViewController: UIDocumentPickerDelegate {
+extension ThirdAcademicVerificationViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
             // Start accessing a security-scoped resource.
@@ -516,7 +444,7 @@ extension FirstAcademicVerificationViewController: UIDocumentPickerDelegate {
 
 
 // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate Extension
-extension FirstAcademicVerificationViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension ThirdAcademicVerificationViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageURL = info[.imageURL] as? URL {
             // 파일명 가져오기

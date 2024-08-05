@@ -7,8 +7,8 @@
 
 import UIKit
 import UniformTypeIdentifiers
-//import UniformTypeIdentifiers
 
+//대학원생
 class SecondAcademicVerificationViewController: UIViewController {
     
     private var isUpload = false
@@ -29,11 +29,11 @@ class SecondAcademicVerificationViewController: UIViewController {
     }
     // MARK: - Label
     private let titleLabel = UILabel().then {
-        let fullText = "학사 졸업 또는 재학 중이시군요!"
+        let fullText = "석사 또는 박사 재학 중이시군요!"
         let attributedString = NSMutableAttributedString(string: fullText)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 10
-        let rangeText = (fullText as NSString).range(of: "학사 졸업 또는 재학")
+        let rangeText = (fullText as NSString).range(of: "석사 또는 박사 재학")
         attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: rangeText)
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         $0.attributedText = attributedString
@@ -42,7 +42,7 @@ class SecondAcademicVerificationViewController: UIViewController {
         $0.numberOfLines = 0
     }
     private let subtitlelabel = UILabel().then {
-        $0.text = "대학생 학력 인증을 진행할게요 🙌"
+        $0.text = "대학원생 학력 인증을 진행할게요 🙌"
         $0.textColor = .gray500
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-Regular", size: 14)
@@ -93,15 +93,6 @@ class SecondAcademicVerificationViewController: UIViewController {
         $0.frame.size.width = 61
         $0.frame.size.height = 40
         $0.tag = 2
-        $0.addTarget(self, action: #selector(changeTabBarView), for: .touchUpInside)
-    }
-    private let graduateDocument = UIButton().then {
-        $0.setTitle("졸업증명서", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setTitleColor(.gray600, for: .normal)
-        $0.frame.size.width = 88
-        $0.frame.size.height = 40
-        $0.tag = 3
         $0.addTarget(self, action: #selector(changeTabBarView), for: .touchUpInside)
     }
     private let uploadButton = UIButton().then {
@@ -285,37 +276,14 @@ class SecondAcademicVerificationViewController: UIViewController {
                 changeTabBar(studentID)
             }
             
-        case 3:
-            if isUpload {
-                let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 졸업증명서 페이지로 이동할까요?", rangeText: "졸업증명서")
-                popUpVC.modalPresentationStyle = .overFullScreen
-                self.present(popUpVC, animated: false)
-                
-                popUpVC.onMove = {
-                    self.isUpload = false
-                    self.subNoticeLabel.text = "학교에서 공식적으로 발급한 졸업증명서를 제출해 주세요!"
-                    self.changeTabBar(self.graduateDocument)
-                    self.notUploadSetUp()
-                }
-            } else {
-                subNoticeLabel.text = "학교에서 공식적으로 발급한 졸업증명서를 제출해 주세요!"
-                changeTabBar(graduateDocument)
-            }
-            
         default:
             break
         }
     }
-    
-    private func navigateToSecondAcademicVerificationViewController() {
-        let secondAVC = SecondAcademicVerificationViewController()
-        self.navigationController?.pushViewController(secondAVC, animated: true)
-    }
-    
-    
+
     private func changeTabBar(_ button: UIButton) {
         // 모든 버튼에서 기존의 하이라이트를 제거
-        [studentDocument, studentID, graduateDocument].forEach { btn in
+        [studentDocument, studentID].forEach { btn in
             btn.setTitleColor(.gray600, for: .normal)
             btn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
             btn.layer.addBorder([.bottom], color: .white, width: 3)
@@ -339,7 +307,6 @@ class SecondAcademicVerificationViewController: UIViewController {
         view.addSubview(customTabBarView)
         customTabBarView.addSubview(studentDocument)
         customTabBarView.addSubview(studentID)
-        customTabBarView.addSubview(graduateDocument)
         
         view.addSubview(noticeImageView)
         view.addSubview(noticeLabel)
@@ -393,14 +360,6 @@ class SecondAcademicVerificationViewController: UIViewController {
             make.height.equalTo(40)
             make.width.equalTo(61)
         }
-        
-        graduateDocument.snp.makeConstraints { make in
-            make.centerY.equalTo(customTabBarView)
-            make.leading.equalTo(studentID.snp.trailing).offset(16)
-            make.height.equalTo(40)
-            make.width.equalTo(88)
-        }
-        
         
         noticeImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(leftPadding)
