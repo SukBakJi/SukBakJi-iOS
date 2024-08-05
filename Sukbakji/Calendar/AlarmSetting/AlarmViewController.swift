@@ -105,9 +105,7 @@ class AlarmViewController: UIViewController, dateProtocol {
     }
     
     @IBAction func Date_Tapped(_ sender: Any) {
-        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "AlarmDateVC") as? AlarmDateViewController else {
-            return
-        }
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "AlarmDateVC") as? AlarmDateViewController else { return }
         nextVC.delegate = self
         self.present(nextVC, animated: false)
     }

@@ -73,6 +73,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Myalarm"/>
+                                <connections>
+                                    <action selector="myAlarm_Tapped:" destination="5c0-Nd-j6f" eventType="touchUpInside" id="9U5-Mu-o1t"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OJR-b0-Wtv"/>
@@ -390,7 +393,7 @@
         <!--My Alarm View Controller-->
         <scene sceneID="Y1S-ob-Vbz">
             <objects>
-                <viewController storyboardIdentifier="MyAlarmVC" id="Hfz-cG-OQz" customClass="MyAlarmViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyAlarmVC" modalPresentationStyle="fullScreen" id="Hfz-cG-OQz" customClass="MyAlarmViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mNM-Ns-PsV">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -411,6 +414,7 @@
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Back"/>
                                 <connections>
                                     <action selector="back_Tapped:" destination="dwA-CJ-mIM" eventType="touchUpInside" id="0Yh-op-8PN"/>
+                                    <action selector="back_Tapped:" destination="Hfz-cG-OQz" eventType="touchUpInside" id="6Oi-St-Nc7"/>
                                     <action selector="back_Tapped:" destination="C0K-Ir-Zkm" eventType="touchUpInside" id="sf5-1V-ad1"/>
                                 </connections>
                             </button>
@@ -447,7 +451,7 @@
                                 <rect key="frame" x="0.0" y="158.33333333333331" width="393" height="693.66666666666674"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="120" id="zbq-fh-Mv6">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyAlarm_TableViewCell" rowHeight="120" id="zbq-fh-Mv6" customClass="MyAlarmTableViewCell" customModule="Sukbakji" customModuleProvider="target">
                                         <rect key="frame" x="20" y="55.333332061767578" width="353" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zbq-fh-Mv6" id="FMz-3z-qFR">
@@ -547,6 +551,9 @@
                             <constraint firstItem="BpY-ah-Bvi" firstAttribute="top" secondItem="yJ4-rP-tDN" secondAttribute="bottom" constant="20" id="vZV-In-d7b"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="myAlarmTV" destination="BpY-ah-Bvi" id="nwz-65-wQl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akH-NH-Brh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1031,7 +1038,7 @@
                                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Mypage"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTN-3Z-5Ni">
-                                                <rect key="frame" x="0.0" y="31.999999999999996" width="393" height="1.3333333333333321"/>
+                                                <rect key="frame" x="0.0" y="35" width="393" height="1.3333333333333357"/>
                                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1.2" id="HTR-Go-6X8"/>
@@ -1041,19 +1048,19 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2024년 6월" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arB-bv-ePv">
-                                                <rect key="frame" x="23.999999999999993" y="53.333333333333336" width="91.333333333333314" height="21.000000000000007"/>
+                                                <rect key="frame" x="23.999999999999993" y="56.333333333333343" width="91.333333333333314" height="21"/>
                                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대학교를 설정하세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVK-db-PhL">
-                                                <rect key="frame" x="208" y="54.333333333333336" width="133" height="18.666666666666664"/>
+                                                <rect key="frame" x="208" y="57.333333333333336" width="133" height="18.666666666666664"/>
                                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                                 <color key="textColor" name="Coquelicot"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sL-7J-Zp2">
-                                                <rect key="frame" x="349" y="53.666666666666664" width="20" height="19.999999999999993"/>
+                                                <rect key="frame" x="349" y="56.666666666666657" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="MV6-xN-0Xu"/>
                                                     <constraint firstAttribute="height" constant="20" id="rJO-5j-JxF"/>
@@ -1065,21 +1072,21 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nIR-UR-A9G">
-                                                <rect key="frame" x="24" y="94.333333333333314" width="345" height="342"/>
+                                                <rect key="frame" x="24" y="97.333333333333314" width="345" height="342"/>
                                                 <color key="backgroundColor" name="ViewBackground"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="342" id="qpt-8O-ruJ"/>
                                                 </constraints>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Rectangle" translatesAutoresizingMaskIntoConstraints="NO" id="Knr-fr-ST0">
-                                                <rect key="frame" x="355" y="84.333333333333329" width="14" height="12"/>
+                                                <rect key="frame" x="355" y="87.333333333333329" width="14" height="12"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="14" id="012-FT-qUf"/>
                                                     <constraint firstAttribute="height" constant="12" id="8dc-e0-8oh"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPm-ao-z51">
-                                                <rect key="frame" x="189" y="96.333333333333329" width="196" height="35.999999999999986"/>
+                                                <rect key="frame" x="189" y="99.333333333333329" width="196" height="35.999999999999986"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대학교 설정하고 일정을 확인해 보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsN-BH-g5a">
                                                         <rect key="frame" x="7.6666666666666572" y="11" width="181" height="14"/>
@@ -1097,7 +1104,7 @@
                                                 </constraints>
                                             </view>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Skc-LD-Uw6">
-                                                <rect key="frame" x="0.0" y="436" width="393" height="56"/>
+                                                <rect key="frame" x="0.0" y="439.33333333333331" width="393" height="56"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="56" id="7B0-KJ-MK4"/>
                                                 </constraints>
@@ -1106,20 +1113,20 @@
                                                 </connections>
                                             </containerView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다가오는 일정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3D-ir-ALe">
-                                                <rect key="frame" x="24" y="520.33333333333337" width="98" height="21"/>
+                                                <rect key="frame" x="24" y="523.33333333333337" width="98" height="21"/>
                                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Date" translatesAutoresizingMaskIntoConstraints="NO" id="qLT-b1-5ua">
-                                                <rect key="frame" x="126" y="520.66666666666663" width="20" height="20"/>
+                                                <rect key="frame" x="126" y="523.66666666666663" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="RYj-HP-hNs"/>
                                                     <constraint firstAttribute="width" constant="20" id="lyd-Ra-2Li"/>
                                                 </constraints>
                                             </imageView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N4d-wv-gp5">
-                                                <rect key="frame" x="0.0" y="541" width="393" height="128"/>
+                                                <rect key="frame" x="0.0" y="544.33333333333337" width="393" height="128"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="QSl-bU-voR"/>
                                                 </constraints>
@@ -1127,18 +1134,6 @@
                                                     <segue destination="gaI-TL-N4z" kind="embed" id="j8N-Ir-GMv"/>
                                                 </connections>
                                             </containerView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhC-ZL-PAA">
-                                                <rect key="frame" x="309" y="613" width="60" height="60"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="hTa-XC-0vd"/>
-                                                    <constraint firstAttribute="height" constant="60" id="xsB-7X-Zl9"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Alarm"/>
-                                                <connections>
-                                                    <action selector="Alarm_Tapped:" destination="HjL-dA-FDw" eventType="touchUpInside" id="5g7-Rl-1bf"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -1147,7 +1142,6 @@
                                             <constraint firstAttribute="trailing" secondItem="YPm-ao-z51" secondAttribute="trailing" constant="8" id="4Eq-Fx-qMz"/>
                                             <constraint firstAttribute="trailing" secondItem="Knr-fr-ST0" secondAttribute="trailing" constant="24" id="6UD-dM-XIW"/>
                                             <constraint firstItem="nIR-UR-A9G" firstAttribute="top" secondItem="arB-bv-ePv" secondAttribute="bottom" constant="20" id="6wr-Nl-D9R"/>
-                                            <constraint firstAttribute="bottom" secondItem="uhC-ZL-PAA" secondAttribute="bottom" constant="179" id="8Nm-IT-ZWt"/>
                                             <constraint firstAttribute="trailing" secondItem="Hrn-vN-qs9" secondAttribute="trailing" constant="8" id="8od-vr-flT"/>
                                             <constraint firstItem="qLT-b1-5ua" firstAttribute="leading" secondItem="x3D-ir-ALe" secondAttribute="trailing" constant="4" id="8sy-xg-gWV"/>
                                             <constraint firstItem="nIR-UR-A9G" firstAttribute="leading" secondItem="ZdI-aj-dQE" secondAttribute="leading" constant="24" id="EHt-Bq-FVu"/>
@@ -1171,10 +1165,9 @@
                                             <constraint firstItem="N4d-wv-gp5" firstAttribute="top" secondItem="x3D-ir-ALe" secondAttribute="bottom" id="neU-Fb-atG"/>
                                             <constraint firstItem="arB-bv-ePv" firstAttribute="leading" secondItem="ZdI-aj-dQE" secondAttribute="leading" constant="24" id="oK1-EH-WXI"/>
                                             <constraint firstAttribute="trailing" secondItem="Skc-LD-Uw6" secondAttribute="trailing" id="oUr-XD-HPx"/>
-                                            <constraint firstItem="YTN-3Z-5Ni" firstAttribute="top" secondItem="Jvq-Bt-YmL" secondAttribute="bottom" constant="8" id="ojc-ak-ci0"/>
+                                            <constraint firstItem="YTN-3Z-5Ni" firstAttribute="top" secondItem="Jvq-Bt-YmL" secondAttribute="bottom" constant="11" id="ojc-ak-ci0"/>
                                             <constraint firstItem="x3D-ir-ALe" firstAttribute="leading" secondItem="ZdI-aj-dQE" secondAttribute="leading" constant="24" id="qm9-op-WQj"/>
                                             <constraint firstItem="wVK-db-PhL" firstAttribute="centerY" secondItem="arB-bv-ePv" secondAttribute="centerY" id="rhX-t7-3Mp"/>
-                                            <constraint firstAttribute="trailing" secondItem="uhC-ZL-PAA" secondAttribute="trailing" constant="24" id="tv5-ba-W64"/>
                                             <constraint firstItem="2sL-7J-Zp2" firstAttribute="centerY" secondItem="arB-bv-ePv" secondAttribute="centerY" id="xki-V6-xjz"/>
                                         </constraints>
                                     </view>
@@ -1190,6 +1183,18 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="yk3-d3-hfp"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Sw0-zm-L5j"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhC-ZL-PAA">
+                                <rect key="frame" x="166" y="396" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="hTa-XC-0vd"/>
+                                    <constraint firstAttribute="height" constant="60" id="xsB-7X-Zl9"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Alarm"/>
+                                <connections>
+                                    <action selector="Alarm_Tapped:" destination="HjL-dA-FDw" eventType="touchUpInside" id="5g7-Rl-1bf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Sn3-La-AJS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1203,6 +1208,7 @@
                     <connections>
                         <outlet property="AlertView" destination="YPm-ao-z51" id="ImV-He-wTF"/>
                         <outlet property="DateView" destination="nIR-UR-A9G" id="y4s-SI-eqN"/>
+                        <outlet property="alarmButton" destination="uhC-ZL-PAA" id="mW7-Wz-32Y"/>
                         <outlet property="dayLabel" destination="arB-bv-ePv" id="U5I-ye-2CL"/>
                     </connections>
                 </viewController>
@@ -1812,13 +1818,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성신여자대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDK-xr-EkH">
-                                                    <rect key="frame" x="44" y="12" width="97" height="20"/>
+                                                    <rect key="frame" x="44" y="12.666666666666666" width="97" height="18.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="원서 접수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf4-zy-X6O">
-                                                    <rect key="frame" x="149" y="12" width="60" height="20"/>
+                                                    <rect key="frame" x="149" y="12.666666666666666" width="60" height="18.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                                     <color key="textColor" name="Coquelicot"/>
                                                     <nil key="highlightedColor"/>
@@ -1838,6 +1844,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="HRC-JZ-Mcn"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="oEj-bJ-IgO" secondAttribute="trailing" id="2Vj-wn-ZdN"/>
@@ -1852,7 +1859,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HqI-0W-gmS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-521" y="63"/>
+            <point key="canvasLocation" x="-521" y="24"/>
         </scene>
         <!--Date View Controller-->
         <scene sceneID="oJi-uQ-8lq">
@@ -1909,6 +1916,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Pc8-NZ-ftX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Mh6-xa-D6y" secondAttribute="bottom" id="3XY-w9-JZi"/>
@@ -1923,7 +1931,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GSj-rv-ivd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="734" y="164"/>
+            <point key="canvasLocation" x="734" y="125"/>
         </scene>
     </scenes>
     <resources>

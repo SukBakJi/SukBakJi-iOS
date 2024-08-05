@@ -8,6 +8,10 @@
 import UIKit
 
 class FavoriteLabCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var firstMajorView: UIView!
+    @IBOutlet weak var secondMajorView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -16,6 +20,9 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         
         layer.cornerRadius = 15
         layer.masksToBounds = false
+        
+        firstMajorView.layer.cornerRadius = 5
+        secondMajorView.layer.cornerRadius = 5
     }
 }
 
@@ -57,7 +64,7 @@ extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
