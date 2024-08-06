@@ -18,6 +18,8 @@ class AlarmViewController: UIViewController, dateProtocol {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var DatePicker: UIPickerView!
     
+    @IBOutlet weak var setButton: UIButton!
+    
     let drop = DropDown()
     let schoolName = ["   광운대학교", "   성신여자대학교", "   서경대학교", "   서울여자대학교", "   한성대학교"]
     
@@ -29,9 +31,14 @@ class AlarmViewController: UIViewController, dateProtocol {
     var hour: String = "8"
     var minute: String = "00"
     
+    var timeLabel: String = ""
+    
+    private var alarmData: AlarmPostResult!
+    
     func dateSend(data: String) {
         AlarmDateTF.text = "   \(data)"
         dateLabel.text = "\(data)"
+        updateButtonColor()
     }
     
     override func viewDidLoad() {
@@ -39,10 +46,15 @@ class AlarmViewController: UIViewController, dateProtocol {
 
         SchoolTF.addBottomShadow()
         SchoolTF.isEnabled = false
-        AlarmDateTF.isEnabled = false
         AlarmNameTF.addBottomShadow()
+        AlarmNameTF.setLeftPadding(10)
+        AlarmNameTF.errorfix()
         AlarmDateTF.addBottomShadow()
+        AlarmDateTF.isEnabled = false
+        
         DatePicker.isHidden = true
+        
+        settingButton()
         
         initUI()
         setDropdown()
@@ -51,6 +63,8 @@ class AlarmViewController: UIViewController, dateProtocol {
         
         DatePicker.delegate = self
         DatePicker.dataSource = self
+        
+        AlarmNameTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
     }
     
     func appendMinute() {
@@ -60,6 +74,40 @@ class AlarmViewController: UIViewController, dateProtocol {
             } else {
                 pickerMinute.append("\(i)")
             }
+        }
+    }
+    
+    func settingButton() {
+        setButton.isEnabled = false
+        setButton.layer.masksToBounds = true
+        setButton.layer.cornerRadius = 10
+        setButton.backgroundColor = UIColor(hexCode: "EFEFEF")
+        setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+    }
+    
+    @objc func textFieldEdited(_ textField: UITextField) {
+        updateButtonColor()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 텍스트 필드 내용이 변경될 때 버튼 색깔 업데이트
+        DispatchQueue.main.async {
+            self.updateButtonColor()
+        }
+        return true
+    }
+        
+    func updateButtonColor() {
+        if (SchoolTF.text?.isEmpty == false) && (AlarmNameTF.text != "") && (AlarmDateTF.text?.isEmpty == false){
+            setButton.isEnabled = true
+            setButton.backgroundColor = UIColor(named: "Coquelicot")
+            setButton.setTitleColor(.white, for: .normal)
+            setButton.setTitleColor(.white, for: .selected)
+        } else {
+            setButton.isEnabled = false
+            setButton.backgroundColor = UIColor(hexCode: "EFEFEF")
+            setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+            setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .selected)
         }
     }
     
@@ -89,6 +137,7 @@ class AlarmViewController: UIViewController, dateProtocol {
         drop.selectionAction = { [weak self] (index, item) in
             //선택한 Item을 TextField에 넣어준다.
             self!.SchoolTF.text = " \(item)"
+            self?.updateButtonColor()
         }
         
         // 취소 시 처리
@@ -108,6 +157,12 @@ class AlarmViewController: UIViewController, dateProtocol {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "AlarmDateVC") as? AlarmDateViewController else { return }
         nextVC.delegate = self
         self.present(nextVC, animated: false)
+    }
+    
+    @IBAction func alarm_Setting(_ sender: Any) {
+//        let parameterDatas = AlarmPostModel(memberId: 1, univName: "광운대학교", name: "모집일정", date: "2024-09-01", time: "14:00", onoff: 1)
+//        APIAlarmPost.instance.SendingPostAlarm(parameters: parameterDatas) { result in self.alarmData = result }
+        self.presentingViewController?.dismiss(animated: true)
     }
     
     @IBAction func back_Tapped(_ sender: Any) {
@@ -186,8 +241,10 @@ extension AlarmViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             minute = pickerMinute[row]
         default:
             timeButton.setTitle("오전 8:00", for: .normal)
+            timeLabel = "오전 8:00"
         }
         
         timeButton.setTitle("\(day) \(hour):\(minute)", for: .normal)
+        timeLabel = "\(day) \(hour):\(minute)"
     }
 }
