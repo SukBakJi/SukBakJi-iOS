@@ -14,16 +14,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     // SiwftUI로 BoardViewController 실행하기
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        
-        let mainViewController = UINavigationController(rootViewController: LoginViewController())
-        //let mainViewController = UINavigationController(rootViewController: TOSViewController())
-        
-        window?.rootViewController = mainViewController
-        window?.makeKeyAndVisible()
-    }
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(windowScene: windowScene)
+//        
+//        let mainViewController = UINavigationController(rootViewController: LoginViewController())
+//        //let mainViewController = UINavigationController(rootViewController: TOSViewController())
+//        
+//        window?.rootViewController = mainViewController
+//        window?.makeKeyAndVisible()
+//    }
     
 //    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 //        guard let windowScene = (scene as? UIWindowScene) else { return }

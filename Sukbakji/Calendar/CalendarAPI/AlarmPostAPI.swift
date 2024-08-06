@@ -11,10 +11,11 @@ import Alamofire
 class APIAlarmPost {
     static let instance = APIAlarmPost()
     
-    func SendingPostAlarm(parameters: AlarmPostModel, handler: @escaping (_ result: AlarmPostResult)->(Void)) {
-        let url = APIConstants.baseURL
+    func SendingPostAlarm(token: String, parameters: AlarmPostModel, handler: @escaping (_ result: AlarmPostResult)->(Void)) {
+        let url = APIConstants.calendarURL + "/alarm"
         let headers:HTTPHeaders = [
-            "content-type": "application/json"
+            "content-type": "application/json",
+            "Authorization": "Bearer \(token)"
         ]
         
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { responce in
