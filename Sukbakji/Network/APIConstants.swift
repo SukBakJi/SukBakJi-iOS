@@ -9,7 +9,15 @@ import Foundation
 
 struct APIConstants {
     // MARK: - Base URL
-    static let baseURL = ""
+    static let baseURL = "http://54.180.165.121:8080/api"
     
-    static let calendarURL = baseURL + "/calendar"
+    static let joinURL = baseURL + "/auth"
+    
+    static let userURL = baseURL + "/user"
+    
+    static let boardURL = baseURL + "/board"
+    
+    static let boardpostURL = baseURL + "/posts"
+    
+    static let calendarURL = baseURL + "/calender"
 }
