@@ -6,11 +6,20 @@ struct BoardWriteBoardViewController: View {
     @State private var titleText: String = "" // 제목 텍스트 필드의 상태를 관리하기 위한 변수
     @State private var postText: String = "" // 내용 텍스트 필드의 상태를 관리하기 위한 변수
     @State private var selectedOptionIndex: Int? = nil // DropDown 메뉴에서 선택된 옵션의 인덱스
+    @State private var selectedSupportFieldIndex: Int? = nil // 지원분야 드롭다운 메뉴에서 선택된 옵션의 인덱스
+    @State private var selectedEmploymentType: Int? = nil // 채용 형태 선택
+    @State private var selectedEducationLevel: Int? = nil // 최종학력 선택
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var showValidationError = false // Validation error state
+    @State private var showCategoryDropdown = false // 카테고리 드롭다운 메뉴 표시 상태
+    @State private var showSupportFieldDropdown = false // 지원분야 드롭다운 메뉴 표시 상태
 
     var isFormValid: Bool {
-        selectedCategory != nil && !titleText.isEmpty && !postText.isEmpty
+        selectedCategory != nil && selectedOptionIndex != nil && (!showExtraFields || (selectedSupportFieldIndex != nil && selectedEmploymentType != nil && selectedEducationLevel != nil)) && !titleText.isEmpty && !postText.isEmpty
+    }
+
+    var showExtraFields: Bool {
+        return (selectedCategory == 0 || selectedCategory == 1) && selectedOptionIndex == 1
     }
 
     var body: some View {
@@ -44,12 +53,20 @@ struct BoardWriteBoardViewController: View {
                 Divider()
                 
                 ScrollView {
-                    SeoBakji()
-                    WriteBoardDetail(selectedCategory: $selectedCategory,
-                                     titleText: $titleText,
-                                     postText: $postText,
-                                     selectedOptionIndex: $selectedOptionIndex,
-                                     showValidationError: $showValidationError) // 전달 추가
+                    SeokBakji()
+                    WriteBoardDetail(
+                        selectedCategory: $selectedCategory,
+                        titleText: $titleText,
+                        postText: $postText,
+                        selectedOptionIndex: $selectedOptionIndex,
+                        selectedSupportFieldIndex: $selectedSupportFieldIndex,
+                        selectedEmploymentType: $selectedEmploymentType,
+                        selectedEducationLevel: $selectedEducationLevel,
+                        showValidationError: $showValidationError,
+                        showCategoryDropdown: $showCategoryDropdown,
+                        showSupportFieldDropdown: $showSupportFieldDropdown,
+                        showExtraFields: showExtraFields
+                    )
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
@@ -89,7 +106,7 @@ struct BoardWriteBoardViewController: View {
     }
 }
 
-struct SeoBakji: View {
+struct SeokBakji: View {
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
             Text("석박지")
@@ -108,13 +125,32 @@ struct SeoBakji: View {
 
 struct WriteBoardDetail: View {
     
-    let category: [String] = ["박사", "석사", "입학예정"]
+    let boardCategory: [String] = ["박사", "석사", "입학예정"]
     
     @Binding var selectedCategory: Int? // 선택된 카테고리
     @Binding var titleText: String // 제목 텍스트 필드의 상태
     @Binding var postText: String // 내용 텍스트 필드의 상태
     @Binding var selectedOptionIndex: Int? // DropDown 메뉴에서 선택된 옵션의 인덱스
+    @Binding var selectedSupportFieldIndex: Int? // 지원분야 드롭다운 메뉴에서 선택된 옵션의 인덱스
+    @Binding var selectedEmploymentType: Int? // 채용 형태 선택
+    @Binding var selectedEducationLevel: Int? // 최종학력 선택
     @Binding var showValidationError: Bool // Validation error state
+    @Binding var showCategoryDropdown: Bool
+    @Binding var showSupportFieldDropdown: Bool
+    var showExtraFields: Bool
+
+    var boardCategories: [String] {
+        switch selectedCategory {
+        case 0:
+            return ["질문 게시판", "취업후기 게시판", "대학원생활 게시판", "연구주제 게시판"]
+        case 1:
+            return ["질문 게시판", "취업후기 게시판", "박사지원 게시판", "대학원생활 게시판", "박사합격 후기", "연구주제 게시판"]
+        case 2:
+            return ["질문 게시판", "석사합격 후기", "학부연구생 게시판", "석사지원 게시판", "석박사통합지원 게시판"]
+        default:
+            return []
+        }
+    }
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -135,16 +171,20 @@ struct WriteBoardDetail: View {
                     // Category Buttons
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 16) {
-                            ForEach(category.indices, id: \.self) { index in
+                            ForEach(boardCategory.indices, id: \.self) { index in
                                 Button(action: {
                                     selectedCategory = index
+                                    selectedOptionIndex = nil // Reset the selected option when category changes
+                                    selectedSupportFieldIndex = nil
+                                    selectedEmploymentType = nil
+                                    selectedEducationLevel = nil
                                 }) {
                                     HStack(alignment: .center, spacing: 8) {
                                         Image(selectedCategory == index ? "Radio Button" : "Radio Button 1")
                                             .resizable()
                                             .frame(width: 20, height: 20)
                                         
-                                        Text(category[index])
+                                        Text(boardCategory[index])
                                             .font(.system(size: 16, weight: .semibold))
                                             .foregroundStyle(Constants.Gray900)
                                     }
@@ -169,7 +209,122 @@ struct WriteBoardDetail: View {
                     .padding(.top, 20)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
-                    DropDownMenuView(selectedOptionIndex: $selectedOptionIndex, showValidationError: $showValidationError) // 전달 추가
+                    CategoryDropDownMenuView(options: boardCategories, selectedOptionIndex: $selectedOptionIndex, showValidationError: $showValidationError, showDropdown: $showCategoryDropdown) // 전달 추가
+                    
+                    if showExtraFields {
+                        // 지원분야 드롭다운
+                        HStack(alignment: .top, spacing: 4) {
+                            Text("지원분야")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(Constants.Gray900)
+                            
+                            Image("dot-badge")
+                                .resizable()
+                                .frame(width: 4, height: 4)
+                        }
+                        .padding(.bottom, 12)
+                        .padding(.top, 20)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        
+                        fieldOfSupportDropDown(
+                            options: ["기획·전략", "법무", "인사·HR", "회계·세무", "마케팅·광고·MD", "개발·데이터", "디자인", "물류·무역", "운전·운송·배송", "영업", "고객상담·TM", "금융·보험", "식·음료", "고객서비스·리테일", "엔지니어링·설계", "제조·생산", "교육", "건축·시설", "의료·바이오", "미디어·문화·스포츠", "공공·복지", "기타"],
+                            selectedSupportFieldIndex: $selectedSupportFieldIndex,
+                            showDropdown: $showSupportFieldDropdown,
+                            showValidationError: $showValidationError
+                        )
+                        
+                        // 채용 형태
+                        HStack(alignment: .top, spacing: 4) {
+                            Text("채용 형태")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(Constants.Gray900)
+                            
+                            Image("dot-badge")
+                                .resizable()
+                                .frame(width: 4, height: 4)
+                        }
+                        .padding(.bottom, 12)
+                        .padding(.top, 20)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        
+                        HStack(spacing: 16) {
+                            ForEach(["신입", "경력"].indices, id: \.self) { index in
+                                Button(action: {
+                                    selectedEmploymentType = index
+                                }) {
+                                    HStack(alignment: .center, spacing: 8) {
+                                        Image(selectedEmploymentType == index ? "Radio Button" : "Radio Button 1")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                        
+                                        Text(["신입", "경력"][index])
+                                            .font(.system(size: 16, weight: .semibold))
+                                            .foregroundStyle(Constants.Gray900)
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.bottom, 12)
+                        
+                        if showValidationError && selectedEmploymentType == nil {
+                            HStack {
+                                Image("CircleWarning")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                
+                                Text("채용 형태 선택은 필수입니다")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                            }
+                            .padding(.bottom, 12)
+                        }
+
+                        // 최종학력
+                        HStack(alignment: .top, spacing: 4) {
+                            Text("최종학력")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(Constants.Gray900)
+                            
+                            Image("dot-badge")
+                                .resizable()
+                                .frame(width: 4, height: 4)
+                        }
+                        .padding(.bottom, 12)
+                        .padding(.top, 20)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        
+                        HStack(spacing: 16) {
+                            ForEach(["박사", "석사"].indices, id: \.self) { index in
+                                Button(action: {
+                                    selectedEducationLevel = index
+                                }) {
+                                    HStack(alignment: .center, spacing: 8) {
+                                        Image(selectedEducationLevel == index ? "Radio Button" : "Radio Button 1")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                        
+                                        Text(["박사", "석사"][index])
+                                            .font(.system(size: 16, weight: .semibold))
+                                            .foregroundStyle(Constants.Gray900)
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.bottom, 12)
+                        
+                        if showValidationError && selectedEducationLevel == nil {
+                            HStack {
+                                Image("CircleWarning")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                
+                                Text("최종학력 선택은 필수입니다")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                            }
+                            .padding(.bottom, 12)
+                        }
+                    }
                     
                     HStack(alignment: .top, spacing: 4) {
                         Text("제목")
@@ -184,18 +339,38 @@ struct WriteBoardDetail: View {
                     .padding(.top, 20)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
-                    // 텍스트 필드 생성
+                    // 제목 텍스트 필드 생성
                     VStack(alignment: .leading, spacing: 4) {
-                        TextField("제목을 입력해주세요", text: $titleText)
-                            .padding() // 텍스트 필드 내부 여백
-                            .background(showValidationError && titleText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
-                            .cornerRadius(8) // 모서리 둥글게
-                            .foregroundColor(showValidationError && titleText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900)) // 텍스트 색상 (선택 사항)
-                        
+                        ZStack(alignment: .leading) {
+                            if titleText.isEmpty {
+                                Text("")
+                                    .foregroundColor(showValidationError ? Color(red: 1, green: 0.29, blue: 0.29) : Constants.Gray500)
+                                    .padding(.horizontal, 8)
+                            }
+                            TextField("제목을 입력해주세요", text: $titleText)
+                                .padding()
+                                .background(showValidationError && titleText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
+                                .cornerRadius(8, corners: [.topLeft, .topRight])
+                                .overlay(
+                                    Rectangle()
+                                        .frame(height: 2)
+                                        .foregroundColor(titleText.isEmpty && showValidationError ? Color.red : Color(Constants.Gray300))
+                                        .padding(.top, 44)
+                                        .padding(.horizontal, 8),
+                                    alignment: .bottom
+                                )
+                                .foregroundColor(showValidationError && titleText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
+                        }
                         if showValidationError && titleText.isEmpty {
-                            Text("제목은 필수 입력입니다")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                            HStack {
+                                Image("CircleWarning")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                
+                                Text("제목은 필수 입력입니다")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                            }
                         }
                     }
                     
@@ -212,19 +387,39 @@ struct WriteBoardDetail: View {
                     .padding(.top, 20)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
-                    // 텍스트 필드 생성
+                    // 내용 텍스트 필드 생성
                     VStack(alignment: .leading, spacing: 4) {
-                        TextField("내용을 입력해주세요", text: $postText)
-                            .frame(height: 100, alignment: .topLeading)
-                            .padding() // 텍스트 필드 내부 여백
-                            .background(showValidationError && postText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
-                            .cornerRadius(8) // 모서리 둥글게
-                            .foregroundColor(showValidationError && postText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900)) // 텍스트 색상 (선택 사항)
-                        
+                        ZStack(alignment: .leading) {
+                            if postText.isEmpty {
+                                Text("")
+                                    .foregroundColor(showValidationError ? Color(red: 1, green: 0.29, blue: 0.29) : Constants.Gray500)
+                                    .padding(.horizontal, 8)
+                            }
+                            TextField("내용을 입력해주세요", text: $postText)
+                                .frame(height: 100, alignment: .topLeading)
+                                .padding()
+                                .background(showValidationError && postText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
+                                .cornerRadius(8, corners: [.topLeft, .topRight])
+                                .overlay(
+                                    Rectangle()
+                                        .frame(height: 2)
+                                        .foregroundColor(postText.isEmpty && showValidationError ? Color.red : Color(Constants.Gray300))
+                                        .padding(.top, 100)
+                                        .padding(.horizontal, 8),
+                                    alignment: .bottom
+                                )
+                                .foregroundColor(showValidationError && postText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
+                        }
                         if showValidationError && postText.isEmpty {
-                            Text("내용은 필수 입력입니다")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                            HStack {
+                                Image("CircleWarning")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                
+                                Text("내용은 필수 입력입니다")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                            }
                         }
                     }
 
@@ -260,12 +455,12 @@ struct WriteBoardDetail: View {
     }
 }
 
-struct DropDownMenu: View {
+struct CategoryDropDownMenu: View {
     
     let options: [String]
     var menuWidth: CGFloat = 150
     var buttonHeight: CGFloat = 44
-    var maxItemDisplayed: Int = 4
+    var maxItemDisplayed: Int = 6
     
     @Binding var selectedOptionIndex: Int?
     @Binding var showDropdown: Bool
@@ -290,13 +485,13 @@ struct DropDownMenu: View {
                                 }, label: {
                                     HStack {
                                         Text(options[index])
-                                            .foregroundColor(Color(Constants.Gray900))
-                                            .fontWeight(selectedOptionIndex == index ? .bold : .regular)
-                                            .underline(selectedOptionIndex == index)
+                                            .foregroundColor(selectedOptionIndex == index ? Constants.Orange700 : Constants.Gray900)
+                                            .padding(16)
+                                            .frame(height: buttonHeight, alignment: .leading)
+                                            .background(selectedOptionIndex == index ? Color(red: 0.99, green: 0.91, blue: 0.9) : Color.clear)
+                                            .cornerRadius(8, corners: .allCorners)
                                     }
                                 })
-                                .padding(.leading, 16)
-                                .frame(width: menuWidth, height: buttonHeight, alignment: .leading)
                             }
                         }
                         .scrollTargetLayout()
@@ -336,9 +531,15 @@ struct DropDownMenu: View {
                 .background(RoundedRectangle(cornerRadius: 8).fill(showValidationError && selectedOptionIndex == nil ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100)))
 
                 if showValidationError && selectedOptionIndex == nil {
-                    Text("카테고리는 필수 선택입니다")
-                        .font(.system(size: 14))
+                    HStack {
+                        Image("CircleWarning")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                        
+                        Text("카테고리는 필수 선택입니다")
+                            .font(.system(size: 14))
                         .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                    }
                 }
             }
         }
@@ -346,20 +547,111 @@ struct DropDownMenu: View {
     }
 }
 
-
-struct DropDownMenuView: View {
+struct CategoryDropDownMenuView: View {
+    let options: [String]
     @Binding var selectedOptionIndex: Int? // Binding 추가
     @Binding var showValidationError: Bool // Validation error state
-    @State private var showDropdown = false
+    @Binding var showDropdown: Bool
     
     var body: some View {
-        DropDownMenu(options: ["질문 게시판", "취업후기 게시판", "대학원생활 게시판", "연구주제 게시판"],
+        CategoryDropDownMenu(options: options,
                      selectedOptionIndex: $selectedOptionIndex, // Binding 전달
                      showDropdown: $showDropdown,
                      showValidationError: $showValidationError)
     }
 }
 
+struct fieldOfSupportDropDown: View {
+    
+    let options: [String]
+    var menuWidth: CGFloat = 300
+    var buttonHeight: CGFloat = 44
+    var maxItemDisplayed: Int = 4
+    
+    @Binding var selectedSupportFieldIndex: Int?
+    @Binding var showDropdown: Bool
+    @Binding var showValidationError: Bool // Validation error state
+    
+    @State private var scrollPosition: Int?
+    
+    var body: some View {
+        VStack {
+            // Dropdown Menu
+            VStack(spacing: 0) {
+                if showDropdown {
+                    let scrollViewHeight: CGFloat = options.count > maxItemDisplayed ? (buttonHeight * CGFloat(maxItemDisplayed)) : (buttonHeight * CGFloat(options.count))
+                    ScrollView {
+                        LazyVStack(spacing: 0) {
+                            ForEach(0..<options.count, id: \.self) { index in
+                                Button(action: {
+                                    withAnimation {
+                                        selectedSupportFieldIndex = index
+                                        showDropdown.toggle()
+                                    }
+                                }, label: {
+                                    HStack {
+                                        Text(options[index])
+                                            .foregroundColor(selectedSupportFieldIndex == index ? Constants.Orange700 : Constants.Gray900)
+                                            .fontWeight(selectedSupportFieldIndex == index ? .bold : .regular)
+                                            .underline(selectedSupportFieldIndex == index)
+                                    }
+                                })
+                                .padding(.leading, 16)
+                                .frame(width: menuWidth, height: buttonHeight, alignment: .leading)
+                            }
+                        }
+                        .scrollTargetLayout()
+                    }
+                    .scrollPosition(id: $scrollPosition)
+                    .scrollDisabled(options.count <= maxItemDisplayed)
+                    .frame(height: scrollViewHeight)
+                    .onAppear {
+                        scrollPosition = selectedSupportFieldIndex
+                    }
+                }
+            }
+            
+            // Selected Item or Placeholder
+            VStack(alignment: .leading, spacing: 4) {
+                Button(action: {
+                    withAnimation {
+                        showDropdown.toggle()
+                    }
+                }, label: {
+                    HStack {
+                        if let selectedIndex = selectedSupportFieldIndex {
+                            Text(options[selectedIndex])
+                        } else {
+                            Text("지원분야를 선택해 주세요")
+                                .foregroundColor(showValidationError ? Color(red: 1, green: 0.29, blue: 0.29) : Constants.Gray500)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.down")
+                            .foregroundStyle(Color(red: 0.46, green: 0.46, blue: 0.46))
+                            .padding(.trailing, 12)
+                            .rotationEffect(.degrees(showDropdown ? -180 : 0))
+                    }
+                })
+                .padding(.leading, 16)
+                .padding(.vertical, 13)
+                .background(RoundedRectangle(cornerRadius: 8).fill(showValidationError && selectedSupportFieldIndex == nil ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100)))
+
+                if showValidationError && selectedSupportFieldIndex == nil {
+                    HStack {
+                        Image("CircleWarning")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                        
+                        Text("지원분야는 필수 선택입니다")
+                            .font(.system(size: 14))
+                            .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                    }
+                }
+            }
+        }
+        .foregroundColor(Color(Constants.Gray900))
+    }
+}
 
 #Preview {
     BoardWriteBoardViewController()
