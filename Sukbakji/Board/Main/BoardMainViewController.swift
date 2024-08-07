@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-
-
-
 struct BoardMainViewController: View {
     
     @State private var searchText: String = "" // 검색 텍스트 상태 변수
+    @State private var hasBookmarkedBoard: Bool = true // 즐겨찾기한 게시판 상태 변수
+    @State private var isSearchActive: Bool = false // 검색 바 클릭 상태 변수
     
     var body: some View {
         ScrollView(.vertical) {
@@ -46,11 +45,14 @@ struct BoardMainViewController: View {
                                 .foregroundColor(.gray)
                                 .padding(.leading, 8) // 아이콘 왼쪽 여백
                             
-                            TextField("게시판에서 궁금한 내용을 검색해 보세요!", text: $searchText)
+                            Text("게시판에서 궁금한 내용을 검색해 보세요!")
                                 .font(.system(size: 14))
-                                .textFieldStyle(PlainTextFieldStyle()) // 테두리 없는 스타일
+                                .foregroundColor(.gray)
                                 .padding(.vertical, 12) // 상하 여백 추가
                                 .padding(.horizontal, 4) // 아이콘과 텍스트 사이의 여백 추가
+                                .onTapGesture {
+                                    isSearchActive = true
+                                }
                             
                             Spacer() // 아이콘과 텍스트 사이에 빈 공간 추가
                         }
@@ -62,7 +64,7 @@ struct BoardMainViewController: View {
                         
                         Spacer() // 검색창과 다른 요소 간의 공간을 만듭니다.
                     }
-                    .padding(.horizontal, 24)
+                        .padding(.horizontal, 24)
                 )
                 
                 // 탭 메뉴 4개 영역
@@ -72,12 +74,76 @@ struct BoardMainViewController: View {
                 qnaBoard()
                 
                 //즐겨찾기한 게시판
-                scrappedBoard()
+                
+                if hasBookmarkedBoard {
+                    HStack(alignment: .center) {
+                        Text("즐겨찾기한 게시판")
+                            .font(.system(size: 18, weight:.semibold))
+                            .foregroundStyle(Constants.Gray900)
+                        
+                        Image("Star 1")
+                            .resizable()
+                            .frame(width: 20, height: 20, alignment: .center)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            print("즐겨찾기한 게시판 tapped")
+                            // 버튼 클릭 시 동작
+                        }) {
+                            Text("더보기")
+                                .font(.system(size: 12, weight: .medium))
+                                .multilineTextAlignment(.center)
+                                .foregroundStyle(Constants.Gray500)
+                            
+                            Image("More 1")
+                                .resizable()
+                                .frame(width: 4, height: 8)
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 14)
+                    .padding(.bottom, 12)
+                    .frame(alignment: .center)
+                    .background(Constants.White)
+                    .buttonStyle(PlainButtonStyle())  // 기본 버튼 스타일
+                    bookmarkedBoard()
+                } else {
+                    VStack {
+                        Spacer()
+                        
+                        HStack(alignment: .center) {
+                            Text("즐겨찾기한 게시판")
+                                .font(.system(size: 18, weight:.semibold))
+                                .foregroundStyle(Constants.Gray900)
+                            
+                            Image("Star 1")
+                                .resizable()
+                                .frame(width: 20, height: 20, alignment: .center)
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.top, 14)
+                        .padding(.bottom, 12)
+                        .frame(alignment: .center)
+                        .background(Constants.White)
+                        
+                        EmptyBookmarkBoard()
+                        
+                        Spacer()
+                    }
+                }
                 
             }
         }
+        .navigationBarHidden(true)
+        .fullScreenCover(isPresented: $isSearchActive) {
+            SearchViewController(boardName: "게시판")
+        }
     }
 }
+
 
 // MARK - tapMenu
 struct tapMenu: View {
@@ -358,50 +424,18 @@ struct qnaBoard: View {
     }
 }
 
-// MARK - scrappedBoard
-struct scrappedBoard: View {
+// MARK: - 즐겨찾기한 게시판
+struct bookmarkedBoard: View {
     
     @State var progress: Double = 0.0
-
+    
     var body: some View {
         VStack {
-            HStack(alignment: .center) {
-                Text("즐겨찾기한 게시판")
-                    .font(.system(size: 18, weight:.semibold))
-                    .foregroundStyle(Constants.Gray900)
-                
-                Image("Star 1")
-                    .resizable()
-                    .frame(width: 20, height: 20, alignment: .center)
-                
-                Spacer()
-                
-                Button(action: {
-                    print("즐겨찾기한 게시판 tapped")
-                    // 버튼 클릭 시 동작
-                }) {
-                    Text("더보기")
-                        .font(.system(size: 12, weight: .medium))
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(Constants.Gray500)
-                    
-                    Image("More 1")
-                        .resizable()
-                        .frame(width: 4, height: 8)
-                }
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 14)
-            .padding(.bottom, 12)
-            .frame(alignment: .center)
-            .background(Constants.White)
-            .buttonStyle(PlainButtonStyle())  // 기본 버튼 스타일
-            
             GeometryReader { outerGeometry in
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(0..<8) { _ in
-                            scrappedBoardTable()
+                            bookmarkedBoardTable()
                         }
                     }
                     .background(
@@ -428,7 +462,10 @@ struct scrappedBoard: View {
     }
 }
 
-struct scrappedBoardTable: View {
+// MARK: -- 즐겨찾기한 게시판 테이블뷰
+struct bookmarkedBoardTable: View {
+    
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 12) {
@@ -500,7 +537,27 @@ struct scrappedBoardTable: View {
     }
 }
 
-// MARK - Preview
+
+// MARK: -- 즐겨찾기한 게시판이 없을 경우
+struct EmptyBookmarkBoard: View {
+    var body: some View {
+        VStack {
+            Text("아직 즐겨찾기한 게시물이 없어요")
+                .font(.system(size: 14, weight: .semibold))
+                .multilineTextAlignment(.center)
+                .foregroundStyle(Constants.Gray500)
+                .padding(.bottom, 8)
+            
+            Text("게시판을 탐색하고 즐겨찾기를 등록해 보세요!")
+                .font(.system(size: 11))
+                .multilineTextAlignment(.center)
+                .foregroundColor(Constants.Gray500)
+            
+        }
+    }
+}
+
+// MARK: -- Preview
 struct BoardMainViewController_Previews: PreviewProvider {
     static var previews: some View {
         BoardMainViewController()
