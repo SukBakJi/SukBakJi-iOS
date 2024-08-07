@@ -14,57 +14,80 @@ struct HotBoardViewController: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                HStack {
-                    // 뒤로가기 버튼
-                    Button(action: {
-                        // 뒤로가기 버튼 클릭 시 동작할 코드
-                        self.presentationMode.wrappedValue.dismiss()
-                        print("뒤로가기 버튼 tapped")
-                    }) {
-                        Image("BackButton")
+            ZStack {
+                VStack {
+                    HStack {
+                        // 뒤로가기 버튼
+                        Button(action: {
+                            // 뒤로가기 버튼 클릭 시 동작할 코드
+                            self.presentationMode.wrappedValue.dismiss()
+                            print("뒤로가기 버튼 tapped")
+                        }) {
+                            Image("BackButton")
+                                .frame(width: Constants.nav, height: Constants.nav)
+                        }
+                        
+                        Spacer()
+                        
+                        Text("HOT 게시판")
+                            .font(.system(size: 20, weight: .semibold))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Constants.Gray900)
+                        
+                        Spacer()
+                        
+                        // 더보기 버튼
+                        Image("")
                             .frame(width: Constants.nav, height: Constants.nav)
+                        
                     }
                     
-                    Spacer()
+                    Divider()
                     
-                    Text("HOT 게시판")
-                        .font(.system(size: 20, weight: .semibold))
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(Constants.Gray900)
-                    
-                    Spacer()
-                    
-                    // 더보기 버튼
-                    Image("")
-                        .frame(width: Constants.nav, height: Constants.nav)
-                    
-                }
-                
-                Divider()
-                
-                ScrollView {
-                    // 공지사항 글
-                    hotNoticeView(showAlert: $showAlert)
+                    ScrollView {
+                        // 공지사항 글
+                        hotNoticeView(showAlert: $showAlert)
                         
-                    
-                    // 게시판 글 목록
-                    Board()
-                    Board()
-                    Board()
-                    Board()
-                    Board()
-                    Board()
-                    Board()
-                    Board()
+                        // 게시판 글 목록
+                            ForEach(0..<8, id: \.self) { _ in
+                                Board(boardName: "HOT 게시판")
+                            }
+                    }
                 }
-            }
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text("공지"),
-                    message: Text("스크랩 20개 이상 또는 조회수 100회 이상인 게시글의 경우 HOT 게시판에 선정되어 게시됩니다"),
-                    dismissButton: .default(Text("확인했어요"))
-                )
+                
+                if showAlert {
+                    Color.black.opacity(0.2)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack(spacing: 16) {
+                        Text("공지")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Constants.Gray900)
+                        
+                        Text("스크랩 20개 이상\n또는 조회수 100회 이상인 게시글의 경우\nHOT 게시판에 선정되어 게시됩니다")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(Constants.Gray800)
+                            .frame(alignment: .topLeading)
+                        
+                        Button(action: {
+                            showAlert = false
+                        }) {
+                            Text("확인했어요")
+                                .padding(.horizontal, 60)
+                                .padding(.vertical, 10)
+                                .font(.system(size: 16, weight: .semibold))
+                                .multilineTextAlignment(.center)
+                                .background(Color(red: 0.93, green: 0.29, blue: 0.03))
+                                .foregroundColor(Constants.White)
+                                .cornerRadius(8)
+                        }
+                    }
+                    .padding(.horizontal, 48)
+                    .padding(.vertical, 24)
+                    .background(Constants.White)
+                    .cornerRadius(12)
+                    .shadow(radius: 8)
+                }
             }
         }
         .navigationBarBackButtonHidden()
@@ -100,7 +123,6 @@ struct hotNoticeView: View {
                         .frame(alignment: .topLeading)
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-                
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 9)
