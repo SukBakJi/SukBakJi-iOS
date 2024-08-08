@@ -62,16 +62,16 @@ class ProfileTabViewController: TabmanViewController {
         addBar(bar, dataSource: self, at: .custom(view: tabView, layout: nil))
     }
     
-    override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: NavigationDirection, animated: Bool) {
-        if index == 1 { // 두 번째 탭이 선택된 경우
-            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PWAlertVC") as? PWAlertViewController else { return }
-            nextVC.modalPresentationStyle = .overCurrentContext
-            
-            DispatchQueue.main.async {
-                self.present(nextVC, animated: false, completion: nil)
-            }
-        }
-    }
+//    override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: NavigationDirection, animated: Bool) {
+//        if index == 1 { // 두 번째 탭이 선택된 경우
+//            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PWAlertVC") as? PWAlertViewController else { return }
+//            nextVC.modalPresentationStyle = .overCurrentContext
+//            
+//            DispatchQueue.main.async {
+//                self.present(nextVC, animated: false, completion: nil)
+//            }
+//        }
+//    }
 }
 
 extension ProfileTabViewController: PageboyViewControllerDataSource, TMBarDataSource {
