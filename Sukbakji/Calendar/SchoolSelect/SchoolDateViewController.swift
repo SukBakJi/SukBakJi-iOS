@@ -99,6 +99,7 @@ class SchoolDateViewController: UIViewController {
         
         // 취소 시 처리
         drop.cancelAction = { [weak self] in
+            self?.RecruitTF.text = "일반전형"
         }
     }
     
@@ -118,17 +119,5 @@ class SchoolDateViewController: UIViewController {
             warningImage.isHidden = false
             warningLabel.isHidden = false
         }
-    }
-}
-
-extension UITextField {
-    func addBottomShadow() {
-        self.layer.shadowColor = UIColor.lightGray.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 1)
-        self.layer.shadowOpacity = 1
-        self.layer.shadowRadius = 1.0
-        self.layer.masksToBounds = false
-        self.layer.cornerRadius = 10
-        self.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
     }
 }

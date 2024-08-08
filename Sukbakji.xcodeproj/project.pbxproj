@@ -54,6 +54,10 @@
 		C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */; };
 		C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2842C633F7B00D6014B /* MessageViewController.swift */; };
 		C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2862C633F8600D6014B /* MentoringViewController.swift */; };
+		C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2882C63633000D6014B /* UniPostModel.swift */; };
+		C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28A2C63646A00D6014B /* UniMethodModel.swift */; };
+		C70DB28D2C636AB200D6014B /* UniDeleteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28C2C636AB200D6014B /* UniDeleteModel.swift */; };
+		C70DB28F2C636B6600D6014B /* AlarmListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28E2C636B6600D6014B /* AlarmListModel.swift */; };
 		C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716EF172C50FB1200474228 /* SchoolDateViewController.swift */; };
 		C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14862C44CE59003AFCB7 /* Home.storyboard */; };
 		C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14882C44CE64003AFCB7 /* Calendar.storyboard */; };
@@ -99,6 +103,9 @@
 		C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */; };
 		C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55D2C481F8C00A58395 /* DateViewController.swift */; };
 		C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */; };
+		C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */; };
+		C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */; };
+		C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79864002C652B450029F8E3 /* TFaddShadow.swift */; };
 		C7996CB02C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CAF2C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift */; };
 		C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */; };
 		C7A434F92C62233200C47F5E /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor.swift */; };
@@ -179,6 +186,10 @@
 		C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTabViewController.swift; sourceTree = "<group>"; };
 		C70DB2842C633F7B00D6014B /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		C70DB2862C633F8600D6014B /* MentoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringViewController.swift; sourceTree = "<group>"; };
+		C70DB2882C63633000D6014B /* UniPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniPostModel.swift; sourceTree = "<group>"; };
+		C70DB28A2C63646A00D6014B /* UniMethodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniMethodModel.swift; sourceTree = "<group>"; };
+		C70DB28C2C636AB200D6014B /* UniDeleteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDeleteModel.swift; sourceTree = "<group>"; };
+		C70DB28E2C636B6600D6014B /* AlarmListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListModel.swift; sourceTree = "<group>"; };
 		C716EF172C50FB1200474228 /* SchoolDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDateViewController.swift; sourceTree = "<group>"; };
 		C71E14862C44CE59003AFCB7 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		C71E14882C44CE64003AFCB7 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
@@ -226,6 +237,9 @@
 		C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C78DE55D2C481F8C00A58395 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertViewController.swift; sourceTree = "<group>"; };
+		C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLabModel.swift; sourceTree = "<group>"; };
+		C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
+		C79864002C652B450029F8E3 /* TFaddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFaddShadow.swift; sourceTree = "<group>"; };
 		C7996CAF2C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectTableViewCell.swift; sourceTree = "<group>"; };
 		C7A434F82C62233200C47F5E /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
@@ -300,6 +314,7 @@
 				412BFBE52C52A5E30099E442 /* addBorder+.swift */,
 				C7A434F82C62233200C47F5E /* HexColor.swift */,
 				C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */,
+				C79864002C652B450029F8E3 /* TFaddShadow.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -478,7 +493,11 @@
 			isa = PBXGroup;
 			children = (
 				C72F14DB2C5948E30017B57E /* UniSearchModel.swift */,
+				C70DB28A2C63646A00D6014B /* UniMethodModel.swift */,
+				C70DB2882C63633000D6014B /* UniPostModel.swift */,
+				C70DB28C2C636AB200D6014B /* UniDeleteModel.swift */,
 				C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */,
+				C70DB28E2C636B6600D6014B /* AlarmListModel.swift */,
 				C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */,
 			);
 			path = CalendarModel;
@@ -513,8 +532,10 @@
 				C73ED5312C6279AB00C455A2 /* UpComingModel.swift */,
 				C73ED5332C62821B00C455A2 /* FavoritesBoardModel.swift */,
 				C73ED5352C6282F000C455A2 /* HotPostModel.swift */,
+				C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */,
 				C73ED52D2C6272CC00C455A2 /* MyPageModel.swift */,
 				C73ED5372C62844900C455A2 /* EditProfileModel.swift */,
+				C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */,
 				C73ED5392C62845900C455A2 /* ChangePWModel.swift */,
 			);
 			path = HomeModel;
@@ -836,15 +857,17 @@
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
 				C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
+				C70DB28D2C636AB200D6014B /* UniDeleteModel.swift in Sources */,
 				417AADBB2C60A8AA002080E0 /* TOSTableViewCell.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7B0E5D262C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift in Sources */,
 				7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
+				C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				41EE134E2C5529B20037EDD6 /* SelectResearchTopicViewController.swift in Sources */,
 				C7DA4E412C6122BB0092F342 /* AlarmPostAPI.swift in Sources */,
-				7BFDEC3B2C5225E7007280F8 /* Constants.swift in Sources */,
+				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
@@ -856,10 +879,14 @@
 				7BFDEC312C52250A007280F8 /* BoardMasterViewController.swift in Sources */,
 				7BFB8C982C5A41C300A31B70 /* RadarChart.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
+				C70DB28F2C636B6600D6014B /* AlarmListModel.swift in Sources */,
+				C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */,
 				C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
+				C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
+				C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
 				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,
@@ -899,6 +926,7 @@
 				C7DA4E3F2C611D6D0092F342 /* NetworkResult.swift in Sources */,
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
+				C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
