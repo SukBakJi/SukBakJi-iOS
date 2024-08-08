@@ -13,23 +13,19 @@ class EditPWViewController: UIViewController {
     @IBOutlet weak var newPWTF: UITextField!
     @IBOutlet weak var newPWAgainTF: UITextField!
     
+    @IBOutlet weak var currentPWView: UIStackView!
+    @IBOutlet weak var newPWView: UIStackView!
+    @IBOutlet weak var newPWAgainView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         currentPWTF.addBottomShadow()
         newPWTF.addBottomShadow()
         newPWAgainTF.addBottomShadow()
+        
+        currentPWView.isHidden = true
+        newPWView.isHidden = true
+        newPWAgainView.isHidden = true
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
