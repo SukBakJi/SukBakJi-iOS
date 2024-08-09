@@ -1129,14 +1129,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="eaH-Fs-ArA">
                                 <rect key="frame" x="24" y="89.666666666666671" width="345" height="60.000000000000014"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   현재 비밀번호를 입력해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ue0-fl-N6O">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="현재 비밀번호를 입력해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ue0-fl-N6O">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="44"/>
                                         <color key="backgroundColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="mZz-Pm-Ete"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="c7t-NC-fgO">
                                         <rect key="frame" x="0.0" y="47.999999999999986" width="345" height="12"/>
@@ -1182,14 +1182,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="rCm-Xm-48r">
                                 <rect key="frame" x="24" y="317" width="345" height="60"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   새로운 비밀번호를 입력해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qql-Qo-ef2">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="새로운 비밀번호를 입력해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qql-Qo-ef2">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="44"/>
                                         <color key="backgroundColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="aZa-PD-p35"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="iOg-4W-pAx">
                                         <rect key="frame" x="0.0" y="48" width="345" height="12"/>
@@ -1257,14 +1257,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Gmd-y1-w4T">
                                 <rect key="frame" x="24" y="203.33333333333334" width="345" height="60.000000000000028"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   새로운 비밀번호를 입력해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yVJ-HG-hVu">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="새로운 비밀번호를 입력해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yVJ-HG-hVu">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="44"/>
                                         <color key="backgroundColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="ZNL-cb-thA"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1td-B2-QB8">
                                         <rect key="frame" x="0.0" y="48" width="345" height="12"/>
@@ -1289,15 +1289,91 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F03-XM-LeW">
+                                <rect key="frame" x="340" y="99" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="6N8-9K-pRI"/>
+                                    <constraint firstAttribute="height" constant="25" id="OyF-UM-MuC"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_PW_Delete"/>
+                                <connections>
+                                    <action selector="currentPW_Delete:" destination="nt7-44-wNg" eventType="touchUpInside" id="Exb-rk-c10"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rp-ZW-F0h">
+                                <rect key="frame" x="315" y="99" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="fAH-XL-AGl"/>
+                                    <constraint firstAttribute="height" constant="25" id="zlb-qf-IA0"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_PW_View"/>
+                                <connections>
+                                    <action selector="Show_currentPW:" destination="nt7-44-wNg" eventType="touchUpInside" id="Jz5-YS-RdG"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYF-5w-mT6">
+                                <rect key="frame" x="315" y="212.66666666666666" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="EYm-b7-5FG"/>
+                                    <constraint firstAttribute="width" constant="25" id="x4Y-kG-Geo"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_PW_View"/>
+                                <connections>
+                                    <action selector="Show_newPW:" destination="nt7-44-wNg" eventType="touchUpInside" id="8Sb-iG-DWw"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4c-ZP-5ql">
+                                <rect key="frame" x="340" y="212.66666666666666" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="Euc-WC-Cy0"/>
+                                    <constraint firstAttribute="height" constant="25" id="gLZ-Yw-SGi"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_PW_Delete"/>
+                                <connections>
+                                    <action selector="newPW_Delete:" destination="nt7-44-wNg" eventType="touchUpInside" id="ow7-gi-ngD"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMs-DD-Nb9">
+                                <rect key="frame" x="340" y="326.33333333333331" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="TlL-Oq-mgt"/>
+                                    <constraint firstAttribute="height" constant="25" id="lTQ-LI-rJ9"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_PW_Delete"/>
+                                <connections>
+                                    <action selector="newPWAgain_Delete:" destination="nt7-44-wNg" eventType="touchUpInside" id="CKw-EI-Y9H"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KN5-sp-3dC">
+                                <rect key="frame" x="315" y="326.33333333333331" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="K0k-m1-lO6"/>
+                                    <constraint firstAttribute="height" constant="25" id="MJx-vF-aH9"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Sukbakji_PW_View"/>
+                                <connections>
+                                    <action selector="Show_newPWAgain:" destination="nt7-44-wNg" eventType="touchUpInside" id="g24-Rv-gOD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xfU-72-LMr"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="rvF-AS-gxK" firstAttribute="top" secondItem="rCm-Xm-48r" secondAttribute="bottom" constant="40" id="5Aa-N4-ll2"/>
+                            <constraint firstItem="xfU-72-LMr" firstAttribute="trailing" secondItem="F03-XM-LeW" secondAttribute="trailing" constant="28" id="6sB-WT-Dqi"/>
                             <constraint firstItem="xfU-72-LMr" firstAttribute="trailing" secondItem="rCm-Xm-48r" secondAttribute="trailing" constant="24" id="7qK-Kj-nfJ"/>
                             <constraint firstItem="eva-4o-LkD" firstAttribute="leading" secondItem="xfU-72-LMr" secondAttribute="leading" constant="24" id="BX4-ae-cqs"/>
                             <constraint firstItem="0FZ-cn-yms" firstAttribute="leading" secondItem="Gwd-7T-FB6" secondAttribute="trailing" constant="4" id="CuN-eO-yFZ"/>
+                            <constraint firstItem="xfU-72-LMr" firstAttribute="trailing" secondItem="Z4c-ZP-5ql" secondAttribute="trailing" constant="28" id="DIT-0E-Cqi"/>
                             <constraint firstItem="CJb-q2-5aq" firstAttribute="top" secondItem="WXf-aN-h2G" secondAttribute="top" constant="56" id="DvA-3m-rUC"/>
+                            <constraint firstItem="Z4c-ZP-5ql" firstAttribute="leading" secondItem="xYF-5w-mT6" secondAttribute="trailing" id="E9J-eF-7Cz"/>
+                            <constraint firstItem="KN5-sp-3dC" firstAttribute="top" secondItem="Gmd-y1-w4T" secondAttribute="bottom" constant="63" id="F1s-r4-lMd"/>
                             <constraint firstItem="rvF-AS-gxK" firstAttribute="centerX" secondItem="WXf-aN-h2G" secondAttribute="centerX" id="F3o-u4-ocB"/>
                             <constraint firstItem="rCm-Xm-48r" firstAttribute="top" secondItem="Gwd-7T-FB6" secondAttribute="bottom" constant="12" id="Hkr-wA-cbl"/>
                             <constraint firstItem="xfU-72-LMr" firstAttribute="trailing" secondItem="eaH-Fs-ArA" secondAttribute="trailing" constant="24" id="HoP-HH-dYJ"/>
@@ -1305,27 +1381,41 @@
                             <constraint firstItem="Gwd-7T-FB6" firstAttribute="top" secondItem="Gmd-y1-w4T" secondAttribute="bottom" constant="20" id="J5g-o9-hPT"/>
                             <constraint firstItem="xfU-72-LMr" firstAttribute="trailing" secondItem="Gmd-y1-w4T" secondAttribute="trailing" constant="24" id="JeL-Oc-KwO"/>
                             <constraint firstItem="Gmd-y1-w4T" firstAttribute="leading" secondItem="xfU-72-LMr" secondAttribute="leading" constant="24" id="QBW-mn-b2I"/>
+                            <constraint firstItem="F03-XM-LeW" firstAttribute="leading" secondItem="5rp-ZW-F0h" secondAttribute="trailing" id="Qqk-hU-FC1"/>
                             <constraint firstItem="Gmd-y1-w4T" firstAttribute="top" secondItem="cnF-WR-cfS" secondAttribute="bottom" constant="12" id="S2F-0r-eyO"/>
                             <constraint firstItem="lUv-UQ-Ie8" firstAttribute="leading" secondItem="WXf-aN-h2G" secondAttribute="leading" constant="24" id="S9w-KK-5Ec"/>
+                            <constraint firstItem="xfU-72-LMr" firstAttribute="trailing" secondItem="kMs-DD-Nb9" secondAttribute="trailing" constant="28" id="Sgw-Uq-LZ1"/>
                             <constraint firstItem="xfU-72-LMr" firstAttribute="trailing" secondItem="eva-4o-LkD" secondAttribute="trailing" constant="24" id="U7u-iN-ai8"/>
                             <constraint firstItem="eaH-Fs-ArA" firstAttribute="leading" secondItem="xfU-72-LMr" secondAttribute="leading" constant="24" id="UbI-Kg-ALR"/>
+                            <constraint firstItem="5rp-ZW-F0h" firstAttribute="top" secondItem="WXf-aN-h2G" secondAttribute="top" constant="99" id="Wa6-nf-d3U"/>
                             <constraint firstItem="cnF-WR-cfS" firstAttribute="leading" secondItem="xfU-72-LMr" secondAttribute="leading" constant="24" id="Xph-Pq-HbD"/>
                             <constraint firstItem="sUm-4M-6qu" firstAttribute="leading" secondItem="cnF-WR-cfS" secondAttribute="trailing" constant="4" id="Ziv-lj-aZX"/>
                             <constraint firstItem="lUv-UQ-Ie8" firstAttribute="top" secondItem="WXf-aN-h2G" secondAttribute="top" constant="56" id="ciy-JH-MEW"/>
                             <constraint firstItem="Gwd-7T-FB6" firstAttribute="leading" secondItem="xfU-72-LMr" secondAttribute="leading" constant="24" id="e7Z-7u-Hum"/>
+                            <constraint firstItem="kMs-DD-Nb9" firstAttribute="top" secondItem="Gmd-y1-w4T" secondAttribute="bottom" constant="63" id="eX2-D7-Fdf"/>
+                            <constraint firstItem="kMs-DD-Nb9" firstAttribute="leading" secondItem="KN5-sp-3dC" secondAttribute="trailing" id="iPM-F2-c6A"/>
                             <constraint firstItem="eva-4o-LkD" firstAttribute="top" secondItem="rvF-AS-gxK" secondAttribute="bottom" constant="160" id="icF-0e-F2a"/>
+                            <constraint firstItem="Z4c-ZP-5ql" firstAttribute="top" secondItem="eaH-Fs-ArA" secondAttribute="bottom" constant="63" id="ivO-hO-2Pu"/>
                             <constraint firstItem="rCm-Xm-48r" firstAttribute="leading" secondItem="xfU-72-LMr" secondAttribute="leading" constant="24" id="jQe-0r-yei"/>
                             <constraint firstItem="eaH-Fs-ArA" firstAttribute="top" secondItem="lUv-UQ-Ie8" secondAttribute="bottom" constant="12" id="koe-9P-XFm"/>
+                            <constraint firstItem="xYF-5w-mT6" firstAttribute="top" secondItem="eaH-Fs-ArA" secondAttribute="bottom" constant="63" id="qH9-f7-u1e"/>
+                            <constraint firstItem="F03-XM-LeW" firstAttribute="top" secondItem="WXf-aN-h2G" secondAttribute="top" constant="99" id="qiz-cd-3fP"/>
                             <constraint firstItem="sUm-4M-6qu" firstAttribute="top" secondItem="eaH-Fs-ArA" secondAttribute="bottom" constant="20" id="sFd-yN-MFH"/>
                             <constraint firstItem="CJb-q2-5aq" firstAttribute="leading" secondItem="lUv-UQ-Ie8" secondAttribute="trailing" constant="4" id="w5u-cU-B1w"/>
                             <constraint firstItem="cnF-WR-cfS" firstAttribute="top" secondItem="eaH-Fs-ArA" secondAttribute="bottom" constant="20" id="xaZ-dQ-9xb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="currentPWDelete" destination="F03-XM-LeW" id="p9T-Pp-63y"/>
+                        <outlet property="currentPWEye" destination="5rp-ZW-F0h" id="ImC-Ne-tuc"/>
                         <outlet property="currentPWTF" destination="ue0-fl-N6O" id="D6o-y6-4X3"/>
                         <outlet property="currentPWView" destination="c7t-NC-fgO" id="C9D-tP-TpY"/>
+                        <outlet property="newPWAgainDelete" destination="kMs-DD-Nb9" id="SZJ-lG-5Ah"/>
+                        <outlet property="newPWAgainEye" destination="KN5-sp-3dC" id="JGa-DT-pjt"/>
                         <outlet property="newPWAgainTF" destination="Qql-Qo-ef2" id="wDb-8Z-xRj"/>
                         <outlet property="newPWAgainView" destination="iOg-4W-pAx" id="qDt-Np-wRf"/>
+                        <outlet property="newPWDelete" destination="Z4c-ZP-5ql" id="oYZ-mO-IeV"/>
+                        <outlet property="newPWEye" destination="xYF-5w-mT6" id="I9U-4I-49S"/>
                         <outlet property="newPWTF" destination="yVJ-HG-hVu" id="B9W-kh-N16"/>
                         <outlet property="newPWView" destination="1td-B2-QB8" id="kbA-eU-grp"/>
                     </connections>
@@ -1867,6 +1957,8 @@
         <image name="Sukbakji_Myinfo" width="20" height="20.5"/>
         <image name="Sukbakji_Mypage" width="48" height="48"/>
         <image name="Sukbakji_Notification" width="48" height="48"/>
+        <image name="Sukbakji_PW_Delete" width="12" height="12"/>
+        <image name="Sukbakji_PW_View" width="12" height="12"/>
         <image name="Sukbakji_Pick" width="20" height="20.5"/>
         <image name="Sukbakji_Point" width="20" height="20.5"/>
         <image name="Sukbakji_View" width="12" height="12"/>
