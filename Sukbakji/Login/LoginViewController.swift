@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import SnapKit
+import KakaoSDKUser
 
 class LoginViewController: UIViewController {
 
@@ -55,6 +56,7 @@ class LoginViewController: UIViewController {
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 1.25
         $0.layer.borderColor = UIColor.kakaoBorder.cgColor
+        $0.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
     }
     private let appleLoginButton = UIButton().then {
         $0.setTitle("Apple로 로그인", for: .normal)
@@ -122,7 +124,6 @@ class LoginViewController: UIViewController {
     // MARK: - Screen transition
     // 회원가입
     @objc private func signUpButtonTapped() {
-        // 회원가입 뷰 띄우기
         let SignUpVC = SignUpViewController()
         self.navigationController?.pushViewController(SignUpVC, animated: true)
         
@@ -138,9 +139,103 @@ class LoginViewController: UIViewController {
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
+    // 카카오톡 로그인
+    @objc private func kakaoLoginButtonTapped() {
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            
+            //카톡 설치되어있으면 -> 카톡으로 로그인
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("카카오톡 로그인 성공")
 
-    // MARK: - Functional
+                    //do something
+                    _ = oauthToken
+                    self.setUserInfo()
+                }
+            }
+        }
+        else {
+            // 카톡 없으면 -> 계정으로 로그인
+            UserApi.shared.loginWithKakaoAccount { (oauthToken, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("카카오 계정으로 로그인 성공")
+                    
+                    _ = oauthToken
+                    self.setUserInfo()
+                }
+            }
+        }
+    }
+
+    private func navigateToHomeScreen() {
+        let nextVC = UIStoryboard(name: "Main", bundle: nil)
+        guard let rvc = nextVC.instantiateViewController(withIdentifier: "MainTabVC") as? MainTabViewController else {return}
+        
+        rvc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        self.present(rvc, animated: true)
+    }
     
+    // MARK: - Functional
+    private func setUserInfo() {
+        UserApi.shared.me {(user, error) in
+            if let error = error {
+                print(error)
+            } else {
+                let email = user?.kakaoAccount?.email
+                let hasSignedUp = user?.hasSignedUp
+                print("카카오톡 이메일 : \(email ?? "이메일 없음 오류")")
+                
+                let loginDataManager = LoginDataManager()
+                
+                let input = LoginAPIInput(email: email)
+                print("전송된 데이터: \(input)")
+                print("카카오톡으로 로그인 호출")
+                loginDataManager.kakaoLoginDataManager(input) {
+                    [weak self] loginModel in
+                    guard let self = self else { return }
+                    
+                    printKeychain()
+
+                    // 응답
+                    if let model = loginModel, model.code == "COMMON200" {
+                        self.navigateToHomeScreen()
+                        self.showMessage(message: model.message ?? "로그인에 성공했습니다")
+                    }
+                }
+            }
+        }
+    }
+    
+        private func showMessage(message: String) {
+            print("메시지 : \(message)")
+        }
+        
+    private func printKeychain() {
+        // 키체인 테스트
+        if let emailData = KeychainHelper.standard.read(service: "email", account: "user"),
+           let email = String(data: emailData, encoding: .utf8) {
+            print("----- email : \(email) ----- ")
+        }
+        if let passwordData = KeychainHelper.standard.read(service: "password", account: "user"),
+           let password = String(data: passwordData, encoding: .utf8) {
+            print("----- password : \(password) ----- ")
+        }
+        
+        if let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+           let accessToken = String(data: accessTokenData, encoding: .utf8) {
+            print("---- Access Token: \(accessToken) -----")
+        }
+        
+        if let refreshTokenData = KeychainHelper.standard.read(service: "refresh-token", account: "user"),
+           let refreshToken = String(data: refreshTokenData, encoding: .utf8) {
+            print("----- Refresh Token: \(refreshToken) ----- ")
+        }
+    }
     // MARK: - addView
     func setupViews() {
         view.addSubview(symbolImageView)
