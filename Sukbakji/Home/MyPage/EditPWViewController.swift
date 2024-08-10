@@ -24,6 +24,8 @@ class EditPWViewController: UIViewController {
     @IBOutlet weak var newPWAgainEye: UIButton!
     @IBOutlet weak var newPWAgainDelete: UIButton!
     
+    @IBOutlet weak var setButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,12 +39,18 @@ class EditPWViewController: UIViewController {
         newPWTF.errorfix()
         newPWAgainTF.errorfix()
         
+        settingButton()
+        
         currentPWView.isHidden = true
         newPWView.isHidden = true
         newPWAgainView.isHidden = true
         currentPWTF.addTarget(self, action: #selector(currentPWRegex), for: .editingChanged)
         newPWTF.addTarget(self, action: #selector(newPWRegex(_:)), for: .editingChanged)
         newPWAgainTF.addTarget(self, action: #selector(newPWAgainRegex), for: .editingChanged)
+        
+        currentPWTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        newPWTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        newPWAgainTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +59,40 @@ class EditPWViewController: UIViewController {
         currentPWTF.errorfix()
         newPWTF.errorfix()
         newPWAgainTF.errorfix()
+    }
+    
+    func settingButton() {
+        setButton.isEnabled = false
+        setButton.layer.masksToBounds = true
+        setButton.layer.cornerRadius = 10
+        setButton.backgroundColor = UIColor(hexCode: "EFEFEF")
+        setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+    }
+    
+    @objc func textFieldEdited(_ textField: UITextField) {
+        updateButtonColor()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 텍스트 필드 내용이 변경될 때 버튼 색깔 업데이트
+        DispatchQueue.main.async {
+            self.updateButtonColor()
+        }
+        return true
+    }
+        
+    func updateButtonColor() {
+        if (currentPWTF.text == "123456") && (isValidPW(testStr: newPWTF.text)) && (newPWAgainTF.text == newPWTF.text) {
+            setButton.isEnabled = true
+            setButton.backgroundColor = UIColor(named: "Coquelicot")
+            setButton.setTitleColor(.white, for: .normal)
+            setButton.setTitleColor(.white, for: .selected)
+        } else {
+            setButton.isEnabled = false
+            setButton.backgroundColor = UIColor(hexCode: "EFEFEF")
+            setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+            setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .selected)
+        }
     }
     
     func isValidPW(testStr: String?) -> Bool{

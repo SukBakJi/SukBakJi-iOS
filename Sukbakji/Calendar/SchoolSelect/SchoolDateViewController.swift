@@ -87,7 +87,7 @@ class SchoolDateViewController: UIViewController {
         drop.anchorView = self.RecruitTF
         
         // View를 갖리지 않고 View아래에 Item 팝업이 붙도록 설정
-        drop.bottomOffset = CGPoint(x: 0, y: 1.5 + RecruitTF.bounds.height)
+        drop.bottomOffset = CGPoint(x: 0, y: 1.6 + RecruitTF.bounds.height)
         
         // Item 선택 시 처리
         drop.selectionAction = { [weak self] (index, item) in
