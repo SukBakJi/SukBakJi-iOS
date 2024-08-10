@@ -12,10 +12,5 @@ struct SignUpModel: Decodable {
     let isSuccess: Bool?
     let code: String?
     let message: String?
-    let result: SignUpResult?
-}
-
-// MARK: - SignUpResult
-struct SignUpResult: Decodable {
-    let email: String?
+    let result: String?
 }
