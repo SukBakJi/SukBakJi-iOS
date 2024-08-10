@@ -11,7 +11,7 @@ class SignUpDataManager {
     let url = "http://54.180.165.121:8080/api/auth/signup"
     
     func signUpDataManager(_ parameters: SignUpAPIInput,
-                           completion: @escaping (SignUpModel) -> Void) {
+                           completion: @escaping (SignUpModel?) -> Void) {
         
         AF.request(url,
                    method: .post,
@@ -23,9 +23,14 @@ class SignUpDataManager {
             switch response.result {
             case .success(let signUpModel):
                 completion(signUpModel)
+                print("성공. \(signUpModel)")
                 
             case .failure(let error):
-                print("요청 실패: \(error.localizedDescription)")
+                    // 디버깅을 위해 원시 데이터를 출력
+                    if let data = response.data, let json = String(data: data, encoding: .utf8) {
+                        print("Server response data: \(json)")
+                    }
+                    print("에러 : \(error.localizedDescription)")
             }
         }
     }
