@@ -6,9 +6,60 @@
 //
 
 import UIKit
+import SnapKit
 
 class EmailSignUpViewController: UIViewController {
     
+    // MARK: - ErrorState
+    private var passwordLabelTopConstraint: Constraint?
+    private var checkPasswordLabelTopConstraint: Constraint?
+    private var nextButtonTopConstraint: Constraint?
+    
+    private let emailErrorIcon = UIImageView().then {
+        $0.image = UIImage(named: "ErrorCircle")
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private let passwordErrorIcon = UIImageView().then {
+        $0.image = UIImage(named: "ErrorCircle")
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private let checkPasswordErrorIcon = UIImageView().then {
+        $0.image = UIImage(named: "ErrorCircle")
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private let emailErrorLabel = UILabel().then {
+        $0.textAlignment = .left
+        $0.textColor = .warning400
+        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
+        $0.numberOfLines = 0
+    }
+    private let passwordErrorLabel = UILabel().then {
+        $0.textAlignment = .left
+        $0.textColor = .warning400
+        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
+        $0.numberOfLines = 0
+    }
+    private let checkPasswordErrorLabel = UILabel().then {
+        $0.textAlignment = .left
+        $0.textColor = .warning400
+        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
+        $0.numberOfLines = 0
+    }
+    private let emailErrorView = UIView().then {
+        $0.isHidden = true
+    }
+    private let passwordErrorView = UIView().then {
+        $0.isHidden = true
+    }
+    private let checkPasswordErrorView = UIView().then {
+        $0.isHidden = true
+    }
     // MARK: - ImageView
     private let emailDot = UIImageView().then {
         $0.image = UIImage(named: "dot-badge")
@@ -28,24 +79,6 @@ class EmailSignUpViewController: UIViewController {
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let emailWarningIcon = UIImageView().then {
-        $0.image = UIImage(named: "warningCircle")
-        $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    private let passwordWarningIcon = UIImageView().then {
-        $0.image = UIImage(named: "warningCircle")
-        $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    private let correctIcon = UIImageView().then {
-        $0.image = UIImage(named: "correctCircle")
-        $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
     
     // MARK: - Label
     private let emailLabel = UILabel().then {
@@ -54,37 +87,16 @@ class EmailSignUpViewController: UIViewController {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.numberOfLines = 0
     }
-    private let emailWarningLabel = UILabel().then {
-        $0.text = "올바르지 않은 형식의 이메일입니다"
-        $0.textAlignment = .left
-        $0.textColor = .warning400
-        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
-        $0.numberOfLines = 0
-    }
     private let passwordLabel = UILabel().then {
         $0.text = "비밀번호"
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.numberOfLines = 0
     }
-    private let passwordWarningLabel = UILabel().then {
-        $0.text = "비밀번호는 6자리 이상 입력해야 합니다"
-        $0.textAlignment = .left
-        $0.textColor = .warning400
-        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
-        $0.numberOfLines = 0
-    }
     private let checkPasswordLabel = UILabel().then {
         $0.text = "비밀번호 확인"
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.numberOfLines = 0
-    }
-    private let checkPasswordWarningLabel = UILabel().then {
-        $0.text = "입력한 비밀번호와 일치하지 않습니다"
-        $0.textAlignment = .left
-        $0.textColor = .warning400
-        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
         $0.numberOfLines = 0
     }
     
@@ -104,6 +116,7 @@ class EmailSignUpViewController: UIViewController {
         $0.frame.size.height = 44
         $0.backgroundColor = .gray50
         $0.textColor = .gray500
+        $0.setPlaceholderColor(.gray500)
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
     }
     private let passwordTextField = UITextField().then {
@@ -121,6 +134,7 @@ class EmailSignUpViewController: UIViewController {
         $0.frame.size.height = 44
         $0.backgroundColor = .gray50
         $0.textColor = .gray500
+        $0.setPlaceholderColor(.gray500)
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
     }
     private let checkPasswordTextField = UITextField().then {
@@ -138,33 +152,11 @@ class EmailSignUpViewController: UIViewController {
         $0.frame.size.height = 44
         $0.backgroundColor = .gray50
         $0.textColor = .gray500
+        $0.setPlaceholderColor(.gray500)
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
     }
     
     // MARK: - Button
-    private var eyeButton = UIButton().then {
-        $0.setImage(UIImage(named: "Password-hidden"), for: .normal)
-        $0.setImage(UIImage(named: "Password-shown"), for: .selected)
-        $0.adjustsImageWhenHighlighted = false
-        $0.addTarget(self, action: #selector(eyeButtonTapped(_:)), for: .touchUpInside)
-    }
-    private var clearButton = UIButton().then {
-        $0.setImage(UIImage(named: "clear"), for: .normal)
-        $0.adjustsImageWhenHighlighted = false
-        $0.addTarget(self, action: #selector(clearButtonTapped(_:)), for: .touchUpInside)
-    }
-    private var eyeSecondButton = UIButton().then {
-        $0.setImage(UIImage(named: "Password-hidden"), for: .normal)
-        $0.setImage(UIImage(named: "Password-shown"), for: .selected)
-        $0.adjustsImageWhenHighlighted = false
-        $0.addTarget(self, action: #selector(eyeSecondButtonTapped(_:)), for: .touchUpInside)
-    }
-    private var clearSecondButton = UIButton().then {
-        $0.setImage(UIImage(named: "clear"), for: .normal)
-        $0.adjustsImageWhenHighlighted = false
-        $0.addTarget(self, action: #selector(clearSecondButtonTapped(_:)), for: .touchUpInside)
-    }
-    
     private let nextButton = UIButton().then {
         $0.setTitle("다음으로", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
@@ -175,13 +167,41 @@ class EmailSignUpViewController: UIViewController {
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
+    // MARK: - TextField Button
+    private var emailClearButton = UIButton().then {
+        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(emailClearButtonTapped(_:)), for: .touchUpInside)
+    }
+    private var passwordEyeButton = UIButton().then {
+        $0.setImage(UIImage(named: "Password-hidden"), for: .normal)
+        $0.setImage(UIImage(named: "Password-shown"), for: .selected)
+        $0.adjustsImageWhenHighlighted = false
+        $0.addTarget(self, action: #selector(eyeButtonTapped(_:)), for: .touchUpInside)
+    }
+    private var passwordClearButton = UIButton().then {
+        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+        $0.addTarget(self, action: #selector(clearButtonTapped(_:)), for: .touchUpInside)
+    }
+    private var checkPasswordEyeButton = UIButton().then {
+        $0.setImage(UIImage(named: "Password-hidden"), for: .normal)
+        $0.setImage(UIImage(named: "Password-shown"), for: .selected)
+        $0.adjustsImageWhenHighlighted = false
+        $0.addTarget(self, action: #selector(eyeSecondButtonTapped(_:)), for: .touchUpInside)
+    }
+    private var checkPasswordClearButton = UIButton().then {
+        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+        $0.addTarget(self, action: #selector(clearSecondButtonTapped(_:)), for: .touchUpInside)
+    }
+    
     // MARK: - View
     private let passwordRightView = UIView().then {
-        $0.backgroundColor = .clear
         $0.isHidden = true
     }
     private let checkPasswordRightView = UIView().then {
-        $0.backgroundColor = .clear
         $0.isHidden = true
     }
     
@@ -194,7 +214,7 @@ class EmailSignUpViewController: UIViewController {
         setUpNavigationBar()
         setupViews()
         setupLayout()
-        
+        validateFieldForButtonUpdate()
     }
     
     // MARK: - setTextField
@@ -202,11 +222,6 @@ class EmailSignUpViewController: UIViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         checkPasswordTextField.delegate = self
-        
-        if let clearButton = emailTextField.value(forKeyPath: "_clearButton") as? UIButton {
-            clearButton.setImage(UIImage(named: "clear"), for: .normal)
-            clearButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -12, bottom: 0, right: 0)
-        }
     }
     
     // MARK: - navigationBar Title
@@ -216,12 +231,16 @@ class EmailSignUpViewController: UIViewController {
     
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
+        validateField()
+    }
+    
+    private func nextPage() {
         let AcademicVerificationVC = AcademicVerificationViewController()
-        self.navigationController?.pushViewController(AcademicVerificationVC, animated: true)
+                self.navigationController?.pushViewController(AcademicVerificationVC, animated: true)
         
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .black
-        self.navigationItem.backBarButtonItem = backBarButtonItem
+                let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+                backBarButtonItem.tintColor = .black
+                self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     // MARK: - Functional
     @objc private func eyeButtonTapped(_ sender: UIButton) {
@@ -238,12 +257,174 @@ class EmailSignUpViewController: UIViewController {
     @objc private func clearSecondButtonTapped(_ sender: UIButton) {
         checkPasswordTextField.text = ""
     }
+    @objc private func emailClearButtonTapped(_ sender: UIButton) {
+        emailTextField.text = ""
+    }
+    
+    //MARK: - validate
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
+    
+    private func validateField() {
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        let checkPassword = checkPasswordTextField.text ?? ""
+        var isEmailValid = false
+        var isPasswordValid = false
+        var ischeckPasswordValid = false
+        
+        // 이메일 NULL 인 경우
+        if email.isEmpty {
+            changeStateError(emailTextField)
+            emailErrorLabel.text = "이메일을 입력해 주세요"
+            isEmailValid = false
+            
+            // 이메일 형식 오류 경우
+        } else if !isValidEmail(email) {
+            changeStateError(emailTextField)
+            emailErrorLabel.text = "올바르지 않은 형식의 이메일 입니다"
+            isEmailValid = false
+        } else { isEmailValid = true }
+        
+        // 비밀번호 NULL 인 경우
+        if password.isEmpty {
+            changeStateError(passwordTextField)
+            passwordErrorLabel.text = "비밀번호를 입력해 주세요"
+            isPasswordValid = false
+            
+            //비밀번호 6자리 이하인 경우
+        } else if password.count < 6 {
+            changeStateError(passwordTextField)
+            passwordErrorLabel.text = "비밀번호는 6자리 이상 입력해야 합니다"
+            isPasswordValid = false
+        } else { isPasswordValid = true }
+        
+        // 비밀번호확인 NULL 인 경우
+        if checkPassword.isEmpty {
+            changeStateError(checkPasswordTextField)
+            checkPasswordErrorLabel.text = "비밀번호를 한 번 더 입력해 주세요"
+            ischeckPasswordValid = false
+            
+            //비밀번호확인 일치하지 않는 경우
+        } else if !checkPassword.isEmpty && password != checkPassword {
+            changeStateError(checkPasswordTextField)
+            checkPasswordErrorLabel.text = "입력한 비밀번호와 일치하지 않습니다"
+            ischeckPasswordValid = false
+        } else { ischeckPasswordValid = true }
+        
+        if isEmailValid && isPasswordValid && ischeckPasswordValid {
+            nextPage()
+            print("다음페이지로 넘어가기")
+        }
+    }
+    
+    private func changeStateError(_ tf: UITextField) {
+        tf.backgroundColor = .warning50
+        tf.textColor = .warning400
+        tf.setPlaceholderColor(.warning400)
+        tf.layer.addBorder([.bottom], color: .warning400, width: 0.5)
+        
+        if tf == emailTextField {
+            emailClearButton.setImage(UIImage(named: "clear-red"), for: .normal)
+            
+            emailErrorView.isHidden = false
+            updatePasswordLabelConstraint()
+            
+        } else if tf == passwordTextField {
+            passwordClearButton.setImage(UIImage(named: "clear-red"), for: .normal)
+            passwordEyeButton.setImage(UIImage(named: "Password-hidden-red"), for: .normal)
+            passwordEyeButton.setImage(UIImage(named: "Password-shown-red"), for: .selected)
+            
+            passwordErrorView.isHidden = false
+            updateAutoCheckBoxConstraint()
+            
+        } else if tf == checkPasswordTextField {
+            checkPasswordClearButton.setImage(UIImage(named: "clear-red"), for: .normal)
+            checkPasswordEyeButton.setImage(UIImage(named: "Password-hidden-red"), for: .normal)
+            checkPasswordEyeButton.setImage(UIImage(named: "Password-shown-red"), for: .selected)
+            
+            checkPasswordErrorView.isHidden = false
+            updateNextButtonTopConstraint()
+        }
+    }
+    private func changeStateBack(_ tf: UITextField) {
+        tf.backgroundColor = .gray50
+        tf.textColor = .gray500
+        tf.setPlaceholderColor(.gray500)
+        tf.layer.addBorder([.bottom], color: .gray300, width: 0.5)
+        
+        if tf == emailTextField {
+            emailClearButton.setImage(UIImage(named: "clear"), for: .normal)
+            
+            emailErrorView.isHidden = true
+            updatePasswordLabelConstraint()
+            
+        } else if tf == passwordTextField {
+            passwordClearButton.setImage(UIImage(named: "clear"), for: .normal)
+            passwordEyeButton.setImage(UIImage(named: "Password-hidden"), for: .normal)
+            passwordEyeButton.setImage(UIImage(named: "Password-shown"), for: .selected)
+            
+            passwordErrorView.isHidden = true
+            updateAutoCheckBoxConstraint()
+            
+        } else if tf == checkPasswordTextField {
+            checkPasswordClearButton.setImage(UIImage(named: "clear"), for: .normal)
+            checkPasswordEyeButton.setImage(UIImage(named: "Password-hidden"), for: .normal)
+            checkPasswordEyeButton.setImage(UIImage(named: "Password-shown"), for: .selected)
+            
+            checkPasswordErrorView.isHidden = true
+            updateNextButtonTopConstraint()
+        }
+    }
+    private func validateFieldForButtonUpdate() {
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        let checkPassword = checkPasswordTextField.text ?? ""
+        var isEmailValid = false
+        var isPasswordValid = false
+        var ischeckPasswordValid = false
+        
+        if !email.isEmpty && isValidEmail(email) {
+            isEmailValid = true
+            changeStateBack(emailTextField)
+        }
+        
+        if !password.isEmpty && password.count >= 6 {
+            isPasswordValid = true
+            changeStateBack(passwordTextField)
+        }
+        
+        if !checkPassword.isEmpty && checkPassword == password {
+            ischeckPasswordValid = true
+            changeStateBack(checkPasswordTextField)
+        }
+        
+        if isEmailValid && isPasswordValid && ischeckPasswordValid {
+            updateNextButton(enabled: true)
+        } else {
+            updateNextButton(enabled: false)
+        }
+    }
+    
+    private func updateNextButton(enabled: Bool) {
+        if enabled {
+            nextButton.backgroundColor = .orange700
+            nextButton.setTitleColor(.white, for: .normal)
+        } else {
+            nextButton.backgroundColor = .gray200
+            nextButton.setTitleColor(.gray500, for: .normal)
+        }
+    }
     
     // MARK: - addView
     func setupViews() {
         view.addSubview(emailDot)
         view.addSubview(emailLabel)
         view.addSubview(emailTextField)
+        view.addSubview(emailClearButton)
         
         view.addSubview(passwordDot)
         view.addSubview(passwordLabel)
@@ -256,15 +437,38 @@ class EmailSignUpViewController: UIViewController {
         view.addSubview(nextButton)
         
         view.addSubview(passwordRightView)
-        passwordRightView.addSubview(eyeButton)
-        passwordRightView.addSubview(clearButton)
+        passwordRightView.addSubview(passwordEyeButton)
+        passwordRightView.addSubview(passwordClearButton)
         
         view.addSubview(checkPasswordRightView)
-        checkPasswordRightView.addSubview(eyeSecondButton)
-        checkPasswordRightView.addSubview(clearSecondButton)
+        checkPasswordRightView.addSubview(checkPasswordEyeButton)
+        checkPasswordRightView.addSubview(checkPasswordClearButton)
+        
+        //Error
+        view.addSubview(emailErrorView)
+        emailErrorView.addSubview(emailErrorIcon)
+        emailErrorView.addSubview(emailErrorLabel)
+        
+        view.addSubview(passwordErrorView)
+        passwordErrorView.addSubview(passwordErrorIcon)
+        passwordErrorView.addSubview(passwordErrorLabel)
+        
+        view.addSubview(checkPasswordErrorView)
+        checkPasswordErrorView.addSubview(checkPasswordErrorIcon)
+        checkPasswordErrorView.addSubview(checkPasswordErrorLabel)
     }
     
     // MARK: - setLayout
+    private func updatePasswordLabelConstraint() {
+        passwordLabelTopConstraint?.update(offset: emailErrorView.isHidden ? 20 : 36)
+    }
+    private func updateAutoCheckBoxConstraint() {
+        checkPasswordLabelTopConstraint?.update(offset: passwordErrorView.isHidden ? 20 : 36)
+    }
+    private func updateNextButtonTopConstraint() {
+        nextButtonTopConstraint?.update(offset: checkPasswordErrorView.isHidden ? 54 : 70)
+    }
+    
     func setupLayout() {
         
         emailLabel.snp.makeConstraints { make in
@@ -284,7 +488,7 @@ class EmailSignUpViewController: UIViewController {
         }
         
         passwordLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(20)
+            passwordLabelTopConstraint = make.top.equalTo(emailTextField.snp.bottom).offset(20).constraint
             make.leading.equalToSuperview().inset(24)
         }
         
@@ -300,7 +504,7 @@ class EmailSignUpViewController: UIViewController {
         }
         
         checkPasswordLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(20)
+            checkPasswordLabelTopConstraint = make.top.equalTo(passwordTextField.snp.bottom).offset(20).constraint
             make.leading.equalToSuperview().inset(24)
         }
         
@@ -316,7 +520,7 @@ class EmailSignUpViewController: UIViewController {
         }
         
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(checkPasswordTextField.snp.bottom).offset(54)
+            nextButtonTopConstraint = make.top.equalTo(checkPasswordTextField.snp.bottom).offset(54).constraint
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
@@ -328,15 +532,15 @@ class EmailSignUpViewController: UIViewController {
             make.height.equalTo(12)
         }
         
-        clearButton.snp.makeConstraints { make in
+        passwordClearButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
             make.width.height.equalTo(12)
         }
         
-        eyeButton.snp.makeConstraints { make in
+        passwordEyeButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalTo(clearButton.snp.leading).offset(-8)
+            make.trailing.equalTo(passwordClearButton.snp.leading).offset(-8)
             make.width.height.equalTo(12)
         }
         
@@ -347,16 +551,68 @@ class EmailSignUpViewController: UIViewController {
             make.height.equalTo(12)
         }
         
-        clearSecondButton.snp.makeConstraints { make in
+        checkPasswordClearButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
             make.width.height.equalTo(12)
         }
         
-        eyeSecondButton.snp.makeConstraints { make in
+        checkPasswordEyeButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalTo(clearSecondButton.snp.leading).offset(-8)
+            make.trailing.equalTo(checkPasswordClearButton.snp.leading).offset(-8)
             make.width.height.equalTo(12)
+        }
+        
+        //Error
+        emailErrorView.snp.makeConstraints { make in
+            make.leading.equalTo(emailTextField)
+            make.top.equalTo(emailTextField.snp.bottom).offset(4)
+            make.height.equalTo(12)
+        }
+        
+        emailErrorIcon.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(4)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(12)
+        }
+        
+        emailErrorLabel.snp.makeConstraints { make in
+            make.leading.equalTo(emailErrorIcon.snp.trailing).offset(4)
+            make.centerY.equalToSuperview()
+        }
+        
+        passwordErrorView.snp.makeConstraints { make in
+            make.leading.equalTo(passwordTextField)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(4)
+            make.height.equalTo(12)
+        }
+        
+        passwordErrorIcon.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(4)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(12)
+        }
+        
+        passwordErrorLabel.snp.makeConstraints { make in
+            make.leading.equalTo(passwordErrorIcon.snp.trailing).offset(4)
+            make.centerY.equalToSuperview()
+        }
+        
+        checkPasswordErrorView.snp.makeConstraints { make in
+            make.leading.equalTo(checkPasswordTextField)
+            make.top.equalTo(checkPasswordTextField.snp.bottom).offset(4)
+            make.height.equalTo(12)
+        }
+        
+        checkPasswordErrorIcon.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(4)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(12)
+        }
+        
+        checkPasswordErrorLabel.snp.makeConstraints { make in
+            make.leading.equalTo(checkPasswordErrorIcon.snp.trailing).offset(4)
+            make.centerY.equalToSuperview()
         }
     }
 }
@@ -385,4 +641,8 @@ extension EmailSignUpViewController: UITextFieldDelegate {
         return true
     }
     
+    // 텍스트 필드의 내용이 변경될 때 호출
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        validateFieldForButtonUpdate()
+    }
 }
