@@ -34,11 +34,17 @@
 		41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE13492C5510A80037EDD6 /* TagCell.swift */; };
 		41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		41EE134E2C5529B20037EDD6 /* SelectResearchTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE134D2C5529B20037EDD6 /* SelectResearchTopicViewController.swift */; };
+		7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E5D232C57A5BA00C7479F /* DummyBoardDetail.swift */; };
+		7B0E5D262C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E5D252C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift */; };
 		7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */; };
 		7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */; };
 		7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */; };
 		7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */; };
 		7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */; };
+		7BFB8C982C5A41C300A31B70 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C972C5A41C300A31B70 /* RadarChart.swift */; };
+		7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C992C62778D00A31B70 /* SearchViewController.swift */; };
+		7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */; };
+		7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */; };
 		7BFDEC2B2C5224EF007280F8 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */; };
 		7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2C2C5224F7007280F8 /* BoardMainViewController.swift */; };
 		7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */; };
@@ -47,10 +53,19 @@
 		7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC342C52251F007280F8 /* BoardFreeViewController.swift */; };
 		7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */; };
 		7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */; };
-		7BFDEC3B2C5225E7007280F8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC3A2C5225E7007280F8 /* Constants.swift */; };
+		7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
 		C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */; };
 		C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */; };
+		C70DB27F2C633CBE00D6014B /* Chatting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70DB27E2C633CBE00D6014B /* Chatting.storyboard */; };
+		C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2802C633CDB00D6014B /* ChattingViewController.swift */; };
+		C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */; };
+		C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2842C633F7B00D6014B /* MessageViewController.swift */; };
+		C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2862C633F8600D6014B /* MentoringViewController.swift */; };
+		C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2882C63633000D6014B /* UniPostModel.swift */; };
+		C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28A2C63646A00D6014B /* UniMethodModel.swift */; };
+		C70DB28D2C636AB200D6014B /* UniDeleteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28C2C636AB200D6014B /* UniDeleteModel.swift */; };
+		C70DB28F2C636B6600D6014B /* AlarmListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28E2C636B6600D6014B /* AlarmListModel.swift */; };
 		C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716EF172C50FB1200474228 /* SchoolDateViewController.swift */; };
 		C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14862C44CE59003AFCB7 /* Home.storyboard */; };
 		C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14882C44CE64003AFCB7 /* Calendar.storyboard */; };
@@ -60,7 +75,6 @@
 		C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */; };
 		C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */; };
 		C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */; };
-		C72F14DC2C5948E30017B57E /* SchoolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F14DB2C5948E30017B57E /* SchoolModel.swift */; };
 		C72F14DE2C594DAA0017B57E /* CalendarFBCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F14DD2C594DAA0017B57E /* CalendarFBCViewController.swift */; };
 		C7347E3A2C4D452100688768 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E312C4D410200688768 /* Pretendard-Black.otf */; };
 		C7347E3B2C4D452400688768 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E372C4D410300688768 /* Pretendard-Bold.otf */; };
@@ -71,6 +85,12 @@
 		C7347E402C4D452E00688768 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E332C4D410200688768 /* Pretendard-Regular.otf */; };
 		C7347E412C4D453000688768 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */; };
 		C7347E422C4D453400688768 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E342C4D410300688768 /* Pretendard-Thin.otf */; };
+		C73ED52E2C6272CC00C455A2 /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED52D2C6272CC00C455A2 /* MyPageModel.swift */; };
+		C73ED5322C6279AB00C455A2 /* UpComingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5312C6279AB00C455A2 /* UpComingModel.swift */; };
+		C73ED5342C62821B00C455A2 /* FavoritesBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5332C62821B00C455A2 /* FavoritesBoardModel.swift */; };
+		C73ED5362C6282F000C455A2 /* HotPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5352C6282F000C455A2 /* HotPostModel.swift */; };
+		C73ED5382C62844900C455A2 /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5372C62844900C455A2 /* EditProfileModel.swift */; };
+		C73ED53A2C62845900C455A2 /* ChangePWModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5392C62845900C455A2 /* ChangePWModel.swift */; };
 		C73F89842C5E834D007ECFE7 /* MyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73F89832C5E834D007ECFE7 /* MyAlarmViewController.swift */; };
 		C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CA82C45757200D4339D /* FavoriteLabViewController.swift */; };
 		C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CAA2C4575B600D4339D /* FavoriteBoardViewController.swift */; };
@@ -78,7 +98,7 @@
 		C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CAE2C4576E900D4339D /* FavoriteBoardTableViewCell.swift */; };
 		C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */; };
 		C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */; };
-		C74DC22B2C59D6AF004BDC25 /* SchoolSearchPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74DC22A2C59D6AF004BDC25 /* SchoolSearchPost.swift */; };
+		C75A2D4A2C6128F1000D215B /* AlarmPatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */; };
 		C75C457C2C5A3B6C001DDEA8 /* SUITE-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */; };
 		C75C457D2C5A3B6C001DDEA8 /* SUITE-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */; };
 		C75C457E2C5A3B6C001DDEA8 /* SUITE-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */; };
@@ -91,13 +111,23 @@
 		C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */; };
 		C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55D2C481F8C00A58395 /* DateViewController.swift */; };
 		C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */; };
+		C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */; };
+		C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */; };
+		C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79864002C652B450029F8E3 /* TFaddShadow.swift */; };
 		C7996CB02C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CAF2C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift */; };
 		C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */; };
+		C7A434F92C62233200C47F5E /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor.swift */; };
+		C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */; };
+		C7A6758B2C6674F600BB7784 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A6758A2C6674F600BB7784 /* KeyChain.swift */; };
 		C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */; };
 		C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */; };
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
+		C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E3C2C611CE10092F342 /* APIConstants.swift */; };
+		C7DA4E3F2C611D6D0092F342 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E3E2C611D6D0092F342 /* NetworkResult.swift */; };
+		C7DA4E412C6122BB0092F342 /* AlarmPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E402C6122BB0092F342 /* AlarmPostAPI.swift */; };
+		C7DA4E442C61252A0092F342 /* AlarmPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */; };
 		C7DCEF792C5FCDE7001D38AA /* DateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */; };
 		C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */; };
 		C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */; };
@@ -144,11 +174,17 @@
 		41EE13492C5510A80037EDD6 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		41EE134D2C5529B20037EDD6 /* SelectResearchTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectResearchTopicViewController.swift; sourceTree = "<group>"; };
+		7B0E5D232C57A5BA00C7479F /* DummyBoardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyBoardDetail.swift; sourceTree = "<group>"; };
+		7B0E5D252C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentDummyBoardDetail.swift; sourceTree = "<group>"; };
 		7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrittenBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentedBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentReviewWriteBoardViewController.swift; sourceTree = "<group>"; };
+		7BFB8C972C5A41C300A31B70 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
+		7BFB8C992C62778D00A31B70 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyBoards.swift; sourceTree = "<group>"; };
+		7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMainViewController.swift; sourceTree = "<group>"; };
 		7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		7BFDEC2C2C5224F7007280F8 /* BoardMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMainViewController.swift; sourceTree = "<group>"; };
 		7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDoctoralViewController.swift; sourceTree = "<group>"; };
@@ -157,11 +193,20 @@
 		7BFDEC342C52251F007280F8 /* BoardFreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardFreeViewController.swift; sourceTree = "<group>"; };
 		7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardQnAViewController.swift; sourceTree = "<group>"; };
 		7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardWriteViewController.swift; sourceTree = "<group>"; };
-		7BFDEC3A2C5225E7007280F8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateViewController.swift; sourceTree = "<group>"; };
+		C70DB27E2C633CBE00D6014B /* Chatting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chatting.storyboard; sourceTree = "<group>"; };
+		C70DB2802C633CDB00D6014B /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTabViewController.swift; sourceTree = "<group>"; };
+		C70DB2842C633F7B00D6014B /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		C70DB2862C633F8600D6014B /* MentoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringViewController.swift; sourceTree = "<group>"; };
+		C70DB2882C63633000D6014B /* UniPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniPostModel.swift; sourceTree = "<group>"; };
+		C70DB28A2C63646A00D6014B /* UniMethodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniMethodModel.swift; sourceTree = "<group>"; };
+		C70DB28C2C636AB200D6014B /* UniDeleteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDeleteModel.swift; sourceTree = "<group>"; };
+		C70DB28E2C636B6600D6014B /* AlarmListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListModel.swift; sourceTree = "<group>"; };
 		C716EF172C50FB1200474228 /* SchoolDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDateViewController.swift; sourceTree = "<group>"; };
 		C71E14862C44CE59003AFCB7 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		C71E14882C44CE64003AFCB7 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
@@ -171,7 +216,7 @@
 		C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAlertViewController.swift; sourceTree = "<group>"; };
 		C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarViewController.swift; sourceTree = "<group>"; };
 		C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDeleteAlertViewController.swift; sourceTree = "<group>"; };
-		C72F14DB2C5948E30017B57E /* SchoolModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolModel.swift; sourceTree = "<group>"; };
+		C72F14DB2C5948E30017B57E /* UniSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniSearchModel.swift; sourceTree = "<group>"; };
 		C72F14DD2C594DAA0017B57E /* CalendarFBCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFBCViewController.swift; sourceTree = "<group>"; };
 		C7347E312C4D410200688768 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		C7347E322C4D410200688768 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -182,6 +227,12 @@
 		C7347E372C4D410300688768 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		C7347E392C4D410300688768 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		C73ED52D2C6272CC00C455A2 /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
+		C73ED5312C6279AB00C455A2 /* UpComingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingModel.swift; sourceTree = "<group>"; };
+		C73ED5332C62821B00C455A2 /* FavoritesBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesBoardModel.swift; sourceTree = "<group>"; };
+		C73ED5352C6282F000C455A2 /* HotPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPostModel.swift; sourceTree = "<group>"; };
+		C73ED5372C62844900C455A2 /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
+		C73ED5392C62845900C455A2 /* ChangePWModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePWModel.swift; sourceTree = "<group>"; };
 		C73F89832C5E834D007ECFE7 /* MyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmViewController.swift; sourceTree = "<group>"; };
 		C74D4CA82C45757200D4339D /* FavoriteLabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabViewController.swift; sourceTree = "<group>"; };
 		C74D4CAA2C4575B600D4339D /* FavoriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardViewController.swift; sourceTree = "<group>"; };
@@ -189,7 +240,8 @@
 		C74D4CAE2C4576E900D4339D /* FavoriteBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardTableViewCell.swift; sourceTree = "<group>"; };
 		C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotFeedTableViewCell.swift; sourceTree = "<group>"; };
 		C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabCollectionViewCell.swift; sourceTree = "<group>"; };
-		C74DC22A2C59D6AF004BDC25 /* SchoolSearchPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSearchPost.swift; sourceTree = "<group>"; };
+		C74DC22A2C59D6AF004BDC25 /* AlarmPatchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPatchAPI.swift; sourceTree = "<group>"; };
+		C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPatchModel.swift; sourceTree = "<group>"; };
 		C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-Regular.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Regular.otf"; sourceTree = "<group>"; };
 		C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-Heavy.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Heavy.otf"; sourceTree = "<group>"; };
 		C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-SemiBold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-SemiBold.otf"; sourceTree = "<group>"; };
@@ -202,13 +254,23 @@
 		C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C78DE55D2C481F8C00A58395 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertViewController.swift; sourceTree = "<group>"; };
+		C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLabModel.swift; sourceTree = "<group>"; };
+		C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
+		C79864002C652B450029F8E3 /* TFaddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFaddShadow.swift; sourceTree = "<group>"; };
 		C7996CAF2C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectTableViewCell.swift; sourceTree = "<group>"; };
+		C7A434F82C62233200C47F5E /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
+		C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLeftPadding.swift; sourceTree = "<group>"; };
+		C7A6758A2C6674F600BB7784 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
+		C7DA4E3C2C611CE10092F342 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		C7DA4E3E2C611D6D0092F342 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		C7DA4E402C6122BB0092F342 /* AlarmPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPostAPI.swift; sourceTree = "<group>"; };
+		C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPostModel.swift; sourceTree = "<group>"; };
 		C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListViewController.swift; sourceTree = "<group>"; };
 		C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListTableViewCell.swift; sourceTree = "<group>"; };
 		C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarTableViewCell.swift; sourceTree = "<group>"; };
@@ -272,6 +334,9 @@
 				41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift */,
 				412BFBE52C52A5E30099E442 /* addBorder+.swift */,
 				417AADBE2C64E40A002080E0 /* placeholder+.swift */,
+				C7A434F82C62233200C47F5E /* HexColor.swift */,
+				C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */,
+				C79864002C652B450029F8E3 /* TFaddShadow.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -361,6 +426,9 @@
 				7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */,
 				7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */,
 				7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */,
+				7B0E5D232C57A5BA00C7479F /* DummyBoardDetail.swift */,
+				7B0E5D252C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift */,
+				7BFB8C972C5A41C300A31B70 /* RadarChart.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -389,9 +457,18 @@
 			path = Doctoral;
 			sourceTree = "<group>";
 		};
+		7BFB8C9D2C63458300A31B70 /* Directory */ = {
+			isa = PBXGroup;
+			children = (
+				7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */,
+			);
+			path = Directory;
+			sourceTree = "<group>";
+		};
 		7BFDEC292C5224CD007280F8 /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */,
 				7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */,
 				7B969F5E2C541E6000F34A18 /* Main */,
 				7B969F612C541E7F00F34A18 /* Doctoral */,
@@ -400,6 +477,8 @@
 				7B3E3D252C541F35002D6A43 /* Free */,
 				7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */,
 				7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */,
+				7BFB8C992C62778D00A31B70 /* SearchViewController.swift */,
+				7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -413,10 +492,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C70DB27D2C633C7100D6014B /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				C70DB27E2C633CBE00D6014B /* Chatting.storyboard */,
+				C70DB2802C633CDB00D6014B /* ChattingViewController.swift */,
+				C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */,
+				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
+				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
 		C71E14842C44CE44003AFCB7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				C71E14862C44CE59003AFCB7 /* Home.storyboard */,
+				C73ED52F2C62784400C455A2 /* HomeModel */,
+				C73ED5302C62784E00C455A2 /* HomeAPI */,
 				C7E3EF552C60ABE300DDC36B /* MainHome */,
 				C7E3EF562C60B9BF00DDC36B /* MyPage */,
 			);
@@ -428,6 +521,7 @@
 			children = (
 				C71E14882C44CE64003AFCB7 /* Calendar.storyboard */,
 				C72F14DA2C5948CA0017B57E /* CalendarModel */,
+				C7DA4E422C6122E30092F342 /* CalendarAPI */,
 				C7E3EF592C60BF4200DDC36B /* MainCalendar */,
 				C7E3EF5A2C60BF7F00DDC36B /* SchoolSelect */,
 				C7E3EF5B2C60BFF300DDC36B /* SchoolCalendar */,
@@ -440,8 +534,13 @@
 		C72F14DA2C5948CA0017B57E /* CalendarModel */ = {
 			isa = PBXGroup;
 			children = (
-				C72F14DB2C5948E30017B57E /* SchoolModel.swift */,
-				C74DC22A2C59D6AF004BDC25 /* SchoolSearchPost.swift */,
+				C72F14DB2C5948E30017B57E /* UniSearchModel.swift */,
+				C70DB28A2C63646A00D6014B /* UniMethodModel.swift */,
+				C70DB2882C63633000D6014B /* UniPostModel.swift */,
+				C70DB28C2C636AB200D6014B /* UniDeleteModel.swift */,
+				C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */,
+				C70DB28E2C636B6600D6014B /* AlarmListModel.swift */,
+				C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */,
 			);
 			path = CalendarModel;
 			sourceTree = "<group>";
@@ -469,6 +568,28 @@
 			path = Pretendard;
 			sourceTree = "<group>";
 		};
+		C73ED52F2C62784400C455A2 /* HomeModel */ = {
+			isa = PBXGroup;
+			children = (
+				C73ED5312C6279AB00C455A2 /* UpComingModel.swift */,
+				C73ED5332C62821B00C455A2 /* FavoritesBoardModel.swift */,
+				C73ED5352C6282F000C455A2 /* HotPostModel.swift */,
+				C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */,
+				C73ED52D2C6272CC00C455A2 /* MyPageModel.swift */,
+				C73ED5372C62844900C455A2 /* EditProfileModel.swift */,
+				C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */,
+				C73ED5392C62845900C455A2 /* ChangePWModel.swift */,
+			);
+			path = HomeModel;
+			sourceTree = "<group>";
+		};
+		C73ED5302C62784E00C455A2 /* HomeAPI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomeAPI;
+			sourceTree = "<group>";
+		};
 		C763D71E2C3BBA8900201913 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +607,25 @@
 				C7347E302C4D40F300688768 /* Pretendard */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		C7DA4E3B2C611BF50092F342 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C7DA4E3C2C611CE10092F342 /* APIConstants.swift */,
+				C7DA4E3E2C611D6D0092F342 /* NetworkResult.swift */,
+				C7A6758A2C6674F600BB7784 /* KeyChain.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C7DA4E422C6122E30092F342 /* CalendarAPI */ = {
+			isa = PBXGroup;
+			children = (
+				C7DA4E402C6122BB0092F342 /* AlarmPostAPI.swift */,
+				C74DC22A2C59D6AF004BDC25 /* AlarmPatchAPI.swift */,
+			);
+			path = CalendarAPI;
 			sourceTree = "<group>";
 		};
 		C7E3EF552C60ABE300DDC36B /* MainHome */ = {
@@ -594,17 +734,19 @@
 		C7F4552B2C39B8EE00A4D0EE /* Sukbakji */ = {
 			isa = PBXGroup;
 			children = (
+				C7DA4E3B2C611BF50092F342 /* Network */,
+				7BFB8C9D2C63458300A31B70 /* Directory */,
 				412BFBD92C52252C0099E442 /* SignUp */,
 				412BFBD42C5224EB0099E442 /* Login */,
-				7BFDEC292C5224CD007280F8 /* Board */,
-				C71E14852C44CE4B003AFCB7 /* Calendar */,
-				C71E14842C44CE44003AFCB7 /* Home */,
 				C763D71E2C3BBA8900201913 /* Main */,
+				C71E14842C44CE44003AFCB7 /* Home */,
+				C71E14852C44CE4B003AFCB7 /* Calendar */,
+				7BFDEC292C5224CD007280F8 /* Board */,
+				C70DB27D2C633C7100D6014B /* Chatting */,
 				C7A7BC262C3AF2D4007E66DA /* Font */,
 				412BFBE42C52A5D20099E442 /* Extension */,
 				C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */,
 				C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */,
-				7BFDEC3A2C5225E7007280F8 /* Constants.swift */,
 				C7F455352C39B8F000A4D0EE /* Assets.xcassets */,
 				C7F455372C39B8F000A4D0EE /* LaunchScreen.storyboard */,
 				C7F4553A2C39B8F000A4D0EE /* Info.plist */,
@@ -676,6 +818,7 @@
 				C75C45812C5A3B6C001DDEA8 /* SUITE-Light.otf in Resources */,
 				C7347E402C4D452E00688768 /* Pretendard-Regular.otf in Resources */,
 				C7F455392C39B8F000A4D0EE /* LaunchScreen.storyboard in Resources */,
+				C70DB27F2C633CBE00D6014B /* Chatting.storyboard in Resources */,
 				C7347E412C4D453000688768 /* Pretendard-SemiBold.otf in Resources */,
 				C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */,
 				C75C45802C5A3B6C001DDEA8 /* SUITE-Medium.otf in Resources */,
@@ -745,10 +888,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C73ED52E2C6272CC00C455A2 /* MyPageModel.swift in Sources */,
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */,
 				7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */,
+				7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */,
 				C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */,
 				417AADC42C652228002080E0 /* LoginModel.swift in Sources */,
 				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
@@ -757,27 +902,41 @@
 				C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */,
 				417AADCD2C673E28002080E0 /* SignUpAPIInput.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
+				C70DB28D2C636AB200D6014B /* UniDeleteModel.swift in Sources */,
 				417AADBB2C60A8AA002080E0 /* TOSTableViewCell.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
+				7B0E5D262C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift in Sources */,
+				7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* Constants.swift in Sources */,
 				417AADD12C673E42002080E0 /* SignUpDataManager.swift in Sources */,
+				C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */,
+				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				41EE134E2C5529B20037EDD6 /* SelectResearchTopicViewController.swift in Sources */,
+				C7DA4E412C6122BB0092F342 /* AlarmPostAPI.swift in Sources */,
+				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
+				C7A6758B2C6674F600BB7784 /* KeyChain.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */,
 				C7996CB02C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift in Sources */,
 				C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */,
 				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,
+				C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */,
 				7BFDEC312C52250A007280F8 /* BoardMasterViewController.swift in Sources */,
+				7BFB8C982C5A41C300A31B70 /* RadarChart.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
+				C70DB28F2C636B6600D6014B /* AlarmListModel.swift in Sources */,
+				C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */,
 				C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
+				C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
+				C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
 				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,
@@ -794,24 +953,34 @@
 				417AADB72C606B17002080E0 /* TOSViewController.swift in Sources */,
 				417AADC22C65221D002080E0 /* LoginAPIInput.swift in Sources */,
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
+				C73ED53A2C62845900C455A2 /* ChangePWModel.swift in Sources */,
+				C75A2D4A2C6128F1000D215B /* AlarmPatchModel.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
 				C72F14DE2C594DAA0017B57E /* CalendarFBCViewController.swift in Sources */,
+				7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */,
 				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
 				412F92322C5C9E280042B834 /* SecondAcademicVerificationViewController.swift in Sources */,
 				C7E3EF542C60A87000DDC36B /* ADCollectionViewCell.swift in Sources */,
+				C7DA4E442C61252A0092F342 /* AlarmPostModel.swift in Sources */,
+				C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */,
 				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
 				C7DCEF812C5FD710001D38AA /* MyAlarmTableViewCell.swift in Sources */,
+				C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */,
+				C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */,
 				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				C78DE55A2C48176C00A58395 /* CalendarCollectionViewCell.swift in Sources */,
 				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,
 				7BFDEC2B2C5224EF007280F8 /* BoardViewController.swift in Sources */,
-				C72F14DC2C5948E30017B57E /* SchoolModel.swift in Sources */,
+				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
+				C7DA4E3F2C611D6D0092F342 /* NetworkResult.swift in Sources */,
+				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
+				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
+				C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
-				C74DC22B2C59D6AF004BDC25 /* SchoolSearchPost.swift in Sources */,
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
 				417AADBF2C64E40A002080E0 /* placeholder+.swift in Sources */,
 				7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */,
@@ -820,12 +989,18 @@
 				C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */,
 				C75C45842C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift in Sources */,
 				C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */,
+				7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */,
 				C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */,
 				C7E3EF522C60A85D00DDC36B /* ADViewController.swift in Sources */,
 				C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */,
+				C73ED5342C62821B00C455A2 /* FavoritesBoardModel.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */,
+				C73ED5362C6282F000C455A2 /* HotPostModel.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
+				C73ED5382C62844900C455A2 /* EditProfileModel.swift in Sources */,
+				C73ED5322C6279AB00C455A2 /* UpComingModel.swift in Sources */,
+				C7A434F92C62233200C47F5E /* HexColor.swift in Sources */,
 				C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,
 				C73F89842C5E834D007ECFE7 /* MyAlarmViewController.swift in Sources */,
