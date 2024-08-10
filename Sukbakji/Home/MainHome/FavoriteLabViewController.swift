@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import Alamofire
 
 class FavoriteLabViewController: UIViewController {
     
     @IBOutlet weak var FavoriteLabCV: UICollectionView!
     @IBOutlet weak var FavoriteLabPV: UIProgressView!
+    
+    @IBOutlet weak var noFavLabel: UILabel!
+    @IBOutlet weak var letsFavLabel: UILabel!
+    
+    var allDatas: [FavoritesLabResult] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,5 +30,44 @@ class FavoriteLabViewController: UIViewController {
         FavoriteLabCV.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         FavoriteLabPV.setProgress(0, animated: true)
+        
+//        self.getFavoriteLab()
+    }
+    
+    func getFavoriteLab() {
+        
+        let url = APIConstants.mypageURL + "/favorite-labs"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer ",
+        ]
+        
+        AF.request(url, method: .get, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decodedData = try JSONDecoder().decode(FavoritesLabResultModel.self, from: data)
+                    self.allDatas = decodedData.result
+                    DispatchQueue.main.async {
+                        self.FavoriteLabCV.reloadData()
+                    }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
     }
 }

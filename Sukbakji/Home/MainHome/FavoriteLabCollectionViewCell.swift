@@ -12,6 +12,11 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var firstMajorView: UIView!
     @IBOutlet weak var secondMajorView: UIView!
     
+    @IBOutlet weak var univLabel: UILabel!
+    @IBOutlet weak var labLabel: UILabel!
+    @IBOutlet weak var profNameLabel: UILabel!
+    @IBOutlet weak var profMajorLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -46,7 +51,7 @@ extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewD
         }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return allDatas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -63,6 +68,19 @@ extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: FavoriteLabCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteLab_CollectionViewCell", for: indexPath) as! FavoriteLabCollectionViewCell
+        
+        let detailData = allDatas[indexPath.item]
+        
+        if allDatas.count == 0 {
+            FavoriteLabCV.isHidden = true
+            noFavLabel.isHidden = false
+            letsFavLabel.isHidden = false
+        } else {
+            cell.univLabel.text = detailData.universityName
+            cell.labLabel.text = detailData.labName
+            cell.profNameLabel.text = detailData.professorName
+            cell.profMajorLabel.text = detailData.departmentName
+        }
         
         return cell
     }

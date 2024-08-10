@@ -10,6 +10,9 @@ import UIKit
 class FavoriteBoardTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelView: UIView!
+
+    @IBOutlet weak var labelLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,7 +44,7 @@ extension FavoriteBoardViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return allDatas.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -54,6 +57,17 @@ extension FavoriteBoardViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: FavoriteBoardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteBoard_TableViewCell", for: indexPath) as! FavoriteBoardTableViewCell
+        
+        let detailData = allDatas[indexPath.row]
+        
+        if allDatas.count == 0 {
+            FavoriteBoardTV.isHidden = true
+            noFavLabel.isHidden = false
+            letsFavLabel.isHidden = false
+        } else {
+            cell.labelLabel.text = detailData.boardName
+            cell.contentLabel.text = detailData.title
+        }
         
         cell.selectionStyle = .none
         

@@ -8,14 +8,17 @@
 import Foundation
 
 struct FavoritesLabResultModel : Codable {
-    var favorites: [FavoritesLabResult]
+    let isSuccess: Bool
+    let code: String
+    let message: String
+    var result: [FavoritesLabResult]
 }
 
 struct FavoritesLabResult : Codable {
-    let university_name: String
-    let lab_name: String
-    let professor_name: String
-    let professor_profile: String
-    let professor_academic: String
-    let research_topics: [String]
+    let labId: Int
+    let labName: String
+    let universityName: String
+    let departmentName: String
+    let professorName: String
+    let researchTopics: [String]
 }
