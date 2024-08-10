@@ -10,6 +10,8 @@ import DropDown
 
 class AlarmViewController: UIViewController, dateProtocol {
     
+    var memberId = UserDefaults.standard.integer(forKey: "memberID")
+    
     @IBOutlet weak var SchoolTF: UITextField!
     @IBOutlet weak var AlarmNameTF: UITextField!
     @IBOutlet weak var AlarmDateTF: UITextField!
@@ -21,7 +23,7 @@ class AlarmViewController: UIViewController, dateProtocol {
     @IBOutlet weak var setButton: UIButton!
     
     let drop = DropDown()
-    let schoolName = ["   광운대학교", "   성신여자대학교", "   서경대학교", "   서울여자대학교", "   한성대학교"]
+    let schoolName = ["   서울대학교", "   연세대학교", "   고려대학교", "   카이스트"]
     
     var pickerHour = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     var pickerMinute:[String] = []
@@ -31,13 +33,17 @@ class AlarmViewController: UIViewController, dateProtocol {
     var hour: String = "8"
     var minute: String = "00"
     
-    var timeLabel: String = ""
+    var timeLabel: String = "8:00"
+    var dateData: String = ""
     
     private var alarmData: AlarmPostResult!
     
     func dateSend(data: String) {
         AlarmDateTF.text = "   \(data)"
         dateLabel.text = "\(data)"
+        let replacedString = data.replacingOccurrences(of: " ", with: "")
+        let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
+        dateData = reReplacedString.replacingOccurrences(of: "일", with: "")
         updateButtonColor()
     }
     
@@ -131,7 +137,7 @@ class AlarmViewController: UIViewController, dateProtocol {
         drop.anchorView = self.SchoolTF
         
         // View를 갖리지 않고 View아래에 Item 팝업이 붙도록 설정
-        drop.bottomOffset = CGPoint(x: 0, y: 1.5 + SchoolTF.bounds.height)
+        drop.bottomOffset = CGPoint(x: 0, y: 1.6 + SchoolTF.bounds.height)
         
         // Item 선택 시 처리
         drop.selectionAction = { [weak self] (index, item) in
@@ -142,11 +148,13 @@ class AlarmViewController: UIViewController, dateProtocol {
         
         // 취소 시 처리
         drop.cancelAction = { [weak self] in
+            self!.SchoolTF.text = ""
         }
     }
     
     @IBAction func drop_Tapped(_ sender: Any) {
         drop.show()
+        print(timeLabel)
     }
     
     @IBAction func picker_Tapped(_ sender: Any) {
@@ -160,8 +168,8 @@ class AlarmViewController: UIViewController, dateProtocol {
     }
     
     @IBAction func alarm_Setting(_ sender: Any) {
-//        let parameterDatas = AlarmPostModel(memberId: 1, univName: "광운대학교", name: "모집일정", date: "2024-09-01", time: "14:00", onoff: 1)
-//        APIAlarmPost.instance.SendingPostAlarm(parameters: parameterDatas) { result in self.alarmData = result }
+        let parameterDatas = AlarmPostModel(memberId: memberId, univName: SchoolTF.text ?? "", name: AlarmNameTF.text ?? "", date: dateData, time: timeLabel, onoff: 1)
+        APIAlarmPost.instance.SendingPostAlarm(parameters: parameterDatas) { result in self.alarmData = result }
         self.presentingViewController?.dismiss(animated: true)
     }
     
@@ -245,6 +253,12 @@ extension AlarmViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         
         timeButton.setTitle("\(day) \(hour):\(minute)", for: .normal)
-        timeLabel = "\(day) \(hour):\(minute)"
+        if day == pickerDay[0] {
+            timeLabel = "\(hour):\(minute)"
+        } else {
+            let hourData = 12 + (Int(pickerHour[row]) ?? 0)
+            let hourString = String(hourData)
+            timeLabel = "\(hourString):\(minute)"
+        }
     }
 }
