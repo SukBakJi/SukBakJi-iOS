@@ -15,7 +15,7 @@ class APIAlarmPost {
         let url = APIConstants.calendarURL + "/alarm"
         let headers:HTTPHeaders = [
             "content-type": "application/json",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwams5NzExMTNAbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTcyMzI3NjA3M30.N647pqS3eZyHzs2D8UohorBJlPptCEWwedsoxgnEOBY"
+            "Authorization": "Bearer"
         ]
         
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { responce in

@@ -48,7 +48,8 @@ class SchoolDateViewController: UIViewController {
     }
     
     @objc func didDismissDetailNotification(_ notification: Notification) {
-        self.presentingViewController?.dismiss(animated: false)
+        NotificationCenter.default.post(name: NSNotification.Name("DismissTwo"), object: nil, userInfo: nil)
+        self.presentingViewController?.dismiss(animated: true)
     }
     
     @objc func buttonTapped(_ sender: UIButton) {

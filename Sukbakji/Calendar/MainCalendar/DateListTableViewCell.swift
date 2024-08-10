@@ -29,7 +29,7 @@ extension DateListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -12,6 +12,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var DateView: UIView!
     @IBOutlet weak var AlertView: UIView!
+    @IBOutlet weak var triangleView: UIImageView!
     
     @IBOutlet weak var alarmButton: UIButton!
     
@@ -145,6 +146,8 @@ class CalendarViewController: UIViewController {
     }
     
     @IBAction func School_Select_Tapped(_ sender: Any) {
+        AlertView.isHidden = true
+        triangleView.isHidden = true
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SchoolSelectVC") as? SchoolSelectViewController else {
             return
         }
