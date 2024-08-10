@@ -249,7 +249,7 @@ class TOSViewController: UIViewController {
     
     private let tableView = UITableView().then {
         $0.register(TOSTableViewCell.self, forCellReuseIdentifier: "TOSTableViewCell")
-        $0.backgroundColor = .green
+        $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.allowsSelection = false
         $0.isScrollEnabled = false
