@@ -16,7 +16,7 @@ class EditInfoViewController: UIViewController {
     @IBOutlet weak var researchTopicCV: UICollectionView!
     
     let drop = DropDown()
-    let belongType = ["  학사 졸업 또는 재학", "  석사 재학", "  석사 졸업", "  박사 재학", "  박사 졸업", "  석박사 통합 재학"]
+    let belongType = ["   학사 졸업 또는 재학", "   석사 재학", "   석사 졸업", "   박사 재학", "   박사 졸업", "   석박사 통합 재학"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
