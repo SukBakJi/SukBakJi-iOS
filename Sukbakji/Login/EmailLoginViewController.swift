@@ -191,7 +191,7 @@ class EmailLoginViewController: UIViewController {
     }
     
     // MARK: - ViewDidLoad
-    let loginDataManager = LoginDataManager()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -229,6 +229,11 @@ class EmailLoginViewController: UIViewController {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
+    }
+    
+    private func navigateToHomeScreen() {
+        let homeVC = successSignUpViewController()
+        self.navigationController?.pushViewController(homeVC, animated: true)
     }
     
     // MARK: - Functional
@@ -285,6 +290,8 @@ class EmailLoginViewController: UIViewController {
         
         // 유효성 검사를 통과한 경우
         if isEmailValid && isPasswordValid {
+            let loginDataManager = LoginDataManager()
+            
             let input = LoginAPIInput(email: email, password: password)
             print("전송된 데이터: \(input)")
             
@@ -297,6 +304,10 @@ class EmailLoginViewController: UIViewController {
                    let email = String(data: emailData, encoding: .utf8) {
                     print("----- email : \(email) ----- ")
                 }
+                if let passwordData = KeychainHelper.standard.read(service: "password", account: "user"),
+                   let password = String(data: passwordData, encoding: .utf8) {
+                    print("----- password : \(password) ----- ")
+                }
                 
                 if let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
                    let accessToken = String(data: accessTokenData, encoding: .utf8) {
@@ -308,15 +319,19 @@ class EmailLoginViewController: UIViewController {
                     print("----- Refresh Token: \(refreshToken) ----- ")
                 }
                 
+                // 응답
                 if let model = loginModel, model.code == "COMMON200" {
                     self.navigateToHomeScreen()
-                } else if let model = loginModel, model.isSuccess == false {
-                    self.showError(message: model.message ?? "로그인에 실패했습니다.")
+                    self.showMessage(message: model.message ?? "로그인에 성공했습니다")
+                }
+                else if let model = loginModel, model.isSuccess == false {
                     changeStateError(emailTextField)
                     changeStateError(passwordTextField)
                     emailErrorView.isHidden = true
                     updatePasswordLabelConstraint()
                     passwordErrorLabel.text = "입력한 이메일 또는 비밀번호가 일치하지 않습니다"
+                    
+                    self.showMessage(message: model.message ?? "로그인에 실패했습니다")
                 }
             }
         } else {
@@ -325,16 +340,10 @@ class EmailLoginViewController: UIViewController {
         }
     }
     
-    // 추후 홈화면으로 연결
-    private func navigateToHomeScreen() {
-        let homeVC = successSignUpViewController()
-        self.navigationController?.pushViewController(homeVC, animated: true)
+    private func showMessage(message: String) {
+        // 에러 메시지를 표시하는 로직 추가
+        print("메시지 : \(message)")
     }
-    
-    private func showError(message: String) {
-        print("에러: \(message)")
-    }
-    
     
     // 에러 상태
     private func changeStateError(_ tf: UITextField) {
@@ -595,23 +604,22 @@ extension EmailLoginViewController: UITextFieldDelegate {
     // 입력 시 파란색
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.addBorder([.bottom], color: .blue400, width: 0.5)
-        if textField == passwordTextField {
-            passwordRightView.isHidden = false
-        }
         if textField == emailTextField {
             emailClearButton.isHidden = false
         }
-        
+        if textField == passwordTextField {
+            passwordRightView.isHidden = false
+        }
     }
     
     // 입력 끝날 시 회색
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.layer.addBorder([.bottom], color: .gray300, width: 0.5)
-        if textField == passwordTextField {
-            passwordRightView.isHidden = true
-        }
         if textField == emailTextField {
             emailClearButton.isHidden = true
+        }
+        if textField == passwordTextField {
+            passwordRightView.isHidden = true
         }
         return true
     }
