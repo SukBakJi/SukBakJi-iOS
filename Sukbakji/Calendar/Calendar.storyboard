@@ -286,9 +286,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU6-fo-6Ks">
-                                                <rect key="frame" x="299" y="532.66666666666663" width="70" height="20"/>
+                                                <rect key="frame" x="294" y="532.66666666666663" width="75" height="20"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="70" id="egZ-a3-q5J"/>
+                                                    <constraint firstAttribute="width" constant="75" id="egZ-a3-q5J"/>
                                                     <constraint firstAttribute="height" constant="20" id="hLE-Ht-70d"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
@@ -437,6 +437,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Add"/>
                                 <connections>
+                                    <action selector="add_Tapped:" destination="Hfz-cG-OQz" eventType="touchUpInside" id="VTQ-1d-tvx"/>
                                     <action selector="back_Tapped:" destination="dwA-CJ-mIM" eventType="touchUpInside" id="XCn-vh-fU0"/>
                                     <action selector="back_Tapped:" destination="C0K-Ir-Zkm" eventType="touchUpInside" id="d4g-f8-dez"/>
                                 </connections>
@@ -488,8 +489,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2024년 6월 24일 (월) 오전 8:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yX-PA-kEm">
-                                                    <rect key="frame" x="20" y="78.666666666666671" width="189.33333333333334" height="18.666666666666671"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2024년 6월 24일 오전 8:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yX-PA-kEm">
+                                                    <rect key="frame" x="20" y="78.666666666666671" width="163.66666666666666" height="18.666666666666671"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18.670000000000002" id="9zk-aH-B6M"/>
                                                     </constraints>
@@ -509,7 +510,7 @@
                                                         <color key="baseForegroundColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </buttonConfiguration>
                                                 </button>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Nyh-lz-zUJ">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nyh-lz-zUJ">
                                                     <rect key="frame" x="292" y="67.666666666666671" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
@@ -527,6 +528,13 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="contentLabel" destination="geb-i7-Eer" id="92t-Ma-j6k"/>
+                                            <outlet property="dateLabel" destination="3yX-PA-kEm" id="IZI-6g-CPf"/>
+                                            <outlet property="onoffSwitch" destination="Nyh-lz-zUJ" id="dfL-Fb-W24"/>
+                                            <outlet property="univName" destination="IpV-ZB-nYL" id="5gy-3q-yG3"/>
+                                            <outlet property="univView" destination="CSj-Dy-DGk" id="qCr-BY-rKw"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -552,6 +560,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dateLabel" destination="yJ4-rP-tDN" id="CVI-Pz-3R8"/>
                         <outlet property="myAlarmTV" destination="BpY-ah-Bvi" id="nwz-65-wQl"/>
                     </connections>
                 </viewController>

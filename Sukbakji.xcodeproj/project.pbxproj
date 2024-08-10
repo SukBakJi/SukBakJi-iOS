@@ -110,7 +110,6 @@
 		C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */; };
 		C7A434F92C62233200C47F5E /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor.swift */; };
 		C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */; };
-		C7A6758B2C6674F600BB7784 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A6758A2C6674F600BB7784 /* KeyChain.swift */; };
 		C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */; };
 		C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */; };
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
@@ -127,6 +126,9 @@
 		C7E3EF522C60A85D00DDC36B /* ADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF512C60A85D00DDC36B /* ADViewController.swift */; };
 		C7E3EF542C60A87000DDC36B /* ADCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF532C60A87000DDC36B /* ADCollectionViewCell.swift */; };
 		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
+		C7ECF5462C6757A700283F06 /* MemberIDModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ECF5452C6757A700283F06 /* MemberIDModel.swift */; };
+		C7ECF54A2C677F8600283F06 /* ApplyMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ECF5492C677F8600283F06 /* ApplyMentorViewController.swift */; };
+		C7ECF54C2C677F9200283F06 /* ApplyMentoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */; };
 		C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */; };
 		C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */; };
 		C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F455302C39B8EE00A4D0EE /* ViewController.swift */; };
@@ -245,7 +247,6 @@
 		C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectTableViewCell.swift; sourceTree = "<group>"; };
 		C7A434F82C62233200C47F5E /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLeftPadding.swift; sourceTree = "<group>"; };
-		C7A6758A2C6674F600BB7784 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +263,9 @@
 		C7E3EF512C60A85D00DDC36B /* ADViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADViewController.swift; sourceTree = "<group>"; };
 		C7E3EF532C60A87000DDC36B /* ADCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7ECF5452C6757A700283F06 /* MemberIDModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberIDModel.swift; sourceTree = "<group>"; };
+		C7ECF5492C677F8600283F06 /* ApplyMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentorViewController.swift; sourceTree = "<group>"; };
+		C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentoringViewController.swift; sourceTree = "<group>"; };
 		C7F455292C39B8EE00A4D0EE /* Sukbakji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sukbakji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -458,8 +462,8 @@
 				C70DB27E2C633CBE00D6014B /* Chatting.storyboard */,
 				C70DB2802C633CDB00D6014B /* ChattingViewController.swift */,
 				C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */,
-				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
-				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
+				C7ECF5472C677F3C00283F06 /* Message */,
+				C7ECF5482C677F4600283F06 /* Mentor */,
 			);
 			path = Chatting;
 			sourceTree = "<group>";
@@ -531,6 +535,7 @@
 		C73ED52F2C62784400C455A2 /* HomeModel */ = {
 			isa = PBXGroup;
 			children = (
+				C7ECF5452C6757A700283F06 /* MemberIDModel.swift */,
 				C73ED5312C6279AB00C455A2 /* UpComingModel.swift */,
 				C73ED5332C62821B00C455A2 /* FavoritesBoardModel.swift */,
 				C73ED5352C6282F000C455A2 /* HotPostModel.swift */,
@@ -574,7 +579,6 @@
 			children = (
 				C7DA4E3C2C611CE10092F342 /* APIConstants.swift */,
 				C7DA4E3E2C611D6D0092F342 /* NetworkResult.swift */,
-				C7A6758A2C6674F600BB7784 /* KeyChain.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -671,6 +675,24 @@
 				C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */,
 			);
 			path = MyAlarm;
+			sourceTree = "<group>";
+		};
+		C7ECF5472C677F3C00283F06 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		C7ECF5482C677F4600283F06 /* Mentor */ = {
+			isa = PBXGroup;
+			children = (
+				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
+				C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */,
+				C7ECF5492C677F8600283F06 /* ApplyMentorViewController.swift */,
+			);
+			path = Mentor;
 			sourceTree = "<group>";
 		};
 		C7F455202C39B8EE00A4D0EE = {
@@ -849,6 +871,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C73ED52E2C6272CC00C455A2 /* MyPageModel.swift in Sources */,
+				C7ECF54A2C677F8600283F06 /* ApplyMentorViewController.swift in Sources */,
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */,
@@ -860,11 +883,13 @@
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
 				C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
+				C7ECF5462C6757A700283F06 /* MemberIDModel.swift in Sources */,
 				C70DB28D2C636AB200D6014B /* UniDeleteModel.swift in Sources */,
 				417AADBB2C60A8AA002080E0 /* TOSTableViewCell.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7B0E5D262C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift in Sources */,
 				7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */,
+				C7ECF54C2C677F9200283F06 /* ApplyMentoringViewController.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
@@ -873,7 +898,6 @@
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
-				C7A6758B2C6674F600BB7784 /* KeyChain.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */,
 				C7996CB02C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift in Sources */,
