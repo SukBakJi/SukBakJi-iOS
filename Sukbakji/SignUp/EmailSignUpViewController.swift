@@ -104,7 +104,7 @@ class EmailSignUpViewController: UIViewController {
     private let emailTextField = UITextField().then {
         $0.placeholder = "이메일을 입력해 주세요"
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.clearButtonMode = .whileEditing
+        $0.clearButtonMode = .never
         
         $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         $0.leftViewMode = .always
@@ -234,13 +234,13 @@ class EmailSignUpViewController: UIViewController {
         validateField()
     }
     
-    private func nextPage() {
+    private func navigateToNextPage() {
         let AcademicVerificationVC = AcademicVerificationViewController()
-                self.navigationController?.pushViewController(AcademicVerificationVC, animated: true)
+        self.navigationController?.pushViewController(AcademicVerificationVC, animated: true)
         
-                let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-                backBarButtonItem.tintColor = .black
-                self.navigationItem.backBarButtonItem = backBarButtonItem
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     // MARK: - Functional
     @objc private func eyeButtonTapped(_ sender: UIButton) {
@@ -269,6 +269,7 @@ class EmailSignUpViewController: UIViewController {
     }
     
     private func validateField() {
+        let provider = "BASIC"
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
         let checkPassword = checkPasswordTextField.text ?? ""
@@ -276,49 +277,68 @@ class EmailSignUpViewController: UIViewController {
         var isPasswordValid = false
         var ischeckPasswordValid = false
         
-        // 이메일 NULL 인 경우
         if email.isEmpty {
             changeStateError(emailTextField)
             emailErrorLabel.text = "이메일을 입력해 주세요"
             isEmailValid = false
-            
-            // 이메일 형식 오류 경우
         } else if !isValidEmail(email) {
             changeStateError(emailTextField)
             emailErrorLabel.text = "올바르지 않은 형식의 이메일 입니다"
             isEmailValid = false
         } else { isEmailValid = true }
         
-        // 비밀번호 NULL 인 경우
         if password.isEmpty {
             changeStateError(passwordTextField)
             passwordErrorLabel.text = "비밀번호를 입력해 주세요"
             isPasswordValid = false
-            
-            //비밀번호 6자리 이하인 경우
         } else if password.count < 6 {
             changeStateError(passwordTextField)
             passwordErrorLabel.text = "비밀번호는 6자리 이상 입력해야 합니다"
             isPasswordValid = false
         } else { isPasswordValid = true }
         
-        // 비밀번호확인 NULL 인 경우
         if checkPassword.isEmpty {
             changeStateError(checkPasswordTextField)
             checkPasswordErrorLabel.text = "비밀번호를 한 번 더 입력해 주세요"
             ischeckPasswordValid = false
-            
-            //비밀번호확인 일치하지 않는 경우
         } else if !checkPassword.isEmpty && password != checkPassword {
             changeStateError(checkPasswordTextField)
             checkPasswordErrorLabel.text = "입력한 비밀번호와 일치하지 않습니다"
             ischeckPasswordValid = false
         } else { ischeckPasswordValid = true }
         
+        // 유효성 검사를 통과한 경우
         if isEmailValid && isPasswordValid && ischeckPasswordValid {
-            nextPage()
-            print("다음페이지로 넘어가기")
+            let signUpDataManager = SignUpDataManager()
+            
+            let input = SignUpAPIInput(provider: provider, email: email, password: password)
+            print("전송된 데이터: \(input)")
+            
+            signUpDataManager.signUpDataManager(input) {
+                [weak self] SignUpModel in
+                guard let self = self else { return }
+                
+                // 응답
+                if let model = SignUpModel, model.code == "COMMON200" {
+                    self.navigateToNextPage()
+                    print("회원가입 성공 : ID(\(email)")
+                    self.showMessage(message: model.message ?? "로그인에 성공했습니다")
+                }
+                else if let model = SignUpModel, model.code == "MEMBER4002" {
+                    changeStateError(emailTextField)
+                    emailErrorLabel.text = "이미 가입된 이메일입니다"
+                    self.showMessage(message: model.message ?? "로그인에 실패했습니다")
+                }
+            }
         }
+        else {
+            updateNextButton(enabled: false)
+        }
+    }
+    
+    private func showMessage(message: String) {
+        // 에러 메시지를 표시하는 로직 추가
+        print("메시지 : \(message)")
     }
     
     private func changeStateError(_ tf: UITextField) {
@@ -525,6 +545,12 @@ class EmailSignUpViewController: UIViewController {
             make.height.equalTo(48)
         }
         
+        emailClearButton.snp.makeConstraints { make in
+            make.centerY.equalTo(emailTextField)
+            make.trailing.equalTo(emailTextField.snp.trailing).inset(12)
+            make.width.height.equalTo(12)
+        }
+        
         passwordRightView.snp.makeConstraints { make in
             make.centerY.equalTo(passwordTextField)
             make.trailing.equalTo(passwordTextField.snp.trailing).inset(12)
@@ -621,6 +647,9 @@ class EmailSignUpViewController: UIViewController {
 extension EmailSignUpViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.addBorder([.bottom], color: .blue400, width: 0.5)
+        if textField == emailTextField {
+            emailClearButton.isHidden = false
+        }
         if textField == passwordTextField {
             passwordRightView.isHidden = false
         }
@@ -632,6 +661,9 @@ extension EmailSignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.layer.addBorder([.bottom], color: .gray300, width: 0.5)
+        if textField == emailTextField {
+            emailClearButton.isHidden = true
+        }
         if textField == passwordTextField {
             passwordRightView.isHidden = true
         }
