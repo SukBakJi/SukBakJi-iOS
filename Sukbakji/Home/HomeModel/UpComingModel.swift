@@ -15,12 +15,12 @@ struct UpComingResultModel : Codable {
 }
 
 struct UpComingResult : Codable {
-    let member_id: Int
-    let university_id: Int
-    let university_name: String
-    var schedule: [UpcomingResponse]
+    let memberId: Int
+    var scheduleList: [UpcomingResponse]
 }
+
 struct UpcomingResponse : Codable {
+    let univId: String
     let content: String
-    let date: String
+    let dday: Int
 }
