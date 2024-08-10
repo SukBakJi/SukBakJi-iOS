@@ -232,8 +232,11 @@ class EmailLoginViewController: UIViewController {
     }
     
     private func navigateToHomeScreen() {
-        let homeVC = successSignUpViewController()
-        self.navigationController?.pushViewController(homeVC, animated: true)
+        let nextVC = UIStoryboard(name: "Main", bundle: nil)
+        guard let rvc = nextVC.instantiateViewController(withIdentifier: "MainTabVC") as? MainTabViewController else {return}
+        
+        rvc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        self.present(rvc, animated: true)
     }
     
     // MARK: - Functional
