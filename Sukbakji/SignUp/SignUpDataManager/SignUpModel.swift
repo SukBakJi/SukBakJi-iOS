@@ -10,7 +10,8 @@ import Foundation
 // MARK: - SignUpModel
 struct SignUpModel: Decodable {
     let isSuccess: Bool?
-    let code, message: String?
+    let code: String?
+    let message: String?
     let result: SignUpResult?
 }
 

@@ -321,8 +321,7 @@
 				412BFBDC2C52257F0099E442 /* SuccessSignUpViewController.swift */,
 				41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */,
 				41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */,
-				417AADB62C606B17002080E0 /* TOSViewController.swift */,
-				417AADBA2C60A8AA002080E0 /* TOSTableViewCell.swift */,
+				417AADD22C676B9B002080E0 /* TOS */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -369,6 +368,15 @@
 				417AADD02C673E42002080E0 /* SignUpDataManager.swift */,
 			);
 			path = SignUpDataManager;
+			sourceTree = "<group>";
+		};
+		417AADD22C676B9B002080E0 /* TOS */ = {
+			isa = PBXGroup;
+			children = (
+				417AADB62C606B17002080E0 /* TOSViewController.swift */,
+				417AADBA2C60A8AA002080E0 /* TOSTableViewCell.swift */,
+			);
+			path = TOS;
 			sourceTree = "<group>";
 		};
 		41EE13362C54016C0037EDD6 /* PopUp */ = {
@@ -909,7 +917,7 @@
 				7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */,
-				7BFDEC3B2C5225E7007280F8 /* Constants.swift in Sources */,
+				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				417AADD12C673E42002080E0 /* SignUpDataManager.swift in Sources */,
 				C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,

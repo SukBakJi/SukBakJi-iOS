@@ -24,16 +24,18 @@ class LoginDataManager {
             case .success(let loginModel):
                 completion(loginModel)
                 
-                if let accessToken = loginModel.result?.accessToken {
+                if let accessToken = loginModel.result?.accessToken,
+                   let refreshToken = loginModel.result?.refreshToken,
+                   let email = loginModel.result?.email {
+                    // 키체인에 저장
                     KeychainHelper.standard.save(Data(accessToken.utf8), service: "access-token", account: "user")
-                }
-                
-                if let refreshToken = loginModel.result?.refreshToken {
                     KeychainHelper.standard.save(Data(refreshToken.utf8), service: "refresh-token", account: "user")
-                }
-        
-                if let email = loginModel.result?.email {
                     KeychainHelper.standard.save(Data(email.utf8), service: "email", account: "user")
+                    
+                    // 비밀번호 저장 추가
+                    if let password = parameters.password {
+                        KeychainHelper.standard.save(Data(password.utf8), service: "password", account: "user")
+                    }
                 }
                 
             case .failure(let error):
