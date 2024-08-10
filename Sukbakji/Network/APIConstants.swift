@@ -19,5 +19,9 @@ struct APIConstants {
     
     static let boardpostURL = baseURL + "/posts"
     
+    static let communityURL = baseURL + "/community"
+    
+    static let mypageURL = baseURL + "/mypage"
+    
     static let calendarURL = baseURL + "/calender"
 }

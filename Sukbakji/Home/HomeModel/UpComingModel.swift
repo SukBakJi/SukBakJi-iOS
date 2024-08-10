@@ -20,7 +20,7 @@ struct UpComingResult : Codable {
 }
 
 struct UpcomingResponse : Codable {
-    let univId: String
+    let univId: Int
     let content: String
     let dday: Int
 }

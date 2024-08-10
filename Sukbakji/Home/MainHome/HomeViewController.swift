@@ -10,13 +10,22 @@ import Alamofire
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var UpComingView: UIView!
     @IBOutlet weak var dDayLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
+    @IBOutlet weak var topButton: UIButton!
+    
     var allDatas: UpComingResult?
     var allDetailDatas: [UpcomingResponse] = []
+    var userData: MyPageResult?
     var memberData: memberIdResult?
+    
+    var userPW: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +35,19 @@ class HomeViewController: UIViewController {
         UpComingView.layer.shadowOpacity = 0.2// any value you want
         UpComingView.layer.shadowRadius = 2 // any value you want
         UpComingView.layer.shadowOffset = .init(width: 0, height: 0.2)
+        
+        topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        topButton.frame = CGRect(x: 309, y: 672, width: 60, height: 60)
+    }
+    
+    @objc func scrollToTop() {
+        // 스크롤뷰의 가장 위로 이동
+        scrollView.setContentOffset(CGPoint(x: 0, y: -scrollView.contentInset.top - 59), animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +60,53 @@ class HomeViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    func getUserPW() {
+        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user"),
+           let retrievedPW = String(data: retrievedData, encoding: .utf8) {
+            userPW = retrievedPW
+            print("Password retrieved and stored in userPW: \(userPW ?? "")")
+        } else {
+            print("Failed to retrieve password.")
+        }
+    }
+    
+    func getUserName() {
+        
+        let url = APIConstants.userURL + "/mypage"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer ",
+        ]
+        
+        AF.request(url, method: .get, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decodedData = try JSONDecoder().decode(MyPageResultModel.self, from: data)
+                    self.userData = decodedData.result
+                    DispatchQueue.main.async {
+                        self.nameLabel.text = self.userData?.name
+                    }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
     }
     
     func getViewAll() {
@@ -57,9 +126,23 @@ class HomeViewController: UIViewController {
                     self.allDetailDatas = self.allDatas?.scheduleList ?? []
                     let upComingdDay = self.allDetailDatas[0].dday
                     let upComingContent = self.allDetailDatas[0].content
+                    let upComingUniv = self.allDetailDatas[0].univId
                     DispatchQueue.main.async {
-                        self.dDayLabel.text = "D-\(upComingdDay)"
-                        self.contentLabel.text = "\(upComingContent)"
+                        if self.allDetailDatas.count >= 1{
+                            self.dDayLabel.text = "D-\(upComingdDay)"
+                            if upComingUniv == 1 {
+                                self.contentLabel.text = "서울대학교 \(upComingContent)"
+                            } else if upComingUniv == 2 {
+                                self.contentLabel.text = "연세대학교 \(upComingContent)"
+                            } else if upComingUniv == 3 {
+                                self.contentLabel.text = "고려대학교 \(upComingContent)"
+                            } else if upComingUniv == 4 {
+                                self.contentLabel.text = "카이스트 \(upComingContent)"
+                            }
+                        } else {
+                            self.dDayLabel.isHidden = true
+                            self.contentLabel.text = "다가오는 일정이 없습니다"
+                        }
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
