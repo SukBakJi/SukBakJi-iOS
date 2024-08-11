@@ -9,6 +9,15 @@ import UIKit
 
 class TOSViewController: UIViewController {
     
+    // MARK: - Properties
+    var isKakaoSignUp: Bool = false
+    
+    private var allChecked: Bool {
+        return tableView.visibleCells
+            .compactMap { $0 as? TOSTableViewCell }
+            .allSatisfy { $0.checkButton.isSelected }
+    }
+    
     // MARK: - Label
     private let titleLabel = UILabel().then {
         let fullText = "석박지를 사용하기 위해서\n아래의 약관 동의가 필요해요"
@@ -37,7 +46,7 @@ class TOSViewController: UIViewController {
         $0.font = UIFont(name: "Pretendard-Regular", size: 12)
         $0.numberOfLines = 0
     }
-
+    
     // MARK: - Button
     private let nextButton = UIButton().then {
         $0.setTitle("다음으로", for: .normal)
@@ -106,13 +115,22 @@ class TOSViewController: UIViewController {
     }
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
-        let EmailSignUpVC = EmailSignUpViewController()
-        self.navigationController?.pushViewController(EmailSignUpVC, animated: true)
-        self.dismiss(animated: true)
-        
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .black
-        self.navigationItem.backBarButtonItem = backBarButtonItem
+        if isKakaoSignUp {
+            let AcademicVerificationVC = AcademicVerificationViewController()
+            self.navigationController?.pushViewController(AcademicVerificationVC, animated: true)
+            
+            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+            backBarButtonItem.tintColor = .black
+            self.navigationItem.backBarButtonItem = backBarButtonItem
+        } else {
+            let EmailSignUpVC = EmailSignUpViewController()
+            self.navigationController?.pushViewController(EmailSignUpVC, animated: true)
+            self.dismiss(animated: true)
+            
+            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+            backBarButtonItem.tintColor = .black
+            self.navigationItem.backBarButtonItem = backBarButtonItem
+        }
     }
     
     // MARK: - viewDidLoad
@@ -126,6 +144,7 @@ class TOSViewController: UIViewController {
         setUpNavigationBar()
         setupViews()
         setupLayout()
+        updateNextButtonState()
     }
     // MARK: - navigationBar Title
     private func setUpNavigationBar(){
@@ -135,10 +154,41 @@ class TOSViewController: UIViewController {
     // MARK: - Functional
     @objc func finalAgreeCheckButtonTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
+        if !sender.isSelected {
+            AllAgreeCheckButton.isSelected = false
+        } else if allChecked {
+            AllAgreeCheckButton.isSelected = true
+        }
+        updateNextButtonState()
     }
     
     @objc func AllAgreeCheckButtonTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
+        let isSelected = sender.isSelected
+        
+        tableView.visibleCells
+            .compactMap { $0 as? TOSTableViewCell }
+            .forEach { $0.checkButton.isSelected = isSelected }
+        
+        finalAgreeCheckButton.isSelected = isSelected
+        updateNextButtonState()
+    }
+    
+    @objc func checkButtonTapped(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if !sender.isSelected {
+            AllAgreeCheckButton.isSelected = false
+        } else if allChecked && finalAgreeCheckButton.isSelected {
+            AllAgreeCheckButton.isSelected = true
+        }
+        updateNextButtonState()
+    }
+    
+    private func updateNextButtonState() {
+        let allSelected = allChecked && finalAgreeCheckButton.isSelected
+        nextButton.isEnabled = allSelected
+        nextButton.backgroundColor = allSelected ? .orange700 : .gray200
+        nextButton.setTitleColor(allSelected ? .white : .gray500, for: .normal)
     }
     
     // MARK: - addView
@@ -243,9 +293,9 @@ class TOSViewController: UIViewController {
     }
     // MARK: - TabelView
     private let consent = ["서비스 이용약관 동의",
-                     "전자금융거래 이용약관 동의",
-                     "개인정보 수집 및 이용 동의",
-                     "커뮤니티 이용규칙 확인"]
+                           "전자금융거래 이용약관 동의",
+                           "개인정보 수집 및 이용 동의",
+                           "커뮤니티 이용규칙 확인"]
     
     private let tableView = UITableView().then {
         $0.register(TOSTableViewCell.self, forCellReuseIdentifier: "TOSTableViewCell")
@@ -273,7 +323,4 @@ extension TOSViewController: UITableViewDelegate, UITableViewDataSource {
         return 52
     }
     
-    @objc func checkButtonTapped(_ sender: UIButton) {
-        sender.isSelected.toggle()
-    }
 }

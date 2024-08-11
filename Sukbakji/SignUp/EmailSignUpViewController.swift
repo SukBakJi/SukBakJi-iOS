@@ -337,7 +337,6 @@ class EmailSignUpViewController: UIViewController {
     }
     
     private func showMessage(message: String) {
-        // 에러 메시지를 표시하는 로직 추가
         print("메시지 : \(message)")
     }
     
