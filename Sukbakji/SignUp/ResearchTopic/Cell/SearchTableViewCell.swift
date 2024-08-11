@@ -9,8 +9,8 @@ import UIKit
 
 class SearchTableViewCell: UITableViewCell {
     let checkButton = UIButton().then {
-        $0.setImage(UIImage(named: "check=off"), for: .normal)
-        $0.setImage(UIImage(named: "check=on"), for: .selected)
+        $0.setImage(UIImage(named: "SBJ_check=off"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_check=on"), for: .selected)
         $0.adjustsImageWhenHighlighted = false
     }
     

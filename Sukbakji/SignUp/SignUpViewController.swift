@@ -14,7 +14,7 @@ class SignUpViewController: UIViewController {
     
     // MARK: - ImageView
     private let symbolImageView = UIImageView().then {
-        $0.image = UIImage(named: "symbol")
+        $0.image = UIImage(named: "SBJ_symbol")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +41,7 @@ class SignUpViewController: UIViewController {
         $0.setTitle("카카오톡으로 회원가입", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.titleLabel?.textAlignment = .center
-        $0.setImage(UIImage(named: "Kakao"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_Kakao"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: -135, bottom: 0, right: 0)
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
@@ -56,7 +56,7 @@ class SignUpViewController: UIViewController {
         $0.setTitle("Apple로 회원가입", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.titleLabel?.textAlignment = .center
-        $0.setImage(UIImage(named: "Apple"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_Apple"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: -165, bottom: 0, right: 0)
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
@@ -70,7 +70,7 @@ class SignUpViewController: UIViewController {
         $0.setTitle("이메일로 회원가입", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.titleLabel?.textAlignment = .center
-        $0.setImage(UIImage(named: "Mail"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_Mail"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: -165, bottom: 0, right: 0)
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)

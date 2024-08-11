@@ -14,7 +14,7 @@ class ResearchTopicViewController: UIViewController {
     
     // MARK: - ErrorState
     private let ErrorIcon = UIImageView().then {
-        $0.image = UIImage(named: "ErrorCircle")
+        $0.image = UIImage(named: "SBJ_ErrorCircle")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -30,19 +30,19 @@ class ResearchTopicViewController: UIViewController {
     }
     // MARK: - ImageView
     private let progressBar = UIImageView().then {
-        $0.image = UIImage(named: "ProgressBar_2")
+        $0.image = UIImage(named: "SBJ_ProgressBar_2")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let topicDot = UIImageView().then {
-        $0.image = UIImage(named: "dot-badge")
+        $0.image = UIImage(named: "SBJ_dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let deletedAlert = UIImageView().then {
-        $0.image = UIImage(named: "deletedAlert")
+        $0.image = UIImage(named: "SBJ_deletedAlert")
         $0.alpha = 0
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
@@ -86,7 +86,7 @@ class ResearchTopicViewController: UIViewController {
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     private let plusButton = UIButton().then {
-        $0.setImage(UIImage(named: "plusButton"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_plusButton"), for: .normal)
         $0.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
     }
     // MARK: - view
