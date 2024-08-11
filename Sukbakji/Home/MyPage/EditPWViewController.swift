@@ -26,6 +26,8 @@ class EditPWViewController: UIViewController {
     
     @IBOutlet weak var setButton: UIButton!
     
+    var userPW: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +61,16 @@ class EditPWViewController: UIViewController {
         currentPWTF.errorfix()
         newPWTF.errorfix()
         newPWAgainTF.errorfix()
+    }
+    
+    func getUserPW() {
+        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user"),
+           let retrievedPW = String(data: retrievedData, encoding: .utf8) {
+            userPW = retrievedPW
+            print("Password retrieved and stored in userPW: \(userPW ?? "")")
+        } else {
+            print("Failed to retrieve password.")
+        }
     }
     
     func settingButton() {
@@ -251,5 +263,9 @@ class EditPWViewController: UIViewController {
     
     @IBAction func newPWAgain_Delete(_ sender: Any) {
         newPWAgainTF.text = ""
+    }
+    
+    @IBAction func change_Tapped(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true)
     }
 }
