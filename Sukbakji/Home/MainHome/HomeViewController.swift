@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
     var userData: MyPageResult?
     var memberData: memberIdResult?
     
-    var userPW: String?
+    var userToken: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +37,8 @@ class HomeViewController: UIViewController {
         UpComingView.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
+        
+        self.getUserToken()
     }
     
     override func viewDidLayoutSubviews() {
@@ -62,11 +64,11 @@ class HomeViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    func getUserPW() {
-        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user"),
-           let retrievedPW = String(data: retrievedData, encoding: .utf8) {
-            userPW = retrievedPW
-            print("Password retrieved and stored in userPW: \(userPW ?? "")")
+    func getUserToken() {
+        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+           let retrievedToken = String(data: retrievedData, encoding: .utf8) {
+            userToken = retrievedToken
+            print("Password retrieved and stored in userPW: \(userToken ?? "")")
         } else {
             print("Failed to retrieve password.")
         }

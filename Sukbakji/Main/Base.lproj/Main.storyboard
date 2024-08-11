@@ -4,21 +4,9 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--HomeVC-->
-        <scene sceneID="eEx-96-N5C">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="HomeVC" id="5sS-ng-nrc" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="MUp-xv-8Sj"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RaX-6l-loW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2492" y="-1287"/>
-        </scene>
         <!--Main Tab View Controller-->
         <scene sceneID="Ths-7K-IB5">
             <objects>
@@ -30,168 +18,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" name="Coquelicot"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="z5g-c0-8O5" kind="relationship" relationship="viewControllers" id="0Tn-dv-4OW"/>
-                        <segue destination="izy-0S-ez8" kind="relationship" relationship="viewControllers" id="Ebs-eF-Kn8"/>
-                        <segue destination="Bzy-yW-f8o" kind="relationship" relationship="viewControllers" id="zEC-Un-0gN"/>
-                        <segue destination="gTt-1i-RW8" kind="relationship" relationship="viewControllers" id="1aC-X2-que"/>
-                        <segue destination="OzF-qj-b7f" kind="relationship" relationship="viewControllers" id="tz4-tH-9Fj"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RoL-Ba-gQr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="912" y="4"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="eb1-n2-koD">
-            <objects>
-                <viewController id="rrj-ed-jw5" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8Al-ER-NaU">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="0r7-hR-rq6"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Cvy-JA-w8a"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="k1r-LQ-OXK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2727.4809160305344" y="3.5211267605633805"/>
-        </scene>
-        <!--디렉토리-->
-        <scene sceneID="7hA-bI-evj">
-            <objects>
-                <viewController id="OzF-qj-b7f" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="a1q-rw-OZv">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="v5V-Kv-iRd"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="디렉토리" image="Sukbakji_Book" id="cvm-1b-2LM">
-                        <color key="badgeColor" name="Coquelicot"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Af4-B3-XuA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1801" y="1294"/>
-        </scene>
-        <!--홈-->
-        <scene sceneID="z9J-qg-Bcc">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="z5g-c0-8O5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="홈" image="Sukbakji_Home" id="5yO-kN-xDo">
-                        <color key="badgeColor" name="Coquelicot"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OCq-FD-xlD">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="5sS-ng-nrc" kind="relationship" relationship="rootViewController" id="xul-94-le5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6J1-4o-AZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1800.7633587786258" y="-1287.323943661972"/>
-        </scene>
-        <!--캘린더-->
-        <scene sceneID="T3a-38-lUN">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="izy-0S-ez8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="캘린더" image="Sukbakji_Calendar" id="01g-bL-7C4">
-                        <color key="badgeColor" red="0.62368756530000002" green="0.62310129400000003" blue="0.64314001799999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WVe-xg-DRd">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="NKd-WK-608" kind="relationship" relationship="rootViewController" id="9EZ-eY-FaZ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="twz-Tr-SWT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1800.7633587786258" y="-641.54929577464793"/>
-        </scene>
-        <!--CalendarVC-->
-        <scene sceneID="0ko-Es-49j">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Calendar" referencedIdentifier="CalendarVC" id="NKd-WK-608" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Tbd-V5-lWw"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tku-dK-0sA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2553" y="-642"/>
-        </scene>
-        <!--게시판-->
-        <scene sceneID="OZp-by-yEx">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bzy-yW-f8o" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="게시판" image="Sukbakji_Board" id="suU-6k-cCB">
-                        <color key="badgeColor" name="Coquelicot"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="P9z-EV-wAz">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="rrj-ed-jw5" kind="relationship" relationship="rootViewController" id="PBP-mn-jGV"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AbH-Ri-l72" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1800.7633587786258" y="3.5211267605633805"/>
-        </scene>
-        <!--채팅-->
-        <scene sceneID="Y7C-6b-8Lq">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gTt-1i-RW8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="채팅" image="Sukbakji_Chatting" id="Cde-my-INk">
-                        <color key="badgeColor" name="Coquelicot"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NTH-xO-ojp">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="lkC-6l-FRq" kind="relationship" relationship="rootViewController" id="qF9-uJ-D4v"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bD2-F2-2gc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1800.7633587786258" y="648.59154929577471"/>
-        </scene>
-        <!--ChattingVC-->
-        <scene sceneID="43e-5v-t3w">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Chatting" referencedIdentifier="ChattingVC" id="lkC-6l-FRq" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="rbR-ok-PKe"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CIr-sP-f66" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2554" y="649"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="Sukbakji_Board" width="32" height="32"/>
-        <image name="Sukbakji_Book" width="32" height="32"/>
-        <image name="Sukbakji_Calendar" width="32" height="32"/>
-        <image name="Sukbakji_Chatting" width="32" height="32"/>
-        <image name="Sukbakji_Home" width="32" height="32"/>
         <namedColor name="Coquelicot">
             <color red="0.92549019607843142" green="0.28627450980392155" blue="0.031372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
