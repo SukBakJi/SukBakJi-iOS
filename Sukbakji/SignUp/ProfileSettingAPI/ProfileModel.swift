@@ -1,20 +1,20 @@
 //
-//  AVModel.swift
+//  ProfileModel.swift
 //  Sukbakji
 //
-//  Created by 오현민 on 8/10/24.
+//  Created by 오현민 on 8/12/24.
 //
 
 import Foundation
 
-struct AVModel : Decodable {
+struct ProfileModel : Decodable {
     let isSuccess: Bool?
     let code: String?
     let message: String?
-    let result: AVResult?
+    let result: ProfileSettingResult?
 }
 
-struct AVResult : Decodable{
+struct ProfileSettingResult : Decodable{
     let name: String?
     let provider: String?
     let degreeLevel: String?

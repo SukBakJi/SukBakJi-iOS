@@ -118,6 +118,7 @@ class EmailSignUpViewController: UIViewController {
         $0.textColor = .gray500
         $0.setPlaceholderColor(.gray500)
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
+        $0.autocapitalizationType = .none
     }
     private let passwordTextField = UITextField().then {
         $0.placeholder = "비밀번호를 6자리 이상 입력해 주세요"
@@ -136,6 +137,7 @@ class EmailSignUpViewController: UIViewController {
         $0.textColor = .gray500
         $0.setPlaceholderColor(.gray500)
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
+        $0.autocapitalizationType = .none
     }
     private let checkPasswordTextField = UITextField().then {
         $0.placeholder = "비밀번호를 한 번 더 입력해 주세요"
@@ -154,6 +156,7 @@ class EmailSignUpViewController: UIViewController {
         $0.textColor = .gray500
         $0.setPlaceholderColor(.gray500)
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
+        $0.autocapitalizationType = .none
     }
     
     // MARK: - Button
@@ -323,6 +326,8 @@ class EmailSignUpViewController: UIViewController {
                     self.navigateToNextPage()
                     print("회원가입 성공 : ID(\(email))")
                     self.showMessage(message: model.message ?? "로그인에 성공했습니다")
+                    
+                    getToken(email, password)
                 }
                 else if let model = SignUpModel, model.code == "MEMBER4002" {
                     changeStateError(emailTextField)
@@ -333,6 +338,36 @@ class EmailSignUpViewController: UIViewController {
         }
         else {
             updateNextButton(enabled: false)
+        }
+    }
+    private func getToken(_ email: String, _ password: String) {
+        let loginDataManager = LoginDataManager()
+        
+        let input = LoginAPIInput(email: email, password: password)
+        print("전송된 데이터: \(input)")
+        print("이메일로 로그인 호출")
+        
+        loginDataManager.loginDataManager(input) {
+            [weak self] loginModel in
+            guard let self = self else { return }
+            
+            printKeychain()
+            
+            // 응답
+            if let model = loginModel, model.code == "COMMON200" {
+                print("토큰 \(model.result?.accessToken ?? "발급실패")")
+            }
+        }
+    }
+    private func printKeychain() {
+        if let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+           let accessToken = String(data: accessTokenData, encoding: .utf8) {
+            print("---- Access Token: \(accessToken) -----")
+        }
+        
+        if let refreshTokenData = KeychainHelper.standard.read(service: "refresh-token", account: "user"),
+           let refreshToken = String(data: refreshTokenData, encoding: .utf8) {
+            print("----- Refresh Token: \(refreshToken) ----- ")
         }
     }
     

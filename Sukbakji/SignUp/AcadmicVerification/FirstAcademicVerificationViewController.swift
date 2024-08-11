@@ -13,6 +13,8 @@ class FirstAcademicVerificationViewController: UIViewController {
     
     private var isUpload = false
     private var isConfirm = false
+    var userName: String?
+    var degreeLevel: DegreeLevel?
     
     // MARK: - imageView
     private let noticeImageView = UIImageView().then {
@@ -235,6 +237,8 @@ class FirstAcademicVerificationViewController: UIViewController {
         UploadCompletedpopUpVC.onClose = {
             self.isConfirm = true
             let ResearchTopicVC = ResearchTopicViewController()
+            ResearchTopicVC.userName = self.userName
+            ResearchTopicVC.degreeLevel = self.degreeLevel
             self.navigationController?.pushViewController(ResearchTopicVC, animated: true)
             
             let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
