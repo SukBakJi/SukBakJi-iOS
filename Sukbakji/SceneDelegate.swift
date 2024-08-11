@@ -13,17 +13,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        
-        let mainViewController = UINavigationController(rootViewController: LoginViewController())
-        //let mainViewController = UINavigationController(rootViewController: successSignUpViewController())
-        
-        window?.rootViewController = mainViewController
-        window?.makeKeyAndVisible()
-    }
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(windowScene: windowScene)
+//        
+//        let mainViewController = UINavigationController(rootViewController: LoginViewController())
+//        //let mainViewController = UINavigationController(rootViewController: successSignUpViewController())
+//        
+//        window?.rootViewController = mainViewController
+//        window?.makeKeyAndVisible()
+//    }
     // SiwftUI로 BoardViewController 실행하기
 //    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 //        guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -46,21 +46,76 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //      }
 //    }
     
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(windowScene: windowScene)
+                
+        let mainViewController = UINavigationController(rootViewController: LoginViewController())
+        
+        window?.rootViewController = mainViewController
+        window?.makeKeyAndVisible()
+    }
+    
+    func switchToTabBarController() {
+        // Main.storyboard에서 탭 바 컨트롤러를 불러오기
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let tabBarController = storyboard.instantiateInitialViewController() as? MainTabViewController else {
+            fatalError("UITabBarController가 Main 스토리보드에 초기 ViewController로 설정되어 있지 않습니다.")
+        }
+        
+        let Homestoryboard = UIStoryboard(name: "Home", bundle: nil)
+        let firstViewController = Homestoryboard.instantiateViewController(withIdentifier: "HomeVC")
+//        let firstNavController = UINavigationController(rootViewController: firstViewController)
+        firstViewController.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "Sukbakji_Home"), tag: 0)
+        
+        let Calendarstoryboard = UIStoryboard(name: "Calendar", bundle: nil)
+        let secondViewController = Calendarstoryboard.instantiateViewController(withIdentifier: "CalendarVC")
+        secondViewController.tabBarItem = UITabBarItem(title: "캘린더", image: UIImage(named: "Sukbakji_Calendar"), tag: 1)
+        
+        let swiftUIBoardView = BoardViewController()
+        let thirdViewController = UIHostingController(rootView: swiftUIBoardView)
+        thirdViewController.tabBarItem = UITabBarItem(title: "게시판", image: UIImage(named: "Sukbakji_Board"), tag: 2)
+        
+        let Chattingstoryboard = UIStoryboard(name: "Chatting", bundle: nil)
+        let fourthViewController = Chattingstoryboard.instantiateViewController(withIdentifier: "ChattingVC")
+        fourthViewController.tabBarItem = UITabBarItem(title: "채팅", image: UIImage(named: "Sukbakji_Chatting"), tag: 3)
+        
+        let swiftUIDirectoryView = DirectoryMainViewController()
+        let fifthViewController = UIHostingController(rootView: swiftUIDirectoryView)
+        fifthViewController.tabBarItem = UITabBarItem(title: "디렉토리", image: UIImage(named: "Sukbakji_Board"), tag: 4)
+                
+        tabBarController.viewControllers = [firstViewController, secondViewController, thirdViewController, fourthViewController, fifthViewController]
+        
+        // UIWindow의 rootViewController를 탭 바 컨트롤러로 설정
+        guard let currentRootViewController = window?.rootViewController else { return }
+                
+                // 탭 바 컨트롤러를 프레젠트합니다.
+        tabBarController.modalTransitionStyle = .coverVertical // 원하는 애니메이션 스타일을 설정
+        tabBarController.modalPresentationStyle = .fullScreen
+                
+        currentRootViewController.present(tabBarController, animated: true, completion: nil)
+    }
+    
+    // MARK: - 카카오 연결
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                _ = AuthController.handleOpenUrl(url: url)
+            }
+        }
+    }
+    
 //    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 //        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
 //        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
 //        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 //        guard let _ = (scene as? UIWindowScene) else { return }
 //    }
-    
-    // MARK: - 카카오 연결
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-            if let url = URLContexts.first?.url {
-                if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                    _ = AuthController.handleOpenUrl(url: url)
-                }
-            }
-        }
+
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

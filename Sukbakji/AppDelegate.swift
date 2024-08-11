@@ -12,8 +12,6 @@ import KakaoSDKAuth
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         KakaoSDK.initSDK(appKey: "0cf7886895af19a6dcd4ec656890f126")
@@ -23,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appearance.configureWithOpaqueBackground()
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                
         return true
     }
     

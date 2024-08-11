@@ -47,7 +47,7 @@ struct BoardMainViewController: View {
                             
                             Text("게시판에서 궁금한 내용을 검색해 보세요!")
                                 .font(.system(size: 14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(Constants.Gray300)
                                 .padding(.vertical, 12) // 상하 여백 추가
                                 .padding(.horizontal, 4) // 아이콘과 텍스트 사이의 여백 추가
                                 .onTapGesture {
@@ -57,7 +57,7 @@ struct BoardMainViewController: View {
                             Spacer() // 아이콘과 텍스트 사이에 빈 공간 추가
                         }
                         .padding(.leading, 4) // 좌우 여백 추가
-                        .background(Color(UIColor.systemGray6)) // 밝은 회색 배경색
+                        .background(Constants.Gray50) // 밝은 회색 배경색
                         .cornerRadius(8) // 모서리 둥글게
                         .shadow(radius: 5) // 그림자 효과
                         .padding(.top, 120) // 검색창과 주황색 배경 간의 공간 조정
@@ -67,13 +67,13 @@ struct BoardMainViewController: View {
                         .padding(.horizontal, 24)
                 )
                 
-                // 탭 메뉴 4개 영역
+                // MARK: -- 탭 메뉴 4개 영역
                 tapMenu()
                 
-                // 최신 질문글
+                // MARK: -- 최신 질문글
                 qnaBoard()
                 
-                //즐겨찾기한 게시판
+                // MARK: -- 즐겨찾기한 게시판
                 
                 if hasBookmarkedBoard {
                     HStack(alignment: .center) {
@@ -145,7 +145,7 @@ struct BoardMainViewController: View {
 }
 
 
-// MARK - tapMenu
+// MARK: -- 컨테이너 버튼 'HOT 게시판', '내가 쓴 글', '스크랩', '댓글 단 글'
 struct tapMenu: View {
     var body: some View {
         VStack(spacing: 8) {
@@ -291,7 +291,7 @@ struct tapMenu: View {
     }
 }
 
-// MARK - qnaBoard
+// MARK: -- 질문 게시판
 struct qnaBoard: View {
     var body: some View {
         Rectangle()
@@ -424,7 +424,7 @@ struct qnaBoard: View {
     }
 }
 
-// MARK: - 즐겨찾기한 게시판
+// MARK: -- 즐겨찾기한 게시판
 struct bookmarkedBoard: View {
     
     @State var progress: Double = 0.0

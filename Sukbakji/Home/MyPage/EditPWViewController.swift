@@ -26,6 +26,10 @@ class EditPWViewController: UIViewController {
     
     @IBOutlet weak var setButton: UIButton!
     
+    private var userPW: String?
+    
+    private var PWData: ChangePWResult!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +55,8 @@ class EditPWViewController: UIViewController {
         currentPWTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         newPWTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         newPWAgainTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        
+        getUserPW()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +65,16 @@ class EditPWViewController: UIViewController {
         currentPWTF.errorfix()
         newPWTF.errorfix()
         newPWAgainTF.errorfix()
+    }
+    
+    func getUserPW() {
+        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user"),
+           let retrievedPW = String(data: retrievedData, encoding: .utf8) {
+            userPW = retrievedPW
+            print("Password retrieved and stored in userPW: \(userPW ?? "")")
+        } else {
+            print("Failed to retrieve password.")
+        }
     }
     
     func settingButton() {
@@ -251,5 +267,11 @@ class EditPWViewController: UIViewController {
     
     @IBAction func newPWAgain_Delete(_ sender: Any) {
         newPWAgainTF.text = ""
+    }
+    
+    @IBAction func change_Tapped(_ sender: Any) {
+        let parameters = ChangePWModel(currentPassword: currentPWTF.text ?? "", newPassword: newPWTF.text ?? "", confirmPassword: newPWAgainTF.text ?? "")
+        APIChangePWPost.instance.SendingChangePW(parameters: parameters) { result in self.PWData = result }
+        self.presentingViewController?.dismiss(animated: true)
     }
 }
