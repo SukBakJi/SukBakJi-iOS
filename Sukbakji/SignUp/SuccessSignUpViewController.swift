@@ -11,7 +11,7 @@ class successSignUpViewController: UIViewController {
     
     // MARK: - ImageView
     private let RocketImage = UIImageView().then {
-        $0.image = UIImage(named: "Rocket")
+        $0.image = UIImage(named: "SBJ_Rocket")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -80,6 +80,7 @@ class successSignUpViewController: UIViewController {
         
         $0.backgroundColor = .orange700
         $0.setTitleColor(.white, for: .normal)
+        $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - viewDidLoad
@@ -97,6 +98,16 @@ class successSignUpViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true) // 뷰 컨트롤러가 사라질 때 나타내기
     }
     
+    // MARK: - Screen transition
+    @objc private func nextButtonTapped() {
+        navigateToHomeScreen()
+    }
+    private func navigateToHomeScreen() {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            return
+        }
+        sceneDelegate.switchToTabBarController()
+    }
     // MARK: - addView
     func setupViews() {
         view.addSubview(RocketImage)

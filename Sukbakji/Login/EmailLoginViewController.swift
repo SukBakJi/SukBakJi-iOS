@@ -20,13 +20,13 @@ class EmailLoginViewController: UIViewController {
     private var autoLoginCheckBoxTopConstraint: Constraint?
     
     private let emailErrorIcon = UIImageView().then {
-        $0.image = UIImage(named: "ErrorCircle")
+        $0.image = UIImage(named: "SBJ_ErrorCircle")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let passwordErrorIcon = UIImageView().then {
-        $0.image = UIImage(named: "ErrorCircle")
+        $0.image = UIImage(named: "SBJ_ErrorCircle")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -52,13 +52,13 @@ class EmailLoginViewController: UIViewController {
     
     // MARK: - ImageView
     private let emailDot = UIImageView().then {
-        $0.image = UIImage(named: "dot-badge")
+        $0.image = UIImage(named: "SBJ_dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let passwordDot = UIImageView().then {
-        $0.image = UIImage(named: "dot-badge")
+        $0.image = UIImage(named: "SBJ_dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -126,8 +126,8 @@ class EmailLoginViewController: UIViewController {
     }
     // MARK: - Button
     private let autoLoginCheckBox = UIButton().then {
-        $0.setImage(UIImage(named: "state=off"), for: .normal)
-        $0.setImage(UIImage(named: "state=on"), for: .selected)
+        $0.setImage(UIImage(named: "SBJ_state=off"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_state=on"), for: .selected)
         $0.setTitle("자동 로그인", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.titleLabel?.textAlignment = .center
@@ -168,18 +168,18 @@ class EmailLoginViewController: UIViewController {
     
     // MARK: - TextField Button
     private var eyeButton = UIButton().then {
-        $0.setImage(UIImage(named: "Password-hidden"), for: .normal)
-        $0.setImage(UIImage(named: "Password-shown"), for: .selected)
+        $0.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
         $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(eyeButtonTapped(_:)), for: .touchUpInside)
     }
     private var passwordClearButton = UIButton().then {
-        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_clear"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(passwordClearButtonTapped(_:)), for: .touchUpInside)
     }
     private var emailClearButton = UIButton().then {
-        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_clear"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.isHidden = true
         $0.addTarget(self, action: #selector(emailClearButtonTapped(_:)), for: .touchUpInside)
@@ -231,11 +231,10 @@ class EmailLoginViewController: UIViewController {
     }
     
     private func navigateToHomeScreen() {
-        let nextVC = UIStoryboard(name: "Main", bundle: nil)
-        guard let rvc = nextVC.instantiateViewController(withIdentifier: "MainTabVC") as? MainTabViewController else {return}
-        
-        rvc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.present(rvc, animated: true)
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            return
+        }
+        sceneDelegate.switchToTabBarController()
     }
     
     // MARK: - Functional
@@ -370,15 +369,15 @@ class EmailLoginViewController: UIViewController {
         tf.layer.addBorder([.bottom], color: .warning400, width: 0.5)
         
         if tf == emailTextField {
-            emailClearButton.setImage(UIImage(named: "clear-red"), for: .normal)
+            emailClearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
             
             emailErrorView.isHidden = false
             updatePasswordLabelConstraint()
             
         } else if tf == passwordTextField {
-            passwordClearButton.setImage(UIImage(named: "clear-red"), for: .normal)
-            eyeButton.setImage(UIImage(named: "Password-hidden-red"), for: .normal)
-            eyeButton.setImage(UIImage(named: "Password-shown-red"), for: .selected)
+            passwordClearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
+            eyeButton.setImage(UIImage(named: "SBJ_Password-hidden-red"), for: .normal)
+            eyeButton.setImage(UIImage(named: "SBJ_Password-shown-red"), for: .selected)
             
             passwordErrorView.isHidden = false
             updateAutoCheckBoxConstraint()
@@ -392,15 +391,15 @@ class EmailLoginViewController: UIViewController {
         tf.layer.addBorder([.bottom], color: .gray300, width: 0.5)
         
         if tf == emailTextField {
-            emailClearButton.setImage(UIImage(named: "clear"), for: .normal)
+            emailClearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
             
             emailErrorView.isHidden = true
             updatePasswordLabelConstraint()
             
         } else if tf == passwordTextField {
-            passwordClearButton.setImage(UIImage(named: "clear"), for: .normal)
-            eyeButton.setImage(UIImage(named: "Password-hidden"), for: .normal)
-            eyeButton.setImage(UIImage(named: "Password-shown"), for: .selected)
+            passwordClearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
+            eyeButton.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
+            eyeButton.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
             
             passwordErrorView.isHidden = true
             updateAutoCheckBoxConstraint()

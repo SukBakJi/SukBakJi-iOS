@@ -15,26 +15,26 @@ class SelectResearchTopicViewController: UIViewController {
     
     // MARK: - ImageView
     private let messagesImageView = UIImageView().then {
-        $0.image = UIImage(named: "Messages")
+        $0.image = UIImage(named: "SBJ_Messages")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let searchIcon = UIImageView().then {
-        $0.image = UIImage(named: "search")
+        $0.image = UIImage(named: "SBJ_search")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let maximumAlert = UIImageView().then {
-        $0.image = UIImage(named: "maximumAlert")
+        $0.image = UIImage(named: "SBJ_maximumAlert")
         $0.alpha = 0
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let noticeIcon = UIImageView().then {
-        $0.image = UIImage(named: "notice_Big")
+        $0.image = UIImage(named: "SBJ_notice_Big")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -73,9 +73,9 @@ class SelectResearchTopicViewController: UIViewController {
     private let searchBar = UISearchBar().then {
         $0.placeholder = "연구 주제를 입력해 주세요"
         $0.backgroundColor = .clear
-        $0.backgroundImage = UIImage(named: "SearchBar")
+        $0.backgroundImage = UIImage(named: "SBJ_SearchBar")
         $0.tintColor = .gray300
-        $0.setImage(UIImage(named: "clear"), for: .clear, state: .normal)
+        $0.setImage(UIImage(named: "SBJ_clear"), for: .clear, state: .normal)
     }
     
     private func setupSearchBar() {
