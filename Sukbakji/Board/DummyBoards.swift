@@ -29,6 +29,59 @@ let containerDummyBoardData = [
     BoardItem(title: "대학원 생활", description: "대학원 생활을 하면서 느낀 점들...", category: "대학원생활", views: 820, comments: 20)
 ]
 
+// MARK: -- 최신 질문글 더미 게시판
+struct Board: View {
+    var boardName: String
+    
+    var body: some View {
+        VStack {
+            Button(action: {
+                print("질문 게시글 tapped")
+            }) {
+                NavigationLink(destination: DummyBoardDetail(boardName: boardName)) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("아삭아삭 석박지")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(Constants.Gray900)
+                        
+                        Text("무를 큼직하게 썰어 양념에 버무린 섞박지는 국밥, 설렁탕 등...")
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundStyle(Constants.Gray900)
+                        
+                        HStack(alignment: .top, spacing: 12) {
+                            Image("chat 1")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                            
+                            Text("12")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
+                            
+                            Image("eye")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                            
+                            Text("1532")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                        }
+                        .frame(maxWidth: .infinity, alignment: .topTrailing)
+                    }
+                    .padding(.horizontal, 18) // VStack 내부 좌우 여백
+                    .padding(.vertical, 16)
+                    .background(Constants.White)
+                    .cornerRadius(12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .inset(by: 0.5)
+                            .stroke(Constants.Gray300, lineWidth: 1) // 원래 색상 Gray100
+                    )
+                    .padding(.horizontal, 24) // 사각형 바깥쪽 좌우 여백을 24로 지정
+                }
+            }
+        }
+    }
+}
 
 // MARK: -- 게시판 메인화면 더미 게시판
 struct ContainerDummyBoard: View {

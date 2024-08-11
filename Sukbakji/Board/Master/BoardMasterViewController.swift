@@ -257,36 +257,19 @@ struct overlayButton: View {
             // 버튼 클릭 시 동작할 코드를 여기에 작성합니다.
             print("글쓰기 버튼 tapped!")
         }) {
-            if selectedButton == "취업후기 게시판" {
-                NavigationLink(destination: EmploymentReviewWriteBoardViewController()) {
-                    ZStack {
-                        Circle()
-                            .frame(width: 60, height: 60)
-                            .background(.clear)
-                            .foregroundStyle(Color(Constants.Orange700))
-                            .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 0)
-                        
-                        Image("edit 1")
-                            .resizable()
-                            .frame(width: 32, height: 32)
-                    }
-                    .buttonStyle(PlainButtonStyle()) // 버튼의 기본 스타일을 제거합니다.
+            NavigationLink(destination: BoardWriteBoardViewController()) {
+                ZStack {
+                    Circle()
+                        .frame(width: 60, height: 60)
+                        .background(.clear)
+                        .foregroundStyle(Color(Constants.Orange700))
+                        .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 0)
+                    
+                    Image("edit 1")
+                        .resizable()
+                        .frame(width: 32, height: 32)
                 }
-            } else {
-                NavigationLink(destination: BoardWriteBoardViewController()) {
-                    ZStack {
-                        Circle()
-                            .frame(width: 60, height: 60)
-                            .background(.clear)
-                            .foregroundStyle(Color(Constants.Orange700))
-                            .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 0)
-                        
-                        Image("edit 1")
-                            .resizable()
-                            .frame(width: 32, height: 32)
-                    }
-                    .buttonStyle(PlainButtonStyle()) // 버튼의 기본 스타일을 제거합니다.
-                }
+                .buttonStyle(PlainButtonStyle()) // 버튼의 기본 스타일을 제거합니다.
             }
         }
     }

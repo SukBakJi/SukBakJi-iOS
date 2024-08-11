@@ -17,6 +17,11 @@ struct EmploymentDummyBoardDetail: View {
     @State var isAuthor = true // 작성자인지 여부를 나타내는 상태 변수
     @State private var showDeletionMessage = false
     @State private var showCommentDeletionMessage = false
+    
+    // 댓글 데이터 상태 변수
+    @State private var comments: [Comment] = [
+        Comment(author: "익명 1", content: "좋은 후기 감사합니다!", date: "2024.08.07 작성", isLiked: false, likeCount: 1)
+    ]
 
     var body: some View {
         NavigationView {
@@ -121,7 +126,7 @@ struct EmploymentDummyBoardDetail: View {
                                 .resizable()
                                 .frame(width: 12, height: 12)
                             
-                            Text("4")
+                            Text("\(comments.count)")
                                 .font(.system(size: 12, weight: .medium))
                                 .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
                             
@@ -145,15 +150,15 @@ struct EmploymentDummyBoardDetail: View {
                             .background(Constants.Gray100)
                             .foregroundStyle(Constants.Gray100)
                         
-                        Comments(isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage)
-                        Divider()
-                            .padding(.horizontal, 24)
-                        
-                        Comments(isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage)
+                        VStack(alignment: .leading, spacing: 16) {
+                            ForEach(comments) { comment in
+                                Comments(comment: comment, isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage)
+                                    .padding(.horizontal, 24)
+                            }
+                        }
                     }
-
                     
-                    WriteComment(commentText: $commentText, showValidationError: $showValidationError)
+                    WriteComment(commentText: $commentText, showValidationError: $showValidationError, addComment: addComment)
                 }
                 
                 // Custom Alert View
@@ -220,7 +225,7 @@ struct EmploymentDummyBoardDetail: View {
                         Spacer()
                         
                         HStack {
-                            Image("Checkbox")
+                            Image("CheckBox")
                                 .resizable()
                                 .frame(width: 18, height: 18)
                             
@@ -244,7 +249,7 @@ struct EmploymentDummyBoardDetail: View {
                         Spacer()
                         
                         HStack {
-                            Image("Checkbox")
+                            Image("CheckBox")
                                 .resizable()
                                 .frame(width: 18, height: 18)
                             
@@ -263,6 +268,23 @@ struct EmploymentDummyBoardDetail: View {
         }
         .navigationBarBackButtonHidden()
     }
+    
+    // 댓글 추가 함수
+    func addComment() {
+        if commentText.isEmpty {
+            showValidationError = true
+        } else {
+            let currentDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy.MM.dd 작성"
+            let dateString = dateFormatter.string(from: currentDate)
+            
+            let newComment = Comment(author: "익명 \(comments.count + 1)", content: commentText, date: dateString, isLiked: false, likeCount: 0)
+            comments.append(newComment)
+            commentText = ""
+            showValidationError = false
+        }
+    }
 }
 
 
@@ -270,4 +292,3 @@ struct EmploymentDummyBoardDetail: View {
 #Preview {
     EmploymentDummyBoardDetail()
 }
-

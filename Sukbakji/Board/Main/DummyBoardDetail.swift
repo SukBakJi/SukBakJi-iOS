@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+struct Comment: Identifiable {
+    let id = UUID()
+    let author: String
+    let content: String
+    let date: String
+    var isLiked: Bool
+    var likeCount: Int
+}
+
 struct DummyBoardDetail: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -18,7 +27,12 @@ struct DummyBoardDetail: View {
     var boardName: String // 게시판 이름을 전달받는 변수
     @State private var showDeletionMessage = false
     @State private var showCommentDeletionMessage = false
-
+    
+    // 댓글 데이터 상태 변수
+    @State private var comments: [Comment] = [
+        Comment(author: "익명 1", content: "무는 깨끗이 씻은 후 지저분한 부분만 필러로 제거한 후 1~1.5cm 두께로 썰어 4등분 해주세요.", date: "2024.07.19 작성", isLiked: false, likeCount: 1)
+    ]
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -108,7 +122,7 @@ struct DummyBoardDetail: View {
                                 .resizable()
                                 .frame(width: 12, height: 12)
                             
-                            Text("4")
+                            Text("\(comments.count)")
                                 .font(.system(size: 12, weight: .medium))
                                 .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
                             
@@ -133,18 +147,15 @@ struct DummyBoardDetail: View {
                             .background(Constants.Gray100)
                             .foregroundStyle(Constants.Gray100)
                         
-                        Comments(isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage)
-                        Divider()
-                            .padding(.horizontal, 24)
-                        
-                        Comments(isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage)
-                        Divider()
-                            .padding(.horizontal, 24)
-                        
-                        Comments(isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage)
+                        VStack(alignment: .leading, spacing: 16) {
+                            ForEach(comments) { comment in
+                                Comments(comment: comment, isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage)
+                                    .padding(.horizontal, 24)
+                            }
+                        }
                     }
                     
-                    WriteComment(commentText: $commentText, showValidationError: $showValidationError)
+                    WriteComment(commentText: $commentText, showValidationError: $showValidationError, addComment: addComment)
                 }
                 
                 // Custom Alert View
@@ -211,7 +222,7 @@ struct DummyBoardDetail: View {
                         Spacer()
                         
                         HStack {
-                            Image("Checkbox")
+                            Image("CheckBox")
                                 .resizable()
                                 .frame(width: 18, height: 18)
                             
@@ -226,7 +237,7 @@ struct DummyBoardDetail: View {
                     .transition(.opacity)
                     .animation(.easeInOut)
                 }
-
+                
                 if showCommentDeletionMessage {
                     Color.black.opacity(0.2)
                         .edgesIgnoringSafeArea(.all)
@@ -235,7 +246,7 @@ struct DummyBoardDetail: View {
                         Spacer()
                         
                         HStack {
-                            Image("Checkbox")
+                            Image("CheckBox")
                                 .resizable()
                                 .frame(width: 18, height: 18)
                             
@@ -254,11 +265,27 @@ struct DummyBoardDetail: View {
         }
         .navigationBarBackButtonHidden()
     }
+    
+    // 댓글 추가 함수
+    func addComment() {
+        if commentText.isEmpty {
+            showValidationError = true
+        } else {
+            let currentDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy.MM.dd 작성"
+            let dateString = dateFormatter.string(from: currentDate)
+            
+            let newComment = Comment(author: "익명 \(comments.count + 1)", content: commentText, date: dateString, isLiked: false, likeCount: 0)
+            comments.append(newComment)
+            commentText = ""
+            showValidationError = false
+        }
+    }
 }
 
 struct Comments: View {
-    @State private var isLiked: Bool = false
-    @State private var likeCount: Int = 1
+    @State var comment: Comment
     @State private var showingCommentSheet = false
     @State private var showCommentAlert = false
     var isAuthor: Bool
@@ -268,7 +295,7 @@ struct Comments: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center) {
-                Text("익명 1")
+                Text(comment.author)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Constants.Gray800)
                 Divider()
@@ -325,34 +352,33 @@ struct Comments: View {
                 }
             }
             
-            Text("2024.07.19 작성")
+            Text(comment.date)
                 .font(.system(size: 10))
                 .foregroundStyle(Constants.Gray500)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             
-            Text("무는 깨끗이 씻은 후 지저분한 부분만 필러로 제거한 후 1~1.5cm 두께로 썰어 4등분 해주세요.")
+            Text(comment.content)
                 .font(.system(size: 12, weight: .medium))
                 .foregroundColor(Constants.Gray900)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             
             HStack(alignment: .center, spacing: 4) {
                 Button(action: {
-                    isLiked.toggle()
-                    if isLiked {
-                        likeCount += 1
+                    comment.isLiked.toggle()
+                    if comment.isLiked {
+                        comment.likeCount += 1
                     } else {
-                        likeCount -= 1
+                        comment.likeCount -= 1
                     }
-                    print("댓글 좋아요 버튼 tapped")
                 }) {
-                    Image(isLiked ? "LikeButton Fill" : "LikeButton")
+                    Image(comment.isLiked ? "LikeButton Fill" : "LikeButton")
                         .resizable()
                         .frame(width: 12, height: 12)
                 }
                 
-                Text("\(likeCount)")
+                Text("\(comment.likeCount)")
                     .font(.system(size: 10))
-                    .foregroundStyle(isLiked ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray300)
+                    .foregroundStyle(comment.isLiked ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray300)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
@@ -366,6 +392,7 @@ struct Comments: View {
 struct WriteComment: View {
     @Binding var commentText: String
     @Binding var showValidationError: Bool
+    var addComment: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -393,13 +420,7 @@ struct WriteComment: View {
                             .foregroundColor(showValidationError && commentText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
                     }
                     Button(action: {
-                        if commentText.isEmpty {
-                            showValidationError = true
-                        } else {
-                            showValidationError = false
-                            print("등록 버튼 tapped: \(commentText)")
-                            commentText = ""
-                        }
+                        addComment()
                     }) {
                         Text("등록")
                             .font(.system(size: 16, weight: .semibold))
@@ -456,4 +477,3 @@ struct BookmarkButtonView: View {
 #Preview {
     DummyBoardDetail(boardName: "질문 게시판")
 }
-
