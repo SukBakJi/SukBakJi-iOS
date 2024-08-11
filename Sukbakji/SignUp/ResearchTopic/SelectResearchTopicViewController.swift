@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class SelectResearchTopicViewController: UIViewController {
+    private var searchWorkItem: DispatchWorkItem?
+    private var searchBarTopConstraint: Constraint?
+    var completionHandler: (([String]) -> Void)?
     
     // MARK: - ImageView
     private let messagesImageView = UIImageView().then {
@@ -22,7 +26,20 @@ class SelectResearchTopicViewController: UIViewController {
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+    private let maximumAlert = UIImageView().then {
+        $0.image = UIImage(named: "maximumAlert")
+        $0.alpha = 0
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private let noticeIcon = UIImageView().then {
+        $0.image = UIImage(named: "notice_Big")
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isHidden = true
+    }
     // MARK: - Label
     private let titleLabel = UILabel().then {
         $0.text = "연구 주제를 입력해 주세요"
@@ -37,7 +54,18 @@ class SelectResearchTopicViewController: UIViewController {
         $0.font = UIFont(name: "Pretendard-Regular", size: 14)
         $0.numberOfLines = 0
     }
-    
+    private let noticeLabel = UILabel().then {
+        //        let fullText = "키워드에 대한 검색 결과 없어요"
+        //        let attributedString = NSMutableAttributedString(string: fullText)
+        //
+        //        let rangeText = (fullText as NSString).range(of: "키워드")
+        //        attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: rangeText)
+        //$0.attributedText = attributedString
+        $0.textAlignment = .center
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.numberOfLines = 1
+        $0.isHidden = true
+    }
     // MARK: - view
     private let containerView = UIView()
     
@@ -77,15 +105,20 @@ class SelectResearchTopicViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+        setDelegate()
         setUpNavigationBar()
         setupViews()
         setupLayout()
         setupSearchBar()
+    }
+    
+    // MARK: - Delegate
+    private func setDelegate() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        searchBar.delegate = self
     }
     
     // MARK: - navigationBar Title
@@ -95,14 +128,36 @@ class SelectResearchTopicViewController: UIViewController {
         let rightButtonItem = UIBarButtonItem(title: "완료",
                                               style: .plain,
                                               target: self,
-                                              action: #selector(completedTouched))
+                                              action: #selector(topicSaveButtonTapped))
         rightButtonItem.tintColor = .black
         self.navigationItem.rightBarButtonItem = rightButtonItem
     }
     
-    @objc func completedTouched() {
+    // 완료버튼
+    @objc func topicSaveButtonTapped() {
+        completionHandler?(selectedTags)
         self.navigationController?.popViewController(animated: true)
     }
+    
+    // MARK: - functional
+    private func updateNotice(enabled: Bool, searchText: String) {
+        if enabled {
+            let fullText = "\(searchText)에 대한 검색 결과가 없어요"
+            let attributedString = NSMutableAttributedString(string: fullText)
+            
+            let rangeText = (fullText as NSString).range(of: searchText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: rangeText)
+            
+            noticeLabel.attributedText = attributedString
+            
+            noticeIcon.isHidden = false
+            noticeLabel.isHidden = false
+        } else {
+            noticeIcon.isHidden = true
+            noticeLabel.isHidden = true
+        }
+    }
+    
     // MARK: - addView
     func setupViews() {
         view.addSubview(containerView)
@@ -115,9 +170,16 @@ class SelectResearchTopicViewController: UIViewController {
         view.addSubview(searchIcon)
         
         view.addSubview(tableView)
+        view.addSubview(maximumAlert)
+        
+        view.addSubview(noticeIcon)
+        view.addSubview(noticeLabel)
     }
     
     // MARK: - setLayout
+    private func updateSearchBarConstraint() {
+        searchBarTopConstraint?.update(offset: collectionView.isHidden ? 0 : 41)
+    }
     func setupLayout() {
         containerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -148,7 +210,7 @@ class SelectResearchTopicViewController: UIViewController {
         }
         
         searchBar.snp.makeConstraints { make in
-            make.top.equalTo(collectionView.snp.bottom).offset(12)
+            searchBarTopConstraint = make.top.equalTo(containerView.snp.bottom).constraint
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
@@ -163,20 +225,41 @@ class SelectResearchTopicViewController: UIViewController {
             make.top.equalTo(searchBar.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
+        
+        maximumAlert.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(59)
+            make.centerX.equalToSuperview()
+        }
+        
+        noticeIcon.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(searchBar.snp.bottom).offset(84)
+            make.width.height.equalTo(32)
+        }
+        
+        noticeLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(noticeIcon.snp.bottom).offset(20)
+        }
     }
     // MARK: - TabelView
-    var DummyTopics = ["HCI", "인공지능", "모빌리티", "사용성평가", "디자인"]
+    struct SearchResultItem {
+        let title: String
+        var isSelected: Bool
+    }
+    var searchResults: [SearchResultItem] = []
+    
     
     let tableView = UITableView().then {
         $0.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.allowsSelection = false
-        $0.isScrollEnabled = false
+        $0.isScrollEnabled = true
     }
     
     // MARK: - CollectionView
-    var DummyTags = ["#HCI", "#인공지능", "#모빌리티", "#사용성평가", "#디자인"]
+    var selectedTags: [String] = []
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
         let layout = LeftAlignedCollectionViewFlowLayout()
@@ -185,6 +268,7 @@ class SelectResearchTopicViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 5, left: 2, bottom: 5, right: 2)
         layout.scrollDirection = .horizontal
         
+        $0.isHidden = true
         $0.isScrollEnabled = true
         $0.showsHorizontalScrollIndicator = false
         $0.collectionViewLayout = layout
@@ -198,13 +282,13 @@ class SelectResearchTopicViewController: UIViewController {
 extension SelectResearchTopicViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DummyTags.count
+        return selectedTags.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell",
                                                             for: indexPath) as? TagCell else { return UICollectionViewCell() }
-        cell.tagLabel.text = DummyTags[indexPath.item]
+        cell.tagLabel.text = "#\(selectedTags[indexPath.item])"
         cell.removeButton.tag = indexPath.item
         cell.removeButton.addTarget(self, action: #selector(removeButtonTapped(_:)), for:.touchUpInside)
         return cell
@@ -213,8 +297,8 @@ extension SelectResearchTopicViewController: UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let label = UILabel().then {
-            $0.font = .systemFont(ofSize: 14)
-            $0.text = DummyTags[indexPath.item]
+            $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+            $0.text = "#\(selectedTags[indexPath.item])"
             $0.sizeToFit()
         }
         let size = label.frame.size
@@ -224,31 +308,151 @@ extension SelectResearchTopicViewController: UICollectionViewDataSource, UIColle
     
     @objc func removeButtonTapped(_ sender: UIButton) {
         let index = sender.tag
-        DummyTags.remove(at: index)
-        collectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+        let removedTag = selectedTags[index]
+        
+        // 배열에서 먼저 요소를 제거
+        if index < selectedTags.count {
+            selectedTags.remove(at: index)
+        }
+        // 테이블뷰의 해당 항목 체크 해제
+        if let tableIndex = searchResults.firstIndex(where: { $0.title == removedTag }) {
+            searchResults[tableIndex].isSelected = false
+            if let cell = tableView.cellForRow(at: IndexPath(row: tableIndex, section: 0)) as? SearchTableViewCell {
+                cell.checkButton.isSelected = false
+            }
+        }
+        
+        // 이후에 컬렉션뷰를 업데이트
+        collectionView.performBatchUpdates({
+            collectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+        }, completion: { _ in
+            // 인덱스가 꼬이지 않도록 새로고침
+            self.collectionView.reloadData()
+        })
+        
+        // 만약 선택된 태그가 모두 제거되었다면 컬렉션뷰를 숨기고 서치바 위치 업데이트
+        if selectedTags.isEmpty {
+            collectionView.isHidden = true
+            updateSearchBarConstraint()
+        }
     }
+    
     
 }
 
 // MARK: - TableView extension
 extension SelectResearchTopicViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DummyTopics.count
+        return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
-        cell.topicLabel.text = DummyTopics[indexPath.item]
+        let item = searchResults[indexPath.item]
+        cell.topicLabel.text = item.title
+        cell.checkButton.isSelected = item.isSelected
         cell.checkButton.addTarget(self, action: #selector(checkButtonTapped(_:)), for: .touchUpInside)
         return cell
     }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
     @objc func checkButtonTapped(_ sender: UIButton) {
+        guard let cell = sender.superview?.superview as? SearchTableViewCell,
+              let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        
         sender.isSelected.toggle()
+        let selectedTopic = searchResults[indexPath.item].title
+        
+        if sender.isSelected {
+            searchResults[indexPath.item].isSelected = true
+            collectionView.isHidden = false
+            if selectedTags.count < 5 {
+                selectedTags.append(selectedTopic)
+            } else {
+                sender.isSelected = false
+                showImageView()
+            }
+        } else {
+            searchResults[indexPath.item].isSelected = false
+            if let index = selectedTags.firstIndex(of: selectedTopic) {
+                selectedTags.remove(at: index)
+            }
+        }
+        if selectedTags.isEmpty{
+            collectionView.isHidden = true
+            updateSearchBarConstraint()
+            collectionView.reloadData()
+        }
+        updateSearchBarConstraint()
+        collectionView.reloadData()
     }
     
+    private func showImageView() {
+        UIView.animate(withDuration: 0, animations: {
+            self.maximumAlert.alpha = 1 // 이미지뷰를 표시
+        }) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                UIView.animate(withDuration: 0.5) {
+                    self.maximumAlert.alpha = 0 // 이미지뷰를 서서히 숨김
+                }
+            }
+        }
+    }
+}
+
+
+// MARK: - searchBar extension
+extension SelectResearchTopicViewController: UISearchBarDelegate {
+    // 사용자가 텍스트 입력 시
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchText.isEmpty {
+            loadResult(searchText)
+        } else {
+            self.searchResults = []
+            self.tableView.reloadData()
+        }
+    }
+    
+    func loadResult(_ searchText: String) {
+        searchWorkItem?.cancel()
+        
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            let researchTopicDataManager = ResearchTopicDataManager()
+            
+            researchTopicDataManager.ResearchTopicDataManager(searchText) {
+                [weak self] ResearchTopicModel in
+                guard let self = self else { return }
+                
+                if let model = ResearchTopicModel, model.code == "COMMON200" {
+                    // 검색 결과 없는 경우
+                    if model.result?.researchTopics?.isEmpty == true {
+                        print("검색결과없음")
+                        updateNotice(enabled: true, searchText: searchText)
+                    } else {
+                        self.updateNotice(enabled: false, searchText: searchText)
+                    }
+                    
+                    // 기존 선택 상태 유지
+                    let selectedTitles = Set(self.selectedTags)
+                    self.searchResults = model.result?.researchTopics?.map {
+                        SearchResultItem(title: $0, isSelected: selectedTitles.contains($0))
+                    } ?? []
+                    
+                    self.tableView.reloadData()
+                } else {
+                    print("검색 실패")
+                }
+            }
+        }
+        
+        searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: workItem)
+    }
 }

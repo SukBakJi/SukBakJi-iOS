@@ -15,6 +15,11 @@
 		412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F922F2C5C9E120042B834 /* FirstAcademicVerificationViewController.swift */; };
 		412F92322C5C9E280042B834 /* SecondAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F92312C5C9E280042B834 /* SecondAcademicVerificationViewController.swift */; };
 		412F92342C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F92332C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift */; };
+		4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E84B2C68ACC500A0F292 /* ResearchTopicDataManager.swift */; };
+		4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E84D2C68ACCC00A0F292 /* ResearchTopicModel.swift */; };
+		4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */; };
+		4168E8532C690BB500A0F292 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8522C690BB500A0F292 /* ProfileModel.swift */; };
+		4168E8552C690BBD00A0F292 /* ProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8542C690BBD00A0F292 /* ProfileDataManager.swift */; };
 		417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADB22C606132002080E0 /* SearchTableViewCell.swift */; };
 		417AADB72C606B17002080E0 /* TOSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADB62C606B17002080E0 /* TOSViewController.swift */; };
 		417AADBB2C60A8AA002080E0 /* TOSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADBA2C60A8AA002080E0 /* TOSTableViewCell.swift */; };
@@ -26,9 +31,6 @@
 		417AADCD2C673E28002080E0 /* SignUpAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADCC2C673E28002080E0 /* SignUpAPIInput.swift */; };
 		417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADCE2C673E32002080E0 /* SignUpModel.swift */; };
 		417AADD12C673E42002080E0 /* SignUpDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD02C673E42002080E0 /* SignUpDataManager.swift */; };
-		417AADD52C67B342002080E0 /* AVAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD42C67B342002080E0 /* AVAPIInput.swift */; };
-		417AADD72C67B388002080E0 /* AVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD62C67B388002080E0 /* AVModel.swift */; };
-		417AADD92C67B39A002080E0 /* AVDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD82C67B39A002080E0 /* AVDataManager.swift */; };
 		41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */; };
 		41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */; };
 		41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */; };
@@ -166,6 +168,11 @@
 		412F922F2C5C9E120042B834 /* FirstAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAcademicVerificationViewController.swift; sourceTree = "<group>"; };
 		412F92312C5C9E280042B834 /* SecondAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondAcademicVerificationViewController.swift; sourceTree = "<group>"; };
 		412F92332C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdAcademicVerificationViewController.swift; sourceTree = "<group>"; };
+		4168E84B2C68ACC500A0F292 /* ResearchTopicDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicDataManager.swift; sourceTree = "<group>"; };
+		4168E84D2C68ACCC00A0F292 /* ResearchTopicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicModel.swift; sourceTree = "<group>"; };
+		4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIInput.swift; sourceTree = "<group>"; };
+		4168E8522C690BB500A0F292 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		4168E8542C690BBD00A0F292 /* ProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManager.swift; sourceTree = "<group>"; };
 		417AADB22C606132002080E0 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		417AADB62C606B17002080E0 /* TOSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSViewController.swift; sourceTree = "<group>"; };
 		417AADBA2C60A8AA002080E0 /* TOSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSTableViewCell.swift; sourceTree = "<group>"; };
@@ -177,9 +184,6 @@
 		417AADCC2C673E28002080E0 /* SignUpAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAPIInput.swift; sourceTree = "<group>"; };
 		417AADCE2C673E32002080E0 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		417AADD02C673E42002080E0 /* SignUpDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDataManager.swift; sourceTree = "<group>"; };
-		417AADD42C67B342002080E0 /* AVAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAPIInput.swift; sourceTree = "<group>"; };
-		417AADD62C67B388002080E0 /* AVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVModel.swift; sourceTree = "<group>"; };
-		417AADD82C67B39A002080E0 /* AVDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVDataManager.swift; sourceTree = "<group>"; };
 		41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignUpViewController.swift; sourceTree = "<group>"; };
 		41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 		412BFBD92C52252C0099E442 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				4168E84F2C690B7000A0F292 /* ProfileSettingAPI */,
 				417AADC92C666253002080E0 /* SignUpAPI */,
 				41EE13452C54EC8A0037EDD6 /* AcadmicVerification */,
 				412F92282C5C95450042B834 /* ResearchTopic */,
@@ -365,11 +370,31 @@
 		412F92282C5C95450042B834 /* ResearchTopic */ = {
 			isa = PBXGroup;
 			children = (
+				4168E8482C68AC9E00A0F292 /* ResearchTopicAPI */,
 				41EE13482C5510960037EDD6 /* Cell */,
 				41EE13462C54ECCD0037EDD6 /* ResearchTopicViewController.swift */,
 				41EE134D2C5529B20037EDD6 /* SelectResearchTopicViewController.swift */,
 			);
 			path = ResearchTopic;
+			sourceTree = "<group>";
+		};
+		4168E8482C68AC9E00A0F292 /* ResearchTopicAPI */ = {
+			isa = PBXGroup;
+			children = (
+				4168E84B2C68ACC500A0F292 /* ResearchTopicDataManager.swift */,
+				4168E84D2C68ACCC00A0F292 /* ResearchTopicModel.swift */,
+			);
+			path = ResearchTopicAPI;
+			sourceTree = "<group>";
+		};
+		4168E84F2C690B7000A0F292 /* ProfileSettingAPI */ = {
+			isa = PBXGroup;
+			children = (
+				4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */,
+				4168E8522C690BB500A0F292 /* ProfileModel.swift */,
+				4168E8542C690BBD00A0F292 /* ProfileDataManager.swift */,
+			);
+			path = ProfileSettingAPI;
 			sourceTree = "<group>";
 		};
 		417AADC02C652203002080E0 /* LoginAPI */ = {
@@ -401,16 +426,6 @@
 			path = TOS;
 			sourceTree = "<group>";
 		};
-		417AADD32C67B330002080E0 /* AVAPI */ = {
-			isa = PBXGroup;
-			children = (
-				417AADD42C67B342002080E0 /* AVAPIInput.swift */,
-				417AADD62C67B388002080E0 /* AVModel.swift */,
-				417AADD82C67B39A002080E0 /* AVDataManager.swift */,
-			);
-			path = AVAPI;
-			sourceTree = "<group>";
-		};
 		41EE13362C54016C0037EDD6 /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -423,7 +438,6 @@
 		41EE13452C54EC8A0037EDD6 /* AcadmicVerification */ = {
 			isa = PBXGroup;
 			children = (
-				417AADD32C67B330002080E0 /* AVAPI */,
 				41EE13362C54016C0037EDD6 /* PopUp */,
 				412F922D2C5C9D360042B834 /* AcademicVerificationViewController.swift */,
 				412F922F2C5C9E120042B834 /* FirstAcademicVerificationViewController.swift */,
@@ -977,7 +991,7 @@
 				417AADCD2C673E28002080E0 /* SignUpAPIInput.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
 				C7ECF5462C6757A700283F06 /* MemberIDModel.swift in Sources */,
-				417AADD72C67B388002080E0 /* AVModel.swift in Sources */,
+				4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */,
 				C70DB28D2C636AB200D6014B /* UniDeleteModel.swift in Sources */,
 				417AADBB2C60A8AA002080E0 /* TOSTableViewCell.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
@@ -988,7 +1002,6 @@
 				417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */,
 				C772B1132C6885F60039B7C7 /* ChangePWPost.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
-				417AADD92C67B39A002080E0 /* AVDataManager.swift in Sources */,
 				417AADD12C673E42002080E0 /* SignUpDataManager.swift in Sources */,
 				C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
@@ -1011,7 +1024,6 @@
 				C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
 				C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */,
-				417AADD52C67B342002080E0 /* AVAPIInput.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
@@ -1041,6 +1053,7 @@
 				7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */,
 				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
 				412F92322C5C9E280042B834 /* SecondAcademicVerificationViewController.swift in Sources */,
+				4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */,
 				7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */,
 				C7E3EF542C60A87000DDC36B /* ADCollectionViewCell.swift in Sources */,
 				C7DA4E442C61252A0092F342 /* AlarmPostModel.swift in Sources */,
@@ -1056,6 +1069,7 @@
 				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,
 				7BFDEC2B2C5224EF007280F8 /* BoardViewController.swift in Sources */,
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
+				4168E8552C690BBD00A0F292 /* ProfileDataManager.swift in Sources */,
 				C7DA4E3F2C611D6D0092F342 /* NetworkResult.swift in Sources */,
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
@@ -1065,6 +1079,7 @@
 				C74DC22B2C59D6AF004BDC25 /* AlarmPatchAPI.swift in Sources */,
 				C72F14DC2C5948E30017B57E /* UniSearchModel.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
+				4168E8532C690BB500A0F292 /* ProfileModel.swift in Sources */,
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
 				417AADBF2C64E40A002080E0 /* placeholder+.swift in Sources */,
@@ -1086,6 +1101,7 @@
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
 				C73ED5382C62844900C455A2 /* EditProfileModel.swift in Sources */,
 				C73ED5322C6279AB00C455A2 /* UpComingModel.swift in Sources */,
+				4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */,
 				C7A434F92C62233200C47F5E /* HexColor.swift in Sources */,
 				C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,

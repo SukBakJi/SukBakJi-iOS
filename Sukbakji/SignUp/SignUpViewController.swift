@@ -119,7 +119,7 @@ class SignUpViewController: UIViewController {
                 }
                 else {
                     print("카카오톡 회원가입 성공")
-
+                    
                     //do something
                     _ = oauthToken
                     self.setUserInfo()
@@ -153,34 +153,36 @@ class SignUpViewController: UIViewController {
     }
     
     // MARK: - Functional
-private func setUserInfo() {
-    UserApi.shared.me {(user, error) in
-        if let error = error {
-            print(error)
-        } else {
-            let email = user?.kakaoAccount?.email
-            print("카카오톡 이메일 : \(email ?? "이메일 없음 오류")")
-            
-            let loginDataManager = LoginDataManager()
-            
-            let input = LoginAPIInput(email: email)
-            print("전송된 데이터: \(input)")
-            print("카카오톡으로 로그인 호출")
-            loginDataManager.kakaoLoginDataManager(input) {
-                [weak self] loginModel in
-                guard let self = self else { return }
+    private func setUserInfo() {
+        UserApi.shared.me {(user, error) in
+            if let error = error {
+                print(error)
+            } else {
+                let email = user?.kakaoAccount?.email
+                print("카카오톡 이메일 : \(email ?? "이메일 없음 오류")")
                 
-
-                // 응답
-                if let model = loginModel, model.code == "COMMON200" {
-                    self.navigateToTOSScreen(isKakaoSignUp: true)
-                    self.showMessage(message: model.message ?? "로그인에 성공했습니다")
+                let loginDataManager = LoginDataManager()
+                
+                let input = LoginAPIInput(email: email)
+                print("전송된 데이터: \(input)")
+                print("카카오톡으로 로그인 호출")
+                loginDataManager.kakaoLoginDataManager(input) {
+                    [weak self] loginModel in
+                    guard let self = self else { return }
+                    
+                    
+                    // 응답
+                    if let model = loginModel, model.code == "COMMON200" {
+                        self.navigateToTOSScreen(isKakaoSignUp: true)
+                        self.showMessage(message: model.message ?? "로그인에 성공했습니다")
+                    } else {
+                        print("카카오톡 로그인 실패")
+                    }
                 }
             }
         }
     }
-}
-
+    
     private func showMessage(message: String) {
         print("메시지 : \(message)")
     }

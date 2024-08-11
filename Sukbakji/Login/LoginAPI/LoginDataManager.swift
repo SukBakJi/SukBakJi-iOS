@@ -14,10 +14,6 @@ class LoginDataManager {
         "Accept": "*/*",
         "Content-Type": "application/json"
     ]
-    //    let kakaoHeaders:HTTPHeaders = [
-    //        "Accept": "*/*",
-    //        "Content-Type": "application/json"
-    //    ]
     
     func loginDataManager(_ parameters: LoginAPIInput, completion: @escaping (LoginModel?) -> Void) {
         AF.request(url,
