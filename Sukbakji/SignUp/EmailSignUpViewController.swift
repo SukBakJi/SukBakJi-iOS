@@ -16,19 +16,19 @@ class EmailSignUpViewController: UIViewController {
     private var nextButtonTopConstraint: Constraint?
     
     private let emailErrorIcon = UIImageView().then {
-        $0.image = UIImage(named: "ErrorCircle")
+        $0.image = UIImage(named: "SBJ_ErrorCircle")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let passwordErrorIcon = UIImageView().then {
-        $0.image = UIImage(named: "ErrorCircle")
+        $0.image = UIImage(named: "SBJ_ErrorCircle")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let checkPasswordErrorIcon = UIImageView().then {
-        $0.image = UIImage(named: "ErrorCircle")
+        $0.image = UIImage(named: "SBJ_ErrorCircle")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -62,19 +62,19 @@ class EmailSignUpViewController: UIViewController {
     }
     // MARK: - ImageView
     private let emailDot = UIImageView().then {
-        $0.image = UIImage(named: "dot-badge")
+        $0.image = UIImage(named: "SBJ_dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let passwordDot = UIImageView().then {
-        $0.image = UIImage(named: "dot-badge")
+        $0.image = UIImage(named: "SBJ_dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let checkPasswordDot = UIImageView().then {
-        $0.image = UIImage(named: "dot-badge")
+        $0.image = UIImage(named: "SBJ_dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -172,30 +172,30 @@ class EmailSignUpViewController: UIViewController {
     
     // MARK: - TextField Button
     private var emailClearButton = UIButton().then {
-        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_clear"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.isHidden = true
         $0.addTarget(self, action: #selector(emailClearButtonTapped(_:)), for: .touchUpInside)
     }
     private var passwordEyeButton = UIButton().then {
-        $0.setImage(UIImage(named: "Password-hidden"), for: .normal)
-        $0.setImage(UIImage(named: "Password-shown"), for: .selected)
+        $0.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
         $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(eyeButtonTapped(_:)), for: .touchUpInside)
     }
     private var passwordClearButton = UIButton().then {
-        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_clear"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(clearButtonTapped(_:)), for: .touchUpInside)
     }
     private var checkPasswordEyeButton = UIButton().then {
-        $0.setImage(UIImage(named: "Password-hidden"), for: .normal)
-        $0.setImage(UIImage(named: "Password-shown"), for: .selected)
+        $0.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
         $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(eyeSecondButtonTapped(_:)), for: .touchUpInside)
     }
     private var checkPasswordClearButton = UIButton().then {
-        $0.setImage(UIImage(named: "clear"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_clear"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(clearSecondButtonTapped(_:)), for: .touchUpInside)
     }
@@ -382,23 +382,23 @@ class EmailSignUpViewController: UIViewController {
         tf.layer.addBorder([.bottom], color: .warning400, width: 0.5)
         
         if tf == emailTextField {
-            emailClearButton.setImage(UIImage(named: "clear-red"), for: .normal)
+            emailClearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
             
             emailErrorView.isHidden = false
             updatePasswordLabelConstraint()
             
         } else if tf == passwordTextField {
-            passwordClearButton.setImage(UIImage(named: "clear-red"), for: .normal)
-            passwordEyeButton.setImage(UIImage(named: "Password-hidden-red"), for: .normal)
-            passwordEyeButton.setImage(UIImage(named: "Password-shown-red"), for: .selected)
+            passwordClearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
+            passwordEyeButton.setImage(UIImage(named: "SBJ_Password-hidden-red"), for: .normal)
+            passwordEyeButton.setImage(UIImage(named: "SBJ_Password-shown-red"), for: .selected)
             
             passwordErrorView.isHidden = false
             updateAutoCheckBoxConstraint()
             
         } else if tf == checkPasswordTextField {
-            checkPasswordClearButton.setImage(UIImage(named: "clear-red"), for: .normal)
-            checkPasswordEyeButton.setImage(UIImage(named: "Password-hidden-red"), for: .normal)
-            checkPasswordEyeButton.setImage(UIImage(named: "Password-shown-red"), for: .selected)
+            checkPasswordClearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
+            checkPasswordEyeButton.setImage(UIImage(named: "SBJ_Password-hidden-red"), for: .normal)
+            checkPasswordEyeButton.setImage(UIImage(named: "SBJ_Password-shown-red"), for: .selected)
             
             checkPasswordErrorView.isHidden = false
             updateNextButtonTopConstraint()
@@ -411,23 +411,23 @@ class EmailSignUpViewController: UIViewController {
         tf.layer.addBorder([.bottom], color: .gray300, width: 0.5)
         
         if tf == emailTextField {
-            emailClearButton.setImage(UIImage(named: "clear"), for: .normal)
+            emailClearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
             
             emailErrorView.isHidden = true
             updatePasswordLabelConstraint()
             
         } else if tf == passwordTextField {
-            passwordClearButton.setImage(UIImage(named: "clear"), for: .normal)
-            passwordEyeButton.setImage(UIImage(named: "Password-hidden"), for: .normal)
-            passwordEyeButton.setImage(UIImage(named: "Password-shown"), for: .selected)
+            passwordClearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
+            passwordEyeButton.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
+            passwordEyeButton.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
             
             passwordErrorView.isHidden = true
             updateAutoCheckBoxConstraint()
             
         } else if tf == checkPasswordTextField {
-            checkPasswordClearButton.setImage(UIImage(named: "clear"), for: .normal)
-            checkPasswordEyeButton.setImage(UIImage(named: "Password-hidden"), for: .normal)
-            checkPasswordEyeButton.setImage(UIImage(named: "Password-shown"), for: .selected)
+            checkPasswordClearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
+            checkPasswordEyeButton.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
+            checkPasswordEyeButton.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
             
             checkPasswordErrorView.isHidden = true
             updateNextButtonTopConstraint()

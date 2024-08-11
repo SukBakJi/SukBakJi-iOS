@@ -15,7 +15,7 @@ class TagCell: UICollectionViewCell {
     }
     
     let removeButton = UIButton().then {
-        $0.setImage(UIImage(named: "cross"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_cross"), for: .normal)
     }
     
     override init(frame: CGRect) {

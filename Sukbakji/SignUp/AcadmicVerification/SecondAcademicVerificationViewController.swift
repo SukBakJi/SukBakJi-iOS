@@ -18,13 +18,13 @@ class SecondAcademicVerificationViewController: UIViewController {
     
     // MARK: - imageView
     private let noticeImageView = UIImageView().then {
-        $0.image = UIImage(named: "notice")
+        $0.image = UIImage(named: "SBJ_notice")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let ImageIcon = UIImageView().then {
-        $0.image = UIImage(named: "ImageIcon")
+        $0.image = UIImage(named: "SBJ_ImageIcon")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +98,7 @@ class SecondAcademicVerificationViewController: UIViewController {
         $0.addTarget(self, action: #selector(changeTabBarView), for: .touchUpInside)
     }
     private let uploadButton = UIButton().then {
-        $0.setImage(UIImage(named: "upload"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_upload"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
     }
     private let nextButton = UIButton().then {
