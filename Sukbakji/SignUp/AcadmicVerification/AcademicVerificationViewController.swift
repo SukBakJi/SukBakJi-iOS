@@ -152,7 +152,6 @@ class AcademicVerificationViewController: UIViewController {
         $0.setImage(UIImage(named: "Verification-off"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(VerificationButtonTapped), for: .touchUpInside)
-        //$0.isEnabled = false
     }
     
     // MARK: - view
@@ -290,6 +289,8 @@ class AcademicVerificationViewController: UIViewController {
         var isNameValid = true
         var isBelongValid = true
         
+        var degreeLevel: DegreeLevel?
+
         if name.isEmpty {
             changeStateError(nameTextField)
             nameErrorLabel.text = "이름은 필수 입력입니다"
@@ -311,6 +312,23 @@ class AcademicVerificationViewController: UIViewController {
         } else {
             belongErrorView.isHidden = true
             isBelongValid = true
+            
+            switch belong {
+            case " 학사 졸업 또는 재학":
+                degreeLevel = .bachelorsStudying
+            case " 석사 재학":
+                degreeLevel = .mastersStudying
+            case " 석사 졸업":
+                degreeLevel = .mastersGraduated
+            case " 박사 재학":
+                degreeLevel = .doctoralStudying
+            case " 박사 졸업":
+                degreeLevel = .doctoralGraduated
+            case " 석박사 통합 재학":
+                degreeLevel = .integratedStudying
+            default:
+                break
+            }
         }
         
         if isNameValid && isBelongValid {

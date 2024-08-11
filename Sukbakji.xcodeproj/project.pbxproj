@@ -26,6 +26,9 @@
 		417AADCD2C673E28002080E0 /* SignUpAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADCC2C673E28002080E0 /* SignUpAPIInput.swift */; };
 		417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADCE2C673E32002080E0 /* SignUpModel.swift */; };
 		417AADD12C673E42002080E0 /* SignUpDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD02C673E42002080E0 /* SignUpDataManager.swift */; };
+		417AADD52C67B342002080E0 /* AVAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD42C67B342002080E0 /* AVAPIInput.swift */; };
+		417AADD72C67B388002080E0 /* AVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD62C67B388002080E0 /* AVModel.swift */; };
+		417AADD92C67B39A002080E0 /* AVDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD82C67B39A002080E0 /* AVDataManager.swift */; };
 		41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */; };
 		41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */; };
 		41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */; };
@@ -54,6 +57,11 @@
 		7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */; };
 		7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */; };
 		7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */; };
+		7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */; };
+		7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D342C6613FD00EF16FB /* LabReviewViewController.swift */; };
+		7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */; };
+		7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */; };
+		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
 		C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */; };
 		C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */; };
@@ -169,6 +177,9 @@
 		417AADCC2C673E28002080E0 /* SignUpAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAPIInput.swift; sourceTree = "<group>"; };
 		417AADCE2C673E32002080E0 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		417AADD02C673E42002080E0 /* SignUpDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDataManager.swift; sourceTree = "<group>"; };
+		417AADD42C67B342002080E0 /* AVAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAPIInput.swift; sourceTree = "<group>"; };
+		417AADD62C67B388002080E0 /* AVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVModel.swift; sourceTree = "<group>"; };
+		417AADD82C67B39A002080E0 /* AVDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVDataManager.swift; sourceTree = "<group>"; };
 		41EE133B2C54A94B0037EDD6 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignUpViewController.swift; sourceTree = "<group>"; };
 		41EE133F2C54ABD70037EDD6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +208,11 @@
 		7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardQnAViewController.swift; sourceTree = "<group>"; };
 		7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardWriteViewController.swift; sourceTree = "<group>"; };
 		7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedLabDetailViewController.swift; sourceTree = "<group>"; };
+		7BFE5D342C6613FD00EF16FB /* LabReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewViewController.swift; sourceTree = "<group>"; };
+		7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectorySearchViewController.swift; sourceTree = "<group>"; };
+		7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabDetailViewController.swift; sourceTree = "<group>"; };
+		7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListGetModel.swift; sourceTree = "<group>"; };
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
@@ -245,13 +261,13 @@
 		C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabCollectionViewCell.swift; sourceTree = "<group>"; };
 		C74DC22A2C59D6AF004BDC25 /* AlarmPatchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPatchAPI.swift; sourceTree = "<group>"; };
 		C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPatchModel.swift; sourceTree = "<group>"; };
-		C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-Regular.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Regular.otf"; sourceTree = "<group>"; };
-		C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-Heavy.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Heavy.otf"; sourceTree = "<group>"; };
-		C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-SemiBold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-SemiBold.otf"; sourceTree = "<group>"; };
-		C75C45782C5A3B6C001DDEA8 /* SUITE-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-ExtraBold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-ExtraBold.otf"; sourceTree = "<group>"; };
-		C75C45792C5A3B6C001DDEA8 /* SUITE-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-Medium.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Medium.otf"; sourceTree = "<group>"; };
-		C75C457A2C5A3B6C001DDEA8 /* SUITE-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-Light.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Light.otf"; sourceTree = "<group>"; };
-		C75C457B2C5A3B6C001DDEA8 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUITE-Bold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Bold.otf"; sourceTree = "<group>"; };
+		C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Regular.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Regular.otf"; sourceTree = "<group>"; };
+		C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Heavy.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Heavy.otf"; sourceTree = "<group>"; };
+		C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-SemiBold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-SemiBold.otf"; sourceTree = "<group>"; };
+		C75C45782C5A3B6C001DDEA8 /* SUITE-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-ExtraBold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-ExtraBold.otf"; sourceTree = "<group>"; };
+		C75C45792C5A3B6C001DDEA8 /* SUITE-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Medium.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Medium.otf"; sourceTree = "<group>"; };
+		C75C457A2C5A3B6C001DDEA8 /* SUITE-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Light.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Light.otf"; sourceTree = "<group>"; };
+		C75C457B2C5A3B6C001DDEA8 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Bold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Bold.otf"; sourceTree = "<group>"; };
 		C75C45832C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C772B1122C6885F60039B7C7 /* ChangePWPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePWPost.swift; sourceTree = "<group>"; };
 		C78DE5592C48176C00A58395 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -311,7 +327,7 @@
 		412BFBD42C5224EB0099E442 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				417AADC02C652203002080E0 /* LoginDataManager */,
+				417AADC02C652203002080E0 /* LoginAPI */,
 				412BFBD52C5225010099E442 /* LoginViewController.swift */,
 				412BFBD72C5225250099E442 /* EmailLoginViewController.swift */,
 			);
@@ -321,7 +337,7 @@
 		412BFBD92C52252C0099E442 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				417AADC92C666253002080E0 /* SignUpDataManager */,
+				417AADC92C666253002080E0 /* SignUpAPI */,
 				41EE13452C54EC8A0037EDD6 /* AcadmicVerification */,
 				412F92282C5C95450042B834 /* ResearchTopic */,
 				412BFBDC2C52257F0099E442 /* SuccessSignUpViewController.swift */,
@@ -356,24 +372,24 @@
 			path = ResearchTopic;
 			sourceTree = "<group>";
 		};
-		417AADC02C652203002080E0 /* LoginDataManager */ = {
+		417AADC02C652203002080E0 /* LoginAPI */ = {
 			isa = PBXGroup;
 			children = (
 				417AADC12C65221D002080E0 /* LoginAPIInput.swift */,
 				417AADC32C652228002080E0 /* LoginModel.swift */,
 				417AADC52C652253002080E0 /* LoginDataManager.swift */,
 			);
-			path = LoginDataManager;
+			path = LoginAPI;
 			sourceTree = "<group>";
 		};
-		417AADC92C666253002080E0 /* SignUpDataManager */ = {
+		417AADC92C666253002080E0 /* SignUpAPI */ = {
 			isa = PBXGroup;
 			children = (
 				417AADCC2C673E28002080E0 /* SignUpAPIInput.swift */,
 				417AADCE2C673E32002080E0 /* SignUpModel.swift */,
 				417AADD02C673E42002080E0 /* SignUpDataManager.swift */,
 			);
-			path = SignUpDataManager;
+			path = SignUpAPI;
 			sourceTree = "<group>";
 		};
 		417AADD22C676B9B002080E0 /* TOS */ = {
@@ -383,6 +399,16 @@
 				417AADBA2C60A8AA002080E0 /* TOSTableViewCell.swift */,
 			);
 			path = TOS;
+			sourceTree = "<group>";
+		};
+		417AADD32C67B330002080E0 /* AVAPI */ = {
+			isa = PBXGroup;
+			children = (
+				417AADD42C67B342002080E0 /* AVAPIInput.swift */,
+				417AADD62C67B388002080E0 /* AVModel.swift */,
+				417AADD82C67B39A002080E0 /* AVDataManager.swift */,
+			);
+			path = AVAPI;
 			sourceTree = "<group>";
 		};
 		41EE13362C54016C0037EDD6 /* PopUp */ = {
@@ -397,6 +423,7 @@
 		41EE13452C54EC8A0037EDD6 /* AcadmicVerification */ = {
 			isa = PBXGroup;
 			children = (
+				417AADD32C67B330002080E0 /* AVAPI */,
 				41EE13362C54016C0037EDD6 /* PopUp */,
 				412F922D2C5C9D360042B834 /* AcademicVerificationViewController.swift */,
 				412F922F2C5C9E120042B834 /* FirstAcademicVerificationViewController.swift */,
@@ -475,6 +502,10 @@
 			isa = PBXGroup;
 			children = (
 				7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */,
+				7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */,
+				7BFE5D342C6613FD00EF16FB /* LabReviewViewController.swift */,
+				7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */,
+				7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */,
 			);
 			path = Directory;
 			sourceTree = "<group>";
@@ -482,6 +513,7 @@
 		7BFDEC292C5224CD007280F8 /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				7BFE5D3A2C68819600EF16FB /* BoardModel */,
 				7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */,
 				7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */,
 				7B969F5E2C541E6000F34A18 /* Main */,
@@ -495,6 +527,14 @@
 				7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */,
 			);
 			path = Board;
+			sourceTree = "<group>";
+		};
+		7BFE5D3A2C68819600EF16FB /* BoardModel */ = {
+			isa = PBXGroup;
+			children = (
+				7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */,
+			);
+			path = BoardModel;
 			sourceTree = "<group>";
 		};
 		A7354ED8CCE70303B1993A7F /* Pods */ = {
@@ -937,6 +977,7 @@
 				417AADCD2C673E28002080E0 /* SignUpAPIInput.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
 				C7ECF5462C6757A700283F06 /* MemberIDModel.swift in Sources */,
+				417AADD72C67B388002080E0 /* AVModel.swift in Sources */,
 				C70DB28D2C636AB200D6014B /* UniDeleteModel.swift in Sources */,
 				417AADBB2C60A8AA002080E0 /* TOSTableViewCell.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
@@ -947,6 +988,7 @@
 				417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */,
 				C772B1132C6885F60039B7C7 /* ChangePWPost.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
+				417AADD92C67B39A002080E0 /* AVDataManager.swift in Sources */,
 				417AADD12C673E42002080E0 /* SignUpDataManager.swift in Sources */,
 				C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
@@ -969,6 +1011,7 @@
 				C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
 				C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */,
+				417AADD52C67B342002080E0 /* AVAPIInput.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
@@ -993,10 +1036,12 @@
 				C75A2D4A2C6128F1000D215B /* AlarmPatchModel.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
+				7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */,
 				C72F14DE2C594DAA0017B57E /* CalendarFBCViewController.swift in Sources */,
 				7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */,
 				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
 				412F92322C5C9E280042B834 /* SecondAcademicVerificationViewController.swift in Sources */,
+				7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */,
 				C7E3EF542C60A87000DDC36B /* ADCollectionViewCell.swift in Sources */,
 				C7DA4E442C61252A0092F342 /* AlarmPostModel.swift in Sources */,
 				C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */,
@@ -1015,12 +1060,17 @@
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
 				C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */,
+				7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */,
+				7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */,
+				C74DC22B2C59D6AF004BDC25 /* AlarmPatchAPI.swift in Sources */,
+				C72F14DC2C5948E30017B57E /* UniSearchModel.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
 				417AADBF2C64E40A002080E0 /* placeholder+.swift in Sources */,
 				7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */,
 				412F92342C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift in Sources */,
+				7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */,
 				C727767E2C48CFDE000A6B25 /* SchoolSelectViewController.swift in Sources */,
 				C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */,
 				C75C45842C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift in Sources */,
@@ -1201,6 +1251,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1230,6 +1281,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

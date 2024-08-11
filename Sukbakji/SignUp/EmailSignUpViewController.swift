@@ -321,7 +321,7 @@ class EmailSignUpViewController: UIViewController {
                 // 응답
                 if let model = SignUpModel, model.code == "COMMON200" {
                     self.navigateToNextPage()
-                    print("회원가입 성공 : ID(\(email)")
+                    print("회원가입 성공 : ID(\(email))")
                     self.showMessage(message: model.message ?? "로그인에 성공했습니다")
                 }
                 else if let model = SignUpModel, model.code == "MEMBER4002" {
@@ -337,7 +337,6 @@ class EmailSignUpViewController: UIViewController {
     }
     
     private func showMessage(message: String) {
-        // 에러 메시지를 표시하는 로직 추가
         print("메시지 : \(message)")
     }
     

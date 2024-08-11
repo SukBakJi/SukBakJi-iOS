@@ -13,6 +13,8 @@ import UIKit
 
 class EmailLoginViewController: UIViewController {
     
+    var isAutoLogin: Bool = false
+    
     // MARK: - ErrorState
     private var passwordLabelTopConstraint: Constraint?
     private var autoLoginCheckBoxTopConstraint: Constraint?
@@ -191,8 +193,6 @@ class EmailLoginViewController: UIViewController {
     }
     
     // MARK: - ViewDidLoad
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -202,8 +202,6 @@ class EmailLoginViewController: UIViewController {
         setupLayout()
         setTextFieldDelegate()
         validateFieldForButtonUpdate()
-        
-        //        loginDataManager.loginDataManager(email: , password:)
     }
     
     // MARK: - setTextField
@@ -232,14 +230,25 @@ class EmailLoginViewController: UIViewController {
     }
     
     private func navigateToHomeScreen() {
-        let homeVC = successSignUpViewController()
-        self.navigationController?.pushViewController(homeVC, animated: true)
+        let nextVC = UIStoryboard(name: "Main", bundle: nil)
+        guard let rvc = nextVC.instantiateViewController(withIdentifier: "MainTabVC") as? MainTabViewController else {return}
+        
+        rvc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        self.present(rvc, animated: true)
     }
     
     // MARK: - Functional
     @objc private func checkBoxTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
+        if sender.isSelected {
+            isAutoLogin = true
+            UserDefaults.standard.set(true, forKey: "isAutoLogin")
+        } else {
+            isAutoLogin = false
+            UserDefaults.standard.set(false, forKey: "isAutoLogin")
+        }
     }
+
     @objc private func eyeButtonTapped(_ sender: UIButton) {
         passwordTextField.isSecureTextEntry.toggle()
         sender.isSelected.toggle()
@@ -294,30 +303,13 @@ class EmailLoginViewController: UIViewController {
             
             let input = LoginAPIInput(email: email, password: password)
             print("전송된 데이터: \(input)")
+            print("이메일로 로그인 호출")
             
             loginDataManager.loginDataManager(input) {
                 [weak self] loginModel in
                 guard let self = self else { return }
                 
-                // 키체인 테스트
-                if let emailData = KeychainHelper.standard.read(service: "email", account: "user"),
-                   let email = String(data: emailData, encoding: .utf8) {
-                    print("----- email : \(email) ----- ")
-                }
-                if let passwordData = KeychainHelper.standard.read(service: "password", account: "user"),
-                   let password = String(data: passwordData, encoding: .utf8) {
-                    print("----- password : \(password) ----- ")
-                }
-                
-                if let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-                   let accessToken = String(data: accessTokenData, encoding: .utf8) {
-                    print("---- Access Token: \(accessToken) -----")
-                }
-                
-                if let refreshTokenData = KeychainHelper.standard.read(service: "refresh-token", account: "user"),
-                   let refreshToken = String(data: refreshTokenData, encoding: .utf8) {
-                    print("----- Refresh Token: \(refreshToken) ----- ")
-                }
+                printKeychain()
                 
                 // 응답
                 if let model = loginModel, model.code == "COMMON200" {
@@ -341,8 +333,29 @@ class EmailLoginViewController: UIViewController {
     }
     
     private func showMessage(message: String) {
-        // 에러 메시지를 표시하는 로직 추가
         print("메시지 : \(message)")
+    }
+    
+    private func printKeychain() {
+        // 키체인 테스트
+        if let emailData = KeychainHelper.standard.read(service: "email", account: "user"),
+           let email = String(data: emailData, encoding: .utf8) {
+            print("----- email : \(email) ----- ")
+        }
+        if let passwordData = KeychainHelper.standard.read(service: "password", account: "user"),
+           let password = String(data: passwordData, encoding: .utf8) {
+            print("----- password : \(password) ----- ")
+        }
+        
+        if let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+           let accessToken = String(data: accessTokenData, encoding: .utf8) {
+            print("---- Access Token: \(accessToken) -----")
+        }
+        
+        if let refreshTokenData = KeychainHelper.standard.read(service: "refresh-token", account: "user"),
+           let refreshToken = String(data: refreshTokenData, encoding: .utf8) {
+            print("----- Refresh Token: \(refreshToken) ----- ")
+        }
     }
     
     // 에러 상태

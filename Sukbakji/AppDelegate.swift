@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        KakaoSDK.initSDK(appKey: "0cf7886895af19a6dcd4ec656890f126")
+        
         // Override point for customization after application launch.
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -19,7 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
         return true
     }
+    
+    // MARK: - 카카오 연결
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                return AuthController.handleOpenUrl(url: url)
+            }
 
+            return false
+        }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
