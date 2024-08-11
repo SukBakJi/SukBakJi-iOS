@@ -2,11 +2,16 @@ import UIKit
 import SnapKit
 import Then
 
+import UIKit
+import SnapKit
+import Then
+
 class TagCell: UICollectionViewCell {
     let tagLabel = UILabel().then {
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textAlignment = .center
         $0.textColor = .white
+        $0.numberOfLines = 1
     }
     
     let removeButton = UIButton().then {
@@ -38,4 +43,9 @@ class TagCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        tagLabel.text = nil
+        removeButton.isHidden = false
+    }
 }

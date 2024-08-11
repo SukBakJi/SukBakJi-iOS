@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+struct ProfileModel : Decodable {
+    let isSuccess: Bool?
+    let code: String?
+    let message: String?
+    let result: ProfileSettingResult?
+}
+
+struct ProfileSettingResult : Decodable{
+    let name: String?
+    let provider: String?
+    let degreeLevel: String?
+    let researchTopics: [String]?
+    let point: Int?
+}
+

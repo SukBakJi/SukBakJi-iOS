@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct ResearchTopicModel: Decodable {
+    let isSuccess: Bool?
+    let code, message: String?
+    let result: ResearchTopicResult?
+}
+
+// MARK: - Result
+struct ResearchTopicResult: Decodable {
+    let researchTopics: [String]?
+}

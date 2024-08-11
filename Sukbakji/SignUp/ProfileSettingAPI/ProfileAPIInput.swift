@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+struct ProfileAPIInput : Encodable {
+    var name : String?
+    var degreeLevel : DegreeLevel
+    var researchTopics: [String] = []
+}
+
+enum DegreeLevel: String, Encodable {
+    case bachelorsStudying = "BACHELORS_STUDYING"
+    case bachelorsGraduated = "BACHELORS_GRADUATED"
+    case mastersStudying = "MASTERS_STUDYING"
+    case mastersGraduated = "MASTERS_GRADUATED"
+    case doctoralStudying = "DOCTORAL_STUDYING"
+    case doctoralGraduated = "DOCTORAL_GRADUATED"
+    case integratedStudying = "INTEGRATED_STUDYING"
+}

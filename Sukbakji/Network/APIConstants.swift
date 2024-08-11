@@ -24,4 +24,6 @@ struct APIConstants {
     static let mypageURL = baseURL + "/mypage"
     
     static let calendarURL = baseURL + "/calender"
+    
+    static let reseachtopicURL = baseURL + "/research-topics"
 }
