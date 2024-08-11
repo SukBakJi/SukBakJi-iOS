@@ -54,6 +54,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
                 
+        let mainViewController = UINavigationController(rootViewController: LoginViewController())
+        
+        window?.rootViewController = mainViewController
+        window?.makeKeyAndVisible()
+    }
+    
+    func switchToTabBarController() {
+        // Main.storyboard에서 탭 바 컨트롤러를 불러오기
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let tabBarController = storyboard.instantiateInitialViewController() as? MainTabViewController else {
             fatalError("UITabBarController가 Main 스토리보드에 초기 ViewController로 설정되어 있지 않습니다.")
@@ -81,29 +89,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         fifthViewController.tabBarItem = UITabBarItem(title: "디렉토리", image: UIImage(named: "Sukbakji_Board"), tag: 4)
                 
         tabBarController.viewControllers = [firstViewController, secondViewController, thirdViewController, fourthViewController, fifthViewController]
+        
+        // UIWindow의 rootViewController를 탭 바 컨트롤러로 설정
+        guard let currentRootViewController = window?.rootViewController else { return }
                 
-        window?.rootViewController = tabBarController
-        window?.makeKeyAndVisible()
+                // 탭 바 컨트롤러를 프레젠트합니다.
+        tabBarController.modalTransitionStyle = .coverVertical // 원하는 애니메이션 스타일을 설정
+        tabBarController.modalPresentationStyle = .fullScreen
+                
+        currentRootViewController.present(tabBarController, animated: true, completion: nil)
     }
     
     // MARK: - 카카오 연결
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-            if let url = URLContexts.first?.url {
-                if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                    _ = AuthController.handleOpenUrl(url: url)
-                }
+        if let url = URLContexts.first?.url {
+            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                _ = AuthController.handleOpenUrl(url: url)
             }
         }
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        window = UIWindow(windowScene: windowScene)
-//        
-//        let mainViewController = UINavigationController(rootViewController: LoginViewController())
-//        //let mainViewController = UINavigationController(rootViewController: successSignUpViewController())
-//        
-//        window?.rootViewController = mainViewController
-//        window?.makeKeyAndVisible()
-//    }
+    }
     
 //    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 //        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
