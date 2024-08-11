@@ -11,7 +11,7 @@ import Alamofire
 class APIChangePWPost {
     static let instance = APIChangePWPost()
     
-    func SendingPostAlarm(parameters: ChangePWModel, handler: @escaping (_ result: ChangePWResult)->(Void)) {
+    func SendingChangePW(parameters: ChangePWModel, handler: @escaping (_ result: ChangePWResult)->(Void)) {
         let url = APIConstants.userURL + "/password"
         let headers:HTTPHeaders = [
             "content-type": "application/json",
