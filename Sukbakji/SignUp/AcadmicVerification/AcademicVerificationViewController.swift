@@ -249,10 +249,13 @@ class AcademicVerificationViewController: UIViewController {
         validateField()
     }
     
-    private func nextPage() {
+    // 데이터 넘겨주기
+    private func nextPage(_ userName: String, _ degreeLevel: DegreeLevel) {
                 switch NextPage {
                 case 1:
                     let FirstAcademicVerificationVC = FirstAcademicVerificationViewController()
+                    FirstAcademicVerificationVC.userName = userName
+                    FirstAcademicVerificationVC.degreeLevel = degreeLevel
                     self.navigationController?.pushViewController(FirstAcademicVerificationVC, animated: true)
         
                     let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -261,6 +264,8 @@ class AcademicVerificationViewController: UIViewController {
         
                 case 2:
                     let SecondAcademicVerificationVC = SecondAcademicVerificationViewController()
+                    SecondAcademicVerificationVC.userName = userName
+                    SecondAcademicVerificationVC.degreeLevel = degreeLevel
                     self.navigationController?.pushViewController(SecondAcademicVerificationVC, animated: true)
         
                     let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -269,6 +274,8 @@ class AcademicVerificationViewController: UIViewController {
         
                 case 3:
                     let ThirdAcademicVerificationVC = ThirdAcademicVerificationViewController()
+                    ThirdAcademicVerificationVC.userName = userName
+                    ThirdAcademicVerificationVC.degreeLevel = degreeLevel
                     self.navigationController?.pushViewController(ThirdAcademicVerificationVC, animated: true)
         
                     let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -288,7 +295,6 @@ class AcademicVerificationViewController: UIViewController {
         let belong = belongSelectButton.currentTitle ?? ""
         var isNameValid = true
         var isBelongValid = true
-        
         var degreeLevel: DegreeLevel?
 
         if name.isEmpty {
@@ -329,11 +335,12 @@ class AcademicVerificationViewController: UIViewController {
             default:
                 break
             }
+            
         }
         
         if isNameValid && isBelongValid {
             print("다음 화면으로 넘어가기")
-            nextPage()
+            nextPage(name, degreeLevel!)
         }
     }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 class successSignUpViewController: UIViewController {
-
+    
     // MARK: - ImageView
     private let RocketImage = UIImageView().then {
         $0.image = UIImage(named: "Rocket")
@@ -91,10 +91,10 @@ class successSignUpViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      navigationController?.setNavigationBarHidden(true, animated: true) // 뷰 컨트롤러가 나타날 때 숨기기
+        navigationController?.setNavigationBarHidden(true, animated: true) // 뷰 컨트롤러가 나타날 때 숨기기
     }
     override func viewWillDisappear(_ animated: Bool) {
-      navigationController?.setNavigationBarHidden(false, animated: true) // 뷰 컨트롤러가 사라질 때 나타내기
+        navigationController?.setNavigationBarHidden(false, animated: true) // 뷰 컨트롤러가 사라질 때 나타내기
     }
     
     // MARK: - addView
@@ -104,7 +104,7 @@ class successSignUpViewController: UIViewController {
         view.addSubview(pointLabel)
         view.addSubview(nextButton)
     }
-   
+    
     // MARK: - setLayout
     func setupLayout() {
         

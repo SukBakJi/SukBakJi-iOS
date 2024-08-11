@@ -15,7 +15,6 @@ class SearchTableViewCell: UITableViewCell {
     }
     
     let topicLabel = UILabel().then {
-        $0.text = "HCI"
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-Medium", size: 18)
         $0.numberOfLines = 1

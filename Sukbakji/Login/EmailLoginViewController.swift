@@ -103,6 +103,7 @@ class EmailLoginViewController: UIViewController {
         $0.textColor = .gray500
         $0.setPlaceholderColor(.gray500)
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
+        $0.autocapitalizationType = .none
     }
     private let passwordTextField = UITextField().then {
         $0.placeholder = "비밀번호를 입력해 주세요"
@@ -121,7 +122,7 @@ class EmailLoginViewController: UIViewController {
         $0.textColor = .gray500
         $0.setPlaceholderColor(.gray500)
         $0.layer.addBorder([.bottom], color: .gray300, width: 0.5)
-        
+        $0.autocapitalizationType = .none
     }
     // MARK: - Button
     private let autoLoginCheckBox = UIButton().then {
@@ -324,6 +325,9 @@ class EmailLoginViewController: UIViewController {
                     passwordErrorLabel.text = "입력한 이메일 또는 비밀번호가 일치하지 않습니다"
                     
                     self.showMessage(message: model.message ?? "로그인에 실패했습니다")
+                }
+                else {
+                    print("이메일로 로그인 실패")
                 }
             }
         } else {
