@@ -26,7 +26,9 @@ class EditPWViewController: UIViewController {
     
     @IBOutlet weak var setButton: UIButton!
     
-    var userPW: String?
+    private var userPW: String?
+    
+    private var PWData: ChangePWResult!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,8 @@ class EditPWViewController: UIViewController {
         currentPWTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         newPWTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         newPWAgainTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        
+        getUserPW()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -266,6 +270,8 @@ class EditPWViewController: UIViewController {
     }
     
     @IBAction func change_Tapped(_ sender: Any) {
+        let parameters = ChangePWModel(currentPassword: currentPWTF.text ?? "", newPassword: newPWTF.text ?? "", confirmPassword: newPWAgainTF.text ?? "")
+        APIChangePWPost.instance.SendingChangePW(parameters: parameters) { result in self.PWData = result }
         self.presentingViewController?.dismiss(animated: true)
     }
 }

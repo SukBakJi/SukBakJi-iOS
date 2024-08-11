@@ -173,11 +173,11 @@ class LoginViewController: UIViewController {
     }
 
     private func navigateToHomeScreen() {
-        let nextVC = UIStoryboard(name: "Main", bundle: nil)
-        guard let rvc = nextVC.instantiateViewController(withIdentifier: "MainTabVC") as? MainTabViewController else {return}
-        
-        rvc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.present(rvc, animated: true)
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            return
+        }
+
+        sceneDelegate.switchToTabBarController()
     }
     
     // MARK: - Functional
