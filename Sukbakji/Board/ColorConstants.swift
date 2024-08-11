@@ -23,4 +23,10 @@ struct Constants {
     static let Gray300: Color = Color(red: 0.88, green: 0.88, blue: 0.88)
     static let Gray200: Color = Color(red: 0.94, green: 0.94, blue: 0.94)
     static let Gray600: Color = Color(red: 0.46, green: 0.46, blue: 0.46)
+    static let fontSize6: CGFloat = 12
+    static let fontSize5: CGFloat = 14
+    static let fontWeightMedium: Font.Weight = .medium
+    static let fontWeightSemibold: Font.Weight = .semibold
+    static let fontSize7: CGFloat = 11
+
 }

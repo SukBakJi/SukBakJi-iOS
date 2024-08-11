@@ -107,7 +107,7 @@ struct DoctoralQnABoard: View {
     }
 }
 
-// MARK: -- 박사 합격후기 게시판
+// MARK: -- 박사 취업후기 게시판
 struct DoctoralReviewBoard: View {
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
