@@ -32,7 +32,7 @@ class MyAlarmViewController: UIViewController {
         myAlarmTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         
         self.configureCalendar()
-//        self.getAlarmList()
+        self.getAlarmList()
     }
     
     func getAlarmList() {
@@ -40,7 +40,7 @@ class MyAlarmViewController: UIViewController {
         let url = APIConstants.calendarURL + "/alarm"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwams5NzExMTNAbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTcyMzI4NTI3Nn0.SaeLTeryo-dRf92ES8Jw13IxmVAen95cMwBL2-UPVCI",
+            "Authorization": "Bearer",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in

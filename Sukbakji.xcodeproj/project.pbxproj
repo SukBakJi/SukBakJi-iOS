@@ -115,6 +115,7 @@
 		C75C45812C5A3B6C001DDEA8 /* SUITE-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C457A2C5A3B6C001DDEA8 /* SUITE-Light.otf */; };
 		C75C45822C5A3B6C001DDEA8 /* SUITE-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C457B2C5A3B6C001DDEA8 /* SUITE-Bold.otf */; };
 		C75C45842C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C45832C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift */; };
+		C772B1132C6885F60039B7C7 /* ChangePWPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C772B1122C6885F60039B7C7 /* ChangePWPost.swift */; };
 		C78DE55A2C48176C00A58395 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE5592C48176C00A58395 /* CalendarCollectionViewCell.swift */; };
 		C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */; };
 		C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55D2C481F8C00A58395 /* DateViewController.swift */; };
@@ -268,6 +269,7 @@
 		C75C457A2C5A3B6C001DDEA8 /* SUITE-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Light.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Light.otf"; sourceTree = "<group>"; };
 		C75C457B2C5A3B6C001DDEA8 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Bold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Bold.otf"; sourceTree = "<group>"; };
 		C75C45832C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateCollectionViewCell.swift; sourceTree = "<group>"; };
+		C772B1122C6885F60039B7C7 /* ChangePWPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePWPost.swift; sourceTree = "<group>"; };
 		C78DE5592C48176C00A58395 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C78DE55D2C481F8C00A58395 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
@@ -639,6 +641,7 @@
 		C73ED5302C62784E00C455A2 /* HomeAPI */ = {
 			isa = PBXGroup;
 			children = (
+				C772B1122C6885F60039B7C7 /* ChangePWPost.swift */,
 			);
 			path = HomeAPI;
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 				C7ECF54C2C677F9200283F06 /* ApplyMentoringViewController.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */,
+				C772B1132C6885F60039B7C7 /* ChangePWPost.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				417AADD92C67B39A002080E0 /* AVDataManager.swift in Sources */,
 				417AADD12C673E42002080E0 /* SignUpDataManager.swift in Sources */,

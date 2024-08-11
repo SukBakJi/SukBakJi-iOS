@@ -29,24 +29,24 @@
             <objects>
                 <viewController storyboardIdentifier="HomeVC" id="Y6W-OH-hqX" customClass="HomeViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="1420"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="1450"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sb3-SE-keZ">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="1420"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="1450"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rQ-PM-1zG">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1420"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1450"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Homelogo" translatesAutoresizingMaskIntoConstraints="NO" id="Y8M-5P-cnS">
-                                                <rect key="frame" x="24" y="-5" width="70" height="32"/>
+                                                <rect key="frame" x="24" y="-4" width="70" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="5Ru-ii-mn5"/>
                                                     <constraint firstAttribute="width" constant="70" id="mhJ-7j-Xh2"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zbb-t8-zym">
-                                                <rect key="frame" x="289" y="-13" width="48" height="48"/>
+                                                <rect key="frame" x="289" y="-12" width="48" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="ccF-39-LU5"/>
                                                     <constraint firstAttribute="width" constant="48" id="qz3-Pj-1n5"/>
@@ -55,7 +55,7 @@
                                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Notification"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4H-J0-OMa">
-                                                <rect key="frame" x="337" y="-13" width="48" height="48"/>
+                                                <rect key="frame" x="337" y="-12" width="48" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="48" id="hJ4-zg-3Wi"/>
                                                     <constraint firstAttribute="height" constant="48" id="pbH-Su-7p8"/>
@@ -255,6 +255,7 @@
                                             <constraint firstItem="qz8-Ct-Snt" firstAttribute="top" secondItem="TLA-AN-gMc" secondAttribute="bottom" constant="20" id="6jG-Ag-o8d"/>
                                             <constraint firstItem="gI6-Rp-DuR" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" id="6rp-aC-nas"/>
                                             <constraint firstAttribute="trailing" secondItem="ylx-Sr-WKR" secondAttribute="trailing" id="7nN-XL-yur"/>
+                                            <constraint firstAttribute="bottom" secondItem="fRc-CD-U69" secondAttribute="bottom" constant="62.670000000000002" id="9oD-iI-3Vi"/>
                                             <constraint firstAttribute="trailing" secondItem="K4H-J0-OMa" secondAttribute="trailing" constant="8" id="Azp-OI-gaf"/>
                                             <constraint firstItem="Zuv-cG-Bv0" firstAttribute="top" secondItem="oVm-t7-APb" secondAttribute="bottom" constant="28" id="DC2-SA-y2U"/>
                                             <constraint firstItem="khr-i7-lcE" firstAttribute="top" secondItem="ylx-Sr-WKR" secondAttribute="bottom" id="G7D-Tj-rbr"/>
@@ -284,10 +285,9 @@
                                             <constraint firstItem="NV1-Ro-PWR" firstAttribute="leading" secondItem="tBQ-Dx-6u5" secondAttribute="trailing" id="hqA-FY-Tkw"/>
                                             <constraint firstItem="jJu-2d-puP" firstAttribute="leading" secondItem="hGO-xK-xBQ" secondAttribute="trailing" constant="4" id="ino-1f-D6G"/>
                                             <constraint firstItem="hGO-xK-xBQ" firstAttribute="top" secondItem="oVm-t7-APb" secondAttribute="bottom" constant="28" id="kZa-oI-TIJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="fRc-CD-U69" secondAttribute="bottom" constant="32.670000000000002" id="lll-hY-ICx"/>
                                             <constraint firstItem="1IX-Hc-Nt7" firstAttribute="top" secondItem="gI6-Rp-DuR" secondAttribute="bottom" constant="8" id="lzj-JX-K8z"/>
-                                            <constraint firstItem="Y8M-5P-cnS" firstAttribute="top" secondItem="5rQ-PM-1zG" secondAttribute="top" constant="-5" id="miB-Aa-Ixw"/>
-                                            <constraint firstItem="TLA-AN-gMc" firstAttribute="top" secondItem="Y8M-5P-cnS" secondAttribute="bottom" constant="8" id="nlo-HI-SYm"/>
+                                            <constraint firstItem="Y8M-5P-cnS" firstAttribute="top" secondItem="5rQ-PM-1zG" secondAttribute="top" constant="-4" id="miB-Aa-Ixw"/>
+                                            <constraint firstItem="TLA-AN-gMc" firstAttribute="top" secondItem="Y8M-5P-cnS" secondAttribute="bottom" constant="7" id="nlo-HI-SYm"/>
                                             <constraint firstItem="hGO-xK-xBQ" firstAttribute="leading" secondItem="Zuv-cG-Bv0" secondAttribute="trailing" id="oBH-zf-pE0"/>
                                             <constraint firstAttribute="trailing" secondItem="oVm-t7-APb" secondAttribute="trailing" constant="24" id="osi-oP-711"/>
                                             <constraint firstItem="ylx-Sr-WKR" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" id="rnF-Tp-1dn"/>
@@ -331,7 +331,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vRz-q5-AJN"/>
-                    <size key="freeformSize" width="393" height="1420"/>
+                    <size key="freeformSize" width="393" height="1450"/>
                     <connections>
                         <outlet property="UpComingView" destination="oVm-t7-APb" id="ojx-nT-XYG"/>
                         <outlet property="contentLabel" destination="iGM-BB-26M" id="0b0-67-cB6"/>
@@ -1259,6 +1259,9 @@
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="비밀번호 변경하기"/>
+                                <connections>
+                                    <action selector="change_Tapped:" destination="nt7-44-wNg" eventType="touchUpInside" id="E7m-lR-NyO"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Gmd-y1-w4T">
                                 <rect key="frame" x="24" y="203.33333333333334" width="345" height="60.000000000000028"/>
@@ -1548,7 +1551,7 @@
                                                     <rect key="frame" x="16" y="134" width="53" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#열화학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGK-Md-8fY">
-                                                            <rect key="frame" x="7.3333333333333321" y="-3" width="38.666666666666671" height="26"/>
+                                                            <rect key="frame" x="7.6666666666666679" y="-3" width="38" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="26" id="OO8-Gr-Ru7"/>
                                                             </constraints>
@@ -1618,13 +1621,13 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아직 즐겨찾기 연구실이 없어요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Y6-ut-iL6">
-                                <rect key="frame" x="112.66666666666669" y="106" width="168" height="17"/>
+                                <rect key="frame" x="113.00000000000001" y="106" width="167.33333333333337" height="17"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="14"/>
                                 <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="연구실을 탐색하고 즐겨찾기를 등록해 보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bF4-im-df1">
-                                <rect key="frame" x="99" y="131" width="195" height="14"/>
+                                <rect key="frame" x="99.333333333333329" y="131" width="194.66666666666669" height="13"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="11"/>
                                 <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1704,7 +1707,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <containerView key="tableFooterView" opaque="NO" contentMode="scaleToFill" id="Lf7-sL-EMn">
-                                            <rect key="frame" x="0.0" y="129" width="393" height="44"/>
+                                            <rect key="frame" x="0.0" y="129.33333015441895" width="393" height="44"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         </containerView>
                                         <prototypes>
@@ -1762,13 +1765,13 @@
                                         </prototypes>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아직 즐겨찾기 게시판이 없어요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m38-qq-DTB">
-                                        <rect key="frame" x="112.66666666666669" y="106" width="168" height="17"/>
+                                        <rect key="frame" x="113.00000000000001" y="106" width="167.33333333333337" height="17"/>
                                         <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="14"/>
                                         <color key="textColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시판을 탐색하고 즐겨찾기를 등록해 보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgV-SA-qzX">
-                                        <rect key="frame" x="99" y="131" width="195" height="14"/>
+                                        <rect key="frame" x="99.333333333333329" y="131" width="194.66666666666669" height="13"/>
                                         <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="11"/>
                                         <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
