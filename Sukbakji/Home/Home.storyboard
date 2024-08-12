@@ -381,7 +381,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcc-nY-xhJ">
-                                                    <rect key="frame" x="18" y="16" width="71" height="20"/>
+                                                    <rect key="frame" x="18" y="16" width="71.333333333333329" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="조회수 TOP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fhh-lW-ny1">
                                                             <rect key="frame" x="7.0000000000000036" y="-3" width="57.333333333333343" height="26"/>
@@ -395,17 +395,17 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.99215686270000003" green="0.91372549020000005" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="Fhh-lW-ny1" firstAttribute="centerX" secondItem="rcc-nY-xhJ" secondAttribute="centerX" id="Dk6-U0-DEj"/>
                                                         <constraint firstAttribute="height" constant="20" id="LJa-pe-8pF"/>
-                                                        <constraint firstAttribute="width" constant="71" id="fMS-xu-0v9"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Fhh-lW-ny1" secondAttribute="trailing" constant="7" id="bm8-nk-5uk"/>
+                                                        <constraint firstItem="Fhh-lW-ny1" firstAttribute="leading" secondItem="rcc-nY-xhJ" secondAttribute="leading" constant="7" id="ho4-GV-UMv"/>
                                                         <constraint firstItem="Fhh-lW-ny1" firstAttribute="centerY" secondItem="rcc-nY-xhJ" secondAttribute="centerY" id="tvR-dC-JjP"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9H-rd-ZfZ">
-                                                    <rect key="frame" x="95" y="16" width="59" height="20"/>
+                                                    <rect key="frame" x="95.333333333333329" y="16" width="55.666666666666671" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="취업정보" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCc-Sd-nSO">
-                                                            <rect key="frame" x="8.6666666666666714" y="-3" width="41.666666666666664" height="26"/>
+                                                            <rect key="frame" x="7" y="-3" width="41.666666666666664" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="26" id="OOS-pm-iR0"/>
                                                             </constraints>
@@ -416,9 +416,9 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
+                                                        <constraint firstItem="KCc-Sd-nSO" firstAttribute="leading" secondItem="I9H-rd-ZfZ" secondAttribute="leading" constant="7" id="1Ms-Ig-WVf"/>
                                                         <constraint firstItem="KCc-Sd-nSO" firstAttribute="centerY" secondItem="I9H-rd-ZfZ" secondAttribute="centerY" id="6mK-68-7ym"/>
-                                                        <constraint firstAttribute="width" constant="59" id="Kbu-q0-jrt"/>
-                                                        <constraint firstItem="KCc-Sd-nSO" firstAttribute="centerX" secondItem="I9H-rd-ZfZ" secondAttribute="centerX" id="Ogu-nJ-y0w"/>
+                                                        <constraint firstAttribute="trailing" secondItem="KCc-Sd-nSO" secondAttribute="trailing" constant="7" id="fAv-jB-otr"/>
                                                         <constraint firstAttribute="height" constant="20" id="t3e-5q-RNe"/>
                                                     </constraints>
                                                 </view>
@@ -520,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mah-Xv-Uv5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="77"/>
+            <point key="canvasLocation" x="1679" y="65"/>
         </scene>
         <!--Mypage View Controller-->
         <scene sceneID="85B-zC-bBI">
@@ -1513,7 +1513,7 @@
                                                         <constraint firstAttribute="height" constant="70" id="oaO-bf-zx3"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oDV-vh-2tg">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_ProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="oDV-vh-2tg">
                                                     <rect key="frame" x="16" y="82" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="JkE-ew-lGE"/>
@@ -1548,10 +1548,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-Nq-tG7">
-                                                    <rect key="frame" x="16" y="134" width="53" height="20"/>
+                                                    <rect key="frame" x="15.999999999999996" y="134" width="52.666666666666657" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#열화학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGK-Md-8fY">
-                                                            <rect key="frame" x="7.6666666666666679" y="-3" width="38" height="26"/>
+                                                            <rect key="frame" x="7" y="-3" width="38.666666666666664" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="26" id="OO8-Gr-Ru7"/>
                                                             </constraints>
@@ -1562,14 +1562,14 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.99215686270000003" green="0.91372549020000005" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="53" id="8hh-fg-RsW"/>
+                                                        <constraint firstItem="IGK-Md-8fY" firstAttribute="leading" secondItem="MVg-Nq-tG7" secondAttribute="leading" constant="7" id="9us-U7-9cj"/>
                                                         <constraint firstItem="IGK-Md-8fY" firstAttribute="centerY" secondItem="MVg-Nq-tG7" secondAttribute="centerY" id="UIa-vA-Dul"/>
                                                         <constraint firstAttribute="height" constant="20" id="a7Q-ax-mvN"/>
-                                                        <constraint firstItem="IGK-Md-8fY" firstAttribute="centerX" secondItem="MVg-Nq-tG7" secondAttribute="centerX" id="eIw-NP-AMV"/>
+                                                        <constraint firstAttribute="trailing" secondItem="IGK-Md-8fY" secondAttribute="trailing" constant="7" id="r0M-Op-Ip3"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ceV-RF-zY8">
-                                                    <rect key="frame" x="75" y="134" width="63" height="20"/>
+                                                    <rect key="frame" x="74.666666666666671" y="134" width="63.000000000000014" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#전기화학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2W-Ng-9F0">
                                                             <rect key="frame" x="7" y="-3" width="49" height="26"/>
@@ -1583,10 +1583,10 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.99215686270000003" green="0.91372549020000005" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="63" id="5jO-CP-0wI"/>
+                                                        <constraint firstAttribute="trailing" secondItem="H2W-Ng-9F0" secondAttribute="trailing" constant="7" id="cHI-kM-lO3"/>
                                                         <constraint firstItem="H2W-Ng-9F0" firstAttribute="centerY" secondItem="ceV-RF-zY8" secondAttribute="centerY" id="hoc-Vy-BEn"/>
-                                                        <constraint firstItem="H2W-Ng-9F0" firstAttribute="centerX" secondItem="ceV-RF-zY8" secondAttribute="centerX" id="htn-YD-Zyk"/>
                                                         <constraint firstAttribute="height" constant="20" id="iho-2Y-EnM"/>
+                                                        <constraint firstItem="H2W-Ng-9F0" firstAttribute="leading" secondItem="ceV-RF-zY8" secondAttribute="leading" constant="7" id="vYX-3G-Yev"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1661,7 +1661,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iH-t4-Pf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="395" y="382"/>
+            <point key="canvasLocation" x="395" y="346"/>
         </scene>
         <!--Favorite Board View Controller-->
         <scene sceneID="z6n-9m-9u0">
@@ -1719,10 +1719,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXN-tt-NgS">
-                                                            <rect key="frame" x="18" y="18" width="67" height="20"/>
+                                                            <rect key="frame" x="18" y="18" width="67.333333333333329" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DIY 소모임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18O-06-Lq1">
-                                                                    <rect key="frame" x="6.6666666666666714" y="-3" width="54" height="26"/>
+                                                                    <rect key="frame" x="7.0000000000000036" y="-3" width="53.333333333333343" height="26"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="26" id="bIG-i7-iAC"/>
                                                                     </constraints>
@@ -1733,14 +1733,14 @@
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.91372549020000005" green="0.92156862750000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstItem="18O-06-Lq1" firstAttribute="centerX" secondItem="ZXN-tt-NgS" secondAttribute="centerX" id="2bp-dB-GIm"/>
-                                                                <constraint firstAttribute="width" constant="67" id="62r-S9-68U"/>
+                                                                <constraint firstItem="18O-06-Lq1" firstAttribute="leading" secondItem="ZXN-tt-NgS" secondAttribute="leading" constant="7" id="95D-Vd-N8c"/>
+                                                                <constraint firstAttribute="trailing" secondItem="18O-06-Lq1" secondAttribute="trailing" constant="7" id="EEc-xT-muv"/>
                                                                 <constraint firstItem="18O-06-Lq1" firstAttribute="centerY" secondItem="ZXN-tt-NgS" secondAttribute="centerY" id="JZe-su-Aa2"/>
                                                                 <constraint firstAttribute="height" constant="20" id="zY5-N1-gdy"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="배고프다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnT-uZ-fML">
-                                                            <rect key="frame" x="97" y="15" width="48.666666666666657" height="26"/>
+                                                            <rect key="frame" x="97.333333333333329" y="15" width="48.666666666666671" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="26" id="SPc-K8-6kp"/>
                                                             </constraints>
@@ -1814,7 +1814,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eMm-U1-gUe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="395" y="-134"/>
+            <point key="canvasLocation" x="395" y="-144"/>
         </scene>
         <!--Profile Tab View Controller-->
         <scene sceneID="iFC-LF-bbc">
@@ -1990,7 +1990,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJg-ga-0YI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="-232"/>
+            <point key="canvasLocation" x="1679" y="-267"/>
         </scene>
     </scenes>
     <resources>
@@ -2014,6 +2014,7 @@
         <image name="Sukbakji_PW_View" width="12" height="12"/>
         <image name="Sukbakji_Pick" width="20" height="20.5"/>
         <image name="Sukbakji_Point" width="20" height="20.5"/>
+        <image name="Sukbakji_ProfileImage" width="40" height="40"/>
         <image name="Sukbakji_View" width="12" height="12"/>
         <image name="Sukbakji_Warning" width="12" height="12"/>
         <image name="plusButton" width="44" height="44"/>

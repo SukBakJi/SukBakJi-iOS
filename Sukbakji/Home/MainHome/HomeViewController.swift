@@ -25,8 +25,6 @@ class HomeViewController: UIViewController {
     var userData: MyPageResult?
     var memberData: memberIdResult?
     
-    var userToken: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,7 +36,10 @@ class HomeViewController: UIViewController {
         
         topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
         
-        self.getUserToken()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            self.getUserName()
+            self.getViewSchedule()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,22 +65,21 @@ class HomeViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    func getUserToken() {
+    func getUserName() {
+        var userToken: String = ""
+        
         if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
            let retrievedToken = String(data: retrievedData, encoding: .utf8) {
             userToken = retrievedToken
-            print("Password retrieved and stored in userPW: \(userToken ?? "")")
+            print("Password retrieved and stored in userPW: \(userToken)")
         } else {
             print("Failed to retrieve password.")
         }
-    }
-    
-    func getUserName() {
         
         let url = APIConstants.userURL + "/mypage"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer ",
+            "Authorization": "Bearer \(userToken)",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in
@@ -89,7 +89,7 @@ class HomeViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(MyPageResultModel.self, from: data)
                     self.userData = decodedData.result
                     DispatchQueue.main.async {
-                        self.nameLabel.text = self.userData?.name
+                        self.nameLabel.text = self.userData?.provider
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
@@ -111,12 +111,21 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func getViewAll() {
+    func getViewSchedule() {
+        var userToken: String = ""
+        
+        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+           let retrievedToken = String(data: retrievedData, encoding: .utf8) {
+            userToken = retrievedToken
+            print("Password retrieved and stored in userPW: \(userToken)")
+        } else {
+            print("Failed to retrieve password.")
+        }
         
         let url = APIConstants.calendarURL + "/schedule"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer ",
+            "Authorization": "Bearer \(userToken)",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in
@@ -126,11 +135,11 @@ class HomeViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(UpComingResultModel.self, from: data)
                     self.allDatas = decodedData.result
                     self.allDetailDatas = self.allDatas?.scheduleList ?? []
-                    let upComingdDay = self.allDetailDatas[0].dday
-                    let upComingContent = self.allDetailDatas[0].content
-                    let upComingUniv = self.allDetailDatas[0].univId
                     DispatchQueue.main.async {
                         if self.allDetailDatas.count >= 1{
+                            let upComingdDay = self.allDetailDatas[0].dday
+                            let upComingContent = self.allDetailDatas[0].content
+                            let upComingUniv = self.allDetailDatas[0].univId
                             self.dDayLabel.text = "D-\(upComingdDay)"
                             if upComingUniv == 1 {
                                 self.contentLabel.text = "서울대학교 \(upComingContent)"
