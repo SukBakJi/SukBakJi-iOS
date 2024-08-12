@@ -10,12 +10,12 @@ import SnapKit
 
 class TOSTableViewCell: UITableViewCell {
     let checkButton = UIButton().then {
-        $0.setImage(UIImage(named: "check=off"), for: .normal)
-        $0.setImage(UIImage(named: "check=on"), for: .selected)
+        $0.setImage(UIImage(named: "SBJ_check=off"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_check=on"), for: .selected)
         $0.adjustsImageWhenHighlighted = false
     }
     let readMoreButton = UIButton().then {
-        $0.setImage(UIImage(named: "arrow-right"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_arrow-right"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
     }
     let consentLabel = UILabel().then {

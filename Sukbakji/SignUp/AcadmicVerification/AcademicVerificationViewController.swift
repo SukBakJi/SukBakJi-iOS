@@ -16,13 +16,13 @@ class AcademicVerificationViewController: UIViewController {
     private var VerificationLabelTopConstraint: Constraint?
     
     private let nameErrorIcon = UIImageView().then {
-        $0.image = UIImage(named: "ErrorCircle")
+        $0.image = UIImage(named: "SBJ_ErrorCircle")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let belongErrorIcon = UIImageView().then {
-        $0.image = UIImage(named: "ErrorCircle")
+        $0.image = UIImage(named: "SBJ_ErrorCircle")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -48,31 +48,31 @@ class AcademicVerificationViewController: UIViewController {
 
     // MARK: - ImageView
     private let progressBar = UIImageView().then {
-        $0.image = UIImage(named: "ProgressBar")
+        $0.image = UIImage(named: "SBJ_ProgressBar")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let nameDot = UIImageView().then {
-        $0.image = UIImage(named: "dot-badge")
+        $0.image = UIImage(named: "SBJ_dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let belongDot = UIImageView().then {
-        $0.image = UIImage(named: "dot-badge")
+        $0.image = UIImage(named: "SBJ_dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let VerificationDot = UIImageView().then {
-        $0.image = UIImage(named: "dot-badge")
+        $0.image = UIImage(named: "SBJ_dot-badge")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let arrowView = UIImageView().then {
-        $0.image = UIImage(named: "down-arrow")
+        $0.image = UIImage(named: "SBJ_down-arrow")
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -149,7 +149,7 @@ class AcademicVerificationViewController: UIViewController {
         $0.addTarget(self, action: #selector(showDropDown), for: .touchUpInside)
     }
     private let VerificationButton = UIButton().then {
-        $0.setImage(UIImage(named: "Verification-off"), for: .normal)
+        $0.setImage(UIImage(named: "SBJ_Verification-off"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(VerificationButtonTapped), for: .touchUpInside)
     }
@@ -222,7 +222,7 @@ class AcademicVerificationViewController: UIViewController {
             self.VerificationButton.backgroundColor = .gray50
             self.VerificationButton.layer.addBorder([.bottom], color: .gray300, width: 0.5)
             
-            self.arrowView.image = UIImage(named: "down-arrow")
+            self.arrowView.image = UIImage(named: "SBJ_down-arrow")
             
             // 경고 상태 해제
             self.belongErrorView.isHidden = true
@@ -236,10 +236,10 @@ class AcademicVerificationViewController: UIViewController {
         }
         
         dropDown.willShowAction = {
-            self.arrowView.image = UIImage(named: "up-arrow")
+            self.arrowView.image = UIImage(named: "SBJ_up-arrow")
         }
         dropDown.cancelAction = {
-            self.arrowView.image = UIImage(named: "down-arrow")
+            self.arrowView.image = UIImage(named: "SBJ_down-arrow")
         }
     }
 
@@ -387,9 +387,9 @@ class AcademicVerificationViewController: UIViewController {
     
     private func updateLoginButton(enabled: Bool) {
         if enabled {
-            VerificationButton.setImage(UIImage(named: "Verification-on"), for: .normal)
+            VerificationButton.setImage(UIImage(named: "SBJ_Verification-on"), for: .normal)
         } else {
-            VerificationButton.setImage(UIImage(named: "Verification-off"), for: .normal)
+            VerificationButton.setImage(UIImage(named: "SBJ_Verification-off"), for: .normal)
         }
     }
     // MARK: - addView
