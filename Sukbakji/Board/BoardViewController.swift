@@ -93,8 +93,11 @@ struct BoardViewController: View {
                 
             }
         }
+        .accessibilityIdentifier("BoardViewController")
     }
+    
 }
+
 
 struct MainView: View {
     var body: some View {
