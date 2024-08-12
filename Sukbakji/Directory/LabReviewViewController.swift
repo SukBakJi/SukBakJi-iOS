@@ -112,12 +112,17 @@ struct LabReviewViewController: View {
                     
                     // 기존 리뷰들을 표시
                     ForEach(reviews) { review in
+                        
+                        
                         NewLabReview(review: review)
+                        
                     }
                     
                     // '연구실 후기 더보기' 버튼
                     if showMoreReviews {
                         ForEach(reviews) { review in
+                            
+                            
                             NewLabReview(review: review)
                         }
                     }
@@ -130,11 +135,11 @@ struct LabReviewViewController: View {
                         HStack {
                             Text("연구실 후기 더보기")
                                 .font(
-                                Font.custom("Pretendard", size: Constants.fontSize7)
-                                    .weight(.regular)
+                                    Font.custom("Pretendard", size: Constants.fontSize7)
+                                        .weight(.regular)
                                 )
                                 .foregroundColor(Constants.Gray900)
-                                
+                            
                             Image("More 2")
                                 .resizable()
                                 .frame(width: 12, height: 12)

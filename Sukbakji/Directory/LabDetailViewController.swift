@@ -114,6 +114,7 @@ struct LabDetailViewController: View {
             .padding(.top, 2)
             
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
