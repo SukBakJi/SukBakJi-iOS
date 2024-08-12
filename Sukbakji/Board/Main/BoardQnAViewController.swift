@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct BoardQnABoardViewController: View {
     
@@ -204,6 +205,32 @@ struct BoardQnABoardViewController: View {
                 showBookmarkOverlay = false
             }
         }
+    }
+    
+    func BoardNewQnAApi(completion: @escaping (Result<[BoardNewQnAResult], Error>) -> Void) {
+        let url = "https://your.api.endpoint.com/api/community/latest-questions" // 실제 API 엔드포인트로 교체
+
+        AF.request(url,
+                   method: .get,
+                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: BoardNewQnAModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        // 성공적으로 데이터를 받아왔을 때, 결과를 반환
+                        completion(.success(data.result))
+                    } else {
+                        // API 호출은 성공했으나, 서버에서 에러 코드를 반환한 경우
+                        let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: data.message])
+                        completion(.failure(error))
+                    }
+                    
+                case .failure(let error):
+                    // 네트워크 오류 또는 응답 디코딩 실패 등의 오류가 발생했을 때
+                    completion(.failure(error))
+                }
+            }
     }
 }
 
