@@ -351,23 +351,11 @@ class EmailSignUpViewController: UIViewController {
             [weak self] loginModel in
             guard let self = self else { return }
             
-            printKeychain()
             
             // 응답
             if let model = loginModel, model.code == "COMMON200" {
                 print("토큰 \(model.result?.accessToken ?? "발급실패")")
             }
-        }
-    }
-    private func printKeychain() {
-        if let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-           let accessToken = String(data: accessTokenData, encoding: .utf8) {
-            print("---- Access Token: \(accessToken) -----")
-        }
-        
-        if let refreshTokenData = KeychainHelper.standard.read(service: "refresh-token", account: "user"),
-           let refreshToken = String(data: refreshTokenData, encoding: .utf8) {
-            print("----- Refresh Token: \(refreshToken) ----- ")
         }
     }
     

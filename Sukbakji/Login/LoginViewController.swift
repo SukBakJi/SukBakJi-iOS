@@ -11,7 +11,7 @@ import SnapKit
 import KakaoSDKUser
 
 class LoginViewController: UIViewController {
-
+    
     // MARK: - ImageView
     private let symbolImageView = UIImageView().then {
         $0.image = UIImage(named: "SBJ_symbol")
@@ -114,10 +114,10 @@ class LoginViewController: UIViewController {
         self.title = "이메일로 로그인"
     }
     override func viewWillAppear(_ animated: Bool) {
-      navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     override func viewWillDisappear(_ animated: Bool) {
-      navigationController?.setNavigationBarHidden(false, animated: true) 
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     // MARK: - Screen transition
@@ -149,7 +149,7 @@ class LoginViewController: UIViewController {
                 }
                 else {
                     print("카카오톡 로그인 성공")
-
+                    
                     //do something
                     _ = oauthToken
                     self.setUserInfo()
@@ -170,12 +170,23 @@ class LoginViewController: UIViewController {
             }
         }
     }
-
+    
     private func navigateToHomeScreen() {
         guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
             return
         }
         sceneDelegate.switchToTabBarController()
+    }
+    
+    private func navigateToTOSScreen(isKakaoSignUp: Bool = false) {
+        let TOSVC = TOSViewController()
+        TOSVC.isKakaoSignUp = isKakaoSignUp
+        self.navigationController?.pushViewController(TOSVC, animated: true)
+        self.dismiss(animated: true)
+        
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     // MARK: - Functional
@@ -196,12 +207,10 @@ class LoginViewController: UIViewController {
                     [weak self] loginModel in
                     guard let self = self else { return }
                     
-                    printKeychain()
-
                     // 응답
                     if let model = loginModel, model.code == "COMMON200" {
-                        self.navigateToHomeScreen()
                         self.showMessage(message: model.message ?? "로그인에 성공했습니다")
+                        checkIsSignUp()
                     }
                     else {
                         print("카카오톡 로그인 실패")
@@ -210,32 +219,32 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
-        private func showMessage(message: String) {
-            print("메시지 : \(message)")
-        }
+    private func checkIsSignUp() {
+        let profileDataManager = ProfileDataManager()
         
-    private func printKeychain() {
-        // 키체인 테스트
-        if let emailData = KeychainHelper.standard.read(service: "email", account: "user"),
-           let email = String(data: emailData, encoding: .utf8) {
-            print("----- email : \(email) ----- ")
-        }
-        if let passwordData = KeychainHelper.standard.read(service: "password", account: "user"),
-           let password = String(data: passwordData, encoding: .utf8) {
-            print("----- password : \(password) ----- ")
-        }
-        
-        if let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-           let accessToken = String(data: accessTokenData, encoding: .utf8) {
-            print("---- Access Token: \(accessToken) -----")
-        }
-        
-        if let refreshTokenData = KeychainHelper.standard.read(service: "refresh-token", account: "user"),
-           let refreshToken = String(data: refreshTokenData, encoding: .utf8) {
-            print("----- Refresh Token: \(refreshToken) ----- ")
+        profileDataManager.ProfileGetDataManager() {
+            [weak self] profileModel in
+            guard let self = self else { return }
+            
+            // 응답
+            if let model = profileModel, model.result?.name == nil {
+                print("프로필 설정 진행 안 함 -> 회원가입으로 이동")
+                navigateToTOSScreen(isKakaoSignUp: true)
+            }
+            else if let model = profileModel, model.result?.name != nil {
+                print("프로필 설정 진행 되어있음 -> 홈화면으로 이동")
+                self.navigateToHomeScreen()
+            }
+            else {
+                print("프로필 불러오기 실패")
+            }
         }
     }
+    
+    private func showMessage(message: String) {
+        print("메시지 : \(message)")
+    }
+    
     // MARK: - addView
     func setupViews() {
         view.addSubview(symbolImageView)

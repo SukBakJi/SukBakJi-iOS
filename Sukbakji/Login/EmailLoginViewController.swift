@@ -240,14 +240,10 @@ class EmailLoginViewController: UIViewController {
     // MARK: - Functional
     @objc private func checkBoxTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
-        if sender.isSelected {
-            isAutoLogin = true
-            UserDefaults.standard.set(true, forKey: "isAutoLogin")
-        } else {
-            isAutoLogin = false
-            UserDefaults.standard.set(false, forKey: "isAutoLogin")
-        }
+        isAutoLogin = sender.isSelected
+        UserDefaults.standard.set(isAutoLogin, forKey: "isAutoLogin")
     }
+
 
     @objc private func eyeButtonTapped(_ sender: UIButton) {
         passwordTextField.isSecureTextEntry.toggle()
@@ -309,8 +305,6 @@ class EmailLoginViewController: UIViewController {
                 [weak self] loginModel in
                 guard let self = self else { return }
                 
-                printKeychain()
-                
                 // 응답
                 if let model = loginModel, model.code == "COMMON200" {
                     self.navigateToHomeScreen()
@@ -337,28 +331,6 @@ class EmailLoginViewController: UIViewController {
     
     private func showMessage(message: String) {
         print("메시지 : \(message)")
-    }
-    
-    private func printKeychain() {
-        // 키체인 테스트
-        if let emailData = KeychainHelper.standard.read(service: "email", account: "user"),
-           let email = String(data: emailData, encoding: .utf8) {
-            print("----- email : \(email) ----- ")
-        }
-        if let passwordData = KeychainHelper.standard.read(service: "password", account: "user"),
-           let password = String(data: passwordData, encoding: .utf8) {
-            print("----- password : \(password) ----- ")
-        }
-        
-        if let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-           let accessToken = String(data: accessTokenData, encoding: .utf8) {
-            print("---- Access Token: \(accessToken) -----")
-        }
-        
-        if let refreshTokenData = KeychainHelper.standard.read(service: "refresh-token", account: "user"),
-           let refreshToken = String(data: refreshTokenData, encoding: .utf8) {
-            print("----- Refresh Token: \(refreshToken) ----- ")
-        }
     }
     
     // 에러 상태

@@ -65,14 +65,14 @@ class HomeViewController: UIViewController {
     }
     
     func getUserToken() {
-        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-           let retrievedToken = String(data: retrievedData, encoding: .utf8) {
+        if let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
             userToken = retrievedToken
-            print("Password retrieved and stored in userPW: \(userToken ?? "")")
+            print("Token retrieved and stored in userToken: \(userToken ?? "")")
         } else {
-            print("Failed to retrieve password.")
+            print("Failed to retrieve token.")
         }
     }
+
     
     func getUserName() {
         
