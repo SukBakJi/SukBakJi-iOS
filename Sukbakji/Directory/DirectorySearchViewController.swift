@@ -137,7 +137,7 @@ struct DirectorySearchViewController: View {
                                                 Button(action: {
                                                     deleteSearch(search)
                                                 }) {
-                                                    Image("Cross")
+                                                    Image("cross")
                                                         .resizable()
                                                         .frame(width: 12, height: 12)
                                                         .foregroundColor(Constants.Gray300)

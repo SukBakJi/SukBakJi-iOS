@@ -6,29 +6,32 @@
 //
 
 import UIKit
+import Alamofire
 
-class SchoolSelectViewController: UIViewController {
-    
-    @IBOutlet weak var schoolCV: UICollectionView!
+class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
+
     @IBOutlet weak var SchoolTV: UITableView!
     @IBOutlet weak var noResultImage: UIImageView!
     @IBOutlet weak var noResultSV: UIStackView!
     
     @IBOutlet weak var schoolSearchTF: UITextField!
     @IBOutlet weak var setButton: UIButton!
+
+    var uniData: UniResponse?
+    var allUniDatas: [UniListResponse] = []
+    
+    var selectedIndex: IndexPath?
+    
+    var searchTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.schoolCV.dataSource = self
-        self.schoolCV.delegate = self
+        
         self.SchoolTV.dataSource = self
         self.SchoolTV.delegate = self
         
-        self.SchoolTV.isHidden = true
-        
         schoolSearchTF.errorfix()
-        schoolSearchTF.addTarget(self, action: #selector(schoolSearch(_:)), for: .editingChanged)
+        schoolSearchTF.delegate = self
         
         settingButton()
         
@@ -38,6 +41,62 @@ class SchoolSelectViewController: UIViewController {
                   name: NSNotification.Name("DismissTwo"),
                   object: nil
         )
+    }
+    
+    func getSchool() {
+        var userToken: String = ""
+        
+        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+           let retrievedToken = String(data: retrievedData, encoding: .utf8) {
+            userToken = retrievedToken
+            print("Password retrieved and stored in userPW: \(userToken)")
+        } else {
+            print("Failed to retrieve password.")
+        }
+        
+        let url = APIConstants.calendarURL + "/search"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(userToken)",
+        ]
+        
+        AF.request(url, method: .get, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decodedData = try JSONDecoder().decode(UniResultModel.self, from: data)
+                    self.uniData = decodedData.result
+                    self.allUniDatas = self.uniData?.universityList ?? []
+                    DispatchQueue.main.async {
+                        self.SchoolTV.reloadData()
+                    }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        searchTimer?.invalidate() // 이전 타이머를 취소
+        let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
+        
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { [weak self] _ in
+        })
+        return true
     }
     
     @objc func didDismissDetailNotification(_ notification: Notification) {
@@ -52,26 +111,8 @@ class SchoolSelectViewController: UIViewController {
         setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
     }
     
-    @objc func schoolSearch(_ textField: UITextField) {
-        
-        if schoolSearchTF.text == "ㅅ" {
-            SchoolTV.isHidden = false
-            setButton.isEnabled = true
-            setButton.backgroundColor = UIColor(named: "Coquelicot")
-            setButton.setTitleColor(.white, for: .normal)
-            setButton.setTitleColor(.white, for: .selected)
-        }
-        else {
-            SchoolTV.isHidden = true
-            setButton.isEnabled = false
-            setButton.backgroundColor = UIColor(hexCode: "EFEFEF")
-            setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
-            setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .selected)
-        }
-        
-        UIView.animate(withDuration: 0.1) { // 효과 주기
-                self.view.layoutIfNeeded()
-        }
+    @IBAction func delete_Tapped(_ sender: Any) {
+        schoolSearchTF.text = ""
     }
     
     @IBAction func back_Tapped(_ sender: Any) {

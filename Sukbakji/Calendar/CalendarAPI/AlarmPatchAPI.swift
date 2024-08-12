@@ -13,20 +13,10 @@ class APIAlarmPatch {
     
     func SendingPatchAlarmOn(parameters: AlarmPatchModel, handler: @escaping (_ result: AlarmPatchResult)->(Void)) {
         
-        var userToken: String?
-        
-        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-           let retrievedToken = String(data: retrievedData, encoding: .utf8) {
-            userToken = retrievedToken
-            print("Password retrieved and stored in userPW: \(userToken ?? "")")
-        } else {
-            print("Failed to retrieve password.")
-        }
-        
         let url = APIConstants.calendarURL + "/alarm/on"
         let headers:HTTPHeaders = [
             "content-type": "application/json"
-            "Authorization": "Bearer \(userToken)"
+            "Authorization": "Bearer "
         ]
         
         AF.request(url, method: .patch, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { responce in

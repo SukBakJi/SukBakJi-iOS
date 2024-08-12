@@ -223,6 +223,7 @@ struct DirectoryMainViewController: View {
                 }
             }
         }
+        .accessibilityIdentifier("DirectoryMainViewController")
     }
 }
 
@@ -236,78 +237,80 @@ struct ScrappedLaboratory: View {
     var professorName: String
 
     var body: some View {
-        HStack {
-            ZStack(alignment: .topLeading) {
-                VStack(spacing: 0) {
-                    Constants.White
-                        .frame(height: 70) // 상단 흰색 배경
-                    Constants.Gray50
-                }
-                .cornerRadius(12)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .inset(by: 0.5)
-                        .stroke(Constants.Gray100, lineWidth: 1)
-                )
-
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(title)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.black)
-                        .lineLimit(1) // 텍스트가 길면 한 줄로 제한하고 '...'로 표시
-                        .truncationMode(.tail) // '...' 표시 위치 설정
-                        .frame(maxWidth: .infinity, alignment: .leading)
+        NavigationLink(destination: LabDetailViewController()) {
+            HStack {
+                ZStack(alignment: .topLeading) {
+                    VStack(spacing: 0) {
+                        Constants.White
+                            .frame(height: 70) // 상단 흰색 배경
+                        Constants.Gray50
+                    }
+                    .cornerRadius(12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .inset(by: 0.5)
+                            .stroke(Constants.Gray100, lineWidth: 1)
+                    )
                     
-                    Text(labName)
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.black)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    HStack(alignment: .center, spacing: 12) {
-                        Image("Profile Image")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .padding(.top, 12)
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(title)
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(.black)
+                            .lineLimit(1) // 텍스트가 길면 한 줄로 제한하고 '...'로 표시
+                            .truncationMode(.tail) // '...' 표시 위치 설정
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack {
-                                Text(professorName)
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
+                        Text(labName)
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.black)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        HStack(alignment: .center, spacing: 12) {
+                            Image("Profile Image")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .padding(.top, 12)
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text(professorName)
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(.black)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                    
+                                    Text("교수")
+                                        .font(.system(size: 12, weight: .medium))
+                                        .foregroundColor(.black)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                }
                                 
-                                Text("교수")
+                                Text("\(universityName) \(labName)")
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundColor(.black)
                                     .lineLimit(1)
                                     .truncationMode(.tail)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                            
-                            Text("\(universityName) \(labName)")
+                        }
+                        
+                        HStack {
+                            Text("label")
                                 .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(.black)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 3)
+                                .background(Color(red: 0.99, green: 0.91, blue: 0.9))
+                                .cornerRadius(4)
                         }
                     }
-                    
-                    HStack {
-                        Text("label")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 3)
-                            .background(Color(red: 0.99, green: 0.91, blue: 0.9))
-                            .cornerRadius(4)
-                    }
+                    .padding(.horizontal, 18)
+                    .padding(.vertical, 16)
+                    .frame(width: 300, alignment: .topLeading)
                 }
-                .padding(.horizontal, 18)
-                .padding(.vertical, 16)
-                .frame(width: 300, alignment: .topLeading)
             }
         }
     }
