@@ -15,9 +15,9 @@ struct MyPageResultModel : Codable {
 }
 
 struct MyPageResult : Codable {
-    let name: String
+    let name: String?
     let provider: String
-    let degreeLevel: String
-    let researchTopics: [String]
-    let point: Int
+    let degreeLevel: String?
+    let researchTopics: [String]?
+    let point: Int?
 }

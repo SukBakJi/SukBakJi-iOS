@@ -27,12 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - 카카오 연결
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-            if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                return AuthController.handleOpenUrl(url: url)
-            }
-
-            return false
+        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+            return AuthController.handleOpenUrl(url: url)
         }
+        
+        return false
+    }
     
     // MARK: UISceneSession Lifecycle
 
