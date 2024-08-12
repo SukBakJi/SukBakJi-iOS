@@ -65,17 +65,16 @@ class HomeViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    func getUserToken() {
+    func getUserName() {
+            var userToken: String = ""
+
         if let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
             userToken = retrievedToken
-            print("Token retrieved and stored in userToken: \(userToken ?? "")")
+            print("Token retrieved and stored in userToken: \(userToken)")
         } else {
             print("Failed to retrieve token.")
         }
-    }
 
-    
-    func getUserName() {
         
         let url = APIConstants.userURL + "/mypage"
         
@@ -115,13 +114,13 @@ class HomeViewController: UIViewController {
     func getViewSchedule() {
         var userToken: String = ""
         
-        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-           let retrievedToken = String(data: retrievedData, encoding: .utf8) {
+        if let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
             userToken = retrievedToken
-            print("Password retrieved and stored in userPW: \(userToken)")
+            print("Token retrieved and stored in userToken: \(userToken)")
         } else {
-            print("Failed to retrieve password.")
+            print("Failed to retrieve token.")
         }
+
         
         let url = APIConstants.calendarURL + "/schedule"
         
