@@ -44,23 +44,23 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
     }
     
     func getSchool() {
-        var userToken: String = ""
-        
-        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-           let retrievedToken = String(data: retrievedData, encoding: .utf8) {
-            userToken = retrievedToken
-            print("Password retrieved and stored in userPW: \(userToken)")
-        } else {
+        guard let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self),
+              let userToken = String(data: retrievedData, encoding: .utf8) else {
             print("Failed to retrieve password.")
+            return
         }
         
         let url = APIConstants.calendarURL + "/search"
+        
+        let parameter: Parameters = [
+            "keyword": "\(schoolSearchTF.text ?? "")"
+        ]
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(userToken)",
         ]
         
-        AF.request(url, method: .get, headers: headers).responseData { response in
+        AF.request(url, method: .get, parameters: parameter, headers: headers).responseData { response in
             switch response.result {
             case .success(let data):
                 do {
@@ -95,6 +95,7 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
         let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
         
         searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { [weak self] _ in
+            self?.getSchool()
         })
         return true
     }

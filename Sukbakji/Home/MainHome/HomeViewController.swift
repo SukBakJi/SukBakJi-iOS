@@ -68,7 +68,7 @@ class HomeViewController: UIViewController {
     func getUserName() {
         var userToken: String = ""
         
-        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self),
            let retrievedToken = String(data: retrievedData, encoding: .utf8) {
             userToken = retrievedToken
             print("Password retrieved and stored in userPW: \(userToken)")
@@ -89,7 +89,7 @@ class HomeViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(MyPageResultModel.self, from: data)
                     self.userData = decodedData.result
                     DispatchQueue.main.async {
-                        self.nameLabel.text = self.userData?.provider
+                        self.nameLabel.text = self.userData?.name
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)

@@ -76,6 +76,7 @@
 		C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2882C63633000D6014B /* UniPostModel.swift */; };
 		C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28A2C63646A00D6014B /* UniMethodModel.swift */; };
 		C70DB28F2C636B6600D6014B /* AlarmListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28E2C636B6600D6014B /* AlarmListModel.swift */; };
+		C715D3822C6A2A2B0020060D /* AlarmPatchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74DC22A2C59D6AF004BDC25 /* AlarmPatchAPI.swift */; };
 		C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716EF172C50FB1200474228 /* SchoolDateViewController.swift */; };
 		C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14862C44CE59003AFCB7 /* Home.storyboard */; };
 		C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14882C44CE64003AFCB7 /* Calendar.storyboard */; };
@@ -129,6 +130,8 @@
 		C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */; };
 		C7A434F92C62233200C47F5E /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor.swift */; };
 		C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */; };
+		C7A5A0CE2C6A5DFD00946B48 /* SelectDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A5A0CD2C6A5DFD00946B48 /* SelectDateModel.swift */; };
+		C7A5A0D02C6A5F2700946B48 /* UnivNameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A5A0CF2C6A5F2700946B48 /* UnivNameModel.swift */; };
 		C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */; };
 		C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */; };
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
@@ -139,7 +142,6 @@
 		C7DA4E3F2C611D6D0092F342 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E3E2C611D6D0092F342 /* NetworkResult.swift */; };
 		C7DA4E412C6122BB0092F342 /* AlarmPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E402C6122BB0092F342 /* AlarmPostAPI.swift */; };
 		C7DA4E442C61252A0092F342 /* AlarmPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */; };
-		C7DCEF792C5FCDE7001D38AA /* DateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */; };
 		C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */; };
 		C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */; };
 		C7DCEF812C5FD710001D38AA /* MyAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */; };
@@ -286,6 +288,8 @@
 		C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectTableViewCell.swift; sourceTree = "<group>"; };
 		C7A434F82C62233200C47F5E /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLeftPadding.swift; sourceTree = "<group>"; };
+		C7A5A0CD2C6A5DFD00946B48 /* SelectDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateModel.swift; sourceTree = "<group>"; };
+		C7A5A0CF2C6A5F2700946B48 /* UnivNameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivNameModel.swift; sourceTree = "<group>"; };
 		C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
@@ -295,7 +299,6 @@
 		C7DA4E3E2C611D6D0092F342 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		C7DA4E402C6122BB0092F342 /* AlarmPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPostAPI.swift; sourceTree = "<group>"; };
 		C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPostModel.swift; sourceTree = "<group>"; };
-		C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListViewController.swift; sourceTree = "<group>"; };
 		C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListTableViewCell.swift; sourceTree = "<group>"; };
 		C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmTableViewCell.swift; sourceTree = "<group>"; };
@@ -609,6 +612,8 @@
 				C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */,
 				C70DB28E2C636B6600D6014B /* AlarmListModel.swift */,
 				C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */,
+				C7A5A0CD2C6A5DFD00946B48 /* SelectDateModel.swift */,
+				C7A5A0CF2C6A5F2700946B48 /* UnivNameModel.swift */,
 			);
 			path = CalendarModel;
 			sourceTree = "<group>";
@@ -733,7 +738,6 @@
 				C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */,
 				C78DE5592C48176C00A58395 /* CalendarCollectionViewCell.swift */,
 				C72F14DD2C594DAA0017B57E /* CalendarFBCViewController.swift */,
-				C7DCEF782C5FCDE7001D38AA /* DateListViewController.swift */,
 				C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */,
 				C78DE55D2C481F8C00A58395 /* DateViewController.swift */,
 				C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */,
@@ -976,7 +980,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C715D3822C6A2A2B0020060D /* AlarmPatchAPI.swift in Sources */,
 				C7D26CAD2C6A01B50045339E /* UniSearchModel.swift in Sources */,
+				C7A5A0CE2C6A5DFD00946B48 /* SelectDateModel.swift in Sources */,
 				C73ED52E2C6272CC00C455A2 /* MyPageModel.swift in Sources */,
 				C7ECF54A2C677F8600283F06 /* ApplyMentorViewController.swift in Sources */,
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
@@ -1033,7 +1039,6 @@
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
 				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,
 				C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */,
-				C7DCEF792C5FCDE7001D38AA /* DateListViewController.swift in Sources */,
 				417AADCB2C673B89002080E0 /* KeychainHelper.swift in Sources */,
 				C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */,
 				C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */,
@@ -1050,6 +1055,7 @@
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
 				7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */,
+				C7A5A0D02C6A5F2700946B48 /* UnivNameModel.swift in Sources */,
 				C72F14DE2C594DAA0017B57E /* CalendarFBCViewController.swift in Sources */,
 				7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */,
 				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
