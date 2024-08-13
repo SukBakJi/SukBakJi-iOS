@@ -208,6 +208,8 @@ class FirstAcademicVerificationViewController: UIViewController {
         uploadButton.layer.isHidden = false
         uploadedFileView.layer.isHidden = true
         nextButton.isEnabled = false
+        nextButton.backgroundColor = .gray200
+        nextButton.setTitleColor(.gray500, for: .normal)
     }
     
     // MARK: - viewDidLoad
