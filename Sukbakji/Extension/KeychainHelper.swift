@@ -1,10 +1,3 @@
-//
-//  KeychainHelper.swift
-//  Sukbakji
-//
-//  Created by 오현민 on 8/10/24.
-//
-
 import Security
 import Foundation
 
@@ -26,7 +19,7 @@ class KeychainHelper {
         SecItemAdd(query as CFDictionary, nil)
     }
 
-    func read(service: String, account: String) -> Data? {
+    func read<T>(service: String, account: String, type: T.Type) -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
@@ -38,9 +31,15 @@ class KeychainHelper {
         var item: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &item)
 
-        guard status == errSecSuccess else { return nil }
+        guard status == errSecSuccess, let data = item as? Data else {
+            return nil
+        }
 
-        return (item as? Data)
+        if type == String.self {
+            return String(data: data, encoding: .utf8) as? T
+        } else {
+            return data as? T
+        }
     }
 
     func delete(service: String, account: String) {
@@ -53,4 +52,3 @@ class KeychainHelper {
         SecItemDelete(query as CFDictionary)
     }
 }
-

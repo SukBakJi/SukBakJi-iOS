@@ -9,12 +9,12 @@ import Alamofire
 
 class ResearchTopicDataManager {
     func ResearchTopicDataManager(_ topicName: String, completion: @escaping (ResearchTopicModel?) -> Void) {
-        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
+        guard let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             print("토큰이 없습니다.")
             completion(nil)
             return
         }
+
         
         let url = APIConstants.reseachtopicURL + "/search" + "?topicName=\(topicName)"
         
