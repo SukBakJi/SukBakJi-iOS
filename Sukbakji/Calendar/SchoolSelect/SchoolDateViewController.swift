@@ -7,8 +7,13 @@
 
 import UIKit
 import DropDown
+import Alamofire
 
 class SchoolDateViewController: UIViewController {
+    
+    var memberId = UserDefaults.standard.integer(forKey: "memberID")
+    
+    @IBOutlet weak var univLabel: UILabel!
     
     @IBOutlet weak var RecruitTF: UITextField!
     @IBOutlet weak var recruitFirstButton: UIButton!
@@ -20,8 +25,18 @@ class SchoolDateViewController: UIViewController {
     @IBOutlet weak var warningImage: UIImageView!
     @IBOutlet weak var warningLabel: UILabel!
     
+    @IBOutlet weak var setButton: UIButton!
+    
+    var receivedUnivName: String?
+    var univId: Int?
+    
     let drop = DropDown()
-    let recruitType = ["일반전형", "외국인전형", "학부 대학원 연계과정"]
+    var recruitType: [String] = []
+    
+    var methodData: UniMethodResponse?
+    var allMethodDatas: [UniMethodList] = []
+    
+    private var uniData: UniPostResult!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +49,6 @@ class SchoolDateViewController: UIViewController {
         warningLabel.isHidden = true
         
         initUI()
-        setDropdown()
         
         recruitFirstButton.isEnabled = false
         recruitFirstButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
@@ -46,6 +60,93 @@ class SchoolDateViewController: UIViewController {
                   name: NSNotification.Name("DismissOneMore"),
                   object: nil
         )
+        
+        settingButton()
+        
+        univLabel.text = receivedUnivName
+        
+        getSchool(univId: univId ?? 0)
+        
+        print(memberId)
+    }
+    
+    func getSchool(univId: Int) {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
+
+        let url = APIConstants.calendarURL + "/univ/method?univId=\(univId)"
+        
+        let parameter: Parameters = [
+            "keyword": "\(univId)"
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(retrievedToken)",
+        ]
+        
+        AF.request(url, method: .get, parameters: parameter, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decodedData = try JSONDecoder().decode(UniMethodResultModel.self, from: data)
+                    self.methodData = decodedData.result
+                    self.allMethodDatas = self.methodData?.methodList ?? []
+                    DispatchQueue.main.async {
+                        for i in 0..<self.allMethodDatas.count {
+                            self.recruitType.append(self.allMethodDatas[i].method)
+                            self.setDropdown()
+                        }
+                    }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    func settingButton() {
+        setButton.isEnabled = false
+        setButton.layer.masksToBounds = true
+        setButton.layer.cornerRadius = 10
+        setButton.backgroundColor = UIColor(hexCode: "EFEFEF")
+        setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 텍스트 필드 내용이 변경될 때 버튼 색깔 업데이트
+        DispatchQueue.main.async {
+            self.updateButtonColor()
+        }
+        return true
+    }
+        
+    func updateButtonColor() {
+        if (RecruitTF.text?.isEmpty == false) {
+            setButton.isEnabled = true
+            setButton.backgroundColor = UIColor(named: "Coquelicot")
+            setButton.setTitleColor(.white, for: .normal)
+            setButton.setTitleColor(.white, for: .selected)
+        } else {
+            setButton.isEnabled = false
+            setButton.backgroundColor = UIColor(hexCode: "EFEFEF")
+            setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+            setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .selected)
+        }
     }
     
     @objc func didDismissDetailNotification(_ notification: Notification) {
@@ -114,14 +215,15 @@ class SchoolDateViewController: UIViewController {
         // Item 선택 시 처리
         drop.selectionAction = { [weak self] (index, item) in
             //선택한 Item을 TextField에 넣어준다.
-            self?.RecruitTF.text = " \(item)"
-            self?.recruitTypeLabel.text = " \(item)"
+            self?.RecruitTF.text = "\(item)"
+            self?.recruitTypeLabel.text = "\(item)"
             self?.recruitTypeLabel.textColor = UIColor(named: "Coquelicot")
+            self?.updateButtonColor()
         }
         
         // 취소 시 처리
         drop.cancelAction = { [weak self] in
-            self?.RecruitTF.text = "일반전형"
+            self?.RecruitTF.text = ""
         }
     }
     
@@ -137,9 +239,9 @@ class SchoolDateViewController: UIViewController {
     }
     
     @IBAction func next_Tapped(_ sender: Any) {
-        if RecruitTF.text == "" {
-            warningImage.isHidden = false
-            warningLabel.isHidden = false
-        }
+        let parameters = UniPostModel(memberId: memberId, univId: univId ?? 0, season: recruitDayLabel.text ?? "", method: recruitTypeLabel.text ?? "")
+        APIUniPost.instance.SendingPostUni(parameters: parameters) { result in self.uniData = result }
+        NotificationCenter.default.post(name: NSNotification.Name("DismissTwo"), object: nil, userInfo: nil)
+        self.presentingViewController?.dismiss(animated: true)
     }
 }

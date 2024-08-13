@@ -175,7 +175,6 @@ class AlarmViewController: UIViewController, dateProtocol {
     
     @IBAction func drop_Tapped(_ sender: Any) {
         drop.show()
-        print(timeLabel)
     }
     
     @IBAction func picker_Tapped(_ sender: Any) {

@@ -1592,7 +1592,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집전형을 선택해 주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOo-ua-K6q">
-                                        <rect key="frame" x="136.66666666666666" y="16.333333333333314" width="159.99999999999997" height="21"/>
+                                        <rect key="frame" x="134.66666666666666" y="16.333333333333314" width="159.99999999999997" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="JvF-OY-yao"/>
                                         </constraints>
@@ -1605,7 +1605,7 @@
                                 <constraints>
                                     <constraint firstItem="Bn7-ji-1dY" firstAttribute="centerY" secondItem="ANv-Ai-JIh" secondAttribute="centerY" id="TOD-uO-2ej"/>
                                     <constraint firstItem="qIZ-sh-9WU" firstAttribute="centerY" secondItem="ANv-Ai-JIh" secondAttribute="centerY" id="WQC-uf-30P"/>
-                                    <constraint firstItem="zOo-ua-K6q" firstAttribute="leading" secondItem="qIZ-sh-9WU" secondAttribute="trailing" constant="8" id="X07-bp-rkI"/>
+                                    <constraint firstItem="zOo-ua-K6q" firstAttribute="leading" secondItem="qIZ-sh-9WU" secondAttribute="trailing" constant="6" id="X07-bp-rkI"/>
                                     <constraint firstAttribute="height" constant="54" id="XCV-ml-n2K"/>
                                     <constraint firstItem="qIZ-sh-9WU" firstAttribute="leading" secondItem="Bn7-ji-1dY" secondAttribute="trailing" constant="8" id="Xoe-S6-SvN"/>
                                     <constraint firstItem="Bn7-ji-1dY" firstAttribute="leading" secondItem="ANv-Ai-JIh" secondAttribute="leading" constant="16" id="tjf-Cm-OgM"/>
@@ -1774,6 +1774,8 @@
                         <outlet property="recruitFirstButton" destination="MKR-0b-cAs" id="OcG-LP-BcP"/>
                         <outlet property="recruitSecondButton" destination="X8k-BN-pfd" id="bxl-nw-zSF"/>
                         <outlet property="recruitTypeLabel" destination="zOo-ua-K6q" id="B6Y-Hs-oVY"/>
+                        <outlet property="setButton" destination="ThJ-NJ-qme" id="RbP-QQ-zLu"/>
+                        <outlet property="univLabel" destination="Obz-Yg-vAl" id="rLd-Ng-M1z"/>
                         <outlet property="warningImage" destination="fQr-Uv-3wI" id="hzy-zD-HvI"/>
                         <outlet property="warningLabel" destination="HPy-AU-QvD" id="yKj-GA-1ci"/>
                     </connections>
