@@ -21,12 +21,13 @@ class SchoolDateViewController: UIViewController {
     @IBOutlet weak var warningLabel: UILabel!
     
     let drop = DropDown()
-    let recruitType = ["  일반전형", "  외국인전형", "  학부 대학원 연계과정"]
+    let recruitType = ["일반전형", "외국인전형", "학부 대학원 연계과정"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         RecruitTF.addBottomShadow()
+        RecruitTF.setLeftPadding(10)
         RecruitTF.isEnabled = false
         
         warningImage.isHidden = true
@@ -71,9 +72,8 @@ class SchoolDateViewController: UIViewController {
     func initUI() {
         DropDown.appearance().textColor = UIColor.black // 아이템 텍스트 색상
         DropDown.appearance().selectedTextColor = UIColor(red: 236/255, green: 73/255, blue: 8/255, alpha: 1.0) // 선택된 아이템 텍스트 색상
-        DropDown.appearance().backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0) // 아이템 팝업 배경 색상
+        DropDown.appearance().backgroundColor = UIColor(hexCode: "F5F5F5") // 아이템 팝업 배경 색상
         DropDown.appearance().selectionBackgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0) // 선택한 아이템 배경 색상
-        DropDown.appearance().separatorColor = UIColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1.0)
         DropDown.appearance().setupCornerRadius(5)
         DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
         drop.dismissMode = .automatic // 팝업을 닫을 모드 설정
@@ -88,7 +88,28 @@ class SchoolDateViewController: UIViewController {
         drop.anchorView = self.RecruitTF
         
         // View를 갖리지 않고 View아래에 Item 팝업이 붙도록 설정
-        drop.bottomOffset = CGPoint(x: 0, y: 1.6 + RecruitTF.bounds.height)
+        drop.bottomOffset = CGPoint(x: 0, y: 1.5 + RecruitTF.bounds.height)
+        
+        drop.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
+            // separatorInset을 조정하여 separator 앞의 간격을 없앱니다.
+            cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
+                        
+            // 새로운 separator 추가
+            let separator = UIView()
+            separator.backgroundColor = UIColor(hexCode: "E1E1E1")
+            separator.translatesAutoresizingMaskIntoConstraints = false
+            cell.addSubview(separator)
+                        
+            // separator 높이(굵기) 설정
+            let separatorHeight: CGFloat = 1.0 // 원하는 굵기 설정
+                        
+            NSLayoutConstraint.activate([
+                separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+                separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+                separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
+                separator.heightAnchor.constraint(equalToConstant: separatorHeight)
+            ])
+        }
         
         // Item 선택 시 처리
         drop.selectionAction = { [weak self] (index, item) in

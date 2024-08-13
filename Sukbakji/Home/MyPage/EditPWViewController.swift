@@ -68,7 +68,8 @@ class EditPWViewController: UIViewController {
     }
     
     func getUserPW() {
-        if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
+        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user", type: String.self),
+           let retrievedPW = String(data: retrievedData, encoding: .utf8) {
             userPW = retrievedPW
             print("Password retrieved and stored in userPW: \(userPW ?? "")")
         } else {

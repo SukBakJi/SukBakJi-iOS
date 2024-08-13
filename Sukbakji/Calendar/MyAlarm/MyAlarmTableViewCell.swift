@@ -15,11 +15,14 @@ class MyAlarmTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var onoffSwitch: UISwitch!
     
+    var buttonAction: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         univView.layer.cornerRadius = 5
+        
+        onoffSwitch.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,6 +31,9 @@ class MyAlarmTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @objc func buttonTapped() {
+        buttonAction?()
+    }
 }
 
 extension MyAlarmViewController: UITableViewDelegate, UITableViewDataSource {
@@ -54,6 +60,10 @@ extension MyAlarmViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MyAlarmTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MyAlarm_TableViewCell", for: indexPath) as! MyAlarmTableViewCell
+        
+        cell.buttonAction = { [weak self] in
+            self?.handleButtonTap(for: indexPath)
+        }
         
         let detailData = allDetailDatas[indexPath.section]
         
@@ -90,8 +100,34 @@ extension MyAlarmViewController: UITableViewDelegate, UITableViewDataSource {
             cell.dateLabel.text = "\(yearsubstring)년 \(monthsubstring)월 \(daysubstring)일 오후 \(afterTime)\(minutesubstring)"
         }
         
+        if (detailData.onoff == 1) {
+            cell.onoffSwitch.isOn = true
+        } else {
+            cell.onoffSwitch.isOn = false
+        }
+        
         cell.selectionStyle = .none
         
         return cell
+    }
+    
+    func handleButtonTap(for indexPath: IndexPath) {
+        // API 호출을 위한 파라미터 생성
+        let detailData = allDetailDatas[indexPath.section]
+        let parameters = AlarmPatchModel(alarmId: detailData.alarmId)
+        if (detailData.onoff == 1) {
+            APIAlarmPatch.instance.SendingPatchAlarmOff(parameters: parameters) { result in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                    self.getAlarmList()
+                }
+            }
+        } else if (detailData.onoff == 0) {
+            APIAlarmPatch.instance.SendingPatchAlarmOn(parameters: parameters) { result in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                    self.getAlarmList()
+                }
+            }
+        }
+        
     }
 }

@@ -35,7 +35,7 @@ extension SchoolSelectViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return allUniDatas.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -61,9 +61,9 @@ extension SchoolSelectViewController: UITableViewDelegate, UITableViewDataSource
             cell.selectButton.tintColor = .clear
         }
         
-//        let detailData = allUniDatas[indexPath.row]
+        let detailData = allUniDatas[indexPath.row]
         
-//        cell.uniLabel.text = detailData.name
+        cell.uniLabel.text = detailData.name
         
         cell.selectionStyle = .none
         
