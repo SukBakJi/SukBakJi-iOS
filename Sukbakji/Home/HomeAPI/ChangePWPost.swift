@@ -12,8 +12,7 @@ class APIChangePWPost {
     static let instance = APIChangePWPost()
     
     func SendingChangePW(parameters: ChangePWModel, handler: @escaping (_ result: ChangePWResult)->(Void)) {
-        guard let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-              let userToken = String(data: retrievedData, encoding: .utf8) else {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             print("Failed to retrieve password.")
             return
         }
@@ -21,7 +20,7 @@ class APIChangePWPost {
         let url = APIConstants.userURL + "/password"
         let headers:HTTPHeaders = [
             "content-type": "application/json",
-            "Authorization": "Bearer \(userToken)"
+            "Authorization": "Bearer \(retrievedToken)"
         ]
         
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { responce in

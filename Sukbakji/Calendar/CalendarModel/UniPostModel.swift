@@ -9,10 +9,6 @@ import Foundation
 
 struct UniPostModel : Encodable {
     let memberId: Int
-    var setUnivList: [UniRequest]
-}
-
-struct UniRequest : Encodable {
     let univId: Int
     let season: String
     let method: String

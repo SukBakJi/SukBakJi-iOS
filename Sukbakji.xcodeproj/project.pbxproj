@@ -131,6 +131,7 @@
 		C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CAE2C4576E900D4339D /* FavoriteBoardTableViewCell.swift */; };
 		C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */; };
 		C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */; };
+		C74F584F2C6B330000369545 /* UniPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74F584E2C6B330000369545 /* UniPostAPI.swift */; };
 		C75A2D4A2C6128F1000D215B /* AlarmPatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */; };
 		C75C457C2C5A3B6C001DDEA8 /* SUITE-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */; };
 		C75C457D2C5A3B6C001DDEA8 /* SUITE-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */; };
@@ -148,7 +149,6 @@
 		C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */; };
 		C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */; };
 		C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79864002C652B450029F8E3 /* TFaddShadow.swift */; };
-		C7996CB02C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CAF2C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift */; };
 		C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */; };
 		C7A434F92C62233200C47F5E /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor.swift */; };
 		C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */; };
@@ -311,6 +311,7 @@
 		C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotFeedTableViewCell.swift; sourceTree = "<group>"; };
 		C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabCollectionViewCell.swift; sourceTree = "<group>"; };
 		C74DC22A2C59D6AF004BDC25 /* AlarmPatchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPatchAPI.swift; sourceTree = "<group>"; };
+		C74F584E2C6B330000369545 /* UniPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniPostAPI.swift; sourceTree = "<group>"; };
 		C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPatchModel.swift; sourceTree = "<group>"; };
 		C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Regular.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Regular.otf"; sourceTree = "<group>"; };
 		C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Heavy.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Heavy.otf"; sourceTree = "<group>"; };
@@ -328,7 +329,6 @@
 		C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLabModel.swift; sourceTree = "<group>"; };
 		C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
 		C79864002C652B450029F8E3 /* TFaddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFaddShadow.swift; sourceTree = "<group>"; };
-		C7996CAF2C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectTableViewCell.swift; sourceTree = "<group>"; };
 		C7A434F82C62233200C47F5E /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLeftPadding.swift; sourceTree = "<group>"; };
@@ -769,6 +769,7 @@
 		C7DA4E422C6122E30092F342 /* CalendarAPI */ = {
 			isa = PBXGroup;
 			children = (
+				C74F584E2C6B330000369545 /* UniPostAPI.swift */,
 				C7DA4E402C6122BB0092F342 /* AlarmPostAPI.swift */,
 				C74DC22A2C59D6AF004BDC25 /* AlarmPatchAPI.swift */,
 			);
@@ -822,7 +823,6 @@
 			isa = PBXGroup;
 			children = (
 				C727767D2C48CFDE000A6B25 /* SchoolSelectViewController.swift */,
-				C7996CAF2C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift */,
 				C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */,
 				C716EF172C50FB1200474228 /* SchoolDateViewController.swift */,
 				C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */,
@@ -1074,9 +1074,7 @@
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
 				C7ECF5462C6757A700283F06 /* MemberIDModel.swift in Sources */,
 				4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */,
-				417AADD72C67B388002080E0 /* AVModel.swift in Sources */,
 				7B3459F92C688C2D008B711A /* BoardWrittenModel.swift in Sources */,
-				C70DB28D2C636AB200D6014B /* UniDeleteModel.swift in Sources */,
 				417AADBB2C60A8AA002080E0 /* TOSTableViewCell.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7B0E5D262C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift in Sources */,
@@ -1099,7 +1097,6 @@
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */,
-				C7996CB02C5B4B6000DC18AF /* SchoolSelectCollectionViewCell.swift in Sources */,
 				C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */,
 				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,
 				7B1C535A2C69D85800C66D0D /* DirectoryFavoriteLabModel.swift in Sources */,
@@ -1210,6 +1207,7 @@
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
 				C73F89842C5E834D007ECFE7 /* MyAlarmViewController.swift in Sources */,
 				C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */,
+				C74F584F2C6B330000369545 /* UniPostAPI.swift in Sources */,
 				7B1C53602C6A680000C66D0D /* BoardNewQnAModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
