@@ -12,10 +12,16 @@ class APIAlarmPost {
     static let instance = APIAlarmPost()
     
     func SendingPostAlarm(parameters: AlarmPostModel, handler: @escaping (_ result: AlarmPostResult)->(Void)) {
+        guard let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+              let userToken = String(data: retrievedData, encoding: .utf8) else {
+            print("Failed to retrieve password.")
+            return
+        }
+        
         let url = APIConstants.calendarURL + "/alarm"
         let headers:HTTPHeaders = [
             "content-type": "application/json",
-            "Authorization": "Bearer"
+            "Authorization": "Bearer \(userToken)"
         ]
         
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { responce in

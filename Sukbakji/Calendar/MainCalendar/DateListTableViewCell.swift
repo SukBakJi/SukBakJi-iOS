@@ -8,7 +8,10 @@
 import UIKit
 
 class DateListTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var univLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,14 +25,14 @@ class DateListTableViewCell: UITableViewCell {
 
 }
 
-extension DateListViewController: UITableViewDelegate, UITableViewDataSource {
+extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return allDateDatas.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,6 +49,19 @@ extension DateListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DateListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "DateList_TableViewCell", for: indexPath) as! DateListTableViewCell
+        
+        let detailDatas = allDateDatas[indexPath.section]
+        
+        cell.contentLabel.text = detailDatas.content
+        if detailDatas.univId == 1 {
+            cell.univLabel.text = "서울대학교"
+        } else if detailDatas.univId == 2 {
+            cell.univLabel.text = "연세대학교"
+        } else if detailDatas.univId == 3 {
+            cell.univLabel.text = "고려대학교"
+        } else if detailDatas.univId == 4 {
+            cell.univLabel.text = "카이스트"
+        }
         
         cell.selectionStyle = .none
         
