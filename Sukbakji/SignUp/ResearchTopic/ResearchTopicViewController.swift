@@ -143,19 +143,25 @@ class ResearchTopicViewController: UIViewController {
     }
     
     @objc private func plusButtonTapped() {
-        let SelectResearchTopicVC = SelectResearchTopicViewController()
-        SelectResearchTopicVC.completionHandler = { [weak self] data in
+        let selectResearchTopicVC = SelectResearchTopicViewController()
+        
+        // 현재 선택된 주제를 뒷페이지로 전달
+        selectResearchTopicVC.selectedTags = selectedTags
+        
+        selectResearchTopicVC.completionHandler = { [weak self] data in
             self?.selectedTags = data
             self?.collectionView.reloadData()
             self?.updateCollectionViewHeight()
             self?.validateField()
             print("받은 데이터 : \(data)")
         }
-        self.navigationController?.pushViewController(SelectResearchTopicVC, animated: true)
+        
+        self.navigationController?.pushViewController(selectResearchTopicVC, animated: true)
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
+
     
     private func navigateToSuccessPage() {
         let SuccessSignUpVC = successSignUpViewController()

@@ -110,7 +110,15 @@ class SelectResearchTopicViewController: UIViewController {
         setupViews()
         setupLayout()
         setupSearchBar()
+        
+        // 전달받은 주제를 반영하여 초기 상태 설정
+        if !selectedTags.isEmpty {
+            collectionView.isHidden = false
+            collectionView.reloadData()
+            updateSearchBarConstraint()
+        }
     }
+
     
     // MARK: - Delegate
     private func setDelegate() {
@@ -373,7 +381,9 @@ extension SelectResearchTopicViewController: UITableViewDelegate, UITableViewDat
             searchResults[indexPath.item].isSelected = true
             collectionView.isHidden = false
             if selectedTags.count < 5 {
-                selectedTags.append(selectedTopic)
+                if !selectedTags.contains(selectedTopic) {
+                    selectedTags.append(selectedTopic)
+                }
             } else {
                 sender.isSelected = false
                 showImageView()
@@ -384,14 +394,15 @@ extension SelectResearchTopicViewController: UITableViewDelegate, UITableViewDat
                 selectedTags.remove(at: index)
             }
         }
-        if selectedTags.isEmpty{
+        
+        if selectedTags.isEmpty {
             collectionView.isHidden = true
             updateSearchBarConstraint()
-            collectionView.reloadData()
         }
         updateSearchBarConstraint()
         collectionView.reloadData()
     }
+
     
     private func showImageView() {
         UIView.animate(withDuration: 0, animations: {
