@@ -39,6 +39,7 @@ class HomeViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
             self.getUserName()
             self.getViewSchedule()
+            self.getMemberID()
         }
     }
     
@@ -66,20 +67,15 @@ class HomeViewController: UIViewController {
     }
     
     func getUserName() {
-            var userToken: String = ""
-
-        if let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
-            userToken = retrievedToken
-            print("Token retrieved and stored in userToken: \(userToken)")
-        } else {
-            print("Failed to retrieve token.")
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
         }
-
         
         let url = APIConstants.userURL + "/mypage"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(userToken)",
+            "Authorization": "Bearer \(retrievedToken)",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in
@@ -89,7 +85,7 @@ class HomeViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(MyPageResultModel.self, from: data)
                     self.userData = decodedData.result
                     DispatchQueue.main.async {
-                        self.nameLabel.text = self.userData?.provider
+                        self.nameLabel.text = self.userData?.name
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
@@ -112,20 +108,15 @@ class HomeViewController: UIViewController {
     }
     
     func getViewSchedule() {
-        var userToken: String = ""
-        
-        if let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
-            userToken = retrievedToken
-            print("Token retrieved and stored in userToken: \(userToken)")
-        } else {
-            print("Failed to retrieve token.")
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
         }
 
-        
         let url = APIConstants.calendarURL + "/schedule"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(userToken)",
+            "Authorization": "Bearer \(retrievedToken)",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in
@@ -176,11 +167,15 @@ class HomeViewController: UIViewController {
     }
     
     func getMemberID() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
         
         let url = APIConstants.calendarURL + "/member"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer ",
+            "Authorization": "Bearer \(retrievedToken)",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in

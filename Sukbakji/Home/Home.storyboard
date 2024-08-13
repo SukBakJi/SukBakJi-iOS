@@ -770,6 +770,14 @@
                             <constraint firstItem="ne5-V1-8Bp" firstAttribute="trailing" secondItem="AfG-N9-bZY" secondAttribute="trailing" id="xqN-4c-Nqd"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="degreeLabel" destination="8z0-6o-A0C" id="I45-aw-G19"/>
+                        <outlet property="isDegreeLabel" destination="dIb-n6-HEm" id="Mxq-C4-pbj"/>
+                        <outlet property="nameLabel" destination="RPh-HM-cXh" id="Nzd-qr-pmA"/>
+                        <outlet property="pointLabel" destination="fxo-pF-rOZ" id="PBV-JA-lHv"/>
+                        <outlet property="warningImage" destination="xP1-Fw-0Hc" id="E0n-aS-ty4"/>
+                        <outlet property="warningLabel" destination="cxY-Nl-pQW" id="y4t-Cx-U9y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LYD-KH-oNv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1548,10 +1556,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-Nq-tG7">
-                                                    <rect key="frame" x="15.999999999999996" y="134" width="52.666666666666657" height="20"/>
+                                                    <rect key="frame" x="16" y="134" width="52" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#열화학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGK-Md-8fY">
-                                                            <rect key="frame" x="7" y="-3" width="38.666666666666664" height="26"/>
+                                                            <rect key="frame" x="7" y="-3" width="38" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="26" id="OO8-Gr-Ru7"/>
                                                             </constraints>
@@ -1569,7 +1577,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ceV-RF-zY8">
-                                                    <rect key="frame" x="74.666666666666671" y="134" width="63.000000000000014" height="20"/>
+                                                    <rect key="frame" x="74" y="134" width="63" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#전기화학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2W-Ng-9F0">
                                                             <rect key="frame" x="7" y="-3" width="49" height="26"/>
@@ -1719,10 +1727,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXN-tt-NgS">
-                                                            <rect key="frame" x="18" y="18" width="67.333333333333329" height="20"/>
+                                                            <rect key="frame" x="18" y="18" width="68" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DIY 소모임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18O-06-Lq1">
-                                                                    <rect key="frame" x="7.0000000000000036" y="-3" width="53.333333333333343" height="26"/>
+                                                                    <rect key="frame" x="7" y="-3" width="54" height="26"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="26" id="bIG-i7-iAC"/>
                                                                     </constraints>
@@ -1740,7 +1748,7 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="배고프다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnT-uZ-fML">
-                                                            <rect key="frame" x="97.333333333333329" y="15" width="48.666666666666671" height="26"/>
+                                                            <rect key="frame" x="98" y="15" width="48.666666666666657" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="26" id="SPc-K8-6kp"/>
                                                             </constraints>

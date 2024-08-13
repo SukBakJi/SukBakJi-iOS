@@ -20,6 +20,8 @@ class MyAlarmViewController: UIViewController {
     var allDatas: AlarmResponse?
     var allDetailDatas: [AlarmList] = []
     
+    var alarmData: AlarmPatchResult!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,11 +38,15 @@ class MyAlarmViewController: UIViewController {
     }
     
     func getAlarmList() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
         
         let url = APIConstants.calendarURL + "/alarm"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer",
+            "Authorization": "Bearer \(retrievedToken)",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in

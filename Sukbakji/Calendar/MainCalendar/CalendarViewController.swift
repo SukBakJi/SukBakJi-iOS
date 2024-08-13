@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class CalendarViewController: UIViewController {
     
@@ -13,6 +14,8 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var DateView: UIView!
     @IBOutlet weak var AlertView: UIView!
     @IBOutlet weak var triangleView: UIImageView!
+    
+    @IBOutlet weak var dateListTV: UITableView!
     
     @IBOutlet weak var alarmButton: UIButton!
     
@@ -24,6 +27,9 @@ class CalendarViewController: UIViewController {
     private var calendarDate = Date()
     private var days = [String]()
     
+    var dateDatas: DateResponse?
+    var allDateDatas: [DateListResponse] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +37,7 @@ class CalendarViewController: UIViewController {
         AlertView.layer.cornerRadius = 10
         
         self.configure()
+        self.setTableView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -49,6 +56,62 @@ class CalendarViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    func getSchedule(date: String) {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
+        
+        let url = APIConstants.calendarURL + "/schedule/\(date)"
+        
+        let parameter: Parameters = [
+            "date": "\(date)"
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(retrievedToken)",
+        ]
+        
+        AF.request(url, method: .get, parameters: parameter, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decodedData = try JSONDecoder().decode(DateResultModel.self, from: data)
+                    self.dateDatas = decodedData.result
+                    self.allDateDatas = self.dateDatas?.scheduleList ?? []
+                    DispatchQueue.main.async {
+                        self.dateListTV.reloadData()
+                    }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    func setTableView() {
+        dateListTV.delegate = self
+        dateListTV.dataSource = self
+        dateListTV.layer.masksToBounds = false// any value you want
+        dateListTV.layer.shadowOpacity = 0.2// any value you want
+        dateListTV.layer.shadowRadius = 2 // any value you want
+        dateListTV.layer.shadowOffset = .init(width: 0, height: 0.5)
+        dateListTV.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
     }
     
     private func configure() {
@@ -163,6 +226,18 @@ class CalendarViewController: UIViewController {
 }
 
 extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let day = days[indexPath.item]
+        
+        let date = dayLabel.text ?? ""
+        let replacedString = date.replacingOccurrences(of: " ", with: "")
+        let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
+        
+        getSchedule(date: "\(reReplacedString)\(day)")
+        print("\(reReplacedString)\(day)")
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.days.count

@@ -12,11 +12,15 @@ class APIAlarmPatch {
     static let instance = APIAlarmPatch()
     
     func SendingPatchAlarmOn(parameters: AlarmPatchModel, handler: @escaping (_ result: AlarmPatchResult)->(Void)) {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
         
         let url = APIConstants.calendarURL + "/alarm/on"
         let headers:HTTPHeaders = [
-            "content-type": "application/json"
-            "Authorization": "Bearer "
+            "content-type": "application/json",
+            "Authorization": "Bearer \(retrievedToken)"
         ]
         
         AF.request(url, method: .patch, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { responce in
@@ -40,10 +44,15 @@ class APIAlarmPatch {
     }
     
     func SendingPatchAlarmOff(parameters: AlarmPatchModel, handler: @escaping (_ result: AlarmPatchResult)->(Void)) {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
+        
         let url = APIConstants.calendarURL + "/alarm/off"
         let headers:HTTPHeaders = [
-            "content-type": "application/json"
-            "Authorization": "Bearer"
+            "content-type": "application/json",
+            "Authorization": "Bearer \(retrievedToken)"
         ]
         
         AF.request(url, method: .patch, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { responce in

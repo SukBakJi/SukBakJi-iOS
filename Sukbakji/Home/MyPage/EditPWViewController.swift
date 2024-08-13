@@ -68,8 +68,8 @@ class EditPWViewController: UIViewController {
     }
     
     func getUserPW() {
-        if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
-            userPW = retrievedPW
+        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
+            userPW = retrievedData
             print("Password retrieved and stored in userPW: \(userPW ?? "")")
         } else {
             print("Failed to retrieve password.")
@@ -98,7 +98,7 @@ class EditPWViewController: UIViewController {
     }
         
     func updateButtonColor() {
-        if (currentPWTF.text == "123456") && (isValidPW(testStr: newPWTF.text)) && (newPWAgainTF.text == newPWTF.text) {
+        if (currentPWTF.text == "\(userPW ?? "")") && (isValidPW(testStr: newPWTF.text)) && (newPWAgainTF.text == newPWTF.text) {
             setButton.isEnabled = true
             setButton.backgroundColor = UIColor(named: "Coquelicot")
             setButton.setTitleColor(.white, for: .normal)
@@ -118,7 +118,7 @@ class EditPWViewController: UIViewController {
     }
     
     @objc func currentPWRegex(_ textField: UITextField) {
-        if (currentPWTF.text == "123456") {
+        if (currentPWTF.text == "\(userPW ?? "")") {
             currentPWView.isHidden = true
             currentPWEye.setImage(UIImage(named: "Sukbakji_PW_View"), for: .normal)
             currentPWEye.setImage(UIImage(named: "Sukbakji_PW_noView"), for: .selected)
