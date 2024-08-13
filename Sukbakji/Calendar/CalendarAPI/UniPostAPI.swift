@@ -1,23 +1,23 @@
 //
-//  AlarmPostAPI.swift
+//  UniPostAPI.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 8/6/24.
+//  Created by jaegu park on 8/13/24.
 //
 
 import Foundation
 import Alamofire
 
-class APIAlarmPost {
-    static let instance = APIAlarmPost()
+class APIUniPost {
+    static let instance = APIUniPost()
     
-    func SendingPostAlarm(parameters: AlarmPostModel, handler: @escaping (_ result: AlarmPostResult)->(Void)) {
+    func SendingPostUni(parameters: UniPostModel, handler: @escaping (_ result: UniPostResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             print("Failed to retrieve password.")
             return
         }
         
-        let url = APIConstants.calendarURL + "/alarm"
+        let url = APIConstants.calendarURL + "/univ"
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"
@@ -31,7 +31,7 @@ class APIAlarmPost {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .fragmentsAllowed)
                     print(json)
                     
-                    let jsonresult = try JSONDecoder().decode(AlarmPostResult.self, from: data!)
+                    let jsonresult = try JSONDecoder().decode(UniPostResult.self, from: data!)
                     handler(jsonresult)
                     print(jsonresult)
                 } catch {
@@ -56,3 +56,4 @@ class APIAlarmPost {
         }
     }
 }
+

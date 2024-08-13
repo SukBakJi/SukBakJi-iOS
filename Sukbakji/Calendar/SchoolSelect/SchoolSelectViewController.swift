@@ -24,6 +24,8 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
     
     var searchTimer: Timer?
     
+    var univName: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,13 +46,11 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
     }
     
     func getSchool() {
-        guard let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self),
-              let userToken = String(data: retrievedData, encoding: .utf8) else {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             print("Failed to retrieve password.")
             return
         }
 
-        
         let url = APIConstants.calendarURL + "/search"
         
         let parameter: Parameters = [
@@ -58,7 +58,7 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
         ]
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(userToken)",
+            "Authorization": "Bearer \(retrievedToken)",
         ]
         
         AF.request(url, method: .get, parameters: parameter, headers: headers).responseData { response in
@@ -125,6 +125,16 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SchoolDateVC") as? SchoolDateViewController else {
             return
         }
-        self.present(nextVC, animated: false)
+        if univName == "서울대학교" {
+            nextVC.univId = 1
+        } else if univName == "연세대학교" {
+            nextVC.univId = 2
+        } else if univName == "고려대학교" {
+            nextVC.univId = 3
+        } else if univName == "카이스트" {
+            nextVC.univId = 4
+        }
+        nextVC.receivedUnivName = univName
+        self.present(nextVC, animated: true)
     }
 }

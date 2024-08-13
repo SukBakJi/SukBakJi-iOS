@@ -16,7 +16,7 @@ struct UniMethodResultModel : Codable {
 
 struct UniMethodResponse : Codable {
     let univId: Int
-    var methodListDTO: [UniMethodList]
+    var methodList: [UniMethodList]
 }
 
 struct UniMethodList : Codable {
