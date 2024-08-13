@@ -1,4 +1,6 @@
 import SwiftUI
+import Foundation
+import Alamofire
 
 struct BoardWriteBoardViewController: View {
     
@@ -7,12 +9,17 @@ struct BoardWriteBoardViewController: View {
     @State private var postText: String = "" // 내용 텍스트 필드의 상태를 관리하기 위한 변수
     @State private var selectedOptionIndex: Int? = nil // DropDown 메뉴에서 선택된 옵션의 인덱스
     @State private var selectedSupportFieldIndex: Int? = nil // 지원분야 드롭다운 메뉴에서 선택된 옵션의 인덱스
+    @State private var selectedJob: String? = nil // 직무
     @State private var selectedEmploymentType: Int? = nil // 채용 형태 선택
     @State private var selectedEducationLevel: Int? = nil // 최종학력 선택
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var showValidationError = false // Validation error state
     @State private var showCategoryDropdown = false // 카테고리 드롭다운 메뉴 표시 상태
     @State private var showSupportFieldDropdown = false // 지원분야 드롭다운 메뉴 표시 상태
+    
+    // MARK: - api 연결 변수
+    @State private var postResult: BoardWriteGetModel? = nil // 응답 결과를 저장할 상태 변수
+
 
     var isFormValid: Bool {
         selectedCategory != nil && selectedOptionIndex != nil && (!showExtraFields || (selectedSupportFieldIndex != nil && selectedEmploymentType != nil && selectedEducationLevel != nil)) && !titleText.isEmpty && !postText.isEmpty
@@ -60,6 +67,7 @@ struct BoardWriteBoardViewController: View {
                         postText: $postText,
                         selectedOptionIndex: $selectedOptionIndex,
                         selectedSupportFieldIndex: $selectedSupportFieldIndex,
+                        selectedJob: $selectedJob,
                         selectedEmploymentType: $selectedEmploymentType,
                         selectedEducationLevel: $selectedEducationLevel,
                         showValidationError: $showValidationError,
@@ -104,6 +112,48 @@ struct BoardWriteBoardViewController: View {
         }
         .navigationBarBackButtonHidden()
     }
+    func BoardWriteApi() {
+        let url = "https://54.180.165.121:8080/api/posts/create"
+
+        // 옵셔널 바인딩을 통해 nil이 아닌 값을 추출하거나, 기본값을 사용할 수 있습니다.
+        let supportField = selectedSupportFieldIndex != nil ? "Some Support Field" : nil // 실제 데이터에 따라 적절히 설정
+        let job = selectedJob ?? ""
+        let hiringType = selectedEmploymentType != nil ? "Some Hiring Type" : nil // 실제 데이터에 따라 적절히 설정
+        let finalEducation = selectedEducationLevel != nil ? "Some Education Level" : nil // 실제 데이터에 따라 적절히 설정
+
+        // POST 요청에 필요한 파라미터 구성
+        let postParameters = BoardWritePostModel(
+            menu: selectedCategory ?? 0,
+            boardName: "Some Board Name", // 실제 데이터에 따라 적절히 설정
+            title: titleText,
+            content: postText,
+            supportField: supportField,
+            job: job,
+            hiringType: hiringType,
+            finalEducation: finalEducation
+        )
+
+        AF.request(url,
+                   method: .post,
+                   parameters: postParameters,
+                   encoder: JSONParameterEncoder.default,
+                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: BoardWriteGetModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    // 서버로부터 데이터를 정상적으로 받아왔을 때
+                    print("Success: \(data)")
+                    
+                    // 필요한 경우 받아온 데이터를 사용하여 UI 업데이트 등 수행
+                    self.postResult = data
+                    
+                case .failure(let error):
+                    // 오류가 발생했을 때
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
+    }
 }
 
 struct SeokBakji: View {
@@ -132,6 +182,7 @@ struct WriteBoardDetail: View {
     @Binding var postText: String // 내용 텍스트 필드의 상태
     @Binding var selectedOptionIndex: Int? // DropDown 메뉴에서 선택된 옵션의 인덱스
     @Binding var selectedSupportFieldIndex: Int? // 지원분야 드롭다운 메뉴에서 선택된 옵션의 인덱스
+    @Binding var selectedJob: String? // 직무 텍스트 필드
     @Binding var selectedEmploymentType: Int? // 채용 형태 선택
     @Binding var selectedEducationLevel: Int? // 최종학력 선택
     @Binding var showValidationError: Bool // Validation error state
@@ -232,6 +283,55 @@ struct WriteBoardDetail: View {
                             showDropdown: $showSupportFieldDropdown,
                             showValidationError: $showValidationError
                         )
+                        
+                        // 직무
+                        HStack(alignment: .top, spacing: 4) {
+                            Text("직무")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(Constants.Gray900)
+                            
+                            Image("dot-badge")
+                                .resizable()
+                                .frame(width: 4, height: 4)
+                        }
+                        .padding(.bottom, 12)
+                        .padding(.top, 20)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        
+                        // 제목 텍스트 필드 생성
+                        VStack(alignment: .leading, spacing: 4) {
+                            ZStack(alignment: .leading) {
+                                if titleText.isEmpty {
+                                    Text("")
+                                        .foregroundColor(showValidationError ? Color(red: 1, green: 0.29, blue: 0.29) : Constants.Gray500)
+                                        .padding(.horizontal, 8)
+                                }
+                                TextField("직무를 입력해주세요", text: $titleText)
+                                    .padding()
+                                    .background(showValidationError && titleText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
+                                    .cornerRadius(8, corners: [.topLeft, .topRight])
+                                    .overlay(
+                                        Rectangle()
+                                            .frame(height: 2)
+                                            .foregroundColor(titleText.isEmpty && showValidationError ? Color.red : Color(Constants.Gray300))
+                                            .padding(.top, 44)
+                                            .padding(.horizontal, 8),
+                                        alignment: .bottom
+                                    )
+                                    .foregroundColor(showValidationError && titleText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
+                            }
+                            if showValidationError && titleText.isEmpty {
+                                HStack {
+                                    Image("CircleWarning")
+                                        .resizable()
+                                        .frame(width: 12, height: 12)
+                                    
+                                    Text("제목은 필수 입력입니다")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                                }
+                            }
+                        }
                         
                         // 채용 형태
                         HStack(alignment: .top, spacing: 4) {

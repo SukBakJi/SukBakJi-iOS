@@ -49,6 +49,7 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
             print("Failed to retrieve password.")
             return
         }
+
         
         let url = APIConstants.calendarURL + "/search"
         

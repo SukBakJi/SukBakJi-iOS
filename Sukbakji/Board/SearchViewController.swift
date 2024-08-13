@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct SearchViewController: View {
     
@@ -27,9 +28,9 @@ struct SearchViewController: View {
                         // 검색 로직 추가
                         performSearch()
                     })
-                        .padding(.leading, 12)
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundStyle(Constants.Gray900)
+                    .padding(.leading, 12)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(Constants.Gray900)
                     
                 }
                 .padding(.horizontal, 16)
@@ -149,6 +150,45 @@ struct SearchViewController: View {
         
         // 검색 결과가 있는지 확인
         hasSearchResults = !filteredResults.isEmpty
+    }
+    
+    func BoardSearchApi(keyword: String, menu: String? = nil, boardName: String? = nil, completion: @escaping (Result<[BoardSearchResult], Error>) -> Void) {
+        // 기본 URL
+        let url = "https://your.api.endpoint.com/api/community/search"
+        
+        // 쿼리 파라미터 설정
+        var parameters: [String: String] = ["keyword": keyword]
+        
+        // 선택적으로 menu와 boardName을 추가
+        if let menu = menu {
+            parameters["menu"] = menu
+        }
+        if let boardName = boardName {
+            parameters["boardName"] = boardName
+        }
+        
+        AF.request(url,
+                   method: .get,
+                   parameters: parameters,
+                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
+        .validate(statusCode: 200..<300)
+        .responseDecodable(of: BoardSearchModel.self) { response in
+            switch response.result {
+            case .success(let data):
+                if data.isSuccess {
+                    // 성공적으로 데이터를 받아왔을 때, 결과를 반환
+                    completion(.success(data.result))
+                } else {
+                    // API 호출은 성공했으나, 서버에서 에러 코드를 반환한 경우
+                    let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: data.message])
+                    completion(.failure(error))
+                }
+                
+            case .failure(let error):
+                // 네트워크 오류 또는 응답 디코딩 실패 등의 오류가 발생했을 때
+                completion(.failure(error))
+            }
+        }
     }
 }
 

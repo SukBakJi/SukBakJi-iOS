@@ -76,6 +76,7 @@ class EditPWViewController: UIViewController {
             print("Failed to retrieve password.")
         }
     }
+
     
     func settingButton() {
         setButton.isEnabled = false
