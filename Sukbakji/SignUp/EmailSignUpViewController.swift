@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class EmailSignUpViewController: UIViewController {
+    private var emailWorkItem: DispatchWorkItem?
     
     // MARK: - ErrorState
     private var passwordLabelTopConstraint: Constraint?
@@ -358,6 +359,37 @@ class EmailSignUpViewController: UIViewController {
             }
         }
     }
+    func checkEmail(_ email: String) {
+            // 이전에 실행 중이던 작업이 있다면 취소합니다.
+            emailWorkItem?.cancel()
+            
+            // 새로운 작업 생성
+            let workItem = DispatchWorkItem { [weak self] in
+                guard let self = self else { return }
+                
+                // 이메일 데이터 매니저 호출
+                let signUpDataManager = SignUpDataManager()
+                signUpDataManager.EmailDataManager(email) { [weak self] SignUpModel in
+                    guard let self = self else { return }
+                    
+                    // 서버로부터의 응답 처리
+                    if let model = SignUpModel {
+                        if model.result == "사용 가능한 이메일입니다." {
+                            print("사용 가능한 이메일입니다.")
+                            self.changeStateCorrect()
+                        } else {
+                            // 이미 사용 중인 이메일인 경우 상태를 오류로 변경
+                            self.changeStateError(self.emailTextField)
+                            self.emailErrorLabel.text = "이미 가입된 이메일입니다"
+                        }
+                    }
+                }
+            }
+            
+            // 새로운 작업을 큐에 추가, 0.5초 후 실행
+            emailWorkItem = workItem
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workItem)
+        }
     
     private func showMessage(message: String) {
         print("메시지 : \(message)")
@@ -373,6 +405,8 @@ class EmailSignUpViewController: UIViewController {
             emailClearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
             
             emailErrorView.isHidden = false
+            emailErrorLabel.textColor = .warning400
+            emailErrorIcon.image = UIImage(named: "SBJ_ErrorCircle")
             updatePasswordLabelConstraint()
             
         } else if tf == passwordTextField {
@@ -421,6 +455,15 @@ class EmailSignUpViewController: UIViewController {
             updateNextButtonTopConstraint()
         }
     }
+    private func changeStateCorrect() {
+        emailTextField.layer.addBorder([.bottom], color: .blue400, width: 0.5)
+        emailErrorView.isHidden = false
+        emailErrorLabel.textColor = .blue400
+        emailErrorLabel.text = "해당 이메일은 사용 가능한 이메일입니다"
+        emailErrorIcon.image = UIImage(named: "SBJ_CorrectCircle")
+        updatePasswordLabelConstraint()
+    }
+    
     private func validateFieldForButtonUpdate() {
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
@@ -429,6 +472,9 @@ class EmailSignUpViewController: UIViewController {
         var isPasswordValid = false
         var ischeckPasswordValid = false
         
+        if isValidEmail(email) {
+            checkEmail(email)
+        }
         if !email.isEmpty && isValidEmail(email) {
             isEmailValid = true
             changeStateBack(emailTextField)
@@ -695,8 +741,17 @@ extension EmailSignUpViewController: UITextFieldDelegate {
         return true
     }
     
-    // 텍스트 필드의 내용이 변경될 때 호출
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        validateFieldForButtonUpdate()
-    }
+           validateFieldForButtonUpdate()
+           if textField == emailTextField {
+               // 이메일 형식이 유효하지 않거나 이미 존재하는 이메일인 경우 상태를 오류로 변경
+               let email = emailTextField.text ?? ""
+               if !isValidEmail(email) {
+                   changeStateError(emailTextField)
+                   emailErrorLabel.text = "올바르지 않은 형식의 이메일 입니다"
+               } else {
+                   checkEmail(email)
+               }
+           }
+       }
 }
