@@ -44,11 +44,11 @@ struct BoardMasterViewController: View {
                         BoardButton(text: "질문 게시판", isSelected: selectedButton == "질문 게시판") {
                             selectedButton = "질문 게시판"
                         }
-                        BoardButton(text: "취업후기 게시판", isSelected: selectedButton == "취업후기 게시판") {
-                            selectedButton = "취업후기 게시판"
-                        }
                         BoardButton(text: "박사지원 게시판", isSelected: selectedButton == "박사지원 게시판") {
                             selectedButton = "박사지원 게시판"
+                        }
+                        BoardButton(text: "취업후기 게시판", isSelected: selectedButton == "취업후기 게시판") {
+                            selectedButton = "취업후기 게시판"
                         }
                         BoardButton(text: "대학원생활 게시판", isSelected: selectedButton == "대학원생활 게시판") {
                             selectedButton = "대학원생활 게시판"
@@ -69,10 +69,10 @@ struct BoardMasterViewController: View {
                     switch selectedButton {
                     case "질문 게시판":
                         MasterQnABoard()
-                    case "취업후기 게시판":
-                        MasterEmploymentReviewBoard()
                     case "박사지원 게시판":
                         MasterToDoctoralBoard()
+                    case "취업후기 게시판":
+                        MasterEmploymentReviewBoard()
                     case "대학원생활 게시판":
                         MasterLifeBoard()
                     case "박사합격 후기":
@@ -182,9 +182,9 @@ struct MasterEmploymentReviewBoard: View {
         .padding(.bottom, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
         
-        EmploymentDummyBoard()
-        EmploymentDummyBoard()
-        EmploymentDummyBoard()
+//        EmploymentDummyBoard()
+//        EmploymentDummyBoard()
+//        EmploymentDummyBoard()
     }
 }
 
@@ -257,7 +257,7 @@ struct overlayButton: View {
             // 버튼 클릭 시 동작할 코드를 여기에 작성합니다.
             print("글쓰기 버튼 tapped!")
         }) {
-            NavigationLink(destination: BoardWriteBoardViewController()) {
+            NavigationLink(destination: BoardWriteViewController()) {
                 ZStack {
                     Circle()
                         .frame(width: 60, height: 60)

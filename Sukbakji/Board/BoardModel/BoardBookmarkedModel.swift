@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - BoardScrappedModel
+// MARK: - BoardBookMaredModel
 struct BoardBookmarkedModel: Codable {
     let isSuccess: Bool
     let code, message: String

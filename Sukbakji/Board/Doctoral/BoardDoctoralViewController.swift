@@ -1,10 +1,13 @@
 import SwiftUI
+import Alamofire
 
 struct BoardDoctoralViewController: View {
     
     @State private var searchText: String = "" // 검색 텍스트 상태 변수
     @State private var selectedButton: String? = "질문 게시판" // 기본값을 '질문 게시판'으로 설정
     @State private var isSearchActive: Bool = false // 검색 바 클릭 상태 변수
+    @State private var posts: [BoardListResult] = [] // 게시물 데이터를 저장할 상태 변수
+    @State private var isLoading: Bool = true // 데이터 로딩 상태
     
     var body: some View {
         ScrollView {
@@ -36,15 +39,19 @@ struct BoardDoctoralViewController: View {
                     HStack(spacing: 8) {
                         BoardButton(text: "질문 게시판", isSelected: selectedButton == "질문 게시판") {
                             selectedButton = "질문 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "취업후기 게시판", isSelected: selectedButton == "취업후기 게시판") {
                             selectedButton = "취업후기 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "대학원생활 게시판", isSelected: selectedButton == "대학원생활 게시판") {
                             selectedButton = "대학원생활 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "연구주제 게시판", isSelected: selectedButton == "연구주제 게시판") {
                             selectedButton = "연구주제 게시판"
+                            loadPosts()
                         }
                     }
                     .font(.system(size: 12, weight: .medium))
@@ -53,19 +60,17 @@ struct BoardDoctoralViewController: View {
                 
                 // 선택된 게시판에 따라 다른 뷰 표시
                 VStack {
-                    switch selectedButton {
-                    case "질문 게시판":
-                        DoctoralQnABoard()
-                    case "취업후기 게시판":
-                        DoctoralReviewBoard()
-                    case "대학원생활 게시판":
-                        DoctoralLifeBoard()
-                    case "연구주제 게시판":
-                        DoctoralResearchBoard()
-                    default:
-                        Text("여기에 컨텐츠를 추가하세요")
-                            .font(.body)
-                            .foregroundColor(.secondary)
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                    } else if posts.isEmpty {
+                        Text("게시물이 없습니다.")
+                            .foregroundColor(Constants.Gray500)
+                            .padding()
+                    } else {
+                        ForEach(posts, id: \.postId) { post in
+                            BoardItem(post: post)
+                        }
                     }
                 }
                 .padding(.top, 20)
@@ -83,89 +88,103 @@ struct BoardDoctoralViewController: View {
         .fullScreenCover(isPresented: $isSearchActive) {
             SearchViewController(boardName: selectedButton ?? "게시판")
         }
-    }
-}
-
-// 각 게시판에 대한 뷰
-// MARK: -- 박사 질문 게시판
-struct DoctoralQnABoard: View {
-    var body: some View {
-        VStack(alignment: .center, spacing: 8) {
-            Text("질문 게시판")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
-            + Text("에서\n이야기를 나눠 보세요")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color.black)
+        .onAppear {
+            loadPosts() // 초기 로드
         }
-        .padding(.bottom, 16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        
-        dummyBoard(boardName: "질문 게시판")
-        dummyBoard(boardName: "질문 게시판")
-        dummyBoard(boardName: "질문 게시판")
     }
-}
-
-// MARK: -- 박사 취업후기 게시판
-struct DoctoralReviewBoard: View {
-    var body: some View {
-        VStack(alignment: .center, spacing: 8) {
-            Text("취업후기 게시판")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
-            + Text("에서\n이야기를 나눠 보세요")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color.black)
+    
+    // 게시글을 불러오는 함수
+    // 게시글을 불러오는 함수
+    func loadPosts() {
+        isLoading = true
+        
+        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
+            print("토큰이 없습니다.")
+            self.isLoading = false
+            return
         }
-        .padding(.bottom, 16)
-        .frame(maxWidth: .infinity, alignment: .leading)
         
-        EmploymentDummyBoard()
-        EmploymentDummyBoard()
-        EmploymentDummyBoard()
+        let boardName = selectedButton ?? "질문 게시판"
+        let url = APIConstants.boardpostURL + "/list"
+        
+        let parameters: [String: Any] = [
+            "menu": "박사",
+            "boardName": boardName
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)"
+        ]
+        
+        AF.request(url, method: .get, parameters: parameters, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: BoardListGetResponseModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        self.posts = data.result.reversed() // 배열을 뒤집어 상단에 추가되도록 함
+                    } else {
+                        print("Error: \(data.message)")
+                        self.posts = []
+                    }
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    self.posts = []
+                }
+                self.isLoading = false
+            }
     }
 }
 
-// MARK: -- 박사 대학원생활 게시판
-struct DoctoralLifeBoard: View {
+struct BoardItem: View {
+    var post: BoardListResult
     
     var body: some View {
-        VStack(alignment: .center, spacing: 8) {
-            Text("대학원생활 게시판")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
-            + Text("에서\n이야기를 나눠 보세요")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color.black)
+        Button(action: {
+            print("\(post.title) 게시글 tapped")
+        }) {
+            NavigationLink(destination: DummyBoardDetail(boardName: post.title, postId: 1)) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(post.title)
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(Constants.Gray900)
+                    
+                    Text(post.previewContent)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(Constants.Gray900)
+                        .lineLimit(2) // Preview content의 최대 2줄로 제한
+                    
+                    HStack(alignment: .top, spacing: 12) {
+                        Image("chat 1")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                        
+                        Text("\(post.commentCount)")
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
+                        
+                        Image("eye")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                        
+                        Text("\(post.views)")
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .topTrailing)
+                }
+                .padding(.horizontal, 18) // VStack 내부 좌우 여백
+                .padding(.vertical, 16)
+                .background(Constants.White)
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 0.5)
+                        .stroke(Constants.Gray300, lineWidth: 1)
+                )
+            }
         }
-        .padding(.bottom, 16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        
-        dummyBoard(boardName: "대학원생활 게시판")
-        dummyBoard(boardName: "대학원생활 게시판")
-        dummyBoard(boardName: "대학원생활 게시판")
-    }
-}
-
-// MARK: -- 박사 연구주제 게시판
-struct DoctoralResearchBoard: View {
-    
-    var body: some View {
-        VStack(alignment: .center, spacing: 8) {
-            Text("연구주제 게시판")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
-            + Text("에서\n이야기를 나눠 보세요")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color.black)
-        }
-        .padding(.bottom, 16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        
-        dummyBoard(boardName: "연구주제 게시판")
-        dummyBoard(boardName: "연구주제 게시판")
-        dummyBoard(boardName: "연구주제 게시판")
     }
 }
 

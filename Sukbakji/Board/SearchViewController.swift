@@ -14,7 +14,7 @@ struct SearchViewController: View {
     @State private var searchText: String = ""
     @State private var hasSearchResults: Bool = true // 검색 결과 상태 변수
     var boardName: String
-    @State private var filteredResults: [BoardItem] = [] // 검색 결과를 저장할 상태 변수
+    @State private var filteredResults: [BoardsItem] = [] // 검색 결과를 저장할 상태 변수
     
     var body: some View {
         VStack {
@@ -152,25 +152,29 @@ struct SearchViewController: View {
         hasSearchResults = !filteredResults.isEmpty
     }
     
-    func BoardSearchApi(keyword: String, menu: String? = nil, boardName: String? = nil, completion: @escaping (Result<[BoardSearchResult], Error>) -> Void) {
+    func BoardSearchApi(keyword: String, menu: String? = nil, boardName: String? = nil, userToken: String, completion: @escaping (Result<[BoardSearchResult], Error>) -> Void) {
         // 기본 URL
-        let url = "https://your.api.endpoint.com/api/community/search"
+        let url = APIConstants.communityURL + "/search"
         
         // 쿼리 파라미터 설정
-        var parameters: [String: String] = ["keyword": keyword]
+        var parameters: [String: String] = [
+            "keyword": keyword,
+            "menu": menu ?? "",
+            "boardName": boardName ?? ""
+        ]
         
-        // 선택적으로 menu와 boardName을 추가
-        if let menu = menu {
-            parameters["menu"] = menu
-        }
-        if let boardName = boardName {
-            parameters["boardName"] = boardName
-        }
+        // 요청 헤더에 Authorization 추가
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Bearer \(userToken)"
+        ]
         
         AF.request(url,
                    method: .get,
                    parameters: parameters,
-                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
+                   encoding: URLEncoding.default, // GET 요청에서 쿼리 파라미터를 URL에 추가
+                   headers: headers)
         .validate(statusCode: 200..<300)
         .responseDecodable(of: BoardSearchModel.self) { response in
             switch response.result {
