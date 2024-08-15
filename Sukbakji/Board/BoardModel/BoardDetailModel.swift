@@ -7,21 +7,25 @@
 
 import Foundation
 
-// MARK: - BoardDetailModel
-struct BoardDetailModel: Codable {
+struct BoardDetailModel: Decodable {
     let isSuccess: Bool
-    let code, message: String
+    let code: String
+    let message: String
     let result: BoardDetailResult
 }
 
-// MARK: - BoardDetailResult
-struct BoardDetailResult: Codable {
-    let menu, title, content: String
-    let comments: [BoardDetailComment]
-    let commentCount, views: Int
+struct BoardDetailResult: Decodable {
+    let menu: String
+    let title: String
+    let content: String
+    let comments: [BoardComment]
+    let commentCount: Int
+    let views: Int
 }
 
-// MARK: - BoardDetailComment
-struct BoardDetailComment: Codable {
-    let anonymousName, degreeLevel, content, createdDate: String
+struct BoardComment: Decodable {
+    let anonymousName: String
+    let degreeLevel: String
+    let content: String
+    let createdDate: String
 }
