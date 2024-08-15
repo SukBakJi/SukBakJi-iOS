@@ -26,4 +26,6 @@ struct APIConstants {
     static let calendarURL = baseURL + "/calender"
     
     static let reseachtopicURL = baseURL + "/research-topics"
+    
+    static let mentorURL = baseURL + "/mentor"
 }

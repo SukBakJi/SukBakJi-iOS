@@ -1503,6 +1503,7 @@
                         <outlet property="noResultSV" destination="ZeW-AZ-0ak" id="Bzx-UT-Uiu"/>
                         <outlet property="schoolSearchTF" destination="210-Gh-o40" id="l0s-5D-AQQ"/>
                         <outlet property="setButton" destination="8VV-vd-Odu" id="JLO-X4-6fY"/>
+                        <outlet property="univLabel" destination="ycQ-u2-X7c" id="S6r-Ej-pck"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GP7-1N-uQ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

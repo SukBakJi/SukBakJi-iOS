@@ -146,6 +146,7 @@
 		C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */; };
 		C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55D2C481F8C00A58395 /* DateViewController.swift */; };
 		C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */; };
+		C78E70C32C6C9094004BBCE9 /* MentorListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78E70C22C6C9094004BBCE9 /* MentorListModel.swift */; };
 		C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */; };
 		C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */; };
 		C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79864002C652B450029F8E3 /* TFaddShadow.swift */; };
@@ -154,6 +155,8 @@
 		C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */; };
 		C7A5A0CE2C6A5DFD00946B48 /* SelectDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A5A0CD2C6A5DFD00946B48 /* SelectDateModel.swift */; };
 		C7A5A0D02C6A5F2700946B48 /* UnivNameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A5A0CF2C6A5F2700946B48 /* UnivNameModel.swift */; };
+		C7A99B182C6DBA5C00698C27 /* EditProfilePut.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A99B172C6DBA5C00698C27 /* EditProfilePut.swift */; };
+		C7A99B1A2C6DBA6700698C27 /* LogoutPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A99B192C6DBA6700698C27 /* LogoutPost.swift */; };
 		C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */; };
 		C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */; };
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
@@ -326,6 +329,7 @@
 		C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C78DE55D2C481F8C00A58395 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertViewController.swift; sourceTree = "<group>"; };
+		C78E70C22C6C9094004BBCE9 /* MentorListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorListModel.swift; sourceTree = "<group>"; };
 		C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLabModel.swift; sourceTree = "<group>"; };
 		C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
 		C79864002C652B450029F8E3 /* TFaddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFaddShadow.swift; sourceTree = "<group>"; };
@@ -334,6 +338,8 @@
 		C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLeftPadding.swift; sourceTree = "<group>"; };
 		C7A5A0CD2C6A5DFD00946B48 /* SelectDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateModel.swift; sourceTree = "<group>"; };
 		C7A5A0CF2C6A5F2700946B48 /* UnivNameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivNameModel.swift; sourceTree = "<group>"; };
+		C7A99B172C6DBA5C00698C27 /* EditProfilePut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePut.swift; sourceTree = "<group>"; };
+		C7A99B192C6DBA6700698C27 /* LogoutPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutPost.swift; sourceTree = "<group>"; };
 		C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
@@ -640,6 +646,8 @@
 		C70DB27D2C633C7100D6014B /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
+				C78E70C02C6C9065004BBCE9 /* ChattingModel */,
+				C78E70C12C6C9070004BBCE9 /* ChattingAPI */,
 				C70DB27E2C633CBE00D6014B /* Chatting.storyboard */,
 				C70DB2802C633CDB00D6014B /* ChattingViewController.swift */,
 				C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */,
@@ -734,6 +742,8 @@
 			isa = PBXGroup;
 			children = (
 				C772B1122C6885F60039B7C7 /* ChangePWPost.swift */,
+				C7A99B172C6DBA5C00698C27 /* EditProfilePut.swift */,
+				C7A99B192C6DBA6700698C27 /* LogoutPost.swift */,
 			);
 			path = HomeAPI;
 			sourceTree = "<group>";
@@ -747,6 +757,21 @@
 				C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		C78E70C02C6C9065004BBCE9 /* ChattingModel */ = {
+			isa = PBXGroup;
+			children = (
+				C78E70C22C6C9094004BBCE9 /* MentorListModel.swift */,
+			);
+			path = ChattingModel;
+			sourceTree = "<group>";
+		};
+		C78E70C12C6C9070004BBCE9 /* ChattingAPI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChattingAPI;
 			sourceTree = "<group>";
 		};
 		C7A7BC262C3AF2D4007E66DA /* Font */ = {
@@ -1069,6 +1094,7 @@
 				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
 				41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */,
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
+				C7A99B1A2C6DBA6700698C27 /* LogoutPost.swift in Sources */,
 				C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */,
 				417AADCD2C673E28002080E0 /* SignUpAPIInput.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
@@ -1088,6 +1114,7 @@
 				C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				41EE134E2C5529B20037EDD6 /* SelectResearchTopicViewController.swift in Sources */,
+				C78E70C32C6C9094004BBCE9 /* MentorListModel.swift in Sources */,
 				C7DA4E412C6122BB0092F342 /* AlarmPostAPI.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				7B1C535E2C69F20E00C66D0D /* SwiftUIView.swift in Sources */,
@@ -1114,6 +1141,7 @@
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
 				C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
+				C7A99B182C6DBA5C00698C27 /* EditProfilePut.swift in Sources */,
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
 				7B1C53582C69D80A00C66D0D /* DirectoryFavoriteCancelModel.swift in Sources */,
 				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,

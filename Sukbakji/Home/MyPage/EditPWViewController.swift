@@ -76,7 +76,6 @@ class EditPWViewController: UIViewController {
         }
     }
 
-    
     func settingButton() {
         setButton.isEnabled = false
         setButton.layer.masksToBounds = true
