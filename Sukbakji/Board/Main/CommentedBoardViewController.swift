@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct CommentedBoardViewController: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var hasCommentedPosts: Bool = true // State variable to track if there are written posts
+    @State private var hasCommentedPosts: Bool = true // State variable to track if there are commented posts
+    @State private var commentedPosts: [BoardCommentedResult] = [] // 댓글 단 글 목록을 저장할 상태 변수
+    @State private var isLoading: Bool = true // 로딩 상태를 추적하는 상태 변수
     
     var body: some View {
         NavigationView {
@@ -43,13 +46,16 @@ struct CommentedBoardViewController: View {
                 
                 Divider()
                 
-                if hasCommentedPosts {
+                if isLoading {
+                    // 로딩 중일 때 표시할 뷰
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                } else if hasCommentedPosts {
                     ScrollView {
                         // 게시판 글 목록
-                        ContainerDummyBoard(boardName: "댓글 단 글")
-                        ContainerDummyBoard(boardName: "댓글 단 글")
-                        ContainerDummyBoard(boardName: "댓글 단 글")
-                        ContainerDummyBoard(boardName: "댓글 단 글")
+                        ForEach(commentedPosts, id: \.postID) { post in
+                            ContainerDummyBoard(boardName: post.boardName)
+                        }
                     }
                 } else {
                     VStack {
@@ -61,8 +67,67 @@ struct CommentedBoardViewController: View {
                     }
                 }
             }
+            .onAppear {
+                loadCommentedPosts()
+            }
         }
         .navigationBarBackButtonHidden()
+    }
+    
+    func loadCommentedPosts() {
+        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
+            print("토큰이 없습니다.")
+            self.isLoading = false // 로딩 상태 업데이트
+            self.hasCommentedPosts = false
+            return
+        }
+        
+        CommentedBoardApi(userToken: accessToken) { result in
+            switch result {
+            case .success(let posts):
+                self.commentedPosts = posts
+                self.hasCommentedPosts = !posts.isEmpty
+            case .failure(let error):
+                print("Error loading commented posts: \(error.localizedDescription)")
+                self.hasCommentedPosts = false
+            }
+            self.isLoading = false
+        }
+    }
+    
+    func CommentedBoardApi(userToken: String, completion: @escaping (Result<[BoardCommentedResult], Error>) -> Void) {
+        // API 엔드포인트 URL
+        let url = APIConstants.communityURL + "/comment-list"
+        
+        // 요청 헤더에 Authorization 추가
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Bearer \(userToken)"
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: headers)
+        .validate(statusCode: 200..<300)
+        .responseDecodable(of: BoardCommentedModel.self) { response in
+            switch response.result {
+            case .success(let data):
+                if data.isSuccess {
+                    // 성공적으로 데이터를 받아왔을 때, 결과를 반환
+                    completion(.success(data.result))
+                } else {
+                    // API 호출은 성공했으나, 서버에서 에러 코드를 반환한 경우
+                    let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: data.message])
+                    completion(.failure(error))
+                }
+                
+            case .failure(let error):
+                // 네트워크 오류 또는 응답 디코딩 실패 등의 오류가 발생했을 때
+                completion(.failure(error))
+            }
+        }
     }
 }
 
@@ -83,6 +148,7 @@ struct EmptyCommentedBoard: View {
         }
     }
 }
+
 #Preview {
     CommentedBoardViewController()
 }
