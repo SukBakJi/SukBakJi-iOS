@@ -8,7 +8,7 @@
 import Foundation
 
 struct EditProfileModel : Encodable {
-    let degreeLevel: String
+    let degreeLevel: DegreeLevel
     let researchTopics: [String]
 }
 

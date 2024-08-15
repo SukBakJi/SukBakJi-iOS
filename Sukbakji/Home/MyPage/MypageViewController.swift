@@ -17,7 +17,10 @@ class MypageViewController: UIViewController {
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var pointLabel: UILabel!
     
-    var userData: MyPageResult?
+    private var userData: MyPageResult?
+    private var logoutData: LogoutResult!
+    
+    private var userToken: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +41,17 @@ class MypageViewController: UIViewController {
     }
     
     func getUserName() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
+            userToken = retrievedData
+            print("Password retrieved and stored in userPW: \(userToken ?? "")")
+        } else {
             print("Failed to retrieve password.")
-            return
         }
         
         let url = APIConstants.userURL + "/mypage"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(retrievedToken)",
+            "Authorization": "Bearer \(userToken ?? "")",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in
@@ -57,7 +62,19 @@ class MypageViewController: UIViewController {
                     self.userData = decodedData.result
                     DispatchQueue.main.async {
                         self.nameLabel.text = self.userData?.name
-                        self.degreeLabel.text = self.userData?.degreeLevel ?? ""
+                        if self.userData?.degreeLevel == "BACHELORS_STUDYING" || self.userData?.degreeLevel == "BACHELORS_GRADUATED"{
+                            self.degreeLabel.text = "학사 졸업 또는 재학중"
+                        } else if self.userData?.degreeLevel == "MASTERS_STUDYING" {
+                            self.degreeLabel.text = "석사 재학중"
+                        } else if self.userData?.degreeLevel == "MASTERS_GRADUATED" {
+                            self.degreeLabel.text = "석사 졸업중"
+                        } else if self.userData?.degreeLevel == "DOCTORAL_STUDYING" {
+                            self.degreeLabel.text = "박사 재학중"
+                        } else if self.userData?.degreeLevel == "DOCTORAL_GRADUATED" {
+                            self.degreeLabel.text = "박사 졸업중"
+                        } else {
+                            self.degreeLabel.text = "석박사 통합 재학"
+                        }
                         if self.userData?.degreeLevel == nil {
                             self.warningImage.isHidden = false
                             self.warningLabel.isHidden = false
@@ -93,6 +110,14 @@ class MypageViewController: UIViewController {
         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as? EditProfileViewController else { return }
         
         self.present(nextVC, animated: true)
+    }
+    
+    @IBAction func logout_Tapped(_ sender: Any) {
+        let parameters = LogoutModel(accessToken: userToken ?? "")
+        APILogoutPost.instance.SendingLogout(parameters: parameters) { result in self.logoutData = result }
+        let mainViewController = UINavigationController(rootViewController: LoginViewController())
+        mainViewController.modalPresentationStyle = .fullScreen
+        self.present(mainViewController, animated: true)
     }
     
     @IBAction func back_Tapped(_ sender: Any) {

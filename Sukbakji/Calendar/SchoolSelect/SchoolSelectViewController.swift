@@ -13,6 +13,7 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var SchoolTV: UITableView!
     @IBOutlet weak var noResultImage: UIImageView!
     @IBOutlet weak var noResultSV: UIStackView!
+    @IBOutlet weak var univLabel: UILabel!
     
     @IBOutlet weak var schoolSearchTF: UITextField!
     @IBOutlet weak var setButton: UIButton!
@@ -70,6 +71,14 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
                     self.allUniDatas = self.uniData?.universityList ?? []
                     DispatchQueue.main.async {
                         self.SchoolTV.reloadData()
+                        if (self.allUniDatas.count == 0) {
+                            self.noResultImage.isHidden = false
+                            self.noResultSV.isHidden = false
+                            self.univLabel.text = self.schoolSearchTF.text
+                        } else if (self.allUniDatas.count >= 1) {
+                            self.noResultImage.isHidden = true
+                            self.noResultSV.isHidden = true
+                        }
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
