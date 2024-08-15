@@ -15,6 +15,8 @@ class ProfileTabViewController: TabmanViewController {
     
     private var viewControllers: Array<UIViewController> = []
     
+    private var userPW: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabMan()
@@ -25,10 +27,21 @@ class ProfileTabViewController: TabmanViewController {
                   name: NSNotification.Name("CannotChangePW"),
                   object: nil
         )
+        
+        getUserPW()
     }
         
     @objc func didDismissDetailNotification(_ notification: Notification) {
         self.scrollToPage(.at(index: 0), animated: true)
+    }
+    
+    func getUserPW() {
+        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
+            userPW = retrievedData
+            print("Password retrieved and stored in userPW: \(userPW)")
+        } else {
+            print("Failed to retrieve password.")
+        }
     }
     
     private func setupTabMan(){
@@ -62,16 +75,16 @@ class ProfileTabViewController: TabmanViewController {
         addBar(bar, dataSource: self, at: .custom(view: tabView, layout: nil))
     }
     
-//    override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: NavigationDirection, animated: Bool) {
-//        if index == 1 { // 두 번째 탭이 선택된 경우
-//            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PWAlertVC") as? PWAlertViewController else { return }
-//            nextVC.modalPresentationStyle = .overCurrentContext
-//            
-//            DispatchQueue.main.async {
-//                self.present(nextVC, animated: false, completion: nil)
-//            }
-//        }
-//    }
+    override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: NavigationDirection, animated: Bool) {
+        if (index == 1) && (userPW == "") { // 두 번째 탭이 선택된 경우
+            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PWAlertVC") as? PWAlertViewController else { return }
+            nextVC.modalPresentationStyle = .overCurrentContext
+            
+            DispatchQueue.main.async {
+                self.present(nextVC, animated: false, completion: nil)
+            }
+        }
+    }
 }
 
 extension ProfileTabViewController: PageboyViewControllerDataSource, TMBarDataSource {

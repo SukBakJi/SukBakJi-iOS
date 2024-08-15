@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="채팅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nM0-Gl-hF5">
-                                <rect key="frame" x="23.999999999999996" y="59" width="34.666666666666657" height="24"/>
+                                <rect key="frame" x="24" y="59" width="35" height="24"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -113,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RcT-0r-2be" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="793" y="38"/>
+            <point key="canvasLocation" x="805" y="38"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="5k4-Ry-hQ3">
@@ -133,7 +133,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시판을 탐색하고 채팅을 나눠 보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vON-8j-YnD">
-                                <rect key="frame" x="24.000000000000014" y="80" width="211.33333333333337" height="26"/>
+                                <rect key="frame" x="23.999999999999986" y="80" width="211.66666666666663" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="Pkq-pV-7XB"/>
                                 </constraints>
@@ -324,7 +324,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="멘토링 신청" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDg-Zm-mng">
-                                <rect key="frame" x="146.33333333333334" y="59.000000000000007" width="100.33333333333334" height="26.333333333333336"/>
+                                <rect key="frame" x="146.66666666666666" y="58.999999999999993" width="100" height="26.666666666666664"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -379,13 +379,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="를 기반으로 찾아 봤어요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIg-3h-r5z">
-                                <rect key="frame" x="91" y="185.33333333333334" width="171" height="21"/>
+                                <rect key="frame" x="90.999999999999986" y="185.33333333333334" width="168.66666666666663" height="21"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="리스트에서 바로 멘토를 찾아 멘토링을 신청해 보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BL-ou-Wbs">
-                                <rect key="frame" x="24" y="214.33333333333334" width="293.66666666666669" height="17"/>
+                                <rect key="frame" x="24" y="214.33333333333334" width="291" height="17"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
                                 <color key="textColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -502,6 +502,13 @@
                                                 <constraint firstAttribute="trailing" secondItem="AkS-6a-Chn" secondAttribute="trailing" constant="16" id="qGM-Em-6qk"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="deptName" destination="Ko6-hb-ay6" id="a8E-39-vp8"/>
+                                            <outlet property="firstTopic" destination="vx5-7C-O5h" id="dpu-Wl-ScV"/>
+                                            <outlet property="profName" destination="Ewp-AO-QZi" id="euq-go-LsT"/>
+                                            <outlet property="secondTopic" destination="YIi-98-nUQ" id="Jkf-2N-pzw"/>
+                                            <outlet property="univName" destination="GoV-9I-8vk" id="Tdr-mM-Xmm"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -589,7 +596,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="멘토 신청" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I45-xD-I54">
-                                <rect key="frame" x="156" y="59.000000000000007" width="81.333333333333314" height="26.333333333333336"/>
+                                <rect key="frame" x="156" y="58.999999999999993" width="81" height="26.666666666666664"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -620,19 +627,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="멘토 신청을 위해서는 소속 연구실 정보가 필요해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKU-Np-h11">
-                                <rect key="frame" x="24" y="146.33333333333334" width="275.33333333333331" height="17"/>
+                                <rect key="frame" x="24" y="146.33333333333334" width="275.66666666666669" height="17"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
                                 <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwc-FT-vtB">
-                                <rect key="frame" x="24" y="205.33333333333334" width="31.333333333333329" height="21"/>
+                                <rect key="frame" x="24" y="205.33333333333334" width="31.666666666666671" height="21"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Dot" translatesAutoresizingMaskIntoConstraints="NO" id="yAb-bU-eGO">
-                                <rect key="frame" x="59.333333333333336" y="205.33333333333334" width="4" height="4"/>
+                                <rect key="frame" x="59.666666666666664" y="205.33333333333334" width="4" height="4"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="대학명을 입력해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bui-r1-cEM">
                                 <rect key="frame" x="24" y="238.33333333333337" width="345" height="44"/>
@@ -644,13 +651,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학과" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwD-nX-pAn">
-                                <rect key="frame" x="24" y="302.33333333333331" width="31.333333333333329" height="21"/>
+                                <rect key="frame" x="24" y="302.33333333333331" width="31.666666666666671" height="21"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Dot" translatesAutoresizingMaskIntoConstraints="NO" id="Ao2-fs-IDM">
-                                <rect key="frame" x="59.333333333333336" y="302.33333333333331" width="4" height="4"/>
+                                <rect key="frame" x="59.666666666666664" y="302.33333333333331" width="4" height="4"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="학과를 입력해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="szb-lz-O6b">
                                 <rect key="frame" x="24" y="335.33333333333331" width="345" height="44"/>

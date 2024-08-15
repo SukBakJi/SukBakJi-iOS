@@ -8,7 +8,13 @@
 import UIKit
 
 class ApplyMentoringTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var univName: UILabel!
+    @IBOutlet weak var deptName: UILabel!
+    @IBOutlet weak var profName: UILabel!
+    @IBOutlet weak var firstTopic: UILabel!
+    @IBOutlet weak var secondTopic: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,7 +35,7 @@ extension ApplyMentoringViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return allDetailDatas.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,6 +52,14 @@ extension ApplyMentoringViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ApplyMentoringTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ApplyMentoring_TableViewCell", for: indexPath) as! ApplyMentoringTableViewCell
+        
+        let detailData = allDetailDatas[indexPath.section]
+        
+        cell.univName.text = detailData.univName
+        cell.deptName.text = "\(detailData.deptName)부"
+        cell.profName.text = "\(detailData.profName) 교수님"
+        cell.firstTopic.text = "#\(detailData.researchTopic[0])"
+        cell.secondTopic.text = "#\(detailData.researchTopic[1])"
         
         cell.selectionStyle = .none
         

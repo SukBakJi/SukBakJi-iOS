@@ -10,6 +10,7 @@ import UIKit
 class ResearchTopicCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var topicView: UIView!
+    @IBOutlet weak var topicLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +22,7 @@ class ResearchTopicCollectionViewCell: UICollectionViewCell {
 extension EditInfoViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return userData?.researchTopics?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -29,7 +30,9 @@ extension EditInfoViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 88, height: 29)
+        let str = userData?.researchTopics?[indexPath.item]
+        let leng = str?.count ?? 0
+        return CGSize(width: 40 + leng * 12, height: 29)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -38,6 +41,10 @@ extension EditInfoViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ResearchTopicCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ResearchTopic_CollectionViewCell", for: indexPath) as! ResearchTopicCollectionViewCell
+        
+        let topicData = userData?.researchTopics?[indexPath.item]
+        
+        cell.topicLabel.text = "#\(topicData ?? "")"
         
         return cell
     }

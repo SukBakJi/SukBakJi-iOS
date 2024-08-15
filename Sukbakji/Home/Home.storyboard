@@ -705,6 +705,9 @@
                                     <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
                                     <color key="baseForegroundColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="logout_Tapped:" destination="HLL-h6-w3n" eventType="touchUpInside" id="08Y-45-yfL"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAQ-9E-jX8">
                                 <rect key="frame" x="16" y="737" width="73" height="20"/>
@@ -986,7 +989,7 @@
                                     <constraint firstAttribute="height" constant="30" id="NpG-5M-XRX"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="plusButton"/>
+                                <buttonConfiguration key="configuration" style="plain" image="SBJ_plusButton"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eF9-zL-KVT">
                                 <rect key="frame" x="24" y="514" width="303" height="45"/>
@@ -1020,8 +1023,8 @@
                                                     </subviews>
                                                     <color key="backgroundColor" name="Coquelicot"/>
                                                     <constraints>
-                                                        <constraint firstItem="DaR-7P-N0D" firstAttribute="centerY" secondItem="Zmz-OI-s0j" secondAttribute="centerY" id="4Y4-mv-5Sx"/>
-                                                        <constraint firstItem="DaR-7P-N0D" firstAttribute="centerX" secondItem="Zmz-OI-s0j" secondAttribute="centerX" id="Jho-ee-Z3l"/>
+                                                        <constraint firstItem="DaR-7P-N0D" firstAttribute="centerY" secondItem="Zmz-OI-s0j" secondAttribute="centerY" id="gic-Pl-JNf"/>
+                                                        <constraint firstItem="DaR-7P-N0D" firstAttribute="centerX" secondItem="Zmz-OI-s0j" secondAttribute="centerX" id="o17-Br-CFU"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1033,6 +1036,7 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
+                                            <outlet property="topicLabel" destination="DaR-7P-N0D" id="3T9-96-Thp"/>
                                             <outlet property="topicView" destination="Zmz-OI-s0j" id="0es-AQ-IJL"/>
                                         </connections>
                                     </collectionViewCell>
@@ -1043,12 +1047,12 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="3Wz-AE-fCN"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="다음으로" cornerStyle="medium">
-                                    <fontDescription key="titleFontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
-                                    <color key="baseForegroundColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="baseBackgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="다음으로"/>
+                                <connections>
+                                    <action selector="edit_Tapped:" destination="8Lj-J9-fzZ" eventType="touchUpInside" id="BpY-Iq-MAj"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="연구 주제" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOS-m6-oFq">
                                 <rect key="frame" x="24" y="473" width="66.666666666666671" height="21"/>
@@ -1120,6 +1124,9 @@
                         <outlet property="idTF" destination="aaq-H4-cwN" id="dvl-cr-sxC"/>
                         <outlet property="nameTF" destination="xtY-gD-nfp" id="YeA-a9-46B"/>
                         <outlet property="researchTopicCV" destination="eF9-zL-KVT" id="evs-xf-Ldt"/>
+                        <outlet property="setButton" destination="9IY-xL-mBE" id="fLT-0c-crD"/>
+                        <outlet property="socialImage" destination="yZR-n6-3Ff" id="krr-pf-Agf"/>
+                        <outlet property="socialLabel" destination="zlP-EE-gDM" id="6pd-SO-LMw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GIS-Eo-4ik" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1715,7 +1722,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <containerView key="tableFooterView" opaque="NO" contentMode="scaleToFill" id="Lf7-sL-EMn">
-                                            <rect key="frame" x="0.0" y="129.33333015441895" width="393" height="44"/>
+                                            <rect key="frame" x="0.0" y="129" width="393" height="44"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         </containerView>
                                         <prototypes>
@@ -2002,6 +2009,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SBJ_plusButton" width="44" height="44"/>
         <image name="Sukbakji_AD" width="342" height="100"/>
         <image name="Sukbakji_Back" width="48" height="48"/>
         <image name="Sukbakji_Comment" width="12" height="12"/>
@@ -2025,7 +2033,6 @@
         <image name="Sukbakji_ProfileImage" width="40" height="40"/>
         <image name="Sukbakji_View" width="12" height="12"/>
         <image name="Sukbakji_Warning" width="12" height="12"/>
-        <image name="plusButton" width="44" height="44"/>
         <namedColor name="Coquelicot">
             <color red="0.92549019607843142" green="0.28627450980392155" blue="0.031372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
