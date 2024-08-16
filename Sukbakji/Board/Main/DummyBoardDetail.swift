@@ -194,17 +194,17 @@ struct DummyBoardDetail: View {
     
     // 게시글 상세 정보를 불러오는 함수
     func loadBoardDetail(postId: Int) {
-        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-              let accessToken = String(data: accessTokenData, encoding: .utf8), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            self.isLoading = false
-            return
-        }
+//        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+//              let accessToken = String(data: accessTokenData, encoding: .utf8), !accessToken.isEmpty else {
+//            print("토큰이 없습니다.")
+//            self.isLoading = false
+//            return
+//        }
         
         let url = APIConstants.boardpostURL + "/detail/\(postId)"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+//            "Authorization": "Bearer \(accessToken)",
             "Content-Type": "application/json"
         ]
         

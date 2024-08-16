@@ -85,7 +85,7 @@ extension SchoolCalendarViewController: UITableViewDelegate, UITableViewDataSour
     func handleButtonTap(for indexPath: IndexPath) {
         // API 호출을 위한 파라미터 생성
         let detailData = allDetailDatas[indexPath.section]
-        let parameters = UniDeleteModel(memberId: allDatas?.memberId ?? 0, univId: 1, season: detailData.season, method: detailData.method)
+        let parameters = UniDeleteModel(memberId: allDatas?.memberId ?? 0, univId: detailData.univId, season: detailData.season, method: detailData.method)
         print(parameters)
         APIUniDelete.instance.SendingUniDelete(parameters: parameters) { result in
             switch result {

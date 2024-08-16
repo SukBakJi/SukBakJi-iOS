@@ -75,25 +75,25 @@ struct CommentedBoardViewController: View {
     }
     
     func loadCommentedPosts() {
-        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
-            print("토큰이 없습니다.")
-            self.isLoading = false // 로딩 상태 업데이트
-            self.hasCommentedPosts = false
-            return
-        }
-        
-        CommentedBoardApi(userToken: accessToken) { result in
-            switch result {
-            case .success(let posts):
-                self.commentedPosts = posts
-                self.hasCommentedPosts = !posts.isEmpty
-            case .failure(let error):
-                print("Error loading commented posts: \(error.localizedDescription)")
-                self.hasCommentedPosts = false
-            }
-            self.isLoading = false
-        }
+//        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+//              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
+//            print("토큰이 없습니다.")
+//            self.isLoading = false // 로딩 상태 업데이트
+//            self.hasCommentedPosts = false
+//            return
+//        }
+//        
+//        CommentedBoardApi(userToken: accessToken) { result in
+//            switch result {
+//            case .success(let posts):
+//                self.commentedPosts = posts
+//                self.hasCommentedPosts = !posts.isEmpty
+//            case .failure(let error):
+//                print("Error loading commented posts: \(error.localizedDescription)")
+//                self.hasCommentedPosts = false
+//            }
+//            self.isLoading = false
+//        }
     }
     
     func CommentedBoardApi(userToken: String, completion: @escaping (Result<[BoardCommentedResult], Error>) -> Void) {
