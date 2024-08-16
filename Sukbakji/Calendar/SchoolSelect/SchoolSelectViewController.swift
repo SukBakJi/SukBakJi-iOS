@@ -108,8 +108,7 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
             // 텍스트 필드가 비어 있으면 API 호출을 하지 않음
             return true
         }
-        
-        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { [weak self] _ in
+                searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { [weak self] _ in
             self?.getSchool()
         })
         return true

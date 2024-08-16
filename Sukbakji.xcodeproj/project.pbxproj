@@ -189,6 +189,7 @@
 		C7F455342C39B8EE00A4D0EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F455322C39B8EE00A4D0EE /* Main.storyboard */; };
 		C7F455362C39B8F000A4D0EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F455352C39B8F000A4D0EE /* Assets.xcassets */; };
 		C7F455392C39B8F000A4D0EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F455372C39B8F000A4D0EE /* LaunchScreen.storyboard */; };
+		C7F954E42C6FACFE00A4B275 /* MentoringPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F954E32C6FACFE00A4B275 /* MentoringPostViewController.swift */; };
 		C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */; };
 		C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */; };
 /* End PBXBuildFile section */
@@ -380,6 +381,7 @@
 		C7F455352C39B8F000A4D0EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7F455382C39B8F000A4D0EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7F4553A2C39B8F000A4D0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7F954E32C6FACFE00A4B275 /* MentoringPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringPostViewController.swift; sourceTree = "<group>"; };
 		C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarShadow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -920,6 +922,7 @@
 				C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */,
 				C707E4BA2C69CB97005D390C /* ApplyMentoringTableViewCell.swift */,
 				C7ECF5492C677F8600283F06 /* ApplyMentorViewController.swift */,
+				C7F954E32C6FACFE00A4B275 /* MentoringPostViewController.swift */,
 			);
 			path = Mentor;
 			sourceTree = "<group>";
@@ -1178,6 +1181,7 @@
 				7B1C53562C69D79200C66D0D /* DirectoryFavoriteModel.swift in Sources */,
 				7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */,
 				412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */,
+				C7F954E42C6FACFE00A4B275 /* MentoringPostViewController.swift in Sources */,
 				C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */,
 				417AADB72C606B17002080E0 /* TOSViewController.swift in Sources */,
 				7B3459ED2C68870E008B711A /* BoardDetailModel.swift in Sources */,
