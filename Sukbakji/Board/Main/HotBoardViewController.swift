@@ -109,22 +109,7 @@ struct HotBoardViewController: View {
     }
     
     func loadHotPosts() {
-        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
-            print("토큰이 없습니다.")
-            self.isLoading = false
-            return
-        }
-        
-        HotBoardApi(userToken: accessToken) { result in
-            switch result {
-            case .success(let posts):
-                self.hotPosts = posts
-            case .failure(let error):
-                print("Error loading HOT posts: \(error.localizedDescription)")
-            }
-            self.isLoading = false
-        }
+//        어
     }
     
     func HotBoardApi(userToken: String, completion: @escaping (Result<[BoardHotResult], Error>) -> Void) {

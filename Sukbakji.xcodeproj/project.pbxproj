@@ -165,6 +165,10 @@
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
+		C7C5686B2C6F42C900A57821 /* ApplyMentorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5686A2C6F42C900A57821 /* ApplyMentorModel.swift */; };
+		C7C5686D2C6F42D600A57821 /* ApplyMentoringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5686C2C6F42D600A57821 /* ApplyMentoringModel.swift */; };
+		C7C568712C6F44C500A57821 /* MentorPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C568702C6F44C500A57821 /* MentorPostAPI.swift */; };
+		C7C568732C6F44D100A57821 /* MentoringPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */; };
 		C7D26CAD2C6A01B50045339E /* UniSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F14DB2C5948E30017B57E /* UniSearchModel.swift */; };
 		C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E3C2C611CE10092F342 /* APIConstants.swift */; };
 		C7DA4E3F2C611D6D0092F342 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E3E2C611D6D0092F342 /* NetworkResult.swift */; };
@@ -351,6 +355,10 @@
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
+		C7C5686A2C6F42C900A57821 /* ApplyMentorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentorModel.swift; sourceTree = "<group>"; };
+		C7C5686C2C6F42D600A57821 /* ApplyMentoringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentoringModel.swift; sourceTree = "<group>"; };
+		C7C568702C6F44C500A57821 /* MentorPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorPostAPI.swift; sourceTree = "<group>"; };
+		C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringPostAPI.swift; sourceTree = "<group>"; };
 		C7DA4E3C2C611CE10092F342 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		C7DA4E3E2C611D6D0092F342 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		C7DA4E402C6122BB0092F342 /* AlarmPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPostAPI.swift; sourceTree = "<group>"; };
@@ -771,6 +779,8 @@
 			isa = PBXGroup;
 			children = (
 				C78E70C22C6C9094004BBCE9 /* MentorListModel.swift */,
+				C7C5686A2C6F42C900A57821 /* ApplyMentorModel.swift */,
+				C7C5686C2C6F42D600A57821 /* ApplyMentoringModel.swift */,
 			);
 			path = ChattingModel;
 			sourceTree = "<group>";
@@ -778,6 +788,8 @@
 		C78E70C12C6C9070004BBCE9 /* ChattingAPI */ = {
 			isa = PBXGroup;
 			children = (
+				C7C568702C6F44C500A57821 /* MentorPostAPI.swift */,
+				C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */,
 			);
 			path = ChattingAPI;
 			sourceTree = "<group>";
@@ -1101,6 +1113,7 @@
 				C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */,
 				417AADC42C652228002080E0 /* LoginModel.swift in Sources */,
 				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
+				C7C5686B2C6F42C900A57821 /* ApplyMentorModel.swift in Sources */,
 				41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */,
 				C7023D302C6E1B8B0036D355 /* UniDeleteAPI.swift in Sources */,
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
@@ -1194,6 +1207,7 @@
 				7B1C53482C69D10800C66D0D /* DirectoryLabSearchModel.swift in Sources */,
 				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
+				C7C568712C6F44C500A57821 /* MentorPostAPI.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				7B1C534C2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift in Sources */,
 				C78DE55A2C48176C00A58395 /* CalendarCollectionViewCell.swift in Sources */,
@@ -1222,12 +1236,14 @@
 				C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */,
 				7B1C53502C69D53C00C66D0D /* DirectoryLabReviewListModel.swift in Sources */,
 				7B3459F32C688AEE008B711A /* BoardSearchModel.swift in Sources */,
+				C7C5686D2C6F42D600A57821 /* ApplyMentoringModel.swift in Sources */,
 				C75C45842C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift in Sources */,
 				7B3459EB2C68858E008B711A /* BoardWritePostModel.swift in Sources */,
 				C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */,
 				7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */,
 				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
 				C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */,
+				C7C568732C6F44D100A57821 /* MentoringPostAPI.swift in Sources */,
 				C7E3EF522C60A85D00DDC36B /* ADViewController.swift in Sources */,
 				C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */,
 				C73ED5342C62821B00C455A2 /* FavoritesBoardModel.swift in Sources */,

@@ -122,18 +122,18 @@ struct BoardWriteViewController: View {
     }
 
     func BoardWriteApi() {
-        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
-            print("토큰이 없습니다.")
-            return
-        }
+//        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+//              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
+//            print("토큰이 없습니다.")
+//            return
+//        }
         
         // 카테고리에 따른 메뉴 및 게시판 이름 설정
         let menu = selectedCategory ?? "박사"  // 서버에서 기대하는 정확한 메뉴 이름으로 변경
         let boardName = selectedOptionIndex ?? "질문 게시판"  // 서버에서 기대하는 정확한 게시판 이름으로 변경
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+//            "Authorization": "Bearer \(accessToken)",
             "Content-Type": "application/json",
             "Accept": "application/json"
         ]
