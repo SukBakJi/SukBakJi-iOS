@@ -16,6 +16,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var triangleView: UIImageView!
     
     @IBOutlet weak var dateListTV: UITableView!
+    @IBOutlet weak var dateListTVHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var alarmButton: UIButton!
     
@@ -36,6 +37,14 @@ class CalendarViewController: UIViewController {
         DateView.layer.cornerRadius = 10
         AlertView.layer.cornerRadius = 10
         
+        dateListTV.delegate = self
+        dateListTV.dataSource = self
+        dateListTV.layer.masksToBounds = false// any value you want
+        dateListTV.layer.shadowOpacity = 0.2// any value you want
+        dateListTV.layer.shadowRadius = 2 // any value you want
+        dateListTV.layer.shadowOffset = .init(width: 0, height: 0.2)
+        dateListTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+        
         self.configure()
         self.setTableView()
     }
@@ -44,6 +53,11 @@ class CalendarViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         alarmButton.frame = CGRect(x: 309, y: 672, width: 60, height: 60)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateTableViewHeight()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -206,6 +220,13 @@ class CalendarViewController: UIViewController {
     private func updateCalendar() {
         self.updateTitle()
         self.updateDays()
+    }
+    
+    @IBAction func school_Tapped(_ sender: Any) {
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SchoolCalendarVC") as? SchoolCalendarViewController else {
+            return
+        }
+        self.present(nextVC, animated: true)
     }
     
     @IBAction func School_Select_Tapped(_ sender: Any) {
