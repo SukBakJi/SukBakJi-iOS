@@ -75,25 +75,25 @@ struct ScrappedBoardViewController: View {
     }
     
     func loadScrappedPosts() {
-        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
-            print("토큰이 없습니다.")
-            self.isLoading = false
-            self.hasScrappedPosts = false
-            return
-        }
-        
-        BookmarkedBoardApi(userToken: accessToken) { result in
-            switch result {
-            case .success(let posts):
-                self.scrappedPosts = posts
-                self.hasScrappedPosts = !posts.isEmpty
-            case .failure(let error):
-                print("Error loading scrapped posts: \(error.localizedDescription)")
-                self.hasScrappedPosts = false
-            }
-            self.isLoading = false
-        }
+//        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+//              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
+//            print("토큰이 없습니다.")
+//            self.isLoading = false
+//            self.hasScrappedPosts = false
+//            return
+//        }
+//        
+//        BookmarkedBoardApi(userToken: accessToken) { result in
+//            switch result {
+//            case .success(let posts):
+//                self.scrappedPosts = posts
+//                self.hasScrappedPosts = !posts.isEmpty
+//            case .failure(let error):
+//                print("Error loading scrapped posts: \(error.localizedDescription)")
+//                self.hasScrappedPosts = false
+//            }
+//            self.isLoading = false
+//        }
     }
     
     func BookmarkedBoardApi(userToken: String, completion: @escaping (Result<[BoardBookmarkedResult], Error>) -> Void) {
