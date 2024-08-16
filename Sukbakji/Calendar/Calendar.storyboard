@@ -747,7 +747,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Check"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체선택 (0/5)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jU3-fv-oXx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체선택 (0/0)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jU3-fv-oXx">
                                 <rect key="frame" x="65" y="110" width="84" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="77K-jj-Kb7"/>
@@ -874,6 +874,12 @@
                                                 <constraint firstItem="Iyc-1B-fuL" firstAttribute="leading" secondItem="Cln-b3-04Q" secondAttribute="trailing" constant="12" id="tvz-cU-zOJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="deleteButton" destination="Ylh-rZ-ec2" id="bpJ-I7-9iy"/>
+                                            <outlet property="methodLabel" destination="YC4-CA-BwR" id="c8C-yT-j9p"/>
+                                            <outlet property="seasonLabel" destination="Iyc-1B-fuL" id="AHd-KA-Jb6"/>
+                                            <outlet property="univName" destination="7Xb-UC-rGI" id="37g-PN-CHD"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -919,6 +925,7 @@
                     </view>
                     <connections>
                         <outlet property="schoolCalendarTV" destination="dEv-h6-0v1" id="TUe-ep-YBO"/>
+                        <outlet property="univCount" destination="jU3-fv-oXx" id="Sir-fa-ivq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H11-uf-xgw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1045,6 +1052,9 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Mypage"/>
+                                                <connections>
+                                                    <action selector="school_Tapped:" destination="HjL-dA-FDw" eventType="touchUpInside" id="zP1-Mc-8bj"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTN-3Z-5Ni">
                                                 <rect key="frame" x="0.0" y="94" width="393" height="1.3333333333333286"/>
@@ -1113,20 +1123,20 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다가오는 일정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3D-ir-ALe">
-                                                <rect key="frame" x="24" y="582.33333333333337" width="98" height="21"/>
+                                                <rect key="frame" x="24" y="556.33333333333337" width="98" height="21"/>
                                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Date" translatesAutoresizingMaskIntoConstraints="NO" id="qLT-b1-5ua">
-                                                <rect key="frame" x="126" y="582.66666666666663" width="20" height="20"/>
+                                                <rect key="frame" x="126" y="556.66666666666663" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="RYj-HP-hNs"/>
                                                     <constraint firstAttribute="width" constant="20" id="lyd-Ra-2Li"/>
                                                 </constraints>
                                             </imageView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N4d-wv-gp5">
-                                                <rect key="frame" x="0.0" y="603.33333333333337" width="393" height="128"/>
+                                                <rect key="frame" x="0.0" y="577.33333333333337" width="393" height="128"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="QSl-bU-voR"/>
                                                 </constraints>
@@ -1135,10 +1145,10 @@
                                                 </connections>
                                             </containerView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pcH-TK-vRz">
-                                                <rect key="frame" x="0.0" y="498.33333333333326" width="393" height="56"/>
+                                                <rect key="frame" x="0.0" y="498.33333333333326" width="393" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="56" id="HXq-Jw-55I"/>
+                                                    <constraint firstAttribute="height" constant="30" id="HXq-Jw-55I"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DateList_TableViewCell" rowHeight="44" id="Z4S-0a-WVE" customClass="DateListTableViewCell" customModule="Sukbakji" customModuleProvider="target">
@@ -1261,6 +1271,7 @@
                         <outlet property="DateView" destination="nIR-UR-A9G" id="y4s-SI-eqN"/>
                         <outlet property="alarmButton" destination="uhC-ZL-PAA" id="mW7-Wz-32Y"/>
                         <outlet property="dateListTV" destination="pcH-TK-vRz" id="OsX-9c-cDq"/>
+                        <outlet property="dateListTVHeightConstraint" destination="HXq-Jw-55I" id="Gau-ix-RXA"/>
                         <outlet property="dayLabel" destination="arB-bv-ePv" id="U5I-ye-2CL"/>
                         <outlet property="triangleView" destination="Knr-fr-ST0" id="X1u-LU-71E"/>
                     </connections>
@@ -1855,7 +1866,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GSj-rv-ivd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="734" y="125"/>
+            <point key="canvasLocation" x="727" y="176"/>
         </scene>
     </scenes>
     <resources>

@@ -215,7 +215,12 @@ class AlarmDateViewController: UIViewController {
 extension AlarmDateViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dateLabel.text = "\(yearLabel.text ?? "") \(monthLabel.text ?? "") \(days[indexPath.item])일"
+        let dayNum = Int(days[indexPath.item]) ?? 0
+        if dayNum >= 10 {
+            dateLabel.text = "\(yearLabel.text ?? "") \(monthLabel.text ?? "") \(days[indexPath.item])일"
+        } else {
+            dateLabel.text = "\(yearLabel.text ?? "") \(monthLabel.text ?? "") 0\(days[indexPath.item])일"
+        }
 
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
             if let text = self.dateLabel.text {
