@@ -24,4 +24,8 @@ class ApplyMentorViewController: UIViewController {
         setButton.backgroundColor = UIColor(hexCode: "EFEFEF")
         setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
     }
+    
+    @IBAction func back_Tapped(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true)
+    }
 }

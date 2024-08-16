@@ -78,10 +78,15 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
                     let decodedData = try JSONDecoder().decode(MentorListResultModel.self, from: data)
                     self.allDatas = decodedData.result
                     self.allDetailDatas = self.allDatas?.mentorList ?? []
+                    
                     DispatchQueue.main.async {
                         self.MentoringTV.reloadData()
+                        
                         self.noResultImage.isHidden = true
                         self.noResultSV.isHidden = true
+                        self.titleLabelOne.isHidden = false
+                        self.titleLabelSecond.isHidden = false
+                        self.titleLabelThird.isHidden = false
                         if self.allDetailDatas.count >= 4 {
                             self.moreView.isHidden = false
                         } else {
@@ -132,9 +137,13 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
                     let decodedData = try JSONDecoder().decode(MentorListResultModel.self, from: data)
                     self.allDatas = decodedData.result
                     self.allDetailDatas = self.allDatas?.mentorList ?? []
+                    
                     DispatchQueue.main.async {
-                        print(url)
                         self.MentoringTV.reloadData()
+                        
+                        self.titleLabelOne.isHidden = true
+                        self.titleLabelSecond.isHidden = true
+                        self.titleLabelThird.isHidden = true
                         if (self.allDetailDatas.count == 0) {
                             self.noResultImage.isHidden = false
                             self.noResultSV.isHidden = false
@@ -183,5 +192,9 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
     @IBAction func more_Tapped(_ sender: Any) {
         MentoringTV.isScrollEnabled = true
         moreView.isHidden = true
+    }
+    
+    @IBAction func back_Tapped(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true)
     }
 }
