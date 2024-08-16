@@ -128,6 +128,5 @@ extension MyAlarmViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
     }
 }
