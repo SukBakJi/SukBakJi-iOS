@@ -22,3 +22,10 @@ extension UITextField {
         self.spellCheckingType = .no
     }
 }
+
+extension UITextView {
+    func errorfix() {
+        self.autocorrectionType = .no
+        self.spellCheckingType = .no
+    }
+}
