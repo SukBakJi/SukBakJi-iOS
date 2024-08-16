@@ -9,7 +9,7 @@ import SwiftUI
 import Alamofire
 
 struct BoardQnABoardViewController: View {
-    
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var showAlert: Bool = false
     @State private var showBookmarkAlert: Bool = false
@@ -19,7 +19,9 @@ struct BoardQnABoardViewController: View {
     @State private var showBookmarkOverlay = false // 즐겨찾기 오버레이 표시 상태 변수
     @State private var bookmarkOverlayMessage = "" // 오버레이 메시지
     @State private var showAnonymousMessage = false // 익명 메시지 표시 상태 변수
-    
+    @State private var qnaPosts: [BoardNewQnAResult] = [] // 질문 게시판의 최신 질문 목록을 저장할 상태 변수
+    @State private var isLoading: Bool = true // 로딩 상태를 추적하는 상태 변수
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -27,27 +29,24 @@ struct BoardQnABoardViewController: View {
                     HStack {
                         // 뒤로가기 버튼
                         Button(action: {
-                            // 뒤로가기 버튼 클릭 시 동작할 코드
                             self.presentationMode.wrappedValue.dismiss()
                             print("뒤로가기 버튼 tapped")
                         }) {
                             Image("BackButton")
                                 .frame(width: Constants.nav, height: Constants.nav)
                         }
-                        
+
                         Spacer()
-                        
+
                         Text("질문 게시판")
                             .font(.system(size: 20, weight: .semibold))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Constants.Gray900)
-                        
+
                         Spacer()
-                        
+
                         // 더보기 버튼
                         Button(action: {
-                            // 더보기 버튼 클릭 시 동작할 코드
-                            print("더보기 버튼 tapped")
                             self.showingSheet = true
                         }) {
                             Image("MoreButton")
@@ -78,16 +77,25 @@ struct BoardQnABoardViewController: View {
                             }
                         }
                     }
-                    
+
                     Divider()
-                    
+
                     ScrollView {
                         // 공지사항 글
                         noticeView(showAlert: $showAlert)
-                        
-                        // 게시판 글 목록
-                        ForEach(0..<8, id: \.self) { _ in
-                            Board(boardName: "질문 게시판")
+
+                        if isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                        } else if qnaPosts.isEmpty {
+                            Spacer()
+                            EmptyQnABoard()
+                            Spacer()
+                        } else {
+                            // 게시판 글 목록
+                            ForEach(qnaPosts, id: \.menu) { post in
+                                Board(boardName: post.menu, title: post.title, content: "내용 없음", commentCount: 0, views: 0)
+                            }
                         }
                     }
                     .overlay(
@@ -97,21 +105,21 @@ struct BoardQnABoardViewController: View {
                         , alignment: .bottomTrailing // 오른쪽 아래에 위치
                     )
                 }
-                
+
                 if showAlert {
                     Color.black.opacity(0.2)
                         .edgesIgnoringSafeArea(.all)
-                    
+
                     VStack(spacing: 16) {
                         Text("공지")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(Constants.Gray900)
-                        
+
                         Text("게시판 내 개인정보 유추 금지와 관련하여 안내드립니다")
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(Constants.Gray800)
                             .frame(alignment: .topLeading)
-                        
+
                         Button(action: {
                             showAlert = false
                         }) {
@@ -131,7 +139,7 @@ struct BoardQnABoardViewController: View {
                     .cornerRadius(12)
                     .shadow(radius: 8)
                 }
-                
+
                 if showBookmarkOverlay {
                     VStack {
                         Spacer()
@@ -142,7 +150,6 @@ struct BoardQnABoardViewController: View {
                                 .frame(width: 18, height: 18)
                                 .foregroundColor(Constants.White)
 
-                            
                             Text(bookmarkOverlayMessage)
                                 .padding(.leading, 12)
                                 .foregroundColor(Constants.White)
@@ -153,13 +160,13 @@ struct BoardQnABoardViewController: View {
                         .cornerRadius(8)
                         .transition(.opacity)
                         .animation(.easeInOut, value: showBookmarkOverlay)
-                        
+
                         Spacer().frame(height: 59)
                     }
                 }
-                
+
                 if showAnonymousMessage {
-                    VStack() {
+                    VStack {
                         Spacer()
                         Text("익명으로 함께 소통해 보세요!")
                             .font(.system(size: 12, weight: .medium))
@@ -168,7 +175,7 @@ struct BoardQnABoardViewController: View {
                             .background(Color(red: 1, green: 0.34, blue: 0.08))
                             .foregroundColor(Constants.White)
                             .cornerRadius(6)
-                        
+
                         Spacer().frame(height: 59)
                     }
                     .padding(.bottom, 55)
@@ -185,6 +192,7 @@ struct BoardQnABoardViewController: View {
             }
             .onAppear {
                 showAnonymousMessage = true
+                loadQnAPosts()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     withAnimation {
                         showAnonymousMessage = false
@@ -194,21 +202,34 @@ struct BoardQnABoardViewController: View {
         }
         .navigationBarBackButtonHidden()
     }
-    
+
     private func toggleBookmark() {
         isBookmarked.toggle()
         bookmarkOverlayMessage = isBookmarked ? "즐겨찾기를 등록했어요" : "즐겨찾기에서 삭제했어요"
         showBookmarkOverlay = true
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             withAnimation {
                 showBookmarkOverlay = false
             }
         }
     }
-    
+
+    private func loadQnAPosts() {
+        isLoading = true
+        BoardNewQnAApi { result in
+            switch result {
+            case .success(let posts):
+                self.qnaPosts = posts
+            case .failure(let error):
+                print("Error loading QnA posts: \(error.localizedDescription)")
+            }
+            self.isLoading = false
+        }
+    }
+
     func BoardNewQnAApi(completion: @escaping (Result<[BoardNewQnAResult], Error>) -> Void) {
-        let url = "https://your.api.endpoint.com/api/community/latest-questions" // 실제 API 엔드포인트로 교체
+        let url = APIConstants.communityURL + "/latest-questions" // 실제 API 엔드포인트로 교체
 
         AF.request(url,
                    method: .get,
@@ -225,7 +246,7 @@ struct BoardQnABoardViewController: View {
                         let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: data.message])
                         completion(.failure(error))
                     }
-                    
+
                 case .failure(let error):
                     // 네트워크 오류 또는 응답 디코딩 실패 등의 오류가 발생했을 때
                     completion(.failure(error))
@@ -237,7 +258,7 @@ struct BoardQnABoardViewController: View {
 // MARK: -- 공지사항
 struct noticeView: View {
     @Binding var showAlert: Bool
-    
+
     var body: some View {
         Button(action: {
             showAlert = true
@@ -248,16 +269,16 @@ struct noticeView: View {
                     Image("Speaker")
                         .resizable()
                         .frame(width: 20, height: 20, alignment: .center)
-                    
+
                     Text("공지")
                         .padding(.leading, 6)
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundStyle(Constants.Orange400)
-                    
+
                     Divider()
                         .background(Constants.Gray400)
                         .padding(.horizontal, 8.8)
-                    
+
                     Text("게시판 내 개인정보 유추 금지와 관련하여 안내드립니다")
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(Constants.Gray800)
@@ -276,6 +297,19 @@ struct noticeView: View {
         }
     }
 }
+
+struct EmptyQnABoard: View {
+    var body: some View {
+        VStack {
+            Text("아직 질문 게시물이 없어요")
+                .font(.system(size: 14, weight: .semibold))
+                .multilineTextAlignment(.center)
+                .foregroundStyle(Constants.Gray500)
+                .padding(.bottom, 8)
+        }
+    }
+}
+
 
 #Preview {
     BoardQnABoardViewController()

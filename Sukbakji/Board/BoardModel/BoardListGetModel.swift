@@ -7,21 +7,17 @@
 
 import Foundation
 
-// MARK: - BoardListGetModel
-struct BoardListGetModel: Codable {
+struct BoardListGetResponseModel: Decodable {
     let isSuccess: Bool
-    let code, message: String
+    let code: String
+    let message: String
     let result: [BoardListResult]
 }
 
-// MARK: - BoardListResult
-struct BoardListResult: Codable {
-    let postID: Int
-    let title, previewContent: String
-    let commentCount, views: Int
-
-    enum CodingKeys: String, CodingKey {
-        case postID = "postId"
-        case title, previewContent, commentCount, views
-    }
+struct BoardListResult: Decodable {
+    let postId: Int
+    let title: String
+    let previewContent: String
+    let commentCount: Int
+    let views: Int
 }

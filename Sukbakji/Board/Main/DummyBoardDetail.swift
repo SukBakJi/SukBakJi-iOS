@@ -5,7 +5,15 @@
 //  Created by KKM on 7/29/24.
 //
 
+//
+//  DummyBoardDetail.swift
+//  Sukbakji
+//
+//  Created by KKM on 7/29/24.
+//
+
 import SwiftUI
+import Alamofire
 
 struct Comment: Identifiable {
     let id = UUID()
@@ -28,244 +36,145 @@ struct DummyBoardDetail: View {
     @State private var showDeletionMessage = false
     @State private var showCommentDeletionMessage = false
     
+    @State private var boardDetail: BoardDetailResult? = nil // 게시물 데이터 상태 변수
+    @State private var isLoading: Bool = true // 데이터 로딩 상태
+    
+    var postId: Int // 게시물 ID를 전달받는 변수
+    
     // 댓글 데이터 상태 변수
-    @State private var comments: [Comment] = [
-        Comment(author: "익명 1", content: "무는 깨끗이 씻은 후 지저분한 부분만 필러로 제거한 후 1~1.5cm 두께로 썰어 4등분 해주세요.", date: "2024.07.19 작성", isLiked: false, likeCount: 1)
-    ]
+    @State private var comments: [Comment] = []
     
     var body: some View {
         NavigationView {
             ZStack {
-                VStack {
-                    HStack {
-                        // 뒤로가기 버튼
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                            print("뒤로가기 버튼 tapped")
-                        }) {
-                            Image("BackButton")
-                                .frame(width: Constants.nav, height: Constants.nav)
-                        }
-                        
-                        Spacer()
-                        
-                        Text(boardName) // 전달받은 게시판 이름으로 변경
-                            .font(.system(size: 20, weight: .semibold))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(Constants.Gray900)
-                        
-                        Spacer()
-                        
-                        // 더보기 버튼
-                        Button(action: {
-                            print("게시물 더보기 버튼 tapped")
-                            self.showingSheet = true
-                        }) {
-                            Image("MoreButton")
-                                .frame(width: Constants.nav, height: Constants.nav)
-                        }
-                        .actionSheet(isPresented: $showingSheet) {
-                            if isAuthor {
-                                return ActionSheet(
-                                    title: Text(boardName),
-                                    buttons: [
-                                        .default(Text("수정하기")),
-                                        .destructive(Text("삭제하기"), action: {
-                                            self.showAlert = true
-                                        }),
-                                        .cancel(Text("취소"))
-                                    ]
-                                )
-                            } else {
-                                return ActionSheet(
-                                    title: Text(boardName),
-                                    buttons: [
-                                        .default(Text("신고하기")),
-                                        .cancel(Text("취소"))
-                                    ]
-                                )
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                } else {
+                    VStack {
+                        HStack {
+                            // 뒤로가기 버튼
+                            Button(action: {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }) {
+                                Image("BackButton")
+                                    .frame(width: Constants.nav, height: Constants.nav)
                             }
-                        }
-                    }
-                    
-                    Divider()
-                    
-                    VStack(alignment: .trailing, spacing: 4) {
-                        HStack(alignment: .center, spacing: 10) {
-                            Text("박사 게시판")
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 3)
-                                .background(Color(red: 0.91, green: 0.92, blue: 1))
-                                .cornerRadius(4)
+                            
                             Spacer()
                             
-                            BookmarkButtonView()
-                                .frame(width: 20, height: 20)
-                        }
-                        
-                        Text("아삭아삭 석박지")
-                            .padding(.top, 12)
-                            .padding(.bottom, 8)
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(Constants.Gray900)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Text("무를 큼직하게 썰어 양념에 버무린 섞박지는 국밥, 설렁탕 등 맑은 국물이 있는 요리와 찰떡처럼 어울리죠. 달고 아삭아삭한 무가 양념과 환상적으로 어우진답니다. 특히 무를 큼직하게 썰어 식감이 좋은 게 특징이에요. 그냥 따뜻한 밥 위에 올려 먹어도 좋고, 뜨끈한 국물 요리와 함께 먹어도 좋답니다.")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(Constants.Gray900)
-                            .frame(maxWidth: .infinity, alignment: .topLeading)
-                        
-                        HStack(alignment: .top, spacing: 12) {
-                            Image("chat 1")
-                                .resizable()
-                                .frame(width: 12, height: 12)
+                            Text(boardName)
+                                .font(.system(size: 20, weight: .semibold))
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Constants.Gray900)
                             
-                            Text("\(comments.count)")
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
+                            Spacer()
                             
-                            Image("eye")
-                                .resizable()
-                                .frame(width: 12, height: 12)
-                            
-                            Text("1532")
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
-                        }
-                        .frame(maxWidth: .infinity, alignment: .topTrailing)
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 16)
-                    .frame(alignment: .topTrailing)
-                    .background(Constants.White)
-                    
-                    ScrollView {
-                        Rectangle()
-                            .frame(height: 8)
-                            .background(Constants.Gray100)
-                            .foregroundStyle(Constants.Gray100)
-                        
-                        VStack(alignment: .leading, spacing: 16) {
-                            ForEach(comments) { comment in
-                                Comments(comment: comment, isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage)
-                                    .padding(.horizontal, 24)
-                            }
-                        }
-                    }
-                    
-                    WriteComment(commentText: $commentText, showValidationError: $showValidationError, addComment: addComment)
-                }
-                
-                // Custom Alert View
-                if showAlert {
-                    Color.black.opacity(0.2)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    VStack(spacing: 16) {
-                        Text("게시물 삭제하기")
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(Constants.Gray900)
-                        
-                        Text("게시물을 삭제할까요? 삭제 후 복구되지 않습니다.")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundStyle(Constants.Gray800)
-                            .frame(alignment: .topLeading)
-                        
-                        HStack {
                             Button(action: {
-                                showAlert = false
+                                self.showingSheet = true
                             }) {
-                                Text("닫기")
-                                    .padding(.horizontal, 28)
-                                    .padding(.vertical, 10)
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .multilineTextAlignment(.center)
-                                    .background(Color(Constants.Gray200))
-                                    .foregroundColor(Constants.Gray900)
-                                    .cornerRadius(8)
+                                Image("MoreButton")
+                                    .frame(width: Constants.nav, height: Constants.nav)
                             }
-                            
-                            Button(action: {
-                                showAlert = false
-                                showDeletionMessage = true
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    showDeletionMessage = false
-                                    self.presentationMode.wrappedValue.dismiss()
+                            .actionSheet(isPresented: $showingSheet) {
+                                if isAuthor {
+                                    return ActionSheet(
+                                        title: Text(boardName),
+                                        buttons: [
+                                            .default(Text("수정하기")),
+                                            .destructive(Text("삭제하기"), action: {
+                                                self.showAlert = true
+                                            }),
+                                            .cancel(Text("취소"))
+                                        ]
+                                    )
+                                } else {
+                                    return ActionSheet(
+                                        title: Text(boardName),
+                                        buttons: [
+                                            .default(Text("신고하기")),
+                                            .cancel(Text("취소"))
+                                        ]
+                                    )
                                 }
-                                print("게시물 삭제됨")
-                            }) {
-                                Text("삭제할게요")
-                                    .padding(.horizontal, 28)
-                                    .padding(.vertical, 10)
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .multilineTextAlignment(.center)
-                                    .background(Color(red: 0.93, green: 0.29, blue: 0.03))
-                                    .foregroundColor(Constants.White)
-                                    .cornerRadius(8)
                             }
                         }
-                    }
-                    .padding(.horizontal, 48)
-                    .padding(.vertical, 24)
-                    .background(Constants.White)
-                    .cornerRadius(12)
-                    .shadow(radius: 8)
-                }
-                
-                if showDeletionMessage {
-                    Color.black.opacity(0.2)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    VStack {
-                        Spacer()
                         
-                        HStack {
-                            Image("CheckBox")
-                                .resizable()
-                                .frame(width: 18, height: 18)
-                            
-                            Text("해당 게시물이 삭제되었습니다")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(Constants.White)
-                        }
-                        .padding()
-                        .background(Color.black.opacity(0.75))
-                        .cornerRadius(8)
-                    }
-                    .transition(.opacity)
-                    .animation(.easeInOut)
-                }
-                
-                if showCommentDeletionMessage {
-                    Color.black.opacity(0.2)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    VStack {
-                        Spacer()
+                        Divider()
                         
-                        HStack {
-                            Image("CheckBox")
-                                .resizable()
-                                .frame(width: 18, height: 18)
+                        if let boardDetail = boardDetail {
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Text(boardDetail.menu)
+                                        .font(.system(size: 12, weight: .medium))
+                                        .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 3)
+                                        .background(Color(red: 0.91, green: 0.92, blue: 1))
+                                        .cornerRadius(4)
+                                    Spacer()
+                                    BookmarkButtonView()
+                                        .frame(width: 20, height: 20)
+                                }
+                                
+                                Text(boardDetail.title)
+                                    .padding(.top, 12)
+                                    .padding(.bottom, 8)
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundColor(Constants.Gray900)
+                                
+                                Text(boardDetail.content)
+                                    .font(.system(size: 12, weight: .medium))
+                                    .foregroundColor(Constants.Gray900)
+                                
+                                HStack {
+                                    Image("chat 1")
+                                        .resizable()
+                                        .frame(width: 12, height: 12)
+                                    
+                                    Text("\(boardDetail.commentCount)")
+                                        .font(.system(size: 12, weight: .medium))
+                                        .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
+                                    
+                                    Image("eye")
+                                        .resizable()
+                                        .frame(width: 12, height: 12)
+                                    
+                                    Text("\(boardDetail.views)")
+                                        .font(.system(size: 12, weight: .medium))
+                                        .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                                }
+                                .frame(maxWidth: .infinity, alignment: .topTrailing)
+                            }
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 16)
+                            .background(Constants.White)
                             
-                            Text("댓글이 삭제되었습니다")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(Constants.White)
+                            ScrollView {
+                                Rectangle()
+                                    .frame(height: 8)
+                                    .background(Constants.Gray100)
+                                
+                                VStack(alignment: .leading, spacing: 16) {
+                                    ForEach(comments) { comment in
+                                        Comments(comment: comment, isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage)
+                                            .padding(.horizontal, 24)
+                                    }
+                                }
+                            }
+                            
+                            WriteComment(commentText: $commentText, showValidationError: $showValidationError, addComment: addComment)
                         }
-                        .padding()
-                        .background(Color.black.opacity(0.75))
-                        .cornerRadius(8)
                     }
-                    .transition(.opacity)
-                    .animation(.easeInOut)
                 }
             }
         }
         .navigationBarBackButtonHidden()
+        .onAppear {
+            loadBoardDetail(postId: postId) // 게시물 상세 정보를 로드합니다.
+        }
     }
-    
+
     // 댓글 추가 함수
     func addComment() {
         if commentText.isEmpty {
@@ -282,10 +191,53 @@ struct DummyBoardDetail: View {
             showValidationError = false
         }
     }
+    
+    // 게시글 상세 정보를 불러오는 함수
+    func loadBoardDetail(postId: Int) {
+        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+              let accessToken = String(data: accessTokenData, encoding: .utf8), !accessToken.isEmpty else {
+            print("토큰이 없습니다.")
+            self.isLoading = false
+            return
+        }
+        
+        let url = APIConstants.boardpostURL + "/detail/\(postId)"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+            "Content-Type": "application/json"
+        ]
+        
+        AF.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: BoardDetailModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    self.boardDetail = data.result
+                    self.comments = data.result.comments.map { comment in
+                        Comment(
+                            author: comment.anonymousName,
+                            content: comment.content,
+                            date: comment.createdDate,
+                            isLiked: false,
+                            likeCount: 0
+                        )
+                    }
+                    self.isLoading = false
+                case .failure(let error):
+                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                        print("Server Error Message: \(errorMessage)")
+                    } else {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                    self.isLoading = false
+                }
+            }
+    }
 }
 
 struct Comments: View {
-    @State var comment: Comment
+    @State var comment: Comment // Comment로 변경
     @State private var showingCommentSheet = false
     @State private var showCommentAlert = false
     var isAuthor: Bool
@@ -361,26 +313,6 @@ struct Comments: View {
                 .font(.system(size: 12, weight: .medium))
                 .foregroundColor(Constants.Gray900)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-            
-            HStack(alignment: .center, spacing: 4) {
-                Button(action: {
-                    comment.isLiked.toggle()
-                    if comment.isLiked {
-                        comment.likeCount += 1
-                    } else {
-                        comment.likeCount -= 1
-                    }
-                }) {
-                    Image(comment.isLiked ? "LikeButton Fill" : "LikeButton")
-                        .resizable()
-                        .frame(width: 12, height: 12)
-                }
-                
-                Text("\(comment.likeCount)")
-                    .font(.system(size: 10))
-                    .foregroundStyle(comment.isLiked ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray300)
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 12)
@@ -451,7 +383,7 @@ extension View {
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
@@ -475,5 +407,5 @@ struct BookmarkButtonView: View {
 }
 
 #Preview {
-    DummyBoardDetail(boardName: "질문 게시판")
+    DummyBoardDetail(boardName: "질문 게시판", postId: 1)
 }

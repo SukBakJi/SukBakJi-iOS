@@ -1,13 +1,12 @@
 import SwiftUI
-import Foundation
 import Alamofire
 
-struct BoardWriteBoardViewController: View {
+struct BoardWriteViewController: View {
     
-    @State private var selectedCategory: Int? = nil
+    @State private var selectedCategory: String? = nil
     @State private var titleText: String = "" // 제목 텍스트 필드의 상태를 관리하기 위한 변수
     @State private var postText: String = "" // 내용 텍스트 필드의 상태를 관리하기 위한 변수
-    @State private var selectedOptionIndex: Int? = nil // DropDown 메뉴에서 선택된 옵션의 인덱스
+    @State private var selectedOptionIndex: String? = nil // DropDown 메뉴에서 선택된 옵션의 인덱스
     @State private var selectedSupportFieldIndex: Int? = nil // 지원분야 드롭다운 메뉴에서 선택된 옵션의 인덱스
     @State private var selectedJob: String? = nil // 직무
     @State private var selectedEmploymentType: Int? = nil // 채용 형태 선택
@@ -18,15 +17,28 @@ struct BoardWriteBoardViewController: View {
     @State private var showSupportFieldDropdown = false // 지원분야 드롭다운 메뉴 표시 상태
     
     // MARK: - api 연결 변수
-    @State private var postResult: BoardWriteGetModel? = nil // 응답 결과를 저장할 상태 변수
-
-
+    @State private var postResult: BoardWritePostResponseModel? = nil // 응답 결과를 저장할 상태 변수
+    
     var isFormValid: Bool {
         selectedCategory != nil && selectedOptionIndex != nil && (!showExtraFields || (selectedSupportFieldIndex != nil && selectedEmploymentType != nil && selectedEducationLevel != nil)) && !titleText.isEmpty && !postText.isEmpty
     }
 
     var showExtraFields: Bool {
-        return (selectedCategory == 0 || selectedCategory == 1) && selectedOptionIndex == 1
+        return (selectedCategory == "박사" || selectedCategory == "석사") && selectedOptionIndex == "취업후기 게시판"
+    }
+
+    // 게시판 카테고리 배열
+    var boardCategories: [String] {
+        switch selectedCategory {
+        case "박사":
+            return ["질문 게시판", "취업후기 게시판", "대학원생활 게시판", "연구주제 게시판"]
+        case "석사":
+            return ["질문 게시판", "박사지원 게시판", "취업후기 게시판", "대학원생활 게시판", "박사합격 후기", "연구주제 게시판"]
+        case "입학예정":
+            return ["질문 게시판", "석사합격 후기", "학부연구생 게시판", "석사지원 게시판", "석박사통합지원 게시판"]
+        default:
+            return []
+        }
     }
 
     var body: some View {
@@ -35,8 +47,6 @@ struct BoardWriteBoardViewController: View {
                 HStack {
                     // 뒤로가기 버튼
                     Button(action: {
-                        // 뒤로가기 버튼 클릭 시 동작할 코드
-                        print("뒤로가기 버튼 tapped")
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Image("BackButton")
@@ -73,35 +83,33 @@ struct BoardWriteBoardViewController: View {
                         showValidationError: $showValidationError,
                         showCategoryDropdown: $showCategoryDropdown,
                         showSupportFieldDropdown: $showSupportFieldDropdown,
-                        showExtraFields: showExtraFields
+                        showExtraFields: showExtraFields,
+                        boardCategories: boardCategories // 전달된 카테고리 배열
                     )
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack(alignment: .center, spacing: 0) {
-                            Button(action: {
-                                if isFormValid {
-                                    print("게시물 등록하기 버튼 tapped")
-                                } else {
-                                    showValidationError = true
-                                }
-                            }) {
-                                Spacer()
-                                Text("게시물 등록하기")
-                                    .font(.system(size: 16, weight: .medium))
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(isFormValid ? Color.white : Constants.Gray500)
-                                Spacer()
+                    HStack(alignment: .center, spacing: 0) {
+                        Button(action: {
+                            if isFormValid {
+                                BoardWriteApi()
+                            } else {
+                                showValidationError = true
                             }
-                            .padding(.horizontal, 24)
-                            .padding(.vertical, 12)
-                            .background(isFormValid ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray200) // 배경색 조건부 변경
-                            .cornerRadius(8)
+                        }) {
+                            Spacer()
+                            Text("게시물 등록하기")
+                                .font(.system(size: 16, weight: .medium))
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(isFormValid ? Color.white : Constants.Gray500)
+                            Spacer()
                         }
-                        .frame(alignment: .center)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 12)
+                        .background(isFormValid ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray200) // 배경색 조건부 변경
+                        .cornerRadius(8)
                     }
-                    
+                    .frame(alignment: .center)
                 }
                 .padding(.horizontal, 24)
                 .padding(.vertical, 8)
@@ -112,49 +120,87 @@ struct BoardWriteBoardViewController: View {
         }
         .navigationBarBackButtonHidden()
     }
+
     func BoardWriteApi() {
-        let url = "https://54.180.165.121:8080/api/posts/create"
-
-        // 옵셔널 바인딩을 통해 nil이 아닌 값을 추출하거나, 기본값을 사용할 수 있습니다.
-        let supportField = selectedSupportFieldIndex != nil ? "Some Support Field" : nil // 실제 데이터에 따라 적절히 설정
-        let job = selectedJob ?? ""
-        let hiringType = selectedEmploymentType != nil ? "Some Hiring Type" : nil // 실제 데이터에 따라 적절히 설정
-        let finalEducation = selectedEducationLevel != nil ? "Some Education Level" : nil // 실제 데이터에 따라 적절히 설정
-
-        // POST 요청에 필요한 파라미터 구성
-        let postParameters = BoardWritePostModel(
-            menu: selectedCategory ?? 0,
-            boardName: "Some Board Name", // 실제 데이터에 따라 적절히 설정
-            title: titleText,
-            content: postText,
-            supportField: supportField,
-            job: job,
-            hiringType: hiringType,
-            finalEducation: finalEducation
-        )
-
-        AF.request(url,
-                   method: .post,
-                   parameters: postParameters,
-                   encoder: JSONParameterEncoder.default,
-                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: BoardWriteGetModel.self) { response in
-                switch response.result {
-                case .success(let data):
-                    // 서버로부터 데이터를 정상적으로 받아왔을 때
-                    print("Success: \(data)")
-                    
-                    // 필요한 경우 받아온 데이터를 사용하여 UI 업데이트 등 수행
-                    self.postResult = data
-                    
-                case .failure(let error):
-                    // 오류가 발생했을 때
-                    print("Error: \(error.localizedDescription)")
+        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
+            print("토큰이 없습니다.")
+            return
+        }
+        
+        // 카테고리에 따른 메뉴 및 게시판 이름 설정
+        let menu = selectedCategory ?? "박사"  // 서버에서 기대하는 정확한 메뉴 이름으로 변경
+        let boardName = selectedOptionIndex ?? "질문 게시판"  // 서버에서 기대하는 정확한 게시판 이름으로 변경
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+        
+        if boardName == "취업후기 게시판" {
+            let url = APIConstants.boardpostURL + "/createJobPost"
+            
+            let postParameters = BoardWritePostModelForJobPost(
+                menu: menu,
+                boardName: boardName,
+                supportField: selectedSupportFieldIndex != nil ? "분야" : "",
+                job: selectedJob ?? "",
+                hiringType: selectedEmploymentType == 0 ? "신입" : "경력",
+                finalEducation: selectedEducationLevel == 0 ? "박사" : "석사",
+                title: titleText,
+                content: postText
+            )
+            
+            AF.request(url,
+                       method: .post,
+                       parameters: postParameters,
+                       encoder: JSONParameterEncoder.default,
+                       headers: headers)
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: BoardWritePostResponseModel.self) { response in
+                    handleResponse(response)
                 }
+        } else {
+            let url = APIConstants.boardpostURL + "/create"
+            
+            let postParameters = BoardWritePostModelForGeneralPost(
+                menu: menu,
+                boardName: boardName,
+                title: titleText,
+                content: postText
+            )
+            
+            AF.request(url,
+                       method: .post,
+                       parameters: postParameters,
+                       encoder: JSONParameterEncoder.default,
+                       headers: headers)
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: BoardWritePostResponseModel.self) { response in
+                    handleResponse(response)
+                }
+        }
+    }
+
+    func handleResponse(_ response: AFDataResponse<BoardWritePostResponseModel>) {
+        switch response.result {
+        case .success(let data):
+            print("Success: \(data)")
+            self.postResult = data
+            self.presentationMode.wrappedValue.dismiss() // 게시글 등록 후 이전 화면으로 돌아감
+            
+        case .failure(let error):
+            if let data = response.data {
+                let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+                print("Server Error Message: \(errorMessage)")
+            } else {
+                print("Error: \(error.localizedDescription)")
             }
+        }
     }
 }
+
 
 struct SeokBakji: View {
     var body: some View {
@@ -173,14 +219,16 @@ struct SeokBakji: View {
     }
 }
 
+import SwiftUI
+
 struct WriteBoardDetail: View {
     
     let boardCategory: [String] = ["박사", "석사", "입학예정"]
     
-    @Binding var selectedCategory: Int? // 선택된 카테고리
+    @Binding var selectedCategory: String? // 선택된 카테고리
     @Binding var titleText: String // 제목 텍스트 필드의 상태
     @Binding var postText: String // 내용 텍스트 필드의 상태
-    @Binding var selectedOptionIndex: Int? // DropDown 메뉴에서 선택된 옵션의 인덱스
+    @Binding var selectedOptionIndex: String? // DropDown 메뉴에서 선택된 옵션의 인덱스
     @Binding var selectedSupportFieldIndex: Int? // 지원분야 드롭다운 메뉴에서 선택된 옵션의 인덱스
     @Binding var selectedJob: String? // 직무 텍스트 필드
     @Binding var selectedEmploymentType: Int? // 채용 형태 선택
@@ -189,19 +237,7 @@ struct WriteBoardDetail: View {
     @Binding var showCategoryDropdown: Bool
     @Binding var showSupportFieldDropdown: Bool
     var showExtraFields: Bool
-
-    var boardCategories: [String] {
-        switch selectedCategory {
-        case 0:
-            return ["질문 게시판", "취업후기 게시판", "대학원생활 게시판", "연구주제 게시판"]
-        case 1:
-            return ["질문 게시판", "취업후기 게시판", "박사지원 게시판", "대학원생활 게시판", "박사합격 후기", "연구주제 게시판"]
-        case 2:
-            return ["질문 게시판", "석사합격 후기", "학부연구생 게시판", "석사지원 게시판", "석박사통합지원 게시판"]
-        default:
-            return []
-        }
-    }
+    var boardCategories: [String] // 전달된 게시판 카테고리 배열
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -222,20 +258,20 @@ struct WriteBoardDetail: View {
                     // Category Buttons
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 16) {
-                            ForEach(boardCategory.indices, id: \.self) { index in
+                            ForEach(boardCategory, id: \.self) { category in
                                 Button(action: {
-                                    selectedCategory = index
+                                    selectedCategory = category
                                     selectedOptionIndex = nil // Reset the selected option when category changes
                                     selectedSupportFieldIndex = nil
                                     selectedEmploymentType = nil
                                     selectedEducationLevel = nil
                                 }) {
                                     HStack(alignment: .center, spacing: 8) {
-                                        Image(selectedCategory == index ? "Radio Button" : "Radio Button 1")
+                                        Image(selectedCategory == category ? "Radio Button" : "Radio Button 1")
                                             .resizable()
                                             .frame(width: 20, height: 20)
                                         
-                                        Text(boardCategory[index])
+                                        Text(category)
                                             .font(.system(size: 16, weight: .semibold))
                                             .foregroundStyle(Constants.Gray900)
                                     }
@@ -246,6 +282,7 @@ struct WriteBoardDetail: View {
                         .padding(.horizontal, -3) // Adjust padding to align items properly
                     }
                     .padding(.bottom, 12)
+
                     
                     HStack(alignment: .top, spacing: 4) {
                         Text("카테고리")
@@ -260,7 +297,7 @@ struct WriteBoardDetail: View {
                     .padding(.top, 20)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
-                    CategoryDropDownMenuView(options: boardCategories, selectedOptionIndex: $selectedOptionIndex, showValidationError: $showValidationError, showDropdown: $showCategoryDropdown) // 전달 추가
+                    CategoryDropDownMenuView(options: boardCategories, selectedOptionIndex: $selectedOptionIndex, showValidationError: $showValidationError, showDropdown: $showCategoryDropdown)
                     
                     if showExtraFields {
                         // 지원분야 드롭다운
@@ -298,35 +335,38 @@ struct WriteBoardDetail: View {
                         .padding(.top, 20)
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                         
-                        // 제목 텍스트 필드 생성
+                        // 직무 텍스트 필드 생성
                         VStack(alignment: .leading, spacing: 4) {
                             ZStack(alignment: .leading) {
-                                if titleText.isEmpty {
+                                if selectedJob?.isEmpty ?? true {
                                     Text("")
                                         .foregroundColor(showValidationError ? Color(red: 1, green: 0.29, blue: 0.29) : Constants.Gray500)
                                         .padding(.horizontal, 8)
                                 }
-                                TextField("직무를 입력해주세요", text: $titleText)
+                                TextField("직무를 입력해주세요", text: Binding(
+                                    get: { selectedJob ?? "" },
+                                    set: { selectedJob = $0 }
+                                ))
                                     .padding()
-                                    .background(showValidationError && titleText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
+                                    .background(showValidationError && (selectedJob?.isEmpty ?? true) ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
                                     .cornerRadius(8, corners: [.topLeft, .topRight])
                                     .overlay(
                                         Rectangle()
                                             .frame(height: 2)
-                                            .foregroundColor(titleText.isEmpty && showValidationError ? Color.red : Color(Constants.Gray300))
+                                            .foregroundColor((selectedJob?.isEmpty ?? true) && showValidationError ? Color.red : Color(Constants.Gray300))
                                             .padding(.top, 44)
                                             .padding(.horizontal, 8),
                                         alignment: .bottom
                                     )
-                                    .foregroundColor(showValidationError && titleText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
+                                    .foregroundColor(showValidationError && (selectedJob?.isEmpty ?? true) ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
                             }
-                            if showValidationError && titleText.isEmpty {
+                            if showValidationError && (selectedJob?.isEmpty ?? true) {
                                 HStack {
                                     Image("CircleWarning")
                                         .resizable()
                                         .frame(width: 12, height: 12)
                                     
-                                    Text("제목은 필수 입력입니다")
+                                    Text("직무는 필수 입력입니다")
                                         .font(.system(size: 14))
                                         .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
                                 }
@@ -524,13 +564,12 @@ struct WriteBoardDetail: View {
                     }
 
                     // 유의사항 텍스트
-                    if selectedOptionIndex == 0 {
+                    if selectedOptionIndex == "질문 게시판" {
                         VStack(alignment: .leading, spacing: 10) {
                             HStack(alignment: .center, spacing: 0) {
                                 Image("Warning")
                                     .resizable()
                                     .frame(width:20, height: 20, alignment: .center)
-                                
                                 
                                 Text("질문 게시판 유의사항")
                                     .font(.system(size: 16, weight: .semibold))
@@ -556,18 +595,18 @@ struct WriteBoardDetail: View {
 }
 
 struct CategoryDropDownMenu: View {
-    
+
     let options: [String]
     var menuWidth: CGFloat = 150
     var buttonHeight: CGFloat = 44
     var maxItemDisplayed: Int = 6
-    
-    @Binding var selectedOptionIndex: Int?
+
+    @Binding var selectedOptionIndex: String?
     @Binding var showDropdown: Bool
     @Binding var showValidationError: Bool // Validation error state
-    
-    @State private var scrollPosition: Int?
-    
+
+    @State private var scrollPosition: String?
+
     var body: some View {
         VStack {
             // Dropdown Menu
@@ -576,19 +615,19 @@ struct CategoryDropDownMenu: View {
                     let scrollViewHeight: CGFloat = options.count > maxItemDisplayed ? (buttonHeight * CGFloat(maxItemDisplayed)) : (buttonHeight * CGFloat(options.count))
                     ScrollView {
                         LazyVStack(spacing: 0) {
-                            ForEach(0..<options.count, id: \.self) { index in
+                            ForEach(options, id: \.self) { option in
                                 Button(action: {
                                     withAnimation {
-                                        selectedOptionIndex = index
+                                        selectedOptionIndex = option
                                         showDropdown.toggle()
                                     }
                                 }, label: {
                                     HStack {
-                                        Text(options[index])
-                                            .foregroundColor(selectedOptionIndex == index ? Constants.Orange700 : Constants.Gray900)
+                                        Text(option)
+                                            .foregroundColor(selectedOptionIndex == option ? Constants.Orange700 : Constants.Gray900)
                                             .padding(16)
                                             .frame(height: buttonHeight, alignment: .leading)
-                                            .background(selectedOptionIndex == index ? Color(red: 0.99, green: 0.91, blue: 0.9) : Color.clear)
+                                            .background(selectedOptionIndex == option ? Color(red: 0.99, green: 0.91, blue: 0.9) : Color.clear)
                                             .cornerRadius(8, corners: .allCorners)
                                     }
                                 })
@@ -604,7 +643,7 @@ struct CategoryDropDownMenu: View {
                     }
                 }
             }
-            
+
             // Selected Item or Placeholder
             VStack(alignment: .leading, spacing: 4) {
                 Button(action: {
@@ -613,8 +652,8 @@ struct CategoryDropDownMenu: View {
                     }
                 }, label: {
                     HStack {
-                        if let selectedIndex = selectedOptionIndex {
-                            Text(options[selectedIndex])
+                        if let selectedOption = selectedOptionIndex {
+                            Text(selectedOption)
                         } else {
                             Text("게시판 카테고리를 선택해 주세요")
                                 .foregroundColor(showValidationError ? Color(red: 1, green: 0.29, blue: 0.29) : Constants.Gray500)
@@ -635,7 +674,7 @@ struct CategoryDropDownMenu: View {
                         Image("CircleWarning")
                             .resizable()
                             .frame(width: 12, height: 12)
-                        
+
                         Text("카테고리는 필수 선택입니다")
                             .font(.system(size: 14))
                         .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
@@ -649,7 +688,7 @@ struct CategoryDropDownMenu: View {
 
 struct CategoryDropDownMenuView: View {
     let options: [String]
-    @Binding var selectedOptionIndex: Int? // Binding 추가
+    @Binding var selectedOptionIndex: String? // Binding 추가
     @Binding var showValidationError: Bool // Validation error state
     @Binding var showDropdown: Bool
     
@@ -754,6 +793,6 @@ struct fieldOfSupportDropDown: View {
 }
 
 #Preview {
-    BoardWriteBoardViewController()
+    BoardWriteViewController()
 }
 
