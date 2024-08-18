@@ -32,10 +32,12 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.dayView.layer.cornerRadius = self.dayView.frame.size.height / 2
-                self.dayView.clipsToBounds = true
-                self.dayView.backgroundColor = UIColor(named: "Coquelicot")
-                self.dayLabel.textColor = .white
+                if dayLabel.text != "" {
+                    self.dayView.layer.cornerRadius = self.dayView.frame.size.width / 2
+                    self.dayView.clipsToBounds = true
+                    self.dayView.backgroundColor = UIColor(named: "Coquelicot")
+                    self.dayLabel.textColor = .white
+                }
             } else {
                 self.dayView.backgroundColor = UIColor(named: "ViewBackground")
                 self.dayLabel.textColor = .black
@@ -48,10 +50,10 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         self.dayView.backgroundColor = UIColor(named: "ViewBackground")
         self.dayView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.dayView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            self.dayView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            self.dayView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-            self.dayView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+            self.dayView.topAnchor.constraint(equalTo: self.topAnchor, constant: 6),
+            self.dayView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2.5),
+            self.dayView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -2.5),
+            self.dayView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 6)
         ])
     }
     
