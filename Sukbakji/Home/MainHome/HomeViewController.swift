@@ -36,11 +36,9 @@ class HomeViewController: UIViewController {
         
         topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-            self.getUserName()
-            self.getViewSchedule()
-            self.getMemberID()
-        }
+        self.getUserName()
+        self.getViewSchedule()
+        self.getMemberID()
     }
     
     override func viewDidLayoutSubviews() {
@@ -132,7 +130,13 @@ class HomeViewController: UIViewController {
                             let upComingdDay = self.allDetailDatas[0].dday
                             let upComingContent = self.allDetailDatas[0].content
                             let upComingUniv = self.allDetailDatas[0].univId
-                            self.dDayLabel.text = "D-\(upComingdDay)"
+                            
+                            if upComingdDay < 0 {
+                                let dayNum = abs(upComingdDay)
+                                self.dDayLabel.text = "D+\(dayNum)"
+                            } else {
+                                self.dDayLabel.text = "D-\(upComingdDay)"
+                            }
                             if upComingUniv == 1 {
                                 self.contentLabel.text = "서울대학교 \(upComingContent)"
                             } else if upComingUniv == 2 {
