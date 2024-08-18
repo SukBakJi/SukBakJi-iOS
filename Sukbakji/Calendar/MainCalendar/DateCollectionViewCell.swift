@@ -17,10 +17,10 @@ class DateCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.layer.cornerRadius = 5
+        contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
         
-        layer.cornerRadius = 5
+        layer.cornerRadius = 8
         layer.masksToBounds = false
     }
 }
@@ -35,7 +35,11 @@ extension DateViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allDetailDatas.count
+        if allDetailDatas.count == 0 {
+            return 1
+        } else {
+            return allDetailDatas.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -53,11 +57,10 @@ extension DateViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: DateCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Date_CollectionViewCell", for: indexPath) as! DateCollectionViewCell
         
-        let detailData = allDetailDatas[indexPath.item]
-        
         if allDetailDatas.count == 0 {
             cell.noResultLabel.isHidden = false
         } else {
+            let detailData = allDetailDatas[indexPath.item]
             cell.noResultLabel.isHidden = true
             cell.ddayLabel.isHidden = false
             cell.univLabel.isHidden = false
@@ -74,7 +77,6 @@ extension DateViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             cell.contentLabel.text = "\(detailData.content)"
         }
-        
         
         return cell
     }
