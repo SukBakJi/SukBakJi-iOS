@@ -48,7 +48,7 @@ class DateViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(UpComingResultModel.self, from: data)
                     self.allDatas = decodedData.result
                     self.allDetailDatas = self.allDatas?.scheduleList ?? []
-                    self.allDetailDatas = self.allDetailDatas.filter { $0.dday <= 10 }
+                    self.allDetailDatas = self.allDetailDatas.filter { $0.dday >= 0 && $0.dday <= 10 }
                     DispatchQueue.main.async {
                         self.DateCV.reloadData()
                     }

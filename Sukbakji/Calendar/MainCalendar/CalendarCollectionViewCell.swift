@@ -12,17 +12,20 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     private lazy var dayLabel = UILabel()
     private lazy var dayView = UIView()
+    var firstDot = UIImageView()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureDay()
         self.configureView()
+        self.configureFirstDot()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureDay()
         self.configureView()
+        self.configureFirstDot()
     }
     
     override func prepareForReuse() {
@@ -65,6 +68,18 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             self.dayLabel.centerYAnchor.constraint(equalTo: self.dayView.centerYAnchor),
             self.dayLabel.centerXAnchor.constraint(equalTo: self.dayView.centerXAnchor)
+        ])
+    }
+    
+    private func configureFirstDot() {
+        self.dayView.addSubview(self.firstDot)
+        self.firstDot.image = UIImage(named: "Sukbakji_Dot")
+        self.firstDot.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.firstDot.topAnchor.constraint(equalTo: self.dayLabel.bottomAnchor, constant: 2),
+            self.firstDot.heightAnchor.constraint(equalToConstant: 4),
+            self.firstDot.widthAnchor.constraint(equalToConstant: 4),
+            self.firstDot.centerXAnchor.constraint(equalTo: self.dayView.centerXAnchor)
         ])
     }
     
