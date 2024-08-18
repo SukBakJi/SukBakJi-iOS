@@ -9,6 +9,11 @@ import UIKit
 
 class DateCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var noResultLabel: UILabel!
+    @IBOutlet weak var ddayLabel: UILabel!
+    @IBOutlet weak var univLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -30,7 +35,7 @@ extension DateViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return allDetailDatas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -47,6 +52,29 @@ extension DateViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: DateCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Date_CollectionViewCell", for: indexPath) as! DateCollectionViewCell
+        
+        let detailData = allDetailDatas[indexPath.item]
+        
+        if allDetailDatas.count == 0 {
+            cell.noResultLabel.isHidden = false
+        } else {
+            cell.noResultLabel.isHidden = true
+            cell.ddayLabel.isHidden = false
+            cell.univLabel.isHidden = false
+            cell.contentLabel.isHidden = false
+            cell.ddayLabel.text = "D-\(detailData.dday)"
+            if detailData.univId == 1 {
+                cell.univLabel.text = "서울대학교"
+            } else if detailData.univId == 1 {
+                cell.univLabel.text = "연세대학교"
+            } else if detailData.univId == 1 {
+                cell.univLabel.text = "고려대학교"
+            } else {
+                cell.univLabel.text = "카이스트"
+            }
+            cell.contentLabel.text = "\(detailData.content)"
+        }
+        
         
         return cell
     }

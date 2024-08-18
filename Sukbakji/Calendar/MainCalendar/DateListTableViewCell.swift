@@ -68,18 +68,17 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func updateTableViewHeight() {
-        // 테이블뷰의 콘텐츠 사이즈를 기반으로 높이 설정
-        DispatchQueue.main.async {
-            let sectionCount = self.dateListTV.numberOfSections
-            
-            if sectionCount == 0 {
-                self.dateListTVHeightConstraint.constant = 10
-            } else {
-                self.dateListTVHeightConstraint.constant = self.dateListTV.contentSize.height
-            }
-            // 레이아웃 업데이트
-            self.view.layoutIfNeeded()
-        }
+    func expandHeight() {
+        let additionalHeight: CGFloat = 52 // 늘리고 싶은 높이 값을 설정 (예시)
+        
+        self.dateListTVHeightConstraint.constant = additionalHeight
+        self.view.layoutIfNeeded()
+    }
+    
+    func reduceHeight() {
+        let additionalHeight: CGFloat = 10 // 늘리고 싶은 높이 값을 설정 (예시)
+        
+        self.dateListTVHeightConstraint.constant = additionalHeight
+        self.view.layoutIfNeeded()
     }
 }

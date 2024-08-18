@@ -130,7 +130,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성신여자대학교 원서 접수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGM-BB-26M">
-                                                        <rect key="frame" x="26" y="60.66666666666665" width="179.66666666666666" height="21.666666666666664"/>
+                                                        <rect key="frame" x="26" y="60.66666666666665" width="299" height="21.666666666666664"/>
                                                         <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -151,6 +151,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="qh3-5i-DsT" secondAttribute="bottom" id="aM8-fp-q5g"/>
                                                     <constraint firstAttribute="height" constant="93" id="aV7-ak-ZbP"/>
                                                     <constraint firstItem="v3T-nR-KKu" firstAttribute="leading" secondItem="qh3-5i-DsT" secondAttribute="trailing" constant="20" id="gCG-Ce-h5S"/>
+                                                    <constraint firstAttribute="trailing" secondItem="iGM-BB-26M" secondAttribute="trailing" constant="20" id="hRm-ss-jai"/>
                                                     <constraint firstItem="iGM-BB-26M" firstAttribute="leading" secondItem="qh3-5i-DsT" secondAttribute="trailing" constant="20" id="xOx-71-wxx"/>
                                                 </constraints>
                                             </view>

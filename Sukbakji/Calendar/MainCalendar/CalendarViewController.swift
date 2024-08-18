@@ -14,6 +14,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var DateView: UIView!
     @IBOutlet weak var AlertView: UIView!
     @IBOutlet weak var triangleView: UIImageView!
+    @IBOutlet weak var univLabel: UILabel!
     
     @IBOutlet weak var dateListTV: UITableView!
     @IBOutlet weak var dateListTVHeightConstraint: NSLayoutConstraint!
@@ -31,6 +32,9 @@ class CalendarViewController: UIViewController {
     var dateDatas: DateResponse?
     var allDateDatas: [DateListResponse] = []
     
+    var UniDatas: UnivListResponse?
+    var UniDetailDatas: [UnivList] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +51,8 @@ class CalendarViewController: UIViewController {
         
         self.configure()
         self.setTableView()
+        
+        getUnivList()
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,7 +63,6 @@ class CalendarViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateTableViewHeight()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +75,52 @@ class CalendarViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    func getUnivList() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
+        
+        let url = APIConstants.calendarURL + "/univ"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(retrievedToken)",
+        ]
+        
+        AF.request(url, method: .get, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decodedData = try JSONDecoder().decode(UnivListResultModel.self, from: data)
+                    self.UniDatas = decodedData.result
+                    self.UniDetailDatas = self.UniDatas?.univList ?? []
+                    DispatchQueue.main.async {
+                        if self.UniDetailDatas.count >= 1 {
+                            self.AlertView.isHidden = true
+                            self.triangleView.isHidden = true
+                            self.univLabel.text = "모든 학교"
+                        }
+                    }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
     }
     
     func getSchedule(date: String) {
@@ -97,6 +148,11 @@ class CalendarViewController: UIViewController {
                     self.allDateDatas = self.dateDatas?.scheduleList ?? []
                     DispatchQueue.main.async {
                         self.dateListTV.reloadData()
+                        if self.allDateDatas.count >= 1 {
+                            self.expandHeight()
+                        } else {
+                            self.reduceHeight()
+                        }
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
@@ -174,7 +230,7 @@ class CalendarViewController: UIViewController {
         self.collectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: CalendarCollectionViewCell.identifier)
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.weekStackView.bottomAnchor, constant: 16),
+            self.collectionView.topAnchor.constraint(equalTo: self.weekStackView.bottomAnchor, constant: 20),
             self.collectionView.leadingAnchor.constraint(equalTo: self.DateView.leadingAnchor, constant: 8),
             self.collectionView.trailingAnchor.constraint(equalTo: self.DateView.trailingAnchor, constant: -8),
             self.collectionView.bottomAnchor.constraint(equalTo: self.DateView.bottomAnchor,  constant: 8)
@@ -251,13 +307,17 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let day = days[indexPath.item]
+        let dayNum = Int(day) ?? 0
         
         let date = dayLabel.text ?? ""
         let replacedString = date.replacingOccurrences(of: " ", with: "")
         let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
         
-        getSchedule(date: "\(reReplacedString)\(day)")
-        print("\(reReplacedString)\(day)")
+        if dayNum <= 9 {
+            getSchedule(date: "\(reReplacedString)0\(day)")
+        } else {
+            getSchedule(date: "\(reReplacedString)\(day)")
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -272,7 +332,7 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.weekStackView.frame.width / 7
-        return CGSize(width: width, height: width)
+        return CGSize(width: width, height: width * 0.9)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
