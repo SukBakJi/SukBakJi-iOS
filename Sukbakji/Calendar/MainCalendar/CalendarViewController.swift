@@ -35,6 +35,10 @@ class CalendarViewController: UIViewController {
     var UniDatas: UnivListResponse?
     var UniDetailDatas: [UnivList] = []
     
+    var alarmDatas: AlarmResponse?
+    var alarmDetailDatas: [AlarmList] = []
+    var alarmDateDatas: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +57,7 @@ class CalendarViewController: UIViewController {
         self.setTableView()
         
         getUnivList()
+        getAlarmList()
     }
     
     override func viewDidLayoutSubviews() {
@@ -153,6 +158,51 @@ class CalendarViewController: UIViewController {
                         } else {
                             self.reduceHeight()
                         }
+                    }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    func getAlarmList() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
+        
+        let url = APIConstants.calendarURL + "/alarm"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(retrievedToken)",
+        ]
+        
+        AF.request(url, method: .get, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decodedData = try JSONDecoder().decode(AlarmResultModel.self, from: data)
+                    self.alarmDatas = decodedData.result
+                    self.alarmDetailDatas = self.alarmDatas?.alarmList ?? []
+                    for i in 0..<self.alarmDetailDatas.count {
+                        self.alarmDateDatas.append(self.alarmDetailDatas[i].alarmDate)
+                    }
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
@@ -326,7 +376,29 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionViewCell.identifier, for: indexPath) as? CalendarCollectionViewCell else { return UICollectionViewCell() }
-        cell.updateDay(day: self.days[indexPath.item])
+        let day = self.days[indexPath.item]
+        
+        cell.updateDay(day: day)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let dayInt = Int(day), dayInt > 0 {
+            var components = self.calendar.dateComponents([.year, .month], from: self.calendarDate)
+            components.day = dayInt
+            if let date = self.calendar.date(from: components) {
+                let dateString = dateFormatter.string(from: date)
+                // 알람이 있는 날짜인지 확인
+                if self.alarmDateDatas.contains(dateString) {
+                    cell.firstDot.isHidden = false
+                } else {
+                    cell.firstDot.isHidden = true
+                }
+            }
+        } else {
+            cell.firstDot.isHidden = true
+        }
+        
         return cell
     }
     

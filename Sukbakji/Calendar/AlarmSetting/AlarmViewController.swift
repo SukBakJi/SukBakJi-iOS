@@ -53,11 +53,13 @@ class AlarmViewController: UIViewController, dateProtocol {
         SchoolTF.addBottomShadow()
         SchoolTF.setLeftPadding(10)
         SchoolTF.isEnabled = false
+        SchoolTF.errorfix()
         AlarmNameTF.addBottomShadow()
         AlarmNameTF.setLeftPadding(10)
         AlarmNameTF.errorfix()
         AlarmDateTF.addBottomShadow()
         AlarmDateTF.isEnabled = false
+        AlarmDateTF.errorfix()
         
         DatePicker.isHidden = true
         
