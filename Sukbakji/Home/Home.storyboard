@@ -29,14 +29,14 @@
             <objects>
                 <viewController storyboardIdentifier="HomeVC" id="Y6W-OH-hqX" customClass="HomeViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="1450"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sb3-SE-keZ">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="1450"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="1400"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rQ-PM-1zG">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1450"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1400"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Homelogo" translatesAutoresizingMaskIntoConstraints="NO" id="Y8M-5P-cnS">
                                                 <rect key="frame" x="24" y="-4" width="70" height="32"/>
@@ -187,7 +187,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRc-CD-U69">
-                                                <rect key="frame" x="143" y="1361.3333333333333" width="107" height="26"/>
+                                                <rect key="frame" x="143" y="1354.3333333333333" width="107" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="uDJ-Fc-gTt"/>
                                                 </constraints>
@@ -207,9 +207,9 @@
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="khr-i7-lcE">
-                                                <rect key="frame" x="0.0" y="1079.3333333333333" width="393" height="282"/>
+                                                <rect key="frame" x="0.0" y="1079.3333333333333" width="393" height="275"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="282" id="0Gs-Aa-j5B"/>
+                                                    <constraint firstAttribute="height" constant="275" id="0Gs-Aa-j5B"/>
                                                 </constraints>
                                                 <connections>
                                                     <segue destination="glx-MM-EFL" kind="embed" id="bbC-bc-34P"/>
@@ -256,9 +256,9 @@
                                             <constraint firstItem="qz8-Ct-Snt" firstAttribute="top" secondItem="TLA-AN-gMc" secondAttribute="bottom" constant="20" id="6jG-Ag-o8d"/>
                                             <constraint firstItem="gI6-Rp-DuR" firstAttribute="leading" secondItem="5rQ-PM-1zG" secondAttribute="leading" id="6rp-aC-nas"/>
                                             <constraint firstAttribute="trailing" secondItem="ylx-Sr-WKR" secondAttribute="trailing" id="7nN-XL-yur"/>
-                                            <constraint firstAttribute="bottom" secondItem="fRc-CD-U69" secondAttribute="bottom" constant="62.670000000000002" id="9oD-iI-3Vi"/>
                                             <constraint firstAttribute="trailing" secondItem="K4H-J0-OMa" secondAttribute="trailing" constant="8" id="Azp-OI-gaf"/>
                                             <constraint firstItem="Zuv-cG-Bv0" firstAttribute="top" secondItem="oVm-t7-APb" secondAttribute="bottom" constant="28" id="DC2-SA-y2U"/>
+                                            <constraint firstAttribute="bottom" secondItem="fRc-CD-U69" secondAttribute="bottom" constant="19.670000000000002" id="Fu6-5K-Lsu"/>
                                             <constraint firstItem="khr-i7-lcE" firstAttribute="top" secondItem="ylx-Sr-WKR" secondAttribute="bottom" id="G7D-Tj-rbr"/>
                                             <constraint firstItem="NV1-Ro-PWR" firstAttribute="top" secondItem="lmu-8g-YBJ" secondAttribute="bottom" constant="6" id="GUQ-U4-WQn"/>
                                             <constraint firstItem="1us-Vb-J3Q" firstAttribute="top" secondItem="tBQ-Dx-6u5" secondAttribute="bottom" id="Gjb-Zi-GT3"/>
@@ -332,7 +332,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vRz-q5-AJN"/>
-                    <size key="freeformSize" width="393" height="1450"/>
+                    <size key="freeformSize" width="393" height="1400"/>
                     <connections>
                         <outlet property="UpComingView" destination="oVm-t7-APb" id="ojx-nT-XYG"/>
                         <outlet property="contentLabel" destination="iGM-BB-26M" id="0b0-67-cB6"/>
@@ -495,8 +495,13 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="boardName" destination="KCc-Sd-nSO" id="guA-Kz-mBx"/>
+                                            <outlet property="commentCount" destination="joz-Vs-xuF" id="e1b-Li-fId"/>
+                                            <outlet property="contentLabel" destination="W3h-i4-cqU" id="Yzu-mI-6F0"/>
                                             <outlet property="labelHotView" destination="rcc-nY-xhJ" id="VMZ-AQ-FsX"/>
                                             <outlet property="labelTypeView" destination="I9H-rd-ZfZ" id="41d-xW-9sF"/>
+                                            <outlet property="titleLabel" destination="4Bd-dH-vVo" id="z1d-es-eHN"/>
+                                            <outlet property="viewCount" destination="odD-gE-JL1" id="S7F-pp-4Bc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1455,7 +1460,7 @@
             <objects>
                 <viewController storyboardIdentifier="FavoriteLabVC" id="glx-MM-EFL" customClass="FavoriteLabViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z8G-6z-IYf">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="282"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="275"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="즐겨찾는 연구실" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJO-nL-9Wf">
@@ -1677,7 +1682,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iH-t4-Pf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="395" y="346"/>
+            <point key="canvasLocation" x="395" y="360"/>
         </scene>
         <!--Favorite Board View Controller-->
         <scene sceneID="z6n-9m-9u0">

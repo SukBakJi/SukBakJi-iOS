@@ -65,6 +65,8 @@ extension FavoriteBoardViewController: UITableViewDelegate, UITableViewDataSourc
             noFavLabel.isHidden = false
             letsFavLabel.isHidden = false
         } else {
+            noFavLabel.isHidden = true
+            letsFavLabel.isHidden = true
             cell.labelLabel.text = detailData.boardName
             cell.contentLabel.text = detailData.title
         }
