@@ -42,7 +42,7 @@ extension UITextView {
         self.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
     }
     
-    func addTVPWBottomShadow() {
+    func addTVRedBottomShadow() {
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(x: 0, y: self.frame.height - 1, width: self.frame.width, height: 1.5)
         bottomBorder.backgroundColor = UIColor(hexCode: "FF4A4A").cgColor  // 원하는 색상으로 변경

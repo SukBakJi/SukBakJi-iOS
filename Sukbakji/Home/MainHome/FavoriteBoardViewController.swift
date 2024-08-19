@@ -21,21 +21,25 @@ class FavoriteBoardViewController: UIViewController {
         
         FavoriteBoardTV.delegate = self
         FavoriteBoardTV.dataSource = self
-        FavoriteBoardTV.layer.masksToBounds = false// any value you want
+        FavoriteBoardTV.layer.masksToBounds = true// any value you want
         FavoriteBoardTV.layer.shadowOpacity = 0.2// any value you want
         FavoriteBoardTV.layer.shadowRadius = 2 // any value you want
         FavoriteBoardTV.layer.shadowOffset = .init(width: 0, height: 0.5)
         FavoriteBoardTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         
-//        self.getFavoriteBoard()
+        self.getFavoriteBoard()
     }
     
     func getFavoriteBoard() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
         
         let url = APIConstants.communityURL + "/favorite-post-list"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer ",
+            "Authorization": "Bearer \(retrievedToken)",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in

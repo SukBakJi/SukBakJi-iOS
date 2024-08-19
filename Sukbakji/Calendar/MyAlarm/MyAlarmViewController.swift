@@ -27,7 +27,7 @@ class MyAlarmViewController: UIViewController {
 
         myAlarmTV.delegate = self
         myAlarmTV.dataSource = self
-        myAlarmTV.layer.masksToBounds = false// any value you want
+        myAlarmTV.layer.masksToBounds = true// any value you want
         myAlarmTV.layer.shadowOpacity = 0.2// any value you want
         myAlarmTV.layer.shadowRadius = 2 // any value you want
         myAlarmTV.layer.shadowOffset = .init(width: 0, height: 0.5)

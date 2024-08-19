@@ -16,6 +16,8 @@ class ApplyMentoringTableViewCell: UITableViewCell {
     @IBOutlet weak var secondTopic: UILabel!
     @IBOutlet weak var mentoringButton: UIButton!
     
+    var index: Int = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -54,6 +56,7 @@ extension ApplyMentoringViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ApplyMentoringTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ApplyMentoring_TableViewCell", for: indexPath) as! ApplyMentoringTableViewCell
         
+        cell.mentoringButton.tag = indexPath.section
         cell.mentoringButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         
         let detailData = allDetailDatas[indexPath.section]
@@ -70,8 +73,10 @@ extension ApplyMentoringViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
-        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MentoringPostVC") as? MentoringPostViewController else { return }
+        let detailData = allDetailDatas[sender.tag]
         
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MentoringPostVC") as? MentoringPostViewController else { return }
+        nextVC.mentorId = detailData.mentorId
         self.present(nextVC, animated: true)
     }
 }

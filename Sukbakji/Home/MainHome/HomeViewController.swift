@@ -125,7 +125,6 @@ class HomeViewController: UIViewController {
                     self.allDatas = decodedData.result
                     self.allDetailDatas = self.allDatas?.scheduleList ?? []
                     DispatchQueue.main.async {
-                        print(self.allDetailDatas)
                         if self.allDetailDatas.count >= 1{
                             let upComingdDay = self.allDetailDatas[0].dday
                             let upComingContent = self.allDetailDatas[0].content
