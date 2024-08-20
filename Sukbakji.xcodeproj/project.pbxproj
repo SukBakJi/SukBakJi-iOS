@@ -15,6 +15,8 @@
 		412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F922F2C5C9E120042B834 /* FirstAcademicVerificationViewController.swift */; };
 		412F92322C5C9E280042B834 /* SecondAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F92312C5C9E280042B834 /* SecondAcademicVerificationViewController.swift */; };
 		412F92342C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F92332C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift */; };
+		415BBC0B2C7343F8002768EE /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBC0A2C7343F8002768EE /* AuthInterceptor.swift */; };
+		415BBC0D2C73442F002768EE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBC0C2C73442F002768EE /* NetworkManager.swift */; };
 		4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E84B2C68ACC500A0F292 /* ResearchTopicDataManager.swift */; };
 		4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E84D2C68ACCC00A0F292 /* ResearchTopicModel.swift */; };
 		4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */; };
@@ -204,6 +206,8 @@
 		412F922F2C5C9E120042B834 /* FirstAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAcademicVerificationViewController.swift; sourceTree = "<group>"; };
 		412F92312C5C9E280042B834 /* SecondAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondAcademicVerificationViewController.swift; sourceTree = "<group>"; };
 		412F92332C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdAcademicVerificationViewController.swift; sourceTree = "<group>"; };
+		415BBC0A2C7343F8002768EE /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
+		415BBC0C2C73442F002768EE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4168E84B2C68ACC500A0F292 /* ResearchTopicDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicDataManager.swift; sourceTree = "<group>"; };
 		4168E84D2C68ACCC00A0F292 /* ResearchTopicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicModel.swift; sourceTree = "<group>"; };
 		4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIInput.swift; sourceTree = "<group>"; };
@@ -809,6 +813,8 @@
 			children = (
 				C7DA4E3C2C611CE10092F342 /* APIConstants.swift */,
 				C7DA4E3E2C611D6D0092F342 /* NetworkResult.swift */,
+				415BBC0A2C7343F8002768EE /* AuthInterceptor.swift */,
+				415BBC0C2C73442F002768EE /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1211,6 +1217,7 @@
 				7B1C53482C69D10800C66D0D /* DirectoryLabSearchModel.swift in Sources */,
 				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
+				415BBC0D2C73442F002768EE /* NetworkManager.swift in Sources */,
 				C7C568712C6F44C500A57821 /* MentorPostAPI.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				7B1C534C2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift in Sources */,
@@ -1264,6 +1271,7 @@
 				C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
+				415BBC0B2C7343F8002768EE /* AuthInterceptor.swift in Sources */,
 				C73F89842C5E834D007ECFE7 /* MyAlarmViewController.swift in Sources */,
 				C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */,
 				C74F584F2C6B330000369545 /* UniPostAPI.swift in Sources */,
