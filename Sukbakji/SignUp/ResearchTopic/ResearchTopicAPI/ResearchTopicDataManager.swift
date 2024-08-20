@@ -9,21 +9,14 @@ import Alamofire
 
 class ResearchTopicDataManager {
     func ResearchTopicDataManager(_ topicName: String, completion: @escaping (ResearchTopicModel?) -> Void) {
-        guard let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("토큰이 없습니다.")
-            completion(nil)
-            return
-        }
-
         
         let url = APIConstants.reseachtopicURL + "/search" + "?topicName=\(topicName)"
         
         let headers: HTTPHeaders = [
-            "Accept": "*/*",
-            "Authorization": "Bearer \(accessToken)"
+            "Accept": "*/*"
         ]
         
-        AF.request(url,
+        NetworkManager.shared.request(url,
                    method: .post,
                    parameters: topicName,
                    encoder: JSONParameterEncoder.default,
