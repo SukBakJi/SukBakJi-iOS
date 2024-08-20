@@ -27,8 +27,10 @@ class EditPWViewController: UIViewController {
     @IBOutlet weak var setButton: UIButton!
     
     private var userPW: String?
+    private var userToken: String?
     
     private var PWData: ChangePWResult!
+    private var logoutData: LogoutResult!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +59,7 @@ class EditPWViewController: UIViewController {
         newPWAgainTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         
         getUserPW()
+        getUserToken()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +68,15 @@ class EditPWViewController: UIViewController {
         currentPWTF.errorfix()
         newPWTF.errorfix()
         newPWAgainTF.errorfix()
+    }
+    
+    func getUserToken() {
+        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
+            userToken = retrievedData
+            print("Password retrieved and stored in userPW: \(userToken ?? "")")
+        } else {
+            print("Failed to retrieve password.")
+        }
     }
     
     func getUserPW() {
@@ -269,8 +281,12 @@ class EditPWViewController: UIViewController {
     }
     
     @IBAction func change_Tapped(_ sender: Any) {
-        let parameters = ChangePWModel(currentPassword: currentPWTF.text ?? "", newPassword: newPWTF.text ?? "", confirmPassword: newPWAgainTF.text ?? "")
-        APIChangePWPost.instance.SendingChangePW(parameters: parameters) { result in self.PWData = result }
-        self.presentingViewController?.dismiss(animated: true)
+        let pwParameters = ChangePWModel(currentPassword: currentPWTF.text ?? "", newPassword: newPWTF.text ?? "", confirmPassword: newPWAgainTF.text ?? "")
+        APIChangePWPost.instance.SendingChangePW(parameters: pwParameters) { result in self.PWData = result }
+        let tokenParameters = LogoutModel(accessToken: userToken ?? "")
+        APILogoutPost.instance.SendingLogout(parameters: tokenParameters) { result in self.logoutData = result }
+        let mainViewController = UINavigationController(rootViewController: LoginViewController())
+        mainViewController.modalPresentationStyle = .fullScreen
+        self.present(mainViewController, animated: true)
     }
 }
