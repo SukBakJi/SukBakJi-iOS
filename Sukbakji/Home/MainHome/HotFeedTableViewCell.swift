@@ -12,6 +12,12 @@ class HotFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var labelHotView: UIView!
     @IBOutlet weak var labelTypeView: UIView!
     
+    @IBOutlet weak var boardName: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var commentCount: UILabel!
+    @IBOutlet weak var viewCount: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -33,7 +39,7 @@ extension HotFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return allDatas.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,6 +56,14 @@ extension HotFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: HotFeedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HotFeed_TableViewCell", for: indexPath) as! HotFeedTableViewCell
+        
+        let detailData = allDatas[indexPath.section]
+        
+        cell.boardName.text = "\(detailData.boardName)"
+        cell.titleLabel.text = "\(detailData.title)"
+        cell.contentLabel.text = "\(detailData.content)"
+        cell.commentCount.text = "\(detailData.commentCount)"
+        cell.viewCount.text = "\(detailData.views)"
         
         cell.selectionStyle = .none
         

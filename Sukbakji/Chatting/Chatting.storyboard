@@ -892,6 +892,9 @@
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="멘토링 신청하기"/>
+                                <connections>
+                                    <action selector="set_Tapped:" destination="72k-EK-rGc" eventType="touchUpInside" id="k18-aG-lOj"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ZMq-AV-P0x">
                                 <rect key="frame" x="24" y="225.66666666666663" width="345" height="120"/>
@@ -919,7 +922,7 @@
                                             <constraint firstAttribute="height" constant="12" id="hiu-ry-fdS"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
-                                        <color key="textColor" name="Coquelicot"/>
+                                        <color key="textColor" red="1" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -950,7 +953,7 @@
                                             <constraint firstAttribute="height" constant="12" id="6sN-nY-HG3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
-                                        <color key="textColor" name="Coquelicot"/>
+                                        <color key="textColor" red="1" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -998,8 +1001,10 @@
                     </view>
                     <connections>
                         <outlet property="questionTV" destination="J1z-1b-vod" id="RVt-22-zak"/>
+                        <outlet property="questionWarningSV" destination="Mcr-Sx-86j" id="HvV-m1-LdL"/>
                         <outlet property="setButton" destination="3gh-Kc-JlA" id="kSW-LJ-edC"/>
                         <outlet property="titleTV" destination="ZMq-AV-P0x" id="UTs-tF-kXD"/>
+                        <outlet property="titleWarningSV" destination="TFZ-bf-ExX" id="3o3-LL-Pxl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BF-Jb-QQF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -31,15 +31,19 @@ class FavoriteLabViewController: UIViewController {
         
         FavoriteLabPV.setProgress(0, animated: true)
         
-//        self.getFavoriteLab()
+        self.getFavoriteLab()
     }
     
     func getFavoriteLab() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("Failed to retrieve password.")
+            return
+        }
         
-        let url = APIConstants.mypageURL + "/favorite-labs"
+        let url = APIConstants.labURL + "/mypage/favorite-labs"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer ",
+            "Authorization": "Bearer \(retrievedToken)",
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in

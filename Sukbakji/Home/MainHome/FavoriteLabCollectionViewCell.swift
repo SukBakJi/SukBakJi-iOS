@@ -76,6 +76,8 @@ extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewD
             noFavLabel.isHidden = false
             letsFavLabel.isHidden = false
         } else {
+            noFavLabel.isHidden = true
+            letsFavLabel.isHidden = true
             cell.univLabel.text = detailData.universityName
             cell.labLabel.text = detailData.labName
             cell.profNameLabel.text = detailData.professorName

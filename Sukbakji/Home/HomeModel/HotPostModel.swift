@@ -15,6 +15,7 @@ struct HotPostResultModel : Codable {
 }
 
 struct HotPostResult : Codable {
+    let postId: Int
     let menu: String
     let boardName: String
     let title: String
