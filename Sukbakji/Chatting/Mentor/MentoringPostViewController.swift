@@ -16,7 +16,11 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var titleWarningSV: UIStackView!
     @IBOutlet weak var questionWarningSV: UIStackView!
     
+    let memberId = UserDefaults.standard.integer(forKey: "memberID")
+    
     var mentorId: Int = 0
+    
+    private var mentoringData: MentoringPostResult!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +31,8 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
         
         titleWarningSV.isHidden = true
         questionWarningSV.isHidden = true
+        
+        print(mentorId)
     }
     
     func settingTextView() {
@@ -125,6 +131,8 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func set_Tapped(_ sender: Any) {
+        let parameters = MentoringPostModel(memberId: memberId, mentorId: mentorId, subject: titleTV.text, question: questionTV.text)
+        APIMentoringPost.instance.SendingPostMentoring(parameters: parameters) { result in self.mentoringData = result }
         self.presentingViewController?.dismiss(animated: true)
     }
     
