@@ -21,6 +21,10 @@ class MypageViewController: UIViewController {
     private var logoutData: LogoutResult!
     
     private var userToken: String?
+    
+    let numberFormatter = NumberFormatter()
+    
+    private var point: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +88,10 @@ class MypageViewController: UIViewController {
                             self.warningLabel.isHidden = true
                             self.isDegreeLabel.text = "현재 학적 인증이 완료된 상태입니다"
                         }
-                        self.pointLabel.text = "\(self.userData?.point ?? 0)"
+                        
+                        self.numberFormatter.numberStyle = .decimal
+                        self.point = self.numberFormatter.string(from: NSNumber(value: self.userData?.point ?? 0))
+                        self.pointLabel.text = "\(self.point ?? "")"
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
