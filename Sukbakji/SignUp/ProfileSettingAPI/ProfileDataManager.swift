@@ -12,21 +12,13 @@ class ProfileDataManager {
 
     func ProfileDataManager(_ parameters: ProfileAPIInput, completion: @escaping (ProfileModel?) -> Void) {
         
-        guard let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("토큰이 없습니다.")
-            completion(nil)
-            return
-        }
-
-        
         let url = APIConstants.userURL + "/profile"
         let headers: HTTPHeaders = [
             "Accept": "*/*",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer \(accessToken)"
+            "Content-Type": "application/json"
         ]
     
-        AF.request(url,
+        NetworkManager.shared.request(url,
                    method: .post,
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
@@ -46,21 +38,13 @@ class ProfileDataManager {
     
     
     func ProfileGetDataManager(completion: @escaping (ProfileModel?) -> Void) {
-        
-        guard let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("토큰이 없습니다.")
-            completion(nil)
-            return
-        }
-
-        
+       
         let url = APIConstants.userURL + "/mypage"
         let headers: HTTPHeaders = [
             "Accept": "*/*",
-            "Authorization": "Bearer \(accessToken)"
         ]
     
-        AF.request(url,
+        NetworkManager.shared.request(url,
                    method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default,
