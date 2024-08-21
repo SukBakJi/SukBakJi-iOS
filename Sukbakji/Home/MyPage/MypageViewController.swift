@@ -28,8 +28,13 @@ class MypageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        getUserName()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.getUserName()
     }
     
     override func viewWillAppear(_ animated: Bool) {

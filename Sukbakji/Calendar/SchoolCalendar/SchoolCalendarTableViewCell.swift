@@ -85,20 +85,16 @@ extension SchoolCalendarViewController: UITableViewDelegate, UITableViewDataSour
     func handleButtonTap(for indexPath: IndexPath) {
         // API 호출을 위한 파라미터 생성
         let detailData = allDetailDatas[indexPath.section]
-        let parameters = UniDeleteModel(memberId: allDatas?.memberId ?? 0, univId: detailData.univId, season: detailData.season, method: detailData.method)
-        print(parameters)
-        APIUniDelete.instance.SendingUniDelete(parameters: parameters) { result in
-            switch result {
-            case .success:
-                // 사용자에게 삭제 성공 알림
-                print("University deletion successful.")
-            case .failure(let error):
-                // 사용자에게 오류 알림
-                print("Failed to delete university: \(error.localizedDescription)")
-            }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-                self.getUnivList()
-            }
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "SchoolDeleteAlertVC") as? SchoolDeleteAlertViewController else { return }
+        nextVC.modalPresentationStyle = .overCurrentContext
+        
+        nextVC.memberId = allDatas?.memberId
+        nextVC.method = detailData.method
+        nextVC.season = detailData.season
+        nextVC.univId = detailData.univId
+        
+        DispatchQueue.main.async {
+            self.present(nextVC, animated: false, completion: nil)
         }
     }
 }
