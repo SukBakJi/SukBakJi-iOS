@@ -37,6 +37,12 @@ class MyAlarmViewController: UIViewController {
         self.getAlarmList()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.getAlarmList()
+    }
+    
     func getAlarmList() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             print("Failed to retrieve password.")

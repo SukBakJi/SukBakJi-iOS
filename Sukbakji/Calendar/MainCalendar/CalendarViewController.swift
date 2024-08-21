@@ -55,9 +55,6 @@ class CalendarViewController: UIViewController {
         
         self.configure()
         self.setTableView()
-        
-        getUnivList()
-        getAlarmList()
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,6 +65,9 @@ class CalendarViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        self.getUnivList()
+        self.getAlarmList()
     }
     
     override func viewWillAppear(_ animated: Bool) {

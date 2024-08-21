@@ -27,7 +27,22 @@ class SchoolCalendarViewController: UIViewController {
         schoolCalendarTV.layer.shadowOffset = .init(width: 0, height: 0.5)
         schoolCalendarTV.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         
-        getUnivList()
+        NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(self.didDismissDetailNotification(_:)),
+                  name: NSNotification.Name("deleteUni"),
+                  object: nil
+        )
+    }
+    
+    @objc func didDismissDetailNotification(_ notification: Notification) {
+        self.getUnivList()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.getUnivList()
     }
     
     func getUnivList() {

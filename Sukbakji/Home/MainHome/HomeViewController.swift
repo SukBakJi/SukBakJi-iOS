@@ -36,9 +36,14 @@ class HomeViewController: UIViewController {
         
         topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
         
+        self.getMemberID()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         self.getUserName()
         self.getViewSchedule()
-        self.getMemberID()
     }
     
     override func viewDidLayoutSubviews() {
