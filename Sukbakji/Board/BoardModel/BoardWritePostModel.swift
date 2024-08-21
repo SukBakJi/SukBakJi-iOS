@@ -13,8 +13,8 @@ struct BoardWritePostModelForJobPost: Encodable {
     let boardName: String
     let supportField: String
     let job: String
-    let hiringType: String
-    let finalEducation: String
+    let hiringType: String?
+    let finalEducation: String?
     let title: String
     let content: String
 }
@@ -35,7 +35,7 @@ struct BoardWritePostResponseModel: Decodable {
     let result: BoardPostResult
 }
 
-// 응답 모델 내부 result 구조체
+// 응답 모델 내부 일반 게시물 result 구조체
 struct BoardPostResult: Decodable {
     let postId: Int
     let title: String

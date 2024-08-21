@@ -7,15 +7,16 @@
 
 import Foundation
 
-// MARK: - BoardScrappedModel
-struct BoardScrappedModel: Codable {
+// MARK: - BoardScrapModel, 스크랩한 게시글 목록
+struct BoardScarppedModel: Codable {
     let isSuccess: Bool
     let code, message: String
-    let result: [BoardScrappedResult]
+    let result: [BoardScarppedResult]
 }
 
-// MARK: - BoardScrappedResult
-struct BoardScrappedResult: Codable {
+// MARK: - BoardScrapResult
+struct BoardScarppedResult: Codable {
+    let postId: Int
     let menu, boardName, title, content: String
     let commentCount, views: Int
 }

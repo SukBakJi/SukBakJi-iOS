@@ -18,6 +18,8 @@ struct BoardListResult: Decodable {
     let postId: Int
     let title: String
     let previewContent: String
+    let supportField: String?
+    let hiringType: String?
     let commentCount: Int
     let views: Int
 }

@@ -6,15 +6,18 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct BoardAdmissionViewController: View {
     
     @State private var searchText: String = "" // 검색 텍스트 상태 변수
     @State private var selectedButton: String? = "질문 게시판" // 기본값을 '질문 게시판'으로 설정
     @State private var isSearchActive: Bool = false // 검색 바 클릭 상태 변수
-    
+    @State private var posts: [BoardListResult] = [] // 게시물 데이터를 저장할 상태 변수
+    @State private var isLoading: Bool = true // 데이터 로딩 상태
+
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 // 검색 바
                 HStack {
@@ -43,18 +46,23 @@ struct BoardAdmissionViewController: View {
                     HStack(spacing: 8) {
                         BoardButton(text: "질문 게시판", isSelected: selectedButton == "질문 게시판") {
                             selectedButton = "질문 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "석사합격 후기", isSelected: selectedButton == "석사합격 후기") {
                             selectedButton = "석사합격 후기"
+                            loadPosts()
                         }
                         BoardButton(text: "학부연구생 게시판", isSelected: selectedButton == "학부연구생 게시판") {
                             selectedButton = "학부연구생 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "석사지원 게시판", isSelected: selectedButton == "석사지원 게시판") {
                             selectedButton = "석사지원 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "석박사통합지원 게시판", isSelected: selectedButton == "석박사통합지원 게시판") {
                             selectedButton = "석박사통합지원 게시판"
+                            loadPosts()
                         }
                     }
                     .font(.system(size: 12, weight: .medium))
@@ -63,21 +71,17 @@ struct BoardAdmissionViewController: View {
                 
                 // 선택된 게시판에 따라 다른 뷰 표시
                 VStack {
-                    switch selectedButton {
-                    case "질문 게시판":
-                        AdmissionQnABoard()
-                    case "석사합격 후기":
-                        AdmissionMasterReviewBoard()
-                    case "학부연구생 게시판":
-                        AdmissionStudentBoard()
-                    case "석사지원 게시판":
-                        AdmissionMasterBoard()
-                    case "석박사통합지원 게시판":
-                        AdmissionIntegrationBoard()
-                    default:
-                        Text("여기에 컨텐츠를 추가하세요")
-                            .font(.body)
-                            .foregroundColor(.secondary)
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                    } else if posts.isEmpty {
+                        Text("게시물이 없습니다.")
+                            .foregroundColor(Constants.Gray500)
+                            .padding()
+                    } else {
+                        ForEach(posts, id: \.postId) { post in
+                            BoardItem(post: post, selectedButton: selectedButton ?? "게시판")
+                        }
                     }
                 }
                 .padding(.top, 20)
@@ -86,7 +90,7 @@ struct BoardAdmissionViewController: View {
             .padding(.top, 20)
         }
         .overlay(
-            overlayButton()
+            overlayButton(selectedButton: selectedButton)
                 .padding(.trailing, 24)
                 .padding(.bottom, 48)
             ,alignment: .bottomTrailing
@@ -95,6 +99,50 @@ struct BoardAdmissionViewController: View {
         .fullScreenCover(isPresented: $isSearchActive) {
             SearchViewController(boardName: selectedButton ?? "게시판")
         }
+        .onAppear {
+            loadPosts() // 초기 로드
+        }
+    }
+    
+    // 게시글을 불러오는 함수
+    func loadPosts() {
+        isLoading = true
+        
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+            print("토큰이 없습니다.")
+            self.isLoading = false
+            return
+        }
+        
+        let boardName = selectedButton ?? "질문 게시판"
+        let url = APIConstants.boardpostURL + "/list"
+        
+        let parameters: [String: Any] = [
+            "menu": "입학예정",
+            "boardName": boardName
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)"
+        ]
+        
+        AF.request(url, method: .get, parameters: parameters, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: BoardListGetResponseModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        self.posts = data.result.reversed() // 배열을 뒤집어 상단에 추가되도록 함
+                    } else {
+                        print("Error: \(data.message)")
+                        self.posts = []
+                    }
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    self.posts = []
+                }
+                self.isLoading = false
+            }
     }
 }
 
@@ -198,7 +246,6 @@ struct AdmissionIntegrationBoard: View {
         dummyBoard(boardName: "석박사통합지원 게시판")
     }
 }
-
 
 #Preview {
     BoardAdmissionViewController()

@@ -1,10 +1,3 @@
-//
-//  HotBoardViewController.swift
-//  Sukbakji
-//
-//  Created by KKM on 7/27/24.
-//
-
 import SwiftUI
 import Alamofire
 
@@ -12,7 +5,7 @@ struct HotBoardViewController: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var showAlert: Bool = false
-    @State private var hotPosts: [BoardHotResult] = [] // HOT 게시판 글 목록을 저장할 상태 변수
+    @State private var hotPosts: [BoardHotPost] = [] // HOT 게시판 글 목록을 저장할 상태 변수
     @State private var isLoading: Bool = true // 로딩 상태를 추적하는 상태 변수
     
     var body: some View {
@@ -39,7 +32,7 @@ struct HotBoardViewController: View {
                         Spacer()
                         
                         // 더보기 버튼
-                        Image("")
+                        Image("") // More button, not currently used
                             .frame(width: Constants.nav, height: Constants.nav)
                     }
                     
@@ -50,21 +43,64 @@ struct HotBoardViewController: View {
                         hotNoticeView(showAlert: $showAlert)
                         
                         if isLoading {
-                            // 로딩 중일 때 표시할 뷰
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle())
                         } else if hotPosts.isEmpty {
-                            // HOT 게시물이 없을 경우 표시할 뷰
                             Spacer()
                             EmptyHotBoard()
                             Spacer()
                         } else {
                             // HOT 게시물 목록 표시
-                            ForEach(hotPosts, id: \.title) { post in
-                                Board(boardName: post.boardName, title: post.title, content: post.content, commentCount: post.commentCount, views: post.views)
+                            ForEach(hotPosts, id: \.postId) { post in
+                                NavigationLink(destination: DummyBoardDetail(boardName: post.boardName, postId: post.postId, memberId: nil)) {
+                                    VStack(alignment: .leading, spacing: 12) {
+                                        Text(post.title)
+                                            .font(.system(size: 14, weight: .semibold))
+                                            .foregroundStyle(Constants.Gray900)
+                                        
+                                        Text(post.content)
+                                            .font(.system(size: 12, weight: .medium))
+                                            .foregroundStyle(Constants.Gray900)
+                                        
+                                        HStack(alignment: .top, spacing: 12) {
+                                            Image("chat 1")
+                                                .resizable()
+                                                .frame(width: 12, height: 12)
+                                            
+                                            Text("\(post.commentCount)")
+                                                .font(.system(size: 12, weight: .medium))
+                                                .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
+                                            
+                                            Image("eye")
+                                                .resizable()
+                                                .frame(width: 12, height: 12)
+                                            
+                                            Text("\(post.views)")
+                                                .font(.system(size: 12, weight: .medium))
+                                                .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .topTrailing)
+                                    }
+                                    .padding(.horizontal, 18)
+                                    .padding(.vertical, 16)
+                                    .background(Constants.White)
+                                    .cornerRadius(12)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .inset(by: 0.5)
+                                            .stroke(Constants.Gray300, lineWidth: 1)
+                                    )
+                                }
                             }
                         }
                     }
+                    .padding(.horizontal, 24)
+                    .overlay(
+                        overlayButton(selectedButton: "HOT 게시판")
+                            .padding(.trailing, 24) // 오른쪽 여백
+                            .padding(.bottom, 48) // 아래 여백
+                        , alignment: .bottomTrailing // 오른쪽 아래에 위치
+                    )
                 }
                 
                 if showAlert {
@@ -109,14 +145,28 @@ struct HotBoardViewController: View {
     }
     
     func loadHotPosts() {
-//        어
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+            print("토큰이 없습니다.")
+            self.isLoading = false
+            return
+        }
+        
+        HotBoardApi(userToken: accessToken) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let posts):
+                    self.hotPosts = posts.filter { $0.views >= 100 || $0.commentCount >= 20 }
+                case .failure(let error):
+                    print("Error loading HOT posts: \(error.localizedDescription)")
+                }
+                self.isLoading = false
+            }
+        }
     }
     
-    func HotBoardApi(userToken: String, completion: @escaping (Result<[BoardHotResult], Error>) -> Void) {
-        // API 엔드포인트 URL
-        let url = APIConstants.communityURL + "/hot-boards" // 실제 API 엔드포인트로 교체
-
-        // 요청 헤더에 Authorization 추가
+    func HotBoardApi(userToken: String, completion: @escaping (Result<[BoardHotPost], Error>) -> Void) {
+        let url = APIConstants.communityURL + "/hot-boards"
+        
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json",
@@ -126,27 +176,25 @@ struct HotBoardViewController: View {
         AF.request(url,
                    method: .get,
                    headers: headers)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: BoardHotModel.self) { response in
-                switch response.result {
-                case .success(let data):
-                    if data.isSuccess {
-                        // 성공적으로 데이터를 받아왔을 때, 결과를 반환
-                        completion(.success(data.result))
-                    } else {
-                        // API 호출은 성공했으나, 서버에서 에러를 반환한 경우
-                        let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: data.message])
-                        completion(.failure(error))
-                    }
-                    
-                case .failure(let error):
-                    // 네트워크 오류 또는 응답 디코딩 실패 등의 오류가 발생했을 때
+        .validate(statusCode: 200..<300)
+        .responseDecodable(of: BoardHotModel.self) { response in
+            switch response.result {
+            case .success(let data):
+                if data.isSuccess {
+                    completion(.success(data.result))
+                } else {
+                    let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: data.message])
                     completion(.failure(error))
                 }
+                
+            case .failure(let error):
+                completion(.failure(error))
             }
+        }
     }
 }
 
+// MARK: -- 공지사항
 struct hotNoticeView: View {
     @Binding var showAlert: Bool
     
@@ -174,8 +222,9 @@ struct hotNoticeView: View {
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(Constants.Gray800)
                         .frame(alignment: .topLeading)
+                    
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity, alignment: .topLeading)
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 9)
@@ -187,7 +236,6 @@ struct hotNoticeView: View {
                     .stroke(Constants.Orange400, lineWidth: 1)
             )
         }
-        .padding(.horizontal, 24)
     }
 }
 
@@ -206,3 +254,4 @@ struct EmptyHotBoard: View {
 #Preview {
     HotBoardViewController()
 }
+

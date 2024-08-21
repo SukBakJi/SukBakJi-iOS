@@ -94,6 +94,23 @@ struct ScrappedBoardViewController: View {
 //            }
 //            self.isLoading = false
 //        }
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+            print("토큰이 없습니다.")
+            self.isLoading = false
+            return
+        }
+        
+        BookmarkedBoardApi(userToken: accessToken) { result in
+            switch result {
+            case .success(let posts):
+                self.scrappedPosts = posts.reversed() // Show the latest scrapped post at the top
+                self.hasScrappedPosts = !posts.isEmpty
+            case .failure(let error):
+                print("Error loading scrapped posts: \(error.localizedDescription)")
+                self.hasScrappedPosts = false
+            }
+            self.isLoading = false
+        }
     }
     
     func BookmarkedBoardApi(userToken: String, completion: @escaping (Result<[BoardBookmarkedResult], Error>) -> Void) {
@@ -127,6 +144,13 @@ struct ScrappedBoardViewController: View {
                 // 네트워크 오류 또는 응답 디코딩 실패 등의 오류가 발생했을 때
                 completion(.failure(error))
             }
+        }
+    }
+    
+    // Function to handle new scrapped post
+    func handleNewScrappedPost(_ newPost: BoardBookmarkedResult?) {
+        if let newPost = newPost {
+            scrappedPosts.insert(newPost, at: 0) // Add the new post at the top of the list
         }
     }
 }

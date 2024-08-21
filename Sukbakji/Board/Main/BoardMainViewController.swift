@@ -14,7 +14,7 @@ struct BoardMainViewController: View {
     @State private var isSearchActive: Bool = false // 검색 바 클릭 상태 변수
     
     var body: some View {
-        ScrollView(.vertical) {
+        ScrollView(.vertical, showsIndicators: false) {
             // MARK - fixedText
             VStack {
                 ZStack(alignment: .topLeading) {
@@ -317,7 +317,7 @@ struct qnaBoard: View {
                             print("최신 질문글 tapped")
                             // 버튼 클릭 시 동작
                         }) {
-                            NavigationLink(destination: BoardQnABoardViewController()) {
+                            NavigationLink(destination: BoardQnAViewController()) {
                                 Text("더보기")
                                     .font(.system(size: 12, weight: .medium))
                                     .multilineTextAlignment(.center)
@@ -502,7 +502,7 @@ struct bookmarkedBoardTable: View {
                     .frame(maxWidth: .infinity, minHeight: 36, maxHeight: 36, alignment: .topLeading)
                 
                 HStack {
-                    Image("Chat 1")
+                    Image("chat 1")
                         .resizable()
                         .frame(width: 12, height: 12)
                     

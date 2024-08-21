@@ -12,8 +12,7 @@ struct DirectoryMainViewController: View {
     @State private var selectedButton: String? = "" // 기본값을 '메인'으로 설정
     @State private var searchText: String = "" // 검색 텍스트 상태 변수
     @State private var isSearchActive: Bool = false // 검색 바 클릭 상태 변수
-    
-    @State private var hasScrappedLaboratories: Bool = true // 연구실이 있는지 여부를 나타내는 Bool 변수
+    @State private var hasScrappedLaboratories: Bool = false // 연구실이 있는지 여부를 나타내는 Bool 변수
     
     var body: some View {
         NavigationView {
@@ -237,7 +236,7 @@ struct ScrappedLaboratory: View {
     var professorName: String
 
     var body: some View {
-        NavigationLink(destination: LabDetailViewController()) {
+        NavigationLink(destination: LabDetailViewController(labId: 1)) {
             HStack {
                 ZStack(alignment: .topLeading) {
                     VStack(spacing: 0) {

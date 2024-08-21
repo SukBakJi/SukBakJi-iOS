@@ -10,7 +10,7 @@ struct BoardDoctoralViewController: View {
     @State private var isLoading: Bool = true // 데이터 로딩 상태
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 // 검색 바
                 HStack {
@@ -69,10 +69,11 @@ struct BoardDoctoralViewController: View {
                             .padding()
                     } else {
                         ForEach(posts, id: \.postId) { post in
-                            BoardItem(post: post)
+                            BoardItem(post: post, selectedButton: selectedButton ?? "게시판") // selectedButton을 전달
                         }
                     }
                 }
+
                 .padding(.top, 20)
             }
             .padding(.horizontal, 24)
@@ -94,7 +95,6 @@ struct BoardDoctoralViewController: View {
     }
     
     // 게시글을 불러오는 함수
-    // 게시글을 불러오는 함수
     func loadPosts() {
         isLoading = true
         
@@ -104,6 +104,11 @@ struct BoardDoctoralViewController: View {
 //            self.isLoading = false
 //            return
 //        }
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+            print("토큰이 없습니다.")
+            self.isLoading = false
+            return
+        }
         
         let boardName = selectedButton ?? "질문 게시판"
         let url = APIConstants.boardpostURL + "/list"
@@ -139,13 +144,39 @@ struct BoardDoctoralViewController: View {
 
 struct BoardItem: View {
     var post: BoardListResult
+    var selectedButton: String
     
     var body: some View {
         Button(action: {
             print("\(post.title) 게시글 tapped")
         }) {
-            NavigationLink(destination: DummyBoardDetail(boardName: post.title, postId: 1)) {
+            NavigationLink(destination: DummyBoardDetail(boardName: selectedButton, postId: post.postId, memberId: 10)) {
                 VStack(alignment: .leading, spacing: 12) {
+                    
+                    // 취업후기 게시판일 경우에만 채용형태와 지원분야 라벨 표시
+                    if selectedButton == "취업후기 게시판" {
+                        HStack {
+                            if let hiringType = post.hiringType {
+                                Text(hiringType)
+                                    .font(.system(size: 12, weight: .bold))
+                                    .padding(4)
+                                    .background(Color(red: 1, green: 0.97, blue: 0.87))
+                                    .foregroundColor(Color(red: 1, green: 0.75, blue: 0))
+                                    .cornerRadius(4)
+                            }
+                            
+                            if let supportField = post.supportField {
+                                Text(supportField)
+                                    .font(.system(size: 12, weight: .bold))
+                                    .padding(4)
+                                    .background(Constants.Gray50)
+                                    .foregroundColor(Constants.Gray500)
+                                    .cornerRadius(4)
+                            }
+                        }
+                    }
+
+                    // 제목과 미리보기 내용은 모든 게시판에서 표시
                     Text(post.title)
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundStyle(Constants.Gray900)
@@ -153,8 +184,9 @@ struct BoardItem: View {
                     Text(post.previewContent)
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(Constants.Gray900)
-                        .lineLimit(2) // Preview content의 최대 2줄로 제한
-                    
+                        .lineLimit(2)
+
+                    // 댓글 수와 조회수는 모든 게시판에서 표시
                     HStack(alignment: .top, spacing: 12) {
                         Image("chat 1")
                             .resizable()
@@ -174,7 +206,7 @@ struct BoardItem: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .topTrailing)
                 }
-                .padding(.horizontal, 18) // VStack 내부 좌우 여백
+                .padding(.horizontal, 18)
                 .padding(.vertical, 16)
                 .background(Constants.White)
                 .cornerRadius(12)
@@ -191,4 +223,5 @@ struct BoardItem: View {
 #Preview {
     BoardDoctoralViewController()
 }
+
 

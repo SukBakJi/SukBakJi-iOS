@@ -7,32 +7,24 @@
 
 import Foundation
 
-// MARK: - BoardCommentsModel
-struct BoardCommentsModel: Encodable {
-    let postID, memberID: Int
+struct CommentRequest: Encodable {
+    let postId: Int
+    let memberId: Int
     let content: String
-
-    enum CodingKeys: String, CodingKey {
-        case postID = "postId"
-        case memberID = "memberId"
-        case content
-    }
 }
 
-// MARK: - BoardCommentsModel
-struct BoardCommentsGetModel: Codable {
+struct CommentResponse: Decodable {
     let isSuccess: Bool
-    let code, message: String
-    let result: BoardCommentsResult
+    let code: String
+    let message: String
+    let result: CommentResult
 }
 
-// MARK: - BoardCommentsResult
-struct BoardCommentsResult: Codable {
-    let commentID: Int
-    let content, nickname, createdAt, updatedAt: String
-
-    enum CodingKeys: String, CodingKey {
-        case commentID = "commentId"
-        case content, nickname, createdAt, updatedAt
-    }
+struct CommentResult: Decodable {
+    let memberId: Int // 추가로 만든거
+    let commentId: Int
+    let content: String
+    let nickname: String
+    let createdAt: String
+    let updatedAt: String
 }
