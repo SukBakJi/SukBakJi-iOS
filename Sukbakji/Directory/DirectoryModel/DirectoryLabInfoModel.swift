@@ -8,17 +8,19 @@
 import Foundation
 
 // MARK: - DirectoryLabInfoGetModel
-struct DirectoryLabInfoGetModel: Codable {
+struct DirectoryLabInfoGetModel: Decodable {
     let isSuccess: Bool
-    let code, message: String
+    let code: String
+    let message: String
     let result: DirectoryLabInfoResult
 }
 
 // MARK: - DirectoryLabInfoResult
-struct DirectoryLabInfoResult: Codable {
-    let professorName, universityName, department, professorAcademic: String
-    let professorProfile: String
+struct DirectoryLabInfoResult: Decodable {
+    let professorName: String
+    let universityName: String
+    let departmentName: String
     let labLink: String
     let researchTopics: [String]
+    let professorEmail: String
 }
-

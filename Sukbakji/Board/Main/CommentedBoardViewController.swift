@@ -1,19 +1,12 @@
-//
-//  CommentedBoardViewController.swift
-//  Sukbakji
-//
-//  Created by KKM on 7/27/24.
-//
-
 import SwiftUI
 import Alamofire
 
 struct CommentedBoardViewController: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var hasCommentedPosts: Bool = true // State variable to track if there are commented posts
-    @State private var commentedPosts: [BoardCommentedResult] = [] // 댓글 단 글 목록을 저장할 상태 변수
-    @State private var isLoading: Bool = true // 로딩 상태를 추적하는 상태 변수
+    @State private var hasCommentedPosts: Bool = true
+    @State private var commentedPosts: [CommentedPost] = []
+    @State private var isLoading: Bool = true
     
     var body: some View {
         NavigationView {
@@ -21,9 +14,7 @@ struct CommentedBoardViewController: View {
                 HStack {
                     // 뒤로가기 버튼
                     Button(action: {
-                        // 뒤로가기 버튼 클릭 시 동작할 코드
                         self.presentationMode.wrappedValue.dismiss()
-                        print("뒤로가기 버튼 tapped")
                     }) {
                         Image("BackButton")
                             .frame(width: Constants.nav, height: Constants.nav)
@@ -38,31 +29,66 @@ struct CommentedBoardViewController: View {
                     
                     Spacer()
                     
-                    // 더보기 버튼
-                    Image("")
+                    Image("") // 더보기 버튼, 현재 사용되지 않음
                         .frame(width: Constants.nav, height: Constants.nav)
-                    
                 }
                 
                 Divider()
                 
                 if isLoading {
-                    // 로딩 중일 때 표시할 뷰
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
-                } else if hasCommentedPosts {
+                } else if hasCommentedPosts && !commentedPosts.isEmpty {
                     ScrollView {
-                        // 게시판 글 목록
-                        ForEach(commentedPosts, id: \.postID) { post in
-                            ContainerDummyBoard(boardName: post.boardName)
+                        // 댓글 단 글 목록 표시
+                        ForEach(commentedPosts, id: \.postId) { post in
+                            NavigationLink(destination: DummyBoardDetail(boardName: post.boardName, postId: post.postId, memberId: nil)) {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    Text(post.title)
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundStyle(Constants.Gray900)
+                                    
+                                    Text(post.content)
+                                        .font(.system(size: 12, weight: .medium))
+                                        .foregroundStyle(Constants.Gray900)
+                                    
+                                    HStack(alignment: .top, spacing: 12) {
+                                        Image("chat 1")
+                                            .resizable()
+                                            .frame(width: 12, height: 12)
+                                        
+                                        Text("\(post.commentCount)")
+                                            .font(.system(size: 12, weight: .medium))
+                                            .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
+                                        
+                                        Image("eye")
+                                            .resizable()
+                                            .frame(width: 12, height: 12)
+                                        
+                                        Text("\(post.views)")
+                                            .font(.system(size: 12, weight: .medium))
+                                            .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .topTrailing)
+                                }
+                                .padding(.horizontal, 18)
+                                .padding(.vertical, 16)
+                                .background(Constants.White)
+                                .cornerRadius(12)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .inset(by: 0.5)
+                                        .stroke(Constants.Gray300, lineWidth: 1)
+                                )
+                            }
                         }
                     }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 20)
                 } else {
                     VStack {
                         Spacer()
-                        
                         EmptyCommentedBoard()
-                        
                         Spacer()
                     }
                 }
@@ -94,13 +120,31 @@ struct CommentedBoardViewController: View {
 //            }
 //            self.isLoading = false
 //        }
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+            print("토큰이 없습니다.")
+            self.isLoading = false
+            return
+        }
+        
+        CommentedBoardApi(userToken: accessToken) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let posts):
+                    // Sort the posts so that the most recent ones are at the top
+                    self.commentedPosts = posts.sorted(by: { $0.postId > $1.postId })
+                    self.hasCommentedPosts = !posts.isEmpty
+                case .failure(let error):
+                    print("Error loading commented posts: \(error.localizedDescription)")
+                    self.hasCommentedPosts = false
+                }
+                self.isLoading = false
+            }
+        }
     }
     
-    func CommentedBoardApi(userToken: String, completion: @escaping (Result<[BoardCommentedResult], Error>) -> Void) {
-        // API 엔드포인트 URL
+    func CommentedBoardApi(userToken: String, completion: @escaping (Result<[CommentedPost], Error>) -> Void) {
         let url = APIConstants.communityURL + "/comment-list"
         
-        // 요청 헤더에 Authorization 추가
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json",
@@ -115,16 +159,13 @@ struct CommentedBoardViewController: View {
             switch response.result {
             case .success(let data):
                 if data.isSuccess {
-                    // 성공적으로 데이터를 받아왔을 때, 결과를 반환
                     completion(.success(data.result))
                 } else {
-                    // API 호출은 성공했으나, 서버에서 에러 코드를 반환한 경우
                     let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: data.message])
                     completion(.failure(error))
                 }
                 
             case .failure(let error):
-                // 네트워크 오류 또는 응답 디코딩 실패 등의 오류가 발생했을 때
                 completion(.failure(error))
             }
         }
@@ -144,7 +185,6 @@ struct EmptyCommentedBoard: View {
                 .font(.system(size: 11))
                 .multilineTextAlignment(.center)
                 .foregroundColor(Constants.Gray500)
-            
         }
     }
 }
@@ -152,3 +192,4 @@ struct EmptyCommentedBoard: View {
 #Preview {
     CommentedBoardViewController()
 }
+

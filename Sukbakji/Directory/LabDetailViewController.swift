@@ -6,127 +6,171 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct LabDetailViewController: View {
-
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var showingSheet = false
-    @State private var isBookmarked = false // 즐겨찾기 상태를 나타내는 변수
-    @State private var isAuthor = true // 작성자인지 여부를 나타내는 상태 변수
-    @State private var showBookmarkOverlay = false // 즐겨찾기 오버레이 표시 상태 변수
-    @State private var bookmarkOverlayMessage = "" // 오버레이 메시지
-    @State private var selectedButton: String? = "연구실 정보" // 기본값을 '연구실 정보'으로 설정
-
+    @State private var isBookmarked = false
+    @State private var selectedButton: String? = "연구실 정보"
     
+    var labId: Int
+    @State private var labInfo: DirectoryLabInfoResult?
+    @State private var isLoading = true
+    @State private var errorMessage: String?
+
     var body: some View {
         VStack(spacing: 0) {
-            VStack(spacing: 0) {
-                HStack {
-                    // 뒤로가기 버튼
-                    Button(action: {
-                        // 뒤로가기 버튼 클릭 시 동작할 코드
-                        self.presentationMode.wrappedValue.dismiss()
-                        print("뒤로가기 버튼 tapped")
-                    }) {
-                        Image("BackButton")
-                            .frame(width: Constants.nav, height: Constants.nav)
-                    }
-                    
-                    Spacer()
-                    
-                    Text("연구실 정보")
-                        .font(.system(size: 22, weight: .bold))
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        print("더보기 버튼 클릭됨")
-                    }) {
-                        Image("MoreButton")
-                            .resizable()
-                            .frame(width: 48, height: 48)
-                    }
-                }
-                .padding(.horizontal, 8)
-                .padding(.bottom, 10)
-                
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .padding(.top, 50)
+            } else if let labInfo = labInfo {
                 VStack(spacing: 0) {
-                    HStack(spacing: 0) {
-                        ForEach(["연구실 정보", "후기"], id: \.self) { title in
-                            Button(action: {
-                                selectedButton = title
-                                print("\(title) 클릭")
-                            }) {
-                                VStack {
-                                    Text(title)
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(selectedButton == title ? Color(red: 0.93, green: 0.29, blue: 0.03) : .gray)
-                                        .padding(.horizontal, 10) // 좌우 여백을 10으로 조정
-                                }
-                                .padding(.vertical, 8)
-                                .background(
-                                    GeometryReader { geometry in
-                                        if selectedButton == title {
-                                            Rectangle()
-                                                .fill(Color(red: 0.93, green: 0.29, blue: 0.03))
-                                                .frame(width: geometry.size.width, height: 3)
-                                                .offset(y: 16) // 구분선과 버튼 사이의 간격
-                                        }
-                                    }
-                                        .frame(height: 0) // GeometryReader의 높이를 0으로 설정하여 겹치지 않게 함
-                                )
-                            }
-                            .padding(.leading, title == "연구실 정보" ? 0 : 16) // 첫 번째 항목에 왼쪽 패딩 제거
+                    HStack {
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                            print("뒤로가기 버튼 tapped")
+                        }) {
+                            Image("BackButton")
+                                .frame(width: 24, height: 24)
+                        }
+                        
+                        Spacer()
+                        
+                        Text("연구실 정보")
+                            .font(.system(size: 22, weight: .bold))
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            print("더보기 버튼 클릭됨")
+                        }) {
+                            Image("MoreButton 1")
+                                .resizable()
+                                .frame(width: 24, height: 24)
                         }
                     }
-                    .padding(.leading, 24) // HStack의 좌측 여백을 24로 고정
-                    .padding(.trailing, 24) // HStack의 우측 여백을 24로 고정
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 10)
+                    
+                    VStack(spacing: 0) {
+                        HStack(spacing: 0) {
+                            ForEach(["연구실 정보", "후기"], id: \.self) { title in
+                                Button(action: {
+                                    selectedButton = title
+                                    print("\(title) 클릭")
+                                }) {
+                                    VStack {
+                                        Text(title)
+                                            .font(.system(size: 16, weight: .semibold))
+                                            .foregroundColor(selectedButton == title ? Color(red: 0.93, green: 0.29, blue: 0.03) : .gray)
+                                            .padding(.horizontal, 10)
+                                    }
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        GeometryReader { geometry in
+                                            if selectedButton == title {
+                                                Rectangle()
+                                                    .fill(Color(red: 0.93, green: 0.29, blue: 0.03))
+                                                    .frame(width: geometry.size.width, height: 3)
+                                                    .offset(y: 16)
+                                            }
+                                        }
+                                            .frame(height: 0)
+                                    )
+                                }
+                                .padding(.leading, title == "연구실 정보" ? 0 : 16)
+                            }
+                        }
+                        .padding(.leading, 24)
+                        .padding(.trailing, 24)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .background(Color.white)
+                    .fixedSize(horizontal: false, vertical: true)
                 }
-                .background(Color.white) // 상단 영역의 배경색을 흰색으로 설정
-                .fixedSize(horizontal: false, vertical: true) // 상단 영역의 높이는 내용에 맞게 조정
-            }
-            .background(Color.white)
-            
-            // 구분선 아래의 내용
-            VStack {
-                switch selectedButton {
-                case "연구실 정보":
-                    LabInfoView(
-                        title: "성신여자대학교",
-                        universityName: "성신여자대학교",
-                        labName: "화학에너지융합학부",
-                        professorName: "구본재",
-                        professorEmail: "koo@seokbakji.ac.kr",
-                        hasLabURL: true,
-                        labURL: "https://seokbakji.ac.kr/",
-                        isBookmarked: $isBookmarked
-                    )
-
-                case "후기":
-                    LabReviewView()
-                default:
-                    Text("오류 발생. 관리자에게 문의하세요.")
-                        .font(.body)
-                        .foregroundColor(.secondary)
+                .background(Color.white)
+                
+                VStack {
+                    switch selectedButton {
+                    case "연구실 정보":
+                        LabInfoView(
+                            universityName: labInfo.universityName,
+                            labName: labInfo.departmentName,
+                            professorName: labInfo.professorName,
+                            professorEmail: labInfo.professorEmail, // 이메일 전달
+                            hasLabURL: !labInfo.labLink.isEmpty,
+                            labURL: labInfo.labLink,
+                            isBookmarked: $isBookmarked,
+                            researchTopics: labInfo.researchTopics,
+                            labId: labId
+                        )
+                    case "후기":
+                        LabDetailReviewViewController(universityName: labInfo.universityName, departmentName: labInfo.departmentName, professorName: labInfo.professorName)
+                    default:
+                        Text("오류 발생. 관리자에게 문의하세요.")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                    }
                 }
+                .padding(.top, 2)
+            } else if let errorMessage = errorMessage {
+                Text(errorMessage)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(Color.red)
+                    .padding()
             }
-            .padding(.top, 2)
-            
         }
         .navigationBarBackButtonHidden()
+        .onAppear {
+            fetchLabDetail()
+        }
+    }
+
+    func fetchLabDetail() {
+        isLoading = true
+        errorMessage = nil
+        
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+            self.errorMessage = "인증 토큰이 없습니다."
+            self.isLoading = false
+            return
+        }
+        
+        let url = APIConstants.baseURL + "/labs/\(labId)"
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+            "Accept": "application/json"
+        ]
+        
+        AF.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: DirectoryLabInfoGetModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        self.labInfo = data.result
+                    } else {
+                        self.errorMessage = data.message
+                    }
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+                self.isLoading = false
+            }
     }
 }
 
 struct LabInfoView: View {
-    var title: String
     var universityName: String
     var labName: String
     var professorName: String
-    var professorEmail: String
+    var professorEmail: String // 교수 이메일 추가
     var hasLabURL: Bool
-    var labURL: String // 연구실 URL
-    @Binding var isBookmarked: Bool // Binding으로 상태 전달
+    var labURL: String
+    @Binding var isBookmarked: Bool
+    var researchTopics: [String]
+    var labId: Int
     
     var body: some View {
         ScrollView {
@@ -150,8 +194,8 @@ struct LabInfoView: View {
                             .frame(width: 56, height: 56)
                             .padding(22)
                     }
-                    .background(Constants.White) // 밝은색 배경색
-                    .cornerRadius(20) // 모서리 둥글게
+                    .background(Constants.White)
+                    .cornerRadius(20)
                     .padding(.top, 60)
                     
                     Spacer()
@@ -174,11 +218,10 @@ struct LabInfoView: View {
                         .lineLimit(1)
                         .truncationMode(.tail)
                     
-                    // 즐겨찾기 버튼
                     Button(action: {
-                        isBookmarked.toggle() // 버튼 클릭 시 상태 변경
+                        toggleBookmark()
                     }) {
-                        Image(isBookmarked ? "BookmarkButton Fill" : "BookmarkButton") // 상태에 따라 이미지 변경
+                        Image(isBookmarked ? "BookmarkButton Fill" : "BookmarkButton")
                             .resizable()
                             .frame(width: 20, height: 20)
                     }
@@ -215,9 +258,9 @@ struct LabInfoView: View {
                                 .weight(Constants.fontWeightMedium)
                         )
                         .foregroundColor(Constants.Gray600)
-                        .frame(width: 50, alignment: .leading) // "최종학력"의 너비를 고정
+                        .frame(width: 50, alignment: .leading)
 
-                    Text("서울대학교 화학에너지융합학부 박사")
+                    Text("\(universityName) departmentName")
                         .font(
                             Font.custom("Pretendard", size: Constants.fontSize5)
                                 .weight(Constants.fontWeightMedium)
@@ -233,9 +276,9 @@ struct LabInfoView: View {
                                 .weight(Constants.fontWeightMedium)
                         )
                         .foregroundColor(Constants.Gray600)
-                        .frame(width: 50, alignment: .leading) // "이메일"의 너비를 "최종학력"과 동일하게 고정
+                        .frame(width: 50, alignment: .leading)
 
-                    Text("\(professorEmail)")
+                    Text(professorEmail)
                         .font(
                             Font.custom("Pretendard", size: Constants.fontSize5)
                                 .weight(Constants.fontWeightMedium)
@@ -245,12 +288,13 @@ struct LabInfoView: View {
                         .frame(alignment: .leading)
                     
                     Button(action: {
-                        UIPasteboard.general.string = "\(professorEmail)"
+                        UIPasteboard.general.string = professorEmail
                     }) {
                         Image("copy")
                             .resizable()
                             .frame(width: 16, height: 16)
                     }
+                     
                 }
             }
             .padding(10)
@@ -300,7 +344,7 @@ struct LabInfoView: View {
                     } else {
                         Text("해당 연구실은 홈페이지가 없습니다.")
                             .font(
-                                Font.custom("Pretendard", size: 16)
+                                Font.custom("Pretendard", size: 12)
                                     .weight(Constants.fontWeightSemibold)
                             )
                             .foregroundColor(Constants.Gray600)
@@ -309,7 +353,7 @@ struct LabInfoView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 17)
-            .frame(width: 342, height: 54, alignment: .topLeading)
+            .frame(width: 342, alignment: .topLeading)
             .background(Constants.Gray50)
             .cornerRadius(8)
             .overlay(
@@ -329,18 +373,49 @@ struct LabInfoView: View {
                     .padding(.top, 14)
                 Spacer()
             }
-
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    LabTopic(topicName: "열화학")
-                    LabTopic(topicName: "딥러닝")
-                    LabTopic(topicName: "HCI")
-                    LabTopic(topicName: "로보틱스")
-                    LabTopic(topicName: "석박지")
+                    ForEach(researchTopics, id: \.self) { topic in
+                        LabTopic(topicName: topic)
+                    }
                 }
                 .padding(.horizontal, 24)
             }
         }
+    }
+    
+    func toggleBookmark() {
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+            print("인증 토큰이 없습니다.")
+            return
+        }
+        
+        let url = APIConstants.baseURL + "/labs/\(labId)/favorite"
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+            "Accept": "application/json"
+        ]
+
+        AF.request(url, method: .post, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: DirectoryFavoriteGetModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        self.isBookmarked.toggle() // 북마크 상태 토글
+                        print("북마크 상태 변경 성공: \(data.message)")
+                    } else {
+                        print("북마크 상태 변경 실패: \(data.message)")
+                    }
+                case .failure(let error):
+                    if let data = response.data, let responseString = String(data: data, encoding: .utf8) {
+                        print("Error response from server: \(responseString)")
+                    }
+                    print("Request failed with error: \(error)")
+                }
+            }
+
     }
 }
 
@@ -363,15 +438,6 @@ struct LabTopic: View {
     }
 }
 
-
-struct LabReviewView: View {
-    var body: some View {
-        ScrollView {
-            
-        }
-    }
-}
-
 #Preview {
-    LabDetailViewController()
+    LabDetailViewController(labId: 1)
 }

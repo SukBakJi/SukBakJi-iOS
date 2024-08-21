@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - BoardBookMaredModel
+// MARK: - BoardBookMaredModel, 즐겨찾기한 게시판 목록
 struct BoardBookmarkedModel: Codable {
     let isSuccess: Bool
     let code, message: String

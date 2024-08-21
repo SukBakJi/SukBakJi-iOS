@@ -8,7 +8,7 @@
 import SwiftUI
 import Alamofire
 
-struct BoardQnABoardViewController: View {
+struct BoardQnAViewController: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var showAlert: Bool = false
@@ -21,6 +21,7 @@ struct BoardQnABoardViewController: View {
     @State private var showAnonymousMessage = false // 익명 메시지 표시 상태 변수
     @State private var qnaPosts: [BoardNewQnAResult] = [] // 질문 게시판의 최신 질문 목록을 저장할 상태 변수
     @State private var isLoading: Bool = true // 로딩 상태를 추적하는 상태 변수
+    @State private var posts: [BoardListResult] = []
 
     var body: some View {
         NavigationView {
@@ -87,14 +88,15 @@ struct BoardQnABoardViewController: View {
                         if isLoading {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle())
-                        } else if qnaPosts.isEmpty {
+                        } else if posts.isEmpty {
                             Spacer()
                             EmptyQnABoard()
                             Spacer()
                         } else {
                             // 게시판 글 목록
-                            ForEach(qnaPosts, id: \.menu) { post in
-                                Board(boardName: post.menu, title: post.title, content: "내용 없음", commentCount: 0, views: 0)
+                            ForEach(posts, id: \.postId) { post in
+                                BoardItem(post: post, selectedButton: "질문 게시판")
+                                    .padding(.horizontal, 24)
                             }
                         }
                     }
@@ -192,13 +194,15 @@ struct BoardQnABoardViewController: View {
             }
             .onAppear {
                 showAnonymousMessage = true
-                loadQnAPosts()
+                //loadQnAPosts()
+                loadAllPosts() // 메뉴의 모든 게시글을 불러옴
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     withAnimation {
                         showAnonymousMessage = false
                     }
                 }
             }
+
         }
         .navigationBarBackButtonHidden()
     }
@@ -253,7 +257,69 @@ struct BoardQnABoardViewController: View {
                 }
             }
     }
+
+    func loadPosts(_ menu: String, completion: @escaping () -> Void) {
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+            print("토큰이 없습니다.")
+            completion()
+            return
+        }
+
+        let url = APIConstants.boardpostURL + "/list"
+
+        let parameters: [String: Any] = [
+            "menu": menu,
+            "boardName": "질문 게시판"
+        ]
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)"
+        ]
+
+        AF.request(url, method: .get, parameters: parameters, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: BoardListGetResponseModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        DispatchQueue.main.async {
+                            self.posts += data.result
+                            // Sort posts by postId in descending order
+                            self.posts.sort(by: { $0.postId > $1.postId })
+                        }
+                    } else {
+                        print("Error: \(data.message)")
+                    }
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+                completion() // API 요청이 끝나면 completion을 호출
+            }
+    }
+
+    func loadAllPosts() {
+        self.posts = [] // 초기화
+        self.isLoading = true
+
+        let group = DispatchGroup()
+
+        // '석사', '박사' 뿐만 아니라 '입학예정'도 포함
+        let menus = ["석사", "박사", "입학예정"]
+        for menu in menus {
+            group.enter()
+            loadPosts(menu) {
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) {
+            self.isLoading = false
+        }
+    }
 }
+
+
+
 
 // MARK: -- 공지사항
 struct noticeView: View {
@@ -312,5 +378,5 @@ struct EmptyQnABoard: View {
 
 
 #Preview {
-    BoardQnABoardViewController()
+    BoardQnAViewController()
 }

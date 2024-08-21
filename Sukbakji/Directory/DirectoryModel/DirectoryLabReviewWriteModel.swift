@@ -7,20 +7,29 @@
 
 import Foundation
 
-// MARK: - DirectoryLabReviewWritePostModel
-struct DirectoryLabReviewWritePostModel: Encodable {
-    let content, leadershipStyle, salaryLevel, autonomy: String
+// MARK: - Request Body Model
+struct LabReviewRequest: Encodable {
+    let content: String
+    let leadershipStyle: String
+    let salaryLevel: String
+    let autonomy: String
 }
 
-// MARK: - DirectoryLabReviewWriteGetModel
-struct DirectoryLabReviewWriteGetModel: Codable {
+// MARK: - Response Body Model for Successful Review Submission
+struct LabReviewResponse: Decodable {
     let isSuccess: Bool
-    let code, message: String
-    let result: DirectoryLabReviewWriteGetResult
+    let code: String
+    let message: String
+    let result: LabReviewResult?
 }
 
-// MARK: - DirectoryLabReviewWriteGetResult
-struct DirectoryLabReviewWriteGetResult: Codable {
-    let universityName, departmentName, professorName, content: String
-    let leadershipStyle, salaryLevel, autonomy: String
+// MARK: - Lab Review Result Model
+struct LabReviewResult: Decodable {
+    let universityName: String
+    let departmentName: String
+    let professorName: String
+    let content: String
+    let leadershipStyle: String
+    let salaryLevel: String
+    let autonomy: String
 }

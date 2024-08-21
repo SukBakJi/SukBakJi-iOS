@@ -6,15 +6,18 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct BoardMasterViewController: View {
     
     @State private var searchText: String = "" // 검색 텍스트 상태 변수
     @State private var selectedButton: String? = "질문 게시판" // 기본값을 '질문 게시판'으로 설정
     @State private var isSearchActive: Bool = false // 검색 바 클릭 상태 변수
-    
+    @State private var posts: [BoardListResult] = [] // 게시물 데이터를 저장할 상태 변수
+    @State private var isLoading: Bool = true // 데이터 로딩 상태
+
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 // 검색 바
                 HStack {
@@ -43,21 +46,27 @@ struct BoardMasterViewController: View {
                     HStack(spacing: 8) {
                         BoardButton(text: "질문 게시판", isSelected: selectedButton == "질문 게시판") {
                             selectedButton = "질문 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "박사지원 게시판", isSelected: selectedButton == "박사지원 게시판") {
                             selectedButton = "박사지원 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "취업후기 게시판", isSelected: selectedButton == "취업후기 게시판") {
                             selectedButton = "취업후기 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "대학원생활 게시판", isSelected: selectedButton == "대학원생활 게시판") {
                             selectedButton = "대학원생활 게시판"
+                            loadPosts()
                         }
                         BoardButton(text: "박사합격 후기", isSelected: selectedButton == "박사합격 후기") {
                             selectedButton = "박사합격 후기"
+                            loadPosts()
                         }
                         BoardButton(text: "연구주제 게시판", isSelected: selectedButton == "연구주제 게시판") {
                             selectedButton = "연구주제 게시판"
+                            loadPosts()
                         }
                     }
                     .font(.system(size: 12, weight: .medium))
@@ -66,23 +75,17 @@ struct BoardMasterViewController: View {
                 
                 // 선택된 게시판에 따라 다른 뷰 표시
                 VStack {
-                    switch selectedButton {
-                    case "질문 게시판":
-                        MasterQnABoard()
-                    case "박사지원 게시판":
-                        MasterToDoctoralBoard()
-                    case "취업후기 게시판":
-                        MasterEmploymentReviewBoard()
-                    case "대학원생활 게시판":
-                        MasterLifeBoard()
-                    case "박사합격 후기":
-                        MasterToDoctoralReviewBoard()
-                    case "연구주제 게시판":
-                        MasterResearchTopicBoard()
-                    default:
-                        Text("여기에 컨텐츠를 추가하세요")
-                            .font(.body)
-                            .foregroundColor(.secondary)
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                    } else if posts.isEmpty {
+                        Text("게시물이 없습니다.")
+                            .foregroundColor(Constants.Gray500)
+                            .padding()
+                    } else {
+                        ForEach(posts, id: \.postId) { post in
+                            BoardItem(post: post, selectedButton: selectedButton ?? "게시판")
+                        }
                     }
                 }
                 .padding(.top, 20)
@@ -100,9 +103,83 @@ struct BoardMasterViewController: View {
         .fullScreenCover(isPresented: $isSearchActive) {
             SearchViewController(boardName: selectedButton ?? "게시판")
         }
+        .onAppear {
+            loadPosts() // 초기 로드
+        }
+    }
+    
+    // 게시글을 불러오는 함수
+    func loadPosts() {
+        isLoading = true
+        
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+            print("토큰이 없습니다.")
+            self.isLoading = false
+            return
+        }
+        
+        let boardName = selectedButton ?? "질문 게시판"
+        let url = APIConstants.boardpostURL + "/list"
+        
+        let parameters: [String: Any] = [
+            "menu": "석사",
+            "boardName": boardName
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)"
+        ]
+        
+        AF.request(url, method: .get, parameters: parameters, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: BoardListGetResponseModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        self.posts = data.result.reversed() // 배열을 뒤집어 상단에 추가되도록 함
+                    } else {
+                        print("Error: \(data.message)")
+                        self.posts = []
+                    }
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    self.posts = []
+                }
+                self.isLoading = false
+            }
     }
 }
 
+#Preview {
+    BoardMasterViewController()
+}
+
+// MARK: -- 글쓰기 버튼
+struct overlayButton: View {
+    var selectedButton: String? // Add this property to capture the selectedButton state
+    
+    var body: some View {
+        Button(action: {
+            // 버튼 클릭 시 동작할 코드를 여기에 작성합니다.
+            print("글쓰기 버튼 tapped!")
+        }) {
+            NavigationLink(destination: BoardWriteViewController()) {
+                ZStack {
+                    Circle()
+                        .frame(width: 60, height: 60)
+                        .background(.clear)
+                        .foregroundStyle(Color(Constants.Orange700))
+                        .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 0)
+                    
+                    Image("edit 1")
+                        .resizable()
+                        .frame(width: 32, height: 32)
+                }
+                .buttonStyle(PlainButtonStyle()) // 버튼의 기본 스타일을 제거합니다.
+            }
+        }
+    }
+}
 
 // MARK: -- 게시판 버튼 뷰
 struct BoardButton: View {
@@ -126,6 +203,7 @@ struct BoardButton: View {
         }
     }
 }
+
 
 // MARK: -- 각 게시판에 대한 뷰
 // MARK: -- 석사 탭 질문 게시판
@@ -245,33 +323,6 @@ struct MasterResearchTopicBoard: View {
         dummyBoard(boardName: "연구주제 게시판")
         dummyBoard(boardName: "연구주제 게시판")
         dummyBoard(boardName: "연구주제 게시판")
-    }
-}
-
-// MARK: -- 글쓰기 버튼
-struct overlayButton: View {
-    var selectedButton: String? // Add this property to capture the selectedButton state
-    
-    var body: some View {
-        Button(action: {
-            // 버튼 클릭 시 동작할 코드를 여기에 작성합니다.
-            print("글쓰기 버튼 tapped!")
-        }) {
-            NavigationLink(destination: BoardWriteViewController()) {
-                ZStack {
-                    Circle()
-                        .frame(width: 60, height: 60)
-                        .background(.clear)
-                        .foregroundStyle(Color(Constants.Orange700))
-                        .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 0)
-                    
-                    Image("edit 1")
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                }
-                .buttonStyle(PlainButtonStyle()) // 버튼의 기본 스타일을 제거합니다.
-            }
-        }
     }
 }
 
