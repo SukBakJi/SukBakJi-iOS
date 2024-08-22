@@ -90,18 +90,12 @@ struct LabReviewViewController: View {
                         // 검색 결과 표시
                         if !searchResults.isEmpty {
                             VStack(alignment: .leading, spacing: 16) {
-                                HStack {
-                                    Text("검색 결과")
-                                        .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemibold))
-                                        .foregroundColor(Constants.Gray900)
-                                        .padding(.top, 16)
-                                        .padding(.horizontal, 24)
-                                    
-                                    Text("돌아가기")
-                                        .font(.system(size: 12, weight: .medium))
-                                        .multilineTextAlignment(.center)
-                                        .foregroundStyle(Constants.Gray500)
-                                }
+                                
+                                Text("검색 결과")
+                                    .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemibold))
+                                    .foregroundColor(Constants.Gray900)
+                                    .padding(.top, 16)
+                                    .padding(.horizontal, 24)
                                 
                                 ForEach(searchResults, id: \.content) { review in
                                     DirectoryLabReviewSearchResultView(review: review)
