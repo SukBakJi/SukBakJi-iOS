@@ -182,7 +182,7 @@ class LoginViewController: UIViewController {
         let TOSVC = TOSViewController()
         TOSVC.isKakaoSignUp = isKakaoSignUp
         self.navigationController?.pushViewController(TOSVC, animated: true)
-        self.dismiss(animated: true)
+        //self.dismiss(animated: true)
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .black

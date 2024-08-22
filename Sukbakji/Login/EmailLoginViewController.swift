@@ -204,7 +204,9 @@ class EmailLoginViewController: UIViewController {
         setTextFieldDelegate()
         validateFieldForButtonUpdate()
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            view.endEditing(true)
+    }
     // MARK: - setTextField
     private func setTextFieldDelegate() {
         emailTextField.delegate = self
