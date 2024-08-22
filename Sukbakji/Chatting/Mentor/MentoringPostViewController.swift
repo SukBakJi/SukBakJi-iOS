@@ -29,30 +29,35 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
         settingTextView()
         settingButton()
         
+        hideKeyboardWhenTappedAround()
+        
         titleWarningSV.isHidden = true
         questionWarningSV.isHidden = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        print(mentorId)
+        titleTV.addTVBottomShadow()
+        questionTV.addTVBottomShadow()
     }
     
     func settingTextView() {
         titleTV.backgroundColor = UIColor(hexCode: "F5F5F5")
-        titleTV.addTVBottomShadow()
         titleTV.errorfix()
         titleTV.textContainerInset = UIEdgeInsets(top: 13, left: 16, bottom: 13, right: 16)
         questionTV.backgroundColor = UIColor(hexCode: "F5F5F5")
-        questionTV.addTVBottomShadow()
         questionTV.errorfix()
         questionTV.textContainerInset = UIEdgeInsets(top: 13, left: 16, bottom: 13, right: 16)
     }
     
     func placeholderSetting() {
         titleTV.delegate = self
-        titleTV.text = "• 포트폴리오 작성법                                                       • 대학원 입학 스펙                                                            • 교수님 솔직 후기                                                            • 졸업 후 전망"
+        titleTV.text = "• 포트폴리오 작성법\n• 대학원 입학 스펙\n• 교수님 솔직 후기\n• 졸업 후 전망"
         titleTV.font = UIFont(name: "Pretendard-Medium", size: 14)
         titleTV.textColor = UIColor(hexCode: "9F9F9F")
         questionTV.delegate = self
-        questionTV.text = "• 졸업 후 대기업 취직 많이 하나요?                                • 포트폴리오에 어떤 내용이 들어가야 하나요?                 • 교수님 인품 좋으신가요?"
+        questionTV.text = "• 졸업 후 대기업 취직 많이 하나요?\n• 포트폴리오에 어떤 내용이 들어가야 하나요?\n• 교수님 인품 좋으신가요?"
         questionTV.font = UIFont(name: "Pretendard-Medium", size: 14)
         questionTV.textColor = UIColor(hexCode: "9F9F9F")
     }
@@ -66,10 +71,10 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
         // TextView Place Holder
     func textViewDidEndEditing(_ textView: UITextView) {
         if titleTV.text.isEmpty {
-            titleTV.text = "• 포트폴리오 작성법                                                       • 대학원 입학 스펙                                                            • 교수님 솔직 후기                                                            • 졸업 후 전망"
+            titleTV.text = "• 포트폴리오 작성법\n• 대학원 입학 스펙\n• 교수님 솔직 후기\n• 졸업 후 전망"
             titleTV.textColor = UIColor(hexCode: "9F9F9F")
         } else if questionTV.text.isEmpty {
-            questionTV.text = "• 졸업 후 대기업 취직 많이 하나요?                                • 포트폴리오에 어떤 내용이 들어가야 하나요?                 • 교수님 인품 좋으신가요?"
+            questionTV.text = "• 졸업 후 대기업 취직 많이 하나요?\n• 포트폴리오에 어떤 내용이 들어가야 하나요?\n• 교수님 인품 좋으신가요?"
             questionTV.textColor = UIColor(hexCode: "9F9F9F")
         }
     }
@@ -84,7 +89,7 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         // 글자 수 확인
-        if titleTV.text.count >= 30 && titleTV.text != "• 포트폴리오 작성법                                                       • 대학원 입학 스펙                                                            • 교수님 솔직 후기                                                            • 졸업 후 전망" {
+        if titleTV.text.count >= 30 && titleTV.text != "• 포트폴리오 작성법\n• 대학원 입학 스펙\n• 교수님 솔직 후기\n• 졸업 후 전망" {
             titleWarningSV.isHidden = true
             titleTV.textColor = UIColor.black
             titleTV.backgroundColor = UIColor(hexCode: "F5F5F5")
@@ -96,7 +101,7 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
             titleTV.addTVRedBottomShadow()
         }
         
-        if questionTV.text.count >= 30 && questionTV.text != "• 졸업 후 대기업 취직 많이 하나요?                                • 포트폴리오에 어떤 내용이 들어가야 하나요?                 • 교수님 인품 좋으신가요?" {
+        if questionTV.text.count >= 30 && questionTV.text != "• 졸업 후 대기업 취직 많이 하나요?\n• 포트폴리오에 어떤 내용이 들어가야 하나요?\n• 교수님 인품 좋으신가요?" {
             questionWarningSV.isHidden = true
             questionTV.textColor = UIColor.black
             questionTV.backgroundColor = UIColor(hexCode: "F5F5F5")

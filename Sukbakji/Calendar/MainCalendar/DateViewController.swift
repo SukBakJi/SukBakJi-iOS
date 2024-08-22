@@ -28,6 +28,12 @@ class DateViewController: UIViewController {
         
         getViewSchedule()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.getViewSchedule()
+    }
 
     func getViewSchedule() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {

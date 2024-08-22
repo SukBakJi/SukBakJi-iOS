@@ -64,10 +64,12 @@ class SchoolDateViewController: UIViewController {
         settingButton()
         
         univLabel.text = receivedUnivName
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        getSchool(univId: univId ?? 0)
-        
-        print(memberId)
+        self.getSchool(univId: univId ?? 0)
     }
     
     func getSchool(univId: Int) {

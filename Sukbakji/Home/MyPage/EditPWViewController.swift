@@ -58,8 +58,7 @@ class EditPWViewController: UIViewController {
         newPWTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         newPWAgainTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         
-        getUserPW()
-        getUserToken()
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +67,9 @@ class EditPWViewController: UIViewController {
         currentPWTF.errorfix()
         newPWTF.errorfix()
         newPWAgainTF.errorfix()
+        
+        getUserPW()
+        getUserToken()
     }
     
     func getUserToken() {

@@ -46,8 +46,12 @@ class EditInfoViewController: UIViewController {
         
         researchTopicCV.delegate = self
         researchTopicCV.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        getUserName()
+        self.getUserName()
     }
     
     func settingButton() {

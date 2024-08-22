@@ -15,6 +15,8 @@ class ApplyMentorViewController: UIViewController {
         super.viewDidLoad()
 
         settingButton()
+        
+        hideKeyboardWhenTappedAround()
     }
     
     func settingButton() {

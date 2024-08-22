@@ -28,6 +28,12 @@ class HotFeedViewController: UIViewController {
         self.getHotBoard()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.getHotBoard()
+    }
+    
     func getHotBoard() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             print("Failed to retrieve password.")

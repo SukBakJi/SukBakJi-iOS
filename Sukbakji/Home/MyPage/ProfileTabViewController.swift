@@ -27,8 +27,12 @@ class ProfileTabViewController: TabmanViewController {
                   name: NSNotification.Name("CannotChangePW"),
                   object: nil
         )
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        getUserPW()
+        self.getUserPW()
     }
         
     @objc func didDismissDetailNotification(_ notification: Notification) {
