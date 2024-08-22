@@ -31,14 +31,10 @@ class MypageViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.getUserName()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.getUserName()
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }

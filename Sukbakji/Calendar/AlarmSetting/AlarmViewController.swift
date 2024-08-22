@@ -70,6 +70,8 @@ class AlarmViewController: UIViewController, dateProtocol {
         
         appendMinute()
         
+        hideKeyboardWhenTappedAround()
+        
         DatePicker.delegate = self
         DatePicker.dataSource = self
         

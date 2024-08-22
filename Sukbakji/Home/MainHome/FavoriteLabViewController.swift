@@ -30,6 +30,10 @@ class FavoriteLabViewController: UIViewController {
         FavoriteLabCV.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         FavoriteLabPV.setProgress(0, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.getFavoriteLab()
     }

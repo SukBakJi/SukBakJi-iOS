@@ -35,21 +35,6 @@ class HomeViewController: UIViewController {
         UpComingView.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
-        
-        self.getMemberID()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.getUserName()
-        self.getViewSchedule()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        topButton.frame = CGRect(x: 309, y: 672, width: 60, height: 60)
     }
     
     @objc func scrollToTop() {
@@ -60,6 +45,10 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.getUserName()
+        self.getViewSchedule()
+        self.getMemberID()
+
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 

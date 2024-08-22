@@ -38,8 +38,12 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
         
         mentorSearchTF.errorfix()
         mentorSearchTF.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        getMentorList()
+        self.getMentorList()
     }
     
     func setTableView() {
@@ -140,10 +144,7 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
                     
                     DispatchQueue.main.async {
                         self.MentoringTV.reloadData()
-                        
-                        self.titleLabelOne.isHidden = true
-                        self.titleLabelSecond.isHidden = true
-                        self.titleLabelThird.isHidden = true
+                    
                         if (self.allDetailDatas.count == 0) {
                             self.noResultImage.isHidden = false
                             self.noResultSV.isHidden = false
