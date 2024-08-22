@@ -38,6 +38,8 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
         
         settingButton()
         
+        hideKeyboardWhenTappedAround()
+        
         NotificationCenter.default.addObserver(
                   self,
                   selector: #selector(self.didDismissDetailNotification(_:)),

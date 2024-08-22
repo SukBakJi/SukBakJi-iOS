@@ -13,14 +13,18 @@ class ApplyMentoringTableViewCell: UITableViewCell {
     @IBOutlet weak var deptName: UILabel!
     @IBOutlet weak var profName: UILabel!
     @IBOutlet weak var firstTopic: UILabel!
+    @IBOutlet weak var firstTopicView: UIView!
     @IBOutlet weak var secondTopic: UILabel!
+    @IBOutlet weak var secondTopicView: UIView!
     @IBOutlet weak var mentoringButton: UIButton!
     
     var index: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        firstTopicView.layer.cornerRadius = 5
+        secondTopicView.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

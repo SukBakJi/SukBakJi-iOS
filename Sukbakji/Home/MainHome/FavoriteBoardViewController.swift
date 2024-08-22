@@ -26,6 +26,10 @@ class FavoriteBoardViewController: UIViewController {
         FavoriteBoardTV.layer.shadowRadius = 2 // any value you want
         FavoriteBoardTV.layer.shadowOffset = .init(width: 0, height: 0.5)
         FavoriteBoardTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.getFavoriteBoard()
     }

@@ -57,21 +57,11 @@ class CalendarViewController: UIViewController {
         self.setTableView()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        alarmButton.frame = CGRect(x: 309, y: 672, width: 60, height: 60)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.getUnivList()
         self.getAlarmList()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
