@@ -119,7 +119,9 @@ class SelectResearchTopicViewController: UIViewController {
         }
     }
 
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            view.endEditing(true)
+    }
     // MARK: - Delegate
     private func setDelegate() {
         collectionView.dataSource = self

@@ -227,7 +227,9 @@ class EmailSignUpViewController: UIViewController {
         passwordTextField.delegate = self
         checkPasswordTextField.delegate = self
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            view.endEditing(true)
+    }
     // MARK: - navigationBar Title
     private func setUpNavigationBar(){
         self.title = "회원가입"

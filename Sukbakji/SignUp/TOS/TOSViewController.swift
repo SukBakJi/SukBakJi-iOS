@@ -40,7 +40,7 @@ class TOSViewController: UIViewController {
         $0.numberOfLines = 0
     }
     private let descLabel = UILabel().then {
-        $0.text = "• 만 14세 이상만 가입 가능\n  석박지는 국내 대학생/대학원생을 위한 서비스이며, 본인인증을 통해 만\n  14세 이상만 가입할 수 있습니다. \n\n• 본인 명의 가입 필수\n  석박지는 철저한 학교 인증과 안전한 익명 커뮤니티를 제공하기 위해 가입\n  시 본인인증 수단을 통해 본인 여부를 확인하고, 커뮤니티 이용 시 증명 자\n  료 제출을 통해 재학 여부를 확인합니다. 두 정보가 일치하지 않을 경우 서\n  비스를 이용할 수 없습니다."
+        $0.text = "• 만 14세 이상만 가입 가능\n  석박지는 국내 대학생/대학원생을 위한 서비스이며, 본인인증을 통해 만14세 이상만 가입할 수 있습니다. \n\n• 본인 명의 가입 필수\n  석박지는 철저한 학교 인증과 안전한 익명 커뮤니티를 제공하기 위해 가입 시 본인인증 수단을 통해 본인 여부를 확인하고, 커뮤니티 이용 시 증명 자료 제출을 통해 재학 여부를 확인합니다. 두 정보가 일치하지 않을 경우 서비스를 이용할 수 없습니다."
         $0.textColor = .gray500
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-Regular", size: 12)
@@ -125,7 +125,7 @@ class TOSViewController: UIViewController {
         } else {
             let EmailSignUpVC = EmailSignUpViewController()
             self.navigationController?.pushViewController(EmailSignUpVC, animated: true)
-            self.dismiss(animated: true)
+            //self.dismiss(animated: true)
             
             let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
             backBarButtonItem.tintColor = .black

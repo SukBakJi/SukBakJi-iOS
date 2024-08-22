@@ -45,7 +45,7 @@ class AcademicVerificationViewController: UIViewController {
     private let belongErrorView = UIView().then {
         $0.isHidden = true
     }
-
+    
     // MARK: - ImageView
     private let progressBar = UIImageView().then {
         $0.image = UIImage(named: "SBJ_ProgressBar")
@@ -170,6 +170,11 @@ class AcademicVerificationViewController: UIViewController {
         setTextFieldDelegate()
         validateFieldForButtonUpdate()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     // MARK: - setTextField
     private func setTextFieldDelegate() {
         nameTextField.delegate = self
@@ -242,7 +247,7 @@ class AcademicVerificationViewController: UIViewController {
             self.arrowView.image = UIImage(named: "SBJ_down-arrow")
         }
     }
-
+    
     
     // MARK: - Screen transition
     @objc private func VerificationButtonTapped() {
@@ -251,40 +256,40 @@ class AcademicVerificationViewController: UIViewController {
     
     // 데이터 넘겨주기
     private func nextPage(_ userName: String, _ degreeLevel: DegreeLevel) {
-                switch NextPage {
-                case 1:
-                    let FirstAcademicVerificationVC = FirstAcademicVerificationViewController()
-                    FirstAcademicVerificationVC.userName = userName
-                    FirstAcademicVerificationVC.degreeLevel = degreeLevel
-                    self.navigationController?.pushViewController(FirstAcademicVerificationVC, animated: true)
-        
-                    let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-                    backBarButtonItem.tintColor = .black
-                    self.navigationItem.backBarButtonItem = backBarButtonItem
-        
-                case 2:
-                    let SecondAcademicVerificationVC = SecondAcademicVerificationViewController()
-                    SecondAcademicVerificationVC.userName = userName
-                    SecondAcademicVerificationVC.degreeLevel = degreeLevel
-                    self.navigationController?.pushViewController(SecondAcademicVerificationVC, animated: true)
-        
-                    let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-                    backBarButtonItem.tintColor = .black
-                    self.navigationItem.backBarButtonItem = backBarButtonItem
-        
-                case 3:
-                    let ThirdAcademicVerificationVC = ThirdAcademicVerificationViewController()
-                    ThirdAcademicVerificationVC.userName = userName
-                    ThirdAcademicVerificationVC.degreeLevel = degreeLevel
-                    self.navigationController?.pushViewController(ThirdAcademicVerificationVC, animated: true)
-        
-                    let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-                    backBarButtonItem.tintColor = .black
-                    self.navigationItem.backBarButtonItem = backBarButtonItem
-        
-                default:
-                    break
-                }
+        switch NextPage {
+        case 1:
+            let FirstAcademicVerificationVC = FirstAcademicVerificationViewController()
+            FirstAcademicVerificationVC.userName = userName
+            FirstAcademicVerificationVC.degreeLevel = degreeLevel
+            self.navigationController?.pushViewController(FirstAcademicVerificationVC, animated: true)
+            
+            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+            backBarButtonItem.tintColor = .black
+            self.navigationItem.backBarButtonItem = backBarButtonItem
+            
+        case 2:
+            let SecondAcademicVerificationVC = SecondAcademicVerificationViewController()
+            SecondAcademicVerificationVC.userName = userName
+            SecondAcademicVerificationVC.degreeLevel = degreeLevel
+            self.navigationController?.pushViewController(SecondAcademicVerificationVC, animated: true)
+            
+            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+            backBarButtonItem.tintColor = .black
+            self.navigationItem.backBarButtonItem = backBarButtonItem
+            
+        case 3:
+            let ThirdAcademicVerificationVC = ThirdAcademicVerificationViewController()
+            ThirdAcademicVerificationVC.userName = userName
+            ThirdAcademicVerificationVC.degreeLevel = degreeLevel
+            self.navigationController?.pushViewController(ThirdAcademicVerificationVC, animated: true)
+            
+            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+            backBarButtonItem.tintColor = .black
+            self.navigationItem.backBarButtonItem = backBarButtonItem
+            
+        default:
+            break
+        }
     }
     // MARK: - functional
     
@@ -296,7 +301,7 @@ class AcademicVerificationViewController: UIViewController {
         var isNameValid = true
         var isBelongValid = true
         var degreeLevel: DegreeLevel?
-
+        
         if name.isEmpty {
             changeStateError(nameTextField)
             nameErrorLabel.text = "이름은 필수 입력입니다"
@@ -343,7 +348,7 @@ class AcademicVerificationViewController: UIViewController {
             nextPage(name, degreeLevel!)
         }
     }
-
+    
     
     private func changeStateError(_ tf: UITextField) {
         tf.backgroundColor = .warning50
@@ -363,7 +368,7 @@ class AcademicVerificationViewController: UIViewController {
         nameErrorView.isHidden = true
         updateBelongLabelTopConstraint()
     }
-
+    
     private func validateFieldForButtonUpdate() {
         let name = nameTextField.text ?? ""
         let belong = belongSelectButton.currentTitle ?? ""
@@ -538,7 +543,7 @@ class AcademicVerificationViewController: UIViewController {
             make.centerY.equalToSuperview()
         }
     }
-
+    
 }
 // MARK: - extension
 extension AcademicVerificationViewController: UITextFieldDelegate {
