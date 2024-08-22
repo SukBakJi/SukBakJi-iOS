@@ -10,8 +10,9 @@ struct LabReviewWriteViewController: View {
     @State private var leadershipStyle: String = ""
     @State private var salaryLevel: String = ""
     @State private var autonomy: String = ""
-
+    
     // Properties to hold lab details
+    var labId: Int // 연구실 ID
     var universityName: String
     var departmentName: String
     var professorName: String
@@ -179,9 +180,9 @@ struct LabReviewWriteViewController: View {
 
                 HStack {
                     Button(action: {
-                        salaryLevel = "좋았어요"
+                        salaryLevel = "높아요"
                     }) {
-                        LabelView(labelName: "좋았어요", isSelected: salaryLevel == "좋았어요")
+                        LabelView(labelName: "높아요", isSelected: salaryLevel == "높아요")
                     }
                     Button(action: {
                         salaryLevel = "보통이에요"
@@ -189,9 +190,9 @@ struct LabReviewWriteViewController: View {
                         LabelView(labelName: "보통이에요", isSelected: salaryLevel == "보통이에요")
                     }
                     Button(action: {
-                        salaryLevel = "아쉬워요"
+                        salaryLevel = "낮아요"
                     }) {
-                        LabelView(labelName: "아쉬워요", isSelected: salaryLevel == "아쉬워요")
+                        LabelView(labelName: "낮아요", isSelected: salaryLevel == "낮아요")
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -210,9 +211,9 @@ struct LabReviewWriteViewController: View {
 
                 HStack {
                     Button(action: {
-                        autonomy = "좋았어요"
+                        autonomy = "높아요"
                     }) {
-                        LabelView(labelName: "좋았어요", isSelected: autonomy == "좋았어요")
+                        LabelView(labelName: "높아요", isSelected: autonomy == "높아요")
                     }
                     Button(action: {
                         autonomy = "보통이에요"
@@ -220,9 +221,9 @@ struct LabReviewWriteViewController: View {
                         LabelView(labelName: "보통이에요", isSelected: autonomy == "보통이에요")
                     }
                     Button(action: {
-                        autonomy = "아쉬워요"
+                        autonomy = "낮아요"
                     }) {
-                        LabelView(labelName: "아쉬워요", isSelected: autonomy == "아쉬워요")
+                        LabelView(labelName: "낮아요", isSelected: autonomy == "낮아요")
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -334,30 +335,35 @@ struct LabReviewWriteViewController: View {
     }
     
     func submitReview() {
-        if !isFormValid {
-            showValidationError = true
-            return
-        }
-        
-        let reviewRequest = LabReviewRequest(
-            content: postText,
-            leadershipStyle: leadershipStyle,
-            salaryLevel: salaryLevel,
-            autonomy: autonomy
-        )
-        
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            return
-        }
-        
-        let url = APIConstants.baseURL + "/labs/review"
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Content-Type": "application/json"
-        ]
-        
-        AF.request(url, method: .post, parameters: reviewRequest, encoder: JSONParameterEncoder.default, headers: headers)
+            if !isFormValid {
+                showValidationError = true
+                return
+            }
+            
+            let reviewRequest = LabReviewRequest(
+                content: postText,
+                leadershipStyle: leadershipStyle,
+                salaryLevel: salaryLevel,
+                autonomy: autonomy
+            )
+            
+            // 요청 전송 전에 요청 데이터를 출력
+            do {
+                let jsonData = try JSONEncoder().encode(reviewRequest)
+                if let jsonString = String(data: jsonData, encoding: .utf8) {
+                    print("Request JSON: \(jsonString)")
+                }
+            } catch {
+                print("Error encoding request data: \(error)")
+            }
+            
+            // 네트워크 요청을 보냅니다
+            NetworkManager.shared.request(
+                APIConstants.baseURL + "/labs/reviews/\(labId)",
+                method: .post,
+                parameters: reviewRequest,
+                encoder: JSONParameterEncoder.default
+            )
             .validate(statusCode: 200..<300)
             .responseDecodable(of: LabReviewResponse.self) { response in
                 switch response.result {
@@ -370,9 +376,16 @@ struct LabReviewWriteViewController: View {
                     }
                 case .failure(let error):
                     print("에러: \(error.localizedDescription)")
+                    if response.response?.statusCode == 400 {
+                        print("잘못된 요청으로 인해 실패하였습니다.")
+                    }
+                    
+                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                        print("서버 응답: \(errorMessage)")
+                    }
                 }
             }
-    }
+        }
 }
 
 struct LabelView: View {
@@ -397,6 +410,7 @@ struct LabelView: View {
 
 #Preview {
     LabReviewWriteViewController(
+        labId: 1,
         universityName: "성신여자대학교",
         departmentName: "화학에너지융합학부",
         professorName: "구본재"

@@ -20,7 +20,7 @@ struct BoardDetailResult: Decodable {
     let title: String
     let content: String
     let comments: [BoardComment]
-    let commentCount: Int
+    var commentCount: Int
     let views: Int
     let memberId: Int // Added memberId to identify the author
     

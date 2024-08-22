@@ -106,7 +106,7 @@ struct LabDetailViewController: View {
                             labId: labId
                         )
                     case "후기":
-                        LabDetailReviewViewController(universityName: labInfo.universityName, departmentName: labInfo.departmentName, professorName: labInfo.professorName)
+                        LabDetailReviewViewController(labId: labId, universityName: labInfo.universityName, departmentName: labInfo.departmentName, professorName: labInfo.professorName)
                     default:
                         Text("오류 발생. 관리자에게 문의하세요.")
                             .font(.body)
@@ -386,24 +386,20 @@ struct LabInfoView: View {
     }
     
     func toggleBookmark() {
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("인증 토큰이 없습니다.")
-            return
-        }
-        
+        // labId를 쿼리 파라미터로 전달
         let url = APIConstants.baseURL + "/labs/\(labId)/favorite"
+        let parameters: [String: Any] = ["labId": labId]
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
             "Accept": "application/json"
         ]
 
-        AF.request(url, method: .post, headers: headers)
+        NetworkManager.shared.request(url, method: .post, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: DirectoryFavoriteGetModel.self) { response in
                 switch response.result {
                 case .success(let data):
                     if data.isSuccess {
-                        self.isBookmarked.toggle() // 북마크 상태 토글
+                        self.isBookmarked.toggle() // 즐겨찾기 상태 토글
                         print("북마크 상태 변경 성공: \(data.message)")
                     } else {
                         print("북마크 상태 변경 실패: \(data.message)")
@@ -415,7 +411,6 @@ struct LabInfoView: View {
                     print("Request failed with error: \(error)")
                 }
             }
-
     }
 }
 

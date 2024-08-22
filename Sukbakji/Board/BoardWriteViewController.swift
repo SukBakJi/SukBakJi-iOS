@@ -127,10 +127,10 @@ struct BoardWriteViewController: View {
 //            print("토큰이 없습니다.")
 //            return
 //        }
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("토큰이 없습니다.")
-            return
-        }
+//        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+//            print("토큰이 없습니다.")
+//            return
+//        }
         
         let menu = selectedCategory ?? "박사"
         let boardName = selectedOptionIndex ?? "질문 게시판"
@@ -159,7 +159,7 @@ struct BoardWriteViewController: View {
                 content: postText
             )
             
-            AF.request(url,
+            NetworkManager.shared.request(url,
                        method: .post,
                        parameters: postParameters,
                        encoder: JSONParameterEncoder.default,
@@ -178,7 +178,7 @@ struct BoardWriteViewController: View {
                 content: postText
             )
             
-            AF.request(url,
+            NetworkManager.shared.request(url,
                        method: .post,
                        parameters: postParameters,
                        encoder: JSONParameterEncoder.default,
