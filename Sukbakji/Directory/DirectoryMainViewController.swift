@@ -1,18 +1,17 @@
-//
-//  DirectoryMainViewController.swift
-//  Sukbakji
-//
-//  Created by KKM on 8/7/24.
-//
-
 import SwiftUI
+import Alamofire
 
 struct DirectoryMainViewController: View {
     
     @State private var selectedButton: String? = "" // 기본값을 '메인'으로 설정
     @State private var searchText: String = "" // 검색 텍스트 상태 변수
     @State private var isSearchActive: Bool = false // 검색 바 클릭 상태 변수
-    @State private var hasScrappedLaboratories: Bool = false // 연구실이 있는지 여부를 나타내는 Bool 변수
+    @State private var hasScrappedLaboratories: Bool = true // 연구실이 있는지 여부를 나타내는 Bool 변수
+    @State private var latestReview: LabReviewListInfo? = nil // 가장 최근 연구실 후기
+    @State private var isLoading: Bool = true // 로딩 상태 변수
+    @State private var errorMessage: String? = nil // 에러 메시지 상태 변수
+    @State private var interestTopics: [String] = [] // 관심 주제 상태 변수
+    @State private var scrappedLaboratories: [ScrappedLabResult] = [] // 즐겨찾기 연구실 목록
     
     var body: some View {
         NavigationView {
@@ -43,7 +42,6 @@ struct DirectoryMainViewController: View {
                     .padding(.leading, 24)
                     .padding(.trailing, 8)
                     
-                    
                     // MARK: -- 검색창
                     ScrollView(.vertical) {
                         VStack {
@@ -73,7 +71,7 @@ struct DirectoryMainViewController: View {
                         
                         HStack(alignment: .center) {
                             Text("즐겨찾는 연구실")
-                                .font(Font.custom("Pretendard", size: 18) .weight(.semibold))
+                                .font(Font.custom("Pretendard", size: 18).weight(.semibold))
                                 .foregroundColor(Constants.Gray900)
                             
                             Image("Magnifier 1")
@@ -111,42 +109,14 @@ struct DirectoryMainViewController: View {
                         if hasScrappedLaboratories {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
-                                    ScrappedLaboratory(
-                                                title: "성신여자대학교",
-                                                universityName: "성신여자대학교",
-                                                labName: "화학에너지융합학부 에너지재료연구실",
-                                                professorName: "구본재"
-                                            )
-                                    ScrappedLaboratory(
-                                                title: "성신여자대학교",
-                                                universityName: "성신여자대학교",
-                                                labName: "화학에너지융합학부 에너지재료연구실",
-                                                professorName: "구본재"
-                                            )
-                                    ScrappedLaboratory(
-                                                title: "성신여자대학교",
-                                                universityName: "성신여자대학교",
-                                                labName: "화학에너지융합학부 에너지재료연구실",
-                                                professorName: "구본재"
-                                    )
-                                    ScrappedLaboratory(
-                                                title: "성신여자대학교",
-                                                universityName: "성신여자대학교",
-                                                labName: "화학에너지융합학부 에너지재료연구실",
-                                                professorName: "구본재"
-                                            )
-                                    ScrappedLaboratory(
-                                                title: "성신여자대학교",
-                                                universityName: "성신여자대학교",
-                                                labName: "화학에너지융합학부 에너지재료연구실",
-                                                professorName: "구본재"
-                                            )
-                                    ScrappedLaboratory(
-                                                title: "성신여자대학교",
-                                                universityName: "성신여자대학교",
-                                                labName: "화학에너지융합학부 에너지재료연구실",
-                                                professorName: "구본재"
-                                            )
+                                    ForEach(scrappedLaboratories, id: \.labId) { lab in
+                                        ScrappedLaboratory(
+                                            title: lab.universityName,
+                                            universityName: lab.universityName,
+                                            labName: lab.labName,
+                                            professorName: lab.professorName
+                                        )
+                                    }
                                 }
                             }
                             .padding(.horizontal, 24)
@@ -160,7 +130,7 @@ struct DirectoryMainViewController: View {
                         
                         HStack(alignment: .center) {
                             Text("관심 주제 모아보기")
-                                .font(Font.custom("Pretendard", size: 18) .weight(.semibold))
+                                .font(Font.custom("Pretendard", size: 18).weight(.semibold))
                                 .foregroundColor(Constants.Gray900)
                             
                             Spacer()
@@ -169,66 +139,185 @@ struct DirectoryMainViewController: View {
                         .padding(.top, 28)
                         .frame(alignment: .center)
                         .background(Constants.White)
-
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                TagView(tagName: "열화학")
-                                TagView(tagName: "딥러닝")
-                                TagView(tagName: "HCI")
-                                TagView(tagName: "로보틱스")
-                                TagView(tagName: "석박지")
+                        
+                        // 관심 주제 표시
+                        if isLoading {
+                            ProgressView("로딩 중...")
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .padding()
+                        } else if !interestTopics.isEmpty {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(interestTopics, id: \.self) { topic in
+                                        TagView(tagName: topic)
+                                    }
+                                }
+                                .padding(.horizontal, 24)
                             }
-                            .padding(.horizontal, 24)
+                        } else if let errorMessage = errorMessage {
+                            Text("Error: \(errorMessage)")
+                                .foregroundColor(.red)
+                                .padding()
+                        } else {
+                            Text("관심 주제가 없습니다.")
+                                .foregroundColor(Constants.Gray500)
+                                .padding(.horizontal, 24)
                         }
 
                         // 광고 배너 뷰
                         AdvertisementView()
                         
-                        
-                        HStack(alignment: .center) {
-                            Text("연구실 후기")
-                                .font(Font.custom("Pretendard", size: 18) .weight(.semibold))
-                                .foregroundColor(Constants.Gray900)
-                            
-                            Image("Magnifier 1")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                print("연구실 후기 더보기 tapped!")
-                            }) {
-                                NavigationLink(destination: LabReviewViewController()) {
-                                    Text("더보기")
-                                        .font(.system(size: 12, weight: .medium))
-                                        .multilineTextAlignment(.center)
-                                        .foregroundStyle(Constants.Gray500)
-                                    
-                                    Image("More 1")
-                                        .resizable()
-                                        .frame(width: 4, height: 8)
+                        // 연구실 후기 표시
+                        if isLoading {
+                            ProgressView("로딩 중...")
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .padding()
+                        } else if let latestReview = latestReview {
+                            HStack(alignment: .center) {
+                                Text("연구실 후기")
+                                    .font(Font.custom("Pretendard", size: 18).weight(.semibold))
+                                    .foregroundColor(Constants.Gray900)
+                                
+                                Image("Magnifier 1")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    print("연구실 후기 더보기 tapped!")
+                                }) {
+                                    NavigationLink(destination: LabReviewViewController()) {
+                                        Text("더보기")
+                                            .font(.system(size: 12, weight: .medium))
+                                            .multilineTextAlignment(.center)
+                                            .foregroundStyle(Constants.Gray500)
+                                        
+                                            Image("More 1")
+                                            .resizable()
+                                            .frame(width: 4, height: 8)
+                                    }
                                 }
                             }
-                        }
-                        .padding(.horizontal, 24)
-                        .padding(.top, 28)
-                        .frame(alignment: .center)
-                        .background(Constants.White)
-                        
-                        LabReviewDummy()
                             .padding(.horizontal, 24)
+                            .padding(.top, 28)
+                            .frame(alignment: .center)
+                            .background(Constants.White)
+                            
+                            LabReviewView(review: latestReview)
+                                .padding(.horizontal, 24)
+                        } else if let errorMessage = errorMessage {
+                            Text("Error: \(errorMessage)")
+                                .foregroundColor(.red)
+                                .padding()
+                        } else {
+                            Text("아직 연구실 후기가 없습니다.")
+                                .foregroundColor(Constants.Gray500)
+                                .padding(.horizontal, 24)
+                        }
                     }
                 }
             }
         }
-        .accessibilityIdentifier("DirectoryMainViewController")
+        .navigationBarBackButtonHidden()
+        .onAppear {
+            loadLatestLabReview()
+            loadInterestTopics()
+            loadScrappedLaboratories() // Load favorite laboratories
+        }
+    }
+    
+    func loadLatestLabReview() {
+        let url = APIConstants.baseURL + "/labs/reviews?limit=1" // 최신 1개의 연구실 후기만 가져오기
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        NetworkManager.shared.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: LabReviewListResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess, let review = data.result.first {
+                        self.latestReview = review
+                    } else {
+                        self.errorMessage = data.message
+                    }
+                    self.isLoading = false
+                case .failure(let error):
+                    if let data = response.data,
+                       let errorMessage = String(data: data, encoding: .utf8) {
+                        print("Server error response: \(errorMessage)")
+                    }
+                    self.errorMessage = error.localizedDescription
+                    self.isLoading = false
+                }
+            }
+    }
+    
+    func loadInterestTopics() {
+        let url = APIConstants.baseURL + "/labs/mypage/interest-topics"
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        NetworkManager.shared.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: DirectoryInterestTopicGetModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        self.interestTopics = data.result.topics
+                    } else {
+                        self.errorMessage = data.message
+                    }
+                    self.isLoading = false
+                case .failure(let error):
+                    if let data = response.data,
+                       let errorMessage = String(data: data, encoding: .utf8) {
+                        print("Server error response: \(errorMessage)")
+                    }
+                    self.errorMessage = error.localizedDescription
+                    self.isLoading = false
+                }
+            }
+    }
+    
+    func loadScrappedLaboratories() {
+        let url = APIConstants.baseURL + "/labs/mypage/favorite-labs"
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        NetworkManager.shared.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: ScrappedLabModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        self.scrappedLaboratories = data.result
+                        self.hasScrappedLaboratories = !data.result.isEmpty
+                    } else {
+                        self.errorMessage = data.message
+                        self.hasScrappedLaboratories = false
+                    }
+                case .failure(let error):
+                    if let data = response.data,
+                       let errorMessage = String(data: data, encoding: .utf8) {
+                        print("Server error response: \(errorMessage)")
+                    }
+                    self.errorMessage = error.localizedDescription
+                    self.hasScrappedLaboratories = false
+                }
+                self.isLoading = false
+            }
     }
 }
 
 // MARK: -- 즐겨찾는 연구실 테이블 뷰
-import SwiftUI
-
 struct ScrappedLaboratory: View {
     var title: String
     var universityName: String
@@ -296,15 +385,15 @@ struct ScrappedLaboratory: View {
                             }
                         }
                         
-                        HStack {
-                            Text("label")
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 3)
-                                .background(Color(red: 0.99, green: 0.91, blue: 0.9))
-                                .cornerRadius(4)
-                        }
+//                        HStack {
+//                            Text("label")
+//                                .font(.system(size: 12, weight: .medium))
+//                                .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
+//                                .padding(.horizontal, 8)
+//                                .padding(.vertical, 3)
+//                                .background(Color(red: 0.99, green: 0.91, blue: 0.9))
+//                                .cornerRadius(4)
+//                        }
                     }
                     .padding(.horizontal, 18)
                     .padding(.vertical, 16)
@@ -315,16 +404,13 @@ struct ScrappedLaboratory: View {
     }
 }
 
-
-
-
 // MARK: -- 해시태그 뷰
 struct TagView: View {
     var tagName: String
     
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
-            Text("#\(tagName)")
+            Text("\(tagName)")
                 .font(
                     Font.custom("Pretendard", size: Constants.fontSize5)
                         .weight(Constants.fontWeightMedium)
@@ -495,4 +581,3 @@ struct DirectoryMainViewController_Previews: PreviewProvider {
         DirectoryMainViewController()
     }
 }
-

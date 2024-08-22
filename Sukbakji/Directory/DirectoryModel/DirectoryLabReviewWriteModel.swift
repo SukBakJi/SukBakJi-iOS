@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Request Body Model
+// Request 모델
 struct LabReviewRequest: Encodable {
     let content: String
     let leadershipStyle: String
@@ -15,15 +15,14 @@ struct LabReviewRequest: Encodable {
     let autonomy: String
 }
 
-// MARK: - Response Body Model for Successful Review Submission
+// Response 모델
 struct LabReviewResponse: Decodable {
     let isSuccess: Bool
     let code: String
     let message: String
-    let result: LabReviewResult?
+    let result: LabReviewResult
 }
 
-// MARK: - Lab Review Result Model
 struct LabReviewResult: Decodable {
     let universityName: String
     let departmentName: String

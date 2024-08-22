@@ -7,7 +7,22 @@
 
 import Foundation
 
-struct DirectoryReviewInfoModel: Decodable {
+// Main response model
+struct LabReviewInfoListResponse: Decodable {
+    let isSuccess: Bool
+    let code: String
+    let message: String
+    let result: LabReviewInfoListResult
+}
+
+// Result part of the response
+struct LabReviewInfoListResult: Decodable {
+    let reviews: [LabReviewInfo]  // 변경된 부분: LabReview -> LabReviewInfo
+    let triangleGraphData: TriangleGraphData
+}
+
+// Individual review details
+struct LabReviewInfo: Decodable {  // 변경된 부분: LabReview -> LabReviewInfo
     let universityName: String
     let departmentName: String
     let professorName: String
@@ -17,10 +32,9 @@ struct DirectoryReviewInfoModel: Decodable {
     let autonomy: String
 }
 
-struct DirectoryReviewInfoResponse: Decodable {
-    let httpStatus: String
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    let result: [DirectoryReviewInfoModel]?
+// Triangle graph data
+struct TriangleGraphData: Decodable {
+    let leadershipAverage: Double
+    let salaryAverage: Double
+    let autonomyAverage: Double
 }

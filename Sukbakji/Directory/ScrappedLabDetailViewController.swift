@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct ScrappedLabDetailViewController: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State private var scrappedLaboratories: [ScrappedLabResult] = []
+    @State private var isLoading: Bool = true
+    @State private var errorMessage: String? = nil
     
     var body: some View {
-        
         NavigationView {
             VStack {
                 HStack {
@@ -35,9 +38,9 @@ struct ScrappedLabDetailViewController: View {
                     
                     Spacer()
                     
-                    // 더보기 버튼
+                    // 수정 버튼
                     Button(action: {
-                        // 더보기 버튼 클릭 시 동작할 코드
+                        // 수정 버튼 클릭 시 동작할 코드
                         print("수정 버튼 tapped")
                     }) {
                         Text("수정")
@@ -53,25 +56,64 @@ struct ScrappedLabDetailViewController: View {
                 
                 Divider()
                 
-                ScrollView {
-                    ScrappedLaboratory(
-                                title: "성신여자대학교",
-                                universityName: "성신여자대학교",
-                                labName: "화학에너지융합학부 에너지재료연구실",
-                                professorName: "구본재"
+                if isLoading {
+                    ProgressView("로딩 중...")
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .padding()
+                } else if let errorMessage = errorMessage {
+                    Text("Error: \(errorMessage)")
+                        .foregroundColor(.red)
+                        .padding()
+                } else {
+                    ScrollView {
+                        ForEach(scrappedLaboratories, id: \.labId) { lab in
+                            ScrappedLaboratory(
+                                title: lab.universityName,
+                                universityName: lab.universityName,
+                                labName: lab.labName,
+                                professorName: lab.professorName
                             )
-                    ScrappedLaboratory(
-                                title: "성신여자대학교",
-                                universityName: "성신여자대학교",
-                                labName: "화학에너지융합학부 에너지재료연구실",
-                                professorName: "구본재"
-                            )
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 16)
                 }
-                .padding(.horizontal, 24)
-                .padding(.top, 16)
             }
         }
         .navigationBarBackButtonHidden()
+        .onAppear {
+            loadScrappedLaboratories()
+        }
+    }
+    
+    func loadScrappedLaboratories() {
+        let url = APIConstants.baseURL + "/labs/mypage/favorite-labs"
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        NetworkManager.shared.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: ScrappedLabModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        self.scrappedLaboratories = data.result
+                        self.isLoading = false
+                    } else {
+                        self.errorMessage = data.message
+                        self.isLoading = false
+                    }
+                case .failure(let error):
+                    if let data = response.data,
+                       let errorMessage = String(data: data, encoding: .utf8) {
+                        print("Server error response: \(errorMessage)")
+                    }
+                    self.errorMessage = error.localizedDescription
+                    self.isLoading = false
+                }
+            }
     }
 }
 

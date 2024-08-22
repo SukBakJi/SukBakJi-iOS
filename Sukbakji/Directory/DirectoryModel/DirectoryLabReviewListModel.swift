@@ -7,15 +7,19 @@
 
 import Foundation
 
-// MARK: - DirectoryLabReviewListGetModel
-struct DirectoryLabReviewListGetModel: Codable {
+struct LabReviewListResponse: Decodable {
     let isSuccess: Bool
-    let code, message: String
-    let result: [DirectoryLabReviewListGetResult]
+    let code: String
+    let message: String
+    let result: [LabReviewListInfo]
 }
 
-// MARK: - DirectoryLabReviewListGetResult
-struct DirectoryLabReviewListGetResult: Codable {
-    let universityName, departmentName, professorName, content: String
-    let leadershipStyle, salaryLevel, autonomy: String
+struct LabReviewListInfo: Decodable {
+    let universityName: String
+    let departmentName: String
+    let professorName: String
+    let content: String
+    let leadershipStyle: String
+    let salaryLevel: String
+    let autonomy: String
 }
