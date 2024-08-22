@@ -8,15 +8,6 @@
 import SwiftUI
 import Alamofire
 
-struct Comment: Identifiable {
-    let id = UUID()
-    let author: String
-    let content: String
-    let date: String
-    var isLiked: Bool
-    var likeCount: Int
-}
-
 struct DummyBoardDetail: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -34,10 +25,10 @@ struct DummyBoardDetail: View {
     @State private var isLoading: Bool = true // 데이터 로딩 상태
     
     var postId: Int // 게시물 ID를 전달받는 변수
-    var memberId: Int? // 사용자 ID를 전달받는 변수 // memberId를 선택적으로 전달받는 변수 (지금은 사용하지 않음)
+    var memberId: Int? // 사용자 ID를 전달받는 변수
     
     // 댓글 데이터 상태 변수
-    @State private var comments: [Comment] = []
+    @State private var comments: [BoardComment] = []
     @State private var anonymousCounter: Int = 1 // 익명 댓글 번호를 위한 카운터
 
     var body: some View {
@@ -111,7 +102,6 @@ struct DummyBoardDetail: View {
                         if let boardDetail = boardDetail {
                             VStack(alignment: .leading) {
                                 HStack {
-                                    // 기존의 메뉴 정보
                                     Text(boardDetail.menu + " 게시판")
                                         .font(.system(size: 12, weight: .medium))
                                         .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
@@ -120,7 +110,6 @@ struct DummyBoardDetail: View {
                                         .background(Color(red: 0.91, green: 0.92, blue: 1))
                                         .cornerRadius(4)
                                     
-                                    // 지원분야(supportField)와 채용형태(hiringType)를 추가로 표시
                                     if let hiringType = boardDetail.hiringType {
                                         Text(hiringType)
                                             .font(.system(size: 12, weight: .medium))
@@ -210,35 +199,7 @@ struct DummyBoardDetail: View {
             }
         }
     }
-
-    // 게시물 삭제 함수
-    func deletePost() {
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            return
-        }
-        
-        let url = APIConstants.boardpostURL + "/\(postId)"
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Content-Type": "application/json"
-        ]
-        
-        AF.request(url, method: .delete, headers: headers)
-            .validate(statusCode: 200..<300)
-            .response { response in
-                switch response.result {
-                case .success:
-                    print("게시물이 삭제되었습니다.")
-                    self.presentationMode.wrappedValue.dismiss() // 삭제 후 이전 화면으로 돌아감
-                case .failure(let error):
-                    print("Error deleting post: \(error.localizedDescription)")
-                }
-            }
-    }
-
-    // 댓글 추가 함수
+    
     func addComment() {
         if commentText.isEmpty {
             showValidationError = true
@@ -246,51 +207,66 @@ struct DummyBoardDetail: View {
             postComment(content: commentText)
         }
     }
-    
+
     // 댓글 작성 함수
     func postComment(content: String) {
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            return
-        }
-        
         let url = APIConstants.baseURL + "/comments/create"
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
             "Content-Type": "application/json"
         ]
         
         let commentRequest = CommentRequest(postId: postId, memberId: memberId ?? 0, content: content)
         
-        AF.request(url, method: .post, parameters: commentRequest, encoder: JSONParameterEncoder.default, headers: headers)
+        NetworkManager.shared.request(url, method: .post, parameters: commentRequest, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: CommentResponse.self) { response in
                 switch response.result {
                 case .success(let data):
-                    let authorName: String
-                    if data.result.memberId == boardDetail?.memberId {
-                        authorName = "글쓴이"
-                    } else {
-                        authorName = "익명\(anonymousCounter)"
-                        anonymousCounter += 1
-                    }
-                    let newComment = Comment(
-                        author: authorName,
+                    let newComment = BoardComment(
+                        anonymousName: data.result.nickname,
+                        degreeLevel: "익명", // DegreeLevel 설정이 필요하다면 적절히 변경하세요
                         content: data.result.content,
-                        date: data.result.createdAt,
-                        isLiked: false,
-                        likeCount: 0
+                        createdDate: data.result.createdAt,
+                        memberId: data.result.memberId
                     )
+                    
                     comments.insert(newComment, at: 0) // 새로운 댓글을 맨 위에 추가
                     commentText = ""
                     showValidationError = false
                     print("댓글 작성 성공: \(data.message)")
+                    
+                    // 댓글 카운트 증가
+                    boardDetail?.commentCount += 1
                 case .failure(let error):
                     if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
                         print("Server Error Message: \(errorMessage)")
                     } else {
                         print("Error: \(error.localizedDescription)")
+                    }
+                }
+            }
+    }
+    
+    // 게시물 삭제 함수
+    func deletePost() {
+        let url = APIConstants.boardpostURL + "/\(postId)"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        NetworkManager.shared.request(url, method: .delete, headers: headers)
+            .validate(statusCode: 200..<300)
+            .response { response in
+                switch response.result {
+                case .success:
+                    print("게시물이 삭제되었습니다.")
+                    self.presentationMode.wrappedValue.dismiss()
+                case .failure(let error):
+                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                        print("Server Error Message: \(errorMessage)")
+                    } else {
+                        print("Error deleting post: \(error.localizedDescription)")
                     }
                 }
             }
@@ -303,26 +279,12 @@ struct DummyBoardDetail: View {
 
     // 게시글 상세 정보를 불러오는 함수
     func loadBoardDetail(postId: Int) {
-//        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-//              let accessToken = String(data: accessTokenData, encoding: .utf8), !accessToken.isEmpty else {
-//            print("토큰이 없습니다.")
-//            self.isLoading = false
-//            return
-//        }
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            self.isLoading = false
-            return
-        }
-        
         let url = APIConstants.boardpostURL + "/\(postId)"
-                
         let headers: HTTPHeaders = [
-//            "Authorization": "Bearer \(accessToken)",
             "Content-Type": "application/json"
         ]
         
-        AF.request(url, method: .get, headers: headers)
+        NetworkManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: BoardDetailModel.self) { response in
                 switch response.result {
@@ -330,21 +292,7 @@ struct DummyBoardDetail: View {
                     self.boardDetail = data.result
                     self.anonymousCounter = 1 // Reset anonymous counter when loading new post details
 
-                    self.comments = data.result.comments.enumerated().map { (index, comment) in
-                        let authorName: String
-                        if comment.memberId == boardDetail?.memberId {
-                            authorName = "글쓴이"
-                        } else {
-                            authorName = "익명\(index + 1)"
-                        }
-                        return Comment(
-                            author: authorName,
-                            content: comment.content,
-                            date: comment.createdDate,
-                            isLiked: false,
-                            likeCount: 0
-                        )
-                    }
+                    self.comments = data.result.comments
                     self.isLoading = false
                 case .failure(let error):
                     if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
@@ -353,34 +301,6 @@ struct DummyBoardDetail: View {
                         print("Error: \(error.localizedDescription)")
                     }
                     self.isLoading = false
-                }
-            }
-    }
-    
-    // 게시판 아이디를 통해 정보를 불러오는 함수
-    func loadBoardDetailByBoardId(boardId: Int, postId: Int, completion: @escaping (Result<BoardDetailResult, Error>) -> Void) {
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            completion(.failure(NSError(domain: "Authentication", code: 401, userInfo: [NSLocalizedDescriptionKey: "Unauthorized"])))
-            return
-        }
-        
-        let url = APIConstants.boardpostURL + "/\(boardId)/\(postId)"
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Content-Type": "application/json"
-        ]
-        
-        AF.request(url, method: .get, headers: headers)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: BoardDetailModel.self) { response in
-                switch response.result {
-                case .success(let data):
-                    completion(.success(data.result))
-                case .failure(let error):
-                    print("Error loading board detail: \(error.localizedDescription)")
-                    completion(.failure(error))
                 }
             }
     }
@@ -398,30 +318,18 @@ struct DummyBoardDetail: View {
 
     // ProfileGetDataManager 함수 정의
     func ProfileGetDataManager(completion: @escaping (ProfileModel?) -> Void) {
-        guard let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("토큰이 없습니다.")
-            completion(nil)
-            return
-        }
-
         let url = APIConstants.userURL + "/mypage"
         let headers: HTTPHeaders = [
-            "Accept": "*/*",
-            "Authorization": "Bearer \(accessToken)"
+            "Accept": "*/*"
         ]
 
-        AF.request(url,
-                   method: .get,
-                   parameters: nil,
-                   encoding: URLEncoding.default,
-                   headers: headers)
+        NetworkManager.shared.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
             .validate(statusCode: 200..<500)
             .responseDecodable(of: ProfileModel.self) { response in
                 switch response.result {
                 case .success(let profileModel):
                     completion(profileModel)
                     print("성공. \(profileModel)")
-                    
                 case .failure(let error):
                     print("에러 : \(error.localizedDescription)")
                     completion(nil)
@@ -432,7 +340,7 @@ struct DummyBoardDetail: View {
 }
 
 struct Comments: View {
-    @State var comment: Comment
+    var comment: BoardComment
     @State private var showingCommentSheet = false
     @State private var showCommentAlert = false
     var degreeLevel: DegreeLevel? // 추가된 변수
@@ -442,13 +350,13 @@ struct Comments: View {
     var deleteComment: () -> Void
     
     // State to manage like status and count
-        @State private var isLiked: Bool = false
-        @State private var likeCount: Int = 0
+    @State private var isLiked: Bool = false
+    @State private var likeCount: Int = 0
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center) {
-                Text(comment.author)
+                Text(comment.anonymousName) // anonymousName 사용
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Constants.Gray800)
                 Divider()
@@ -509,7 +417,7 @@ struct Comments: View {
                 }
             }
             
-            Text(formatDate(comment.date))
+            Text(formatDate(comment.createdDate))
                 .font(.system(size: 10))
                 .foregroundStyle(Constants.Gray500)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -547,11 +455,6 @@ struct Comments: View {
         .padding(.vertical, 12)
         .frame(alignment: .topLeading)
         .background(Constants.White)
-        .onAppear {
-            // Initialize the like count from the comment data
-            likeCount = comment.likeCount
-            isLiked = comment.isLiked
-        }
     }
     
     // DegreeLevel에 따른 텍스트 반환 함수
@@ -659,7 +562,6 @@ struct RoundedCorner: Shape {
 struct BookmarkButtonView: View {
     @State private var isBookmarked: Bool = false
     var postId: Int // Post ID to be passed when toggling scrap status
-    var onScrapToggled: ((BoardBookmarkedResult?) -> Void)? // Callback to notify about the scrap toggle
     
     var body: some View {
         Button(action: {
@@ -675,43 +577,39 @@ struct BookmarkButtonView: View {
     }
     
     private func toggleScrapStatus() {
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            return
-        }
-        
-        let url = APIConstants.baseURL + "/scraps/\(postId)/toggle"
-        
+        let url = "\(APIConstants.baseURL)/scraps/\(postId)/toggle"
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)"
+            "Content-Type": "application/json"
         ]
         
-        AF.request(url, method: .post, headers: headers)
+        NetworkManager.shared.request(url, method: .post, headers: headers)
             .validate(statusCode: 200..<300)
-            .responseDecodable(of: BoardBookmarkedResult.self) { response in
+            .responseDecodable(of: BoardScrapModel.self) { response in
                 switch response.result {
                 case .success(let data):
-                    isBookmarked.toggle()
-                    onScrapToggled?(isBookmarked ? data : nil)
+                    if data.isSuccess {
+                        isBookmarked.toggle()
+                        print("Scrap status toggled successfully: \(data.message)")
+                    } else {
+                        print("Failed to toggle scrap status: \(data.message)")
+                    }
                 case .failure(let error):
-                    print("Error toggling scrap status: \(error.localizedDescription)")
+                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                        print("Server Error Message: \(errorMessage)")
+                    } else {
+                        print("Error toggling scrap status: \(error.localizedDescription)")
+                    }
                 }
             }
     }
     
     private func checkInitialScrapStatus() {
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            return
-        }
-        
-        let url = APIConstants.baseURL + "/scraps/\(postId)/status"
-        
+        let url = "\(APIConstants.baseURL)/scraps/\(postId)"
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)"
+            "Content-Type": "application/json"
         ]
         
-        AF.request(url, method: .get, headers: headers)
+        NetworkManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ScrapStatusResponse.self) { response in
                 switch response.result {
@@ -731,4 +629,3 @@ struct ScrapStatusResponse: Decodable {
 #Preview {
     DummyBoardDetail(boardName: "질문 게시판", postId: 3, memberId: 10)
 }
-

@@ -73,6 +73,7 @@
 		7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */; };
 		7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */; };
 		7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */; };
+		7B9A2E182C770DC400E0C194 /* LabReviewSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9A2E172C770DC400E0C194 /* LabReviewSearchViewController.swift */; };
 		7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C992C62778D00A31B70 /* SearchViewController.swift */; };
 		7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */; };
 		7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */; };
@@ -266,6 +267,7 @@
 		7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentedBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentReviewWriteBoardViewController.swift; sourceTree = "<group>"; };
+		7B9A2E172C770DC400E0C194 /* LabReviewSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewSearchViewController.swift; sourceTree = "<group>"; };
 		7BFB8C992C62778D00A31B70 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyBoards.swift; sourceTree = "<group>"; };
 		7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMainViewController.swift; sourceTree = "<group>"; };
@@ -625,6 +627,7 @@
 				7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */,
 				7B259AFD2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift */,
 				7B259AFF2C75EB5700D3DFE5 /* LabReviewWriteViewController.swift */,
+				7B9A2E172C770DC400E0C194 /* LabReviewSearchViewController.swift */,
 			);
 			path = Directory;
 			sourceTree = "<group>";
@@ -1136,6 +1139,7 @@
 				C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */,
 				417AADC42C652228002080E0 /* LoginModel.swift in Sources */,
 				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
+				7B9A2E182C770DC400E0C194 /* LabReviewSearchViewController.swift in Sources */,
 				C7C5686B2C6F42C900A57821 /* ApplyMentorModel.swift in Sources */,
 				41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */,
 				C7023D302C6E1B8B0036D355 /* UniDeleteAPI.swift in Sources */,

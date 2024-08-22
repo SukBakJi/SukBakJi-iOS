@@ -104,11 +104,11 @@ struct BoardDoctoralViewController: View {
 //            self.isLoading = false
 //            return
 //        }
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            self.isLoading = false
-            return
-        }
+//        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+//            print("토큰이 없습니다.")
+//            self.isLoading = false
+//            return
+//        }
         
         let boardName = selectedButton ?? "질문 게시판"
         let url = APIConstants.boardpostURL + "/list"
@@ -122,7 +122,7 @@ struct BoardDoctoralViewController: View {
 //            "Authorization": "Bearer \(accessToken)"
         ]
         
-        AF.request(url, method: .get, parameters: parameters, headers: headers)
+        NetworkManager.shared.request(url, method: .get, parameters: parameters, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: BoardListGetResponseModel.self) { response in
                 switch response.result {

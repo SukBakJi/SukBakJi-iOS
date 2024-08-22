@@ -95,12 +95,6 @@ struct HotBoardViewController: View {
                         }
                     }
                     .padding(.horizontal, 24)
-                    .overlay(
-                        overlayButton(selectedButton: "HOT 게시판")
-                            .padding(.trailing, 24) // 오른쪽 여백
-                            .padding(.bottom, 48) // 아래 여백
-                        , alignment: .bottomTrailing // 오른쪽 아래에 위치
-                    )
                 }
                 
                 if showAlert {
@@ -145,13 +139,13 @@ struct HotBoardViewController: View {
     }
     
     func loadHotPosts() {
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-            print("토큰이 없습니다.")
-            self.isLoading = false
-            return
-        }
+//        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+//            print("토큰이 없습니다.")
+//            self.isLoading = false
+//            return
+//        }
         
-        HotBoardApi(userToken: accessToken) { result in
+        HotBoardApi { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let posts):
@@ -164,16 +158,17 @@ struct HotBoardViewController: View {
         }
     }
     
-    func HotBoardApi(userToken: String, completion: @escaping (Result<[BoardHotPost], Error>) -> Void) {
+    func HotBoardApi(completion: @escaping (Result<[BoardHotPost], Error>) -> Void) {
         let url = APIConstants.communityURL + "/hot-boards"
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": "Bearer \(userToken)"
+//            "Authorization": "Bearer \(userToken)"
         ]
         
-        AF.request(url,
+        // NetworkManager.shared.request
+        NetworkManager.shared.request(url,
                    method: .get,
                    headers: headers)
         .validate(statusCode: 200..<300)

@@ -86,55 +86,52 @@ struct Board: View {
 // MARK: -- 게시판 메인화면 더미 게시판
 struct ContainerDummyBoard: View {
     var boardName: String
-    
+    var title: String
+    var content: String
+    var commentCount: Int
+    var views: Int
+    var postId: Int
+    var memberId: Int?
+
     var body: some View {
-        NavigationLink(destination: DummyBoardDetail(boardName: boardName, postId: 3, memberId: 10)) {
+        NavigationLink(destination: DummyBoardDetail(boardName: boardName, postId: postId, memberId: memberId)) {
             VStack(alignment: .leading, spacing: 12) {
-                
                 HStack(alignment: .center, spacing: 10) {
                     HStack {
-                        Text("박사 게시판")
+                        Text(boardName)
                             .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
+                        .foregroundColor(Color(red: 1, green: 0.75, blue: 0))
                     }
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
-                    .background(Color(red: 0.91, green: 0.92, blue: 1))
+                    .background(Color(red: 1, green: 0.97, blue: 0.87))
                     .cornerRadius(4)
-                    
-                    HStack {
-                        Text("대학원생활")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(Constants.Gray500)
-                    }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(Constants.Gray50)
-                    .cornerRadius(4)
+
                 }
-                
-                Text("아삭아삭 석박지")
+
+                Text(title)
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(Constants.Gray900)
-                
-                Text("무를 큼직하게 썰어 양념에 버무린 섞박지는 국밥, 설렁탕 등...")
+
+                Text(content)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundStyle(Constants.Gray900)
-                
+                    .lineLimit(2) // Limits the content to 2 lines
+
                 HStack(alignment: .top, spacing: 12) {
                     Image("chat 1")
                         .resizable()
                         .frame(width: 12, height: 12)
-                    
-                    Text("12")
+
+                    Text("\(commentCount)")
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
-                    
+
                     Image("eye")
                         .resizable()
                         .frame(width: 12, height: 12)
-                    
-                    Text("1532")
+
+                    Text("\(views)")
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
                 }

@@ -1,19 +1,17 @@
-//
-//  LabDetailReviewViewController.swift
-//  Sukbakji
-//
-//  Created by KKM on 8/21/24.
-//
-
 import SwiftUI
+import Alamofire
 
 struct LabDetailReviewViewController: View {
+    var labId: Int
     var universityName: String
     var departmentName: String
     var professorName: String
 
-    @State private var reviews: [LabReview] = [LabReview(), LabReview(), LabReview()] // 초기 리뷰 목록
+    @State private var reviews: [LabReviewInfo] = [] // 연구실 후기 배열
+    @State private var triangleGraphData: TriangleGraphData? // 삼각형 그래프 데이터
     @State private var showMoreReviews: Bool = false // '연구실 후기 더보기' 버튼 상태 변수
+    @State private var isLoading: Bool = true // 로딩 상태 변수
+    @State private var highestAttributesText: String = "" // 가장 높은 항목을 표시할 텍스트
 
     var body: some View {
         ScrollView {
@@ -51,34 +49,32 @@ struct LabDetailReviewViewController: View {
             .padding(.horizontal, 24)
             .padding(.top, 28)
             
-            // MARK: - 가장 높은 후기
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Text("자율성")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
-                    + Text("이 가장 높게 나타났어요")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(Constants.Gray900)
+            if let triangleGraphData = triangleGraphData {
+                // 삼각형 그래프 표시
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text(highestAttributesText)
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
+                    }
+                    
+                    Text("키워드를 통해 간단하게 볼 수 있어요")
+                        .font(Font.custom("Pretendard", size: 14))
+                        .foregroundColor(Constants.Gray500)
                 }
-                
-                Text("키워드를 통해 간단하게 볼 수 있어요")
-                    .font(Font.custom("Pretendard", size: 14))
-                    .foregroundColor(Constants.Gray500)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading) // VStack을 왼쪽 정렬
-            .padding(.horizontal, 24)
-            .padding(.top, 20)
-            .padding(.bottom, 16)
-            .frame(width: 390, alignment: .topLeading) // 전체 프레임을 왼쪽 상단으로 정렬
-            
-            // MARK: - 삼각형 그래프
-            RadarChart()
-                .frame(width: 300, height: 270) // 차트 크기 지정
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 24)
                 .padding(.top, 20)
+                .padding(.bottom, 16)
+                .frame(width: 390, alignment: .topLeading)
+                
+                RadarChart(triangleGraphData: triangleGraphData)
+                    .frame(width: 300, height: 270)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 20)
+            }
             
-            // MARK: - 연구실 한줄평
+            // 연구실 한줄평
             HStack(alignment: .center, spacing: 8) {
                 Text("연구실 한줄평")
                   .font(
@@ -97,87 +93,224 @@ struct LabDetailReviewViewController: View {
             .padding(.top, 28)
             
             VStack(spacing: 15) {
-                // 기존 리뷰들을 표시
-                ForEach(reviews) { review in
-                    LabReviewView(review: review)
-                }
-                
-                // '연구실 후기 더보기' 버튼
-                if showMoreReviews {
-                    ForEach(reviews) { review in
-                        LabReviewView(review: review)
+                if isLoading {
+                    ProgressView("로딩 중...")
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .padding()
+                } else {
+                    // 리뷰를 최대 3개까지 보여주고, showMoreReviews가 true이면 모든 리뷰를 보여줌
+                    VStack(spacing: 16) {
+                        ForEach(0..<min(reviews.count, showMoreReviews ? reviews.count : 3), id: \.self) { index in
+                            LabReviewInfoView(review: reviews[index])
+                        }
                     }
-                }
-                
-                Button(action: {
-                    // '연구실 후기 더보기' 버튼 클릭 시 동작할 코드
-                    showMoreReviews.toggle()
-                    print("연구실 후기 더보기 버튼 tapped")
-                }) {
-                    HStack {
-                        Text("연구실 후기 더보기")
-                            .font(
-                                Font.custom("Pretendard", size: Constants.fontSize7)
-                                    .weight(.regular)
+                    
+                    // 리뷰가 4개 이상일 경우에만 '연구실 후기 더보기' 버튼을 표시
+                    if reviews.count > 3 {
+                        Button(action: {
+                            // 리뷰가 4개 이상일 경우에만 동작하도록 설정
+                            if reviews.count > 3 {
+                                showMoreReviews.toggle()
+                                print("연구실 후기 더보기 버튼 tapped")
+                            }
+                        }) {
+                            HStack {
+                                Text(showMoreReviews ? "연구실 후기 접기" : "연구실 후기 더보기")
+                                    .font(
+                                        Font.custom("Pretendard", size: Constants.fontSize7)
+                                            .weight(.regular)
+                                    )
+                                    .foregroundColor(Constants.Gray900)
+                                
+                                Image("More 2")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                    .rotationEffect(.degrees(showMoreReviews ? 180 : 0))
+                            }
+                            .padding(.horizontal, 10)
+                            .padding(10)
+                            .frame(alignment: .center)
+                            .cornerRadius(999)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 999)
+                                    .inset(by: 0.5)
+                                    .stroke(Constants.Gray300, lineWidth: 1)
                             )
-                            .foregroundColor(Constants.Gray900)
-                        
-                        Image("More 2")
-                            .resizable()
-                            .frame(width: 12, height: 12)
+                        }
+                        .padding(.top, 16)
+                        .padding(.bottom, 48)
                     }
-                    .padding(.horizontal, 10)
-                    .padding(10)
-                    .frame(alignment: .center)
-                    .cornerRadius(999)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 999)
-                            .inset(by: 0.5)
-                            .stroke(Constants.Gray300, lineWidth: 1)
-                    )
                 }
-                .padding(.top, 16)
-                .padding(.bottom, 48)
             }
             .padding(.horizontal, 24)
         }
+        .onAppear {
+            loadLabReviews(labId: labId)
+        }
         .overlay(
             DirectoryOverlayButton(
+                labId: labId,
                 universityName: universityName,
                 departmentName: departmentName,
                 professorName: professorName
             )
-            .padding(.trailing, 24) // 오른쪽 여백
-            .padding(.bottom, 48) // 아래 여백
-            , alignment: .bottomTrailing // 오른쪽 아래에 위치
+            .padding(.trailing, 24)
+            .padding(.bottom, 48),
+            alignment: .bottomTrailing
+        )
+    }
+    
+    func loadLabReviews(labId: Int) {
+        let url = APIConstants.baseURL + "/labs/reviews/\(labId)"
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        NetworkManager.shared.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: LabReviewInfoListResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    reviews = data.result.reviews
+                    triangleGraphData = data.result.triangleGraphData
+                    isLoading = false
+                    calculateHighestAttributes()
+                case .failure(let error):
+                    print("Error loading reviews: \(error.localizedDescription)")
+                    isLoading = false
+                }
+            }
+    }
+    
+    func calculateHighestAttributes() {
+        guard let triangleGraphData = triangleGraphData else { return }
+        
+        let attributes = [
+            ("지도력", triangleGraphData.leadershipAverage),
+            ("인건비", triangleGraphData.salaryAverage),
+            ("자율성", triangleGraphData.autonomyAverage)
+        ]
+        
+        let maxValue = attributes.map { $0.1 }.max()
+        let highestAttributes = attributes.filter { $0.1 == maxValue }.map { $0.0 }
+        
+        highestAttributesText = highestAttributes.joined(separator: ", ") + "이 가장 높게 나타났어요"
+    }
+}
+
+// LabReviewInfoView 구조체를 사용하여 각 리뷰를 표시합니다.
+struct LabReviewInfoView: View {
+    let review: LabReviewInfo
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(review.universityName)
+                .font(
+                    Font.custom("Pretendard", size: Constants.fontSize6)
+                        .weight(Constants.fontWeightMedium)
+                )
+                .foregroundColor(Constants.Gray900)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Text(review.departmentName)
+                .font(
+                    Font.custom("Pretendard", size: Constants.fontSize5)
+                        .weight(Constants.fontWeightSemibold)
+                )
+                .foregroundColor(Constants.Gray900)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Text(review.content)
+                .font(
+                    Font.custom("Pretendard", size: Constants.fontSize6)
+                        .weight(Constants.fontWeightMedium)
+                )
+                .foregroundColor(Constants.Gray900)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            
+            HStack(alignment: .center, spacing: 6) {
+                Text("지도력이 \(review.leadershipStyle)")
+                    .font(
+                    Font.custom("Pretendard", size: Constants.fontSize6)
+                    .weight(Constants.fontWeightMedium)
+                    )
+                    .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(Color(red: 0.99, green: 0.91, blue: 0.9))
+                    .cornerRadius(4)
+                
+                Text("인건비가 \(review.salaryLevel)")
+                    .font(
+                        Font.custom("Pretendard", size: Constants.fontSize6)
+                        .weight(Constants.fontWeightMedium)
+                    )
+                    .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(Color(red: 0.99, green: 0.91, blue: 0.9))
+                    .cornerRadius(4)
+                    .lineLimit(1) // Ensure the text is on one line
+                    .minimumScaleFactor(0.5) // Scale the text down if it overflows
+                
+                Text("자율성이 \(review.autonomy)")
+                    .font(
+                    Font.custom("Pretendard", size: Constants.fontSize6)
+                    .weight(Constants.fontWeightMedium)
+                    )
+                    .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(Color(red: 0.99, green: 0.91, blue: 0.9))
+                    .cornerRadius(4)
+            }
+            .font(.system(size: 12, weight: .medium))
+            .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
+        }
+        .padding(16)
+        .frame(width: 342, alignment: .topLeading)
+        .background(Constants.White)
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .inset(by: 0.5)
+                .stroke(Constants.Gray100, lineWidth: 1)
         )
     }
 }
 
+// RadarChart and related structs remain unchanged.
+
 struct RadarChart: View {
-    let categories = ["지도력", "자율성", "인건비"]
-    let values: [Double] = [0.8, 0.9, 0.6] // 각 항목의 점수 (0.0 ~ 1.0 사이의 값)
+    let triangleGraphData: TriangleGraphData
 
     var body: some View {
-        GeometryReader { geometry in
+        let values = [
+            triangleGraphData.leadershipAverage / 10,
+            triangleGraphData.salaryAverage / 10,
+            triangleGraphData.autonomyAverage / 10
+        ]
+        
+        return GeometryReader { geometry in
             ZStack {
                 radarChartBackground(geometry: geometry)
-                radarChartShape(geometry: geometry)
+                radarChartShape(geometry: geometry, values: values)
                 radarChartLabels(geometry: geometry)
             }
             .padding()
-            .frame(width: geometry.size.width, height: geometry.size.width) // 차트가 정사각형이 되도록 설정
+            .frame(width: geometry.size.width, height: geometry.size.width)
         }
-        .aspectRatio(1, contentMode: .fit) // 정사각형 비율을 유지하도록 설정
+        .aspectRatio(1, contentMode: .fit)
     }
 
     private func radarChartBackground(geometry: GeometryProxy) -> some View {
-        let background = RadarChartBackground(categories: categories)
+        let background = RadarChartBackground(categories: ["지도력", "자율성", "인건비"])
             .stroke(Color.gray.opacity(0.5), lineWidth: 1)
         
         return ZStack {
             ForEach(1..<4) { i in
-                RadarChartBackground(categories: categories)
+                RadarChartBackground(categories: ["지도력", "자율성", "인건비"])
                     .stroke(Color.gray.opacity(0.3), lineWidth: 0.5)
                     .scaleEffect(CGFloat(i) / 4)
             }
@@ -185,7 +318,7 @@ struct RadarChart: View {
         }
     }
 
-    private func radarChartShape(geometry: GeometryProxy) -> some View {
+    private func radarChartShape(geometry: GeometryProxy, values: [Double]) -> some View {
         let shape = RadarChartShape(values: values)
             .fill(LinearGradient(
                 stops: [
@@ -204,12 +337,12 @@ struct RadarChart: View {
         let radius = min(geometry.size.width, geometry.size.height) / 2
         let angles = calculateAngles()
 
-        return ForEach(0..<categories.count, id: \.self) { i in
+        return ForEach(0..<3) { i in
             let angle = angles[i]
             let x = center.x + radius * cos(angle)
             let y = center.y + radius * sin(angle)
 
-            Text(categories[i])
+            Text(["지도력", "자율성", "인건비"][i])
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(Constants.Gray900)
                 .position(x: x, y: y)
@@ -217,9 +350,9 @@ struct RadarChart: View {
     }
 
     private func calculateAngles() -> [Double] {
-        let angleIncrement = 2 * .pi / Double(categories.count)
-        return (0..<categories.count).map { i in
-            return angleIncrement * Double(i) - .pi / 2
+        let angleIncrement = 2 * Double.pi / 3
+        return (0..<3).map { i in
+            return angleIncrement * Double(i) - Double.pi / 2
         }
     }
 }
@@ -230,12 +363,12 @@ struct RadarChartBackground: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let center = CGPoint(x: rect.midX, y: rect.midY)
-        let angle = 2 * .pi / Double(categories.count)
+        let angle = 2 * Double.pi / Double(categories.count)
         let radius = min(rect.width, rect.height) / 2
 
         for i in 0..<categories.count {
-            let x = center.x + radius * cos(angle * Double(i) - .pi / 2)
-            let y = center.y + radius * sin(angle * Double(i) - .pi / 2)
+            let x = center.x + radius * cos(angle * Double(i) - Double.pi / 2)
+            let y = center.y + radius * sin(angle * Double(i) - Double.pi / 2)
             if i == 0 {
                 path.move(to: CGPoint(x: x, y: y))
             } else {
@@ -254,13 +387,13 @@ struct RadarChartShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let center = CGPoint(x: rect.midX, y: rect.midY)
-        let angle = 2 * .pi / Double(values.count)
+        let angle = 2 * Double.pi / Double(values.count)
         let radius = min(rect.width, rect.height) / 2
 
         for i in 0..<values.count {
             let valueRadius = radius * CGFloat(values[i])
-            let x = center.x + valueRadius * cos(angle * Double(i) - .pi / 2)
-            let y = center.y + valueRadius * sin(angle * Double(i) - .pi / 2)
+            let x = center.x + valueRadius * cos(angle * Double(i) - Double.pi / 2)
+            let y = center.y + valueRadius * sin(angle * Double(i) - Double.pi / 2)
             if i == 0 {
                 path.move(to: CGPoint(x: x, y: y))
             } else {
@@ -273,34 +406,19 @@ struct RadarChartShape: Shape {
     }
 }
 
-struct ContentView: View {
-    var body: some View {
-        RadarChart()
-            .frame(width: 200, height: 150)
-    }
-}
-
-struct RadarChartApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
-
 struct DirectoryOverlayButton: View {
     
+    var labId: Int
     var universityName: String
     var departmentName: String
     var professorName: String
 
     var body: some View {
         Button(action: {
-            // 버튼 클릭 시 동작할 코드를 여기에 작성합니다.
             print("글쓰기 버튼 tapped!")
         }) {
             NavigationLink(destination: LabReviewWriteViewController(
-                universityName: universityName,
+                labId: labId, universityName: universityName,
                 departmentName: departmentName,
                 professorName: professorName
             )) {
@@ -315,12 +433,12 @@ struct DirectoryOverlayButton: View {
                         .resizable()
                         .frame(width: 32, height: 32)
                 }
-                .buttonStyle(PlainButtonStyle()) // 버튼의 기본 스타일을 제거합니다.
+                .buttonStyle(PlainButtonStyle())
             }
         }
     }
 }
 
 #Preview {
-    LabDetailReviewViewController(universityName: "성신여자대학교", departmentName: "화학에너지융합학부 에너지재료연구실", professorName: "구본재")
+    LabDetailReviewViewController(labId: 1, universityName: "성신여자대학교", departmentName: "화학에너지융합학부 에너지재료연구실", professorName: "구본재")
 }
