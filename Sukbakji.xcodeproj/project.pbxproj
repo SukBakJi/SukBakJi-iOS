@@ -55,6 +55,9 @@
 		7B1C535A2C69D85800C66D0D /* DirectoryFavoriteLabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C53592C69D85800C66D0D /* DirectoryFavoriteLabModel.swift */; };
 		7B1C535E2C69F20E00C66D0D /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C535D2C69F20E00C66D0D /* SwiftUIView.swift */; };
 		7B1C53602C6A680000C66D0D /* BoardNewQnAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C535F2C6A680000C66D0D /* BoardNewQnAModel.swift */; };
+		7B1CFFA82C6F788900DE07F5 /* BoardScrapApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CFFA72C6F788900DE07F5 /* BoardScrapApi.swift */; };
+		7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B259AFD2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift */; };
+		7B259B002C75EB5700D3DFE5 /* LabReviewWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B259AFF2C75EB5700D3DFE5 /* LabReviewWriteViewController.swift */; };
 		7B3459EB2C68858E008B711A /* BoardWritePostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459EA2C68858E008B711A /* BoardWritePostModel.swift */; };
 		7B3459ED2C68870E008B711A /* BoardDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459EC2C68870E008B711A /* BoardDetailModel.swift */; };
 		7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459EE2C688A28008B711A /* BoardCommentsModel.swift */; };
@@ -70,7 +73,6 @@
 		7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */; };
 		7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */; };
 		7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */; };
-		7BFB8C982C5A41C300A31B70 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C972C5A41C300A31B70 /* RadarChart.swift */; };
 		7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C992C62778D00A31B70 /* SearchViewController.swift */; };
 		7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */; };
 		7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */; };
@@ -246,6 +248,9 @@
 		7B1C53592C69D85800C66D0D /* DirectoryFavoriteLabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryFavoriteLabModel.swift; sourceTree = "<group>"; };
 		7B1C535D2C69F20E00C66D0D /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		7B1C535F2C6A680000C66D0D /* BoardNewQnAModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardNewQnAModel.swift; sourceTree = "<group>"; };
+		7B1CFFA72C6F788900DE07F5 /* BoardScrapApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardScrapApi.swift; sourceTree = "<group>"; };
+		7B259AFD2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabDetailReviewViewController.swift; sourceTree = "<group>"; };
+		7B259AFF2C75EB5700D3DFE5 /* LabReviewWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewWriteViewController.swift; sourceTree = "<group>"; };
 		7B3459EA2C68858E008B711A /* BoardWritePostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardWritePostModel.swift; sourceTree = "<group>"; };
 		7B3459EC2C68870E008B711A /* BoardDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailModel.swift; sourceTree = "<group>"; };
 		7B3459EE2C688A28008B711A /* BoardCommentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentsModel.swift; sourceTree = "<group>"; };
@@ -261,7 +266,6 @@
 		7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentedBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentReviewWriteBoardViewController.swift; sourceTree = "<group>"; };
-		7BFB8C972C5A41C300A31B70 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
 		7BFB8C992C62778D00A31B70 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyBoards.swift; sourceTree = "<group>"; };
 		7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMainViewController.swift; sourceTree = "<group>"; };
@@ -555,6 +559,14 @@
 			path = DirectoryModel;
 			sourceTree = "<group>";
 		};
+		7B1CFFA62C6F787800DE07F5 /* BoardApi */ = {
+			isa = PBXGroup;
+			children = (
+				7B1CFFA72C6F788900DE07F5 /* BoardScrapApi.swift */,
+			);
+			path = BoardApi;
+			sourceTree = "<group>";
+		};
 		7B3E3D252C541F35002D6A43 /* Free */ = {
 			isa = PBXGroup;
 			children = (
@@ -574,7 +586,6 @@
 				7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */,
 				7B0E5D232C57A5BA00C7479F /* DummyBoardDetail.swift */,
 				7B0E5D252C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift */,
-				7BFB8C972C5A41C300A31B70 /* RadarChart.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -612,6 +623,8 @@
 				7BFE5D342C6613FD00EF16FB /* LabReviewViewController.swift */,
 				7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */,
 				7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */,
+				7B259AFD2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift */,
+				7B259AFF2C75EB5700D3DFE5 /* LabReviewWriteViewController.swift */,
 			);
 			path = Directory;
 			sourceTree = "<group>";
@@ -619,6 +632,7 @@
 		7BFDEC292C5224CD007280F8 /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				7B1CFFA62C6F787800DE07F5 /* BoardApi */,
 				7BFE5D3A2C68819600EF16FB /* BoardModel */,
 				7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */,
 				7BFDEC2A2C5224EF007280F8 /* BoardViewController.swift */,
@@ -1151,6 +1165,7 @@
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				7B1C535E2C69F20E00C66D0D /* SwiftUIView.swift in Sources */,
 				7B1C534E2C69D4E800C66D0D /* DirectoryLabReviewWriteModel.swift in Sources */,
+				7B259B002C75EB5700D3DFE5 /* LabReviewWriteViewController.swift in Sources */,
 				C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */,
 				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
@@ -1161,13 +1176,13 @@
 				7B1C535A2C69D85800C66D0D /* DirectoryFavoriteLabModel.swift in Sources */,
 				C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */,
 				7BFDEC312C52250A007280F8 /* BoardMasterViewController.swift in Sources */,
-				7BFB8C982C5A41C300A31B70 /* RadarChart.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
 				C70DB28F2C636B6600D6014B /* AlarmListModel.swift in Sources */,
 				C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */,
 				C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
 				C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */,
+				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
@@ -1175,6 +1190,7 @@
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7A99B182C6DBA5C00698C27 /* EditProfilePut.swift in Sources */,
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
+				7B1CFFA82C6F788900DE07F5 /* BoardScrapApi.swift in Sources */,
 				7B1C53582C69D80A00C66D0D /* DirectoryFavoriteCancelModel.swift in Sources */,
 				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,
 				C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */,

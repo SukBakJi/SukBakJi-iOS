@@ -8,14 +8,20 @@
 import Foundation
 
 // MARK: - BoardHotModel
-struct BoardHotModel: Codable {
+struct BoardHotModel: Decodable {
     let isSuccess: Bool
-    let code, message: String
-    let result: [BoardHotResult]
+    let code: String
+    let message: String
+    let result: [BoardHotPost]
 }
 
-// MARK: - BoardHotResult
-struct BoardHotResult: Codable {
-    let menu, boardName, title, content: String
-    let commentCount, views: Int
+// MARK: - BoardHotPost
+struct BoardHotPost: Decodable {
+    let postId: Int
+    let menu: String
+    let boardName: String
+    let title: String
+    let content: String
+    let commentCount: Int
+    let views: Int
 }

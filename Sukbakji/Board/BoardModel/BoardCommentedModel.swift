@@ -7,23 +7,21 @@
 
 import Foundation
 
-// MARK: - BoardScrappedModel
-struct BoardCommentedModel: Codable {
+// MARK: - BoardCommentedModel
+struct BoardCommentedModel: Decodable {
     let isSuccess: Bool
-    let code, message: String
-    let result: [BoardCommentedResult]
+    let code: String
+    let message: String
+    let result: [CommentedPost]
 }
 
-// MARK: - BoardCommentedResult
-struct BoardCommentedResult: Codable {
-    let postID: Int
-    let title, content: String
+// MARK: - CommentedPost
+struct CommentedPost: Decodable {
+    let postId: Int
+    let title: String
+    let content: String
     let views: Int
-    let boardName, menu: String
+    let boardName: String
+    let menu: String
     let commentCount: Int
-
-    enum CodingKeys: String, CodingKey {
-        case postID = "postId"
-        case title, content, views, boardName, menu, commentCount
-    }
 }

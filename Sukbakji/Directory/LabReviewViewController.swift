@@ -114,7 +114,7 @@ struct LabReviewViewController: View {
                     ForEach(reviews) { review in
                         
                         
-                        NewLabReview(review: review)
+                        LabReviewView(review: review)
                         
                     }
                     
@@ -123,7 +123,7 @@ struct LabReviewViewController: View {
                         ForEach(reviews) { review in
                             
                             
-                            NewLabReview(review: review)
+                            LabReviewView(review: review)
                         }
                     }
                     
@@ -162,7 +162,7 @@ struct LabReviewViewController: View {
     }
 }
 
-struct NewLabReview: View {
+struct LabReviewView: View {
     var review: LabReview
     
     var body: some View {

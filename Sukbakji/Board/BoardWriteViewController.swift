@@ -127,11 +127,18 @@ struct BoardWriteViewController: View {
 //            print("토큰이 없습니다.")
 //            return
 //        }
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            print("토큰이 없습니다.")
+            return
+        }
         
-        // 카테고리에 따른 메뉴 및 게시판 이름 설정
-        let menu = selectedCategory ?? "박사"  // 서버에서 기대하는 정확한 메뉴 이름으로 변경
-        let boardName = selectedOptionIndex ?? "질문 게시판"  // 서버에서 기대하는 정확한 게시판 이름으로 변경
+        let menu = selectedCategory ?? "박사"
+        let boardName = selectedOptionIndex ?? "질문 게시판"
         
+        // Extract the actual support field string based on the selected index
+        let supportField = selectedSupportFieldIndex != nil ?
+            ["기획·전략", "법무", "인사·HR", "회계·세무", "마케팅·광고·MD", "개발·데이터", "디자인", "물류·무역", "운전·운송·배송", "영업", "고객상담·TM", "금융·보험", "식·음료", "고객서비스·리테일", "엔지니어링·설계", "제조·생산", "교육", "건축·시설", "의료·바이오", "미디어·문화·스포츠", "공공·복지", "기타"][selectedSupportFieldIndex!] : nil
+
         let headers: HTTPHeaders = [
 //            "Authorization": "Bearer \(accessToken)",
             "Content-Type": "application/json",
@@ -144,7 +151,7 @@ struct BoardWriteViewController: View {
             let postParameters = BoardWritePostModelForJobPost(
                 menu: menu,
                 boardName: boardName,
-                supportField: selectedSupportFieldIndex != nil ? "분야" : "",
+                supportField: supportField ?? "",
                 job: selectedJob ?? "",
                 hiringType: selectedEmploymentType == 0 ? "신입" : "경력",
                 finalEducation: selectedEducationLevel == 0 ? "박사" : "석사",

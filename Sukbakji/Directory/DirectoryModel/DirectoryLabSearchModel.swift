@@ -13,20 +13,18 @@ struct DirectoryLabSearchModel: Encodable {
 }
 
 // MARK: - DirectoryLabSearchGetModel
-struct DirectoryLabSearchGetModel: Codable {
+struct DirectoryLabSearchGetModel: Decodable {
     let isSuccess: Bool
     let code, message: String
-    let result: [DirectoryLabSearchGetResult]
+    let result: [LabResult]
 }
 
-// MARK: - DirectoryLabSearchGetResult
-struct DirectoryLabSearchGetResult: Codable {
-    let labID: Int
-    let universityName, department, professorName: String
+// MARK: - LabResult
+struct LabResult: Decodable {
+    let labId: Int
+    let labName: String
+    let universityName: String
+    let departmentName: String
+    let professorName: String
     let researchTopics: [String]
-
-    enum CodingKeys: String, CodingKey {
-        case labID = "labId"
-        case universityName, department, professorName, researchTopics
-    }
 }
