@@ -203,7 +203,9 @@ class ThirdAcademicVerificationViewController: UIViewController {
         setupViews()
         setupLayout()
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            view.endEditing(true)
+    }
     // MARK: - navigationBar Title
     private func setUpNavigationBar(){
         self.title = "학력인증"
