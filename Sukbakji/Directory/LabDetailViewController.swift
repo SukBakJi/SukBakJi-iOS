@@ -98,7 +98,7 @@ struct LabDetailViewController: View {
                             universityName: labInfo.universityName,
                             labName: labInfo.departmentName,
                             professorName: labInfo.professorName,
-                            professorEmail: labInfo.professorEmail, // 이메일 전달
+                            professorEmail: labInfo.professorEmail, departmentName: labInfo.departmentName, // 이메일 전달
                             hasLabURL: !labInfo.labLink.isEmpty,
                             labURL: labInfo.labLink,
                             isBookmarked: $isBookmarked,
@@ -166,6 +166,7 @@ struct LabInfoView: View {
     var labName: String
     var professorName: String
     var professorEmail: String // 교수 이메일 추가
+    var departmentName: String
     var hasLabURL: Bool
     var labURL: String
     @Binding var isBookmarked: Bool
@@ -260,7 +261,7 @@ struct LabInfoView: View {
                         .foregroundColor(Constants.Gray600)
                         .frame(width: 50, alignment: .leading)
 
-                    Text("\(universityName) departmentName")
+                    Text("\(universityName) \(departmentName)")
                         .font(
                             Font.custom("Pretendard", size: Constants.fontSize5)
                                 .weight(Constants.fontWeightMedium)

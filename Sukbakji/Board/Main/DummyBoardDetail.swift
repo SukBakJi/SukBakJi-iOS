@@ -356,7 +356,8 @@ struct Comments: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center) {
-                Text(comment.anonymousName) // anonymousName 사용
+                // Display "글쓴이" instead of "익명1"
+                Text(comment.anonymousName == "익명1" ? "글쓴이" : comment.anonymousName)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Constants.Gray800)
                 Divider()
@@ -476,12 +477,12 @@ struct Comments: View {
             return "통합과정 재학"
         }
     }
-
+    
     // 날짜 형식을 'yyyy-MM-dd 작성'으로 변경하는 함수
     func formatDate(_ dateString: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS"
-
+        
         if let date = formatter.date(from: dateString) {
             formatter.dateFormat = "yyyy.MM.dd 작성"
             return formatter.string(from: date)
@@ -489,6 +490,7 @@ struct Comments: View {
         return dateString // 변환이 실패하면 원래 문자열 반환
     }
 }
+
 
 struct WriteComment: View {
     @Binding var commentText: String
