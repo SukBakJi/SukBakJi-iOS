@@ -114,7 +114,7 @@ struct DirectoryMainViewController: View {
                                             title: lab.universityName,
                                             universityName: lab.universityName,
                                             labName: lab.labName,
-                                            professorName: lab.professorName
+                                            professorName: lab.professorName, labId: lab.labId
                                         )
                                     }
                                 }
@@ -323,9 +323,10 @@ struct ScrappedLaboratory: View {
     var universityName: String
     var labName: String
     var professorName: String
+    var labId: Int // Add labId to the view
 
     var body: some View {
-        NavigationLink(destination: LabDetailViewController(labId: 1)) {
+        NavigationLink(destination: LabDetailViewController(labId: labId)) {
             HStack {
                 ZStack(alignment: .topLeading) {
                     VStack(spacing: 0) {
@@ -384,16 +385,6 @@ struct ScrappedLaboratory: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
-                        
-//                        HStack {
-//                            Text("label")
-//                                .font(.system(size: 12, weight: .medium))
-//                                .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-//                                .padding(.horizontal, 8)
-//                                .padding(.vertical, 3)
-//                                .background(Color(red: 0.99, green: 0.91, blue: 0.9))
-//                                .cornerRadius(4)
-//                        }
                     }
                     .padding(.horizontal, 18)
                     .padding(.vertical, 16)

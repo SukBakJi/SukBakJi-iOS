@@ -71,7 +71,7 @@ struct ScrappedLabDetailViewController: View {
                                 title: lab.universityName,
                                 universityName: lab.universityName,
                                 labName: lab.labName,
-                                professorName: lab.professorName
+                                professorName: lab.professorName, labId: lab.labId
                             )
                         }
                     }
