@@ -39,6 +39,8 @@ class CalendarViewController: UIViewController {
     var alarmDetailDatas: [AlarmList] = []
     var alarmDateDatas: [String] = []
     
+    let activityIndicator = UIActivityIndicatorView(style: .medium)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,13 +57,66 @@ class CalendarViewController: UIViewController {
         
         self.configure()
         self.setTableView()
+        
+        setupActivityIndicator()
+        
+        NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(self.didDismissDetailNotification(_:)),
+                  name: NSNotification.Name("SchoolComplete"),
+                  object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(self.didAlarmDetailNotification(_:)),
+                  name: NSNotification.Name("AlarmComplete"),
+                  object: nil
+        )
+    }
+    
+    @objc func didDismissDetailNotification(_ notification: Notification) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getUnivList()
+        }
+    }
+    
+    @objc func didAlarmDetailNotification(_ notification: Notification) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getAlarmList()
+        }
+    }
+    
+    func setupActivityIndicator() {
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
+    }
+    
+    func callAPI() {
+        self.getAlarmList()
+        DispatchQueue.global().async {
+            sleep(1)
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.getUnivList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getUnivList()
-        self.getAlarmList()
+        activityIndicator.startAnimating()
+        
+        // 0.5초 후에 API 호출
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.callAPI()
+        }
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }

@@ -12,7 +12,17 @@ class CalendarFBCViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(self.didDismissDetailNotification(_:)),
+                  name: NSNotification.Name("DismissTwo"),
+                  object: nil
+        )
+    }
+    
+    @objc func didDismissDetailNotification(_ notification: Notification) {
+        NotificationCenter.default.post(name: NSNotification.Name("AlarmComplete"), object: nil, userInfo: nil)
+        self.presentingViewController?.dismiss(animated: true)
     }
     
     @IBAction func myAlarm_Tapped(_ sender: Any) {
