@@ -45,9 +45,11 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getUserName()
-        self.getViewSchedule()
-        self.getMemberID()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getUserName()
+            self.getViewSchedule()
+            self.getMemberID()
+        }
 
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
