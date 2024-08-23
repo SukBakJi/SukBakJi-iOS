@@ -30,6 +30,8 @@ class AlarmDateViewController: UIViewController {
     private var calendarYear = Date()
     private var calendarMonth = Date()
     
+    private var calendarDate = Date()
+    
     private var days = [String]()
     
     weak var delegate: dateProtocol?
@@ -93,7 +95,7 @@ class AlarmDateViewController: UIViewController {
     
     private func configureMonthLabel() {
         self.dateView.addSubview(self.monthLabel)
-        self.monthLabel.text = "7월"
+        self.monthLabel.text = "8월"
         self.monthLabel.textColor = .black
         self.monthLabel.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         self.monthLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -166,17 +168,19 @@ class AlarmDateViewController: UIViewController {
         let componentsMonth = self.calendar.dateComponents([.month], from: Date())
         self.calendarYear = self.calendar.date(from: componentsYear) ?? Date()
         self.calendarMonth = self.calendar.date(from: componentsMonth) ?? Date()
+        let components = self.calendar.dateComponents([.year, .month], from: Date())
+        self.calendarDate = self.calendar.date(from: components) ?? Date()
         self.dateYearFormatter.dateFormat = "yyyy년"
         self.dateMonthFormatter.dateFormat = "MM월"
         self.updateCalendar()
     }
     
     private func startDayOfTheWeek() -> Int {
-        return self.calendar.component(.weekday, from: self.calendarYear) - 1
+        return self.calendar.component(.weekday, from: self.calendarDate) - 1
     }
     
     private func endDate() -> Int {
-        return self.calendar.range(of: .day, in: .month, for: self.calendarYear)?.count ?? Int()
+        return self.calendar.range(of: .day, in: .month, for: self.calendarDate)?.count ?? Int()
     }
     
     private func updateTitle(){

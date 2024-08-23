@@ -68,8 +68,13 @@ extension ApplyMentoringViewController: UITableViewDelegate, UITableViewDataSour
         cell.univName.text = detailData.univName
         cell.deptName.text = "\(detailData.deptName)부"
         cell.profName.text = "\(detailData.profName) 교수님"
-        cell.firstTopic.text = "#\(detailData.researchTopic[0])"
-        cell.secondTopic.text = "#\(detailData.researchTopic[1])"
+        if detailData.researchTopic.count == 1 {
+            cell.firstTopic.text = "#\(detailData.researchTopic[0])"
+            cell.secondTopicView.isHidden = true
+        } else {
+            cell.firstTopic.text = "#\(detailData.researchTopic[0])"
+            cell.secondTopic.text = "#\(detailData.researchTopic[1])"
+        }
         
         cell.selectionStyle = .none
         
