@@ -117,6 +117,7 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func didDismissDetailNotification(_ notification: Notification) {
+        NotificationCenter.default.post(name: NSNotification.Name("SchoolComplete"), object: nil, userInfo: nil)
         self.presentingViewController?.dismiss(animated: true)
     }
     

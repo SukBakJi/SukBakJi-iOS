@@ -528,7 +528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mah-Xv-Uv5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="107"/>
+            <point key="canvasLocation" x="1679" y="83"/>
         </scene>
         <!--Mypage View Controller-->
         <scene sceneID="85B-zC-bBI">
@@ -1684,7 +1684,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iH-t4-Pf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="395" y="386"/>
+            <point key="canvasLocation" x="415" y="345"/>
         </scene>
         <!--Favorite Board View Controller-->
         <scene sceneID="z6n-9m-9u0">
@@ -1837,7 +1837,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eMm-U1-gUe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="395" y="-102"/>
+            <point key="canvasLocation" x="395" y="-118"/>
         </scene>
         <!--Profile Tab View Controller-->
         <scene sceneID="iFC-LF-bbc">
@@ -1898,7 +1898,7 @@
                                 <rect key="frame" x="48" y="346.66666666666669" width="318" height="203.00000000000006"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 변경 불가" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EG-V9-Bxa">
-                                        <rect key="frame" x="92.666666666666657" y="24" width="133" height="21"/>
+                                        <rect key="frame" x="92.666666666666657" y="24" width="133.00000000000003" height="21"/>
                                         <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2013,7 +2013,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJg-ga-0YI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="-228"/>
+            <point key="canvasLocation" x="1679" y="-236"/>
         </scene>
     </scenes>
     <resources>
