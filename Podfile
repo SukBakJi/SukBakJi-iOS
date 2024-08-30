@@ -12,9 +12,9 @@ target 'Sukbakji' do
  pod 'Alamofire'
  pod 'Tabman', '~> 3.0'
  pod 'MaterialComponents/BottomSheet'
-pod 'KakaoSDKCommon'
-pod 'KakaoSDKAuth'
-pod 'KakaoSDKUser'	
+ pod 'KakaoSDKCommon'
+ pod 'KakaoSDKAuth'
+ pod 'KakaoSDKUser'	
 end
 post_install do |installer|
     installer.generated_projects.each do |project|

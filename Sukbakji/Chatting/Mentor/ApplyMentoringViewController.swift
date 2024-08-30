@@ -36,6 +36,8 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
         setTableView()
         setMoreButton()
         
+        hideKeyboardWhenTappedAround()
+        
         mentorSearchTF.errorfix()
         mentorSearchTF.delegate = self
     }

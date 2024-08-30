@@ -36,7 +36,9 @@ class SchoolCalendarViewController: UIViewController {
     }
     
     @objc func didDismissDetailNotification(_ notification: Notification) {
-        self.getUnivList()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getUnivList()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
