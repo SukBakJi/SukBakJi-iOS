@@ -34,6 +34,7 @@ class SchoolDeleteAlertViewController: UIViewController {
                 print("Failed to delete university: \(error.localizedDescription)")
             }
         }
+        
         NotificationCenter.default.post(name: NSNotification.Name("deleteUni"), object: nil, userInfo: nil)
         self.presentingViewController?.dismiss(animated: false)
     }

@@ -11,7 +11,7 @@ import Alamofire
 
 class SchoolDateViewController: UIViewController {
     
-    var memberId = UserDefaults.standard.integer(forKey: "memberID")
+    private var memberId = UserDefaults.standard.integer(forKey: "memberID")
     
     @IBOutlet weak var univLabel: UILabel!
     
@@ -27,26 +27,23 @@ class SchoolDateViewController: UIViewController {
     
     @IBOutlet weak var setButton: UIButton!
     
-    var receivedUnivName: String?
-    var univId: Int?
+    private var receivedUnivName: String?
+    private var univId: Int?
     
     let drop = DropDown()
-    var recruitType: [String] = []
+    private var recruitType: [String] = []
     
-    var methodData: UniMethodResponse?
-    var allMethodDatas: [UniMethodList] = []
+    private var methodData: UniMethodResponse?
+    private var allMethodDatas: [UniMethodList] = []
     
     private var uniData: UniPostResult!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        RecruitTF.addBottomShadow()
-        RecruitTF.setLeftPadding(10)
-        RecruitTF.isEnabled = false
         
-        warningImage.isHidden = true
-        warningLabel.isHidden = true
+        setSchoolDateView()
+        
+        settingButton()
         
         initUI()
         
@@ -60,8 +57,15 @@ class SchoolDateViewController: UIViewController {
                   name: NSNotification.Name("DismissOneMore"),
                   object: nil
         )
+    }
+    
+    func setSchoolDateView() {
+        RecruitTF.addBottomShadow()
+        RecruitTF.setLeftPadding(10)
+        RecruitTF.isEnabled = false
         
-        settingButton()
+        warningImage.isHidden = true
+        warningLabel.isHidden = true
         
         univLabel.text = receivedUnivName
     }
@@ -69,12 +73,13 @@ class SchoolDateViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getSchool(univId: univId ?? 0)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getSchool(univId: self.univId ?? 0)
+        }
     }
     
     func getSchool(univId: Int) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
 
@@ -95,6 +100,7 @@ class SchoolDateViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(UniMethodResultModel.self, from: data)
                     self.methodData = decodedData.result
                     self.allMethodDatas = self.methodData?.methodList ?? []
+                    
                     DispatchQueue.main.async {
                         for i in 0..<self.allMethodDatas.count {
                             self.recruitType.append(self.allMethodDatas[i].method)

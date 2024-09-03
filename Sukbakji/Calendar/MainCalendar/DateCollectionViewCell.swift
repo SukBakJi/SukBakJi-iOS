@@ -17,6 +17,10 @@ class DateCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        setCollectionView()
+    }
+    
+    func setCollectionView() {
         contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
         

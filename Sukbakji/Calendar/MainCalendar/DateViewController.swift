@@ -12,32 +12,36 @@ class DateViewController: UIViewController {
     
     @IBOutlet weak var DateCV: UICollectionView!
     
-    var allDatas: UpComingResult?
+    private var allDatas: UpComingResult?
     var allDetailDatas: [UpcomingResponse] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setDateCollectionView()
+        
+        getViewSchedule()
+    }
+    
+    func setDateCollectionView() {
         DateCV.delegate = self
         DateCV.dataSource = self
-        
         DateCV.layer.masksToBounds = false// any value you want
         DateCV.layer.shadowOpacity = 0.2// any value you want
         DateCV.layer.shadowRadius = 2 // any value you want
         DateCV.layer.shadowOffset = .init(width: 0, height: 1)
-        
-        getViewSchedule()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getViewSchedule()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getViewSchedule()
+        }
     }
 
     func getViewSchedule() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
 
@@ -55,6 +59,7 @@ class DateViewController: UIViewController {
                     self.allDatas = decodedData.result
                     self.allDetailDatas = self.allDatas?.scheduleList ?? []
                     self.allDetailDatas = self.allDetailDatas.filter { $0.dday >= 0 && $0.dday <= 10 }
+                    
                     DispatchQueue.main.async {
                         self.DateCV.reloadData()
                     }
