@@ -19,13 +19,7 @@ class SchoolCalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        schoolCalendarTV.delegate = self
-        schoolCalendarTV.dataSource = self
-        schoolCalendarTV.layer.masksToBounds = false// any value you want
-        schoolCalendarTV.layer.shadowOpacity = 0.2// any value you want
-        schoolCalendarTV.layer.shadowRadius = 2 // any value you want
-        schoolCalendarTV.layer.shadowOffset = .init(width: 0, height: 0.5)
-        schoolCalendarTV.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        setSchoolCalendarTableView()
         
         NotificationCenter.default.addObserver(
                   self,
@@ -33,6 +27,16 @@ class SchoolCalendarViewController: UIViewController {
                   name: NSNotification.Name("deleteUni"),
                   object: nil
         )
+    }
+    
+    func setSchoolCalendarTableView() {
+        schoolCalendarTV.delegate = self
+        schoolCalendarTV.dataSource = self
+        schoolCalendarTV.layer.masksToBounds = false// any value you want
+        schoolCalendarTV.layer.shadowOpacity = 0.2// any value you want
+        schoolCalendarTV.layer.shadowRadius = 2 // any value you want
+        schoolCalendarTV.layer.shadowOffset = .init(width: 0, height: 0.5)
+        schoolCalendarTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
     }
     
     @objc func didDismissDetailNotification(_ notification: Notification) {
@@ -44,12 +48,13 @@ class SchoolCalendarViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getUnivList()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getUnivList()
+        }
     }
     
     func getUnivList() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -66,6 +71,7 @@ class SchoolCalendarViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(UnivListResultModel.self, from: data)
                     self.allDatas = decodedData.result
                     self.allDetailDatas = self.allDatas?.univList ?? []
+                    
                     DispatchQueue.main.async {
                         self.univCount.text = "전체선택 (0/\(self.allDetailDatas.count))"
                         self.schoolCalendarTV.reloadData()

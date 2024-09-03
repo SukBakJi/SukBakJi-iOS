@@ -738,7 +738,7 @@
 			path = CalendarModel;
 			sourceTree = "<group>";
 		};
-		C7347E302C4D40F300688768 /* Pretendard */ = {
+		C7347E302C4D40F300688768 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				C7347E312C4D410200688768 /* Pretendard-Black.otf */,
@@ -758,7 +758,7 @@
 				C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */,
 				C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */,
 			);
-			path = Pretendard;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		C73ED52F2C62784400C455A2 /* HomeModel */ = {
@@ -820,7 +820,7 @@
 		C7A7BC262C3AF2D4007E66DA /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				C7347E302C4D40F300688768 /* Pretendard */,
+				C7347E302C4D40F300688768 /* Fonts */,
 			);
 			path = Font;
 			sourceTree = "<group>";

@@ -29,15 +29,15 @@ class CalendarViewController: UIViewController {
     private var calendarDate = Date()
     private var days = [String]()
     
-    var dateDatas: DateResponse?
+    private var dateDatas: DateResponse?
     var allDateDatas: [DateListResponse] = []
     
-    var UniDatas: UnivListResponse?
-    var UniDetailDatas: [UnivList] = []
+    private var UniDatas: UnivListResponse?
+    private var UniDetailDatas: [UnivList] = []
     
-    var alarmDatas: AlarmResponse?
-    var alarmDetailDatas: [AlarmList] = []
-    var alarmDateDatas: [String] = []
+    private var alarmDatas: AlarmResponse?
+    private var alarmDetailDatas: [AlarmList] = []
+    private var alarmDateDatas: [String] = []
     
     let activityIndicator = UIActivityIndicatorView(style: .medium)
     
@@ -47,16 +47,9 @@ class CalendarViewController: UIViewController {
         DateView.layer.cornerRadius = 10
         AlertView.layer.cornerRadius = 10
         
-        dateListTV.delegate = self
-        dateListTV.dataSource = self
-        dateListTV.layer.masksToBounds = false// any value you want
-        dateListTV.layer.shadowOpacity = 0.2// any value you want
-        dateListTV.layer.shadowRadius = 2 // any value you want
-        dateListTV.layer.shadowOffset = .init(width: 0, height: 0.2)
-        dateListTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+        setDateListTableView()
         
         self.configure()
-        self.setTableView()
         
         setupActivityIndicator()
         
@@ -102,20 +95,14 @@ class CalendarViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.getUnivList()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         activityIndicator.startAnimating()
         
-        // 0.5초 후에 API 호출
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.callAPI()
+            self.getUnivList()
         }
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -129,7 +116,6 @@ class CalendarViewController: UIViewController {
     
     func getUnivList() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -146,6 +132,7 @@ class CalendarViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(UnivListResultModel.self, from: data)
                     self.UniDatas = decodedData.result
                     self.UniDetailDatas = self.UniDatas?.univList ?? []
+                    
                     DispatchQueue.main.async {
                         if self.UniDetailDatas.count >= 1 {
                             self.AlertView.isHidden = true
@@ -175,7 +162,6 @@ class CalendarViewController: UIViewController {
     
     func getSchedule(date: String) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -196,6 +182,7 @@ class CalendarViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(DateResultModel.self, from: data)
                     self.dateDatas = decodedData.result
                     self.allDateDatas = self.dateDatas?.scheduleList ?? []
+                    
                     DispatchQueue.main.async {
                         self.dateListTV.reloadData()
                         if self.allDateDatas.count >= 1 {
@@ -226,7 +213,6 @@ class CalendarViewController: UIViewController {
     
     func getAlarmList() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -246,6 +232,7 @@ class CalendarViewController: UIViewController {
                     for i in 0..<self.alarmDetailDatas.count {
                         self.alarmDateDatas.append(self.alarmDetailDatas[i].alarmDate)
                     }
+                    
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
                     }
@@ -269,14 +256,14 @@ class CalendarViewController: UIViewController {
         }
     }
     
-    func setTableView() {
+    func setDateListTableView() {
         dateListTV.delegate = self
         dateListTV.dataSource = self
         dateListTV.layer.masksToBounds = false// any value you want
         dateListTV.layer.shadowOpacity = 0.2// any value you want
         dateListTV.layer.shadowRadius = 2 // any value you want
-        dateListTV.layer.shadowOffset = .init(width: 0, height: 0.5)
-        dateListTV.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        dateListTV.layer.shadowOffset = .init(width: 0, height: 0.2)
+        dateListTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
     }
     
     private func configure() {

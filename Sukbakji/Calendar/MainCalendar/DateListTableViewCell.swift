@@ -15,6 +15,7 @@ class DateListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,10 +27,6 @@ class DateListTableViewCell: UITableViewCell {
 }
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return allDateDatas.count
@@ -69,16 +66,16 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func expandHeight() {
-        let additionalHeight: CGFloat = 52 // 늘리고 싶은 높이 값을 설정 (예시)
+        let addHeight: CGFloat = 52 // 늘리고 싶은 높이 값을 설정 (예시)
         
-        self.dateListTVHeightConstraint.constant = additionalHeight
+        self.dateListTVHeightConstraint.constant = addHeight
         self.view.layoutIfNeeded()
     }
     
     func reduceHeight() {
-        let additionalHeight: CGFloat = 10 // 늘리고 싶은 높이 값을 설정 (예시)
+        let minusHeight: CGFloat = 10 // 줄이고 싶은 높이 값을 설정 (예시)
         
-        self.dateListTVHeightConstraint.constant = additionalHeight
+        self.dateListTVHeightConstraint.constant = minusHeight
         self.view.layoutIfNeeded()
     }
 }
