@@ -45,7 +45,9 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getMentorList()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.getMentorList()
+        }
     }
     
     func setTableView() {

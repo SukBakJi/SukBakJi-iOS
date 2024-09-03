@@ -17,6 +17,10 @@ class HotFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setHotFeedTV()
+    }
+    
+    func setHotFeedTV() {
         HotFeedTV.delegate = self
         HotFeedTV.dataSource = self
         HotFeedTV.layer.masksToBounds = true// any value you want
@@ -24,19 +28,18 @@ class HotFeedViewController: UIViewController {
         HotFeedTV.layer.shadowRadius = 2 // any value you want
         HotFeedTV.layer.shadowOffset = .init(width: 0, height: 0.2)
         HotFeedTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
-        
-        self.getHotBoard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getHotBoard()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.getHotBoard()
+        }
     }
     
     func getHotBoard() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -52,6 +55,7 @@ class HotFeedViewController: UIViewController {
                 do {
                     let decodedData = try JSONDecoder().decode(HotPostResultModel.self, from: data)
                     self.allDatas = decodedData.result
+                    
                     DispatchQueue.main.async {
                         self.HotFeedTV.reloadData()
                     }

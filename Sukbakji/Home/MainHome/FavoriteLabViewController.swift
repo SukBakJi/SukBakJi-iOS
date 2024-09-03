@@ -21,26 +21,30 @@ class FavoriteLabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setFavoriteLabCV()
+        
+        FavoriteLabPV.setProgress(0, animated: true)
+    }
+    
+    func setFavoriteLabCV() {
         FavoriteLabCV.delegate = self
         FavoriteLabCV.dataSource = self
-        
         FavoriteLabCV.layer.masksToBounds = false// any value you want
         FavoriteLabCV.layer.shadowOpacity = 0.2// any value you want
         FavoriteLabCV.layer.shadowRadius = 2 // any value you want
         FavoriteLabCV.layer.shadowOffset = .init(width: 0, height: 0.2)
-        
-        FavoriteLabPV.setProgress(0, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getFavoriteLab()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.getFavoriteLab()
+        }
     }
     
     func getFavoriteLab() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -56,6 +60,7 @@ class FavoriteLabViewController: UIViewController {
                 do {
                     let decodedData = try JSONDecoder().decode(FavoritesLabResultModel.self, from: data)
                     self.allDatas = decodedData.result
+                    
                     DispatchQueue.main.async {
                         self.FavoriteLabCV.reloadData()
                     }

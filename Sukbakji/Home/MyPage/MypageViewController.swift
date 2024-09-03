@@ -21,10 +21,9 @@ class MypageViewController: UIViewController {
     private var logoutData: LogoutResult!
     
     private var userToken: String?
-    
-    let numberFormatter = NumberFormatter()
-    
     private var point: String?
+    
+    private let numberFormatter = NumberFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +33,9 @@ class MypageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getUserName()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.getUserName()
+        }
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
@@ -46,9 +47,8 @@ class MypageViewController: UIViewController {
     }
     
     func getUserName() {
-        if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
-            userToken = retrievedData
-            print("Password retrieved and stored in userPW: \(userToken ?? "")")
+        if let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
+            userToken = retrievedToken
         } else {
             print("Failed to retrieve password.")
         }
@@ -65,6 +65,7 @@ class MypageViewController: UIViewController {
                 do {
                     let decodedData = try JSONDecoder().decode(MyPageResultModel.self, from: data)
                     self.userData = decodedData.result
+                    
                     DispatchQueue.main.async {
                         self.nameLabel.text = self.userData?.name
                         if self.userData?.degreeLevel == "BACHELORS_STUDYING" || self.userData?.degreeLevel == "BACHELORS_GRADUATED"{
