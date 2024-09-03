@@ -14,13 +14,15 @@ class ADViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setADCollectionView()
+    }
+    
+    func setADCollectionView() {
         ADCV.delegate = self
         ADCV.dataSource = self
-        
         ADCV.layer.masksToBounds = false// any value you want
         ADCV.layer.shadowOpacity = 0.2// any value you want
         ADCV.layer.shadowRadius = 2 // any value you want
         ADCV.layer.shadowOffset = .init(width: 0, height: 0.2)
     }
-
 }

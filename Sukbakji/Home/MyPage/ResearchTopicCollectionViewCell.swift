@@ -30,9 +30,8 @@ extension EditInfoViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let str = userData?.researchTopics?[indexPath.item]
-        let leng = str?.count ?? 0
-        return CGSize(width: 40 + leng * 12, height: 29)
+        let str = userData?.researchTopics?[indexPath.item].count ?? 0
+        return CGSize(width: 40 + str * 12, height: 29)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

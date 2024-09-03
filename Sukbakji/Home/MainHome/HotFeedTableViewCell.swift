@@ -34,10 +34,6 @@ class HotFeedTableViewCell: UITableViewCell {
 
 extension HotFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return allDatas.count
     }

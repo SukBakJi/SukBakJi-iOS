@@ -20,6 +20,10 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        setCollectionView()
+    }
+    
+    func setCollectionView() {
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         
@@ -34,21 +38,21 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
 extension FavoriteLabViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            let contentOffsetX = scrollView.contentOffset.x
-            let contentWidth = scrollView.contentSize.width
-            let scrollViewWidth = scrollView.frame.size.width
-            
-            // 현재 스크롤 위치에 따라 진행도 계산
-            let progress = Float(contentOffsetX / (contentWidth - scrollViewWidth))
-            
-            // ProgressView 업데이트
-            FavoriteLabPV.setProgress(progress, animated: true)
-            
-            // 컬렉션 뷰 끝에 도달했는지 확인
-            if contentOffsetX + scrollViewWidth >= contentWidth {
-                FavoriteLabPV.setProgress(1.0, animated: true)
-            }
+        let contentOffsetX = scrollView.contentOffset.x
+        let contentWidth = scrollView.contentSize.width
+        let scrollViewWidth = scrollView.frame.size.width
+        
+        // 현재 스크롤 위치에 따라 진행도 계산
+        let progress = Float(contentOffsetX / (contentWidth - scrollViewWidth))
+        
+        // ProgressView 업데이트
+        FavoriteLabPV.setProgress(progress, animated: true)
+        
+        // 컬렉션 뷰 끝에 도달했는지 확인
+        if contentOffsetX + scrollViewWidth >= contentWidth {
+            FavoriteLabPV.setProgress(1.0, animated: true)
         }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return allDatas.count
