@@ -35,6 +35,16 @@ class EditPWViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setTextField()
+        
+        settingButton()
+        
+        setPWView()
+        
+        hideKeyboardWhenTappedAround()
+    }
+    
+    func setTextField() {
         currentPWTF.addBottomShadow()
         newPWTF.addBottomShadow()
         newPWAgainTF.addBottomShadow()
@@ -44,12 +54,13 @@ class EditPWViewController: UIViewController {
         currentPWTF.errorfix()
         newPWTF.errorfix()
         newPWAgainTF.errorfix()
-        
-        settingButton()
-        
+    }
+    
+    func setPWView() {
         currentPWView.isHidden = true
         newPWView.isHidden = true
         newPWAgainView.isHidden = true
+        
         currentPWTF.addTarget(self, action: #selector(currentPWRegex), for: .editingChanged)
         newPWTF.addTarget(self, action: #selector(newPWRegex(_:)), for: .editingChanged)
         newPWAgainTF.addTarget(self, action: #selector(newPWAgainRegex), for: .editingChanged)
@@ -57,16 +68,10 @@ class EditPWViewController: UIViewController {
         currentPWTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         newPWTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         newPWAgainTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
-        
-        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        currentPWTF.errorfix()
-        newPWTF.errorfix()
-        newPWAgainTF.errorfix()
         
         getUserPW()
         getUserToken()
@@ -75,7 +80,6 @@ class EditPWViewController: UIViewController {
     func getUserToken() {
         if let retrievedData = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
             userToken = retrievedData
-            print("Password retrieved and stored in userPW: \(userToken ?? "")")
         } else {
             print("Failed to retrieve password.")
         }
@@ -84,7 +88,6 @@ class EditPWViewController: UIViewController {
     func getUserPW() {
         if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
             userPW = retrievedData
-            print("Password retrieved and stored in userPW: \(userPW ?? "")")
         } else {
             print("Failed to retrieve password.")
         }
@@ -158,7 +161,6 @@ class EditPWViewController: UIViewController {
     }
     
     @objc func newPWRegex(_ textField: UITextField) {
-        
         if isValidPW(testStr: textField.text) {
             newPWView.isHidden = true
             newPWEye.setImage(UIImage(named: "Sukbakji_PW_View"), for: .normal)
@@ -186,7 +188,6 @@ class EditPWViewController: UIViewController {
     }
     
     @objc func newPWAgainRegex(_ textField: UITextField) {
-        
         if (newPWAgainTF.text == newPWTF.text) {
             newPWAgainView.isHidden = true
             newPWAgainEye.setImage(UIImage(named: "Sukbakji_PW_View"), for: .normal)

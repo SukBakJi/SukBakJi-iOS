@@ -27,14 +27,18 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setUpComingView()
+        
+        topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
+    }
+    
+    func setUpComingView() {
         UpComingView.layer.cornerRadius = 10
         UpComingView.layer.masksToBounds = false// any value you want
         UpComingView.layer.shadowOpacity = 0.2// any value you want
         UpComingView.layer.shadowRadius = 2 // any value you want
         UpComingView.layer.shadowOffset = .init(width: 0, height: 0.2)
-        
-        topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
     }
     
     @objc func scrollToTop() {
@@ -45,7 +49,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.getUserName()
             self.getViewSchedule()
             self.getMemberID()
@@ -62,7 +66,6 @@ class HomeViewController: UIViewController {
     
     func getUserName() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -78,6 +81,7 @@ class HomeViewController: UIViewController {
                 do {
                     let decodedData = try JSONDecoder().decode(MyPageResultModel.self, from: data)
                     self.userData = decodedData.result
+                    
                     DispatchQueue.main.async {
                         self.nameLabel.text = self.userData?.name
                     }
@@ -103,7 +107,6 @@ class HomeViewController: UIViewController {
     
     func getViewSchedule() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
 
@@ -120,6 +123,7 @@ class HomeViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(UpComingResultModel.self, from: data)
                     self.allDatas = decodedData.result
                     self.allDetailDatas = self.allDatas?.scheduleList ?? []
+                    
                     DispatchQueue.main.async {
                         if self.allDetailDatas.count >= 1{
                             let upComingdDay = self.allDetailDatas[0].dday
@@ -168,7 +172,6 @@ class HomeViewController: UIViewController {
     
     func getMemberID() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -185,6 +188,7 @@ class HomeViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(memberIdResultModel.self, from: data)
                     self.memberData = decodedData.result
                     let memberId = self.memberData?.memberId
+                    
                     DispatchQueue.main.async {
                         UserDefaults.standard.set(memberId, forKey: "memberID")
                     }

@@ -11,6 +11,10 @@ class ADCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        setADView()
+    }
+    
+    func setADView() {
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         
@@ -22,7 +26,7 @@ class ADCollectionViewCell: UICollectionViewCell {
 extension ADViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

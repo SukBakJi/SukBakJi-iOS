@@ -19,6 +19,10 @@ class FavoriteBoardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setFavoriteBoardTV()
+    }
+    
+    func setFavoriteBoardTV() {
         FavoriteBoardTV.delegate = self
         FavoriteBoardTV.dataSource = self
         FavoriteBoardTV.layer.masksToBounds = true// any value you want
@@ -31,12 +35,13 @@ class FavoriteBoardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getFavoriteBoard()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.getFavoriteBoard()
+        }
     }
     
     func getFavoriteBoard() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -52,6 +57,7 @@ class FavoriteBoardViewController: UIViewController {
                 do {
                     let decodedData = try JSONDecoder().decode(FavoritesBoardResultModel.self, from: data)
                     self.allDatas = decodedData.result
+                    
                     DispatchQueue.main.async {
                         self.FavoriteBoardTV.reloadData()
                     }

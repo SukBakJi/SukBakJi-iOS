@@ -28,16 +28,11 @@ class FavoriteBoardTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        // 셀을 초기화 해주는 코드 작성
+        
     }
-
 }
 
 extension FavoriteBoardViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

@@ -23,16 +23,20 @@ class EditInfoViewController: UIViewController {
     var userData: MyPageResult?
     private var EditData: EditProfileResult!
     
-    var degreeLevel: DegreeLevel?
+    private var degreeLevel: DegreeLevel?
     
     private var userEmail: String?
     
-    let drop = DropDown()
-    let belongType = ["학사 졸업 또는 재학", "석사 재학", "석사 졸업", "박사 재학", "박사 졸업", "석박사 통합 재학"]
+    private let drop = DropDown()
+    private let belongType = ["학사 졸업 또는 재학", "석사 재학", "석사 졸업", "박사 재학", "박사 졸업", "석박사 통합 재학"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        seteditInfoView()
+    }
+    
+    func seteditInfoView() {
         idTF.addBottomShadow()
         idTF.setLeftPadding(10)
         nameTF.addBottomShadow()
@@ -51,7 +55,9 @@ class EditInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getUserName()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.getUserName()
+        }
     }
     
     func settingButton() {
@@ -64,15 +70,13 @@ class EditInfoViewController: UIViewController {
     }
     
     func getUserName() {
-        if let retrievedData = KeychainHelper.standard.read(service: "email", account: "user", type: String.self) {
-            userEmail = retrievedData
-            print("Password retrieved and stored in userPW: \(userEmail ?? "")")
+        if let retrievedEmail = KeychainHelper.standard.read(service: "email", account: "user", type: String.self) {
+            userEmail = retrievedEmail
         } else {
             print("Failed to retrieve password.")
         }
         
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -88,6 +92,7 @@ class EditInfoViewController: UIViewController {
                 do {
                     let decodedData = try JSONDecoder().decode(MyPageResultModel.self, from: data)
                     self.userData = decodedData.result
+                    
                     DispatchQueue.main.async {
                         self.idTF.text = self.userEmail
                         self.nameTF.text = self.userData?.name

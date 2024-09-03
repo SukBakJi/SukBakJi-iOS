@@ -31,7 +31,7 @@ class ProfileTabViewController: TabmanViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.getUserPW()
     }
         
@@ -40,9 +40,8 @@ class ProfileTabViewController: TabmanViewController {
     }
     
     func getUserPW() {
-        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
-            userPW = retrievedData
-            print("Password retrieved and stored in userPW: \(userPW)")
+        if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
+            userPW = retrievedPW
         } else {
             print("Failed to retrieve password.")
         }
@@ -70,7 +69,6 @@ class ProfileTabViewController: TabmanViewController {
             button.selectedFont = UIFont(name: "Pretendard-SemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
         }
 
-        
         bar.layout.contentMode = .intrinsic
         
         // 밑줄 쳐지는 부분
