@@ -18,23 +18,19 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var schoolSearchTF: UITextField!
     @IBOutlet weak var setButton: UIButton!
 
-    var uniData: UniResponse?
+    private var uniData: UniResponse?
     var allUniDatas: [UniListResponse] = []
     
-    var selectedIndex: IndexPath?
+    private var searchTimer: Timer?
     
-    var searchTimer: Timer?
+    var selectedIndex: IndexPath?
     
     var univName: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.SchoolTV.dataSource = self
-        self.SchoolTV.delegate = self
-        
-        schoolSearchTF.errorfix()
-        schoolSearchTF.delegate = self
+        setSchoolSelectView()
         
         settingButton()
         
@@ -48,9 +44,16 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
         )
     }
     
+    func setSchoolSelectView() {
+        self.SchoolTV.dataSource = self
+        self.SchoolTV.delegate = self
+        
+        schoolSearchTF.errorfix()
+        schoolSearchTF.delegate = self
+    }
+    
     func getSchool() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
 
@@ -71,6 +74,7 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
                     let decodedData = try JSONDecoder().decode(UniResultModel.self, from: data)
                     self.uniData = decodedData.result
                     self.allUniDatas = self.uniData?.universityList ?? []
+                    
                     DispatchQueue.main.async {
                         self.SchoolTV.reloadData()
                         if (self.allUniDatas.count == 0) {

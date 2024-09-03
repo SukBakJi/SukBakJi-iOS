@@ -20,10 +20,10 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var topButton: UIButton!
     
-    var allDatas: UpComingResult?
-    var allDetailDatas: [UpcomingResponse] = []
-    var userData: MyPageResult?
-    var memberData: memberIdResult?
+    private var allDatas: UpComingResult?
+    private var allDetailDatas: [UpcomingResponse] = []
+    private var userData: MyPageResult?
+    private var memberData: memberIdResult?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.getUserName()
             self.getViewSchedule()
             self.getMemberID()

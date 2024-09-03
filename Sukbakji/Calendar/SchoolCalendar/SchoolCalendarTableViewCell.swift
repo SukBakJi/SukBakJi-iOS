@@ -36,10 +36,6 @@ class SchoolCalendarTableViewCell: UITableViewCell {
 
 extension SchoolCalendarViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return allDetailDatas.count
     }
@@ -85,6 +81,7 @@ extension SchoolCalendarViewController: UITableViewDelegate, UITableViewDataSour
     func handleButtonTap(for indexPath: IndexPath) {
         // API 호출을 위한 파라미터 생성
         let detailData = allDetailDatas[indexPath.section]
+        
         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "SchoolDeleteAlertVC") as? SchoolDeleteAlertViewController else { return }
         nextVC.modalPresentationStyle = .overCurrentContext
         

@@ -26,10 +26,6 @@ class SchoolSelectTableViewCell: UITableViewCell {
 
 extension SchoolSelectViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
