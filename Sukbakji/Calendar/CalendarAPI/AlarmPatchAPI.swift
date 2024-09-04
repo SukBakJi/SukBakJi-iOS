@@ -13,7 +13,6 @@ class APIAlarmPatch {
     
     func SendingPatchAlarmOn(parameters: AlarmPatchModel, handler: @escaping (_ result: AlarmPatchResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -45,7 +44,6 @@ class APIAlarmPatch {
     
     func SendingPatchAlarmOff(parameters: AlarmPatchModel, handler: @escaping (_ result: AlarmPatchResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         

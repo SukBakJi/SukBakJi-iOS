@@ -17,14 +17,28 @@ class MyAlarmViewController: UIViewController {
     private let dateFormatter = DateFormatter()
     private var calendarDate = Date()
     
-    var allDatas: AlarmResponse?
+    private var allDatas: AlarmResponse?
     var allDetailDatas: [AlarmList] = []
     
-    var alarmData: AlarmPatchResult!
+    private var alarmData: AlarmPatchResult!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setMyAlarmTableView()
+        
+        self.configureCalendar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getAlarmList()
+        }
+    }
+    
+    func setMyAlarmTableView() {
         myAlarmTV.delegate = self
         myAlarmTV.dataSource = self
         myAlarmTV.layer.masksToBounds = true// any value you want
@@ -32,20 +46,10 @@ class MyAlarmViewController: UIViewController {
         myAlarmTV.layer.shadowRadius = 2 // any value you want
         myAlarmTV.layer.shadowOffset = .init(width: 0, height: 0.5)
         myAlarmTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
-        
-        self.configureCalendar()
-        self.getAlarmList()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.getAlarmList()
     }
     
     func getAlarmList() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -62,6 +66,7 @@ class MyAlarmViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(AlarmResultModel.self, from: data)
                     self.allDatas = decodedData.result
                     self.allDetailDatas = self.allDatas?.alarmList ?? []
+                    
                     DispatchQueue.main.async {
                         self.myAlarmTV.reloadData()
                     }

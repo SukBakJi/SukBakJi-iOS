@@ -13,7 +13,6 @@ class APIUniPost {
     
     func SendingPostUni(parameters: UniPostModel, handler: @escaping (_ result: UniPostResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         

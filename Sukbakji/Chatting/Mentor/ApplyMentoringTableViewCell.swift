@@ -18,7 +18,7 @@ class ApplyMentoringTableViewCell: UITableViewCell {
     @IBOutlet weak var secondTopicView: UIView!
     @IBOutlet weak var mentoringButton: UIButton!
     
-    var index: Int = 0
+    private var index: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,10 +36,6 @@ class ApplyMentoringTableViewCell: UITableViewCell {
 }
 
 extension ApplyMentoringViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return allDetailDatas.count
