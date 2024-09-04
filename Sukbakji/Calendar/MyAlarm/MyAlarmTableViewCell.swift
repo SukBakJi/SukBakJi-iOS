@@ -38,10 +38,6 @@ class MyAlarmTableViewCell: UITableViewCell {
 
 extension MyAlarmViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return allDetailDatas.count
     }
@@ -112,18 +108,17 @@ extension MyAlarmViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func handleButtonTap(for indexPath: IndexPath) {
-        // API 호출을 위한 파라미터 생성
         let detailData = allDetailDatas[indexPath.section]
         let parameters = AlarmPatchModel(alarmId: detailData.alarmId)
         if (detailData.onoff == 1) {
             APIAlarmPatch.instance.SendingPatchAlarmOff(parameters: parameters) { result in
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
                     self.getAlarmList()
                 }
             }
         } else if (detailData.onoff == 0) {
             APIAlarmPatch.instance.SendingPatchAlarmOn(parameters: parameters) { result in
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
                     self.getAlarmList()
                 }
             }

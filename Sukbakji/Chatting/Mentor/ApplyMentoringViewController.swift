@@ -23,12 +23,12 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var mentorSearchTF: UITextField!
     
-    var allDatas: MentorListResponse?
+    private var allDatas: MentorListResponse?
     var allDetailDatas: [MentorList] = []
     
-    var selectedIndex: IndexPath?
+    private var selectedIndex: IndexPath?
     
-    var searchTimer: Timer?
+    private var searchTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +38,20 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
         
         hideKeyboardWhenTappedAround()
         
-        mentorSearchTF.errorfix()
-        mentorSearchTF.delegate = self
+        setTextField()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.getMentorList()
         }
+    }
+    
+    func setTextField() {
+        mentorSearchTF.errorfix()
+        mentorSearchTF.delegate = self
     }
     
     func setTableView() {
@@ -69,7 +73,6 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
     
     func getMentorList() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         
@@ -123,7 +126,6 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
     
     func getMentor() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
 
@@ -184,13 +186,13 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
         
         if updatedText.isEmpty {
             getMentorList()
-            
             return true
         }
         
         searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { [weak self] _ in
             self?.getMentor()
         })
+        
         return true
     }
     

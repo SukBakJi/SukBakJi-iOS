@@ -9,6 +9,8 @@ import UIKit
 
 class MentoringPostViewController: UIViewController, UITextViewDelegate {
     
+    private var memberId = UserDefaults.standard.integer(forKey: "memberID")
+    
     @IBOutlet weak var titleTV: UITextView!
     @IBOutlet weak var questionTV: UITextView!
     @IBOutlet weak var setButton: UIButton!
@@ -16,9 +18,7 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var titleWarningSV: UIStackView!
     @IBOutlet weak var questionWarningSV: UIStackView!
     
-    let memberId = UserDefaults.standard.integer(forKey: "memberID")
-    
-    var mentorId: Int = 0
+    private var mentorId: Int = 0
     
     private var mentoringData: MentoringPostResult!
     

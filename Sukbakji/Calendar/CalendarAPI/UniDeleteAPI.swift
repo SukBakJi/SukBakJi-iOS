@@ -13,7 +13,6 @@ class APIUniDelete {
     
     func SendingUniDelete(parameters: UniDeleteModel, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         

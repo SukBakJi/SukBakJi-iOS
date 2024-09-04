@@ -10,7 +10,7 @@ import DropDown
 
 class AlarmViewController: UIViewController, dateProtocol {
     
-    var memberId = UserDefaults.standard.integer(forKey: "memberID")
+    private var memberId = UserDefaults.standard.integer(forKey: "memberID")
     
     @IBOutlet weak var SchoolTF: UITextField!
     @IBOutlet weak var AlarmNameTF: UITextField!
@@ -25,16 +25,16 @@ class AlarmViewController: UIViewController, dateProtocol {
     let drop = DropDown()
     let schoolName = ["서울대학교", "연세대학교", "고려대학교", "카이스트"]
     
-    var pickerHour = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-    var pickerMinute:[String] = []
-    var pickerDay = ["오전", "오후"]
+    private var pickerHour = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    private var pickerMinute = [String]()
+    private var pickerDay = ["오전", "오후"]
     
-    var day: String = "오전"
-    var hour: String = "8"
-    var minute: String = "00"
+    private var day: String = "오전"
+    private var hour: String = "8"
+    private var minute: String = "00"
     
-    var timeLabel: String = "8:00"
-    var dateData: String = ""
+    private var timeLabel: String = "8:00"
+    private var dateData: String = ""
     
     private var alarmData: AlarmPostResult!
     
@@ -50,15 +50,7 @@ class AlarmViewController: UIViewController, dateProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SchoolTF.setLeftPadding(10)
-        SchoolTF.isEnabled = false
-        SchoolTF.errorfix()
-        AlarmNameTF.setLeftPadding(10)
-        AlarmNameTF.errorfix()
-        AlarmDateTF.isEnabled = false
-        AlarmDateTF.errorfix()
-        
-        DatePicker.isHidden = true
+        setAlarmView()
         
         settingButton()
         
@@ -69,12 +61,20 @@ class AlarmViewController: UIViewController, dateProtocol {
         
         hideKeyboardWhenTappedAround()
         
+        AlarmNameTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+    }
+    
+    func setAlarmView() {
+        SchoolTF.setLeftPadding(10)
+        SchoolTF.isEnabled = false
+        SchoolTF.errorfix()
+        AlarmNameTF.setLeftPadding(10)
+        AlarmNameTF.errorfix()
+        AlarmDateTF.isEnabled = false
+        AlarmDateTF.errorfix()
+        DatePicker.isHidden = true
         DatePicker.delegate = self
         DatePicker.dataSource = self
-        
-        AlarmNameTF.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
-        
-        print(memberId)
     }
     
     override func viewDidLayoutSubviews() {
@@ -217,21 +217,19 @@ extension AlarmViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         switch component {
-                case 0:
-                    return pickerDay.count
-                case 1:
-                    return pickerHour.count
-                case 2:
-                    return pickerMinute.count
-                default:
-                    return 0
-                }
+        case 0:
+            return pickerDay.count
+        case 1:
+            return pickerHour.count
+        case 2:
+            return pickerMinute.count
+        default:
+            return 0
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
         switch component {
             case 0:
                 return "\(pickerDay[row])"
@@ -245,7 +243,6 @@ extension AlarmViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
         var label = view as! UILabel?
         if label == nil {
             label = UILabel()
@@ -271,7 +268,6 @@ extension AlarmViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         switch component {
         case 0:
             day = pickerDay[row]
