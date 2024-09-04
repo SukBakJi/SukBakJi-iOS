@@ -13,7 +13,6 @@ class APIMentorPost {
     
     func SendingPostMentor(parameters: MentorPostModel, handler: @escaping (_ result: MentorPostResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            print("Failed to retrieve password.")
             return
         }
         

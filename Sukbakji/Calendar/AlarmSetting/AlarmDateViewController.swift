@@ -241,6 +241,7 @@ extension AlarmDateViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmDateCollectionViewCell.identifier, for: indexPath) as? AlarmDateCollectionViewCell else { return UICollectionViewCell() }
         cell.updateDay(day: self.days[indexPath.item])
+        
         return cell
     }
     

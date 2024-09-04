@@ -27,10 +27,8 @@ class SchoolDeleteAlertViewController: UIViewController {
         APIUniDelete.instance.SendingUniDelete(parameters: parameters) { result in
             switch result {
             case .success:
-                // 사용자에게 삭제 성공 알림
                 print("University deletion successful.")
             case .failure(let error):
-                // 사용자에게 오류 알림
                 print("Failed to delete university: \(error.localizedDescription)")
             }
         }
