@@ -104,6 +104,14 @@
 		C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2882C63633000D6014B /* UniPostModel.swift */; };
 		C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28A2C63646A00D6014B /* UniMethodModel.swift */; };
 		C70DB28F2C636B6600D6014B /* AlarmListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28E2C636B6600D6014B /* AlarmListModel.swift */; };
+		C71565042C8E9FF10038A782 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565032C8E9FF10038A782 /* RoomViewController.swift */; };
+		C71565062C8EA4430038A782 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565052C8EA4430038A782 /* ChatViewController.swift */; };
+		C71565082C8EB9810038A782 /* MentoringRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */; };
+		C715650A2C8EB9A30038A782 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565092C8EB9A30038A782 /* RoomTableViewCell.swift */; };
+		C715650C2C8EB9AC0038A782 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715650B2C8EB9AC0038A782 /* ChatTableViewCell.swift */; };
+		C715650E2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715650D2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift */; };
+		C71565122C8EBC0F0038A782 /* MentoringChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565112C8EBC0F0038A782 /* MentoringChatViewController.swift */; };
+		C71565142C8EBC1F0038A782 /* MentoringChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565132C8EBC1F0038A782 /* MentoringChatTableViewCell.swift */; };
 		C715D3822C6A2A2B0020060D /* AlarmPatchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74DC22A2C59D6AF004BDC25 /* AlarmPatchAPI.swift */; };
 		C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716EF172C50FB1200474228 /* SchoolDateViewController.swift */; };
 		C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14862C44CE59003AFCB7 /* Home.storyboard */; };
@@ -299,6 +307,14 @@
 		C70DB2882C63633000D6014B /* UniPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniPostModel.swift; sourceTree = "<group>"; };
 		C70DB28A2C63646A00D6014B /* UniMethodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniMethodModel.swift; sourceTree = "<group>"; };
 		C70DB28E2C636B6600D6014B /* AlarmListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListModel.swift; sourceTree = "<group>"; };
+		C71565032C8E9FF10038A782 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		C71565052C8EA4430038A782 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringRoomViewController.swift; sourceTree = "<group>"; };
+		C71565092C8EB9A30038A782 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
+		C715650B2C8EB9AC0038A782 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		C715650D2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringRoomTableViewCell.swift; sourceTree = "<group>"; };
+		C71565112C8EBC0F0038A782 /* MentoringChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringChatViewController.swift; sourceTree = "<group>"; };
+		C71565132C8EBC1F0038A782 /* MentoringChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringChatTableViewCell.swift; sourceTree = "<group>"; };
 		C716EF172C50FB1200474228 /* SchoolDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDateViewController.swift; sourceTree = "<group>"; };
 		C71E14862C44CE59003AFCB7 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		C71E14882C44CE64003AFCB7 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
@@ -934,6 +950,10 @@
 			isa = PBXGroup;
 			children = (
 				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
+				C71565032C8E9FF10038A782 /* RoomViewController.swift */,
+				C71565092C8EB9A30038A782 /* RoomTableViewCell.swift */,
+				C71565052C8EA4430038A782 /* ChatViewController.swift */,
+				C715650B2C8EB9AC0038A782 /* ChatTableViewCell.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -942,6 +962,10 @@
 			isa = PBXGroup;
 			children = (
 				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
+				C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */,
+				C715650D2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift */,
+				C71565112C8EBC0F0038A782 /* MentoringChatViewController.swift */,
+				C71565132C8EBC1F0038A782 /* MentoringChatTableViewCell.swift */,
 				C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */,
 				C707E4BA2C69CB97005D390C /* ApplyMentoringTableViewCell.swift */,
 				C7ECF5492C677F8600283F06 /* ApplyMentorViewController.swift */,
@@ -1131,16 +1155,19 @@
 				C7A5A0CE2C6A5DFD00946B48 /* SelectDateModel.swift in Sources */,
 				C73ED52E2C6272CC00C455A2 /* MyPageModel.swift in Sources */,
 				C7ECF54A2C677F8600283F06 /* ApplyMentorViewController.swift in Sources */,
+				C715650C2C8EB9AC0038A782 /* ChatTableViewCell.swift in Sources */,
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */,
 				7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */,
 				7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */,
 				C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */,
+				C71565062C8EA4430038A782 /* ChatViewController.swift in Sources */,
 				417AADC42C652228002080E0 /* LoginModel.swift in Sources */,
 				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
 				C7C5686B2C6F42C900A57821 /* ApplyMentorModel.swift in Sources */,
 				41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */,
+				C71565042C8E9FF10038A782 /* RoomViewController.swift in Sources */,
 				C7023D302C6E1B8B0036D355 /* UniDeleteAPI.swift in Sources */,
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
 				C7A99B1A2C6DBA6700698C27 /* LogoutPost.swift in Sources */,
@@ -1189,6 +1216,7 @@
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
+				C71565122C8EBC0F0038A782 /* MentoringChatViewController.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
 				C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
@@ -1209,6 +1237,7 @@
 				412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */,
 				C7F954E42C6FACFE00A4B275 /* MentoringPostViewController.swift in Sources */,
 				C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */,
+				C71565082C8EB9810038A782 /* MentoringRoomViewController.swift in Sources */,
 				417AADB72C606B17002080E0 /* TOSViewController.swift in Sources */,
 				7B3459ED2C68870E008B711A /* BoardDetailModel.swift in Sources */,
 				417AADC22C65221D002080E0 /* LoginAPIInput.swift in Sources */,
@@ -1221,6 +1250,7 @@
 				7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */,
 				C7A5A0D02C6A5F2700946B48 /* UnivNameModel.swift in Sources */,
 				C72F14DE2C594DAA0017B57E /* CalendarFBCViewController.swift in Sources */,
+				C71565142C8EBC1F0038A782 /* MentoringChatTableViewCell.swift in Sources */,
 				7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */,
 				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
 				412F92322C5C9E280042B834 /* SecondAcademicVerificationViewController.swift in Sources */,
@@ -1235,6 +1265,7 @@
 				C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */,
 				C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */,
 				7B1C53482C69D10800C66D0D /* DirectoryLabSearchModel.swift in Sources */,
+				C715650E2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift in Sources */,
 				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
 				415BBC0D2C73442F002768EE /* NetworkManager.swift in Sources */,
@@ -1259,6 +1290,7 @@
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
 				417AADBF2C64E40A002080E0 /* placeholder+.swift in Sources */,
+				C715650A2C8EB9A30038A782 /* RoomTableViewCell.swift in Sources */,
 				7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */,
 				412F92342C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift in Sources */,
 				7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */,
