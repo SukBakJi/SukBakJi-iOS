@@ -43,6 +43,9 @@ PODS:
     - MaterialComponents/ShadowLayer
   - Pageboy (4.2.0)
   - SnapKit (5.7.1)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
   - Tabman (3.2.0):
     - Pageboy (~> 4.2.0)
   - Then (3.0.0)
@@ -55,6 +58,7 @@ DEPENDENCIES:
   - KakaoSDKUser
   - MaterialComponents/BottomSheet
   - SnapKit (~> 5.7.0)
+  - Socket.IO-Client-Swift (~> 15.2.0)
   - Tabman (~> 3.0)
   - Then
 
@@ -68,6 +72,8 @@ SPEC REPOS:
     - MaterialComponents
     - Pageboy
     - SnapKit
+    - Socket.IO-Client-Swift
+    - Starscream
     - Tabman
     - Then
 
@@ -80,9 +86,11 @@ SPEC CHECKSUMS:
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   Pageboy: 7f7886f61c76633df635861bf7839caf2cabdb3e
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   Tabman: 49f9181a2bfe5c29d002864dac2de8e0b7ea9180
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: cebea59004c91ab8a344cac5dff96130fd3ce1f4
+PODFILE CHECKSUM: f51aad07011237d288e2920f1542116033a9f4c3
 
 COCOAPODS: 1.15.2
