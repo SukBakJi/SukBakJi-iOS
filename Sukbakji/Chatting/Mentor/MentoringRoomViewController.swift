@@ -8,6 +8,8 @@
 import UIKit
 
 class MentoringRoomViewController: UIViewController {
+    
+    @IBOutlet weak var mentoringRoomTV: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

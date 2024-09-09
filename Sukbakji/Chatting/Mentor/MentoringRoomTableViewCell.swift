@@ -8,7 +8,13 @@
 import UIKit
 
 class MentoringRoomTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var univLabel: UILabel!
+    @IBOutlet weak var majorLabel: UILabel!
+    @IBOutlet weak var profLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
