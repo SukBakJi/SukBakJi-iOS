@@ -6,15 +6,16 @@ target 'Sukbakji' do
   use_frameworks!
 
   # Pods for Sukbakji
- pod 'Then'
- pod 'SnapKit', '~> 5.7.0'
- pod 'DropDown', '2.3.13'
- pod 'Alamofire'
- pod 'Tabman', '~> 3.0'
- pod 'MaterialComponents/BottomSheet'
- pod 'KakaoSDKCommon'
- pod 'KakaoSDKAuth'
- pod 'KakaoSDKUser'	
+  pod 'Then'
+  pod 'SnapKit', '~> 5.7.0'
+  pod 'DropDown', '2.3.13'
+  pod 'Alamofire'
+  pod 'Tabman', '~> 3.0'
+  pod 'MaterialComponents/BottomSheet'
+  pod 'KakaoSDKCommon'
+  pod 'KakaoSDKAuth'
+  pod 'KakaoSDKUser'
+  pod 'Socket.IO-Client-Swift', '~> 15.2.0'	
 end
 post_install do |installer|
     installer.generated_projects.each do |project|
