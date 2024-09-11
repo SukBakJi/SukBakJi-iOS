@@ -18,6 +18,9 @@ class ChatViewController: UIViewController {
     
     @IBOutlet weak var chatTableView: UITableView!
     
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var messageTF: UITextField!
+    
     var socket: SocketIOClient!
     var manager: SocketManager!
     
@@ -32,11 +35,50 @@ class ChatViewController: UIViewController {
         
         setupSocket()
         setTableView()
+        setTextField()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        // 뷰 컨트롤러가 해제될 때 노티피케이션 제거
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        // 키보드 높이 가져오기
+        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardSize.cgRectValue.height
+            
+            // 키보드가 올라오는 애니메이션과 동기화
+            UIView.animate(withDuration: 0.3) {
+                self.bottomView.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight)
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        // 키보드가 내려가는 애니메이션과 동기화
+        UIView.animate(withDuration: 0.3) {
+            self.bottomView.transform = .identity // 원래 위치로 복귀
+        }
     }
     
     func setTableView() {
         chatTableView.delegate = self
         chatTableView.dataSource = self
+    }
+    
+    func setTextField() {
+        messageTF.setLeftPadding(10)
+        messageTF.errorfix()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        messageTF.addBottomShadow()
     }
     
     func setupSocket() {
@@ -69,6 +111,12 @@ class ChatViewController: UIViewController {
         guard !messages.isEmpty else { return }
         let indexPath = IndexPath(row: messages.count - 1, section: 0)
         chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
+    
+    @IBAction func next_Tapped(_ sender: Any) {
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MentoringChatVC") as? MentoringChatViewController else { return }
+        
+        self.present(nextVC, animated: true)
     }
     
     @IBAction func back_Tapped(_ sender: Any) {
