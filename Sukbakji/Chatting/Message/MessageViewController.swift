@@ -14,4 +14,10 @@ class MessageViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func go_Chat(_ sender: Any) {
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "ChatVC") as? ChatViewController else { return }
+        
+        self.present(nextVC, animated: true)
+    }
 }

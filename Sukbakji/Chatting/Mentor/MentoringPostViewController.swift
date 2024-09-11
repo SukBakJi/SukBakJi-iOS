@@ -18,7 +18,7 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var titleWarningSV: UIStackView!
     @IBOutlet weak var questionWarningSV: UIStackView!
     
-    private var mentorId: Int = 0
+    var mentorId: Int = 0
     
     private var mentoringData: MentoringPostResult!
     

@@ -124,7 +124,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아직 채팅방이 없어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHj-x9-9A4">
-                                <rect key="frame" x="24" y="50" width="155" height="26"/>
+                                <rect key="frame" x="24" y="50" width="154" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="YYG-1T-W4a"/>
                                 </constraints>
@@ -133,7 +133,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시판을 탐색하고 채팅을 나눠 보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vON-8j-YnD">
-                                <rect key="frame" x="24" y="80" width="213" height="26"/>
+                                <rect key="frame" x="24.000000000000014" y="80" width="211.33333333333337" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="Pkq-pV-7XB"/>
                                 </constraints>
@@ -159,6 +159,9 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" name="Coquelicot"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="go_Chat:" destination="ETj-ZZ-LMW" eventType="touchUpInside" id="rQo-ym-Kar"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jka-wA-PN5"/>
@@ -189,7 +192,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아직 멘토가 없어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITb-ix-I7H">
-                                <rect key="frame" x="28" y="50" width="139.33333333333334" height="26"/>
+                                <rect key="frame" x="28" y="50" width="138.33333333333334" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="Nlh-xD-Yhg"/>
                                 </constraints>
@@ -198,7 +201,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가고 싶은 연구실 선배와 함께 대화해봐요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="by1-7e-xgs">
-                                <rect key="frame" x="28" y="80" width="229" height="26"/>
+                                <rect key="frame" x="28" y="80" width="227" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="aDG-Ws-DbW"/>
                                 </constraints>
@@ -229,7 +232,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="멘토링 어떻게 진행되나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2o0-Jb-uLY">
-                                <rect key="frame" x="28" y="420" width="191.33333333333334" height="26"/>
+                                <rect key="frame" x="28" y="420" width="189" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="daZ-yd-a1g"/>
                                 </constraints>
@@ -238,17 +241,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_MentorProgress" translatesAutoresizingMaskIntoConstraints="NO" id="eUy-st-4dN">
-                                <rect key="frame" x="223.33333333333334" y="430" width="20" height="20"/>
+                                <rect key="frame" x="221" y="430" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="h4i-l8-Wz1"/>
                                     <constraint firstAttribute="height" constant="20" id="tuh-Vy-IiE"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jyf-bp-k5V">
-                                <rect key="frame" x="74.666666666666686" y="478" width="244" height="26"/>
+                                <rect key="frame" x="76" y="478" width="241" height="26"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="석박지 멘토링" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9r-bH-Oat">
-                                        <rect key="frame" x="0.0" y="0.0" width="87.666666666666671" height="26"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="87" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="1Ya-sQ-zWM"/>
                                         </constraints>
@@ -257,7 +260,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=", 이렇게 진행되고 있어요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rs6-H6-VKV">
-                                        <rect key="frame" x="87.666666666666671" y="0.0" width="156.33333333333331" height="26"/>
+                                        <rect key="frame" x="87" y="0.0" width="154" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="Ryc-Lx-1m4"/>
                                         </constraints>
@@ -268,13 +271,13 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="멘토 매칭 후 앱 채팅 기능을 통해 멘토링을 진행해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGS-Ng-dWq">
-                                <rect key="frame" x="53.666666666666657" y="516" width="285.66666666666674" height="16.333333333333371"/>
+                                <rect key="frame" x="55.333333333333343" y="516" width="282.33333333333326" height="17"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
                                 <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hE-gM-nkO">
-                                <rect key="frame" x="25.666666666666657" y="572.33333333333337" width="342" height="92"/>
+                                <rect key="frame" x="25.666666666666657" y="573" width="342" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="342" id="6GF-GC-PD2"/>
                                     <constraint firstAttribute="height" constant="92" id="QB2-1i-gc1"/>
@@ -637,7 +640,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="멘토 신청" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I45-xD-I54">
-                                <rect key="frame" x="155.33333333333334" y="58.999999999999993" width="82.333333333333343" height="26.666666666666664"/>
+                                <rect key="frame" x="156" y="58.999999999999993" width="81.333333333333314" height="26.666666666666664"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -665,13 +668,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현재 소속된 연구실 정보를 입력해 주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWY-ws-7Wi">
-                                <rect key="frame" x="24" y="117.66666666666669" width="290" height="21"/>
+                                <rect key="frame" x="24" y="117.66666666666669" width="286" height="21"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="멘토 신청을 위해서는 소속 연구실 정보가 필요해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKU-Np-h11">
-                                <rect key="frame" x="24" y="146.66666666666666" width="277.66666666666669" height="17"/>
+                                <rect key="frame" x="24" y="146.66666666666666" width="275.33333333333331" height="17"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
                                 <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -882,7 +885,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7/30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSn-Fk-xlQ">
-                                                    <rect key="frame" x="345.66666666666669" y="19" width="23.333333333333314" height="13.333333333333336"/>
+                                                    <rect key="frame" x="345.66666666666669" y="19" width="23.333333333333314" height="13"/>
                                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="11"/>
                                                     <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -935,7 +938,7 @@
         <!--Chat View Controller-->
         <scene sceneID="eL4-DM-LWl">
             <objects>
-                <viewController storyboardIdentifier="ChatVC" id="BXa-rd-9J3" customClass="ChatViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatVC" modalPresentationStyle="fullScreen" id="BXa-rd-9J3" customClass="ChatViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6J0-zt-h7z">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -979,6 +982,7 @@
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Menu"/>
                                 <connections>
                                     <action selector="back_Tapped:" destination="8u3-br-Awk" eventType="touchUpInside" id="ljh-1H-RTR"/>
+                                    <action selector="next_Tapped:" destination="BXa-rd-9J3" eventType="touchUpInside" id="9dP-WS-Puf"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t73-04-adw">
@@ -1075,11 +1079,11 @@
                                 <rect key="frame" x="0.0" y="254.33333333333331" width="393" height="517.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Chat_TableViewCell" id="9lW-e4-gMp" customClass="ChatTableViewCell" customModule="Sukbakji" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Chat_TableViewCell" rowHeight="300" id="9lW-e4-gMp" customClass="ChatTableViewCell" customModule="Sukbakji" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9lW-e4-gMp" id="gg9-LW-063">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1149,9 +1153,11 @@
                     </view>
                     <connections>
                         <outlet property="boardView" destination="86X-yt-hwR" id="ibi-3a-4k8"/>
+                        <outlet property="bottomView" destination="ihh-bl-qAs" id="Fmp-nh-UPm"/>
                         <outlet property="chatTableView" destination="nXw-R1-5zE" id="JWG-hq-pcf"/>
                         <outlet property="fromLabel" destination="k4t-Gu-pZH" id="ekt-MN-Aad"/>
                         <outlet property="kindView" destination="X1a-7H-Oxl" id="qof-kG-jWe"/>
+                        <outlet property="messageTF" destination="EkA-wm-oNC" id="6Bn-O7-Qgd"/>
                         <outlet property="titleLabel" destination="1lG-I0-UYJ" id="WFY-eG-JUX"/>
                     </connections>
                 </viewController>
@@ -1168,7 +1174,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="궁금한 점을 멘토에게 물어 보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuD-Kp-ZhR">
-                                <rect key="frame" x="23.999999999999986" y="50" width="242.66666666666663" height="26"/>
+                                <rect key="frame" x="24.000000000000014" y="50" width="240.33333333333337" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="CPW-EE-vPY"/>
                                 </constraints>
@@ -1177,7 +1183,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가고 싶은 연구실 선배와 함께 대화해봐요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77v-vK-DjR">
-                                <rect key="frame" x="24" y="80" width="229" height="26"/>
+                                <rect key="frame" x="24" y="80" width="227" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="M0L-yj-aPD"/>
                                 </constraints>
@@ -1231,7 +1237,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김동훈 교수님 연구실" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xc-1v-34J">
-                                                    <rect key="frame" x="108" y="35" width="117" height="17"/>
+                                                    <rect key="frame" x="108" y="35" width="115.66666666666669" height="17"/>
                                                     <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1288,19 +1294,19 @@
         <!--Mentoring Chat View Controller-->
         <scene sceneID="mnd-Hc-5cx">
             <objects>
-                <viewController storyboardIdentifier="MentoringChatVC" id="Bka-ue-bpo" customClass="MentoringChatViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MentoringChatVC" modalPresentationStyle="fullScreen" id="Bka-ue-bpo" customClass="MentoringChatViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Syo-lK-ELT">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김동훈 교수님 연구실" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsQ-xE-x2L">
-                                <rect key="frame" x="104.66666666666667" y="58.999999999999993" width="183.66666666666663" height="25.666666666666664"/>
+                                <rect key="frame" x="105.66666666666667" y="59.000000000000007" width="181.66666666666663" height="26.333333333333336"/>
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-Mh-bG9">
-                                <rect key="frame" x="8" y="48" width="48" height="48"/>
+                                <rect key="frame" x="8" y="48.333333333333343" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="ME9-oF-8Bg"/>
                                     <constraint firstAttribute="height" constant="48" id="QOy-Au-yeQ"/>
@@ -1308,11 +1314,12 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Back"/>
                                 <connections>
+                                    <action selector="back_Button:" destination="Bka-ue-bpo" eventType="touchUpInside" id="NfZ-MR-rLu"/>
                                     <action selector="back_Tapped:" destination="8u3-br-Awk" eventType="touchUpInside" id="qeg-kI-jMu"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCh-Sa-VCW">
-                                <rect key="frame" x="0.0" y="96" width="393" height="1"/>
+                                <rect key="frame" x="0.0" y="96.333333333333329" width="393" height="1"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1.2" id="JEH-Mb-TDe"/>
@@ -1322,7 +1329,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEQ-MP-a0h">
-                                <rect key="frame" x="337" y="48" width="48" height="48"/>
+                                <rect key="frame" x="337" y="48.333333333333343" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="AbU-eb-XDD"/>
                                     <constraint firstAttribute="width" constant="48" id="bGY-rL-lXZ"/>
@@ -1334,10 +1341,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20G-ZZ-tCe">
-                                <rect key="frame" x="24" y="113" width="345" height="54"/>
+                                <rect key="frame" x="24" y="113.33333333333331" width="345" height="54"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="멘토 매칭" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52S-yg-9WP">
-                                        <rect key="frame" x="44" y="14" width="60" height="26"/>
+                                        <rect key="frame" x="44" y="14" width="59.333333333333343" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="4Td-5R-W7g"/>
                                         </constraints>
@@ -1346,7 +1353,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이 완료되었습니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fo-OU-Cri">
-                                        <rect key="frame" x="104" y="14" width="119.33333333333331" height="26"/>
+                                        <rect key="frame" x="103.33333333333334" y="14" width="119.33333333333334" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="6np-KB-rZG"/>
                                         </constraints>
@@ -1355,7 +1362,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_Pick" translatesAutoresizingMaskIntoConstraints="NO" id="adz-zj-Tb8">
-                                        <rect key="frame" x="16" y="16.666666666666657" width="20" height="20.666666666666671"/>
+                                        <rect key="frame" x="16" y="16.666666666666671" width="20" height="20.666666666666671"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1370,14 +1377,14 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fzd-1e-1lp">
-                                <rect key="frame" x="0.0" y="195" width="393" height="577"/>
+                                <rect key="frame" x="0.0" y="195.33333333333331" width="393" height="576.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MentoringChat_TableViewCell" id="1vk-EC-GdK" customClass="MentoringChatTableViewCell" customModule="Sukbakji" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MentoringChat_TableViewCell" rowHeight="300" id="1vk-EC-GdK" customClass="MentoringChatTableViewCell" customModule="Sukbakji" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1vk-EC-GdK" id="CVj-7G-Xz3">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1446,7 +1453,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomView" destination="V7P-yj-z8R" id="x0d-b0-fx9"/>
                         <outlet property="mentoringChatTV" destination="Fzd-1e-1lp" id="0ye-XQ-mqZ"/>
+                        <outlet property="messageTF" destination="l8j-3i-Ys4" id="jua-Rv-Evp"/>
                         <outlet property="profLabel" destination="EsQ-xE-x2L" id="Wjh-Sv-kDs"/>
                     </connections>
                 </viewController>

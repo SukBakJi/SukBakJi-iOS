@@ -27,8 +27,8 @@ class SchoolDateViewController: UIViewController {
     
     @IBOutlet weak var setButton: UIButton!
     
-    private var receivedUnivName: String?
-    private var univId: Int?
+    var receivedUnivName: String?
+    var univId: Int?
     
     let drop = DropDown()
     private var recruitType: [String] = []
