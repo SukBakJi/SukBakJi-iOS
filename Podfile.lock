@@ -42,6 +42,17 @@ PODS:
     - MaterialComponents/private/Math
     - MaterialComponents/ShadowLayer
   - Pageboy (4.2.0)
+  - RxAlamofire (6.1.1):
+    - RxAlamofire/Core (= 6.1.1)
+  - RxAlamofire/Core (6.1.1):
+    - Alamofire (~> 5.4)
+    - RxSwift (~> 6.0)
+  - RxCocoa (6.8.0):
+    - RxRelay (= 6.8.0)
+    - RxSwift (= 6.8.0)
+  - RxRelay (6.8.0):
+    - RxSwift (= 6.8.0)
+  - RxSwift (6.8.0)
   - SnapKit (5.7.1)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
@@ -57,6 +68,9 @@ DEPENDENCIES:
   - KakaoSDKCommon
   - KakaoSDKUser
   - MaterialComponents/BottomSheet
+  - RxAlamofire
+  - RxCocoa (= 6.8.0)
+  - RxSwift (= 6.8.0)
   - SnapKit (~> 5.7.0)
   - Socket.IO-Client-Swift (~> 15.2.0)
   - Tabman (~> 3.0)
@@ -71,6 +85,10 @@ SPEC REPOS:
     - KakaoSDKUser
     - MaterialComponents
     - Pageboy
+    - RxAlamofire
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SnapKit
     - Socket.IO-Client-Swift
     - Starscream
@@ -85,12 +103,16 @@ SPEC CHECKSUMS:
   KakaoSDKUser: 642c339cdb3722216241c541a843f6a4588f6cf4
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   Pageboy: 7f7886f61c76633df635861bf7839caf2cabdb3e
+  RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
+  RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
+  RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
+  RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   Tabman: 49f9181a2bfe5c29d002864dac2de8e0b7ea9180
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: f51aad07011237d288e2920f1542116033a9f4c3
+PODFILE CHECKSUM: f175affa1644564ff9ad559cd9ad065efa5fa307
 
 COCOAPODS: 1.15.2

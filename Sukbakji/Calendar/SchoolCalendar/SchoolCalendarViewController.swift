@@ -58,7 +58,7 @@ class SchoolCalendarViewController: UIViewController {
             return
         }
         
-        let url = APIConstants.calendarURL + "/univ"
+        let url = APIConstants.calendar.path + "/univ"
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(retrievedToken)",

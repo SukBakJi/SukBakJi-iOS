@@ -53,7 +53,7 @@ class MypageViewController: UIViewController {
             print("Failed to retrieve password.")
         }
         
-        let url = APIConstants.userURL + "/mypage"
+        let url = APIConstants.user.path + "/mypage"
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(userToken ?? "")",

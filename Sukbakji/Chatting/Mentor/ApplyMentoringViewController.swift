@@ -76,7 +76,7 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let url = APIConstants.mentorURL
+        let url = APIConstants.mentor.path
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(retrievedToken)",
@@ -129,7 +129,7 @@ class ApplyMentoringViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
-        let url = APIConstants.mentorURL + "/search"
+        let url = APIConstants.mentor.path + "/search"
         
         let parameter: Parameters = [
             "keyword": "\(mentorSearchTF.text ?? "")"

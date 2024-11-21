@@ -250,7 +250,7 @@ struct DummyBoardDetail: View {
     
     // 게시물 삭제 함수
     func deletePost() {
-        let url = APIConstants.boardpostURL + "/\(postId)"
+        let url = APIConstants.posts.path + "/\(postId)"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
@@ -279,7 +279,7 @@ struct DummyBoardDetail: View {
 
     // 게시글 상세 정보를 불러오는 함수
     func loadBoardDetail(postId: Int) {
-        let url = APIConstants.boardpostURL + "/\(postId)"
+        let url = APIConstants.posts.path + "/\(postId)"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
@@ -318,7 +318,7 @@ struct DummyBoardDetail: View {
 
     // ProfileGetDataManager 함수 정의
     func ProfileGetDataManager(completion: @escaping (ProfileModel?) -> Void) {
-        let url = APIConstants.userURL + "/mypage"
+        let url = APIConstants.user.path + "/mypage"
         let headers: HTTPHeaders = [
             "Accept": "*/*"
         ]

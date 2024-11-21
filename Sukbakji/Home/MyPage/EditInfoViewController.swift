@@ -80,7 +80,7 @@ class EditInfoViewController: UIViewController {
             return
         }
         
-        let url = APIConstants.userURL + "/mypage"
+        let url = APIConstants.user.path + "/mypage"
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(retrievedToken)",

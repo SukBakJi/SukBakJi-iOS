@@ -8,8 +8,8 @@
 import Alamofire
 
 class LoginDataManager {
-    let url = APIConstants.joinURL + "/login"
-    let kakaoUrl = APIConstants.joinURL + "/kakao"
+    let url = APIConstants.auth.path + "/login"
+    let kakaoUrl = APIConstants.auth.path + "/kakao"
     let headers:HTTPHeaders = [
         "Accept": "*/*",
         "Content-Type": "application/json"

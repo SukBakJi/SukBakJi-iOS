@@ -43,7 +43,7 @@ class HotFeedViewController: UIViewController {
             return
         }
         
-        let url = APIConstants.communityURL + "/hot-boards"
+        let url = APIConstants.community.path + "/hot-boards"
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(retrievedToken)",
