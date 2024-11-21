@@ -119,7 +119,7 @@ struct BoardMasterViewController: View {
 //        }
         
         let boardName = selectedButton ?? "질문 게시판"
-        let url = APIConstants.boardpostURL + "/list"
+        let url = APIConstants.posts.path + "/list"
         
         let parameters: [String: Any] = [
             "menu": "석사",

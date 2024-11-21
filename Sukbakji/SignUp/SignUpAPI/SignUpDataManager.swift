@@ -8,8 +8,8 @@
 import Alamofire
 
 class SignUpDataManager {
-    let url = APIConstants.joinURL + "/signup"
-    let emailUrl = APIConstants.joinURL + "/email"
+    let url = APIConstants.auth.path + "/signup"
+    let emailUrl = APIConstants.auth.path + "/email"
     let headers:HTTPHeaders = [
         "Accept": "*/*",
         "Content-Type": "application/json"

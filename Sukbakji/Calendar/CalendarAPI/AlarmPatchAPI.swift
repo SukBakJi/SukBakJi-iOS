@@ -16,7 +16,7 @@ class APIAlarmPatch {
             return
         }
         
-        let url = APIConstants.calendarURL + "/alarm/on"
+        let url = APIConstants.calendar.path + "/alarm/on"
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"
@@ -47,7 +47,7 @@ class APIAlarmPatch {
             return
         }
         
-        let url = APIConstants.calendarURL + "/alarm/off"
+        let url = APIConstants.calendar.path + "/alarm/off"
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"
@@ -70,19 +70,6 @@ class APIAlarmPatch {
             case .failure(let error):
                 print(error.localizedDescription)
             }
-        }
-    }
-    
-    private func judgeStatus<T:Codable> (by statusCode: Int, _ data: Data, _ type: T.Type) -> NetworkResult<Any> {
-        let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(type.self, from: data)
-        else { return .pathErr }
-        
-        switch statusCode {
-        case 200 ..< 300: return .success(decodedData as Any)
-        case 400 ..< 500: return .pathErr
-        case 500: return .serverErr
-        default: return .networkFail
         }
     }
 }

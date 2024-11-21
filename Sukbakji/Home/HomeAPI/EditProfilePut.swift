@@ -17,7 +17,7 @@ class APIEditProfile {
             return
         }
         
-        let url = APIConstants.userURL + "/profile"
+        let url = APIConstants.user.path + "/profile"
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"

@@ -15,7 +15,10 @@ target 'Sukbakji' do
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
-  pod 'Socket.IO-Client-Swift', '~> 15.2.0'	
+  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
+  pod 'RxSwift', '6.8.0'
+  pod 'RxCocoa', '6.8.0'
+  pod 'RxAlamofire'	
 end
 post_install do |installer|
     installer.generated_projects.each do |project|
