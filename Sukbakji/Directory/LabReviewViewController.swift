@@ -173,7 +173,7 @@ struct LabReviewViewController: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .get, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: LabReviewListResponse.self) { response in
                 switch response.result {
@@ -205,7 +205,7 @@ struct LabReviewViewController: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: DirectoryLabReviewSearchGetModel.self) { response in
                 switch response.result {

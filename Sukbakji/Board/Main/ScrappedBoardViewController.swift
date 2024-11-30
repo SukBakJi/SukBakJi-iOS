@@ -87,14 +87,14 @@ struct ScrappedBoardViewController: View {
     }
 
     func BookmarkedBoardApi(completion: @escaping (Result<[BoardBookmarkedResult], Error>) -> Void) {
-        let url = APIConstants.communityURL + "/scrap-list"
+        let url = APIConstants.community.path + "/scrap-list"
 
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json",
         ]
 
-        NetworkManager.shared.request(url, method: .get, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: BoardBookmarkedModel.self) { response in
                 switch response.result {

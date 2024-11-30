@@ -7,12 +7,15 @@
 
 import UIKit
 import Alamofire
+import RxSwift
 
 class FavoriteBoardViewController: UIViewController {
     
     @IBOutlet weak var FavoriteBoardTV: UITableView!
     @IBOutlet weak var noFavLabel: UILabel!
     @IBOutlet weak var letsFavLabel: UILabel!
+   
+   private let disposeBag = DisposeBag()
     
     var allDatas: [FavoritesBoardResult] = []
     
@@ -41,43 +44,31 @@ class FavoriteBoardViewController: UIViewController {
     }
     
     func getFavoriteBoard() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        
-        let url = APIConstants.communityURL + "/favorite-post-list"
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(retrievedToken)",
-        ]
-        
-        AF.request(url, method: .get, headers: headers).responseData { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let decodedData = try JSONDecoder().decode(FavoritesBoardResultModel.self, from: data)
-                    self.allDatas = decodedData.result
-                    
-                    DispatchQueue.main.async {
-                        self.FavoriteBoardTV.reloadData()
-                    }
-                } catch let DecodingError.dataCorrupted(context) {
-                    print(context)
-                } catch let DecodingError.keyNotFound(key, context) {
-                    print("Key '\(key)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.valueNotFound(value, context) {
-                    print("Value '\(value)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.typeMismatch(type, context)  {
-                    print("Type '\(type)' mismatch:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch {
-                    print("error: ", error)
-                }
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        }
+//        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+//            return
+//        }
+//        
+//        let url = APIConstants.community.path + "/favorite-post-list"
+//        
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer \(retrievedToken)",
+//        ]
+//        
+//       RxAlamofire.requestData(.get, url, headers: headers)
+//          .subscribe(onNext: { [weak self] (response, data) in
+//                do {
+//                    let decodedData = try JSONDecoder().decode(FavoritesBoardResultModel.self, from: data)
+//                    self?.allDatas = decodedData.result
+//                    
+//                    DispatchQueue.main.async {
+//                        self?.FavoriteBoardTV.reloadData()
+//                    }
+//                } catch let error {
+//                   print("Decoding error: \(error)")
+//               }
+//           }, onError: { error in
+//               print("Error: \(error)")
+//           })
+//           .disposed(by: disposeBag)
     }
 }

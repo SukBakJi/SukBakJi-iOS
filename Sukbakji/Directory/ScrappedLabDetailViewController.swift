@@ -93,7 +93,7 @@ struct ScrappedLabDetailViewController: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .get, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ScrappedLabModel.self) { response in
                 switch response.result {

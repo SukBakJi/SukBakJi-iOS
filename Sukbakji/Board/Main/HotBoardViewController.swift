@@ -159,7 +159,7 @@ struct HotBoardViewController: View {
     }
     
     func HotBoardApi(completion: @escaping (Result<[BoardHotPost], Error>) -> Void) {
-        let url = APIConstants.communityURL + "/hot-boards"
+        let url = APIConstants.community.path + "/hot-boards"
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -168,7 +168,7 @@ struct HotBoardViewController: View {
         ]
         
         // NetworkManager.shared.request
-        NetworkManager.shared.request(url,
+        NetworkAuthManager.shared.request(url,
                    method: .get,
                    headers: headers)
         .validate(statusCode: 200..<300)

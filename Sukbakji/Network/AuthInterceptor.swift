@@ -60,7 +60,7 @@ class AuthInterceptor: RequestInterceptor {
             return
         }
         
-        let url = APIConstants.joinURL + "/refresh-token"
+        let url = APIConstants.auth.path + "/refresh-token"
         let headers: HTTPHeaders = [
             "Accept": "*/*",
             "Content-Type": "application/json"

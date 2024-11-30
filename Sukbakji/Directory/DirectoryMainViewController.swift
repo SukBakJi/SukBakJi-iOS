@@ -234,7 +234,7 @@ struct DirectoryMainViewController: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .get, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: LabReviewListResponse.self) { response in
                 switch response.result {
@@ -263,7 +263,7 @@ struct DirectoryMainViewController: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .get, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: DirectoryInterestTopicGetModel.self) { response in
                 switch response.result {
@@ -292,7 +292,7 @@ struct DirectoryMainViewController: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .get, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ScrappedLabModel.self) { response in
                 switch response.result {

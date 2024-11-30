@@ -394,7 +394,7 @@ struct LabInfoView: View {
             "Accept": "application/json"
         ]
 
-        NetworkManager.shared.request(url, method: .post, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .post, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: DirectoryFavoriteGetModel.self) { response in
                 switch response.result {

@@ -146,7 +146,7 @@ struct BoardWriteViewController: View {
         ]
         
         if boardName == "취업후기 게시판" {
-            let url = APIConstants.boardpostURL + "/createJobPost"
+            let url = APIConstants.posts.path + "/createJobPost"
             
             let postParameters = BoardWritePostModelForJobPost(
                 menu: menu,
@@ -159,7 +159,7 @@ struct BoardWriteViewController: View {
                 content: postText
             )
             
-            NetworkManager.shared.request(url,
+            NetworkAuthManager.shared.request(url,
                        method: .post,
                        parameters: postParameters,
                        encoder: JSONParameterEncoder.default,
@@ -169,7 +169,7 @@ struct BoardWriteViewController: View {
                     handleResponse(response)
                 }
         } else {
-            let url = APIConstants.boardpostURL + "/create"
+            let url = APIConstants.posts.path + "/create"
             
             let postParameters = BoardWritePostModelForGeneralPost(
                 menu: menu,
@@ -178,7 +178,7 @@ struct BoardWriteViewController: View {
                 content: postText
             )
             
-            NetworkManager.shared.request(url,
+            NetworkAuthManager.shared.request(url,
                        method: .post,
                        parameters: postParameters,
                        encoder: JSONParameterEncoder.default,

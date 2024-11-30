@@ -10,13 +10,13 @@ import Alamofire
 class ResearchTopicDataManager {
     func ResearchTopicDataManager(_ topicName: String, completion: @escaping (ResearchTopicModel?) -> Void) {
         
-        let url = APIConstants.reseachtopicURL + "/search" + "?topicName=\(topicName)"
+        let url = APIConstants.researchTopics.path + "/search" + "?topicName=\(topicName)"
         
         let headers: HTTPHeaders = [
             "Accept": "*/*"
         ]
         
-        NetworkManager.shared.request(url,
+        NetworkAuthManager.shared.request(url,
                    method: .post,
                    parameters: topicName,
                    encoder: JSONParameterEncoder.default,

@@ -48,7 +48,7 @@ class FavoriteLabViewController: UIViewController {
             return
         }
         
-        let url = APIConstants.labURL + "/mypage/favorite-labs"
+        let url = APIConstants.labs.path + "/mypage/favorite-labs"
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(retrievedToken)",
