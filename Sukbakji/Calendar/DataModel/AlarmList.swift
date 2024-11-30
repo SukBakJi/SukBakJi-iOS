@@ -7,16 +7,9 @@
 
 import Foundation
 
-struct AlarmResultModel : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: AlarmResponse
-}
-
-struct AlarmResponse : Codable {
+struct AlarmList : Codable {
     let memberId: Int
-    var alarmList: [AlarmList]
+    var alarmList: [AlarmListResult]
     
     enum CodingKeys: String, CodingKey {
         case memberId
@@ -27,11 +20,11 @@ struct AlarmResponse : Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.memberId = try container.decode(Int.self, forKey: .memberId)
-        self.alarmList = try container.decodeIfPresent([AlarmList].self, forKey: .alarmList) ?? []
+        self.alarmList = try container.decodeIfPresent([AlarmListResult].self, forKey: .alarmList) ?? []
     }
 }
 
-struct AlarmList : Codable {
+struct AlarmListResult : Codable {
     let alarmId: Int
     let alarmUnivName: String
     let alarmName: String

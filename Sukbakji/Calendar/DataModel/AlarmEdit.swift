@@ -7,18 +7,11 @@
 
 import Foundation
 
-struct AlarmPatchModel : Encodable {
+struct AlarmPatch : Encodable {
     let alarmId: Int
 }
 
 struct AlarmPatchResult : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: AlarmPatchResponse
-}
-
-struct AlarmPatchResponse : Codable {
     let alarmId: Int
     let onoff: Int
 }

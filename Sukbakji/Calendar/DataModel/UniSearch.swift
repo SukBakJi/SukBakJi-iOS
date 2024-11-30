@@ -7,18 +7,11 @@
 
 import Foundation
 
-struct UniResultModel : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: UniResponse
+struct UniSearch : Codable {
+    var universityList: [UniSearchList]
 }
 
-struct UniResponse : Codable {
-    var universityList: [UniListResponse]
-}
-
-struct UniListResponse : Codable {
+struct UniSearchList : Codable {
     let id: Int
     let name: String
 }

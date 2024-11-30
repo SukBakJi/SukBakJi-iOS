@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UniDeleteModel : Encodable {
+struct UniDelete : Encodable {
     let memberId: Int
     let univId: Int
     let season: String
@@ -15,13 +15,6 @@ struct UniDeleteModel : Encodable {
 }
 
 struct UniDeleteResult : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: UniDeleteResponse
-}
-
-struct UniDeleteResponse : Codable {
     let memberId: Int
     let message: String
 }

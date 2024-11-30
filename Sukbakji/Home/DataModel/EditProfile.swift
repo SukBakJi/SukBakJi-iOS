@@ -1,25 +1,18 @@
 //
-//  EditProfileModel.swift
+//  EditProfile.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 8/7/24.
+//  Created by jaegu park on 11/30/24.
 //
 
 import Foundation
 
-struct EditProfileModel : Encodable {
+struct EditProfile : Encodable {
     let degreeLevel: DegreeLevel
     let researchTopics: [String]
 }
 
 struct EditProfileResult : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: EditProfileResponse
-}
-
-struct EditProfileResponse : Codable {
     let name: String
     let degreeLevel: String
     let researchTopics: [String]

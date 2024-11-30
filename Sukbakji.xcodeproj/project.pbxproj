@@ -127,12 +127,6 @@
 		C7347E402C4D452E00688768 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E332C4D410200688768 /* Pretendard-Regular.otf */; };
 		C7347E412C4D453000688768 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */; };
 		C7347E422C4D453400688768 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E342C4D410300688768 /* Pretendard-Thin.otf */; };
-		C73ED52E2C6272CC00C455A2 /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED52D2C6272CC00C455A2 /* MyPageModel.swift */; };
-		C73ED5322C6279AB00C455A2 /* UpComingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5312C6279AB00C455A2 /* UpComingModel.swift */; };
-		C73ED5342C62821B00C455A2 /* FavoritesBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5332C62821B00C455A2 /* FavoritesBoardModel.swift */; };
-		C73ED5362C6282F000C455A2 /* HotPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5352C6282F000C455A2 /* HotPostModel.swift */; };
-		C73ED5382C62844900C455A2 /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5372C62844900C455A2 /* EditProfileModel.swift */; };
-		C73ED53A2C62845900C455A2 /* ChangePWModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73ED5392C62845900C455A2 /* ChangePWModel.swift */; };
 		C73F89842C5E834D007ECFE7 /* MyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73F89832C5E834D007ECFE7 /* MyAlarmViewController.swift */; };
 		C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CA82C45757200D4339D /* FavoriteLabViewController.swift */; };
 		C74D4CAB2C4575B600D4339D /* FavoriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CAA2C4575B600D4339D /* FavoriteBoardViewController.swift */; };
@@ -157,8 +151,6 @@
 		C7980A832CEF7D5400475D94 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A822CEF7D5400475D94 /* APIService.swift */; };
 		C7980A862CEF838C00475D94 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */; };
 		C7980A882CEF841E00475D94 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A872CEF841E00475D94 /* AlertViewController.swift */; };
-		C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */; };
-		C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */; };
 		C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79864002C652B450029F8E3 /* TFaddShadow.swift */; };
 		C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */; };
 		C7A434F92C62233200C47F5E /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor.swift */; };
@@ -193,9 +185,18 @@
 		C7E3EF542C60A87000DDC36B /* ADCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF532C60A87000DDC36B /* ADCollectionViewCell.swift */; };
 		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
 		C7EA31112C777B0900EFC53B /* KeyboardDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EA31102C777B0900EFC53B /* KeyboardDown.swift */; };
-		C7ECF5462C6757A700283F06 /* MemberIDModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ECF5452C6757A700283F06 /* MemberIDModel.swift */; };
 		C7ECF54A2C677F8600283F06 /* ApplyMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ECF5492C677F8600283F06 /* ApplyMentorViewController.swift */; };
 		C7ECF54C2C677F9200283F06 /* ApplyMentoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */; };
+		C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */; };
+		C7EFF5BE2CFB2D7A0019F30D /* MemberId.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5BD2CFB2D7A0019F30D /* MemberId.swift */; };
+		C7EFF5C02CFB2D8F0019F30D /* UpComing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5BF2CFB2D8F0019F30D /* UpComing.swift */; };
+		C7EFF5C22CFB2DED0019F30D /* FavoritesBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5C12CFB2DED0019F30D /* FavoritesBoard.swift */; };
+		C7EFF5C62CFB2E1A0019F30D /* HotPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5C52CFB2E1A0019F30D /* HotPost.swift */; };
+		C7EFF5C82CFB2E2D0019F30D /* FavoritesLab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5C72CFB2E2D0019F30D /* FavoritesLab.swift */; };
+		C7EFF5CA2CFB2E4C0019F30D /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5C92CFB2E4C0019F30D /* MyProfile.swift */; };
+		C7EFF5CC2CFB2E690019F30D /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5CB2CFB2E690019F30D /* EditProfile.swift */; };
+		C7EFF5CE2CFB2ECC0019F30D /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5CD2CFB2ECC0019F30D /* Logout.swift */; };
+		C7EFF5D02CFB2EEA0019F30D /* ChangePW.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5CF2CFB2EEA0019F30D /* ChangePW.swift */; };
 		C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */; };
 		C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */; };
 		C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F455302C39B8EE00A4D0EE /* ViewController.swift */; };
@@ -333,12 +334,6 @@
 		C7347E372C4D410300688768 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		C7347E392C4D410300688768 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
-		C73ED52D2C6272CC00C455A2 /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
-		C73ED5312C6279AB00C455A2 /* UpComingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingModel.swift; sourceTree = "<group>"; };
-		C73ED5332C62821B00C455A2 /* FavoritesBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesBoardModel.swift; sourceTree = "<group>"; };
-		C73ED5352C6282F000C455A2 /* HotPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPostModel.swift; sourceTree = "<group>"; };
-		C73ED5372C62844900C455A2 /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
-		C73ED5392C62845900C455A2 /* ChangePWModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePWModel.swift; sourceTree = "<group>"; };
 		C73F89832C5E834D007ECFE7 /* MyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmViewController.swift; sourceTree = "<group>"; };
 		C74D4CA82C45757200D4339D /* FavoriteLabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabViewController.swift; sourceTree = "<group>"; };
 		C74D4CAA2C4575B600D4339D /* FavoriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardViewController.swift; sourceTree = "<group>"; };
@@ -364,8 +359,6 @@
 		C7980A822CEF7D5400475D94 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C7980A872CEF841E00475D94 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLabModel.swift; sourceTree = "<group>"; };
-		C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
 		C79864002C652B450029F8E3 /* TFaddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFaddShadow.swift; sourceTree = "<group>"; };
 		C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectTableViewCell.swift; sourceTree = "<group>"; };
 		C7A434F82C62233200C47F5E /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
@@ -400,9 +393,18 @@
 		C7E3EF532C60A87000DDC36B /* ADCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7EA31102C777B0900EFC53B /* KeyboardDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDown.swift; sourceTree = "<group>"; };
-		C7ECF5452C6757A700283F06 /* MemberIDModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberIDModel.swift; sourceTree = "<group>"; };
 		C7ECF5492C677F8600283F06 /* ApplyMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentorViewController.swift; sourceTree = "<group>"; };
 		C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentoringViewController.swift; sourceTree = "<group>"; };
+		C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		C7EFF5BD2CFB2D7A0019F30D /* MemberId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberId.swift; sourceTree = "<group>"; };
+		C7EFF5BF2CFB2D8F0019F30D /* UpComing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComing.swift; sourceTree = "<group>"; };
+		C7EFF5C12CFB2DED0019F30D /* FavoritesBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesBoard.swift; sourceTree = "<group>"; };
+		C7EFF5C52CFB2E1A0019F30D /* HotPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPost.swift; sourceTree = "<group>"; };
+		C7EFF5C72CFB2E2D0019F30D /* FavoritesLab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLab.swift; sourceTree = "<group>"; };
+		C7EFF5C92CFB2E4C0019F30D /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
+		C7EFF5CB2CFB2E690019F30D /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
+		C7EFF5CD2CFB2ECC0019F30D /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
+		C7EFF5CF2CFB2EEA0019F30D /* ChangePW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePW.swift; sourceTree = "<group>"; };
 		C7F455292C39B8EE00A4D0EE /* Sukbakji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sukbakji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -724,7 +726,6 @@
 			children = (
 				C71E14862C44CE59003AFCB7 /* Home.storyboard */,
 				C7BC68132CF6E50000CEC0F3 /* DataModel */,
-				C73ED52F2C62784400C455A2 /* HomeModel */,
 				C73ED5302C62784E00C455A2 /* HomeAPI */,
 				C7E3EF552C60ABE300DDC36B /* MainHome */,
 				C7E3EF562C60B9BF00DDC36B /* MyPage */,
@@ -768,22 +769,6 @@
 				C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		C73ED52F2C62784400C455A2 /* HomeModel */ = {
-			isa = PBXGroup;
-			children = (
-				C7ECF5452C6757A700283F06 /* MemberIDModel.swift */,
-				C73ED5312C6279AB00C455A2 /* UpComingModel.swift */,
-				C73ED5332C62821B00C455A2 /* FavoritesBoardModel.swift */,
-				C73ED5352C6282F000C455A2 /* HotPostModel.swift */,
-				C79863FC2C6519600029F8E3 /* FavoritesLabModel.swift */,
-				C73ED52D2C6272CC00C455A2 /* MyPageModel.swift */,
-				C73ED5372C62844900C455A2 /* EditProfileModel.swift */,
-				C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */,
-				C73ED5392C62845900C455A2 /* ChangePWModel.swift */,
-			);
-			path = HomeModel;
 			sourceTree = "<group>";
 		};
 		C73ED5302C62784E00C455A2 /* HomeAPI */ = {
@@ -835,6 +820,15 @@
 		C7BC68132CF6E50000CEC0F3 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				C7EFF5BD2CFB2D7A0019F30D /* MemberId.swift */,
+				C7EFF5BF2CFB2D8F0019F30D /* UpComing.swift */,
+				C7EFF5C12CFB2DED0019F30D /* FavoritesBoard.swift */,
+				C7EFF5C72CFB2E2D0019F30D /* FavoritesLab.swift */,
+				C7EFF5C52CFB2E1A0019F30D /* HotPost.swift */,
+				C7EFF5C92CFB2E4C0019F30D /* MyProfile.swift */,
+				C7EFF5CB2CFB2E690019F30D /* EditProfile.swift */,
+				C7EFF5CD2CFB2ECC0019F30D /* Logout.swift */,
+				C7EFF5CF2CFB2EEA0019F30D /* ChangePW.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -870,6 +864,7 @@
 			children = (
 				C7DA4E3C2C611CE10092F342 /* APIConstants.swift */,
 				C7980A822CEF7D5400475D94 /* APIService.swift */,
+				C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */,
 				415BBC0A2C7343F8002768EE /* AuthInterceptor.swift */,
 				415BBC0C2C73442F002768EE /* NetworkAuthManager.swift */,
 			);
@@ -1188,7 +1183,6 @@
 			files = (
 				C715D3822C6A2A2B0020060D /* AlarmPatchAPI.swift in Sources */,
 				C7BC68272CF6E7D700CEC0F3 /* AlarmEnroll.swift in Sources */,
-				C73ED52E2C6272CC00C455A2 /* MyPageModel.swift in Sources */,
 				C7FB12A12CF9DF8C001695D1 /* BaseTableViewCell.swift in Sources */,
 				C7ECF54A2C677F8600283F06 /* ApplyMentorViewController.swift in Sources */,
 				C715650C2C8EB9AC0038A782 /* ChatTableViewCell.swift in Sources */,
@@ -1202,6 +1196,7 @@
 				417AADC42C652228002080E0 /* LoginModel.swift in Sources */,
 				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
 				41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */,
+				C7EFF5BE2CFB2D7A0019F30D /* MemberId.swift in Sources */,
 				C71565042C8E9FF10038A782 /* RoomViewController.swift in Sources */,
 				C7023D302C6E1B8B0036D355 /* UniDeleteAPI.swift in Sources */,
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
@@ -1210,7 +1205,6 @@
 				417AADCD2C673E28002080E0 /* SignUpAPIInput.swift in Sources */,
 				C7EA31112C777B0900EFC53B /* KeyboardDown.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
-				C7ECF5462C6757A700283F06 /* MemberIDModel.swift in Sources */,
 				C7BC68212CF6E7BE00CEC0F3 /* UniEnroll.swift in Sources */,
 				4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */,
 				7B3459F92C688C2D008B711A /* BoardWrittenModel.swift in Sources */,
@@ -1222,35 +1216,39 @@
 				C7BC682D2CF6E8BA00CEC0F3 /* DateSelect.swift in Sources */,
 				C7980A862CEF838C00475D94 /* UIViewController+Extension.swift in Sources */,
 				7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */,
+				C7EFF5C82CFB2E2D0019F30D /* FavoritesLab.swift in Sources */,
 				C7ECF54C2C677F9200283F06 /* ApplyMentoringViewController.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */,
 				C772B1132C6885F60039B7C7 /* ChangePWPost.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				417AADD12C673E42002080E0 /* SignUpDataManager.swift in Sources */,
-				C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				41EE134E2C5529B20037EDD6 /* SelectResearchTopicViewController.swift in Sources */,
 				C7DA4E412C6122BB0092F342 /* AlarmPostAPI.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				7B1C534E2C69D4E800C66D0D /* DirectoryLabReviewWriteModel.swift in Sources */,
 				7B259B002C75EB5700D3DFE5 /* LabReviewWriteViewController.swift in Sources */,
+				C7EFF5CC2CFB2E690019F30D /* EditProfile.swift in Sources */,
 				C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */,
 				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
+				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BC682B2CF6E7F600CEC0F3 /* AlarmEdit.swift in Sources */,
 				C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */,
 				C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */,
 				C7BC681B2CF6E56900CEC0F3 /* ApplyMentoring.swift in Sources */,
+				C7EFF5CE2CFB2ECC0019F30D /* Logout.swift in Sources */,
 				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,
 				7B1C535A2C69D85800C66D0D /* DirectoryFavoriteLabModel.swift in Sources */,
 				C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */,
+				C7EFF5CA2CFB2E4C0019F30D /* MyProfile.swift in Sources */,
 				7BFDEC312C52250A007280F8 /* BoardMasterViewController.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
-				C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */,
 				C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
+				C7EFF5C22CFB2DED0019F30D /* FavoritesBoard.swift in Sources */,
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
@@ -1273,6 +1271,7 @@
 				7B1C53562C69D79200C66D0D /* DirectoryFavoriteModel.swift in Sources */,
 				7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */,
 				412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */,
+				C7EFF5C62CFB2E1A0019F30D /* HotPost.swift in Sources */,
 				C7F954E42C6FACFE00A4B275 /* MentoringPostViewController.swift in Sources */,
 				C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */,
 				C71565082C8EB9810038A782 /* MentoringRoomViewController.swift in Sources */,
@@ -1280,7 +1279,6 @@
 				7B3459ED2C68870E008B711A /* BoardDetailModel.swift in Sources */,
 				417AADC22C65221D002080E0 /* LoginAPIInput.swift in Sources */,
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
-				C73ED53A2C62845900C455A2 /* ChangePWModel.swift in Sources */,
 				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				C7BC681F2CF6E7B200CEC0F3 /* UniMethod.swift in Sources */,
@@ -1348,18 +1346,16 @@
 				C7C568732C6F44D100A57821 /* MentoringPostAPI.swift in Sources */,
 				C7E3EF522C60A85D00DDC36B /* ADViewController.swift in Sources */,
 				C74D4CAF2C4576E900D4339D /* FavoriteBoardTableViewCell.swift in Sources */,
-				C73ED5342C62821B00C455A2 /* FavoritesBoardModel.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */,
-				C73ED5362C6282F000C455A2 /* HotPostModel.swift in Sources */,
 				7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
-				C73ED5382C62844900C455A2 /* EditProfileModel.swift in Sources */,
 				7B1C53522C69D56A00C66D0D /* DirectoryLabReviewSearchModel.swift in Sources */,
-				C73ED5322C6279AB00C455A2 /* UpComingModel.swift in Sources */,
 				4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */,
+				C7EFF5C02CFB2D8F0019F30D /* UpComing.swift in Sources */,
 				C7A434F92C62233200C47F5E /* HexColor.swift in Sources */,
 				C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */,
+				C7EFF5D02CFB2EEA0019F30D /* ChangePW.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
 				415BBC0B2C7343F8002768EE /* AuthInterceptor.swift in Sources */,

@@ -7,19 +7,12 @@
 
 import Foundation
 
-struct DateResultModel : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: DateResponse
-}
-
-struct DateResponse : Codable {
+struct DateSelect : Codable {
     let memberId: Int
-    var scheduleList: [DateListResponse]
+    var scheduleList: [DateSelectList]
 }
 
-struct DateListResponse : Codable {
+struct DateSelectList : Codable {
     let univId: Int
     let content: String
 }

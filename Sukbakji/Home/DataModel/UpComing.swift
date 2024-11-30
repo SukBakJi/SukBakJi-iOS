@@ -1,22 +1,15 @@
 //
-//  UpComingModel.swift
+//  UpComing.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 8/7/24.
+//  Created by jaegu park on 11/30/24.
 //
 
 import Foundation
 
-struct UpComingResultModel : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: UpComingResult
-}
-
-struct UpComingResult : Codable {
+struct UpComing : Codable {
     let memberId: Int
-    var scheduleList: [UpcomingResponse]
+    var scheduleList: [UpComingResult]
     
     enum CodingKeys: String, CodingKey {
         case memberId
@@ -27,11 +20,11 @@ struct UpComingResult : Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.memberId = try container.decode(Int.self, forKey: .memberId)
-        self.scheduleList = try container.decodeIfPresent([UpcomingResponse].self, forKey: .scheduleList) ?? []
+        self.scheduleList = try container.decodeIfPresent([UpComingResult].self, forKey: .scheduleList) ?? []
     }
 }
 
-struct UpcomingResponse : Codable {
+struct UpComingResult : Codable {
     let univId: Int
     let content: String
     let dday: Int

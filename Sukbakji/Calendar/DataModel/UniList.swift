@@ -7,16 +7,9 @@
 
 import Foundation
 
-struct UnivListResultModel : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: UnivListResponse
-}
-
-struct UnivListResponse: Codable {
+struct UnivList: Codable {
     let memberId: Int
-    var univList: [UnivList]
+    var univList: [UnivListResult]
 
     enum CodingKeys: String, CodingKey {
         case memberId
@@ -27,11 +20,11 @@ struct UnivListResponse: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.memberId = try container.decode(Int.self, forKey: .memberId)
-        self.univList = try container.decodeIfPresent([UnivList].self, forKey: .univList) ?? []
+        self.univList = try container.decodeIfPresent([UnivListResult].self, forKey: .univList) ?? []
     }
 }
 
-struct UnivList: Codable {
+struct UnivListResult: Codable {
     let univId: Int
     let season: String
     let method: String
