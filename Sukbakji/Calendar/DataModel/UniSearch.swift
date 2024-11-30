@@ -1,8 +1,8 @@
 //
-//  SchoolModel.swift
+//  UniSearch.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 7/31/24.
+//  Created by jaegu park on 11/27/24.
 //
 
 import Foundation

@@ -1,8 +1,8 @@
 //
-//  ApplyMentoringModel.swift
+//  ApplyMentoring.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 8/16/24.
+//  Created by jaegu park on 11/27/24.
 //
 
 import Foundation

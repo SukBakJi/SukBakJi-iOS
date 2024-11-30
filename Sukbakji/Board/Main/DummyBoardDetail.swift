@@ -218,7 +218,7 @@ struct DummyBoardDetail: View {
         
         let commentRequest = CommentRequest(postId: postId, memberId: memberId ?? 0, content: content)
         
-        NetworkManager.shared.request(url, method: .post, parameters: commentRequest, encoder: JSONParameterEncoder.default, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .post, parameters: commentRequest, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: CommentResponse.self) { response in
                 switch response.result {
@@ -255,7 +255,7 @@ struct DummyBoardDetail: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .delete, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .delete, headers: headers)
             .validate(statusCode: 200..<300)
             .response { response in
                 switch response.result {
@@ -284,7 +284,7 @@ struct DummyBoardDetail: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .get, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: BoardDetailModel.self) { response in
                 switch response.result {
@@ -323,7 +323,7 @@ struct DummyBoardDetail: View {
             "Accept": "*/*"
         ]
 
-        NetworkManager.shared.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
             .validate(statusCode: 200..<500)
             .responseDecodable(of: ProfileModel.self) { response in
                 switch response.result {
@@ -584,7 +584,7 @@ struct BookmarkButtonView: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .post, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .post, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: BoardScrapModel.self) { response in
                 switch response.result {
@@ -611,7 +611,7 @@ struct BookmarkButtonView: View {
             "Content-Type": "application/json"
         ]
         
-        NetworkManager.shared.request(url, method: .get, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ScrapStatusResponse.self) { response in
                 switch response.result {

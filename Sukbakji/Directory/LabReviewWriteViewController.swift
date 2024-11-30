@@ -358,7 +358,7 @@ struct LabReviewWriteViewController: View {
             }
             
             // 네트워크 요청을 보냅니다
-            NetworkManager.shared.request(
+        NetworkAuthManager.shared.request(
                 APIConstants.baseURL + "/labs/reviews/\(labId)",
                 method: .post,
                 parameters: reviewRequest,

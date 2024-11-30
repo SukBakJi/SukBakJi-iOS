@@ -122,7 +122,7 @@ struct BoardDoctoralViewController: View {
 //            "Authorization": "Bearer \(accessToken)"
         ]
         
-        NetworkManager.shared.request(url, method: .get, parameters: parameters, headers: headers)
+        NetworkAuthManager.shared.request(url, method: .get, parameters: parameters, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: BoardListGetResponseModel.self) { response in
                 switch response.result {

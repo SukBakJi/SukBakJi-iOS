@@ -1,8 +1,8 @@
 //
-//  AlarmPatchModel.swift
+//  AlarmEdit.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 8/6/24.
+//  Created by jaegu park on 11/27/24.
 //
 
 import Foundation

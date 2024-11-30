@@ -159,7 +159,7 @@ struct BoardWriteViewController: View {
                 content: postText
             )
             
-            NetworkManager.shared.request(url,
+            NetworkAuthManager.shared.request(url,
                        method: .post,
                        parameters: postParameters,
                        encoder: JSONParameterEncoder.default,
@@ -178,7 +178,7 @@ struct BoardWriteViewController: View {
                 content: postText
             )
             
-            NetworkManager.shared.request(url,
+            NetworkAuthManager.shared.request(url,
                        method: .post,
                        parameters: postParameters,
                        encoder: JSONParameterEncoder.default,
