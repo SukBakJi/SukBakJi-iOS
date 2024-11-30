@@ -18,7 +18,7 @@ class ProfileDataManager {
             "Content-Type": "application/json"
         ]
     
-        NetworkManager.shared.request(url,
+        NetworkAuthManager.shared.request(url,
                    method: .post,
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
@@ -44,7 +44,7 @@ class ProfileDataManager {
             "Accept": "*/*",
         ]
     
-        NetworkManager.shared.request(url,
+        NetworkAuthManager.shared.request(url,
                    method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default,

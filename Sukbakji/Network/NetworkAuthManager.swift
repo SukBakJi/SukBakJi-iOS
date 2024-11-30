@@ -7,7 +7,7 @@
 
 import Alamofire
 
-class NetworkManager {
+class NetworkAuthManager {
     static let shared: Session = {
         let interceptor = AuthInterceptor()
         return Session(interceptor: interceptor)

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RxAlamofire
 import Alamofire
 import RxSwift
 
@@ -45,31 +44,31 @@ class FavoriteBoardViewController: UIViewController {
     }
     
     func getFavoriteBoard() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        
-        let url = APIConstants.community.path + "/favorite-post-list"
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(retrievedToken)",
-        ]
-        
-       RxAlamofire.requestData(.get, url, headers: headers)
-          .subscribe(onNext: { [weak self] (response, data) in
-                do {
-                    let decodedData = try JSONDecoder().decode(FavoritesBoardResultModel.self, from: data)
-                    self?.allDatas = decodedData.result
-                    
-                    DispatchQueue.main.async {
-                        self?.FavoriteBoardTV.reloadData()
-                    }
-                } catch let error {
-                   print("Decoding error: \(error)")
-               }
-           }, onError: { error in
-               print("Error: \(error)")
-           })
-           .disposed(by: disposeBag)
+//        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+//            return
+//        }
+//        
+//        let url = APIConstants.community.path + "/favorite-post-list"
+//        
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer \(retrievedToken)",
+//        ]
+//        
+//       RxAlamofire.requestData(.get, url, headers: headers)
+//          .subscribe(onNext: { [weak self] (response, data) in
+//                do {
+//                    let decodedData = try JSONDecoder().decode(FavoritesBoardResultModel.self, from: data)
+//                    self?.allDatas = decodedData.result
+//                    
+//                    DispatchQueue.main.async {
+//                        self?.FavoriteBoardTV.reloadData()
+//                    }
+//                } catch let error {
+//                   print("Decoding error: \(error)")
+//               }
+//           }, onError: { error in
+//               print("Error: \(error)")
+//           })
+//           .disposed(by: disposeBag)
     }
 }

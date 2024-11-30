@@ -168,7 +168,7 @@ struct HotBoardViewController: View {
         ]
         
         // NetworkManager.shared.request
-        NetworkManager.shared.request(url,
+        NetworkAuthManager.shared.request(url,
                    method: .get,
                    headers: headers)
         .validate(statusCode: 200..<300)

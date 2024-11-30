@@ -16,7 +16,7 @@
 		412F92322C5C9E280042B834 /* SecondAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F92312C5C9E280042B834 /* SecondAcademicVerificationViewController.swift */; };
 		412F92342C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F92332C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift */; };
 		415BBC0B2C7343F8002768EE /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBC0A2C7343F8002768EE /* AuthInterceptor.swift */; };
-		415BBC0D2C73442F002768EE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBC0C2C73442F002768EE /* NetworkManager.swift */; };
+		415BBC0D2C73442F002768EE /* NetworkAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBC0C2C73442F002768EE /* NetworkAuthManager.swift */; };
 		4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E84B2C68ACC500A0F292 /* ResearchTopicDataManager.swift */; };
 		4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E84D2C68ACCC00A0F292 /* ResearchTopicModel.swift */; };
 		4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */; };
@@ -91,7 +91,6 @@
 		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
 		C7023D302C6E1B8B0036D355 /* UniDeleteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7023D2F2C6E1B8B0036D355 /* UniDeleteAPI.swift */; };
-		C7023D322C6E1BDA0036D355 /* UniDeleteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7023D312C6E1BDA0036D355 /* UniDeleteModel.swift */; };
 		C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */; };
 		C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */; };
 		C707E4BB2C69CB97005D390C /* ApplyMentoringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707E4BA2C69CB97005D390C /* ApplyMentoringTableViewCell.swift */; };
@@ -100,9 +99,6 @@
 		C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */; };
 		C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2842C633F7B00D6014B /* MessageViewController.swift */; };
 		C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2862C633F8600D6014B /* MentoringViewController.swift */; };
-		C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2882C63633000D6014B /* UniPostModel.swift */; };
-		C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28A2C63646A00D6014B /* UniMethodModel.swift */; };
-		C70DB28F2C636B6600D6014B /* AlarmListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB28E2C636B6600D6014B /* AlarmListModel.swift */; };
 		C71565042C8E9FF10038A782 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565032C8E9FF10038A782 /* RoomViewController.swift */; };
 		C71565062C8EA4430038A782 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565052C8EA4430038A782 /* ChatViewController.swift */; };
 		C71565082C8EB9810038A782 /* MentoringRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */; };
@@ -145,7 +141,6 @@
 		C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CB02C4576F400D4339D /* HotFeedTableViewCell.swift */; };
 		C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */; };
 		C74F584F2C6B330000369545 /* UniPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74F584E2C6B330000369545 /* UniPostAPI.swift */; };
-		C75A2D4A2C6128F1000D215B /* AlarmPatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */; };
 		C75C457C2C5A3B6C001DDEA8 /* SUITE-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */; };
 		C75C457D2C5A3B6C001DDEA8 /* SUITE-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */; };
 		C75C457E2C5A3B6C001DDEA8 /* SUITE-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */; };
@@ -159,7 +154,6 @@
 		C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */; };
 		C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55D2C481F8C00A58395 /* DateViewController.swift */; };
 		C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */; };
-		C78E70C32C6C9094004BBCE9 /* MentorListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78E70C22C6C9094004BBCE9 /* MentorListModel.swift */; };
 		C7980A832CEF7D5400475D94 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A822CEF7D5400475D94 /* APIService.swift */; };
 		C7980A862CEF838C00475D94 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */; };
 		C7980A882CEF841E00475D94 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A872CEF841E00475D94 /* AlertViewController.swift */; };
@@ -167,26 +161,31 @@
 		C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */; };
 		C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79864002C652B450029F8E3 /* TFaddShadow.swift */; };
 		C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */; };
-		C79EC0122C6E4CE7009C2BD9 /* UniListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79EC0112C6E4CE7009C2BD9 /* UniListModel.swift */; };
 		C7A434F92C62233200C47F5E /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor.swift */; };
 		C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */; };
-		C7A5A0CE2C6A5DFD00946B48 /* SelectDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A5A0CD2C6A5DFD00946B48 /* SelectDateModel.swift */; };
-		C7A5A0D02C6A5F2700946B48 /* UnivNameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A5A0CF2C6A5F2700946B48 /* UnivNameModel.swift */; };
 		C7A99B182C6DBA5C00698C27 /* EditProfilePut.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A99B172C6DBA5C00698C27 /* EditProfilePut.swift */; };
 		C7A99B1A2C6DBA6700698C27 /* LogoutPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A99B192C6DBA6700698C27 /* LogoutPost.swift */; };
+		C7BC68172CF6E55000CEC0F3 /* MentorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68162CF6E55000CEC0F3 /* MentorList.swift */; };
+		C7BC68192CF6E55C00CEC0F3 /* ApplyMentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68182CF6E55C00CEC0F3 /* ApplyMentor.swift */; };
+		C7BC681B2CF6E56900CEC0F3 /* ApplyMentoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC681A2CF6E56900CEC0F3 /* ApplyMentoring.swift */; };
+		C7BC681D2CF6E7AA00CEC0F3 /* UniSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC681C2CF6E7AA00CEC0F3 /* UniSearch.swift */; };
+		C7BC681F2CF6E7B200CEC0F3 /* UniMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC681E2CF6E7B200CEC0F3 /* UniMethod.swift */; };
+		C7BC68212CF6E7BE00CEC0F3 /* UniEnroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68202CF6E7BE00CEC0F3 /* UniEnroll.swift */; };
+		C7BC68232CF6E7C500CEC0F3 /* UniList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68222CF6E7C500CEC0F3 /* UniList.swift */; };
+		C7BC68252CF6E7CC00CEC0F3 /* UniDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68242CF6E7CC00CEC0F3 /* UniDelete.swift */; };
+		C7BC68272CF6E7D700CEC0F3 /* AlarmEnroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68262CF6E7D700CEC0F3 /* AlarmEnroll.swift */; };
+		C7BC68292CF6E7DF00CEC0F3 /* AlarmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68282CF6E7DF00CEC0F3 /* AlarmList.swift */; };
+		C7BC682B2CF6E7F600CEC0F3 /* AlarmEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC682A2CF6E7F600CEC0F3 /* AlarmEdit.swift */; };
+		C7BC682D2CF6E8BA00CEC0F3 /* DateSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC682C2CF6E8BA00CEC0F3 /* DateSelect.swift */; };
 		C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */; };
 		C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */; };
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
-		C7C5686B2C6F42C900A57821 /* ApplyMentorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5686A2C6F42C900A57821 /* ApplyMentorModel.swift */; };
-		C7C5686D2C6F42D600A57821 /* ApplyMentoringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5686C2C6F42D600A57821 /* ApplyMentoringModel.swift */; };
 		C7C568712C6F44C500A57821 /* MentorPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C568702C6F44C500A57821 /* MentorPostAPI.swift */; };
 		C7C568732C6F44D100A57821 /* MentoringPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */; };
-		C7D26CAD2C6A01B50045339E /* UniSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F14DB2C5948E30017B57E /* UniSearchModel.swift */; };
 		C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E3C2C611CE10092F342 /* APIConstants.swift */; };
 		C7DA4E412C6122BB0092F342 /* AlarmPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E402C6122BB0092F342 /* AlarmPostAPI.swift */; };
-		C7DA4E442C61252A0092F342 /* AlarmPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */; };
 		C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */; };
 		C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */; };
 		C7DCEF812C5FD710001D38AA /* MyAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */; };
@@ -204,6 +203,10 @@
 		C7F455362C39B8F000A4D0EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F455352C39B8F000A4D0EE /* Assets.xcassets */; };
 		C7F455392C39B8F000A4D0EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F455372C39B8F000A4D0EE /* LaunchScreen.storyboard */; };
 		C7F954E42C6FACFE00A4B275 /* MentoringPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F954E32C6FACFE00A4B275 /* MentoringPostViewController.swift */; };
+		C7FB129E2CF9DDAD001695D1 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB129D2CF9DDAD001695D1 /* BaseView.swift */; };
+		C7FB12A12CF9DF8C001695D1 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB12A02CF9DF8C001695D1 /* BaseTableViewCell.swift */; };
+		C7FB12A32CF9DF97001695D1 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB12A22CF9DF97001695D1 /* BaseCollectionViewCell.swift */; };
+		C7FB12A52CF9DFA6001695D1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB12A42CF9DFA6001695D1 /* BaseViewController.swift */; };
 		C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */; };
 		C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */; };
 /* End PBXBuildFile section */
@@ -219,7 +222,7 @@
 		412F92312C5C9E280042B834 /* SecondAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondAcademicVerificationViewController.swift; sourceTree = "<group>"; };
 		412F92332C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdAcademicVerificationViewController.swift; sourceTree = "<group>"; };
 		415BBC0A2C7343F8002768EE /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
-		415BBC0C2C73442F002768EE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		415BBC0C2C73442F002768EE /* NetworkAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAuthManager.swift; sourceTree = "<group>"; };
 		4168E84B2C68ACC500A0F292 /* ResearchTopicDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicDataManager.swift; sourceTree = "<group>"; };
 		4168E84D2C68ACCC00A0F292 /* ResearchTopicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicModel.swift; sourceTree = "<group>"; };
 		4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIInput.swift; sourceTree = "<group>"; };
@@ -295,7 +298,6 @@
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7023D2F2C6E1B8B0036D355 /* UniDeleteAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDeleteAPI.swift; sourceTree = "<group>"; };
-		C7023D312C6E1BDA0036D355 /* UniDeleteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDeleteModel.swift; sourceTree = "<group>"; };
 		C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateViewController.swift; sourceTree = "<group>"; };
 		C707E4BA2C69CB97005D390C /* ApplyMentoringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentoringTableViewCell.swift; sourceTree = "<group>"; };
@@ -304,9 +306,6 @@
 		C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTabViewController.swift; sourceTree = "<group>"; };
 		C70DB2842C633F7B00D6014B /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		C70DB2862C633F8600D6014B /* MentoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringViewController.swift; sourceTree = "<group>"; };
-		C70DB2882C63633000D6014B /* UniPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniPostModel.swift; sourceTree = "<group>"; };
-		C70DB28A2C63646A00D6014B /* UniMethodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniMethodModel.swift; sourceTree = "<group>"; };
-		C70DB28E2C636B6600D6014B /* AlarmListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListModel.swift; sourceTree = "<group>"; };
 		C71565032C8E9FF10038A782 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		C71565052C8EA4430038A782 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringRoomViewController.swift; sourceTree = "<group>"; };
@@ -324,7 +323,6 @@
 		C72E99832C54033000BC2C9A /* SchoolAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAlertViewController.swift; sourceTree = "<group>"; };
 		C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarViewController.swift; sourceTree = "<group>"; };
 		C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDeleteAlertViewController.swift; sourceTree = "<group>"; };
-		C72F14DB2C5948E30017B57E /* UniSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniSearchModel.swift; sourceTree = "<group>"; };
 		C72F14DD2C594DAA0017B57E /* CalendarFBCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFBCViewController.swift; sourceTree = "<group>"; };
 		C7347E312C4D410200688768 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		C7347E322C4D410200688768 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -350,7 +348,6 @@
 		C74D4CB22C45770800D4339D /* FavoriteLabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabCollectionViewCell.swift; sourceTree = "<group>"; };
 		C74DC22A2C59D6AF004BDC25 /* AlarmPatchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPatchAPI.swift; sourceTree = "<group>"; };
 		C74F584E2C6B330000369545 /* UniPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniPostAPI.swift; sourceTree = "<group>"; };
-		C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPatchModel.swift; sourceTree = "<group>"; };
 		C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Regular.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Regular.otf"; sourceTree = "<group>"; };
 		C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Heavy.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Heavy.otf"; sourceTree = "<group>"; };
 		C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-SemiBold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-SemiBold.otf"; sourceTree = "<group>"; };
@@ -364,7 +361,6 @@
 		C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C78DE55D2C481F8C00A58395 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertViewController.swift; sourceTree = "<group>"; };
-		C78E70C22C6C9094004BBCE9 /* MentorListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorListModel.swift; sourceTree = "<group>"; };
 		C7980A822CEF7D5400475D94 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C7980A872CEF841E00475D94 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -372,25 +368,31 @@
 		C79863FE2C6523FE0029F8E3 /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
 		C79864002C652B450029F8E3 /* TFaddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFaddShadow.swift; sourceTree = "<group>"; };
 		C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectTableViewCell.swift; sourceTree = "<group>"; };
-		C79EC0112C6E4CE7009C2BD9 /* UniListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniListModel.swift; sourceTree = "<group>"; };
 		C7A434F82C62233200C47F5E /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLeftPadding.swift; sourceTree = "<group>"; };
-		C7A5A0CD2C6A5DFD00946B48 /* SelectDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateModel.swift; sourceTree = "<group>"; };
-		C7A5A0CF2C6A5F2700946B48 /* UnivNameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivNameModel.swift; sourceTree = "<group>"; };
 		C7A99B172C6DBA5C00698C27 /* EditProfilePut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePut.swift; sourceTree = "<group>"; };
 		C7A99B192C6DBA6700698C27 /* LogoutPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutPost.swift; sourceTree = "<group>"; };
+		C7BC68162CF6E55000CEC0F3 /* MentorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorList.swift; sourceTree = "<group>"; };
+		C7BC68182CF6E55C00CEC0F3 /* ApplyMentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentor.swift; sourceTree = "<group>"; };
+		C7BC681A2CF6E56900CEC0F3 /* ApplyMentoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentoring.swift; sourceTree = "<group>"; };
+		C7BC681C2CF6E7AA00CEC0F3 /* UniSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniSearch.swift; sourceTree = "<group>"; };
+		C7BC681E2CF6E7B200CEC0F3 /* UniMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniMethod.swift; sourceTree = "<group>"; };
+		C7BC68202CF6E7BE00CEC0F3 /* UniEnroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniEnroll.swift; sourceTree = "<group>"; };
+		C7BC68222CF6E7C500CEC0F3 /* UniList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniList.swift; sourceTree = "<group>"; };
+		C7BC68242CF6E7CC00CEC0F3 /* UniDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDelete.swift; sourceTree = "<group>"; };
+		C7BC68262CF6E7D700CEC0F3 /* AlarmEnroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEnroll.swift; sourceTree = "<group>"; };
+		C7BC68282CF6E7DF00CEC0F3 /* AlarmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmList.swift; sourceTree = "<group>"; };
+		C7BC682A2CF6E7F600CEC0F3 /* AlarmEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEdit.swift; sourceTree = "<group>"; };
+		C7BC682C2CF6E8BA00CEC0F3 /* DateSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelect.swift; sourceTree = "<group>"; };
 		C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
-		C7C5686A2C6F42C900A57821 /* ApplyMentorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentorModel.swift; sourceTree = "<group>"; };
-		C7C5686C2C6F42D600A57821 /* ApplyMentoringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentoringModel.swift; sourceTree = "<group>"; };
 		C7C568702C6F44C500A57821 /* MentorPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorPostAPI.swift; sourceTree = "<group>"; };
 		C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringPostAPI.swift; sourceTree = "<group>"; };
 		C7DA4E3C2C611CE10092F342 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		C7DA4E402C6122BB0092F342 /* AlarmPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPostAPI.swift; sourceTree = "<group>"; };
-		C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPostModel.swift; sourceTree = "<group>"; };
 		C7DCEF7A2C5FCE0B001D38AA /* DateListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListTableViewCell.swift; sourceTree = "<group>"; };
 		C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmTableViewCell.swift; sourceTree = "<group>"; };
@@ -410,6 +412,10 @@
 		C7F455382C39B8F000A4D0EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7F4553A2C39B8F000A4D0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7F954E32C6FACFE00A4B275 /* MentoringPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringPostViewController.swift; sourceTree = "<group>"; };
+		C7FB129D2CF9DDAD001695D1 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		C7FB12A02CF9DF8C001695D1 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		C7FB12A22CF9DF97001695D1 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7FB12A42CF9DFA6001695D1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarShadow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -703,7 +709,7 @@
 			isa = PBXGroup;
 			children = (
 				C70DB27E2C633CBE00D6014B /* Chatting.storyboard */,
-				C78E70C02C6C9065004BBCE9 /* ChattingModel */,
+				C7BC68152CF6E52C00CEC0F3 /* DataModel */,
 				C78E70C12C6C9070004BBCE9 /* ChattingAPI */,
 				C70DB2802C633CDB00D6014B /* ChattingViewController.swift */,
 				C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */,
@@ -717,6 +723,7 @@
 			isa = PBXGroup;
 			children = (
 				C71E14862C44CE59003AFCB7 /* Home.storyboard */,
+				C7BC68132CF6E50000CEC0F3 /* DataModel */,
 				C73ED52F2C62784400C455A2 /* HomeModel */,
 				C73ED5302C62784E00C455A2 /* HomeAPI */,
 				C7E3EF552C60ABE300DDC36B /* MainHome */,
@@ -729,7 +736,7 @@
 			isa = PBXGroup;
 			children = (
 				C71E14882C44CE64003AFCB7 /* Calendar.storyboard */,
-				C72F14DA2C5948CA0017B57E /* CalendarModel */,
+				C7BC68142CF6E51600CEC0F3 /* DataModel */,
 				C7DA4E422C6122E30092F342 /* CalendarAPI */,
 				C7E3EF592C60BF4200DDC36B /* MainCalendar */,
 				C7E3EF5A2C60BF7F00DDC36B /* SchoolSelect */,
@@ -738,23 +745,6 @@
 				C7E3EF5E2C60C04C00DDC36B /* MyAlarm */,
 			);
 			path = Calendar;
-			sourceTree = "<group>";
-		};
-		C72F14DA2C5948CA0017B57E /* CalendarModel */ = {
-			isa = PBXGroup;
-			children = (
-				C72F14DB2C5948E30017B57E /* UniSearchModel.swift */,
-				C70DB28A2C63646A00D6014B /* UniMethodModel.swift */,
-				C70DB2882C63633000D6014B /* UniPostModel.swift */,
-				C79EC0112C6E4CE7009C2BD9 /* UniListModel.swift */,
-				C7023D312C6E1BDA0036D355 /* UniDeleteModel.swift */,
-				C7DA4E432C61252A0092F342 /* AlarmPostModel.swift */,
-				C70DB28E2C636B6600D6014B /* AlarmListModel.swift */,
-				C75A2D492C6128F1000D215B /* AlarmPatchModel.swift */,
-				C7A5A0CD2C6A5DFD00946B48 /* SelectDateModel.swift */,
-				C7A5A0CF2C6A5F2700946B48 /* UnivNameModel.swift */,
-			);
-			path = CalendarModel;
 			sourceTree = "<group>";
 		};
 		C7347E302C4D40F300688768 /* Fonts */ = {
@@ -817,16 +807,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		C78E70C02C6C9065004BBCE9 /* ChattingModel */ = {
-			isa = PBXGroup;
-			children = (
-				C78E70C22C6C9094004BBCE9 /* MentorListModel.swift */,
-				C7C5686A2C6F42C900A57821 /* ApplyMentorModel.swift */,
-				C7C5686C2C6F42D600A57821 /* ApplyMentoringModel.swift */,
-			);
-			path = ChattingModel;
-			sourceTree = "<group>";
-		};
 		C78E70C12C6C9070004BBCE9 /* ChattingAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -852,13 +832,46 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		C7BC68132CF6E50000CEC0F3 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		C7BC68142CF6E51600CEC0F3 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				C7BC681C2CF6E7AA00CEC0F3 /* UniSearch.swift */,
+				C7BC681E2CF6E7B200CEC0F3 /* UniMethod.swift */,
+				C7BC68202CF6E7BE00CEC0F3 /* UniEnroll.swift */,
+				C7BC68222CF6E7C500CEC0F3 /* UniList.swift */,
+				C7BC68242CF6E7CC00CEC0F3 /* UniDelete.swift */,
+				C7BC68262CF6E7D700CEC0F3 /* AlarmEnroll.swift */,
+				C7BC68282CF6E7DF00CEC0F3 /* AlarmList.swift */,
+				C7BC682A2CF6E7F600CEC0F3 /* AlarmEdit.swift */,
+				C7BC682C2CF6E8BA00CEC0F3 /* DateSelect.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		C7BC68152CF6E52C00CEC0F3 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				C7BC68162CF6E55000CEC0F3 /* MentorList.swift */,
+				C7BC68182CF6E55C00CEC0F3 /* ApplyMentor.swift */,
+				C7BC681A2CF6E56900CEC0F3 /* ApplyMentoring.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		C7DA4E3B2C611BF50092F342 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				C7DA4E3C2C611CE10092F342 /* APIConstants.swift */,
 				C7980A822CEF7D5400475D94 /* APIService.swift */,
 				415BBC0A2C7343F8002768EE /* AuthInterceptor.swift */,
-				415BBC0C2C73442F002768EE /* NetworkManager.swift */,
+				415BBC0C2C73442F002768EE /* NetworkAuthManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1006,6 +1019,7 @@
 		C7F4552B2C39B8EE00A4D0EE /* Sukbakji */ = {
 			isa = PBXGroup;
 			children = (
+				C7FB129C2CF9DDA3001695D1 /* Base */,
 				C7DA4E3B2C611BF50092F342 /* Network */,
 				C7980A842CEF835B00475D94 /* Shared */,
 				412BFBE42C52A5D20099E442 /* Extension */,
@@ -1025,6 +1039,17 @@
 				C7F4553A2C39B8F000A4D0EE /* Info.plist */,
 			);
 			path = Sukbakji;
+			sourceTree = "<group>";
+		};
+		C7FB129C2CF9DDA3001695D1 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C7FB129D2CF9DDAD001695D1 /* BaseView.swift */,
+				C7FB12A02CF9DF8C001695D1 /* BaseTableViewCell.swift */,
+				C7FB12A22CF9DF97001695D1 /* BaseCollectionViewCell.swift */,
+				C7FB12A42CF9DFA6001695D1 /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1162,9 +1187,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C715D3822C6A2A2B0020060D /* AlarmPatchAPI.swift in Sources */,
-				C7D26CAD2C6A01B50045339E /* UniSearchModel.swift in Sources */,
-				C7A5A0CE2C6A5DFD00946B48 /* SelectDateModel.swift in Sources */,
+				C7BC68272CF6E7D700CEC0F3 /* AlarmEnroll.swift in Sources */,
 				C73ED52E2C6272CC00C455A2 /* MyPageModel.swift in Sources */,
+				C7FB12A12CF9DF8C001695D1 /* BaseTableViewCell.swift in Sources */,
 				C7ECF54A2C677F8600283F06 /* ApplyMentorViewController.swift in Sources */,
 				C715650C2C8EB9AC0038A782 /* ChatTableViewCell.swift in Sources */,
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
@@ -1176,7 +1201,6 @@
 				C71565062C8EA4430038A782 /* ChatViewController.swift in Sources */,
 				417AADC42C652228002080E0 /* LoginModel.swift in Sources */,
 				C7063B6E2C4E3E0100CFF3CE /* AlarmDateViewController.swift in Sources */,
-				C7C5686B2C6F42C900A57821 /* ApplyMentorModel.swift in Sources */,
 				41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */,
 				C71565042C8E9FF10038A782 /* RoomViewController.swift in Sources */,
 				C7023D302C6E1B8B0036D355 /* UniDeleteAPI.swift in Sources */,
@@ -1187,12 +1211,15 @@
 				C7EA31112C777B0900EFC53B /* KeyboardDown.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
 				C7ECF5462C6757A700283F06 /* MemberIDModel.swift in Sources */,
+				C7BC68212CF6E7BE00CEC0F3 /* UniEnroll.swift in Sources */,
 				4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */,
 				7B3459F92C688C2D008B711A /* BoardWrittenModel.swift in Sources */,
 				417AADBB2C60A8AA002080E0 /* TOSTableViewCell.swift in Sources */,
+				C7BC681D2CF6E7AA00CEC0F3 /* UniSearch.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				C7980A832CEF7D5400475D94 /* APIService.swift in Sources */,
 				7B0E5D262C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift in Sources */,
+				C7BC682D2CF6E8BA00CEC0F3 /* DateSelect.swift in Sources */,
 				C7980A862CEF838C00475D94 /* UIViewController+Extension.swift in Sources */,
 				7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */,
 				C7ECF54C2C677F9200283F06 /* ApplyMentoringViewController.swift in Sources */,
@@ -1204,7 +1231,6 @@
 				C79863FD2C6519600029F8E3 /* FavoritesLabModel.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				41EE134E2C5529B20037EDD6 /* SelectResearchTopicViewController.swift in Sources */,
-				C78E70C32C6C9094004BBCE9 /* MentorListModel.swift in Sources */,
 				C7DA4E412C6122BB0092F342 /* AlarmPostAPI.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				7B1C534E2C69D4E800C66D0D /* DirectoryLabReviewWriteModel.swift in Sources */,
@@ -1213,24 +1239,24 @@
 				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
 				C74D4CA92C45757200D4339D /* FavoriteLabViewController.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
+				C7BC682B2CF6E7F600CEC0F3 /* AlarmEdit.swift in Sources */,
 				C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */,
 				C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */,
+				C7BC681B2CF6E56900CEC0F3 /* ApplyMentoring.swift in Sources */,
 				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,
 				7B1C535A2C69D85800C66D0D /* DirectoryFavoriteLabModel.swift in Sources */,
 				C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */,
 				7BFDEC312C52250A007280F8 /* BoardMasterViewController.swift in Sources */,
 				C7F455312C39B8EE00A4D0EE /* ViewController.swift in Sources */,
-				C70DB28F2C636B6600D6014B /* AlarmListModel.swift in Sources */,
 				C79863FF2C6523FE0029F8E3 /* LogoutModel.swift in Sources */,
 				C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
-				C70DB2892C63633000D6014B /* UniPostModel.swift in Sources */,
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				C74D4CAD2C4575E000D4339D /* HotFeedViewController.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
 				C71565122C8EBC0F0038A782 /* MentoringChatViewController.swift in Sources */,
+				C7FB12A52CF9DFA6001695D1 /* BaseViewController.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
-				C70DB28B2C63646A00D6014B /* UniMethodModel.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7A99B182C6DBA5C00698C27 /* EditProfilePut.swift in Sources */,
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
@@ -1256,13 +1282,14 @@
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
 				C73ED53A2C62845900C455A2 /* ChangePWModel.swift in Sources */,
 				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,
-				C75A2D4A2C6128F1000D215B /* AlarmPatchModel.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
+				C7BC681F2CF6E7B200CEC0F3 /* UniMethod.swift in Sources */,
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
 				7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */,
-				C7A5A0D02C6A5F2700946B48 /* UnivNameModel.swift in Sources */,
 				C72F14DE2C594DAA0017B57E /* CalendarFBCViewController.swift in Sources */,
 				C71565142C8EBC1F0038A782 /* MentoringChatTableViewCell.swift in Sources */,
+				C7FB12A32CF9DF97001695D1 /* BaseCollectionViewCell.swift in Sources */,
+				C7BC68232CF6E7C500CEC0F3 /* UniList.swift in Sources */,
 				7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */,
 				C7980A882CEF841E00475D94 /* AlertViewController.swift in Sources */,
 				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
@@ -1270,8 +1297,8 @@
 				4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */,
 				7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */,
 				C7E3EF542C60A87000DDC36B /* ADCollectionViewCell.swift in Sources */,
-				C7DA4E442C61252A0092F342 /* AlarmPostModel.swift in Sources */,
 				7B3459F12C688AB1008B711A /* BoardScrapModel.swift in Sources */,
+				C7BC68192CF6E55C00CEC0F3 /* ApplyMentor.swift in Sources */,
 				C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */,
 				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
 				C7DCEF812C5FD710001D38AA /* MyAlarmTableViewCell.swift in Sources */,
@@ -1281,19 +1308,19 @@
 				C715650E2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift in Sources */,
 				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
-				415BBC0D2C73442F002768EE /* NetworkManager.swift in Sources */,
+				415BBC0D2C73442F002768EE /* NetworkAuthManager.swift in Sources */,
 				C7C568712C6F44C500A57821 /* MentorPostAPI.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				7B1C534C2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift in Sources */,
 				C78DE55A2C48176C00A58395 /* CalendarCollectionViewCell.swift in Sources */,
 				C707E4BB2C69CB97005D390C /* ApplyMentoringTableViewCell.swift in Sources */,
 				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,
-				C79EC0122C6E4CE7009C2BD9 /* UniListModel.swift in Sources */,
 				7BFDEC2B2C5224EF007280F8 /* BoardViewController.swift in Sources */,
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				4168E8552C690BBD00A0F292 /* ProfileDataManager.swift in Sources */,
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
+				C7BC68252CF6E7CC00CEC0F3 /* UniDelete.swift in Sources */,
 				C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */,
 				7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */,
 				7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */,
@@ -1311,7 +1338,7 @@
 				C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */,
 				7B1C53502C69D53C00C66D0D /* DirectoryLabReviewListModel.swift in Sources */,
 				7B3459F32C688AEE008B711A /* BoardSearchModel.swift in Sources */,
-				C7C5686D2C6F42D600A57821 /* ApplyMentoringModel.swift in Sources */,
+				C7BC68172CF6E55000CEC0F3 /* MentorList.swift in Sources */,
 				C75C45842C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift in Sources */,
 				7B3459EB2C68858E008B711A /* BoardWritePostModel.swift in Sources */,
 				C74D4CB32C45770800D4339D /* FavoriteLabCollectionViewCell.swift in Sources */,
@@ -1338,9 +1365,10 @@
 				415BBC0B2C7343F8002768EE /* AuthInterceptor.swift in Sources */,
 				C73F89842C5E834D007ECFE7 /* MyAlarmViewController.swift in Sources */,
 				C74D4CB12C4576F400D4339D /* HotFeedTableViewCell.swift in Sources */,
+				C7BC68292CF6E7DF00CEC0F3 /* AlarmList.swift in Sources */,
 				C74F584F2C6B330000369545 /* UniPostAPI.swift in Sources */,
 				7B1C53602C6A680000C66D0D /* BoardNewQnAModel.swift in Sources */,
-				C7023D322C6E1BDA0036D355 /* UniDeleteModel.swift in Sources */,
+				C7FB129E2CF9DDAD001695D1 /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

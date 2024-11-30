@@ -16,7 +16,7 @@ class ResearchTopicDataManager {
             "Accept": "*/*"
         ]
         
-        NetworkManager.shared.request(url,
+        NetworkAuthManager.shared.request(url,
                    method: .post,
                    parameters: topicName,
                    encoder: JSONParameterEncoder.default,

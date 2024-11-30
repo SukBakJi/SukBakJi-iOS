@@ -1152,7 +1152,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="boardView" destination="86X-yt-hwR" id="ibi-3a-4k8"/>
+                        <outlet property="boardView" destination="86X-yt-hwR" id="0dk-Hs-Dpr"/>
                         <outlet property="bottomView" destination="ihh-bl-qAs" id="Fmp-nh-UPm"/>
                         <outlet property="chatTableView" destination="nXw-R1-5zE" id="JWG-hq-pcf"/>
                         <outlet property="fromLabel" destination="k4t-Gu-pZH" id="ekt-MN-Aad"/>

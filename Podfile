@@ -6,6 +6,7 @@ target 'Sukbakji' do
   use_frameworks!
 
   # Pods for Sukbakji
+
   pod 'Then'
   pod 'SnapKit', '~> 5.7.0'
   pod 'DropDown', '2.3.13'
@@ -17,8 +18,7 @@ target 'Sukbakji' do
   pod 'KakaoSDKUser'
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   pod 'RxSwift', '6.8.0'
-  pod 'RxCocoa', '6.8.0'
-  pod 'RxAlamofire'	
+  pod 'RxCocoa', '6.8.0'	
 end
 post_install do |installer|
     installer.generated_projects.each do |project|
