@@ -13,7 +13,7 @@ class DateViewController: UIViewController {
     @IBOutlet weak var DateCV: UICollectionView!
     
     private var allDatas: UpComingResult?
-    var allDetailDatas: [UpcomingResponse] = []
+    var allDetailDatas: [UpComingResult] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,14 +55,14 @@ class DateViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 do {
-                    let decodedData = try JSONDecoder().decode(UpComingResultModel.self, from: data)
-                    self.allDatas = decodedData.result
-                    self.allDetailDatas = self.allDatas?.scheduleList ?? []
-                    self.allDetailDatas = self.allDetailDatas.filter { $0.dday >= 0 && $0.dday <= 10 }
-                    
-                    DispatchQueue.main.async {
-                        self.DateCV.reloadData()
-                    }
+                    let decodedData = try JSONDecoder().decode(UpComingResult.self, from: data)
+//                    self.allDatas = decodedData.result
+//                    self.allDetailDatas = self.allDatas?.scheduleList ?? []
+//                    self.allDetailDatas = self.allDetailDatas.filter { $0.dday >= 0 && $0.dday <= 10 }
+//                    
+//                    DispatchQueue.main.async {
+//                        self.DateCV.reloadData()
+//                    }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
                 } catch let DecodingError.keyNotFound(key, context) {

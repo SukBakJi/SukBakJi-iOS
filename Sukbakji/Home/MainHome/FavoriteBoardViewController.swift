@@ -17,7 +17,7 @@ class FavoriteBoardViewController: UIViewController {
    
    private let disposeBag = DisposeBag()
     
-    var allDatas: [FavoritesBoardResult] = []
+    var allDatas: [FavoritesBoard] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +26,13 @@ class FavoriteBoardViewController: UIViewController {
     }
     
     func setFavoriteBoardTV() {
-        FavoriteBoardTV.delegate = self
-        FavoriteBoardTV.dataSource = self
-        FavoriteBoardTV.layer.masksToBounds = true// any value you want
-        FavoriteBoardTV.layer.shadowOpacity = 0.2// any value you want
-        FavoriteBoardTV.layer.shadowRadius = 2 // any value you want
-        FavoriteBoardTV.layer.shadowOffset = .init(width: 0, height: 0.5)
-        FavoriteBoardTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+//        FavoriteBoardTV.delegate = self
+//        FavoriteBoardTV.dataSource = self
+//        FavoriteBoardTV.layer.masksToBounds = true// any value you want
+//        FavoriteBoardTV.layer.shadowOpacity = 0.2// any value you want
+//        FavoriteBoardTV.layer.shadowRadius = 2 // any value you want
+//        FavoriteBoardTV.layer.shadowOffset = .init(width: 0, height: 0.5)
+//        FavoriteBoardTV.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {

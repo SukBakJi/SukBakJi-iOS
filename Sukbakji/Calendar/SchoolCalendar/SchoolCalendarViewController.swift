@@ -13,7 +13,7 @@ class SchoolCalendarViewController: UIViewController {
     @IBOutlet weak var schoolCalendarTV: UITableView!
     @IBOutlet weak var univCount: UILabel!
     
-    var allDatas: UnivListResponse?
+    var allDatas: UnivList?
     var allDetailDatas: [UnivList] = []
     
     override func viewDidLoad() {
@@ -68,14 +68,14 @@ class SchoolCalendarViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 do {
-                    let decodedData = try JSONDecoder().decode(UnivListResultModel.self, from: data)
-                    self.allDatas = decodedData.result
-                    self.allDetailDatas = self.allDatas?.univList ?? []
-                    
-                    DispatchQueue.main.async {
-                        self.univCount.text = "전체선택 (0/\(self.allDetailDatas.count))"
-                        self.schoolCalendarTV.reloadData()
-                    }
+                    let decodedData = try JSONDecoder().decode(UnivListResult.self, from: data)
+//                    self.allDatas = decodedData.result
+//                    self.allDetailDatas = self.allDatas?.univList ?? []
+//                    
+//                    DispatchQueue.main.async {
+//                        self.univCount.text = "전체선택 (0/\(self.allDetailDatas.count))"
+//                        self.schoolCalendarTV.reloadData()
+//                    }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
                 } catch let DecodingError.keyNotFound(key, context) {

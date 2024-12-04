@@ -11,7 +11,7 @@ import Alamofire
 class APIUniDelete {
     static let instance = APIUniDelete()
     
-    func SendingUniDelete(parameters: UniDeleteModel, completion: @escaping (Result<Void, Error>) -> Void) {
+    func SendingUniDelete(parameters: UniDelete, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }

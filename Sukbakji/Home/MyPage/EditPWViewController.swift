@@ -29,8 +29,8 @@ class EditPWViewController: UIViewController {
     private var userPW: String?
     private var userToken: String?
     
-    private var PWData: ChangePWResult!
-    private var logoutData: LogoutResult!
+    private var PWData: ChangePW!
+    private var logoutData: Logout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -284,9 +284,9 @@ class EditPWViewController: UIViewController {
     }
     
     @IBAction func change_Tapped(_ sender: Any) {
-        let pwParameters = ChangePWModel(currentPassword: currentPWTF.text ?? "", newPassword: newPWTF.text ?? "", confirmPassword: newPWAgainTF.text ?? "")
+        let pwParameters = ChangePW(currentPassword: currentPWTF.text ?? "", newPassword: newPWTF.text ?? "", confirmPassword: newPWAgainTF.text ?? "")
         APIChangePWPost.instance.SendingChangePW(parameters: pwParameters) { result in self.PWData = result }
-        let tokenParameters = LogoutModel(accessToken: userToken ?? "")
+        let tokenParameters = Logout(accessToken: userToken ?? "")
         APILogoutPost.instance.SendingLogout(parameters: tokenParameters) { result in self.logoutData = result }
         let mainViewController = UINavigationController(rootViewController: LoginViewController())
         mainViewController.modalPresentationStyle = .fullScreen

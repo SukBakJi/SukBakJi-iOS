@@ -29,13 +29,13 @@ class CalendarViewController: UIViewController {
     private var calendarDate = Date()
     private var days = [String]()
     
-    private var dateDatas: DateResponse?
-    var allDateDatas: [DateListResponse] = []
+    private var dateDatas: DateSelectList?
+    var allDateDatas: [DateSelectList] = []
     
-    private var UniDatas: UnivListResponse?
+    private var UniDatas: UnivListResult?
     private var UniDetailDatas: [UnivList] = []
     
-    private var alarmDatas: AlarmResponse?
+    private var alarmDatas: AlarmListResult?
     private var alarmDetailDatas: [AlarmList] = []
     private var alarmDateDatas: [String] = []
     
@@ -129,17 +129,17 @@ class CalendarViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 do {
-                    let decodedData = try JSONDecoder().decode(UnivListResultModel.self, from: data)
-                    self.UniDatas = decodedData.result
-                    self.UniDetailDatas = self.UniDatas?.univList ?? []
-                    
-                    DispatchQueue.main.async {
-                        if self.UniDetailDatas.count >= 1 {
-                            self.AlertView.isHidden = true
-                            self.triangleView.isHidden = true
-                            self.univLabel.text = "모든 학교"
-                        }
-                    }
+                    let decodedData = try JSONDecoder().decode(UnivListResult.self, from: data)
+//                    self.UniDatas = decodedData.
+//                    self.UniDetailDatas = self.UniDatas?.univList ?? []
+//                    
+//                    DispatchQueue.main.async {
+//                        if self.UniDetailDatas.count >= 1 {
+//                            self.AlertView.isHidden = true
+//                            self.triangleView.isHidden = true
+//                            self.univLabel.text = "모든 학교"
+//                        }
+//                    }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
                 } catch let DecodingError.keyNotFound(key, context) {
@@ -179,18 +179,18 @@ class CalendarViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 do {
-                    let decodedData = try JSONDecoder().decode(DateResultModel.self, from: data)
-                    self.dateDatas = decodedData.result
-                    self.allDateDatas = self.dateDatas?.scheduleList ?? []
-                    
-                    DispatchQueue.main.async {
-                        self.dateListTV.reloadData()
-                        if self.allDateDatas.count >= 1 {
-                            self.expandHeight()
-                        } else {
-                            self.reduceHeight()
-                        }
-                    }
+                    let decodedData = try JSONDecoder().decode(DateSelectList.self, from: data)
+//                    self.dateDatas = decodedData.result
+//                    self.allDateDatas = self.dateDatas?.scheduleList ?? []
+//                    
+//                    DispatchQueue.main.async {
+//                        self.dateListTV.reloadData()
+//                        if self.allDateDatas.count >= 1 {
+//                            self.expandHeight()
+//                        } else {
+//                            self.reduceHeight()
+//                        }
+//                    }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
                 } catch let DecodingError.keyNotFound(key, context) {
@@ -226,12 +226,12 @@ class CalendarViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 do {
-                    let decodedData = try JSONDecoder().decode(AlarmResultModel.self, from: data)
-                    self.alarmDatas = decodedData.result
-                    self.alarmDetailDatas = self.alarmDatas?.alarmList ?? []
-                    for i in 0..<self.alarmDetailDatas.count {
-                        self.alarmDateDatas.append(self.alarmDetailDatas[i].alarmDate)
-                    }
+                    let decodedData = try JSONDecoder().decode(AlarmListResult.self, from: data)
+//                    self.alarmDatas = decodedData.result
+//                    self.alarmDetailDatas = self.alarmDatas?.alarmList ?? []
+//                    for i in 0..<self.alarmDetailDatas.count {
+//                        self.alarmDateDatas.append(self.alarmDetailDatas[i].alarmDate)
+//                    }
                     
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
