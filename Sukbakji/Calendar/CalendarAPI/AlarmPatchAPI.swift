@@ -11,7 +11,7 @@ import Alamofire
 class APIAlarmPatch {
     static let instance = APIAlarmPatch()
     
-    func SendingPatchAlarmOn(parameters: AlarmPatchModel, handler: @escaping (_ result: AlarmPatchResult)->(Void)) {
+    func SendingPatchAlarmOn(parameters: AlarmPatch, handler: @escaping (_ result: AlarmPatchResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
@@ -42,7 +42,7 @@ class APIAlarmPatch {
         }
     }
     
-    func SendingPatchAlarmOff(parameters: AlarmPatchModel, handler: @escaping (_ result: AlarmPatchResult)->(Void)) {
+    func SendingPatchAlarmOff(parameters: AlarmPatch, handler: @escaping (_ result: AlarmPatchResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }

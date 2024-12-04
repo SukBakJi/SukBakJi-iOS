@@ -23,7 +23,7 @@ class SchoolDeleteAlertViewController: UIViewController {
     }
     
     @IBAction func delete_Tapped(_ sender: Any) {
-        let parameters = UniDeleteModel(memberId: memberId ?? 0, univId: univId ?? 0, season: season ?? "", method: method ?? "")
+        let parameters = UniDelete(memberId: memberId ?? 0, univId: univId ?? 0, season: season ?? "", method: method ?? "")
         APIUniDelete.instance.SendingUniDelete(parameters: parameters) { result in
             switch result {
             case .success:

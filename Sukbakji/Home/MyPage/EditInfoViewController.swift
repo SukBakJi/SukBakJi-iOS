@@ -20,7 +20,7 @@ class EditInfoViewController: UIViewController {
     @IBOutlet weak var socialImage: UIImageView!
     @IBOutlet weak var socialLabel: UILabel!
     
-    var userData: MyPageResult?
+    var userData: MyProfile?
     private var EditData: EditProfileResult!
     
     private var degreeLevel: DegreeLevel?
@@ -90,37 +90,37 @@ class EditInfoViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 do {
-                    let decodedData = try JSONDecoder().decode(MyPageResultModel.self, from: data)
-                    self.userData = decodedData.result
-                    
-                    DispatchQueue.main.async {
-                        self.idTF.text = self.userEmail
-                        self.nameTF.text = self.userData?.name
-                        if self.userData?.degreeLevel == "BACHELORS_STUDYING" || self.userData?.degreeLevel == "BACHELORS_GRADUATED"{
-                            self.belongTF.text = "학사 졸업 또는 재학"
-                            self.degreeLevel = .bachelorsGraduated
-                        } else if self.userData?.degreeLevel == "MASTERS_STUDYING" {
-                            self.belongTF.text = "석사 재학"
-                            self.degreeLevel = .mastersStudying
-                        } else if self.userData?.degreeLevel == "MASTERS_GRADUATED" {
-                            self.belongTF.text = "석사 졸업"
-                            self.degreeLevel = .mastersGraduated
-                        } else if self.userData?.degreeLevel == "DOCTORAL_STUDYING" {
-                            self.belongTF.text = "박사 재학"
-                            self.degreeLevel = .doctoralStudying
-                        } else if self.userData?.degreeLevel == "DOCTORAL_GRADUATED" {
-                            self.belongTF.text = "박사 졸업"
-                            self.degreeLevel = .doctoralGraduated
-                        } else {
-                            self.belongTF.text = "석박사 통합 재학"
-                            self.degreeLevel = .integratedStudying
-                        }
-                        if self.userData?.provider == "BASIC" {
-                            self.socialImage.image = UIImage(named: "Sukbakji_Email")
-                            self.socialLabel.text = "이메일 로그인으로 사용 중이에요"
-                        }
-                        self.researchTopicCV.reloadData()
-                    }
+                    let decodedData = try JSONDecoder().decode(MyProfile.self, from: data)
+//                    self.userData = decodedData.result
+//                    
+//                    DispatchQueue.main.async {
+//                        self.idTF.text = self.userEmail
+//                        self.nameTF.text = self.userData?.name
+//                        if self.userData?.degreeLevel == "BACHELORS_STUDYING" || self.userData?.degreeLevel == "BACHELORS_GRADUATED"{
+//                            self.belongTF.text = "학사 졸업 또는 재학"
+//                            self.degreeLevel = .bachelorsGraduated
+//                        } else if self.userData?.degreeLevel == "MASTERS_STUDYING" {
+//                            self.belongTF.text = "석사 재학"
+//                            self.degreeLevel = .mastersStudying
+//                        } else if self.userData?.degreeLevel == "MASTERS_GRADUATED" {
+//                            self.belongTF.text = "석사 졸업"
+//                            self.degreeLevel = .mastersGraduated
+//                        } else if self.userData?.degreeLevel == "DOCTORAL_STUDYING" {
+//                            self.belongTF.text = "박사 재학"
+//                            self.degreeLevel = .doctoralStudying
+//                        } else if self.userData?.degreeLevel == "DOCTORAL_GRADUATED" {
+//                            self.belongTF.text = "박사 졸업"
+//                            self.degreeLevel = .doctoralGraduated
+//                        } else {
+//                            self.belongTF.text = "석박사 통합 재학"
+//                            self.degreeLevel = .integratedStudying
+//                        }
+//                        if self.userData?.provider == "BASIC" {
+//                            self.socialImage.image = UIImage(named: "Sukbakji_Email")
+//                            self.socialLabel.text = "이메일 로그인으로 사용 중이에요"
+//                        }
+//                        self.researchTopicCV.reloadData()
+//                    }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
                 } catch let DecodingError.keyNotFound(key, context) {
@@ -217,7 +217,7 @@ class EditInfoViewController: UIViewController {
     }
     
     @IBAction func edit_Tapped(_ sender: Any) {
-        let parameters = EditProfileModel(degreeLevel: degreeLevel!, researchTopics: userData?.researchTopics ?? [])
+        let parameters = EditProfile(degreeLevel: degreeLevel!, researchTopics: userData?.researchTopics ?? [])
         APIEditProfile.instance.SendingEditProfile(parameters: parameters) { result in self.EditData = result }
         self.presentingViewController?.dismiss(animated: true)
     }

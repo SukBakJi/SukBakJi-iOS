@@ -17,7 +17,7 @@ class MyAlarmViewController: UIViewController {
     private let dateFormatter = DateFormatter()
     private var calendarDate = Date()
     
-    private var allDatas: AlarmResponse?
+    private var allDatas: AlarmListResult?
     var allDetailDatas: [AlarmList] = []
     
     private var alarmData: AlarmPatchResult!
@@ -63,13 +63,13 @@ class MyAlarmViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 do {
-                    let decodedData = try JSONDecoder().decode(AlarmResultModel.self, from: data)
-                    self.allDatas = decodedData.result
-                    self.allDetailDatas = self.allDatas?.alarmList ?? []
-                    
-                    DispatchQueue.main.async {
-                        self.myAlarmTV.reloadData()
-                    }
+                    let decodedData = try JSONDecoder().decode(AlarmListResult.self, from: data)
+//                    self.allDatas = decodedData.result
+//                    self.allDetailDatas = self.allDatas?.alarmList ?? []
+//                    
+//                    DispatchQueue.main.async {
+//                        self.myAlarmTV.reloadData()
+//                    }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
                 } catch let DecodingError.keyNotFound(key, context) {

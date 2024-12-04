@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct HotPost : Codable {
     let postId: Int
@@ -15,4 +16,17 @@ struct HotPost : Codable {
     let content: String
     let commentCount: Int
     let views: Int
+}
+
+struct HotPostSection {
+    var items: [HotPost]
+}
+
+extension HotPostSection: SectionModelType {
+    typealias Item = HotPost
+    
+    init(original: HotPostSection, items: [Item]) {
+        self = original
+        self.items = items
+    }
 }

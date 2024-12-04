@@ -199,7 +199,7 @@ class AlarmViewController: UIViewController, dateProtocol {
     }
     
     @IBAction func alarm_Setting(_ sender: Any) {
-        let parameterDatas = AlarmPostModel(memberId: memberId, univName: SchoolTF.text ?? "", name: AlarmNameTF.text ?? "", date: dateData, time: timeLabel, onoff: 1)
+        let parameterDatas = AlarmPost(memberId: memberId, univName: SchoolTF.text ?? "", name: AlarmNameTF.text ?? "", date: dateData, time: timeLabel, onoff: 1)
         APIAlarmPost.instance.SendingPostAlarm(parameters: parameterDatas) { result in self.alarmData = result }
         NotificationCenter.default.post(name: NSNotification.Name("DismissTwo"), object: nil, userInfo: nil)
         self.presentingViewController?.dismiss(animated: true)

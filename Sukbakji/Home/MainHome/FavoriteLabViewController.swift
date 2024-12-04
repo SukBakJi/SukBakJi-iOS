@@ -16,7 +16,7 @@ class FavoriteLabViewController: UIViewController {
     @IBOutlet weak var noFavLabel: UILabel!
     @IBOutlet weak var letsFavLabel: UILabel!
     
-    var allDatas: [FavoritesLabResult] = []
+    var allDatas: [FavoritesLab] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +27,12 @@ class FavoriteLabViewController: UIViewController {
     }
     
     func setFavoriteLabCV() {
-        FavoriteLabCV.delegate = self
-        FavoriteLabCV.dataSource = self
-        FavoriteLabCV.layer.masksToBounds = false// any value you want
-        FavoriteLabCV.layer.shadowOpacity = 0.2// any value you want
-        FavoriteLabCV.layer.shadowRadius = 2 // any value you want
-        FavoriteLabCV.layer.shadowOffset = .init(width: 0, height: 0.2)
+//        FavoriteLabCV.delegate = self
+//        FavoriteLabCV.dataSource = self
+//        FavoriteLabCV.layer.masksToBounds = false// any value you want
+//        FavoriteLabCV.layer.shadowOpacity = 0.2// any value you want
+//        FavoriteLabCV.layer.shadowRadius = 2 // any value you want
+//        FavoriteLabCV.layer.shadowOffset = .init(width: 0, height: 0.2)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,43 +44,43 @@ class FavoriteLabViewController: UIViewController {
     }
     
     func getFavoriteLab() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        
-        let url = APIConstants.labs.path + "/mypage/favorite-labs"
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(retrievedToken)",
-        ]
-        
-        AF.request(url, method: .get, headers: headers).responseData { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let decodedData = try JSONDecoder().decode(FavoritesLabResultModel.self, from: data)
-                    self.allDatas = decodedData.result
-                    
-                    DispatchQueue.main.async {
-                        self.FavoriteLabCV.reloadData()
-                    }
-                } catch let DecodingError.dataCorrupted(context) {
-                    print(context)
-                } catch let DecodingError.keyNotFound(key, context) {
-                    print("Key '\(key)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.valueNotFound(value, context) {
-                    print("Value '\(value)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.typeMismatch(type, context)  {
-                    print("Type '\(type)' mismatch:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch {
-                    print("error: ", error)
-                }
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        }
+//        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+//            return
+//        }
+//        
+//        let url = APIConstants.labs.path + "/mypage/favorite-labs"
+//        
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer \(retrievedToken)",
+//        ]
+//        
+//        AF.request(url, method: .get, headers: headers).responseData { response in
+//            switch response.result {
+//            case .success(let data):
+//                do {
+//                    let decodedData = try JSONDecoder().decode(FavoritesLabResultModel.self, from: data)
+//                    self.allDatas = decodedData.result
+//                    
+//                    DispatchQueue.main.async {
+//                        self.FavoriteLabCV.reloadData()
+//                    }
+//                } catch let DecodingError.dataCorrupted(context) {
+//                    print(context)
+//                } catch let DecodingError.keyNotFound(key, context) {
+//                    print("Key '\(key)' not found:", context.debugDescription)
+//                    print("codingPath:", context.codingPath)
+//                } catch let DecodingError.valueNotFound(value, context) {
+//                    print("Value '\(value)' not found:", context.debugDescription)
+//                    print("codingPath:", context.codingPath)
+//                } catch let DecodingError.typeMismatch(type, context)  {
+//                    print("Type '\(type)' mismatch:", context.debugDescription)
+//                    print("codingPath:", context.codingPath)
+//                } catch {
+//                    print("error: ", error)
+//                }
+//            case .failure(let error):
+//                print("Error: \(error)")
+//            }
+//        }
     }
 }

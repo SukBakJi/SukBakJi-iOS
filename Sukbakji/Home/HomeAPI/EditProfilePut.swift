@@ -11,7 +11,7 @@ import Alamofire
 class APIEditProfile {
     static let instance = APIEditProfile()
     
-    func SendingEditProfile(parameters: EditProfileModel, handler: @escaping (_ result: EditProfileResult)->(Void)) {
+    func SendingEditProfile(parameters: EditProfile, handler: @escaping (_ result: EditProfileResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             print("Failed to retrieve password.")
             return

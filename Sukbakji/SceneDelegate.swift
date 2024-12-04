@@ -44,8 +44,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let isAutoLoginEnabled = UserDefaults.standard.bool(forKey: "isAutoLogin")
 
         if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
-            print("자동 로그인 활성화: \(accessToken)")
-            switchToTabBarController() // 자동 로그인 후 홈 화면으로 전환
+//            print("자동 로그인 활성화: \(accessToken)")
+//            switchToTabBarController() // 자동 로그인 후 홈 화면으로 전환
+            let mainViewController = UINavigationController(rootViewController: MainTabViewController())
+            window?.rootViewController = mainViewController
         } else {
             let mainViewController = UINavigationController(rootViewController: LoginViewController())
             window?.rootViewController = mainViewController
@@ -56,13 +58,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     
     func switchToTabBarController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let tabBarController = storyboard.instantiateInitialViewController() as? MainTabViewController else {
-            fatalError("UITabBarController가 Main 스토리보드에 초기 ViewController로 설정되어 있지 않습니다.")
-        }
+        let tabBarController = MainTabViewController()
 
-        let Homestoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let firstViewController = Homestoryboard.instantiateViewController(withIdentifier: "HomeVC")
+        let firstViewController = UINavigationController(rootViewController: HomeViewController())
         firstViewController.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "Sukbakji_Home"), tag: 0)
 
         let Calendarstoryboard = UIStoryboard(name: "Calendar", bundle: nil)
