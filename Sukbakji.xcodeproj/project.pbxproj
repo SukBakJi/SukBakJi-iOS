@@ -888,6 +888,7 @@
 				C7DA4E3C2C611CE10092F342 /* APIConstants.swift */,
 				C7980A822CEF7D5400475D94 /* APIService.swift */,
 				C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */,
+				C7980A842CEF835B00475D94 /* Shared */,
 				415BBC0A2C7343F8002768EE /* AuthInterceptor.swift */,
 				415BBC0C2C73442F002768EE /* NetworkAuthManager.swift */,
 			);
@@ -1030,7 +1031,6 @@
 			isa = PBXGroup;
 			children = (
 				C7DA4E3B2C611BF50092F342 /* Network */,
-				C7980A842CEF835B00475D94 /* Shared */,
 				412BFBE42C52A5D20099E442 /* Extension */,
 				C7B7A1662D001D3A00D5CE14 /* Component */,
 				7BFB8C9D2C63458300A31B70 /* Directory */,
