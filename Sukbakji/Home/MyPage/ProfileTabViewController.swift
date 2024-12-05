@@ -11,14 +11,21 @@ import Pageboy
 
 class ProfileTabViewController: TabmanViewController {
     
-    @IBOutlet weak var tabView: UIView!
-    
     private var viewControllers: Array<UIViewController> = []
+    
+    private let tabView = UIView().then {
+       $0.backgroundColor = .white
+    }
+    private let backgroundLabel2 = UILabel().then {
+       $0.backgroundColor = .gray200
+    }
     
     private var userPW: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setUI()
         setupTabMan()
         
         NotificationCenter.default.addObserver(
@@ -34,6 +41,24 @@ class ProfileTabViewController: TabmanViewController {
 
         self.getUserPW()
     }
+    
+    private func setUI() {
+        self.view.backgroundColor = .white
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        self.view.addSubview(tabView)
+        tabView.snp.makeConstraints { make in
+           make.leading.trailing.top.equalToSuperview()
+           make.height.equalTo(44)
+        }
+        
+        self.tabView.addSubview(backgroundLabel2)
+        backgroundLabel2.snp.makeConstraints { make in
+           make.leading.trailing.bottom.equalToSuperview()
+           make.height.equalTo(1.5)
+        }
+    }
         
     @objc func didDismissDetailNotification(_ notification: Notification) {
         self.scrollToPage(.at(index: 0), animated: true)
@@ -42,6 +67,7 @@ class ProfileTabViewController: TabmanViewController {
     func getUserPW() {
         if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
             userPW = retrievedPW
+            print(userPW)
         } else {
             print("Failed to retrieve password.")
         }
@@ -60,7 +86,7 @@ class ProfileTabViewController: TabmanViewController {
         // 배경 회색으로 나옴 -> 하얀색으로 바뀜
         bar.backgroundView.style = .clear
         // 간격 설정
-        bar.layout.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 30, right: 0)
+        bar.layout.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         // 버튼 글씨 커스텀
         bar.buttons.customize { (button) in
             button.tintColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1)
@@ -79,11 +105,16 @@ class ProfileTabViewController: TabmanViewController {
     
     override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: NavigationDirection, animated: Bool) {
         if (index == 1) && (userPW == "") { // 두 번째 탭이 선택된 경우
-            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PWAlertVC") as? PWAlertViewController else { return }
-            nextVC.modalPresentationStyle = .overCurrentContext
-            
-            DispatchQueue.main.async {
-                self.present(nextVC, animated: false, completion: nil)
+            let moveStopView = PWAlertView()
+                
+            self.view.addSubview(moveStopView)
+            moveStopView.alpha = 0
+            moveStopView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+                
+            UIView.animate(withDuration: 0.3) {
+                moveStopView.alpha = 1
             }
         }
     }

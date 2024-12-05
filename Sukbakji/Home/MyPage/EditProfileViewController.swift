@@ -6,28 +6,74 @@
 //
 
 import UIKit
+import SnapKit
+import Alamofire
+import Then
+import RxSwift
+import RxCocoa
 
 class EditProfileViewController: UIViewController {
+    
+    private let navigationbarView = NavigationBarView(title: "프로필 수정")
+    
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
+    private let classifyView = UIView().then {
+        $0.backgroundColor = .white
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        /// 탭 바 숨기기
+        self.tabBarController?.tabBar.isHidden = true
     }
     
-    @IBAction func back_Tapped(_ sender: Any) {
-        self.presentingViewController?.dismiss(animated: true)
+    private func setUI() {
+        self.view.backgroundColor = .white
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.showsVerticalScrollIndicator = false
+        
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        self.scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView.contentLayoutGuide)
+            make.width.equalTo(scrollView.frameLayoutGuide)
+            make.height.equalTo(900)
+        }
+        
+        navigationbarView.delegate = self
+        self.contentView.addSubview(navigationbarView)
+        navigationbarView.snp.makeConstraints { make in
+           make.top.equalToSuperview().inset(47)
+           make.leading.trailing.equalToSuperview()
+           make.height.equalTo(48)
+        }
+        
+        self.contentView.addSubview(classifyView)
+        classifyView.snp.makeConstraints { make in
+            make.top.equalTo(navigationbarView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        let childVC = ProfileTabViewController()
+        addChild(childVC)
+        classifyView.addSubview(childVC.view)
+        childVC.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        childVC.didMove(toParent: self)
     }
 }

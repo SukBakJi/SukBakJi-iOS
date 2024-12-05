@@ -172,10 +172,8 @@ class LoginViewController: UIViewController {
     }
     
     private func navigateToHomeScreen() {
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
-            return
-        }
-        sceneDelegate.switchToTabBarController()
+        let tabBarVC = MainTabViewController()
+        self.navigationController?.pushViewController(tabBarVC, animated: true)
     }
     
     private func navigateToTOSScreen(isKakaoSignUp: Bool = false) {

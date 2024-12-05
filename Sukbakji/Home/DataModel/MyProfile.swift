@@ -10,7 +10,7 @@ import Foundation
 struct MyProfile : Codable {
     let name: String?
     let provider: String
-    let degreeLevel: DegreeLevel?
+    let degreeLevel: String
     let researchTopics: [String]?
     let point: Int?
 }
