@@ -8,24 +8,114 @@
 import UIKit
 import DropDown
 import Alamofire
+import SnapKit
+import Then
+import RxSwift
+import RxCocoa
 
 class EditInfoViewController: UIViewController {
     
-    @IBOutlet weak var idTF: UITextField!
-    @IBOutlet weak var nameTF: UITextField!
-    @IBOutlet weak var belongTF: UITextField!
-    @IBOutlet weak var researchTopicCV: UICollectionView!
-    @IBOutlet weak var setButton: UIButton!
+    let researchTopicViewModel = ResearchTopicViewModel()
     
-    @IBOutlet weak var socialImage: UIImageView!
-    @IBOutlet weak var socialLabel: UILabel!
+    private let idLabel = UILabel().then {
+        $0.text = "아이디"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .black
+    }
+    private let idTextField = UITextField().then {
+       $0.backgroundColor = .gray50
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = UIColor(hexCode: "E1E1E1")
+    }
+    private let logingImageView = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_Kakao")
+    }
+    private let logingLabel = UILabel().then {
+        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
+        $0.textColor = .black
+    }
+    private let nameLabel = UILabel().then {
+        $0.text = "이름"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .black
+    }
+    private let nameTextField = UITextField().then {
+       $0.backgroundColor = .gray50
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = UIColor(hexCode: "E1E1E1")
+    }
+    private let belongLabel = UILabel().then {
+        $0.text = "현재 소속"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .black
+    }
+    private let belongTextField = UITextField().then {
+       $0.backgroundColor = .gray50
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = .black
+    }
+    private let dropButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Down2"), for: .normal)
+    }
+    private let certificateView = UIView().then {
+        $0.backgroundColor = .gray50
+    }
+    private let certificateLabel = UILabel().then {
+        $0.text = "현재 학사 재학으로 학력인증이\n완료된 상태입니다"
+        $0.numberOfLines = 2
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = UIColor(hexCode: "767676")
+    }
+    private let certificateButton = UIButton().then {
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 8
+
+        $0.setTitleColor(.white, for: .normal)
+        $0.setTitle("새로 인증하기", for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
+    }
+    private let researchLabel = UILabel().then {
+        $0.text = "연구 주제"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .black
+    }
+    private var researchTopicCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 8
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.register(ResearchTopicCollectionViewCell.self, forCellWithReuseIdentifier: ResearchTopicCollectionViewCell.identifier)
+        cv.allowsSelection = false
+        cv.backgroundColor = .clear
+        
+        return cv
+    }()
+    private let backgroundLabel = UILabel().then {
+       $0.backgroundColor = .gray200
+    }
+    private let plusButton = UIButton().then {
+        $0.setImage(UIImage(named: "SBJ_plusButton"), for: .normal)
+    }
+    private let editButton = UIButton().then {
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 8
+
+        $0.setTitleColor(.white, for: .normal)
+        $0.setTitle("수정하기", for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
+    }
     
-    var userData: MyProfile?
+    private let disposeBag = DisposeBag()
+    
+    var topicData: [String] = []
+    
     private var EditData: EditProfileResult!
     
     private var degreeLevel: DegreeLevel?
-    
-    private var userEmail: String?
     
     private let drop = DropDown()
     private let belongType = ["학사 졸업 또는 재학", "석사 재학", "석사 졸업", "박사 재학", "박사 졸업", "석박사 통합 재학"]
@@ -33,110 +123,213 @@ class EditInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        seteditInfoView()
-    }
-    
-    func seteditInfoView() {
-        idTF.addBottomShadow()
-        idTF.setLeftPadding(10)
-        nameTF.addBottomShadow()
-        nameTF.setLeftPadding(10)
-        belongTF.addBottomShadow()
-        belongTF.setLeftPadding(10)
-        
-        initUI()
-        setDropdown()
-        settingButton()
-        
-        researchTopicCV.delegate = self
-        researchTopicCV.dataSource = self
+        setUI()
+        setDrop()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.getUserName()
-        }
+        self.tabBarController?.tabBar.isHidden = true
+//        setProfileAPI()
     }
     
-    func settingButton() {
-        setButton.isEnabled = true
-        setButton.layer.masksToBounds = true
-        setButton.layer.cornerRadius = 10
-        setButton.backgroundColor = UIColor(named: "Coquelicot")
-        setButton.setTitleColor(.white, for: .normal)
-        setButton.setTitleColor(.white, for: .selected)
+    private func setDrop() {
+        
+        initUI()
+        setDropdown()
     }
     
-    func getUserName() {
-        if let retrievedEmail = KeychainHelper.standard.read(service: "email", account: "user", type: String.self) {
-            userEmail = retrievedEmail
-        } else {
-            print("Failed to retrieve password.")
+    private func setUI() {
+        self.view.backgroundColor = .white
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        self.view.addSubview(idLabel)
+        idLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(66)
+            make.leading.equalToSuperview().offset(24)
+           make.height.equalTo(21)
         }
         
+        self.view.addSubview(idTextField)
+        idTextField.snp.makeConstraints { make in
+            make.top.equalTo(idLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(44)
+        }
+        idTextField.addTFUnderline()
+        idTextField.setLeftPadding(10)
+        
+        self.view.addSubview(logingImageView)
+        logingImageView.snp.makeConstraints { make in
+            make.top.equalTo(idTextField.snp.bottom).offset(6)
+            make.leading.equalToSuperview().inset(24)
+            make.height.width.equalTo(16)
+        }
+        
+        self.view.addSubview(logingLabel)
+        logingLabel.snp.makeConstraints { make in
+            make.top.equalTo(idTextField.snp.bottom).offset(8)
+            make.leading.equalTo(logingImageView.snp.trailing).inset(6)
+            make.height.equalTo(12)
+        }
+        
+        self.view.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(logingImageView.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(24)
+           make.height.equalTo(21)
+        }
+        
+        self.view.addSubview(nameTextField)
+        nameTextField.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(44)
+        }
+        nameTextField.addTFUnderline()
+        nameTextField.setLeftPadding(10)
+        
+        self.view.addSubview(belongLabel)
+        belongLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameTextField.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(24)
+           make.height.equalTo(21)
+        }
+        belongLabel.addImageAboveLabel(textField: nameTextField, spacing: 20)
+        
+        self.view.addSubview(belongTextField)
+        belongTextField.snp.makeConstraints { make in
+            make.top.equalTo(belongLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(44)
+        }
+        belongTextField.addTFUnderline()
+        belongTextField.setLeftPadding(10)
+        
+        self.view.addSubview(dropButton)
+        dropButton.snp.makeConstraints { make in
+            make.top.equalTo(belongLabel.snp.bottom).offset(12)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.width.equalTo(44)
+        }
+        dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
+        
+        self.view.addSubview(certificateView)
+        certificateView.snp.makeConstraints { make in
+            make.top.equalTo(belongTextField.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(84)
+        }
+        
+        self.certificateView.addSubview(certificateLabel)
+        certificateLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(24)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(44)
+        }
+        
+        self.certificateView.addSubview(certificateButton)
+        certificateButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(24)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(48)
+            make.width.equalTo(100)
+        }
+        
+        self.view.addSubview(researchLabel)
+        researchLabel.snp.makeConstraints { make in
+            make.top.equalTo(certificateView.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(24)
+           make.height.equalTo(21)
+        }
+        researchLabel.addImageAboveLabel(textField: belongTextField, spacing: 124)
+        
+        self.view.addSubview(researchTopicCollectionView)
+        researchTopicCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(certificateLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(24)
+           make.height.equalTo(88)
+        }
+        
+        self.view.addSubview(backgroundLabel)
+        backgroundLabel.snp.makeConstraints { make in
+            make.top.equalTo(researchTopicCollectionView.snp.bottom)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(1.2)
+        }
+        
+        self.view.addSubview(plusButton)
+        plusButton.snp.makeConstraints { make in
+            make.bottom.equalTo(backgroundLabel.snp.top)
+            make.trailing.equalToSuperview().inset(24)
+            make.width.equalTo(43)
+        }
+        
+        self.view.addSubview(editButton)
+        editButton.snp.makeConstraints { make in
+            make.top.equalTo(researchTopicCollectionView.snp.bottom).offset(60)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(48)
+        }
+        editButton.addTarget(self, action: #selector(edit_Tapped), for: .touchUpInside)
+    }
+    
+    private func setTopicData() {
+        researchTopicCollectionView.delegate = nil
+        researchTopicCollectionView.dataSource = nil
+        
+        researchTopicCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        /// CollectionView에 들어갈 Cell에 정보 제공
+        self.researchTopicViewModel.ResearchTopicItems
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.researchTopicCollectionView.rx.items(cellIdentifier: ResearchTopicCollectionViewCell.identifier, cellType: ResearchTopicCollectionViewCell.self)) { index, item, cell in
+                cell.prepare(topics: item)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func setProfileAPI() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
+        guard let retrievedEmail = KeychainHelper.standard.read(service: "email", account: "user", type: String.self) else {
+            return
+        }
+        let url = APIConstants.user.path
         
-        let url = APIConstants.user.path + "/mypage"
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(retrievedToken)",
-        ]
-        
-        AF.request(url, method: .get, headers: headers).responseData { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let decodedData = try JSONDecoder().decode(MyProfile.self, from: data)
-//                    self.userData = decodedData.result
-//                    
-//                    DispatchQueue.main.async {
-//                        self.idTF.text = self.userEmail
-//                        self.nameTF.text = self.userData?.name
-//                        if self.userData?.degreeLevel == "BACHELORS_STUDYING" || self.userData?.degreeLevel == "BACHELORS_GRADUATED"{
-//                            self.belongTF.text = "학사 졸업 또는 재학"
-//                            self.degreeLevel = .bachelorsGraduated
-//                        } else if self.userData?.degreeLevel == "MASTERS_STUDYING" {
-//                            self.belongTF.text = "석사 재학"
-//                            self.degreeLevel = .mastersStudying
-//                        } else if self.userData?.degreeLevel == "MASTERS_GRADUATED" {
-//                            self.belongTF.text = "석사 졸업"
-//                            self.degreeLevel = .mastersGraduated
-//                        } else if self.userData?.degreeLevel == "DOCTORAL_STUDYING" {
-//                            self.belongTF.text = "박사 재학"
-//                            self.degreeLevel = .doctoralStudying
-//                        } else if self.userData?.degreeLevel == "DOCTORAL_GRADUATED" {
-//                            self.belongTF.text = "박사 졸업"
-//                            self.degreeLevel = .doctoralGraduated
-//                        } else {
-//                            self.belongTF.text = "석박사 통합 재학"
-//                            self.degreeLevel = .integratedStudying
-//                        }
-//                        if self.userData?.provider == "BASIC" {
-//                            self.socialImage.image = UIImage(named: "Sukbakji_Email")
-//                            self.socialLabel.text = "이메일 로그인으로 사용 중이에요"
-//                        }
-//                        self.researchTopicCV.reloadData()
-//                    }
-                } catch let DecodingError.dataCorrupted(context) {
-                    print(context)
-                } catch let DecodingError.keyNotFound(key, context) {
-                    print("Key '\(key)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.valueNotFound(value, context) {
-                    print("Value '\(value)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.typeMismatch(type, context)  {
-                    print("Type '\(type)' mismatch:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch {
-                    print("error: ", error)
+        APIService().getWithAccessToken(of: APIResponse<MyProfile>.self, url: url, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
+                let data = response.result
+                for i in 0..<(data.researchTopics?.count ?? 0) {
+                    self.topicData.append(data.researchTopics![i])
                 }
-            case .failure(let error):
-                print("Error: \(error)")
+                self.idTextField.text = retrievedEmail
+                self.nameTextField.text = data.name
+                switch data.degreeLevel {
+                case "BACHELORS_STUDYING":
+                    self.belongTextField.text = "학사 재학 중"
+                case "BACHELORS_GRADUATED":
+                    self.belongTextField.text = "학사 졸업"
+                case "MASTERS_STUDYING":
+                    self.belongTextField.text = "석사 재학 중"
+                case "MASTERS_GRADUATED":
+                    self.belongTextField.text = "석사 졸업"
+                case "DOCTORAL_STUDYING":
+                    self.belongTextField.text = "박사 재학 중"
+                case "DOCTORAL_GRADUATED":
+                    self.belongTextField.text = "박사 졸업"
+                default:
+                    self.belongTextField.text = "소속 정보 없음"
+                }
+                self.setTopicData()
+                self.view.layoutIfNeeded()
+            default:
+                AlertController(message: response.message).show()
             }
         }
     }
@@ -157,10 +350,10 @@ class EditInfoViewController: UIViewController {
         drop.dataSource = belongType
         drop.cellHeight = 44
         // anchorView를 통해 UI와 연결
-        drop.anchorView = self.belongTF
+        drop.anchorView = self.belongTextField
         
         // View를 갖리지 않고 View아래에 Item 팝업이 붙도록 설정
-        drop.bottomOffset = CGPoint(x: 0, y: 1.5 + belongTF.bounds.height)
+        drop.bottomOffset = CGPoint(x: 0, y: 1.5 + belongTextField.bounds.height)
         
         drop.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
             // separatorInset을 조정하여 separator 앞의 간격을 없앱니다.
@@ -186,8 +379,8 @@ class EditInfoViewController: UIViewController {
         // Item 선택 시 처리
         drop.selectionAction = { [weak self] (index, item) in
             //선택한 Item을 TextField에 넣어준다.
-            self?.belongTF.text = "\(item)"
-            let belong = self?.belongTF.text
+            self?.belongTextField.text = "\(item)"
+            let belong = self?.belongTextField.text
             switch belong {
             case "학사 졸업 또는 재학":
                 self?.degreeLevel = .bachelorsStudying
@@ -208,17 +401,21 @@ class EditInfoViewController: UIViewController {
         
         // 취소 시 처리
         drop.cancelAction = { [weak self] in
-            self?.belongTF.text = "학사 졸업 또는 재학"
+            self?.belongTextField.text = "학사 졸업 또는 재학"
         }
     }
     
-    @IBAction func drop_Tapped(_ sender: Any) {
+    @objc private func drop_Tapped() {
         drop.show()
     }
     
-    @IBAction func edit_Tapped(_ sender: Any) {
-        let parameters = EditProfile(degreeLevel: degreeLevel!, researchTopics: userData?.researchTopics ?? [])
-        APIEditProfile.instance.SendingEditProfile(parameters: parameters) { result in self.EditData = result }
-        self.presentingViewController?.dismiss(animated: true)
+    @objc private func edit_Tapped(_ sender: Any) {
+    }
+}
+
+extension EditInfoViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let str = topicData[indexPath.item].count
+        return CGSize(width: 40 + str * 12, height: 29)
     }
 }

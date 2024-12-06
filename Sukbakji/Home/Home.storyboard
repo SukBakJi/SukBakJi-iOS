@@ -337,10 +337,10 @@
             </objects>
             <point key="canvasLocation" x="1042.753623188406" y="-3.3482142857142856"/>
         </scene>
-        <!--Hot Feed View Controller-->
+        <!--View Controller-->
         <scene sceneID="R9O-Wb-G85">
             <objects>
-                <viewController storyboardIdentifier="HotFeedVC" id="sBN-F8-1OE" customClass="HotFeedViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotFeedVC" id="sBN-F8-1OE" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh1-HU-1GQ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="388"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -850,10 +850,10 @@
             </objects>
             <point key="canvasLocation" x="2975" y="-223"/>
         </scene>
-        <!--Edit Info View Controller-->
+        <!--View Controller-->
         <scene sceneID="Y5D-NO-gEm">
             <objects>
-                <viewController storyboardIdentifier="EditInfoVC" id="8Lj-J9-fzZ" customClass="EditInfoViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditInfoVC" id="8Lj-J9-fzZ" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rc6-sw-421">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -900,9 +900,6 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Down2"/>
-                                <connections>
-                                    <action selector="drop_Tapped:" destination="8Lj-J9-fzZ" eventType="touchUpInside" id="Q7k-Tk-5B3"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmT-Zu-UWS">
                                 <rect key="frame" x="24" y="56" width="47" height="21"/>
@@ -1036,9 +1033,6 @@
                                 <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="다음으로"/>
-                                <connections>
-                                    <action selector="edit_Tapped:" destination="8Lj-J9-fzZ" eventType="touchUpInside" id="BpY-Iq-MAj"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="연구 주제" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOS-m6-oFq">
                                 <rect key="frame" x="24" y="473" width="66.666666666666671" height="21"/>
@@ -1105,15 +1099,6 @@
                             <constraint firstItem="VrF-vw-pqp" firstAttribute="top" secondItem="8oI-Rq-U9u" secondAttribute="bottom" constant="12" id="zpe-QN-nWL"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="belongTF" destination="VrF-vw-pqp" id="FBZ-n2-AWm"/>
-                        <outlet property="idTF" destination="aaq-H4-cwN" id="dvl-cr-sxC"/>
-                        <outlet property="nameTF" destination="xtY-gD-nfp" id="YeA-a9-46B"/>
-                        <outlet property="researchTopicCV" destination="eF9-zL-KVT" id="evs-xf-Ldt"/>
-                        <outlet property="setButton" destination="9IY-xL-mBE" id="fLT-0c-crD"/>
-                        <outlet property="socialImage" destination="yZR-n6-3Ff" id="krr-pf-Agf"/>
-                        <outlet property="socialLabel" destination="zlP-EE-gDM" id="6pd-SO-LMw"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GIS-Eo-4ik" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1435,10 +1420,10 @@
             </objects>
             <point key="canvasLocation" x="4280" y="-223"/>
         </scene>
-        <!--Favorite Lab View Controller-->
+        <!--View Controller-->
         <scene sceneID="ZRy-Gm-mNY">
             <objects>
-                <viewController storyboardIdentifier="FavoriteLabVC" id="glx-MM-EFL" customClass="FavoriteLabViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoriteLabVC" id="glx-MM-EFL" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z8G-6z-IYf">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="275"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1665,10 +1650,10 @@
             </objects>
             <point key="canvasLocation" x="415" y="345"/>
         </scene>
-        <!--Favorite Board View Controller-->
+        <!--View Controller-->
         <scene sceneID="z6n-9m-9u0">
             <objects>
-                <viewController storyboardIdentifier="FavoriteBoardVC" id="tAC-0n-RsP" customClass="FavoriteBoardViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoriteBoardVC" id="tAC-0n-RsP" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3wv-c8-9qc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="209"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1709,7 +1694,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <containerView key="tableFooterView" opaque="NO" contentMode="scaleToFill" id="Lf7-sL-EMn">
-                                            <rect key="frame" x="0.0" y="129" width="393" height="44"/>
+                                            <rect key="frame" x="0.0" y="129.33333015441895" width="393" height="44"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         </containerView>
                                         <prototypes>

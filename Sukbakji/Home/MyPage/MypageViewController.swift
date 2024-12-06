@@ -112,14 +112,6 @@ class MypageViewController: UIViewController {
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.setTitleColor(.gray400, for: .normal)
     }
-    
-    private var userData: MyProfile?
-    private var logoutData: Logout!
-    
-    private var userToken: String?
-    private var point: String?
-    
-    private let numberFormatter = NumberFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -302,7 +294,7 @@ class MypageViewController: UIViewController {
         
         APIService().getWithAccessToken(of: APIResponse<MyProfile>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
-            case 200:
+            case "COMMON200":
                 self.nameLabel.text = response.result.name
                 switch response.result.degreeLevel {
                 case "BACHELORS_STUDYING":
@@ -325,8 +317,9 @@ class MypageViewController: UIViewController {
                     self.warningLabel.isHidden = false
                     self.certificateLabel.text = "아직 학적 인증이 완료되지 않은 상태입니다"
                 }
-                self.numberFormatter.numberStyle = .decimal
-                let pointNumber = String(self.numberFormatter.string(from: NSNumber(value: response.result.point ?? 0)) ?? "")
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                let pointNumber = String(numberFormatter.string(from: NSNumber(value: response.result.point ?? 0)) ?? "")
                 self.pointLabel.text = pointNumber
                 self.view.layoutIfNeeded()
             default:
@@ -343,7 +336,7 @@ class MypageViewController: UIViewController {
         
         APIService().postWithAccessToken(of: APIResponse<String>.self, url: url, parameters: nil, AccessToken: retrievedToken) { response in
             switch response.code {
-            case 200:
+            case "COMMON200":
                 print("로그아웃이 정상적으로 처리되었습니다.")
                 AlertController(message: "로그아웃 하시겠어요?", isCancel: true) {
                     let LoginVC = UINavigationController(rootViewController: LoginViewController())

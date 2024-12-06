@@ -27,18 +27,12 @@ class ProfileTabViewController: TabmanViewController {
         
         setUI()
         setupTabMan()
-        
-        NotificationCenter.default.addObserver(
-                  self,
-                  selector: #selector(self.didDismissDetailNotification(_:)),
-                  name: NSNotification.Name("CannotChangePW"),
-                  object: nil
-        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.tabBarController?.tabBar.isHidden = true
         self.getUserPW()
     }
     
@@ -46,6 +40,13 @@ class ProfileTabViewController: TabmanViewController {
         self.view.backgroundColor = .white
         self.navigationItem.setHidesBackButton(true, animated: false)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(self.didDismissDetailNotification(_:)),
+                  name: NSNotification.Name("CannotChangePW"),
+                  object: nil
+        )
         
         self.view.addSubview(tabView)
         tabView.snp.makeConstraints { make in
@@ -74,7 +75,7 @@ class ProfileTabViewController: TabmanViewController {
     }
     
     private func setupTabMan(){
-        let vc1 = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EditInfoVC") as! EditInfoViewController
+        let vc1 = EditInfoViewController()
         let vc2 = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EditPWVC") as! EditPWViewController
         
         viewControllers.append(vc1)

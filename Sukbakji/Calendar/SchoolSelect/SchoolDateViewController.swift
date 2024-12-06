@@ -60,7 +60,7 @@ class SchoolDateViewController: UIViewController {
     }
     
     func setSchoolDateView() {
-        RecruitTF.addBottomShadow()
+        RecruitTF.addTFUnderline()
         RecruitTF.setLeftPadding(10)
         RecruitTF.isEnabled = false
         

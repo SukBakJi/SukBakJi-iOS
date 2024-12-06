@@ -80,9 +80,9 @@ class AlarmViewController: UIViewController, dateProtocol {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        SchoolTF.addBottomShadow()
-        AlarmNameTF.addBottomShadow()
-        AlarmDateTF.addBottomShadow()
+        SchoolTF.addTFUnderline()
+        AlarmNameTF.addTFUnderline()
+        AlarmDateTF.addTFUnderline()
     }
     
     func appendMinute() {

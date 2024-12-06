@@ -9,7 +9,7 @@ import Foundation
 
 struct APIResponse<T: Codable>: Codable {
     let isSuccess: Bool
-    let code: Int
+    let code: String
     let message: String
     let result: T
 }

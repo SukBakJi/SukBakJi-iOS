@@ -31,7 +31,7 @@ enum APIConstants {
 
 extension APIConstants {
     
-    static let baseURL = "http://54.180.165.121:8080/api"
+    static let baseURL = "http://3.38.252.225:8080/api"
     
     static func makeEndPoint(_ endpoint: String) -> String {
         baseURL + endpoint

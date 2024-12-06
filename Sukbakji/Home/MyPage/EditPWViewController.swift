@@ -45,9 +45,9 @@ class EditPWViewController: UIViewController {
     }
     
     func setTextField() {
-        currentPWTF.addBottomShadow()
-        newPWTF.addBottomShadow()
-        newPWAgainTF.addBottomShadow()
+        currentPWTF.addTFUnderline()
+        newPWTF.addTFUnderline()
+        newPWAgainTF.addTFUnderline()
         currentPWTF.setLeftPadding(10)
         newPWTF.setLeftPadding(10)
         newPWAgainTF.setLeftPadding(10)
@@ -140,7 +140,7 @@ class EditPWViewController: UIViewController {
             currentPWEye.setImage(UIImage(named: "Sukbakji_PW_noView"), for: .selected)
             currentPWDelete.setImage(UIImage(named: "Sukbakji_PW_Delete"), for: .normal)
             currentPWTF.backgroundColor = UIColor(hexCode: "FAFAFA")
-            currentPWTF.addBottomShadow()
+            currentPWTF.addTFUnderline()
         }
         else {
             currentPWEye.isEnabled = true
@@ -152,7 +152,7 @@ class EditPWViewController: UIViewController {
             currentPWEye.setImage(UIImage(named: "Sukbakji_PWnoView"), for: .selected)
             currentPWDelete.setImage(UIImage(named: "Sukbakji_PWDelete"), for: .normal)
             currentPWTF.backgroundColor = UIColor(hexCode: "FFEBEE")
-            currentPWTF.addPWBottomShadow()
+            currentPWTF.addTFRedUnderline()
         }
         
         UIView.animate(withDuration: 0.1) { // 효과 주기
@@ -167,7 +167,7 @@ class EditPWViewController: UIViewController {
             newPWEye.setImage(UIImage(named: "Sukbakji_PW_noView"), for: .selected)
             newPWDelete.setImage(UIImage(named: "Sukbakji_PW_Delete"), for: .normal)
             newPWTF.backgroundColor = UIColor(hexCode: "FAFAFA")
-            newPWTF.addBottomShadow()
+            newPWTF.addTFUnderline()
         }
         else {
             newPWEye.isEnabled = true
@@ -179,7 +179,7 @@ class EditPWViewController: UIViewController {
             newPWEye.setImage(UIImage(named: "Sukbakji_PWnoView"), for: .selected)
             newPWDelete.setImage(UIImage(named: "Sukbakji_PWDelete"), for: .normal)
             newPWTF.backgroundColor = UIColor(hexCode: "FFEBEE")
-            newPWTF.addPWBottomShadow()
+            newPWTF.addTFRedUnderline()
         }
         
         UIView.animate(withDuration: 0.1) { // 효과 주기
@@ -194,7 +194,7 @@ class EditPWViewController: UIViewController {
             newPWAgainEye.setImage(UIImage(named: "Sukbakji_PW_noView"), for: .selected)
             newPWAgainDelete.setImage(UIImage(named: "Sukbakji_PW_Delete"), for: .normal)
             newPWAgainTF.backgroundColor = UIColor(hexCode: "FAFAFA")
-            newPWAgainTF.addBottomShadow()
+            newPWAgainTF.addTFUnderline()
         }
         else {
             newPWAgainEye.isEnabled = true
@@ -206,7 +206,7 @@ class EditPWViewController: UIViewController {
             newPWAgainEye.setImage(UIImage(named: "Sukbakji_PWnoView"), for: .selected)
             newPWAgainDelete.setImage(UIImage(named: "Sukbakji_PWDelete"), for: .normal)
             newPWAgainTF.backgroundColor = UIColor(hexCode: "FFEBEE")
-            newPWAgainTF.addPWBottomShadow()
+            newPWAgainTF.addTFRedUnderline()
         }
         
         UIView.animate(withDuration: 0.1) { // 효과 주기
@@ -287,7 +287,6 @@ class EditPWViewController: UIViewController {
         let pwParameters = ChangePW(currentPassword: currentPWTF.text ?? "", newPassword: newPWTF.text ?? "", confirmPassword: newPWAgainTF.text ?? "")
         APIChangePWPost.instance.SendingChangePW(parameters: pwParameters) { result in self.PWData = result }
         let tokenParameters = Logout(accessToken: userToken ?? "")
-        APILogoutPost.instance.SendingLogout(parameters: tokenParameters) { result in self.logoutData = result }
         let mainViewController = UINavigationController(rootViewController: LoginViewController())
         mainViewController.modalPresentationStyle = .fullScreen
         self.present(mainViewController, animated: true)

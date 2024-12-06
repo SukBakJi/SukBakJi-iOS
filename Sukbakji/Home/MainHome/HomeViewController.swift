@@ -249,7 +249,7 @@ class HomeViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
 //        getUserName()
 //        getViewSchedule()
-//        setFavoriteBoardAPI()
+        setFavoriteBoardAPI()
 //        setHotPostAPI()
 //        setFavoriteLabAPI()
     }
@@ -569,7 +569,7 @@ extension HomeViewController {
         
         APIService().getWithAccessToken(of: APIResponse<MyProfile>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
-            case 200:
+            case "COMMON200":
                 self.nameLabel.text = response.result.name
                 self.view.layoutIfNeeded()
             default:
@@ -586,7 +586,7 @@ extension HomeViewController {
         
         APIService().getWithAccessToken(of: APIResponse<UpComing>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
-            case 200:
+            case "COMMON200":
                 self.scheduleArr = response.result.scheduleList
                 if self.scheduleArr.count >= 1{
                     let upComingdDay = self.scheduleArr[0].dday
@@ -627,7 +627,7 @@ extension HomeViewController {
         
         APIService().getWithAccessToken(of: APIResponse<MemberId>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
-            case 200:
+            case "COMMON200":
                 let memberId = response.result.memberId
                 UserDefaults.standard.set(memberId, forKey: "memberID")
             default:
@@ -656,13 +656,14 @@ extension HomeViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.board.path
+        let url = APIConstants.community.path + "/favorite-post-list"
         
         APIService().getWithAccessToken(of: APIResponse<[FavoritesBoard]>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
-            case 200:
+            case "COMMON200":
                 if response.result.isEmpty {
                     self.favoriteBoardTableView.isHidden = true
+                    print("없음")
                 } else {
                     self.favoriteBoardTableView.isHidden = false
                     self.favoriteBoardViewModel.favoriteBoardItems = Observable.just(response.result)
@@ -707,7 +708,7 @@ extension HomeViewController {
         
         APIService().getWithAccessToken(of: APIResponse<[HotPost]>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
-            case 200:
+            case "COMMON200":
                 if response.result.isEmpty {
                     self.hotPostTableView.isHidden = true
                 } else {
@@ -746,7 +747,7 @@ extension HomeViewController {
         
         APIService().getWithAccessToken(of: APIResponse<[FavoritesLab]>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
-            case 200:
+            case "COMMON200":
                 if response.result.isEmpty {
                     self.favoriteLabCollectionView.isHidden = true
                 } else {
@@ -783,10 +784,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDe
                 favoriteLabProgressView.setProgress(1.0, animated: true)
             }
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -37,7 +37,7 @@ struct APIService {
     
     func getWithAccessToken<T: Codable>(of type: T.Type, url: URLConvertible, AccessToken: String, success: @escaping (T) -> (), failure: ((Error) -> ())? = nil) {
         
-        let headers: HTTPHeaders = ["Authorization" : "Bearer \(AccessToken)"]
+        let headers: HTTPHeaders = ["Accept":"application/json", "Authorization" : "Bearer \(AccessToken)"]
         
         AF.request(url,
                    method: .get,

@@ -131,6 +131,8 @@
 		C7347E402C4D452E00688768 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E332C4D410200688768 /* Pretendard-Regular.otf */; };
 		C7347E412C4D453000688768 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */; };
 		C7347E422C4D453400688768 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E342C4D410300688768 /* Pretendard-Thin.otf */; };
+		C73483652D02A727004B6FA1 /* Dot+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483642D02A727004B6FA1 /* Dot+Extension.swift */; };
+		C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */; };
 		C73F89842C5E834D007ECFE7 /* MyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73F89832C5E834D007ECFE7 /* MyAlarmViewController.swift */; };
 		C74F584F2C6B330000369545 /* UniPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74F584E2C6B330000369545 /* UniPostAPI.swift */; };
 		C75C457C2C5A3B6C001DDEA8 /* SUITE-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */; };
@@ -150,12 +152,11 @@
 		C7980A832CEF7D5400475D94 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A822CEF7D5400475D94 /* APIService.swift */; };
 		C7980A862CEF838C00475D94 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */; };
 		C7980A882CEF841E00475D94 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A872CEF841E00475D94 /* AlertViewController.swift */; };
-		C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79864002C652B450029F8E3 /* TFaddShadow.swift */; };
+		C79864012C652B450029F8E3 /* addShadow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79864002C652B450029F8E3 /* addShadow+.swift */; };
 		C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */; };
-		C7A434F92C62233200C47F5E /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor.swift */; };
-		C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */; };
+		C7A434F92C62233200C47F5E /* HexColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor+.swift */; };
+		C7A434FB2C62274F00C47F5E /* SetLeftPadding+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434FA2C62274F00C47F5E /* SetLeftPadding+.swift */; };
 		C7A99B182C6DBA5C00698C27 /* EditProfilePut.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A99B172C6DBA5C00698C27 /* EditProfilePut.swift */; };
-		C7A99B1A2C6DBA6700698C27 /* LogoutPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A99B192C6DBA6700698C27 /* LogoutPost.swift */; };
 		C7B7A1682D001D8200D5CE14 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */; };
 		C7B7A16A2D00360500D5CE14 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7A1692D00360500D5CE14 /* UIButton+Extension.swift */; };
 		C7BC68172CF6E55000CEC0F3 /* MentorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68162CF6E55000CEC0F3 /* MentorList.swift */; };
@@ -186,7 +187,7 @@
 		C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */; };
 		C7DCEF812C5FD710001D38AA /* MyAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */; };
 		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
-		C7EA31112C777B0900EFC53B /* KeyboardDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EA31102C777B0900EFC53B /* KeyboardDown.swift */; };
+		C7EA31112C777B0900EFC53B /* KeyboardDown+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EA31102C777B0900EFC53B /* KeyboardDown+.swift */; };
 		C7ECF54A2C677F8600283F06 /* ApplyMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ECF5492C677F8600283F06 /* ApplyMentorViewController.swift */; };
 		C7ECF54C2C677F9200283F06 /* ApplyMentoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */; };
 		C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */; };
@@ -334,6 +335,8 @@
 		C7347E372C4D410300688768 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		C7347E392C4D410300688768 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		C73483642D02A727004B6FA1 /* Dot+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dot+Extension.swift"; sourceTree = "<group>"; };
+		C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicViewModel.swift; sourceTree = "<group>"; };
 		C73F89832C5E834D007ECFE7 /* MyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmViewController.swift; sourceTree = "<group>"; };
 		C74DC22A2C59D6AF004BDC25 /* AlarmPatchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPatchAPI.swift; sourceTree = "<group>"; };
 		C74F584E2C6B330000369545 /* UniPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniPostAPI.swift; sourceTree = "<group>"; };
@@ -354,12 +357,11 @@
 		C7980A822CEF7D5400475D94 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C7980A872CEF841E00475D94 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		C79864002C652B450029F8E3 /* TFaddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFaddShadow.swift; sourceTree = "<group>"; };
+		C79864002C652B450029F8E3 /* addShadow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "addShadow+.swift"; sourceTree = "<group>"; };
 		C7996CB12C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSelectTableViewCell.swift; sourceTree = "<group>"; };
-		C7A434F82C62233200C47F5E /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
-		C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLeftPadding.swift; sourceTree = "<group>"; };
+		C7A434F82C62233200C47F5E /* HexColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HexColor+.swift"; sourceTree = "<group>"; };
+		C7A434FA2C62274F00C47F5E /* SetLeftPadding+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetLeftPadding+.swift"; sourceTree = "<group>"; };
 		C7A99B172C6DBA5C00698C27 /* EditProfilePut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePut.swift; sourceTree = "<group>"; };
-		C7A99B192C6DBA6700698C27 /* LogoutPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutPost.swift; sourceTree = "<group>"; };
 		C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		C7B7A1692D00360500D5CE14 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		C7BC68162CF6E55000CEC0F3 /* MentorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorList.swift; sourceTree = "<group>"; };
@@ -390,7 +392,7 @@
 		C7DCEF7E2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		C7DCEF802C5FD710001D38AA /* MyAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmTableViewCell.swift; sourceTree = "<group>"; };
 		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
-		C7EA31102C777B0900EFC53B /* KeyboardDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDown.swift; sourceTree = "<group>"; };
+		C7EA31102C777B0900EFC53B /* KeyboardDown+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardDown+.swift"; sourceTree = "<group>"; };
 		C7ECF5492C677F8600283F06 /* ApplyMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentorViewController.swift; sourceTree = "<group>"; };
 		C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentoringViewController.swift; sourceTree = "<group>"; };
 		C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
@@ -458,10 +460,11 @@
 				41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift */,
 				412BFBE52C52A5E30099E442 /* addBorder+.swift */,
 				417AADBE2C64E40A002080E0 /* placeholder+.swift */,
-				C7A434F82C62233200C47F5E /* HexColor.swift */,
-				C7A434FA2C62274F00C47F5E /* SetLeftPadding.swift */,
-				C79864002C652B450029F8E3 /* TFaddShadow.swift */,
-				C7EA31102C777B0900EFC53B /* KeyboardDown.swift */,
+				C7A434F82C62233200C47F5E /* HexColor+.swift */,
+				C7A434FA2C62274F00C47F5E /* SetLeftPadding+.swift */,
+				C79864002C652B450029F8E3 /* addShadow+.swift */,
+				C7EA31102C777B0900EFC53B /* KeyboardDown+.swift */,
+				C73483642D02A727004B6FA1 /* Dot+Extension.swift */,
 				C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */,
 				C7B7A1692D00360500D5CE14 /* UIButton+Extension.swift */,
 			);
@@ -721,6 +724,7 @@
 				C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */,
 				C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */,
 				C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */,
+				C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -782,7 +786,6 @@
 			children = (
 				C772B1122C6885F60039B7C7 /* ChangePWPost.swift */,
 				C7A99B172C6DBA5C00698C27 /* EditProfilePut.swift */,
-				C7A99B192C6DBA6700698C27 /* LogoutPost.swift */,
 			);
 			path = HomeAPI;
 			sourceTree = "<group>";
@@ -878,6 +881,7 @@
 				C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */,
 				C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */,
 				C7C657DC2CFD6891009FFA8E /* FavoriteLabViewModel.swift */,
+				C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -921,7 +925,6 @@
 				C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */,
 				C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */,
 				C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */,
-				C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */,
 				C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */,
 				C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */,
 			);
@@ -1202,12 +1205,11 @@
 				C71565042C8E9FF10038A782 /* RoomViewController.swift in Sources */,
 				C7023D302C6E1B8B0036D355 /* UniDeleteAPI.swift in Sources */,
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
-				C7A99B1A2C6DBA6700698C27 /* LogoutPost.swift in Sources */,
 				C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */,
 				C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */,
 				C7B7A16A2D00360500D5CE14 /* UIButton+Extension.swift in Sources */,
 				417AADCD2C673E28002080E0 /* SignUpAPIInput.swift in Sources */,
-				C7EA31112C777B0900EFC53B /* KeyboardDown.swift in Sources */,
+				C7EA31112C777B0900EFC53B /* KeyboardDown+.swift in Sources */,
 				C716EF182C50FB1200474228 /* SchoolDateViewController.swift in Sources */,
 				C7BC68212CF6E7BE00CEC0F3 /* UniEnroll.swift in Sources */,
 				4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */,
@@ -1284,6 +1286,7 @@
 				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				C7BC681F2CF6E7B200CEC0F3 /* UniMethod.swift in Sources */,
+				C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */,
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
 				7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */,
 				C72F14DE2C594DAA0017B57E /* CalendarFBCViewController.swift in Sources */,
@@ -1299,7 +1302,7 @@
 				7B3459F12C688AB1008B711A /* BoardScrapModel.swift in Sources */,
 				C7BC68192CF6E55C00CEC0F3 /* ApplyMentor.swift in Sources */,
 				C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */,
-				C7A434FB2C62274F00C47F5E /* SetLeftPadding.swift in Sources */,
+				C7A434FB2C62274F00C47F5E /* SetLeftPadding+.swift in Sources */,
 				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
 				C7DCEF812C5FD710001D38AA /* MyAlarmTableViewCell.swift in Sources */,
 				C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */,
@@ -1323,7 +1326,7 @@
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
 				C7BC68252CF6E7CC00CEC0F3 /* UniDelete.swift in Sources */,
-				C79864012C652B450029F8E3 /* TFaddShadow.swift in Sources */,
+				C79864012C652B450029F8E3 /* addShadow+.swift in Sources */,
 				7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */,
 				7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
@@ -1347,6 +1350,7 @@
 				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
 				C7063B6C2C4E3D4900CFF3CE /* AlarmViewController.swift in Sources */,
 				C7C568732C6F44D100A57821 /* MentoringPostAPI.swift in Sources */,
+				C73483652D02A727004B6FA1 /* Dot+Extension.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				C7DCEF7B2C5FCE0B001D38AA /* DateListTableViewCell.swift in Sources */,
 				7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */,
@@ -1354,7 +1358,7 @@
 				7B1C53522C69D56A00C66D0D /* DirectoryLabReviewSearchModel.swift in Sources */,
 				4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */,
 				C7EFF5C02CFB2D8F0019F30D /* UpComing.swift in Sources */,
-				C7A434F92C62233200C47F5E /* HexColor.swift in Sources */,
+				C7A434F92C62233200C47F5E /* HexColor+.swift in Sources */,
 				C72E99842C54033000BC2C9A /* SchoolAlertViewController.swift in Sources */,
 				C7EFF5D02CFB2EEA0019F30D /* ChangePW.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,

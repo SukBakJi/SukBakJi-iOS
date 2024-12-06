@@ -12,6 +12,7 @@ import KakaoSDKAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var LoginVC = UINavigationController(rootViewController: LoginViewController())
     // SiwftUI로 BoardViewController 실행하기
 
 //    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -27,21 +28,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-
         window = UIWindow(windowScene: windowScene)
-
-        let isAutoLoginEnabled = UserDefaults.standard.bool(forKey: "isAutoLogin")
-
-        if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
-            print("자동 로그인 활성화: \(accessToken)")
-            let mainViewController = UINavigationController(rootViewController: MainTabViewController())
-            window?.rootViewController = mainViewController
-        } else {
-            let mainViewController = UINavigationController(rootViewController: LoginViewController())
-            window?.rootViewController = mainViewController
-        }
-
-        window?.makeKeyAndVisible()
+        window!.makeKeyAndVisible()
+        window!.windowScene = windowScene
+        window!.rootViewController = LoginVC
+//        let isAutoLoginEnabled = UserDefaults.standard.bool(forKey: "isAutoLogin")
+//
+//        if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
+//            print("자동 로그인 활성화: \(accessToken)")
+//            let mainViewController = UINavigationController(rootViewController: LoginViewController())
+//            window?.rootViewController = mainViewController
+//        } else {
+//        }
     }
 
     func disableAutoLoginAndReturnToLoginScreen() {
