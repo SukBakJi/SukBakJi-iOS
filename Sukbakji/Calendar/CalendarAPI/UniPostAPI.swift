@@ -16,7 +16,7 @@ class APIUniPost {
             return
         }
         
-        let url = APIConstants.calendar.path + "/univ"
+        let url = APIConstants.calendarSchedule.path
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"

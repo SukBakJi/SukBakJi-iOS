@@ -78,7 +78,7 @@ class ProfileTabViewController: TabmanViewController {
     
     private func setupTabMan(){
         let vc1 = EditInfoViewController()
-        let vc2 = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EditPWVC") as! EditPWViewController
+        let vc2 = EditPWViewController()
         
         viewControllers.append(vc1)
         viewControllers.append(vc2)

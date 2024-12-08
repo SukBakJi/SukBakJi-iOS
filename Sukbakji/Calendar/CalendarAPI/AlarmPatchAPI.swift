@@ -16,7 +16,7 @@ class APIAlarmPatch {
             return
         }
         
-        let url = APIConstants.calendar.path + "/alarm/on"
+        let url = APIConstants.calendarAlarmOn.path
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"
@@ -47,7 +47,7 @@ class APIAlarmPatch {
             return
         }
         
-        let url = APIConstants.calendar.path + "/alarm/off"
+        let url = APIConstants.calendarAlarmOff.path
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"

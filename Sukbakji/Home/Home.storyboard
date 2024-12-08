@@ -906,10 +906,10 @@
             </objects>
             <point key="canvasLocation" x="3628" y="-223"/>
         </scene>
-        <!--EditPW View Controller-->
+        <!--View Controller-->
         <scene sceneID="w2S-Oe-qFl">
             <objects>
-                <viewController storyboardIdentifier="EditPWVC" id="nt7-44-wNg" customClass="EditPWViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditPWVC" id="nt7-44-wNg" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WXf-aN-h2G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1181,18 +1181,6 @@
                             <constraint firstItem="cnF-WR-cfS" firstAttribute="top" secondItem="eaH-Fs-ArA" secondAttribute="bottom" constant="20" id="xaZ-dQ-9xb"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="currentPWEye" destination="5rp-ZW-F0h" id="ImC-Ne-tuc"/>
-                        <outlet property="currentPWTF" destination="ue0-fl-N6O" id="D6o-y6-4X3"/>
-                        <outlet property="currentPWView" destination="c7t-NC-fgO" id="C9D-tP-TpY"/>
-                        <outlet property="newPWAgainEye" destination="KN5-sp-3dC" id="JGa-DT-pjt"/>
-                        <outlet property="newPWAgainTF" destination="Qql-Qo-ef2" id="wDb-8Z-xRj"/>
-                        <outlet property="newPWAgainView" destination="iOg-4W-pAx" id="qDt-Np-wRf"/>
-                        <outlet property="newPWEye" destination="xYF-5w-mT6" id="I9U-4I-49S"/>
-                        <outlet property="newPWTF" destination="yVJ-HG-hVu" id="B9W-kh-N16"/>
-                        <outlet property="newPWView" destination="1td-B2-QB8" id="kbA-eU-grp"/>
-                        <outlet property="setButton" destination="eva-4o-LkD" id="7rB-lH-H3G"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dqP-Q8-lR4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -45,7 +45,7 @@ class DateViewController: UIViewController {
             return
         }
 
-        let url = APIConstants.calendar.path + "/schedule"
+        let url = APIConstants.calendarSchedule.path
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(retrievedToken)",

@@ -143,7 +143,7 @@ struct WrittenBoardViewController: View {
     }
     
     func WrittenBoardApi(userToken: String, completion: @escaping (Result<[WrittenPost], Error>) -> Void) {
-        let url = APIConstants.community.path + "/post-list"
+        let url = APIConstants.communityPostList.path
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",

@@ -233,7 +233,7 @@ struct BoardQnAViewController: View {
     }
 
     func BoardNewQnAApi(completion: @escaping (Result<[BoardNewQnAResult], Error>) -> Void) {
-        let url = APIConstants.community.path + "/latest-questions" // 실제 API 엔드포인트로 교체
+        let url = APIConstants.communityLastestQuestions.path // 실제 API 엔드포인트로 교체
 
         AF.request(url,
                    method: .get,

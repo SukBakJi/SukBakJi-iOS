@@ -83,7 +83,7 @@ class SchoolDateViewController: UIViewController {
             return
         }
 
-        let url = APIConstants.calendar.path + "/univ/method?univId=\(univId)"
+        let url = APIConstants.calendarSchedule.path
         
         let parameter: Parameters = [
             "keyword": "\(univId)"

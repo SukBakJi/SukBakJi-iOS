@@ -16,7 +16,7 @@ class APIUniDelete {
             return
         }
         
-        let url = APIConstants.calendar.path + "/univ"
+        let url = APIConstants.calendarUniv.path
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"

@@ -53,7 +53,7 @@ class MyAlarmViewController: UIViewController {
             return
         }
         
-        let url = APIConstants.calendar.path + "/alarm"
+        let url = APIConstants.calendarSchedule.path
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(retrievedToken)",

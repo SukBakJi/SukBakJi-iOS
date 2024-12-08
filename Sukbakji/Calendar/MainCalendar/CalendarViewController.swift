@@ -119,7 +119,7 @@ class CalendarViewController: UIViewController {
             return
         }
         
-        let url = APIConstants.calendar.path + "/univ"
+        let url = APIConstants.calendarUniv.path + "/univ"
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(retrievedToken)",
@@ -165,7 +165,7 @@ class CalendarViewController: UIViewController {
             return
         }
         
-        let url = APIConstants.calendar.path + "/schedule/\(date)"
+        let url = APIConstants.calendarScheduleDate(date).path
         
         let parameter: Parameters = [
             "date": "\(date)"
@@ -216,7 +216,7 @@ class CalendarViewController: UIViewController {
             return
         }
         
-        let url = APIConstants.calendar.path + "/alarm"
+        let url = APIConstants.calendarAlarm.path
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(retrievedToken)",

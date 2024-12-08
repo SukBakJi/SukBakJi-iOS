@@ -139,7 +139,7 @@ struct SearchViewController: View {
     
     func BoardSearchApi(keyword: String, menu: String? = nil, boardName: String? = nil, userToken: String, completion: @escaping (Result<[BoardSearchResult], Error>) -> Void) {
         // 기본 URL
-        let url = APIConstants.community.path + "/search"
+        let url = APIConstants.communitySearch.path
         
         // 쿼리 파라미터 설정
         var parameters: [String: String] = ["keyword": keyword]

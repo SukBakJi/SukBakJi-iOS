@@ -57,7 +57,7 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
-        let url = APIConstants.calendar.path + "/search"
+        let url = APIConstants.calendarSchedule.path
         
         let parameter: Parameters = [
             "keyword": "\(schoolSearchTF.text ?? "")"

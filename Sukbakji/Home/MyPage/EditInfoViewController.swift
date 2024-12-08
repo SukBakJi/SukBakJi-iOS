@@ -103,10 +103,10 @@ class EditInfoViewController: UIViewController {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
 
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
         $0.setTitle("수정하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
+        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
     }
     
     private let disposeBag = DisposeBag()
@@ -233,7 +233,7 @@ class EditInfoViewController: UIViewController {
             make.trailing.equalToSuperview().inset(24)
             make.centerY.equalToSuperview()
             make.height.equalTo(48)
-            make.width.equalTo(100)
+            make.width.equalTo(120)
         }
         
         self.view.addSubview(researchLabel)
@@ -409,7 +409,7 @@ class EditInfoViewController: UIViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.userPutProfile.path
+        let url = APIConstants.userProfile.path
         
         let params = [
             "degreeLevel": self.degreeLevel ?? "",

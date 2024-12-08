@@ -16,7 +16,7 @@ class APIAlarmPost {
             return
         }
         
-        let url = APIConstants.calendar.path + "/alarm"
+        let url = APIConstants.calendarSchedule.path
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"

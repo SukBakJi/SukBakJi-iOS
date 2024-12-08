@@ -159,7 +159,7 @@ struct HotBoardViewController: View {
     }
     
     func HotBoardApi(completion: @escaping (Result<[BoardHotPost], Error>) -> Void) {
-        let url = APIConstants.community.path + "/hot-boards"
+        let url = APIConstants.communityHotPost.path
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
