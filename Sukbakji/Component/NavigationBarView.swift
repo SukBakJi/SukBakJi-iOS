@@ -39,13 +39,14 @@ final class NavigationBarView: UIView {
       self.addSubview(backButton)
       self.backButton.snp.makeConstraints { make in
          make.leading.equalToSuperview().offset(8)
-         make.centerY.equalToSuperview()
+         make.bottom.equalToSuperview()
          make.width.height.equalTo(48)
       }
       
       self.addSubview(titleLabel)
       self.titleLabel.snp.makeConstraints { make in
-          make.centerX.centerY.equalToSuperview()
+          make.centerY.equalTo(backButton)
+          make.centerX.equalToSuperview()
          make.height.equalTo(24)
       }
       

@@ -22,6 +22,9 @@ class HomeViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
+    private let titleView = UIView().then {
+        $0.backgroundColor = .white
+    }
     private let logoImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Homelogo")
     }
@@ -277,15 +280,21 @@ extension HomeViewController {
             make.height.equalTo(1570)
         }
         
-        self.contentView.addSubview(logoImageView)
-        logoImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(32)
-            make.width.equalTo(70)
+        self.view.addSubview(titleView)
+        titleView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(95)
         }
         
-        self.contentView.addSubview(mypageButton)
+        self.titleView.addSubview(logoImageView)
+        logoImageView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(8)
+            make.leading.equalToSuperview().offset(24)
+            make.height.equalTo(32)
+            make.width.equalTo(74)
+        }
+        
+        self.titleView.addSubview(mypageButton)
         mypageButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(8)
             make.centerY.equalTo(logoImageView)
@@ -293,17 +302,16 @@ extension HomeViewController {
         }
         mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
         
-        self.contentView.addSubview(notificationButton)
+        self.titleView.addSubview(notificationButton)
         notificationButton.snp.makeConstraints { make in
             make.trailing.equalTo(mypageButton.snp.leading)
             make.centerY.equalTo(logoImageView)
             make.height.width.equalTo(48)
         }
         
-        self.contentView.addSubview(backgroundLabel)
+        self.titleView.addSubview(backgroundLabel)
         backgroundLabel.snp.makeConstraints { make in
-            make.top.equalTo(mypageButton.snp.bottom)
-            make.leading.trailing.equalToSuperview()
+            make.bottom.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
         }
         
@@ -565,7 +573,7 @@ extension HomeViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.mypage.path
+        let url = APIConstants.userMypage.path
         
         APIService().getWithAccessToken(of: APIResponse<MyProfile>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
@@ -582,7 +590,7 @@ extension HomeViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.calendar.path
+        let url = APIConstants.calendarSchedule.path
         
         APIService().getWithAccessToken(of: APIResponse<UpComing>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
@@ -623,7 +631,7 @@ extension HomeViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.user.path
+        let url = APIConstants.calendarSchedule.path
         
         APIService().getWithAccessToken(of: APIResponse<MemberId>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
@@ -656,7 +664,7 @@ extension HomeViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.community.path + "/favorite-post-list"
+        let url = APIConstants.communityFavoriteBoard.path
         
         APIService().getWithAccessToken(of: APIResponse<[FavoritesBoard]>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
@@ -704,7 +712,7 @@ extension HomeViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.posts.path
+        let url = APIConstants.communityHotPost.path
         
         APIService().getWithAccessToken(of: APIResponse<[HotPost]>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
@@ -743,7 +751,7 @@ extension HomeViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.labs.path
+        let url = APIConstants.labsFavoriteLab.path
         
         APIService().getWithAccessToken(of: APIResponse<[FavoritesLab]>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {

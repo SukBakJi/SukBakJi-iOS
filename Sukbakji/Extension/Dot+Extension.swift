@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 extension UILabel {
-    func addImageAboveLabel(textField: UITextField, spacing: CGFloat) {
+    func addImageAboveLabel(referenceView: UIView, spacing: CGFloat) {
         guard let superview = self.superview else {
             print("Error: UILabel must be added to a superview before calling this method.")
             return
@@ -20,7 +20,7 @@ extension UILabel {
         superview.addSubview(imageView)
         
         imageView.snp.makeConstraints { make in
-            make.top.equalTo(textField.snp.bottom).offset(spacing) // UILabel 위에 위치
+            make.top.equalTo(referenceView.snp.bottom).offset(spacing) // UILabel 위에 위치
             make.leading.equalTo(self.snp.trailing).offset(4) // UILabel과 중심 정렬
             make.height.width.equalTo(4) // 이미지 크기 설정
         }

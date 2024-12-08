@@ -58,9 +58,8 @@ class EditProfileViewController: UIViewController {
         navigationbarView.delegate = self
         self.contentView.addSubview(navigationbarView)
         navigationbarView.snp.makeConstraints { make in
-           make.top.equalToSuperview().inset(47)
-           make.leading.trailing.equalToSuperview()
-           make.height.equalTo(48)
+            make.top.leading.trailing.equalToSuperview()
+           make.height.equalTo(95)
         }
         
         self.contentView.addSubview(classifyView)
