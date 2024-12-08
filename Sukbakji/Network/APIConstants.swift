@@ -8,25 +8,29 @@
 import Foundation
 
 enum APIConstants {
-    case auth
+    case authLogout
     
-    case user
+    case userMypage
+    case userPutProfile
+    case userPostProfile
+    case userPostPassword
     
     case board
     
     case posts
     
-    case community
+    case communityFavoriteBoard
+    case communityHotPost
     
     case mypage
     
-    case calendar
+    case calendarSchedule
     
     case researchTopics
     
     case mentor
     
-    case labs
+    case labsFavoriteLab
 }
 
 extension APIConstants {
@@ -39,11 +43,17 @@ extension APIConstants {
     
     var path: String {
         switch self {
-        case .auth:
-            return APIConstants.makeEndPoint("/auth")
+        case .authLogout:
+            return APIConstants.makeEndPoint("/auth/logout")
             
-        case .user:
-            return APIConstants.makeEndPoint("/user")
+        case .userMypage:
+            return APIConstants.makeEndPoint("/user/mypage")
+        case .userPutProfile:
+            return APIConstants.makeEndPoint("/user/profile")
+        case .userPostProfile:
+            return APIConstants.makeEndPoint("/user/profile")
+        case .userPostPassword:
+            return APIConstants.makeEndPoint("/user/password")
             
         case .board:
             return APIConstants.makeEndPoint("/board")
@@ -51,14 +61,16 @@ extension APIConstants {
         case .posts:
             return APIConstants.makeEndPoint("/posts")
             
-        case .community:
-            return APIConstants.makeEndPoint("/community")
+        case .communityFavoriteBoard:
+            return APIConstants.makeEndPoint("/community/favorite-post-list")
+        case .communityHotPost:
+            return APIConstants.makeEndPoint("/community/hot-boards")
             
         case .mypage:
             return APIConstants.makeEndPoint("/mypage")
             
-        case .calendar:
-            return APIConstants.makeEndPoint("/calendar")
+        case .calendarSchedule:
+            return APIConstants.makeEndPoint("/calendar/schedule")
             
         case .researchTopics:
             return APIConstants.makeEndPoint("/research-topics")
@@ -66,8 +78,8 @@ extension APIConstants {
         case .mentor:
             return APIConstants.makeEndPoint("/mentor")
             
-        case .labs:
-            return APIConstants.makeEndPoint("/labs")
+        case .labsFavoriteLab:
+            return APIConstants.makeEndPoint("/labs/mypage/favorite-labs")
         }
     }
 }

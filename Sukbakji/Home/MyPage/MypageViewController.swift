@@ -134,9 +134,8 @@ class MypageViewController: UIViewController {
         navigationbarView.delegate = self
         self.view.addSubview(navigationbarView)
         navigationbarView.snp.makeConstraints { make in
-           make.top.equalToSuperview().inset(47)
-           make.leading.trailing.equalToSuperview()
-           make.height.equalTo(48)
+            make.top.leading.trailing.equalToSuperview()
+           make.height.equalTo(95)
         }
         
         self.view.addSubview(backgroundLabel)
@@ -290,7 +289,7 @@ class MypageViewController: UIViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.mypage.path
+        let url = APIConstants.userMypage.path
         
         APIService().getWithAccessToken(of: APIResponse<MyProfile>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
@@ -332,7 +331,7 @@ class MypageViewController: UIViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.auth.path
+        let url = APIConstants.authLogout.path
         
         APIService().postWithAccessToken(of: APIResponse<String>.self, url: url, parameters: nil, AccessToken: retrievedToken) { response in
             switch response.code {

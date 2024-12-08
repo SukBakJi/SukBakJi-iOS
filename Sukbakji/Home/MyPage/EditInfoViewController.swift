@@ -113,12 +113,10 @@ class EditInfoViewController: UIViewController {
     
     var topicData: [String] = []
     
-    private var EditData: EditProfileResult!
-    
-    private var degreeLevel: DegreeLevel?
+    private var degreeLevel: String?
     
     private let drop = DropDown()
-    private let belongType = ["학사 졸업 또는 재학", "석사 재학", "석사 졸업", "박사 재학", "박사 졸업", "석박사 통합 재학"]
+    private let belongType = ["학사 재학 중", "학사 졸업", "석사 재학 중", "석사 졸업", "박사 재학 중", "박사 졸업"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,7 +133,6 @@ class EditInfoViewController: UIViewController {
     }
     
     private func setDrop() {
-        
         initUI()
         setDropdown()
     }
@@ -197,7 +194,7 @@ class EditInfoViewController: UIViewController {
             make.leading.equalToSuperview().offset(24)
            make.height.equalTo(21)
         }
-        belongLabel.addImageAboveLabel(textField: nameTextField, spacing: 20)
+        belongLabel.addImageAboveLabel(referenceView: nameTextField, spacing: 20)
         
         self.view.addSubview(belongTextField)
         belongTextField.snp.makeConstraints { make in
@@ -207,11 +204,12 @@ class EditInfoViewController: UIViewController {
         }
         belongTextField.addTFUnderline()
         belongTextField.setLeftPadding(10)
+        belongTextField.isEnabled = false
         
         self.view.addSubview(dropButton)
         dropButton.snp.makeConstraints { make in
             make.top.equalTo(belongLabel.snp.bottom).offset(12)
-            make.trailing.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(24)
             make.height.width.equalTo(44)
         }
         dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
@@ -244,7 +242,7 @@ class EditInfoViewController: UIViewController {
             make.leading.equalToSuperview().offset(24)
            make.height.equalTo(21)
         }
-        researchLabel.addImageAboveLabel(textField: belongTextField, spacing: 124)
+        researchLabel.addImageAboveLabel(referenceView: belongTextField, spacing: 124)
         
         self.view.addSubview(researchTopicCollectionView)
         researchTopicCollectionView.snp.makeConstraints { make in
@@ -299,7 +297,7 @@ class EditInfoViewController: UIViewController {
         guard let retrievedEmail = KeychainHelper.standard.read(service: "email", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.user.path
+        let url = APIConstants.userMypage.path
         
         APIService().getWithAccessToken(of: APIResponse<MyProfile>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
@@ -310,6 +308,7 @@ class EditInfoViewController: UIViewController {
                 }
                 self.idTextField.text = retrievedEmail
                 self.nameTextField.text = data.name
+                self.degreeLevel = data.degreeLevel
                 switch data.degreeLevel {
                 case "BACHELORS_STUDYING":
                     self.belongTextField.text = "학사 재학 중"
@@ -324,7 +323,7 @@ class EditInfoViewController: UIViewController {
                 case "DOCTORAL_GRADUATED":
                     self.belongTextField.text = "박사 졸업"
                 default:
-                    self.belongTextField.text = "소속 정보 없음"
+                    self.belongTextField.text = "학사 재학 중"
                 }
                 self.setTopicData()
                 self.view.layoutIfNeeded()
@@ -339,13 +338,14 @@ class EditInfoViewController: UIViewController {
         DropDown.appearance().selectedTextColor = UIColor(red: 236/255, green: 73/255, blue: 8/255, alpha: 1.0) // 선택된 아이템 텍스트 색상
         DropDown.appearance().backgroundColor = UIColor(hexCode: "F5F5F5") // 아이템 팝업 배경 색상
         DropDown.appearance().selectionBackgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0) // 선택한 아이템 배경 색상
-        DropDown.appearance().setupCornerRadius(5)
+        DropDown.appearance().setupCornerRadius(10)
         DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
         drop.dismissMode = .automatic // 팝업을 닫을 모드 설정
         DropDown.appearance().textFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 12)
     }
     
     func setDropdown() {
+        self.view.layoutIfNeeded()
         // dataSource로 ItemList를 연결
         drop.dataSource = belongType
         drop.cellHeight = 44
@@ -366,7 +366,7 @@ class EditInfoViewController: UIViewController {
             cell.addSubview(separator)
                         
             // separator 높이(굵기) 설정
-            let separatorHeight: CGFloat = 1.0 // 원하는 굵기 설정
+            let separatorHeight: CGFloat = 1.5 // 원하는 굵기 설정
                         
             NSLayoutConstraint.activate([
                 separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
@@ -382,20 +382,20 @@ class EditInfoViewController: UIViewController {
             self?.belongTextField.text = "\(item)"
             let belong = self?.belongTextField.text
             switch belong {
-            case "학사 졸업 또는 재학":
-                self?.degreeLevel = .bachelorsStudying
-            case "석사 재학":
-                self?.degreeLevel = .mastersStudying
+            case "학사 재학 중":
+                self?.degreeLevel = "BACHELORS_STUDYING"
+            case "학사 졸업":
+                self?.degreeLevel = "BACHELORS_GRADUATED"
+            case "석사 재학 중":
+                self?.degreeLevel = "MASTERS_STUDYING"
             case "석사 졸업":
-                self?.degreeLevel = .mastersGraduated
-            case "박사 재학":
-                self?.degreeLevel = .doctoralStudying
+                self?.degreeLevel = "MASTERS_GRADUATED"
+            case "박사 재학 중 ":
+                self?.degreeLevel = "DOCTORAL_STUDYING"
             case "박사 졸업":
-                self?.degreeLevel = .doctoralGraduated
-            case "석박사 통합 재학":
-                self?.degreeLevel = .integratedStudying
+                self?.degreeLevel = "DOCTORAL_GRADUATED"
             default:
-                break
+                self?.degreeLevel = "BACHELORS_STUDYING"
             }
         }
         
@@ -405,11 +405,35 @@ class EditInfoViewController: UIViewController {
         }
     }
     
+    private func editProfileAPI() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        let url = APIConstants.userPutProfile.path
+        
+        let params = [
+            "degreeLevel": self.degreeLevel ?? "",
+            "researchTopics": [
+            ],
+        ] as [String : Any]
+        
+        APIService().putWithAccessToken(of: APIResponse<String>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
+                print("프로필 수정이 정상적으로 처리되었습니다.")
+            default:
+                AlertController(message: response.message).show()
+            }
+        }
+    }
+    
     @objc private func drop_Tapped() {
         drop.show()
     }
     
     @objc private func edit_Tapped(_ sender: Any) {
+        editProfileAPI()
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

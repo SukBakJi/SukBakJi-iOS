@@ -148,7 +148,6 @@
 		C78DE55A2C48176C00A58395 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE5592C48176C00A58395 /* CalendarCollectionViewCell.swift */; };
 		C78DE55C2C481CD700A58395 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */; };
 		C78DE55E2C481F8C00A58395 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78DE55D2C481F8C00A58395 /* DateViewController.swift */; };
-		C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */; };
 		C7980A832CEF7D5400475D94 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A822CEF7D5400475D94 /* APIService.swift */; };
 		C7980A862CEF838C00475D94 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */; };
 		C7980A882CEF841E00475D94 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A872CEF841E00475D94 /* AlertViewController.swift */; };
@@ -353,7 +352,6 @@
 		C78DE5592C48176C00A58395 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		C78DE55B2C481CD700A58395 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C78DE55D2C481F8C00A58395 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
-		C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertViewController.swift; sourceTree = "<group>"; };
 		C7980A822CEF7D5400475D94 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C7980A872CEF841E00475D94 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -926,7 +924,6 @@
 				C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */,
 				C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */,
 				C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */,
-				C78E0DE62C5E3ACA0025AC8E /* PWAlertViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1243,7 +1240,6 @@
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BC682B2CF6E7F600CEC0F3 /* AlarmEdit.swift in Sources */,
 				C7996CB22C5B4FB700DC18AF /* SchoolSelectTableViewCell.swift in Sources */,
-				C78E0DE72C5E3ACA0025AC8E /* PWAlertViewController.swift in Sources */,
 				C7BC681B2CF6E56900CEC0F3 /* ApplyMentoring.swift in Sources */,
 				C7EFF5CE2CFB2ECC0019F30D /* Logout.swift in Sources */,
 				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,

@@ -8,6 +8,8 @@
 import UIKit
 import Tabman
 import Pageboy
+import Then
+import SnapKit
 
 class ProfileTabViewController: TabmanViewController {
     
@@ -87,7 +89,7 @@ class ProfileTabViewController: TabmanViewController {
         // 배경 회색으로 나옴 -> 하얀색으로 바뀜
         bar.backgroundView.style = .clear
         // 간격 설정
-        bar.layout.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+        bar.layout.contentInset = UIEdgeInsets(top: 5, left: 30, bottom: 0, right: 0)
         // 버튼 글씨 커스텀
         bar.buttons.customize { (button) in
             button.tintColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1)
@@ -126,9 +128,9 @@ extension ProfileTabViewController: PageboyViewControllerDataSource, TMBarDataSo
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
         switch index {
         case 0:
-            return TMBarItem(title: "회원정보 수정   ")
+            return TMBarItem(title: "회원정보 수정    ")
         case 1:
-            return TMBarItem(title: "비밀번호 변경   ")
+            return TMBarItem(title: "비밀번호 변경    ")
         default:
             let title = "Page \(index)"
            return TMBarItem(title: title)
