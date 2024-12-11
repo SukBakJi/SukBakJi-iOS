@@ -119,21 +119,6 @@ class EditPWViewController: UIViewController {
         $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
     }
     
-    @IBOutlet weak var currentPWTF: UITextField!
-    @IBOutlet weak var newPWTF: UITextField!
-    @IBOutlet weak var newPWAgainTF: UITextField!
-    
-    @IBOutlet weak var currentPWView: UIStackView!
-    @IBOutlet weak var newPWView: UIStackView!
-    @IBOutlet weak var newPWAgainView: UIStackView!
-    
-    @IBOutlet weak var currentPWEye: UIButton!
-    @IBOutlet weak var currentPWDelete: UIButton!
-    @IBOutlet weak var newPWEye: UIButton!
-    @IBOutlet weak var newPWDelete: UIButton!
-    @IBOutlet weak var newPWAgainEye: UIButton!
-    @IBOutlet weak var newPWAgainDelete: UIButton!
-    
     private var userPW: String?
     
     override func viewDidLoad() {
@@ -514,7 +499,7 @@ class EditPWViewController: UIViewController {
     }
 
     @objc private func delete_CurrentPW() {
-        currentPWTF.text = ""
+        currentPWTextField.text = ""
     }
     
     @objc private func delete_NewPW() {

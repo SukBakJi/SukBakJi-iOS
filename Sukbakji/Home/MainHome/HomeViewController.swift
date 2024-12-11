@@ -252,7 +252,7 @@ class HomeViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
 //        getUserName()
 //        getViewSchedule()
-        setFavoriteBoardAPI()
+//        setFavoriteBoardAPI()
 //        setHotPostAPI()
 //        setFavoriteLabAPI()
     }

@@ -244,10 +244,18 @@ class EditInfoViewController: UIViewController {
         }
         researchLabel.addImageAboveLabel(referenceView: belongTextField, spacing: 124)
         
+        self.view.addSubview(plusButton)
+        plusButton.snp.makeConstraints { make in
+            make.top.equalTo(certificateView.snp.bottom).offset(64)
+            make.trailing.equalToSuperview().inset(22)
+            make.width.equalTo(43)
+        }
+        
         self.view.addSubview(researchTopicCollectionView)
         researchTopicCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(certificateLabel.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(24)
+            make.centerY.equalTo(plusButton)
+            make.leading.equalToSuperview().inset(24)
+            make.trailing.equalTo(plusButton.snp.leading).inset(8)
            make.height.equalTo(88)
         }
         
@@ -258,16 +266,9 @@ class EditInfoViewController: UIViewController {
             make.height.equalTo(1.2)
         }
         
-        self.view.addSubview(plusButton)
-        plusButton.snp.makeConstraints { make in
-            make.bottom.equalTo(backgroundLabel.snp.top)
-            make.trailing.equalToSuperview().inset(24)
-            make.width.equalTo(43)
-        }
-        
         self.view.addSubview(editButton)
         editButton.snp.makeConstraints { make in
-            make.top.equalTo(researchTopicCollectionView.snp.bottom).offset(60)
+            make.top.equalTo(backgroundLabel.snp.bottom).offset(60)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
@@ -306,6 +307,7 @@ class EditInfoViewController: UIViewController {
                 for i in 0..<(data.researchTopics?.count ?? 0) {
                     self.topicData.append(data.researchTopics![i])
                 }
+                self.researchTopicViewModel.ResearchTopicItems.accept(data.researchTopics!)
                 self.idTextField.text = retrievedEmail
                 self.nameTextField.text = data.name
                 self.degreeLevel = data.degreeLevel
@@ -439,7 +441,13 @@ class EditInfoViewController: UIViewController {
 
 extension EditInfoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let str = topicData[indexPath.item].count
-        return CGSize(width: 40 + str * 12, height: 29)
+        let items = researchTopicViewModel.ResearchTopicItems.value
+        guard indexPath.item < items.count else {
+            return CGSize(width: 40, height: 29) // 기본 사이즈 반환
+        }
+            
+        let str = items[indexPath.item]
+        let width = 40 + str.count * 12
+        return CGSize(width: CGFloat(width), height: 29)
     }
 }

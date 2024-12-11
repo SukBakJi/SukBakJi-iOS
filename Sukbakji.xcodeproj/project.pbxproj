@@ -113,7 +113,6 @@
 		C71AE9BA2CFB60340098FD2A /* FavoriteBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */; };
 		C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */; };
 		C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */; };
-		C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14862C44CE59003AFCB7 /* Home.storyboard */; };
 		C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14882C44CE64003AFCB7 /* Calendar.storyboard */; };
 		C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */; };
 		C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */; };
@@ -315,7 +314,6 @@
 		C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardTableViewCell.swift; sourceTree = "<group>"; };
 		C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPostTableViewCell.swift; sourceTree = "<group>"; };
 		C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabCollectionViewCell.swift; sourceTree = "<group>"; };
-		C71E14862C44CE59003AFCB7 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		C71E14882C44CE64003AFCB7 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -728,7 +726,6 @@
 		C71E14842C44CE44003AFCB7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C71E14862C44CE59003AFCB7 /* Home.storyboard */,
 				C71AE9B62CFB5FF10098FD2A /* Cell */,
 				C7BC68132CF6E50000CEC0F3 /* DataModel */,
 				C7DA37502CFCD31400B26549 /* ViewModel */,
@@ -1114,7 +1111,6 @@
 				C7F455392C39B8F000A4D0EE /* LaunchScreen.storyboard in Resources */,
 				C70DB27F2C633CBE00D6014B /* Chatting.storyboard in Resources */,
 				C7347E412C4D453000688768 /* Pretendard-SemiBold.otf in Resources */,
-				C71E14872C44CE59003AFCB7 /* Home.storyboard in Resources */,
 				C75C45802C5A3B6C001DDEA8 /* SUITE-Medium.otf in Resources */,
 				C7347E3E2C4D452A00688768 /* Pretendard-Light.otf in Resources */,
 				C7347E3C2C4D452600688768 /* Pretendard-ExtraBold.otf in Resources */,

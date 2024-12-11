@@ -11,5 +11,5 @@ import RxCocoa
 
 final class ResearchTopicViewModel {
     var selectResearchTopicItem: String?
-    var ResearchTopicItems: Observable<[String]> = Observable.just([])
+    var ResearchTopicItems = BehaviorRelay<[String]>(value: [])
 }
