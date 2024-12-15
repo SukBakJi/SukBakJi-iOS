@@ -11,7 +11,7 @@ import SwiftUI
 class MainTabViewController: UITabBarController {
 
     let homeVC = HomeViewController()
-    let Calendarstoryboard = UIStoryboard(name: "Calendar", bundle: nil)
+    let calendarVC = CalendarViewController()
     let swiftUIBoardView = BoardViewController()
     let Chattingstoryboard = UIStoryboard(name: "Chatting", bundle: nil)
     let swiftUIDirectoryView = DirectoryMainViewController()
@@ -33,8 +33,7 @@ class MainTabViewController: UITabBarController {
         tabBar.backgroundColor = .white
         UITabBar.clearShadow()
         tabBar.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
-        
-        let calendarVC = Calendarstoryboard.instantiateViewController(withIdentifier: "CalendarVC")
+
         let boardVC = UIHostingController(rootView: swiftUIBoardView)
         let chatVC = Chattingstoryboard.instantiateViewController(withIdentifier: "ChattingVC")
         let directoryVC = UIHostingController(rootView: swiftUIDirectoryView)

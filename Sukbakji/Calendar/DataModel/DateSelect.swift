@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct DateSelect : Codable {
     let memberId: Int
@@ -15,4 +16,17 @@ struct DateSelect : Codable {
 struct DateSelectList : Codable {
     let univId: Int
     let content: String
+}
+
+struct DateSelectSection {
+    var items: [DateSelectList]
+}
+
+extension DateSelectSection: SectionModelType {
+    typealias Item = DateSelectList
+    
+    init(original: DateSelectSection, items: [Item]) {
+        self = original
+        self.items = items
+    }
 }

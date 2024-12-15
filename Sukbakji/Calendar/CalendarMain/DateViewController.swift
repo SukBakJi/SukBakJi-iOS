@@ -17,19 +17,8 @@ class DateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setDateCollectionView()
         
         getViewSchedule()
-    }
-    
-    func setDateCollectionView() {
-        DateCV.delegate = self
-        DateCV.dataSource = self
-        DateCV.layer.masksToBounds = false// any value you want
-        DateCV.layer.shadowOpacity = 0.2// any value you want
-        DateCV.layer.shadowRadius = 2 // any value you want
-        DateCV.layer.shadowOffset = .init(width: 0, height: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {

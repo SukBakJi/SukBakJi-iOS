@@ -29,7 +29,7 @@ class DateListTableViewCell: UITableViewCell {
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return allDateDatas.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,35 +47,35 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DateListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "DateList_TableViewCell", for: indexPath) as! DateListTableViewCell
         
-        let detailDatas = allDateDatas[indexPath.section]
-        
-        cell.contentLabel.text = detailDatas.content
-        if detailDatas.univId == 1 {
-            cell.univLabel.text = "서울대학교"
-        } else if detailDatas.univId == 2 {
-            cell.univLabel.text = "연세대학교"
-        } else if detailDatas.univId == 3 {
-            cell.univLabel.text = "고려대학교"
-        } else if detailDatas.univId == 4 {
-            cell.univLabel.text = "카이스트"
-        }
-        
-        cell.selectionStyle = .none
+//        let detailDatas = allDateDatas[indexPath.section]
+//        
+//        cell.contentLabel.text = detailDatas.content
+//        if detailDatas.univId == 1 {
+//            cell.univLabel.text = "서울대학교"
+//        } else if detailDatas.univId == 2 {
+//            cell.univLabel.text = "연세대학교"
+//        } else if detailDatas.univId == 3 {
+//            cell.univLabel.text = "고려대학교"
+//        } else if detailDatas.univId == 4 {
+//            cell.univLabel.text = "카이스트"
+//        }
+//        
+//        cell.selectionStyle = .none
         
         return cell
     }
     
-    func expandHeight() {
-        let addHeight: CGFloat = 52 // 늘리고 싶은 높이 값을 설정 (예시)
-        
-        self.dateListTVHeightConstraint.constant = addHeight
-        self.view.layoutIfNeeded()
-    }
-    
-    func reduceHeight() {
-        let minusHeight: CGFloat = 10 // 줄이고 싶은 높이 값을 설정 (예시)
-        
-        self.dateListTVHeightConstraint.constant = minusHeight
-        self.view.layoutIfNeeded()
-    }
+//    func expandHeight(num: Int) {
+//        let addHeight: CGFloat = CGFloat(52 + num) // 늘리고 싶은 높이 값을 설정 (예시)
+//        
+//        self.dateListTVHeightConstraint.constant = addHeight
+//        self.view.layoutIfNeeded()
+//    }
+//    
+//    func reduceHeight() {
+//        let minusHeight: CGFloat = 10 // 줄이고 싶은 높이 값을 설정 (예시)
+//        
+//        self.dateListTVHeightConstraint.constant = minusHeight
+//        self.view.layoutIfNeeded()
+//    }
 }

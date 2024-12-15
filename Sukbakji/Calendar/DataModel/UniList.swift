@@ -11,11 +11,6 @@ struct UnivList: Codable {
     let memberId: Int
     var univList: [UnivListResult]
 
-    enum CodingKeys: String, CodingKey {
-        case memberId
-        case univList
-    }
-
     // 커스텀 디코딩 함수에서 null을 빈 배열로 처리
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

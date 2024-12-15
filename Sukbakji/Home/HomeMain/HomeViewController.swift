@@ -317,7 +317,7 @@ extension HomeViewController {
         
         self.contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(backgroundLabel.snp.bottom).offset(20)
+            make.top.equalToSuperview().offset(115)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(17)
         }
@@ -692,14 +692,14 @@ extension HomeViewController {
             .disposed(by: disposeBag)
         
         let dataSource = RxTableViewSectionedReloadDataSource<HotPostSection>(
-                configureCell: { _, tableView, indexPath, item in
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: HotPostTableViewCell.identifier, for: indexPath) as? HotPostTableViewCell else {
-                        return UITableViewCell()
-                    }
-                    cell.prepare(hotPost: item)
-                    return cell
+            configureCell: { _, tableView, indexPath, item in
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: HotPostTableViewCell.identifier, for: indexPath) as? HotPostTableViewCell else {
+                    return UITableViewCell()
                 }
-            )
+                cell.prepare(hotPost: item)
+                return cell
+            }
+        )
         
         self.hotPostViewModel.hotPostItems
                 .map { [HotPostSection(items: $0)] } // 각 아이템을 섹션으로 만듦
