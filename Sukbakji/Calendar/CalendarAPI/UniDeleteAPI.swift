@@ -11,12 +11,12 @@ import Alamofire
 class APIUniDelete {
     static let instance = APIUniDelete()
     
-    func SendingUniDelete(parameters: UniDeleteModel, completion: @escaping (Result<Void, Error>) -> Void) {
+    func SendingUniDelete(parameters: UniDelete, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
         
-        let url = APIConstants.calendar.path + "/univ"
+        let url = APIConstants.calendarUniv.path
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"

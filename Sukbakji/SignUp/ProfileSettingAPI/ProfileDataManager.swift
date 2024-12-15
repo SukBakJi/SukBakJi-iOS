@@ -12,7 +12,7 @@ class ProfileDataManager {
 
     func ProfileDataManager(_ parameters: ProfileAPIInput, completion: @escaping (ProfileModel?) -> Void) {
         
-        let url = APIConstants.user.path + "/profile"
+        let url = APIConstants.userProfile.path
         let headers: HTTPHeaders = [
             "Accept": "*/*",
             "Content-Type": "application/json"
@@ -39,7 +39,7 @@ class ProfileDataManager {
     
     func ProfileGetDataManager(completion: @escaping (ProfileModel?) -> Void) {
        
-        let url = APIConstants.user.path + "/mypage"
+        let url = APIConstants.userMypage.path
         let headers: HTTPHeaders = [
             "Accept": "*/*",
         ]

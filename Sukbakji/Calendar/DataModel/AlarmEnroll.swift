@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AlarmPostModel : Encodable {
+struct AlarmPost : Encodable {
     let memberId: Int
     let univName: String
     let name: String
@@ -17,13 +17,6 @@ struct AlarmPostModel : Encodable {
 }
 
 struct AlarmPostResult : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: AlarmPostResponse
-}
-
-struct AlarmPostResponse : Codable {
     let alarmId: Int
     let alarmUnivName: String
     let alarmName: String

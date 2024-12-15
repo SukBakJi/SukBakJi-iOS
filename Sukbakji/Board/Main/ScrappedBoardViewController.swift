@@ -87,7 +87,7 @@ struct ScrappedBoardViewController: View {
     }
 
     func BookmarkedBoardApi(completion: @escaping (Result<[BoardBookmarkedResult], Error>) -> Void) {
-        let url = APIConstants.community.path + "/scrap-list"
+        let url = APIConstants.communityScrapList.path
 
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",

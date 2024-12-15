@@ -7,31 +7,19 @@
 
 import Foundation
 
-struct UnivListResultModel : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: UnivListResponse
-}
-
-struct UnivListResponse: Codable {
+struct UnivList: Codable {
     let memberId: Int
-    var univList: [UnivList]
-
-    enum CodingKeys: String, CodingKey {
-        case memberId
-        case univList
-    }
+    var univList: [UnivListResult]
 
     // 커스텀 디코딩 함수에서 null을 빈 배열로 처리
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.memberId = try container.decode(Int.self, forKey: .memberId)
-        self.univList = try container.decodeIfPresent([UnivList].self, forKey: .univList) ?? []
+        self.univList = try container.decodeIfPresent([UnivListResult].self, forKey: .univList) ?? []
     }
 }
 
-struct UnivList: Codable {
+struct UnivListResult: Codable {
     let univId: Int
     let season: String
     let method: String

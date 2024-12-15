@@ -13,7 +13,7 @@ struct ProfileAPIInput : Encodable {
     var researchTopics: [String] = []
 }
 
-enum DegreeLevel: String, Encodable {
+enum DegreeLevel: String, Codable {
     case bachelorsStudying = "BACHELORS_STUDYING"
     case bachelorsGraduated = "BACHELORS_GRADUATED"
     case mastersStudying = "MASTERS_STUDYING"

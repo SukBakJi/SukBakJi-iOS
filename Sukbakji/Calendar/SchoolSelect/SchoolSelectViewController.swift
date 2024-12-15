@@ -18,8 +18,8 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var schoolSearchTF: UITextField!
     @IBOutlet weak var setButton: UIButton!
 
-    private var uniData: UniResponse?
-    var allUniDatas: [UniListResponse] = []
+    private var uniData: UnivList?
+    var allUniDatas: [UniSearchList] = []
     
     private var searchTimer: Timer?
     
@@ -57,7 +57,7 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
-        let url = APIConstants.calendar.path + "/search"
+        let url = APIConstants.calendarSchedule.path
         
         let parameter: Parameters = [
             "keyword": "\(schoolSearchTF.text ?? "")"
@@ -67,43 +67,43 @@ class SchoolSelectViewController: UIViewController, UITextFieldDelegate {
             "Authorization": "Bearer \(retrievedToken)",
         ]
         
-        AF.request(url, method: .get, parameters: parameter, headers: headers).responseData { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let decodedData = try JSONDecoder().decode(UniResultModel.self, from: data)
-                    self.uniData = decodedData.result
-                    self.allUniDatas = self.uniData?.universityList ?? []
-                    
-                    DispatchQueue.main.async {
-                        self.SchoolTV.reloadData()
-                        if (self.allUniDatas.count == 0) {
-                            self.noResultImage.isHidden = false
-                            self.noResultSV.isHidden = false
-                            self.univLabel.text = self.schoolSearchTF.text
-                        } else if (self.allUniDatas.count >= 1) {
-                            self.noResultImage.isHidden = true
-                            self.noResultSV.isHidden = true
-                        }
-                    }
-                } catch let DecodingError.dataCorrupted(context) {
-                    print(context)
-                } catch let DecodingError.keyNotFound(key, context) {
-                    print("Key '\(key)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.valueNotFound(value, context) {
-                    print("Value '\(value)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.typeMismatch(type, context)  {
-                    print("Type '\(type)' mismatch:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch {
-                    print("error: ", error)
-                }
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        }
+//        AF.request(url, method: .get, parameters: parameter, headers: headers).responseData { response in
+//            switch response.result {
+//            case .success(let data):
+//                do {
+//                    let decodedData = try JSONDecoder().decode(UniResultModel.self, from: data)
+//                    self.uniData = decodedData.result
+//                    self.allUniDatas = self.uniData?.universityList ?? []
+//                    
+//                    DispatchQueue.main.async {
+//                        self.SchoolTV.reloadData()
+//                        if (self.allUniDatas.count == 0) {
+//                            self.noResultImage.isHidden = false
+//                            self.noResultSV.isHidden = false
+//                            self.univLabel.text = self.schoolSearchTF.text
+//                        } else if (self.allUniDatas.count >= 1) {
+//                            self.noResultImage.isHidden = true
+//                            self.noResultSV.isHidden = true
+//                        }
+//                    }
+//                } catch let DecodingError.dataCorrupted(context) {
+//                    print(context)
+//                } catch let DecodingError.keyNotFound(key, context) {
+//                    print("Key '\(key)' not found:", context.debugDescription)
+//                    print("codingPath:", context.codingPath)
+//                } catch let DecodingError.valueNotFound(value, context) {
+//                    print("Value '\(value)' not found:", context.debugDescription)
+//                    print("codingPath:", context.codingPath)
+//                } catch let DecodingError.typeMismatch(type, context)  {
+//                    print("Type '\(type)' mismatch:", context.debugDescription)
+//                    print("codingPath:", context.codingPath)
+//                } catch {
+//                    print("error: ", error)
+//                }
+//            case .failure(let error):
+//                print("Error: \(error)")
+//            }
+//        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

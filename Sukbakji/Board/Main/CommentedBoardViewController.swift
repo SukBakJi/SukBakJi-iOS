@@ -143,7 +143,7 @@ struct CommentedBoardViewController: View {
     }
     
     func CommentedBoardApi(userToken: String, completion: @escaping (Result<[CommentedPost], Error>) -> Void) {
-        let url = APIConstants.community.path + "/comment-list"
+        let url = APIConstants.communityCommentList.path
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",

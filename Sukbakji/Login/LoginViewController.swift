@@ -99,6 +99,8 @@ class LoginViewController: UIViewController {
         $0.setTitleColor(.gray600, for: .normal)
     }
     
+    private let isAutoLoginEnabled = UserDefaults.standard.bool(forKey: "isAutoLogin")
+    
     // MARK: - ViewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,12 +114,6 @@ class LoginViewController: UIViewController {
     // MARK: - navigationBar Title
     private func setUpNavigationBar(){
         self.title = "이메일로 로그인"
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     // MARK: - Screen transition
@@ -172,10 +168,8 @@ class LoginViewController: UIViewController {
     }
     
     private func navigateToHomeScreen() {
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
-            return
-        }
-        sceneDelegate.switchToTabBarController()
+        let tabBarVC = MainTabViewController()
+        self.navigationController?.pushViewController(tabBarVC, animated: true)
     }
     
     private func navigateToTOSScreen(isKakaoSignUp: Bool = false) {
@@ -247,6 +241,14 @@ class LoginViewController: UIViewController {
     
     // MARK: - addView
     func setupViews() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
+            print("자동 로그인 활성화: \(accessToken)")
+            let tabBarVC = MainTabViewController()
+            self.navigationController?.pushViewController(tabBarVC, animated: true)
+        }
+        
         view.addSubview(symbolImageView)
         view.addSubview(titleLabel)
         view.addSubview(kakaoLoginButton)

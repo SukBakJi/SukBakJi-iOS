@@ -61,17 +61,17 @@ extension SchoolCalendarViewController: UITableViewDelegate, UITableViewDataSour
         
         let detailData = allDetailDatas[indexPath.section]
         
-        if detailData.univId == 1{
-            cell.univName.text = "서울대학교"
-        } else if detailData.univId == 2{
-            cell.univName.text = "연세대학교"
-        } else if detailData.univId == 3{
-            cell.univName.text = "고려대학교"
-        } else {
-            cell.univName.text = "카이스트"
-        }
-        cell.seasonLabel.text = detailData.season
-        cell.methodLabel.text = detailData.method
+//        if detailData.univId == 1{
+//            cell.univName.text = "서울대학교"
+//        } else if detailData.univId == 2{
+//            cell.univName.text = "연세대학교"
+//        } else if detailData.univId == 3{
+//            cell.univName.text = "고려대학교"
+//        } else {
+//            cell.univName.text = "카이스트"
+//        }
+//        cell.seasonLabel.text = detailData.season
+//        cell.methodLabel.text = detailData.method
         
         cell.selectionStyle = .none
         
@@ -86,9 +86,9 @@ extension SchoolCalendarViewController: UITableViewDelegate, UITableViewDataSour
         nextVC.modalPresentationStyle = .overCurrentContext
         
         nextVC.memberId = allDatas?.memberId
-        nextVC.method = detailData.method
-        nextVC.season = detailData.season
-        nextVC.univId = detailData.univId
+//        nextVC.method = detailData.method
+//        nextVC.season = detailData.season
+//        nextVC.univId = detailData.univId
         
         DispatchQueue.main.async {
             self.present(nextVC, animated: false, completion: nil)

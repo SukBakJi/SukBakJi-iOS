@@ -1021,10 +1021,10 @@
             </objects>
             <point key="canvasLocation" x="2050" y="-4"/>
         </scene>
-        <!--Calendar View Controller-->
+        <!--View Controller-->
         <scene sceneID="6ie-z2-F1a">
             <objects>
-                <viewController storyboardIdentifier="CalendarVC" id="HjL-dA-FDw" customClass="CalendarViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarVC" id="HjL-dA-FDw" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dXz-MK-Cw3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1058,9 +1058,6 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Mypage"/>
-                                                <connections>
-                                                    <action selector="school_Tapped:" destination="HjL-dA-FDw" eventType="touchUpInside" id="zP1-Mc-8bj"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTN-3Z-5Ni">
                                                 <rect key="frame" x="0.0" y="94" width="393" height="1.3333333333333286"/>
@@ -1092,9 +1089,6 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Down"/>
-                                                <connections>
-                                                    <action selector="School_Select_Tapped:" destination="HjL-dA-FDw" eventType="touchUpInside" id="nfI-2k-N5k"/>
-                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nIR-UR-A9G">
                                                 <rect key="frame" x="24" y="156.33333333333337" width="345" height="334"/>
@@ -1258,9 +1252,6 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Alarm"/>
-                                <connections>
-                                    <action selector="Alarm_Tapped:" destination="HjL-dA-FDw" eventType="touchUpInside" id="5g7-Rl-1bf"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Sn3-La-AJS"/>
@@ -1274,16 +1265,6 @@
                             <constraint firstItem="Sn3-La-AJS" firstAttribute="trailing" secondItem="uhC-ZL-PAA" secondAttribute="trailing" constant="24" id="pu4-GE-saK"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="AlertView" destination="YPm-ao-z51" id="ImV-He-wTF"/>
-                        <outlet property="DateView" destination="nIR-UR-A9G" id="y4s-SI-eqN"/>
-                        <outlet property="alarmButton" destination="uhC-ZL-PAA" id="mW7-Wz-32Y"/>
-                        <outlet property="dateListTV" destination="pcH-TK-vRz" id="OsX-9c-cDq"/>
-                        <outlet property="dateListTVHeightConstraint" destination="HXq-Jw-55I" id="Gau-ix-RXA"/>
-                        <outlet property="dayLabel" destination="arB-bv-ePv" id="U5I-ye-2CL"/>
-                        <outlet property="triangleView" destination="Knr-fr-ST0" id="X1u-LU-71E"/>
-                        <outlet property="univLabel" destination="wVK-db-PhL" id="Scl-4o-XEB"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6FN-Gx-V9B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

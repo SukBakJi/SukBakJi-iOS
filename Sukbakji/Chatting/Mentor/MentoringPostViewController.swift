@@ -38,8 +38,8 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        titleTV.addTVBottomShadow()
-        questionTV.addTVBottomShadow()
+        titleTV.addTVUnderline()
+        questionTV.addTVUnderline()
     }
     
     func settingTextView() {
@@ -93,24 +93,24 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
             titleWarningSV.isHidden = true
             titleTV.textColor = UIColor.black
             titleTV.backgroundColor = UIColor(hexCode: "F5F5F5")
-            titleTV.addTVBottomShadow()
+            titleTV.addTVUnderline()
         } else if titleTV.text.count < 30 {
             titleWarningSV.isHidden = false
             titleTV.textColor = UIColor(hexCode: "FF4A4A")
             titleTV.backgroundColor = UIColor(hexCode: "FFEBEE")
-            titleTV.addTVRedBottomShadow()
+            titleTV.addTVRedUnderline()
         }
         
         if questionTV.text.count >= 30 && questionTV.text != "• 졸업 후 대기업 취직 많이 하나요?\n• 포트폴리오에 어떤 내용이 들어가야 하나요?\n• 교수님 인품 좋으신가요?" {
             questionWarningSV.isHidden = true
             questionTV.textColor = UIColor.black
             questionTV.backgroundColor = UIColor(hexCode: "F5F5F5")
-            questionTV.addTVBottomShadow()
+            questionTV.addTVUnderline()
         } else if questionTV.text.count < 30 {
             questionWarningSV.isHidden = false
             questionTV.textColor = UIColor(hexCode: "FF4A4A")
             questionTV.backgroundColor = UIColor(hexCode: "FFEBEE")
-            questionTV.addTVRedBottomShadow()
+            questionTV.addTVRedUnderline()
         }
     }
     

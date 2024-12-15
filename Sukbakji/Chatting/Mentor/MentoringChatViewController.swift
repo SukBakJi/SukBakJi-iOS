@@ -71,7 +71,7 @@ class MentoringChatViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        messageTF.addBottomShadow()
+        messageTF.addTFUnderline()
     }
     
     func setupSocket() {

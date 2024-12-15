@@ -318,7 +318,7 @@ struct DummyBoardDetail: View {
 
     // ProfileGetDataManager 함수 정의
     func ProfileGetDataManager(completion: @escaping (ProfileModel?) -> Void) {
-        let url = APIConstants.user.path + "/mypage"
+        let url = APIConstants.userMypage.path
         let headers: HTTPHeaders = [
             "Accept": "*/*"
         ]

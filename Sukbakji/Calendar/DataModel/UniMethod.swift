@@ -7,14 +7,7 @@
 
 import Foundation
 
-struct UniMethodResultModel : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: UniMethodResponse
-}
-
-struct UniMethodResponse : Codable {
+struct UniMethod : Codable {
     let univId: Int
     var methodList: [UniMethodList]
 }

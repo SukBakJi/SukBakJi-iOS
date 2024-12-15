@@ -6,20 +6,27 @@
 //
 
 import Foundation
+import RxDataSources
 
-struct DateResultModel : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: DateResponse
-}
-
-struct DateResponse : Codable {
+struct DateSelect : Codable {
     let memberId: Int
-    var scheduleList: [DateListResponse]
+    var scheduleList: [DateSelectList]
 }
 
-struct DateListResponse : Codable {
+struct DateSelectList : Codable {
     let univId: Int
     let content: String
+}
+
+struct DateSelectSection {
+    var items: [DateSelectList]
+}
+
+extension DateSelectSection: SectionModelType {
+    typealias Item = DateSelectList
+    
+    init(original: DateSelectSection, items: [Item]) {
+        self = original
+        self.items = items
+    }
 }

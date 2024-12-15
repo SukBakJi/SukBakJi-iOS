@@ -33,7 +33,7 @@ class SchoolDateViewController: UIViewController {
     let drop = DropDown()
     private var recruitType: [String] = []
     
-    private var methodData: UniMethodResponse?
+    private var methodData: UniMethod?
     private var allMethodDatas: [UniMethodList] = []
     
     private var uniData: UniPostResult!
@@ -60,7 +60,7 @@ class SchoolDateViewController: UIViewController {
     }
     
     func setSchoolDateView() {
-        RecruitTF.addBottomShadow()
+        RecruitTF.addTFUnderline()
         RecruitTF.setLeftPadding(10)
         RecruitTF.isEnabled = false
         
@@ -83,7 +83,7 @@ class SchoolDateViewController: UIViewController {
             return
         }
 
-        let url = APIConstants.calendar.path + "/univ/method?univId=\(univId)"
+        let url = APIConstants.calendarSchedule.path
         
         let parameter: Parameters = [
             "keyword": "\(univId)"
@@ -97,16 +97,16 @@ class SchoolDateViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 do {
-                    let decodedData = try JSONDecoder().decode(UniMethodResultModel.self, from: data)
-                    self.methodData = decodedData.result
-                    self.allMethodDatas = self.methodData?.methodList ?? []
-                    
-                    DispatchQueue.main.async {
-                        for i in 0..<self.allMethodDatas.count {
-                            self.recruitType.append(self.allMethodDatas[i].method)
-                            self.setDropdown()
-                        }
-                    }
+                    let decodedData = try JSONDecoder().decode(UniMethod.self, from: data)
+//                    self.methodData = decodedData.result
+//                    self.allMethodDatas = self.methodData?.methodList ?? []
+//                    
+//                    DispatchQueue.main.async {
+//                        for i in 0..<self.allMethodDatas.count {
+//                            self.recruitType.append(self.allMethodDatas[i].method)
+//                            self.setDropdown()
+//                        }
+//                    }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
                 } catch let DecodingError.keyNotFound(key, context) {
@@ -247,7 +247,7 @@ class SchoolDateViewController: UIViewController {
     }
     
     @IBAction func next_Tapped(_ sender: Any) {
-        let parameters = UniPostModel(memberId: memberId, univId: univId ?? 0, season: recruitDayLabel.text ?? "", method: recruitTypeLabel.text ?? "")
+        let parameters = UniPost(memberId: memberId, univId: univId ?? 0, season: recruitDayLabel.text ?? "", method: recruitTypeLabel.text ?? "")
         APIUniPost.instance.SendingPostUni(parameters: parameters) { result in self.uniData = result }
         NotificationCenter.default.post(name: NSNotification.Name("DismissTwo"), object: nil, userInfo: nil)
         self.presentingViewController?.dismiss(animated: true)

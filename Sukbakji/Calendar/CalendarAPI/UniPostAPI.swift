@@ -11,12 +11,12 @@ import Alamofire
 class APIUniPost {
     static let instance = APIUniPost()
     
-    func SendingPostUni(parameters: UniPostModel, handler: @escaping (_ result: UniPostResult)->(Void)) {
+    func SendingPostUni(parameters: UniPost, handler: @escaping (_ result: UniPostResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
         
-        let url = APIConstants.calendar.path + "/univ"
+        let url = APIConstants.calendarSchedule.path
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"

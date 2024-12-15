@@ -8,30 +8,54 @@
 import Foundation
 
 enum APIConstants {
-    case auth
+    case authSignUp
+    case authRefreshToken
+    case authLogout
+    case authLogin
+    case authKakao
+    case authEmail
     
-    case user
+    
+    case userMypage
+    case userProfile
+    case userPassword
+    
     
     case board
     
+    
     case posts
     
-    case community
     
-    case mypage
+    case communitySearch
+    case communityScrapList
+    case communityPostList
+    case communityLastestQuestions
+    case communityHotPost
+    case communityFavoriteBoard
+    case communityCommentList
     
-    case calendar
+    
+    case calendarUniv
+    case calendarSchedule
+    case calendarAlarm
+    case calendarAlarmOn
+    case calendarAlarmOff
+    case calendarScheduleDate(String)
+    
     
     case researchTopics
     
+    
     case mentor
     
-    case labs
+    
+    case labsFavoriteLab
 }
 
 extension APIConstants {
     
-    static let baseURL = "http://54.180.165.121:8080/api"
+    static let baseURL = "http://3.38.252.225:8080/api"
     
     static func makeEndPoint(_ endpoint: String) -> String {
         baseURL + endpoint
@@ -39,35 +63,76 @@ extension APIConstants {
     
     var path: String {
         switch self {
-        case .auth:
-            return APIConstants.makeEndPoint("/auth")
+        case .authSignUp:
+            return APIConstants.makeEndPoint("/auth/signup")
+        case .authRefreshToken:
+            return APIConstants.makeEndPoint("/auth/refresh-token")
+        case .authLogout:
+            return APIConstants.makeEndPoint("/auth/logout")
+        case .authLogin:
+            return APIConstants.makeEndPoint("/auth/login")
+        case .authKakao:
+            return APIConstants.makeEndPoint("/auth/kakao")
+        case .authEmail:
+            return APIConstants.makeEndPoint("/auth/email")
             
-        case .user:
-            return APIConstants.makeEndPoint("/user")
+            
+        case .userMypage:
+            return APIConstants.makeEndPoint("/user/mypage")
+        case .userProfile:
+            return APIConstants.makeEndPoint("/user/profile")
+        case .userPassword:
+            return APIConstants.makeEndPoint("/user/password")
+            
             
         case .board:
             return APIConstants.makeEndPoint("/board")
             
+            
         case .posts:
             return APIConstants.makeEndPoint("/posts")
             
-        case .community:
-            return APIConstants.makeEndPoint("/community")
             
-        case .mypage:
-            return APIConstants.makeEndPoint("/mypage")
+        case .communitySearch:
+            return APIConstants.makeEndPoint("/community/search")
+        case .communityScrapList:
+            return APIConstants.makeEndPoint("/community/scrap-list")
+        case .communityPostList:
+            return APIConstants.makeEndPoint("/community/post-list")
+        case .communityLastestQuestions:
+            return APIConstants.makeEndPoint("/community/lastest-questions")
+        case .communityHotPost:
+            return APIConstants.makeEndPoint("/community/hot-boards")
+        case .communityFavoriteBoard:
+            return APIConstants.makeEndPoint("/community/favorite-post-list")
+        case .communityCommentList:
+            return APIConstants.makeEndPoint("/community/comment-list")
             
-        case .calendar:
-            return APIConstants.makeEndPoint("/calendar")
+            
+        case .calendarUniv:
+            return APIConstants.makeEndPoint("/calendar/univ")
+        case .calendarSchedule:
+            return APIConstants.makeEndPoint("/calendar/schedule")
+        case .calendarAlarm:
+            return APIConstants.makeEndPoint("/calendar/alarm")
+        case .calendarAlarmOn:
+            return APIConstants.makeEndPoint("/calendar/alarm/on")
+        case .calendarAlarmOff:
+            return APIConstants.makeEndPoint("/calendar/alarm/off")
+        case .calendarScheduleDate(let date):
+            return APIConstants.makeEndPoint("/calendar/schedule/\(date)")
+            
             
         case .researchTopics:
             return APIConstants.makeEndPoint("/research-topics")
             
+            
         case .mentor:
             return APIConstants.makeEndPoint("/mentor")
             
-        case .labs:
-            return APIConstants.makeEndPoint("/labs")
+            
+        case .labsFavoriteLab:
+            return APIConstants.makeEndPoint("/labs/mypage/favorite-labs")
         }
     }
 }

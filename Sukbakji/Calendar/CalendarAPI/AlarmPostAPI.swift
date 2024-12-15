@@ -11,12 +11,12 @@ import Alamofire
 class APIAlarmPost {
     static let instance = APIAlarmPost()
     
-    func SendingPostAlarm(parameters: AlarmPostModel, handler: @escaping (_ result: AlarmPostResult)->(Void)) {
+    func SendingPostAlarm(parameters: AlarmPost, handler: @escaping (_ result: AlarmPostResult)->(Void)) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
         
-        let url = APIConstants.calendar.path + "/alarm"
+        let url = APIConstants.calendarSchedule.path
         let headers:HTTPHeaders = [
             "content-type": "application/json",
             "Authorization": "Bearer \(retrievedToken)"
