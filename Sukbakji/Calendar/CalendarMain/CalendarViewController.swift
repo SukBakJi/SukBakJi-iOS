@@ -122,6 +122,7 @@ class CalendarViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     private var calendarHeightConstraint: NSLayoutConstraint?
+    private var dateSelectHeightConstraint: NSLayoutConstraint?
     
     private let calendar = Calendar.current
     private let dateFormatter = DateFormatter()
@@ -277,6 +278,8 @@ class CalendarViewController: UIViewController {
             make.trailing.leading.equalToSuperview()
             make.height.equalTo(10)
         }
+        dateSelectHeightConstraint = calendarDetailTableView.heightAnchor.constraint(equalToConstant: 10)
+        dateSelectHeightConstraint?.isActive = true
         
         self.contentView.addSubview(upComingLabel)
         upComingLabel.snp.makeConstraints { make in
@@ -374,7 +377,7 @@ class CalendarViewController: UIViewController {
         activityIndicator.startAnimating()
         DispatchQueue.global().async {
             sleep(1)
-            self.getAlarmList()
+            self.setAlarmListAPI()
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
             }
@@ -388,22 +391,32 @@ class CalendarViewController: UIViewController {
         // daysRelay를 collectionView에 바인딩
         days
             .bind(to: calendarMainCollectionView.rx.items(cellIdentifier: CalendarMainCollectionViewCell.identifier, cellType: CalendarMainCollectionViewCell.self)) { index, day, cell in
-                cell.contentView.subviews.forEach { $0.removeFromSuperview() } // 중복 방지
                 
-                let label = UILabel()
-                label.text = day
-                label.textAlignment = .center
-                label.font = UIFont(name: "SUITE-Medium", size: 14)
-                cell.contentView.addSubview(label)
+                cell.updateDay(day: day)
                 
-                label.snp.makeConstraints { make in
-                    make.edges.equalToSuperview()
-                }
+                let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        
+                        if let dayInt = Int(day), dayInt > 0 {
+                            var components = self.calendar.dateComponents([.year, .month], from: self.calendarDate)
+                            components.day = dayInt
+                            if let date = self.calendar.date(from: components) {
+                                let dateString = dateFormatter.string(from: date)
+                                // 알람이 있는 날짜인지 확인
+                                if self.alarmDatas.contains(dateString) {
+                                    cell.dotImageView.isHidden = false
+                                } else {
+                                    cell.dotImageView.isHidden = true
+                                }
+                            }
+                        } else {
+                            cell.dotImageView.isHidden = true
+                        }
             }
             .disposed(by: disposeBag)
     }
     
-    private func getUnivList() {
+    private func setUnivListAPI() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
@@ -492,6 +505,12 @@ class CalendarViewController: UIViewController {
             switch response.code {
             case "COMMON200":
                 self.dateSelectViewModel.dateSelectItems = Observable.just(response.result.scheduleList)
+                let resultCount = response.result.scheduleList.count
+                if resultCount >= 1 {
+                    self.expandHeight(num: resultCount)
+                } else {
+                    self.reduceHeight()
+                }
                 self.setDateSelectData()
                 self.view.layoutIfNeeded()
             default:
@@ -500,7 +519,21 @@ class CalendarViewController: UIViewController {
         }
     }
     
-    func getAlarmList() {
+    private func expandHeight(num: Int) {
+        let addHeight: CGFloat = CGFloat(44 * num + 10) // 늘리고 싶은 높이 값을 설정 (예시)
+        
+        self.dateSelectHeightConstraint?.constant = addHeight
+        self.view.layoutIfNeeded()
+    }
+    
+    private func reduceHeight() {
+        let minusHeight: CGFloat = 10 // 줄이고 싶은 높이 값을 설정 (예시)
+        
+        self.dateSelectHeightConstraint?.constant = minusHeight
+        self.view.layoutIfNeeded()
+    }
+    
+    func setAlarmListAPI() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
@@ -545,7 +578,10 @@ class CalendarViewController: UIViewController {
     }
 }
 
-extension CalendarViewController: UICollectionViewDelegateFlowLayout {
+extension CalendarViewController: UICollectionViewDelegateFlowLayout, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
     
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        if collectionView.tag == 1 {

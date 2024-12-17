@@ -59,12 +59,12 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
         dayLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
-//        self.dayView.addSubview(dotImageView)
-//        dotImageView.snp.makeConstraints { make in
-//            make.top.equalTo(dayLabel.snp.bottom).offset(2)
-//            make.centerX.equalToSuperview()
-//            make.height.width.equalTo(4)
-//        }
+        self.dayView.addSubview(dotImageView)
+        dotImageView.snp.makeConstraints { make in
+            make.top.equalTo(dayLabel.snp.bottom).offset(2)
+            make.centerX.equalToSuperview()
+            make.height.width.equalTo(4)
+        }
     }
     
     func updateDay(day: String) {

@@ -26,7 +26,7 @@ class DateListTableViewCell: UITableViewCell {
 
 }
 
-extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
+extension CalendarViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -34,10 +34,6 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -64,18 +60,4 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-//    func expandHeight(num: Int) {
-//        let addHeight: CGFloat = CGFloat(52 + num) // 늘리고 싶은 높이 값을 설정 (예시)
-//        
-//        self.dateListTVHeightConstraint.constant = addHeight
-//        self.view.layoutIfNeeded()
-//    }
-//    
-//    func reduceHeight() {
-//        let minusHeight: CGFloat = 10 // 줄이고 싶은 높이 값을 설정 (예시)
-//        
-//        self.dateListTVHeightConstraint.constant = minusHeight
-//        self.view.layoutIfNeeded()
-//    }
 }
