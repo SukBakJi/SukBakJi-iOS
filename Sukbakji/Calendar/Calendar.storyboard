@@ -1856,12 +1856,6 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <outlet property="contentLabel" destination="kFH-7D-a56" id="hyc-90-4IA"/>
-                                            <outlet property="ddayLabel" destination="Pgw-Dh-Izf" id="ljn-pF-7hZ"/>
-                                            <outlet property="noResultLabel" destination="L1J-1y-fh7" id="Pxh-w1-dbF"/>
-                                            <outlet property="univLabel" destination="ZmA-YD-yxA" id="1YW-sv-8bX"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -1875,9 +1869,6 @@
                             <constraint firstItem="Mh6-xa-D6y" firstAttribute="top" secondItem="XDd-5l-zHH" secondAttribute="top" id="c0A-pr-DXG"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="DateCV" destination="Mh6-xa-D6y" id="RZu-59-S8q"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GSj-rv-ivd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

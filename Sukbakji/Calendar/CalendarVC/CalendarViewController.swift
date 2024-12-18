@@ -146,7 +146,7 @@ class CalendarViewController: UIViewController {
 //        getAlarmList()
 //        setUpComingAPI()
 //        getUnivList()
-//        callAPI()
+        callAPI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -462,7 +462,8 @@ class CalendarViewController: UIViewController {
         APIService().getWithAccessToken(of: APIResponse<UpComing>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
             case "COMMON200":
-                self.upComingViewModel.upComingItems = Observable.just(response.result.scheduleList)
+                let resultData = response.result.scheduleList.filter { $0.dday >= 0 && $0.dday <= 10 }
+                self.upComingViewModel.upComingItems = Observable.just(resultData)
                 self.setUpComingData()
                 self.view.layoutIfNeeded()
             default:
@@ -501,7 +502,11 @@ class CalendarViewController: UIViewController {
         }
         let url = APIConstants.calendarScheduleDate(date).path
         
-        APIService().getWithAccessToken(of: APIResponse<DateSelect>.self, url: url, AccessToken: retrievedToken) { response in
+        let params = [
+            "date": date
+        ] as [String : Any]
+        
+        APIService().getWithAccessTokenParameters(of: APIResponse<DateSelect>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
             switch response.code {
             case "COMMON200":
                 self.dateSelectViewModel.dateSelectItems = Observable.just(response.result.scheduleList)
@@ -533,7 +538,7 @@ class CalendarViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    func setAlarmListAPI() {
+    private func setAlarmListAPI() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
@@ -546,7 +551,7 @@ class CalendarViewController: UIViewController {
                 for i in 0..<alarmData.count {
                     self.alarmDatas.append(alarmData[i].alarmDate)
                 }
-                self.view.layoutIfNeeded()
+                self.bindCollectionView()
             default:
                 AlertController(message: response.message).show()
             }
@@ -600,41 +605,12 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout, UITableVie
 //        }
 //    }
     
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarMainCollectionViewCell.identifier, for: indexPath) as? CalendarMainCollectionViewCell else { return UICollectionViewCell() }
-//        let day = self.days[indexPath.item]
-//
-//        cell.updateDay(day: day)
-//
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//
-//        if let dayInt = Int(day), dayInt > 0 {
-//            var components = self.calendar.dateComponents([.year, .month], from: self.calendarDate)
-//            components.day = dayInt
-//            if let date = self.calendar.date(from: components) {
-//                let dateString = dateFormatter.string(from: date)
-//                // 알람이 있는 날짜인지 확인
-//                if self.alarmDatas.contains(dateString) {
-//                    cell.dotImageView.isHidden = false
-//                } else {
-//                    cell.dotImageView.isHidden = true
-//                }
-//            }
-//        } else {
-//            cell.dotImageView.isHidden = true
-//        }
-//
-//        return cell
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.tag == 1 {
             let width = self.dayStackView.frame.width / 7
             return CGSize(width: width, height: width)
         } else {
-            let width = self.dayStackView.frame.width / 7
-            return CGSize(width: width, height: width)
+            return CGSize(width: 200, height: 108)
         }
     }
 }
