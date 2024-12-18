@@ -105,7 +105,7 @@ class EditInfoViewController: UIViewController {
 
         $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
         $0.setTitle("수정하기", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
     }
     

@@ -21,10 +21,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--CalendarFBC View Controller-->
+        <!--View Controller-->
         <scene sceneID="9XR-QT-IaN">
             <objects>
-                <viewController storyboardIdentifier="CalendarFBCVC" modalPresentationStyle="overCurrentContext" id="5c0-Nd-j6f" customClass="CalendarFBCViewController" customModule="Sukbakji" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarFBCVC" modalPresentationStyle="overCurrentContext" id="5c0-Nd-j6f" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zyl-BI-Tbv">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,9 +37,6 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Alarm"/>
-                                <connections>
-                                    <action selector="back_Tapped:" destination="5c0-Nd-j6f" eventType="touchUpInside" id="Til-8A-7XK"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pps-oJ-fOS">
                                 <rect key="frame" x="309" y="592" width="60" height="60"/>
@@ -49,9 +46,6 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_setAlarm"/>
-                                <connections>
-                                    <action selector="setting_Tapped:" destination="5c0-Nd-j6f" eventType="touchUpInside" id="qps-t2-Ose"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내 알람" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sbt-7V-0lj">
                                 <rect key="frame" x="239" y="532.66666666666663" width="46" height="18.666666666666629"/>
@@ -73,9 +67,6 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Myalarm"/>
-                                <connections>
-                                    <action selector="myAlarm_Tapped:" destination="5c0-Nd-j6f" eventType="touchUpInside" id="9U5-Mu-o1t"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OJR-b0-Wtv"/>
@@ -1865,12 +1856,6 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <outlet property="contentLabel" destination="kFH-7D-a56" id="hyc-90-4IA"/>
-                                            <outlet property="ddayLabel" destination="Pgw-Dh-Izf" id="ljn-pF-7hZ"/>
-                                            <outlet property="noResultLabel" destination="L1J-1y-fh7" id="Pxh-w1-dbF"/>
-                                            <outlet property="univLabel" destination="ZmA-YD-yxA" id="1YW-sv-8bX"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -1884,9 +1869,6 @@
                             <constraint firstItem="Mh6-xa-D6y" firstAttribute="top" secondItem="XDd-5l-zHH" secondAttribute="top" id="c0A-pr-DXG"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="DateCV" destination="Mh6-xa-D6y" id="RZu-59-S8q"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GSj-rv-ivd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

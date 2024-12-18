@@ -40,6 +40,9 @@ class UpComingCalendarCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUI() {
+        contentView.layer.cornerRadius = 8
+        contentView.layer.masksToBounds = true
+        
         self.contentView.addSubview(layerImageView)
         layerImageView.snp.makeConstraints { make in
             make.top.bottom.leading.equalToSuperview()

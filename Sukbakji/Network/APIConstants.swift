@@ -41,6 +41,7 @@ enum APIConstants {
     case calendarAlarm
     case calendarAlarmOn
     case calendarAlarmOff
+    case calendarSearch
     case calendarScheduleDate(String)
     
     
@@ -119,6 +120,8 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/calendar/alarm/on")
         case .calendarAlarmOff:
             return APIConstants.makeEndPoint("/calendar/alarm/off")
+        case .calendarSearch:
+            return APIConstants.makeEndPoint("/calendar/search")
         case .calendarScheduleDate(let date):
             return APIConstants.makeEndPoint("/calendar/schedule/\(date)")
             
