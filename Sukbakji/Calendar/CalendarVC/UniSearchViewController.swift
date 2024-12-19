@@ -1,5 +1,5 @@
 //
-//  UniSearchViewController.swift
+//  UnivSearchViewController.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 12/18/24.
@@ -12,7 +12,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-class UniSearchViewController: UIViewController, UITextFieldDelegate {
+class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     
     let univSearchViewModel = UnivSearchViewModel()
 
@@ -278,7 +278,7 @@ class UniSearchViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension UniSearchViewController: UITableViewDelegate {
+extension UnivSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }

@@ -395,24 +395,49 @@ class CalendarViewController: UIViewController {
                 cell.updateDay(day: day)
                 
                 let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd"
-                        
-                        if let dayInt = Int(day), dayInt > 0 {
-                            var components = self.calendar.dateComponents([.year, .month], from: self.calendarDate)
-                            components.day = dayInt
-                            if let date = self.calendar.date(from: components) {
-                                let dateString = dateFormatter.string(from: date)
-                                // 알람이 있는 날짜인지 확인
-                                if self.alarmDatas.contains(dateString) {
-                                    cell.dotImageView.isHidden = false
-                                } else {
-                                    cell.dotImageView.isHidden = true
-                                }
-                            }
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                
+                if let dayInt = Int(day), dayInt > 0 {
+                    var components = self.calendar.dateComponents([.year, .month], from: self.calendarDate)
+                    components.day = dayInt
+                    if let date = self.calendar.date(from: components) {
+                        let dateString = dateFormatter.string(from: date)
+                        // 알람이 있는 날짜인지 확인
+                        if self.alarmDatas.contains(dateString) {
+                            cell.dotImageView.isHidden = false
                         } else {
                             cell.dotImageView.isHidden = true
                         }
+                    }
+                } else {
+                    cell.dotImageView.isHidden = true
+                }
             }
+            .disposed(by: disposeBag)
+        
+        calendarMainCollectionView.rx.modelSelected(String.self)
+            .subscribe(onNext: { [weak self] selectedDay in
+                guard let self = self else { return }
+
+                let dayNum = Int(selectedDay) ?? 0
+                let date = dateLabel.text ?? ""
+                let replacedString = date.replacingOccurrences(of: " ", with: "")
+                let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
+                
+                if dayNum <= 9 {
+                    setDateSelectAPI(date: "\(reReplacedString)0\(selectedDay)")
+                } else {
+                    setDateSelectAPI(date: "\(reReplacedString)\(selectedDay)")
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // 선택된 indexPath 처리 (선택된 셀 스타일 업데이트용)
+        calendarMainCollectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
+                self.calendarMainCollectionView.reloadData() // 선택 상태 업데이트
+            })
             .disposed(by: disposeBag)
     }
     
@@ -551,7 +576,7 @@ class CalendarViewController: UIViewController {
                 for i in 0..<alarmData.count {
                     self.alarmDatas.append(alarmData[i].alarmDate)
                 }
-                self.bindCollectionView()
+                self.calendarMainCollectionView.reloadData()
             default:
                 AlertController(message: response.message).show()
             }
@@ -564,8 +589,8 @@ class CalendarViewController: UIViewController {
     }
     
     @objc private func schoolSetting_Tapped() {
-        let schoolSelectViewController = SchoolSelectViewController()
-        self.navigationController?.pushViewController(schoolSelectViewController, animated: true)
+        let univSearchViewController = UnivSearchViewController()
+        self.navigationController?.pushViewController(univSearchViewController, animated: true)
     }
 
     @objc func alarm_Tapped() {
@@ -587,23 +612,6 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout, UITableVie
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if collectionView.tag == 1 {
-//            let day = days[indexPath.item]
-//            let dayNum = Int(day) ?? 0
-//            
-//            let date = dateLabel.text ?? ""
-//            let replacedString = date.replacingOccurrences(of: " ", with: "")
-//            let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
-//            
-//            if dayNum <= 9 {
-//                setDateSelectAPI(date: "\(reReplacedString)0\(day)")
-//            } else {
-//                setDateSelectAPI(date: "\(reReplacedString)\(day)")
-//            }
-//        }
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.tag == 1 {
