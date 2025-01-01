@@ -81,6 +81,8 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     
     private let disposeBag = DisposeBag()
     
+    private var univId: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -240,6 +242,7 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
                         self.nextButton.setTitleColor(.white, for: .normal)
                         self.nextButton.setTitleColor(.white, for: .selected)
                         self.uniSearchTextField.text = title.name
+                        self.univId = title.id
                     }
                 }
             }
@@ -331,7 +334,7 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func clickNextButton() {
-        let univRecruitVC = UnivRecruitViewController(univName: uniSearchTextField.text ?? "")
+        let univRecruitVC = UnivRecruitViewController(univName: uniSearchTextField.text ?? "", univId: univId ?? 0)
         self.navigationController?.pushViewController(univRecruitVC, animated: true)
     }
 }

@@ -120,13 +120,15 @@ class UnivRecruitViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     private let drop = DropDown()
-    private var recruitType: [String] = ["ㅇㅇ"]
+    private var recruitType: [String] = []
     
     private var univName: String?
+    private var univId: Int?
     
-    init(univName: String) {
+    init(univName: String, univId: Int) {
         super.init(nibName: nil, bundle: nil)
         self.univName = univName
+        self.univId = univId
     }
     
     required init?(coder: NSCoder) {
@@ -428,6 +430,31 @@ class UnivRecruitViewController: UIViewController {
             self?.recruitTypeTextField.text = ""
             self?.warningTypeLabel.isHidden = false
             self?.warningImageView.isHidden = false
+        }
+    }
+    
+    private func setUnivRecruitTypeAPI(univId: String) {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        let url = APIConstants.calendarUnivMethod.path
+        
+        let params = [
+            "univId": univId
+        ] as [String : Any]
+        
+        APIService().getWithAccessTokenParameters(of: APIResponse<UniMethod>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
+                let resultData = response.result.methodList
+                for i in 0..<resultData.count {
+                    self.recruitType.append(resultData[i].method)
+                }
+                self.setDropdown()
+                self.view.layoutIfNeeded()
+            default:
+                AlertController(message: response.message).show()
+            }
         }
     }
     
