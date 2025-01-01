@@ -12,7 +12,7 @@ import KakaoSDKAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var LoginVC = UINavigationController(rootViewController: LoginViewController())
+    var LoginVC = UINavigationController(rootViewController: UnivRecruitViewController(univName: ""))
     // SiwftUI로 BoardViewController 실행하기
 
 //    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

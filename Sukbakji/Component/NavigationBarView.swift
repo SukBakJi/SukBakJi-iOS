@@ -33,29 +33,29 @@ final class NavigationBarView: UIView {
       fatalError("init(coder:) has not been implemented")
    }
    
-   func setUI() {
-      self.backgroundColor = .white
-      
-      self.addSubview(backButton)
-      self.backButton.snp.makeConstraints { make in
-         make.leading.equalToSuperview().offset(8)
-         make.bottom.equalToSuperview()
-         make.width.height.equalTo(48)
-      }
-      
-      self.addSubview(titleLabel)
-      self.titleLabel.snp.makeConstraints { make in
-          make.centerY.equalTo(backButton)
-          make.centerX.equalToSuperview()
-         make.height.equalTo(24)
-      }
-      
-      backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-   }
+    func setUI() {
+        self.backgroundColor = .white
+        
+        self.addSubview(backButton)
+        self.backButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(8)
+            make.bottom.equalToSuperview()
+            make.width.height.equalTo(48)
+        }
+        
+        self.addSubview(titleLabel)
+        self.titleLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(backButton)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(24)
+        }
+        
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
    
-   @objc private func backButtonTapped() {
-         delegate?.didTapBackButton()
-      }
+    @objc private func backButtonTapped() {
+        delegate?.didTapBackButton()
+    }
 }
 
 extension UIViewController: NavigationBarViewDelegate {

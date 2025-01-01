@@ -146,7 +146,7 @@ class CalendarViewController: UIViewController {
 //        getAlarmList()
 //        setUpComingAPI()
 //        getUnivList()
-        callAPI()
+//        callAPI()
     }
     
     override func viewDidLayoutSubviews() {
