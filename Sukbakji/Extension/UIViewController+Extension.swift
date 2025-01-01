@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIViewController {
-    
     func findPresentViewController() -> UIViewController {
         let windowScene = UIApplication.shared.connectedScenes.first as! UIWindowScene
         let keyWindow = windowScene.windows.first

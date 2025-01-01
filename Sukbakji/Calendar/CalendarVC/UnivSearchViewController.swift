@@ -1,5 +1,5 @@
 //
-//  UniSearchViewController.swift
+//  UnivSearchViewController.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 12/18/24.
@@ -12,12 +12,19 @@ import Then
 import RxSwift
 import RxCocoa
 
-class UniSearchViewController: UIViewController, UITextFieldDelegate {
+class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     
     let univSearchViewModel = UnivSearchViewModel()
 
-    private let navigationbarView = NavigationBarView(title: "대학교 선택")
-    
+    private let titleView = UIView()
+    private let backButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Back"), for: .normal)
+    }
+    private let titleLabel = UILabel().then {
+        $0.text = "대학교 선택"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
+        $0.textColor = .black
+    }
     private let backgroundLabel = UILabel().then {
         $0.backgroundColor = .gray200
     }
@@ -78,6 +85,13 @@ class UniSearchViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         setUI()
+        hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        /// 탭 바 숨기기
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     private func setUI() {
@@ -85,30 +99,44 @@ class UniSearchViewController: UIViewController, UITextFieldDelegate {
         self.navigationItem.setHidesBackButton(true, animated: false)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        navigationbarView.delegate = self
-        self.view.addSubview(navigationbarView)
-        navigationbarView.snp.makeConstraints { make in
+        self.view.addSubview(titleView)
+        titleView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
            make.height.equalTo(95)
         }
         
+        self.titleView.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(8)
+            make.bottom.equalToSuperview()
+            make.width.height.equalTo(48)
+        }
+        backButton.addTarget(self, action: #selector(clickXButton), for: .touchUpInside)
+        
+        self.titleView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(backButton)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(24)
+        }
+        
         self.view.addSubview(backgroundLabel)
         backgroundLabel.snp.makeConstraints { make in
-            make.top.equalTo(navigationbarView.snp.bottom)
+            make.top.equalTo(titleView.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
         }
         
         self.view.addSubview(uniSelectLabel)
         uniSelectLabel.snp.makeConstraints { make in
-            make.top.equalTo(backgroundLabel.snp.bottom).offset(20)
+            make.top.equalTo(backgroundLabel.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(21)
         }
         
         self.view.addSubview(stepImageView)
         stepImageView.snp.makeConstraints { make in
-            make.top.equalTo(uniSelectLabel.snp.bottom).offset(49)
+            make.top.equalTo(uniSelectLabel.snp.bottom).offset(39)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(20)
             make.width.equalTo(100)
@@ -121,6 +149,7 @@ class UniSearchViewController: UIViewController, UITextFieldDelegate {
             make.height.equalTo(100)
             make.width.equalTo(93)
         }
+        selectImageView.alpha = 0.5
         
         self.view.addSubview(uniSearchTextField)
         uniSearchTextField.snp.makeConstraints { make in
@@ -159,6 +188,7 @@ class UniSearchViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.height.width.equalTo(32)
         }
+        searchWarningImageView.isHidden = true
         
         self.view.addSubview(searchWarningLabel)
         searchWarningLabel.snp.makeConstraints { make in
@@ -166,6 +196,7 @@ class UniSearchViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.height.equalTo(21)
         }
+        searchWarningLabel.isHidden = true
         let fullText = searchWarningLabel.text ?? ""
         let changeText = "석박지대학교"
         let attributedString = NSMutableAttributedString(string: fullText)
@@ -182,6 +213,7 @@ class UniSearchViewController: UIViewController, UITextFieldDelegate {
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
+        nextButton.addTarget(self, action: #selector(clickNextButton), for: .touchUpInside)
     }
     
     private func bindTableView() {
@@ -253,6 +285,13 @@ class UniSearchViewController: UIViewController, UITextFieldDelegate {
             case "COMMON200":
                 let resultData = response.result.universityList
                 self.univSearchViewModel.univSearchItems = Observable.just(resultData)
+                if resultData.isEmpty {
+                    self.searchWarningImageView.isHidden = true
+                    self.searchWarningLabel.isHidden = true
+                } else {
+                    self.searchWarningImageView.isHidden = false
+                    self.searchWarningLabel.isHidden = false
+                }
                 self.setUnivSearchData()
                 self.view.layoutIfNeeded()
             default:
@@ -276,9 +315,28 @@ class UniSearchViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
+    
+    @objc private func clickXButton() {
+        let univStopView = UnivStopView(target: self, num: 2)
+        
+        self.view.addSubview(univStopView)
+        univStopView.alpha = 0
+        univStopView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            univStopView.alpha = 1
+        }
+    }
+    
+    @objc private func clickNextButton() {
+        let univRecruitVC = UnivRecruitViewController(univName: uniSearchTextField.text ?? "")
+        self.navigationController?.pushViewController(univRecruitVC, animated: true)
+    }
 }
 
-extension UniSearchViewController: UITableViewDelegate {
+extension UnivSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }

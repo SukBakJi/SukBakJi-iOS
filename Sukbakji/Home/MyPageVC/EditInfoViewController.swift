@@ -23,7 +23,7 @@ class EditInfoViewController: UIViewController {
         $0.textColor = .black
     }
     private let idTextField = UITextField().then {
-       $0.backgroundColor = .gray50
+       $0.backgroundColor = .gray100
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = UIColor(hexCode: "E1E1E1")
     }
@@ -40,7 +40,7 @@ class EditInfoViewController: UIViewController {
         $0.textColor = .black
     }
     private let nameTextField = UITextField().then {
-       $0.backgroundColor = .gray50
+       $0.backgroundColor = .gray100
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = UIColor(hexCode: "E1E1E1")
     }
@@ -50,7 +50,7 @@ class EditInfoViewController: UIViewController {
         $0.textColor = .black
     }
     private let belongTextField = UITextField().then {
-       $0.backgroundColor = .gray50
+       $0.backgroundColor = .gray100
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .black
     }
@@ -335,10 +335,10 @@ class EditInfoViewController: UIViewController {
         }
     }
     
-    func initUI() {
+    private func initUI() {
         DropDown.appearance().textColor = UIColor.black // 아이템 텍스트 색상
         DropDown.appearance().selectedTextColor = UIColor(red: 236/255, green: 73/255, blue: 8/255, alpha: 1.0) // 선택된 아이템 텍스트 색상
-        DropDown.appearance().backgroundColor = UIColor(hexCode: "F5F5F5") // 아이템 팝업 배경 색상
+        DropDown.appearance().backgroundColor = .gray50 // 아이템 팝업 배경 색상
         DropDown.appearance().selectionBackgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0) // 선택한 아이템 배경 색상
         DropDown.appearance().setupCornerRadius(10)
         DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
@@ -346,8 +346,7 @@ class EditInfoViewController: UIViewController {
         DropDown.appearance().textFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 12)
     }
     
-    func setDropdown() {
-        self.view.layoutIfNeeded()
+    private func setDropdown() {
         // dataSource로 ItemList를 연결
         drop.dataSource = belongType
         drop.cellHeight = 44
@@ -355,21 +354,25 @@ class EditInfoViewController: UIViewController {
         drop.anchorView = self.belongTextField
         
         // View를 갖리지 않고 View아래에 Item 팝업이 붙도록 설정
-        drop.bottomOffset = CGPoint(x: 0, y: 1.5 + belongTextField.bounds.height)
+        drop.bottomOffset = CGPoint(x: 0, y: 45.5 + belongTextField.bounds.height)
+        
+        drop.shadowColor = .clear
         
         drop.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
             // separatorInset을 조정하여 separator 앞의 간격을 없앱니다.
             cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
-                        
+            
+            guard index != (self.drop.dataSource.count) - 1 else { return }
+            
             // 새로운 separator 추가
             let separator = UIView()
             separator.backgroundColor = UIColor(hexCode: "E1E1E1")
             separator.translatesAutoresizingMaskIntoConstraints = false
             cell.addSubview(separator)
-                        
+            
             // separator 높이(굵기) 설정
             let separatorHeight: CGFloat = 1.5 // 원하는 굵기 설정
-                        
+            
             NSLayoutConstraint.activate([
                 separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
                 separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
@@ -449,5 +452,15 @@ extension EditInfoViewController: UICollectionViewDelegateFlowLayout {
         let str = items[indexPath.item]
         let width = 40 + str.count * 12
         return CGSize(width: CGFloat(width), height: 29)
+    }
+}
+
+class CustomDropDownCell: DropDownCell {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        // 텍스트 레이블의 여백을 추가합니다.
+        let padding: CGFloat = 16
+        textLabel?.frame = CGRect(x: padding, y: 0, width: bounds.width - 2 * padding, height: bounds.height)
     }
 }
