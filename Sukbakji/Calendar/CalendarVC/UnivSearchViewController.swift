@@ -70,9 +70,11 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
         $0.layer.cornerRadius = 8
 
         $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .disabled)
         $0.setTitle("다음으로", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
+        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .disabled)
     }
     
     private let selectedIndex = BehaviorRelay<IndexPath?>(value: nil)
@@ -176,6 +178,7 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
             make.height.width.equalTo(24)
         }
         deleteButton.isHidden = true
+        deleteButton.addTarget(self, action: #selector(delete_Tapped), for: .touchUpInside)
         
         self.view.addSubview(univSearchTableView)
         univSearchTableView.snp.makeConstraints { make in
@@ -215,6 +218,7 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
+        nextButton.isEnabled = false
         nextButton.addTarget(self, action: #selector(clickNextButton), for: .touchUpInside)
     }
     
@@ -241,6 +245,7 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
                         self.nextButton.backgroundColor = UIColor(named: "Coquelicot")
                         self.nextButton.setTitleColor(.white, for: .normal)
                         self.nextButton.setTitleColor(.white, for: .selected)
+                        self.deleteButton.isHidden = false
                         self.uniSearchTextField.text = title.name
                         self.univId = title.id
                     }
@@ -336,6 +341,10 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     @objc private func clickNextButton() {
         let univRecruitVC = UnivRecruitViewController(univName: uniSearchTextField.text ?? "", univId: univId ?? 0)
         self.navigationController?.pushViewController(univRecruitVC, animated: true)
+    }
+    
+    @objc private func delete_Tapped() {
+        uniSearchTextField.text = ""
     }
 }
 

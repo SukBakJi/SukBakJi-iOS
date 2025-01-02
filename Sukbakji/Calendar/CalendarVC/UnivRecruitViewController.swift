@@ -15,6 +15,8 @@ import DropDown
 
 class UnivRecruitViewController: UIViewController {
     
+    private let memberId = UserDefaults.standard.integer(forKey: "memberID")
+    
     private let titleView = UIView()
     private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Back"), for: .normal)
@@ -55,7 +57,7 @@ class UnivRecruitViewController: UIViewController {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .black
     }
-    private let recruitLabel = UILabel().then {
+    private var recruitLabel = UILabel().then {
         $0.text = "  모집전형을 선택해 주세요"
         $0.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.textColor = .gray500
@@ -112,15 +114,17 @@ class UnivRecruitViewController: UIViewController {
         $0.layer.cornerRadius = 8
 
         $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .disabled)
         $0.setTitle("다음으로", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
+        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .disabled)
     }
     
     private let disposeBag = DisposeBag()
     
     private let drop = DropDown()
-    private var recruitType: [String] = []
+    private var recruitType: [String] = ["oo"]
     
     private var univName: String?
     private var univId: Int?
@@ -192,8 +196,9 @@ class UnivRecruitViewController: UIViewController {
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(21)
         }
+        dateSelectLabel.text = "\(univName ?? "") 일정을 선택해 주세요"
         let fullText = dateSelectLabel.text ?? ""
-        let changeText = "성신여자대학교"
+        let changeText = univName ?? ""
         let attributedString = NSMutableAttributedString(string: fullText)
         
         if let range = fullText.range(of: changeText) {
@@ -296,6 +301,7 @@ class UnivRecruitViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(44)
         }
+        recruitTypeTextField.errorfix()
         recruitTypeTextField.addTFUnderline()
         recruitTypeTextField.setLeftPadding(10)
         recruitTypeTextField.isEnabled = false
@@ -330,6 +336,8 @@ class UnivRecruitViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
+        nextButton.isEnabled = false
+        nextButton.addTarget(self, action: #selector(clickNextButton), for: .touchUpInside)
     }
     
     @objc func firstButtonTapped() {
@@ -423,6 +431,11 @@ class UnivRecruitViewController: UIViewController {
             self?.warningTypeLabel.isHidden = true
             self?.warningImageView.isHidden = true
             self?.updateButtonColor()
+            self?.recruitTypeTextField.backgroundColor = UIColor(hexCode: "FAFAFA")
+            self?.recruitTypeTextField.setPlaceholderColor(UIColor(hexCode: "9F9F9F"))
+            self?.recruitTypeTextField.updateUnderlineColor(to: UIColor(hexCode: "E1E1E1"))
+            self?.recruitLabel.text = "  \(item)"
+            self?.recruitLabel.textColor = UIColor(named: "Coquelicot")
         }
         
         // 취소 시 처리
@@ -430,17 +443,22 @@ class UnivRecruitViewController: UIViewController {
             self?.recruitTypeTextField.text = ""
             self?.warningTypeLabel.isHidden = false
             self?.warningImageView.isHidden = false
+            self?.recruitTypeTextField.backgroundColor = UIColor(hexCode: "FFEBEE")
+            self?.recruitTypeTextField.setPlaceholderColor(UIColor(hexCode: "FF4A4A"))
+            self?.recruitTypeTextField.updateUnderlineColor(to: UIColor(hexCode: "FF4A4A"))
+            self?.recruitLabel.text = "  모집전형을 선택해 주세요"
+            self?.recruitLabel.textColor = .gray500
         }
     }
     
-    private func setUnivRecruitTypeAPI(univId: String) {
+    private func setUnivRecruitTypeAPI() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
         let url = APIConstants.calendarUnivMethod.path
         
         let params = [
-            "univId": univId
+            "univId": univId ?? 0
         ] as [String : Any]
         
         APIService().getWithAccessTokenParameters(of: APIResponse<UniMethod>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
@@ -452,6 +470,29 @@ class UnivRecruitViewController: UIViewController {
                 }
                 self.setDropdown()
                 self.view.layoutIfNeeded()
+            default:
+                AlertController(message: response.message).show()
+            }
+        }
+    }
+    
+    private func postUnivAPI() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        let url = APIConstants.calendarUniv.path
+        
+        let params = [
+            "memberId": memberId,
+            "univId": univId ?? 0,
+            "season": self.recruitTitleLabel,
+            "method": self.recruitTypeTextField.text ?? ""
+        ] as [String : Any]
+        
+        APIService().postWithAccessToken(of: APIResponse<String>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
+                print("대학교 등록이 정상적으로 처리되었습니다")
             default:
                 AlertController(message: response.message).show()
             }
@@ -473,6 +514,15 @@ class UnivRecruitViewController: UIViewController {
         
         UIView.animate(withDuration: 0.3) {
             univStopView.alpha = 1
+        }
+    }
+    
+    @objc private func clickNextButton() {
+        postUnivAPI()
+        if let navigationController = self.navigationController {
+            if let targetViewController = navigationController.viewControllers.dropLast(2).last {
+                navigationController.popToViewController(targetViewController, animated: true)
+            }
         }
     }
 }

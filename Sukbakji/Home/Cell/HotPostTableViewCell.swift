@@ -63,7 +63,6 @@ class HotPostTableViewCell: UITableViewCell {
     }
     
     private func setUI() {
-        
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)

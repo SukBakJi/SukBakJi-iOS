@@ -66,7 +66,6 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUI() {
-        
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         contentView.backgroundColor = .gray200
