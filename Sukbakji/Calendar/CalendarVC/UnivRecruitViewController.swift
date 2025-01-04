@@ -124,7 +124,7 @@ class UnivRecruitViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     private let drop = DropDown()
-    private var recruitType: [String] = ["oo"]
+    private var recruitType: [String] = []
     
     private var univName: String?
     private var univId: Int?
@@ -260,30 +260,30 @@ class UnivRecruitViewController: UIViewController {
         self.view.addSubview(recruitFirstButton)
         recruitFirstButton.snp.makeConstraints { make in
             make.top.equalTo(recruitDateLabel.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(21.5)
-            make.height.width.equalTo(25)
+            make.leading.equalToSuperview().offset(22)
+            make.height.width.equalTo(24)
         }
         recruitFirstButton.addTarget(self, action: #selector(firstButtonTapped), for: .touchUpInside)
         
         self.view.addSubview(recruitFirstLabel)
         recruitFirstLabel.snp.makeConstraints { make in
             make.centerY.equalTo(recruitFirstButton)
-            make.leading.equalTo(recruitFirstButton.snp.trailing).offset(5.5)
+            make.leading.equalTo(recruitFirstButton.snp.trailing).offset(6)
            make.height.equalTo(19)
         }
         
         self.view.addSubview(recruitSecondButton)
         recruitSecondButton.snp.makeConstraints { make in
             make.centerY.equalTo(recruitFirstButton)
-            make.leading.equalTo(recruitFirstLabel.snp.trailing).offset(17.5)
-            make.height.width.equalTo(25)
+            make.leading.equalTo(recruitFirstLabel.snp.trailing).offset(18)
+            make.height.width.equalTo(24)
         }
         recruitSecondButton.addTarget(self, action: #selector(secondButtonTapped), for: .touchUpInside)
         
         self.view.addSubview(recruitSecondLabel)
         recruitSecondLabel.snp.makeConstraints { make in
             make.centerY.equalTo(recruitFirstButton)
-            make.leading.equalTo(recruitSecondButton.snp.trailing).offset(5.5)
+            make.leading.equalTo(recruitSecondButton.snp.trailing).offset(6)
            make.height.equalTo(19)
         }
         
@@ -298,7 +298,7 @@ class UnivRecruitViewController: UIViewController {
         self.view.addSubview(recruitTypeTextField)
         recruitTypeTextField.snp.makeConstraints { make in
             make.top.equalTo(recruitTypeLabel.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(44)
         }
         recruitTypeTextField.errorfix()
@@ -310,7 +310,7 @@ class UnivRecruitViewController: UIViewController {
         dropButton.snp.makeConstraints { make in
             make.centerY.equalTo(recruitTypeTextField)
             make.trailing.equalToSuperview().inset(24)
-            make.height.width.equalTo(44)
+            make.height.width.equalTo(36)
         }
         dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
         

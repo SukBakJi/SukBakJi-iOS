@@ -14,7 +14,7 @@ import RxCocoa
 
 class UnivCalendarViewController: UIViewController {
     
-    let univCalendarViewModel = UnivCalendarViewModel()
+    private let univCalendarViewModel = UnivCalendarViewModel()
 
     private let navigationbarView = NavigationBarView(title: "대학별 일정")
     private let allClickButton = UIButton().then {
@@ -133,6 +133,16 @@ class UnivCalendarViewController: UIViewController {
             .bind(to: self.univCalendarTableView.rx.items(cellIdentifier: UnivCalendarTableViewCell.identifier, cellType: UnivCalendarTableViewCell.self)) { index, item, cell in
                 cell.prepare(univListResult: item)
             }
+            .disposed(by: disposeBag)
+        
+        self.univCalendarTableView.rx.modelSelected(UnivListResult.self)
+            .subscribe(onNext: { [weak self] univCalendarItem in
+                guard let self = self else { return }
+                self.univCalendarViewModel.selectUnivCalendarItem = univCalendarItem
+                let viewController = EditUnivCalendarViewController(univCalendarViewModel: self.univCalendarViewModel)
+                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, isPannedable: true)
+                self.present(bottomSheetVC, animated: true)
+            })
             .disposed(by: disposeBag)
     }
     

@@ -117,6 +117,8 @@
 		C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CEED52D258CB500EED814 /* UnivStopView.swift */; };
 		C72E99862C54040600BC2C9A /* SchoolCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */; };
 		C72E99882C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */; };
+		C730327C2D295BF800F717D0 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730327B2D295BF800F717D0 /* BottomSheetViewController.swift */; };
+		C73032802D2974D100F717D0 /* EditUnivCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */; };
 		C7347E3A2C4D452100688768 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E312C4D410200688768 /* Pretendard-Black.otf */; };
 		C7347E3B2C4D452400688768 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E372C4D410300688768 /* Pretendard-Bold.otf */; };
 		C7347E3C2C4D452600688768 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E362C4D410300688768 /* Pretendard-ExtraBold.otf */; };
@@ -322,6 +324,8 @@
 		C72CEED52D258CB500EED814 /* UnivStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivStopView.swift; sourceTree = "<group>"; };
 		C72E99852C54040600BC2C9A /* SchoolCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCalendarViewController.swift; sourceTree = "<group>"; };
 		C72E99872C54043B00BC2C9A /* SchoolDeleteAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDeleteAlertViewController.swift; sourceTree = "<group>"; };
+		C730327B2D295BF800F717D0 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUnivCalendarViewController.swift; sourceTree = "<group>"; };
 		C7347E312C4D410200688768 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		C7347E322C4D410200688768 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		C7347E332C4D410200688768 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -954,6 +958,8 @@
 				C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */,
 				C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */,
 				C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */,
+				C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */,
+				C730327B2D295BF800F717D0 /* BottomSheetViewController.swift */,
 			);
 			path = CalendarVC;
 			sourceTree = "<group>";
@@ -1197,6 +1203,7 @@
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				C7DCEF7F2C5FD1DE001D38AA /* SchoolCalendarTableViewCell.swift in Sources */,
 				7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */,
+				C73032802D2974D100F717D0 /* EditUnivCalendarViewController.swift in Sources */,
 				7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */,
 				C71565062C8EA4430038A782 /* ChatViewController.swift in Sources */,
 				417AADC42C652228002080E0 /* LoginModel.swift in Sources */,
@@ -1260,6 +1267,7 @@
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
 				C71565122C8EBC0F0038A782 /* MentoringChatViewController.swift in Sources */,
+				C730327C2D295BF800F717D0 /* BottomSheetViewController.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7A23D902D0C2224008657B0 /* UpComingViewModel.swift in Sources */,
