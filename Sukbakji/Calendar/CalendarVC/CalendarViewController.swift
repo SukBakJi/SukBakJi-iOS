@@ -584,8 +584,8 @@ class CalendarViewController: UIViewController {
     }
     
     @objc private func schoolCalendar_Tapped() {
-        let schoolCalendarViewController = SchoolCalendarViewController()
-        self.navigationController?.pushViewController(schoolCalendarViewController, animated: true)
+        let univCalendarViewController = UnivCalendarViewController()
+        self.navigationController?.pushViewController(univCalendarViewController, animated: true)
     }
     
     @objc private func schoolSetting_Tapped() {

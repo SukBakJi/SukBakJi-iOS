@@ -15,7 +15,6 @@ import RxCocoa
 class MypageViewController: UIViewController {
     
     private let navigationbarView = NavigationBarView(title: "마이페이지")
-    
     private let backgroundLabel = UILabel().then {
         $0.backgroundColor = .gray200
     }

@@ -176,7 +176,7 @@ class HomeViewController: UIViewController {
         $0.layer.shadowOpacity = 0.2// any value you want
         $0.layer.shadowRadius = 2 // any value you want
         $0.layer.shadowOffset = .init(width: 0, height: 0.2)
-        $0.contentInset = UIEdgeInsets(top: 12, left: 24, bottom: 0, right: 24)
+        $0.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
     }
     private let layerView = UIView().then {
         $0.backgroundColor = UIColor(named: "Coquelicot")
@@ -409,6 +409,8 @@ extension HomeViewController {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(124)
         }
+        advertiseCollectionView.delegate = self
+        advertiseCollectionView.dataSource = self
         
         self.contentView.addSubview(favoriteBoardView)
         favoriteBoardView.snp.makeConstraints { make in
@@ -771,7 +773,16 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+extension HomeViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: AdvertiseCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: AdvertiseCollectionViewCell.identifier, for: indexPath) as! AdvertiseCollectionViewCell
+                
+        return cell
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let collectionView = scrollView as? UICollectionView else { return }
