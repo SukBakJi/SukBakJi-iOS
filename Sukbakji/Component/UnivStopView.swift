@@ -44,7 +44,7 @@ final class UnivStopView: UIView {
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
     }
-    private lazy var buttonStackView = UIStackView().then {
+    lazy var buttonStackView = UIStackView().then {
         $0.addArrangedSubview(cancelButton)
         $0.addArrangedSubview(okButton)
         $0.axis = .horizontal

@@ -26,7 +26,7 @@ final class BottomSheetViewController: UIViewController {
         $0.clipsToBounds = true
     }
     private let dragIndicatorView = UIView().then {
-        $0.backgroundColor = .label
+        $0.backgroundColor = .gray500
         $0.layer.cornerRadius = 1.5
         $0.alpha = 0
     }
@@ -141,10 +141,10 @@ extension BottomSheetViewController {
         ])
         
         dragIndicatorView.snp.makeConstraints { make in
-            make.width.equalTo(60)
+            make.width.equalTo(80)
             make.height.equalTo(dragIndicatorView.layer.cornerRadius * 2)
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
-            make.bottom.equalTo(bottomSheetView.snp.top).inset(12)
+            make.bottom.equalTo(bottomSheetView.snp.top).inset(8)
         }
     }
     

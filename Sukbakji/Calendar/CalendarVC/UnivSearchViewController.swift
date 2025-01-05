@@ -33,6 +33,11 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = .black
     }
+    private let maxSelectLabel = UILabel().then {
+        $0.text = "최대 1개까지 선택할 수 있어요"
+        $0.font = UIFont(name: "Pretendard-Regular", size: 14)
+        $0.textColor = .gray400
+    }
     private let stepImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Progress1")
     }
@@ -138,9 +143,16 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
             make.height.equalTo(21)
         }
         
+        self.view.addSubview(maxSelectLabel)
+        maxSelectLabel.snp.makeConstraints { make in
+            make.top.equalTo(uniSelectLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(24)
+            make.height.equalTo(17)
+        }
+        
         self.view.addSubview(stepImageView)
         stepImageView.snp.makeConstraints { make in
-            make.top.equalTo(uniSelectLabel.snp.bottom).offset(39)
+            make.top.equalTo(maxSelectLabel.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(20)
             make.width.equalTo(100)

@@ -147,7 +147,6 @@
 		C75C45802C5A3B6C001DDEA8 /* SUITE-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45792C5A3B6C001DDEA8 /* SUITE-Medium.otf */; };
 		C75C45812C5A3B6C001DDEA8 /* SUITE-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C457A2C5A3B6C001DDEA8 /* SUITE-Light.otf */; };
 		C75C45822C5A3B6C001DDEA8 /* SUITE-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C457B2C5A3B6C001DDEA8 /* SUITE-Bold.otf */; };
-		C75C45842C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C45832C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift */; };
 		C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */; };
 		C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78611C92D014B70002B67B4 /* PWAlertView.swift */; };
 		C7980A832CEF7D5400475D94 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A822CEF7D5400475D94 /* APIService.swift */; };
@@ -207,6 +206,9 @@
 		C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */; };
 		C7F455362C39B8F000A4D0EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F455352C39B8F000A4D0EE /* Assets.xcassets */; };
 		C7F455392C39B8F000A4D0EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F455372C39B8F000A4D0EE /* LaunchScreen.storyboard */; };
+		C7F951BE2D2A523500D07051 /* AlarmSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951BD2D2A523500D07051 /* AlarmSettingViewController.swift */; };
+		C7F951C02D2A738700D07051 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951BF2D2A738700D07051 /* DateView.swift */; };
+		C7F951C22D2A775000D07051 /* AlarmDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */; };
 		C7F954E42C6FACFE00A4B275 /* MentoringPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F954E32C6FACFE00A4B275 /* MentoringPostViewController.swift */; };
 		C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */; };
 		C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */; };
@@ -355,7 +357,6 @@
 		C75C45792C5A3B6C001DDEA8 /* SUITE-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Medium.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Medium.otf"; sourceTree = "<group>"; };
 		C75C457A2C5A3B6C001DDEA8 /* SUITE-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Light.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Light.otf"; sourceTree = "<group>"; };
 		C75C457B2C5A3B6C001DDEA8 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Bold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Bold.otf"; sourceTree = "<group>"; };
-		C75C45832C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchViewController.swift; sourceTree = "<group>"; };
 		C78611C92D014B70002B67B4 /* PWAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertView.swift; sourceTree = "<group>"; };
 		C7980A822CEF7D5400475D94 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -417,6 +418,9 @@
 		C7F455352C39B8F000A4D0EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7F455382C39B8F000A4D0EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7F4553A2C39B8F000A4D0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7F951BD2D2A523500D07051 /* AlarmSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingViewController.swift; sourceTree = "<group>"; };
+		C7F951BF2D2A738700D07051 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7F954E32C6FACFE00A4B275 /* MentoringPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringPostViewController.swift; sourceTree = "<group>"; };
 		C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarShadow.swift; sourceTree = "<group>"; };
@@ -793,6 +797,7 @@
 				C757F8222D0A9B5400685F1A /* UpComingCalendarCollectionViewCell.swift */,
 				C757F8262D0A9C8B00685F1A /* UnivSearchTableViewCell.swift */,
 				C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */,
+				C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */,
 				C757F82A2D0A9D2000685F1A /* MyAlarmsTableViewCell.swift */,
 			);
 			path = Cell;
@@ -850,6 +855,7 @@
 				C78611C92D014B70002B67B4 /* PWAlertView.swift */,
 				C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */,
 				C72CEED52D258CB500EED814 /* UnivStopView.swift */,
+				C7F951BF2D2A738700D07051 /* DateView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -959,6 +965,7 @@
 				C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */,
 				C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */,
 				C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */,
+				C7F951BD2D2A523500D07051 /* AlarmSettingViewController.swift */,
 				C730327B2D295BF800F717D0 /* BottomSheetViewController.swift */,
 			);
 			path = CalendarVC;
@@ -979,7 +986,6 @@
 			children = (
 				C7063B6B2C4E3D4900CFF3CE /* AlarmViewController.swift */,
 				C7063B6D2C4E3E0100CFF3CE /* AlarmDateViewController.swift */,
-				C75C45832C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift */,
 			);
 			path = SettingAlarm;
 			sourceTree = "<group>";
@@ -1330,6 +1336,7 @@
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				7B1C534C2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift in Sources */,
 				C757F8272D0A9C8B00685F1A /* UnivSearchTableViewCell.swift in Sources */,
+				C7F951C02D2A738700D07051 /* DateView.swift in Sources */,
 				C707E4BB2C69CB97005D390C /* ApplyMentoringTableViewCell.swift in Sources */,
 				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,
 				7BFDEC2B2C5224EF007280F8 /* BoardViewController.swift in Sources */,
@@ -1348,6 +1355,7 @@
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
 				C715650A2C8EB9A30038A782 /* RoomTableViewCell.swift in Sources */,
+				C7F951C22D2A775000D07051 /* AlarmDateCollectionViewCell.swift in Sources */,
 				7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */,
 				412F92342C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift in Sources */,
 				7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */,
@@ -1356,7 +1364,6 @@
 				7B1C53502C69D53C00C66D0D /* DirectoryLabReviewListModel.swift in Sources */,
 				7B3459F32C688AEE008B711A /* BoardSearchModel.swift in Sources */,
 				C7BC68172CF6E55000CEC0F3 /* MentorList.swift in Sources */,
-				C75C45842C5A47B4001DDEA8 /* AlarmDateCollectionViewCell.swift in Sources */,
 				7B3459EB2C68858E008B711A /* BoardWritePostModel.swift in Sources */,
 				7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */,
 				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
@@ -1377,6 +1384,7 @@
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
 				415BBC0B2C7343F8002768EE /* AuthInterceptor.swift in Sources */,
 				C73F89842C5E834D007ECFE7 /* MyAlarmViewController.swift in Sources */,
+				C7F951BE2D2A523500D07051 /* AlarmSettingViewController.swift in Sources */,
 				C7BC68292CF6E7DF00CEC0F3 /* AlarmList.swift in Sources */,
 				C74F584F2C6B330000369545 /* UniPostAPI.swift in Sources */,
 				7B1C53602C6A680000C66D0D /* BoardNewQnAModel.swift in Sources */,

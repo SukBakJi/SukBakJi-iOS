@@ -11,21 +11,21 @@ final class AlarmFBCView: UIView {
     
     private weak var targetViewController: UIViewController?
     
-    private let alarmButton = UIButton().then {
+    var alarmButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Alarm"), for: .normal)
     }
-    private let alarmSettingButton = UIButton().then {
+    var alarmSettingButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_setAlarm"), for: .normal)
     }
-    private let myAlarmButton = UIButton().then {
+    var myAlarmButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Myalarm"), for: .normal)
     }
-    private let alarmSettingLabel = UILabel().then {
+    var alarmSettingLabel = UILabel().then {
         $0.text = "알람 설정"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .white
     }
-    private let myAlarmLabel = UILabel().then {
+    var myAlarmLabel = UILabel().then {
         $0.text = "내 알람"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .white
@@ -68,7 +68,7 @@ final class AlarmFBCView: UIView {
             make.centerX.equalTo(alarmButton)
             make.height.width.equalTo(60)
         }
-        self.alarmSettingButton.addTarget(self, action: #selector(myAlarm_Tapped), for: .touchUpInside)
+        self.myAlarmButton.addTarget(self, action: #selector(myAlarm_Tapped), for: .touchUpInside)
         
         self.addSubview(alarmSettingLabel)
         alarmSettingLabel.snp.makeConstraints { make in
@@ -107,7 +107,7 @@ final class AlarmFBCView: UIView {
     
     @objc func alarmSettingButtonTarget(target: UIViewController) {
         if let navigationController = target.navigationController {
-            let alarmVC = AlarmViewController()
+            let alarmVC = AlarmSettingViewController()
             navigationController.pushViewController(alarmVC, animated: true)
         }
     }

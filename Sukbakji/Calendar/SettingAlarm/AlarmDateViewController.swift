@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol dateProtocol:AnyObject {
-    func dateSend(data: String)
-}
-
 class AlarmDateViewController: UIViewController {
     
     @IBOutlet weak var dateView: UIView!
