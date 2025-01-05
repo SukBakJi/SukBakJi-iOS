@@ -15,6 +15,8 @@ import DropDown
 
 class AlarmSettingViewController: UIViewController, dateProtocol {
     
+    private let memberId = UserDefaults.standard.integer(forKey: "memberID")
+    
     func dateSend(data: String) {
         alarmDateTextField.text = "\(data)"
         dateLabel.text = "\(data)"
@@ -546,6 +548,31 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
             setButton.isEnabled = false
             setButton.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
             setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+        }
+    }
+    
+    private func setAlarmAPI() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        let url = APIConstants.calendarAlarm.path
+        
+        let params = [
+            "memberId": memberId,
+            "univName": univTextField.text!,
+            "name": alarmNameTextField.text!,
+            "date": dateValue,
+            "time": timeValue,
+            "onoff": 1
+        ] as [String : Any]
+        
+        APIService().postWithAccessToken(of: APIResponse<AlarmPostResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
+                print("알람 등록이 정상적으로 처리되었습니다")
+            default:
+                AlertController(message: response.message).show()
+            }
         }
     }
     

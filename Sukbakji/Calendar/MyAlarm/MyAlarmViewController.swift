@@ -103,10 +103,6 @@ class MyAlarmViewController: UIViewController {
     }
 
     @IBAction func add_Tapped(_ sender: Any) {
-        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "AlarmVC") as? AlarmViewController else {
-            return
-        }
-        self.present(nextVC, animated: true)
     }
     
     @IBAction func back_Tapped(_ sender: Any) {

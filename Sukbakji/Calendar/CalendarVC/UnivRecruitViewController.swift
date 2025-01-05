@@ -476,7 +476,7 @@ class UnivRecruitViewController: UIViewController {
         }
     }
     
-    private func postUnivAPI() {
+    private func setUnivAPI() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
@@ -518,7 +518,7 @@ class UnivRecruitViewController: UIViewController {
     }
     
     @objc private func clickNextButton() {
-        postUnivAPI()
+        setUnivAPI()
         if let navigationController = self.navigationController {
             if let targetViewController = navigationController.viewControllers.dropLast(2).last {
                 navigationController.popToViewController(targetViewController, animated: true)
