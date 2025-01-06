@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 class FavoriteBoardTableViewCell: UITableViewCell {
     
@@ -13,6 +15,7 @@ class FavoriteBoardTableViewCell: UITableViewCell {
     
     private let labelView = UIView().then {
         $0.backgroundColor = UIColor(red: 233/255, green: 235/255, blue: 255/255, alpha: 1.0)
+        $0.layer.cornerRadius = 8
     }
     private let labelLabel = UILabel().then {
         $0.textColor = UIColor(red: 74/255, green: 114/255, blue: 255/255, alpha: 1.0)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct UnivList: Codable {
     let memberId: Int
@@ -24,4 +25,17 @@ struct UnivListResult: Codable {
     let season: String
     let method: String
     let showing: Int
+}
+
+struct UnivListSection {
+    var items: [UnivListResult]
+}
+
+extension UnivListSection: SectionModelType {
+    typealias Item = UnivListResult
+    
+    init(original: UnivListSection, items: [Item]) {
+        self = original
+        self.items = items
+    }
 }

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 import RxSwift
 import RxCocoa
 
@@ -66,6 +68,11 @@ class UnivCalendarTableViewCell: UITableViewCell {
     }
 
     private func setUI() {
+        self.contentView.layer.cornerRadius = 12
+        self.contentView.layer.borderWidth = 1
+        self.contentView.layer.borderColor = UIColor.gray200.cgColor
+        self.contentView.clipsToBounds = true
+        
         self.contentView.addSubview(selectView)
         selectView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()

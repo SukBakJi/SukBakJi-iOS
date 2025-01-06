@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct AlarmList : Codable {
     let memberId: Int
@@ -31,4 +32,17 @@ struct AlarmListResult : Codable {
     let alarmDate: String
     let alarmTime: String
     let onoff: Int
+}
+
+struct AlarmListSection {
+    var items: [AlarmListResult]
+}
+
+extension AlarmListSection: SectionModelType {
+    typealias Item = AlarmListResult
+    
+    init(original: AlarmListSection, items: [Item]) {
+        self = original
+        self.items = items
+    }
 }

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 class FavoriteLabCollectionViewCell: UICollectionViewCell {
     
@@ -40,6 +42,7 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
     }
     private let labView2 = UIView().then {
         $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
+        $0.layer.cornerRadius = 8
     }
     private let labLabel2 = UILabel().then {
         $0.textColor = UIColor(named: "Coquelicot")
@@ -47,6 +50,7 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
     }
     private let labView3 = UIView().then {
         $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
+        $0.layer.cornerRadius = 8
     }
     private let labLabel3 = UILabel().then {
         $0.textColor = UIColor(named: "Coquelicot")

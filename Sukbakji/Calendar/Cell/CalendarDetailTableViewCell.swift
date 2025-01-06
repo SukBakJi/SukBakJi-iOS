@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 class CalendarDetailTableViewCell: UITableViewCell {
 
@@ -38,6 +40,10 @@ class CalendarDetailTableViewCell: UITableViewCell {
     
     private func setUI() {
         self.contentView.backgroundColor = UIColor(named: "ViewBackground")
+        self.contentView.layer.cornerRadius = 12
+        self.contentView.layer.borderWidth = 1
+        self.contentView.layer.borderColor = UIColor.gray200.cgColor
+        self.contentView.clipsToBounds = true
         
         self.contentView.addSubview(mainImageView)
         mainImageView.snp.makeConstraints { make in

@@ -108,9 +108,6 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Back"/>
-                                <connections>
-                                    <action selector="back_Tapped:" destination="Hfz-cG-OQz" eventType="touchUpInside" id="6Oi-St-Nc7"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNa-05-qP2">
                                 <rect key="frame" x="0.0" y="96.333333333333329" width="393" height="1"/>
@@ -130,9 +127,6 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_Add"/>
-                                <connections>
-                                    <action selector="add_Tapped:" destination="Hfz-cG-OQz" eventType="touchUpInside" id="VTQ-1d-tvx"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2024년 6월" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJ4-rP-tDN">
                                 <rect key="frame" x="23.999999999999993" y="117.33333333333333" width="91.333333333333314" height="20.999999999999986"/>
@@ -220,13 +214,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <outlet property="contentLabel" destination="geb-i7-Eer" id="92t-Ma-j6k"/>
-                                            <outlet property="dateLabel" destination="3yX-PA-kEm" id="IZI-6g-CPf"/>
-                                            <outlet property="onoffSwitch" destination="Nyh-lz-zUJ" id="dfL-Fb-W24"/>
-                                            <outlet property="univName" destination="IpV-ZB-nYL" id="5gy-3q-yG3"/>
-                                            <outlet property="univView" destination="CSj-Dy-DGk" id="qCr-BY-rKw"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -251,10 +238,6 @@
                             <constraint firstItem="BpY-ah-Bvi" firstAttribute="top" secondItem="yJ4-rP-tDN" secondAttribute="bottom" constant="20" id="vZV-In-d7b"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="dateLabel" destination="yJ4-rP-tDN" id="CVI-Pz-3R8"/>
-                        <outlet property="myAlarmTV" destination="BpY-ah-Bvi" id="nwz-65-wQl"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akH-NH-Brh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
