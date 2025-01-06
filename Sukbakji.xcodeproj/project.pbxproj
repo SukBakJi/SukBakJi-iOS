@@ -89,6 +89,7 @@
 		7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */; };
 		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
+		C704BD882D2BBE9700954EAD /* EditMyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */; };
 		C707E4BB2C69CB97005D390C /* ApplyMentoringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707E4BA2C69CB97005D390C /* ApplyMentoringTableViewCell.swift */; };
 		C70DB27F2C633CBE00D6014B /* Chatting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70DB27E2C633CBE00D6014B /* Chatting.storyboard */; };
 		C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2802C633CDB00D6014B /* ChattingViewController.swift */; };
@@ -290,6 +291,7 @@
 		7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListGetModel.swift; sourceTree = "<group>"; };
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyAlarmViewController.swift; sourceTree = "<group>"; };
 		C707E4BA2C69CB97005D390C /* ApplyMentoringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentoringTableViewCell.swift; sourceTree = "<group>"; };
 		C70DB27E2C633CBE00D6014B /* Chatting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chatting.storyboard; sourceTree = "<group>"; };
 		C70DB2802C633CDB00D6014B /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
@@ -934,8 +936,9 @@
 				C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */,
 				C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */,
 				C7F951BD2D2A523500D07051 /* AlarmSettingViewController.swift */,
-				C730327B2D295BF800F717D0 /* BottomSheetViewController.swift */,
 				C7FD93752D2AD58A0084DC9C /* MyAlarmViewController.swift */,
+				C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */,
+				C730327B2D295BF800F717D0 /* BottomSheetViewController.swift */,
 			);
 			path = CalendarVC;
 			sourceTree = "<group>";
@@ -1285,6 +1288,7 @@
 				7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */,
 				7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
+				C704BD882D2BBE9700954EAD /* EditMyAlarmViewController.swift in Sources */,
 				4168E8532C690BB500A0F292 /* ProfileModel.swift in Sources */,
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,

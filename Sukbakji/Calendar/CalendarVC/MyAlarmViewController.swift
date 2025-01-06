@@ -73,6 +73,7 @@ class MyAlarmViewController: UIViewController {
             make.trailing.equalToSuperview().inset(8)
             make.height.width.equalTo(48)
         }
+        addAlarmButton.addTarget(self, action: #selector(bottomSheet_Tapped), for: .touchUpInside)
         
         self.view.addSubview(backgroundLabel)
         backgroundLabel.snp.makeConstraints { make in
@@ -152,6 +153,12 @@ class MyAlarmViewController: UIViewController {
                 AlertController(message: response.message).show()
             }
         }
+    }
+    
+    @objc private func bottomSheet_Tapped() {
+        let viewController = EditMyAlarmViewController(myAlarmViewModel: self.myAlarmViewModel)
+        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
+        self.present(bottomSheetVC, animated: true)
     }
 }
 

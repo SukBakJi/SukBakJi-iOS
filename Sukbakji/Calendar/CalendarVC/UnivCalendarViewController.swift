@@ -149,7 +149,7 @@ class UnivCalendarViewController: UIViewController {
                 guard let self = self else { return }
                 self.univCalendarViewModel.selectUnivCalendarItem = univCalendarItem
                 let viewController = EditUnivCalendarViewController(univCalendarViewModel: self.univCalendarViewModel)
-                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, isPannedable: true)
+                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 150, isPannedable: true)
                 self.present(bottomSheetVC, animated: true)
             })
             .disposed(by: disposeBag)

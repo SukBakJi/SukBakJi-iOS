@@ -70,7 +70,7 @@ class EditUnivCalendarViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     private let drop = DropDown()
-    private var recruitType: [String] = ["oo"]
+    private var recruitType: [String] = []
     
     init(univCalendarViewModel: UnivCalendarViewModel) {
         super.init(nibName: nil, bundle: nil)

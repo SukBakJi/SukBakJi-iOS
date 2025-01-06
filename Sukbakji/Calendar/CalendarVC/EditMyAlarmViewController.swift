@@ -1,8 +1,8 @@
 //
-//  AlarmSettingViewController.swift
+//  EditMyAlarmViewController.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 1/5/25.
+//  Created by jaegu park on 1/6/25.
 //
 
 import UIKit
@@ -13,9 +13,9 @@ import RxSwift
 import RxCocoa
 import DropDown
 
-class AlarmSettingViewController: UIViewController, dateProtocol {
+class EditMyAlarmViewController: UIViewController, dateProtocol {
     
-    private let memberId = UserDefaults.standard.integer(forKey: "memberID")
+    private var myAlarmViewModel = MyAlarmViewModel()
     
     func dateSend(data: String) {
         alarmDateTextField.text = "\(data)"
@@ -25,32 +25,18 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         dateValue = reReplacedString.replacingOccurrences(of: "일", with: "")
     }
     
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
-    
-    private let navigationbarView = NavigationBarView(title: "알람 설정")
-    private let backgroundLabel = UILabel().then {
-        $0.backgroundColor = .gray200
-    }
-    private let setAlarmLabel = UILabel().then {
-        $0.text = "알람을 설정해 보세요"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+    private let titleLabel = UILabel().then {
+        $0.text = "알람 수정"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 22)
         $0.textColor = .black
-    }
-    private let alarmInfoLabel = UILabel().then {
-        $0.text = "나만의 일정을 만들고 알림을 받아 보세요"
-        $0.font = UIFont(name: "Pretendard-Regular", size: 14)
-        $0.textColor = .gray400
     }
     private let univLabel = UILabel().then {
         $0.text = "학교"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         $0.textColor = .black
     }
     private let univTextField = UITextField().then {
         $0.backgroundColor = .gray100
-        $0.placeholder = "학교를 선택해 주세요"
-        $0.setPlaceholderColor(UIColor(hexCode: "9F9F9F"))
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .black
     }
@@ -67,17 +53,15 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
     }
     private let alarmNameLabel = UILabel().then {
         $0.text = "알람 이름"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         $0.textColor = .black
     }
     private let alarmNameTextField = UITextField().then {
         $0.backgroundColor = .gray100
-        $0.placeholder = "알람 이름을 입력해 주세요"
-        $0.setPlaceholderColor(UIColor(hexCode: "9F9F9F"))
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .black
     }
-    private let deleteButton = UIButton().then {
+    private let alarmNameDeleteButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Delete"), for: .normal)
     }
     private let warningImageView2 = UIImageView().then {
@@ -90,7 +74,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
     }
     private let alarmDateLabel = UILabel().then {
         $0.text = "알람 날짜"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         $0.textColor = .black
     }
     private let alarmDateTextField = UITextField().then {
@@ -103,7 +87,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
     }
     private let alarmTimeLabel = UILabel().then {
         $0.text = "시간 설정"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         $0.textColor = .black
     }
     private let dateLabel = UILabel().then {
@@ -124,16 +108,21 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
     private let alarmPickerView = UIPickerView().then {
         $0.backgroundColor = .clear
     }
-    private let setButton = UIButton().then {
+    private let saveButton = UIButton().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
 
         $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
         $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .disabled)
-        $0.setTitle("알람 설정하기", for: .normal)
+        $0.setTitle("저장하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
         $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .disabled)
+    }
+    private let deleteButton = UIButton().then {
+        $0.setTitle("삭제하기", for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.setTitleColor(.black, for: .normal)
     }
     
     private var warningImageViewHeightConstraint: Constraint?
@@ -155,19 +144,22 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
     
     private var timeValue: String = "8:00"
     private var dateValue: String = ""
+    
+    init(myAlarmViewModel: MyAlarmViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.myAlarmViewModel = myAlarmViewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setUI()
         setDrop()
         hideKeyboardWhenTappedAround()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        /// 탭 바 숨기기
-        self.tabBarController?.tabBar.isHidden = true
     }
     
     private func setDrop() {
@@ -177,61 +169,23 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
     
     private func setUI() {
         self.view.backgroundColor = .white
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        scrollView.contentInsetAdjustmentBehavior = .never
-        scrollView.showsVerticalScrollIndicator = false
-        
-        self.view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
+        self.view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(26)
         }
         
-        self.scrollView.addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView.contentLayoutGuide)
-            make.width.equalTo(scrollView.frameLayoutGuide)
-            make.height.equalTo(944)
-        }
-        
-        navigationbarView.delegate = self
-        self.view.addSubview(navigationbarView)
-        navigationbarView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-           make.height.equalTo(95)
-        }
-        
-        self.view.addSubview(backgroundLabel)
-        backgroundLabel.snp.makeConstraints { make in
-            make.top.equalTo(navigationbarView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(1)
-        }
-        
-        self.contentView.addSubview(setAlarmLabel)
-        setAlarmLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(115)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(18)
-        }
-        
-        self.contentView.addSubview(alarmInfoLabel)
-        alarmInfoLabel.snp.makeConstraints { make in
-            make.top.equalTo(setAlarmLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(17)
-        }
-        
-        self.contentView.addSubview(univLabel)
+        self.view.addSubview(univLabel)
         univLabel.snp.makeConstraints { make in
-            make.top.equalTo(alarmInfoLabel.snp.bottom).offset(36)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(21)
+            make.top.equalTo(titleLabel.snp.bottom).offset(28)
+            make.leading.equalToSuperview().offset(28)
+            make.height.equalTo(24)
         }
-        univLabel.addImageAboveLabel(referenceView: alarmInfoLabel, spacing: 36)
+        univLabel.addImageAboveLabel(referenceView: titleLabel, spacing: 32)
         
-        self.contentView.addSubview(univTextField)
+        self.view.addSubview(univTextField)
         univTextField.snp.makeConstraints { make in
             make.top.equalTo(univLabel.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview().inset(24)
@@ -242,7 +196,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         univTextField.setLeftPadding(10)
         univTextField.isEnabled = false
         
-        self.contentView.addSubview(dropButton)
+        self.view.addSubview(dropButton)
         dropButton.snp.makeConstraints { make in
             make.centerY.equalTo(univTextField)
             make.trailing.equalToSuperview().inset(24)
@@ -250,7 +204,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
         
-        self.contentView.addSubview(warningImageView)
+        self.view.addSubview(warningImageView)
         warningImageView.snp.makeConstraints { make in
             make.top.equalTo(univTextField.snp.bottom).offset(6)
             make.leading.equalToSuperview().offset(28)
@@ -259,7 +213,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         warningImageView.isHidden = true
         
-        self.contentView.addSubview(warningUnivLabel)
+        self.view.addSubview(warningUnivLabel)
         warningUnivLabel.snp.makeConstraints { make in
             make.centerY.equalTo(warningImageView)
             make.leading.equalTo(warningImageView.snp.trailing).offset(4)
@@ -267,7 +221,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         warningUnivLabel.isHidden = true
         
-        self.contentView.addSubview(alarmNameLabel)
+        self.view.addSubview(alarmNameLabel)
         alarmNameLabel.snp.makeConstraints { make in
             make.top.equalTo(warningImageView.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(24)
@@ -275,7 +229,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         alarmNameLabel.addImageAboveLabel(referenceView: warningImageView, spacing: 20)
         
-        self.contentView.addSubview(alarmNameTextField)
+        self.view.addSubview(alarmNameTextField)
         alarmNameTextField.snp.makeConstraints { make in
             make.top.equalTo(alarmNameLabel.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview().inset(24)
@@ -286,15 +240,15 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         alarmNameTextField.setLeftPadding(10)
         alarmNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         
-        self.contentView.addSubview(deleteButton)
-        deleteButton.snp.makeConstraints { make in
+        self.view.addSubview(alarmNameDeleteButton)
+        alarmNameDeleteButton.snp.makeConstraints { make in
             make.centerY.equalTo(alarmNameTextField)
             make.trailing.equalToSuperview().inset(24)
             make.height.width.equalTo(36)
         }
-        deleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
+        alarmNameDeleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
         
-        self.contentView.addSubview(warningImageView2)
+        self.view.addSubview(warningImageView2)
         warningImageView2.snp.makeConstraints { make in
             make.top.equalTo(alarmNameTextField.snp.bottom).offset(6)
             make.leading.equalToSuperview().offset(28)
@@ -303,7 +257,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         warningImageView2.isHidden = true
         
-        self.contentView.addSubview(warningAlarmNameLabel)
+        self.view.addSubview(warningAlarmNameLabel)
         warningAlarmNameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(warningImageView2)
             make.leading.equalTo(warningImageView2.snp.trailing).offset(4)
@@ -311,7 +265,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         warningAlarmNameLabel.isHidden = true
         
-        self.contentView.addSubview(alarmDateLabel)
+        self.view.addSubview(alarmDateLabel)
         alarmDateLabel.snp.makeConstraints { make in
             make.top.equalTo(warningImageView2.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(24)
@@ -319,7 +273,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         alarmDateLabel.addImageAboveLabel(referenceView: warningImageView2, spacing: 20)
         
-        self.contentView.addSubview(alarmDateTextField)
+        self.view.addSubview(alarmDateTextField)
         alarmDateTextField.snp.makeConstraints { make in
             make.top.equalTo(alarmDateLabel.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview().inset(24)
@@ -330,7 +284,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         alarmDateTextField.setLeftPadding(10)
         alarmDateTextField.isEnabled = false
         
-        self.contentView.addSubview(dateButton)
+        self.view.addSubview(dateButton)
         dateButton.snp.makeConstraints { make in
             make.centerY.equalTo(alarmDateTextField)
             make.trailing.equalToSuperview().inset(24)
@@ -338,7 +292,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         dateButton.addTarget(self, action: #selector(date_Tapped), for: .touchUpInside)
         
-        self.contentView.addSubview(alarmTimeLabel)
+        self.view.addSubview(alarmTimeLabel)
         alarmTimeLabel.snp.makeConstraints { make in
             make.top.equalTo(alarmDateTextField.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(24)
@@ -346,7 +300,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         alarmTimeLabel.addImageAboveLabel(referenceView: alarmDateTextField, spacing: 24)
         
-        self.contentView.addSubview(dateLabel)
+        self.view.addSubview(dateLabel)
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(alarmTimeLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(28)
@@ -354,7 +308,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         displayCurrentDate()
         
-        self.contentView.addSubview(timeButton)
+        self.view.addSubview(timeButton)
         timeButton.snp.makeConstraints { make in
             make.centerY.equalTo(dateLabel)
             make.trailing.equalToSuperview().inset(24)
@@ -363,7 +317,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         }
         timeButton.addTarget(self, action: #selector(time_Tapped), for: .touchUpInside)
         
-        self.contentView.addSubview(pickerView)
+        self.view.addSubview(pickerView)
         pickerView.snp.makeConstraints { make in
             make.top.equalTo(dateLabel.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(24)
@@ -380,11 +334,19 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
             make.leading.trailing.equalToSuperview().inset(6)
         }
         
-        self.contentView.addSubview(setButton)
-        setButton.snp.makeConstraints { make in
-            make.top.equalTo(pickerView.snp.bottom).offset(60)
+        self.view.addSubview(saveButton)
+        saveButton.snp.makeConstraints { make in
+            make.top.equalTo(pickerView.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
+        }
+        
+        self.view.addSubview(deleteButton)
+        deleteButton.snp.makeConstraints { make in
+            make.top.equalTo(saveButton.snp.bottom).offset(12)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(28)
+            make.width.equalTo(100)
         }
     }
     
@@ -552,38 +514,13 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
     
     private func updateButtonColor() {
         if (univTextField.text?.isEmpty == false && alarmNameTextField.text?.isEmpty == false) {
-            setButton.isEnabled = true
-            setButton.setBackgroundColor(UIColor(named: "Coquelicot")!, for:.normal)
-            setButton.setTitleColor(.white, for: .normal)
+            saveButton.isEnabled = true
+            saveButton.setBackgroundColor(UIColor(named: "Coquelicot")!, for:.normal)
+            saveButton.setTitleColor(.white, for: .normal)
         } else {
-            setButton.isEnabled = false
-            setButton.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
-            setButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
-        }
-    }
-    
-    private func setAlarmAPI() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        let url = APIConstants.calendarAlarm.path
-        
-        let params = [
-            "memberId": memberId,
-            "univName": univTextField.text!,
-            "name": alarmNameTextField.text!,
-            "date": dateValue,
-            "time": timeValue,
-            "onoff": 1
-        ] as [String : Any]
-        
-        APIService().postWithAccessToken(of: APIResponse<AlarmPostResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
-            switch response.code {
-            case "COMMON200":
-                print("알람 등록이 정상적으로 처리되었습니다")
-            default:
-                AlertController(message: response.message).show()
-            }
+            saveButton.isEnabled = false
+            saveButton.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
+            saveButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
         }
     }
     
@@ -620,7 +557,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
     }
 }
 
-extension AlarmSettingViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension EditMyAlarmViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }
