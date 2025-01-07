@@ -9,9 +9,15 @@ import UIKit
 import Then
 import SnapKit
 
+protocol MyAlarmTableViewCellSwitchDelegate: AnyObject {
+    func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool)
+}
+
 class MyAlarmTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: MyAlarmTableViewCell.self)
+    
+    weak var delegate: MyAlarmTableViewCellSwitchDelegate?
     
     private let labelView = UIView().then {
         $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
@@ -101,7 +107,12 @@ class MyAlarmTableViewCell: UITableViewCell {
             make.height.equalTo(31)
             make.width.equalTo(51)
         }
+        onOffSwitch.addTarget(self, action: #selector(onOffSwitchToggled(_:)), for: .valueChanged)
     }
+    
+    @objc private func onOffSwitchToggled(_ sender: UISwitch) {
+            delegate?.alarmSwitchToggled(cell: self, isOn: sender.isOn)
+        }
 
     func prepare(alarmListResult: AlarmListResult) {
         self.univLabel.text = alarmListResult.alarmUnivName

@@ -13,8 +13,8 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class MyAlarmViewController: UIViewController {
-    
+class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegate {
+
     private let myAlarmViewModel = MyAlarmViewModel()
 
     private let navigationbarView = NavigationBarView(title: "내 알람")
@@ -125,6 +125,7 @@ class MyAlarmViewController: UIViewController {
                     return UITableViewCell()
                 }
                 cell.prepare(alarmListResult: item)
+                cell.delegate = self
                 return cell
             }
         )
@@ -146,7 +147,7 @@ class MyAlarmViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func setUnivListAPI() {
+    private func setMyAlarmAPI() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
@@ -156,8 +157,61 @@ class MyAlarmViewController: UIViewController {
             switch response.code {
             case "COMMON200":
                 let resultData = response.result.alarmList
-                self.myAlarmViewModel.myAlarmItems = Observable.just(resultData)
+                self.myAlarmViewModel.myAlarmItems.accept(resultData)
                 self.setAlarmData()
+                self.view.layoutIfNeeded()
+            default:
+                AlertController(message: response.message).show()
+            }
+        }
+    }
+    
+    func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool) {
+        guard let indexPath = myAlarmTableView.indexPath(for: cell) else { return }
+        let alarmItem = myAlarmViewModel.myAlarmItems.value[indexPath.row]
+        
+        if isOn {
+            alarmOff(alarmId: alarmItem.alarmId)
+            myAlarmViewModel.alarmSwitchToggled(at: indexPath.row, isOn: 0)
+        } else {
+            alarmOn(alarmId: alarmItem.alarmId)
+            myAlarmViewModel.alarmSwitchToggled(at: indexPath.row, isOn: 1)
+        }
+    }
+    
+    private func alarmOn(alarmId: Int) {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        let url = APIConstants.calendarAlarmOn.path
+        
+        let params = [
+            "alarmId": alarmId
+        ] as [String : Any]
+        
+        APIService().getWithAccessTokenParameters(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
+                self.view.layoutIfNeeded()
+            default:
+                AlertController(message: response.message).show()
+            }
+        }
+    }
+    
+    private func alarmOff(alarmId: Int) {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        let url = APIConstants.calendarAlarmOff.path
+        
+        let params = [
+            "alarmId": alarmId
+        ] as [String : Any]
+        
+        APIService().getWithAccessTokenParameters(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
                 self.view.layoutIfNeeded()
             default:
                 AlertController(message: response.message).show()

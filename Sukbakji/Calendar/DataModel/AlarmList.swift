@@ -27,11 +27,11 @@ struct AlarmList : Codable {
 
 struct AlarmListResult : Codable {
     let alarmId: Int
-    let alarmUnivName: String
-    let alarmName: String
-    let alarmDate: String
-    let alarmTime: String
-    let onoff: Int
+    var alarmUnivName: String
+    var alarmName: String
+    var alarmDate: String
+    var alarmTime: String
+    var onoff: Int
 }
 
 struct AlarmListSection {
