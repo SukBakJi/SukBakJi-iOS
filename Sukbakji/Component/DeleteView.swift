@@ -1,29 +1,24 @@
 //
-//  UnivStopView.swift
+//  DeleteView.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 1/1/25.
+//  Created by jaegu park on 1/7/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-final class UnivStopView: UIView {
-    private var num: Int = 1
-    private weak var targetViewController: UIViewController?
-    
+final class DeleteView: UIView {
     var mainView = UIView().then {
        $0.backgroundColor = .white
        $0.layer.cornerRadius = 12
     }
     var titleLabel = UILabel().then {
-        $0.text = "이동하면 내용이 사라져요"
         $0.textColor = .black
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
-    var stopLabel = UILabel().then {
-        $0.text = "페이지를 이탈하면 현재 입력한 내용이 사라져요. 그래도 메인 페이지로 이동할까요?"
+    var contentLabel = UILabel().then {
         $0.textColor = .black
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
@@ -41,7 +36,7 @@ final class UnivStopView: UIView {
         $0.tintColor = .clear
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
-        $0.setTitle("이동할게요", for: .normal)
+        $0.setTitle("삭제할게요", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
@@ -54,11 +49,11 @@ final class UnivStopView: UIView {
         $0.distribution = .fillEqually
     }
     
-    init(target: UIViewController, num: Int) {
-       super.init(frame: .zero)
-       self.targetViewController = target
-       self.num = num
-       setUI()
+    init(title: String, content: String, id: Int) {
+        super.init(frame: .zero)
+        titleLabel.text = title
+        contentLabel.text = content
+        setUI()
     }
     
     required init?(coder: NSCoder) {
@@ -82,38 +77,23 @@ final class UnivStopView: UIView {
             make.height.equalTo(21)
         }
         
-        self.mainView.addSubview(stopLabel)
-        self.stopLabel.snp.makeConstraints { make in
+        self.mainView.addSubview(contentLabel)
+        self.contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(254)
             make.height.equalTo(40)
         }
-        let fullText = stopLabel.text ?? ""
-        let changeText = "메인"
-        let attributedString = NSMutableAttributedString(string: fullText)
-        
-        if let range = fullText.range(of: changeText) {
-            let nsRange = NSRange(range, in: fullText)
-            attributedString.addAttribute(.foregroundColor, value: UIColor(named: "Coquelicot")!, range: nsRange)
-        }
-        stopLabel.attributedText = attributedString
         
         self.mainView.addSubview(buttonStackView)
         self.buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(stopLabel.snp.bottom).offset(26)
+            make.top.equalTo(contentLabel.snp.bottom).offset(26)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(48)
         }
         
-        self.okButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        self.okButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         self.cancelButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
-    }
-    
-    @objc private func backButtonTapped() {
-       if let target = targetViewController {
-          setBackButtonTarget(target: target, num: num)
-       }
     }
     
     @objc private func dismissView() {
@@ -122,16 +102,5 @@ final class UnivStopView: UIView {
        }) { _ in
           self.removeFromSuperview() // 애니메이션 후 뷰에서 제거
        }
-    }
-    
-    func setBackButtonTarget(target: UIViewController, num: Int) {
-        if let navigationController = target.navigationController {
-            let viewControllers = navigationController.viewControllers
-            if viewControllers.count > 1 {
-                let previousViewController = viewControllers[viewControllers.count - num]
-                self.removeFromSuperview()
-                navigationController.popToViewController(previousViewController, animated: true)
-            }
-        }
     }
 }

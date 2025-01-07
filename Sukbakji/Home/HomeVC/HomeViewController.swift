@@ -629,7 +629,7 @@ extension HomeViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.calendarSchedule.path
+        let url = APIConstants.calendarMember.path
         
         APIService().getWithAccessToken(of: APIResponse<MemberId>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {

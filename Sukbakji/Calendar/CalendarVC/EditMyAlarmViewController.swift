@@ -159,6 +159,7 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
 
         setUI()
         setDrop()
+        setMyAlarmData()
         hideKeyboardWhenTappedAround()
     }
     
@@ -348,6 +349,20 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
             make.height.equalTo(28)
             make.width.equalTo(100)
         }
+    }
+    
+    private func setMyAlarmData() {
+        guard let selectMyAlarmItem = self.myAlarmViewModel.selectMyAlarmItem else { return }
+        let alarmUnivName = selectMyAlarmItem.alarmUnivName
+        let alarmName = selectMyAlarmItem.alarmName
+        let alarmDate = selectMyAlarmItem.alarmDate
+        let alarmTime = selectMyAlarmItem.alarmTime
+        
+        univTextField.text = alarmUnivName
+        alarmNameTextField.text = alarmName
+        alarmDateTextField.text = alarmDate
+        dateLabel.text = alarmDate
+        timeButton.setTitle("\(alarmTime)", for: .normal)
     }
     
     private func appendMinute() {

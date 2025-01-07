@@ -133,6 +133,7 @@
 		C757F8272D0A9C8B00685F1A /* UnivSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F8262D0A9C8B00685F1A /* UnivSearchTableViewCell.swift */; };
 		C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */; };
 		C757F82B2D0A9D2000685F1A /* MyAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */; };
+		C75C0BE12D2D2A05000145F3 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C0BE02D2D2A05000145F3 /* DeleteView.swift */; };
 		C75C457C2C5A3B6C001DDEA8 /* SUITE-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */; };
 		C75C457D2C5A3B6C001DDEA8 /* SUITE-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */; };
 		C75C457E2C5A3B6C001DDEA8 /* SUITE-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */; };
@@ -335,6 +336,7 @@
 		C757F8262D0A9C8B00685F1A /* UnivSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchTableViewCell.swift; sourceTree = "<group>"; };
 		C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmTableViewCell.swift; sourceTree = "<group>"; };
+		C75C0BE02D2D2A05000145F3 /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
 		C75C45752C5A3B6C001DDEA8 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Regular.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Regular.otf"; sourceTree = "<group>"; };
 		C75C45762C5A3B6C001DDEA8 /* SUITE-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Heavy.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Heavy.otf"; sourceTree = "<group>"; };
 		C75C45772C5A3B6C001DDEA8 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-SemiBold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-SemiBold.otf"; sourceTree = "<group>"; };
@@ -836,6 +838,7 @@
 				C78611C92D014B70002B67B4 /* PWAlertView.swift */,
 				C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */,
 				C72CEED52D258CB500EED814 /* UnivStopView.swift */,
+				C75C0BE02D2D2A05000145F3 /* DeleteView.swift */,
 				C7F951BF2D2A738700D07051 /* DateView.swift */,
 			);
 			path = Component;
@@ -1262,6 +1265,7 @@
 				C757F8232D0A9B5400685F1A /* UpComingCalendarCollectionViewCell.swift in Sources */,
 				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
 				C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */,
+				C75C0BE12D2D2A05000145F3 /* DeleteView.swift in Sources */,
 				C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */,
 				7B1C53482C69D10800C66D0D /* DirectoryLabSearchModel.swift in Sources */,
 				C7C657DD2CFD6891009FFA8E /* FavoriteLabViewModel.swift in Sources */,

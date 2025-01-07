@@ -134,6 +134,16 @@ class MyAlarmViewController: UIViewController {
                 .observe(on: MainScheduler.instance)
                 .bind(to: self.myAlarmTableView.rx.items(dataSource: dataSource))
                 .disposed(by: disposeBag)
+        
+        self.myAlarmTableView.rx.modelSelected(AlarmListResult.self)
+            .subscribe(onNext: { [weak self] myAlarmItem in
+                guard let self = self else { return }
+                self.myAlarmViewModel.selectMyAlarmItem = myAlarmItem
+                let viewController = EditMyAlarmViewController(myAlarmViewModel: self.myAlarmViewModel)
+                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
+                self.present(bottomSheetVC, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setUnivListAPI() {

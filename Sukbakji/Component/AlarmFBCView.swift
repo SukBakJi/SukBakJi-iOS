@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 final class AlarmFBCView: UIView {
     
