@@ -172,10 +172,6 @@ class HomeViewController: UIViewController {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
         $0.register(HotPostTableViewCell.self, forCellReuseIdentifier: HotPostTableViewCell.identifier)
-        $0.layer.masksToBounds = true// any value you want
-        $0.layer.shadowOpacity = 0.2// any value you want
-        $0.layer.shadowRadius = 2 // any value you want
-        $0.layer.shadowOffset = .init(width: 0, height: 0.2)
         $0.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
     }
     private let layerView = UIView().then {
@@ -633,7 +629,7 @@ extension HomeViewController {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
-        let url = APIConstants.calendarSchedule.path
+        let url = APIConstants.calendarMember.path
         
         APIService().getWithAccessToken(of: APIResponse<MemberId>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {

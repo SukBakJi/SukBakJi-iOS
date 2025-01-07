@@ -15,7 +15,6 @@ import RxCocoa
 class EditProfileViewController: UIViewController {
     
     private let navigationbarView = NavigationBarView(title: "프로필 수정")
-    
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     

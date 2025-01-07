@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 class HotPostTableViewCell: UITableViewCell {
     
@@ -13,6 +15,7 @@ class HotPostTableViewCell: UITableViewCell {
 
     private let labelView = UIView().then {
         $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
+        $0.layer.cornerRadius = 8
     }
     private let labelLabel = UILabel().then {
         $0.text = "조회수 TOP"
@@ -21,6 +24,7 @@ class HotPostTableViewCell: UITableViewCell {
     }
     private let labelView2 = UIView().then {
         $0.backgroundColor = .gray100
+        $0.layer.cornerRadius = 8
     }
     private let labelLabel2 = UILabel().then {
         $0.textColor = .gray200
@@ -63,6 +67,11 @@ class HotPostTableViewCell: UITableViewCell {
     }
     
     private func setUI() {
+        self.contentView.layer.cornerRadius = 12
+        self.contentView.layer.borderWidth = 1
+        self.contentView.layer.borderColor = UIColor.gray200.cgColor
+        self.contentView.clipsToBounds = true
+        
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)

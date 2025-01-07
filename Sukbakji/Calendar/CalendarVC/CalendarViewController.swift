@@ -53,7 +53,7 @@ class CalendarViewController: UIViewController {
         $0.backgroundColor = UIColor(named: "ViewBackground")
         $0.layer.cornerRadius = 10
     }
-    private lazy var dayStackView = UIStackView()
+    private lazy var weekStackView = UIStackView()
     private lazy var calendarMainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -61,6 +61,8 @@ class CalendarViewController: UIViewController {
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(CalendarMainCollectionViewCell.self, forCellWithReuseIdentifier: CalendarMainCollectionViewCell.identifier)
+        cv.allowsSelection = true
+        cv.allowsMultipleSelection = false
         cv.backgroundColor = .clear
         
         return cv
@@ -81,10 +83,6 @@ class CalendarViewController: UIViewController {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
         $0.register(CalendarDetailTableViewCell.self, forCellReuseIdentifier: CalendarDetailTableViewCell.identifier)
-        $0.layer.masksToBounds = true// any value you want
-        $0.layer.shadowOpacity = 0.2// any value you want
-        $0.layer.shadowRadius = 2 // any value you want
-        $0.layer.shadowOffset = .init(width: 0, height: 0.2)
         $0.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
     }
     private let upComingLabel = UILabel().then {
@@ -128,6 +126,8 @@ class CalendarViewController: UIViewController {
     private let dateFormatter = DateFormatter()
     private var calendarDate = Date()
     private var days = BehaviorRelay<[String]>(value: [])
+    
+    private var selectedIndexPath: IndexPath?
     
     private var alarmDatas: [String] = []
     
@@ -234,9 +234,9 @@ class CalendarViewController: UIViewController {
         calendarHeightConstraint = calendarBackgroundView.heightAnchor.constraint(equalToConstant: 300)
         calendarHeightConstraint?.isActive = true
         
-        self.calendarBackgroundView.addSubview(dayStackView)
-        self.dayStackView.distribution = .fillEqually
-        dayStackView.snp.makeConstraints { make in
+        self.calendarBackgroundView.addSubview(weekStackView)
+        self.weekStackView.distribution = .fillEqually
+        weekStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
             make.leading.trailing.equalToSuperview().inset(7)
             make.height.equalTo(40)
@@ -245,7 +245,7 @@ class CalendarViewController: UIViewController {
         calendarMainCollectionView.tag = 1
         self.calendarBackgroundView.addSubview(calendarMainCollectionView)
         calendarMainCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(dayStackView.snp.bottom).offset(12)
+            make.top.equalTo(weekStackView.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview().inset(7)
             make.bottom.equalToSuperview().inset(5)
         }
@@ -331,7 +331,7 @@ class CalendarViewController: UIViewController {
             label.text = dayOfTheWeek[i]
             label.textAlignment = .center
             label.font = UIFont(name: "SUITE-SemiBold", size: 14)
-            self.dayStackView.addArrangedSubview(label)
+            self.weekStackView.addArrangedSubview(label)
         }
     }
     
@@ -418,7 +418,7 @@ class CalendarViewController: UIViewController {
         calendarMainCollectionView.rx.modelSelected(String.self)
             .subscribe(onNext: { [weak self] selectedDay in
                 guard let self = self else { return }
-
+                
                 let dayNum = Int(selectedDay) ?? 0
                 let date = dateLabel.text ?? ""
                 let replacedString = date.replacingOccurrences(of: " ", with: "")
@@ -436,7 +436,18 @@ class CalendarViewController: UIViewController {
         calendarMainCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self else { return }
-                self.calendarMainCollectionView.reloadData() // 선택 상태 업데이트
+                if let previousIndexPath = self.selectedIndexPath, previousIndexPath != indexPath {
+                    self.calendarMainCollectionView.deselectItem(at: previousIndexPath, animated: false)
+                    if let cell = self.calendarMainCollectionView.cellForItem(at: previousIndexPath) as? CalendarMainCollectionViewCell {
+                        cell.isSelected = false
+                    }
+                }
+                
+                // 새로운 셀 선택
+                self.selectedIndexPath = indexPath
+                if let cell = self.calendarMainCollectionView.cellForItem(at: indexPath) as? CalendarMainCollectionViewCell {
+                    cell.isSelected = true
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -615,7 +626,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout, UITableVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.tag == 1 {
-            let width = self.dayStackView.frame.width / 7
+            let width = self.weekStackView.frame.width / 7
             return CGSize(width: width, height: width)
         } else {
             return CGSize(width: 200, height: 108)

@@ -1,17 +1,17 @@
 //
-//  CalendarMainCollectionViewCell.swift
+//  AlarmDateCollectionViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 12/12/24.
+//  Created by jaegu park on 1/5/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-class CalendarMainCollectionViewCell: UICollectionViewCell {
+class AlarmDateCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = String(describing: CalendarMainCollectionViewCell.self)
+    static let identifier = String(describing: AlarmDateCollectionViewCell.self)
     
     private let dayView = UIView().then {
         $0.backgroundColor = .clear
@@ -19,9 +19,6 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
     private let dayLabel = UILabel().then {
         $0.textColor = .black
         $0.font = UIFont(name: "SUITE-Medium", size: 14)
-    }
-    let dotImageView = UIImageView().then {
-        $0.image = UIImage(named: "Sukbakji_Dot")
     }
     
     override init(frame: CGRect) {
@@ -60,12 +57,6 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
         self.dayView.addSubview(dayLabel)
         dayLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
-        }
-        self.dayView.addSubview(dotImageView)
-        dotImageView.snp.makeConstraints { make in
-            make.top.equalTo(dayLabel.snp.bottom).offset(2)
-            make.centerX.equalToSuperview()
-            make.height.width.equalTo(4)
         }
     }
     

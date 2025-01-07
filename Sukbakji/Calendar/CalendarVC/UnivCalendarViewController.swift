@@ -11,6 +11,7 @@ import Alamofire
 import Then
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class UnivCalendarViewController: UIViewController {
     
@@ -127,20 +128,28 @@ class UnivCalendarViewController: UIViewController {
         univCalendarTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        /// CollectionView에 들어갈 Cell에 정보 제공
-        self.univCalendarViewModel.univCalendarItems
-            .observe(on: MainScheduler.instance)
-            .bind(to: self.univCalendarTableView.rx.items(cellIdentifier: UnivCalendarTableViewCell.identifier, cellType: UnivCalendarTableViewCell.self)) { index, item, cell in
+        let dataSource = RxTableViewSectionedReloadDataSource<UnivListSection>(
+            configureCell: { _, tableView, indexPath, item in
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: UnivCalendarTableViewCell.identifier, for: indexPath) as? UnivCalendarTableViewCell else {
+                    return UITableViewCell()
+                }
                 cell.prepare(univListResult: item)
+                return cell
             }
-            .disposed(by: disposeBag)
+        )
+        
+        self.univCalendarViewModel.univCalendarItems
+                .map { [UnivListSection(items: $0)] } // 각 아이템을 섹션으로 만듦
+                .observe(on: MainScheduler.instance)
+                .bind(to: self.univCalendarTableView.rx.items(dataSource: dataSource))
+                .disposed(by: disposeBag)
         
         self.univCalendarTableView.rx.modelSelected(UnivListResult.self)
             .subscribe(onNext: { [weak self] univCalendarItem in
                 guard let self = self else { return }
                 self.univCalendarViewModel.selectUnivCalendarItem = univCalendarItem
                 let viewController = EditUnivCalendarViewController(univCalendarViewModel: self.univCalendarViewModel)
-                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, isPannedable: true)
+                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 150, isPannedable: true)
                 self.present(bottomSheetVC, animated: true)
             })
             .disposed(by: disposeBag)

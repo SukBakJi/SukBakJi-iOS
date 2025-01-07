@@ -20,13 +20,13 @@ final class BottomSheetViewController: UIViewController {
     }
     private let bottomSheetView = UIView().then {
         $0.backgroundColor = .white
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 10
         $0.layer.cornerCurve = .continuous
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         $0.clipsToBounds = true
     }
     private let dragIndicatorView = UIView().then {
-        $0.backgroundColor = .label
+        $0.backgroundColor = .gray300
         $0.layer.cornerRadius = 1.5
         $0.alpha = 0
     }
@@ -44,9 +44,10 @@ final class BottomSheetViewController: UIViewController {
     
     private let contentViewController: UIViewController
     
-    init(contentViewController: UIViewController, defaultHeight: CGFloat, isPannedable: Bool = false) {
+    init(contentViewController: UIViewController, defaultHeight: CGFloat, bottomSheetPanMinTopConstant: CGFloat, isPannedable: Bool = false) {
         self.contentViewController = contentViewController
         self.defaultHeight = defaultHeight
+        self.bottomSheetPanMinTopConstant = bottomSheetPanMinTopConstant
         self.isPannedable = isPannedable
         
         super.init(nibName: nil, bundle: nil)
@@ -141,10 +142,10 @@ extension BottomSheetViewController {
         ])
         
         dragIndicatorView.snp.makeConstraints { make in
-            make.width.equalTo(60)
-            make.height.equalTo(dragIndicatorView.layer.cornerRadius * 2)
+            make.width.equalTo(80)
+            make.height.equalTo(4)
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
-            make.bottom.equalTo(bottomSheetView.snp.top).inset(12)
+            make.bottom.equalTo(bottomSheetView.snp.top).inset(24)
         }
     }
     
