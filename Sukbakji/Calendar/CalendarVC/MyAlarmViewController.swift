@@ -30,11 +30,10 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
     private let dateSelectButton = UIButton().then {
         $0.setImage(UIImage(named: "More 2"), for: .normal)
     }
-    private var myAlarmTableView = UITableView(frame: .zero, style: .insetGrouped).then {
+    private var myAlarmTableView = UITableView(frame: .zero, style: .plain).then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
         $0.register(MyAlarmTableViewCell.self, forCellReuseIdentifier: MyAlarmTableViewCell.identifier)
-        $0.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
     }
     
     private let disposeBag = DisposeBag()
@@ -47,6 +46,7 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         super.viewDidLoad()
 
         setUI()
+        setMyAlarmAPI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,7 +99,7 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         
         self.view.addSubview(myAlarmTableView)
         myAlarmTableView.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.bottom).offset(16)
+            make.top.equalTo(dateLabel.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -228,6 +228,6 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
 
 extension MyAlarmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 132
     }
 }

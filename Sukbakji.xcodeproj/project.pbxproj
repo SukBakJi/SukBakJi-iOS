@@ -108,7 +108,6 @@
 		C71AE9BA2CFB60340098FD2A /* FavoriteBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */; };
 		C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */; };
 		C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */; };
-		C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14882C44CE64003AFCB7 /* Calendar.storyboard */; };
 		C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */; };
 		C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */; };
 		C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CEED52D258CB500EED814 /* UnivStopView.swift */; };
@@ -162,7 +161,7 @@
 		C7BC68252CF6E7CC00CEC0F3 /* UniDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68242CF6E7CC00CEC0F3 /* UniDelete.swift */; };
 		C7BC68272CF6E7D700CEC0F3 /* AlarmEnroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68262CF6E7D700CEC0F3 /* AlarmEnroll.swift */; };
 		C7BC68292CF6E7DF00CEC0F3 /* AlarmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68282CF6E7DF00CEC0F3 /* AlarmList.swift */; };
-		C7BC682B2CF6E7F600CEC0F3 /* AlarmEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC682A2CF6E7F600CEC0F3 /* AlarmEdit.swift */; };
+		C7BC682B2CF6E7F600CEC0F3 /* AlarmOnOff.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC682A2CF6E7F600CEC0F3 /* AlarmOnOff.swift */; };
 		C7BC682D2CF6E8BA00CEC0F3 /* DateSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC682C2CF6E8BA00CEC0F3 /* DateSelect.swift */; };
 		C7BDEA8D2D1338E000001927 /* UnivSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDEA8C2D1338E000001927 /* UnivSearchViewModel.swift */; };
 		C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */; };
@@ -311,7 +310,6 @@
 		C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardTableViewCell.swift; sourceTree = "<group>"; };
 		C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPostTableViewCell.swift; sourceTree = "<group>"; };
 		C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabCollectionViewCell.swift; sourceTree = "<group>"; };
-		C71E14882C44CE64003AFCB7 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		C72CEED52D258CB500EED814 /* UnivStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivStopView.swift; sourceTree = "<group>"; };
@@ -365,7 +363,7 @@
 		C7BC68242CF6E7CC00CEC0F3 /* UniDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDelete.swift; sourceTree = "<group>"; };
 		C7BC68262CF6E7D700CEC0F3 /* AlarmEnroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEnroll.swift; sourceTree = "<group>"; };
 		C7BC68282CF6E7DF00CEC0F3 /* AlarmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmList.swift; sourceTree = "<group>"; };
-		C7BC682A2CF6E7F600CEC0F3 /* AlarmEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEdit.swift; sourceTree = "<group>"; };
+		C7BC682A2CF6E7F600CEC0F3 /* AlarmOnOff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmOnOff.swift; sourceTree = "<group>"; };
 		C7BC682C2CF6E8BA00CEC0F3 /* DateSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelect.swift; sourceTree = "<group>"; };
 		C7BDEA8C2D1338E000001927 /* UnivSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchViewModel.swift; sourceTree = "<group>"; };
 		C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarViewController.swift; sourceTree = "<group>"; };
@@ -739,7 +737,6 @@
 		C71E14852C44CE4B003AFCB7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				C71E14882C44CE64003AFCB7 /* Calendar.storyboard */,
 				C757F81E2D0A9A6000685F1A /* Cell */,
 				C7BC68142CF6E51600CEC0F3 /* DataModel */,
 				C757F81F2D0A9A6A00685F1A /* ViewModel */,
@@ -870,7 +867,7 @@
 				C7BC68242CF6E7CC00CEC0F3 /* UniDelete.swift */,
 				C7BC68262CF6E7D700CEC0F3 /* AlarmEnroll.swift */,
 				C7BC68282CF6E7DF00CEC0F3 /* AlarmList.swift */,
-				C7BC682A2CF6E7F600CEC0F3 /* AlarmEdit.swift */,
+				C7BC682A2CF6E7F600CEC0F3 /* AlarmOnOff.swift */,
 				C7BC682C2CF6E8BA00CEC0F3 /* DateSelect.swift */,
 			);
 			path = DataModel;
@@ -1086,7 +1083,6 @@
 				C7347E3E2C4D452A00688768 /* Pretendard-Light.otf in Resources */,
 				C7347E3C2C4D452600688768 /* Pretendard-ExtraBold.otf in Resources */,
 				C7347E3B2C4D452400688768 /* Pretendard-Bold.otf in Resources */,
-				C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */,
 				C7347E422C4D453400688768 /* Pretendard-Thin.otf in Resources */,
 				C75C457D2C5A3B6C001DDEA8 /* SUITE-Heavy.otf in Resources */,
 				C75C457E2C5A3B6C001DDEA8 /* SUITE-SemiBold.otf in Resources */,
@@ -1197,7 +1193,7 @@
 				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
-				C7BC682B2CF6E7F600CEC0F3 /* AlarmEdit.swift in Sources */,
+				C7BC682B2CF6E7F600CEC0F3 /* AlarmOnOff.swift in Sources */,
 				C7BC681B2CF6E56900CEC0F3 /* ApplyMentoring.swift in Sources */,
 				C7EFF5CE2CFB2ECC0019F30D /* Logout.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,

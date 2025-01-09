@@ -13,7 +13,9 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class UnivCalendarViewController: UIViewController {
+class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDeleteDelegate {
+    
+    private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     
     private let univCalendarViewModel = UnivCalendarViewModel()
 
@@ -34,11 +36,10 @@ class UnivCalendarViewController: UIViewController {
     private let backgroundLabel = UILabel().then {
         $0.backgroundColor = .gray200
     }
-    private var univCalendarTableView = UITableView(frame: .zero, style: .insetGrouped).then {
+    private var univCalendarTableView = UITableView(frame: .zero, style: .plain).then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
         $0.register(UnivCalendarTableViewCell.self, forCellReuseIdentifier: UnivCalendarTableViewCell.identifier)
-        $0.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
     }
     private let selectComplateButton = UIButton().then {
         $0.clipsToBounds = true
@@ -165,8 +166,41 @@ class UnivCalendarViewController: UIViewController {
             switch response.code {
             case "COMMON200":
                 let resultData = response.result.univList
-                self.univCalendarViewModel.univCalendarItems = Observable.just(resultData)
+                self.univCalendarViewModel.univCalendarItems.accept(resultData)
                 self.setUnivCalendarData()
+                self.view.layoutIfNeeded()
+            default:
+                AlertController(message: response.message).show()
+            }
+        }
+    }
+    
+    func univDelete_Tapped(cell: UnivCalendarTableViewCell) {
+        guard let indexPath = univCalendarTableView.indexPath(for: cell) else { return }
+        let univCalendarItem = univCalendarViewModel.univCalendarItems.value[indexPath.row]
+        let univId = univCalendarItem.univId
+        let season = univCalendarItem.season
+        let method = univCalendarItem.method
+        
+        univDeleteAPI(univId: univId, season: season, method: method)
+    }
+    
+    private func univDeleteAPI(univId: Int, season: String, method: String) {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        let url = APIConstants.calendarUniv.path
+        
+        let params = [
+            "memberId": memberId,
+            "univId": univId,
+            "season": season,
+            "method": method
+        ] as [String : Any]
+        
+        APIService().getWithAccessTokenParameters(of: APIResponse<UniDeleteResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
                 self.view.layoutIfNeeded()
             default:
                 AlertController(message: response.message).show()
@@ -177,6 +211,6 @@ class UnivCalendarViewController: UIViewController {
 
 extension UnivCalendarViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 96
+        return 108
     }
 }

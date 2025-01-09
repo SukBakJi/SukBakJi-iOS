@@ -11,9 +11,15 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
+protocol UnivCalendarTableViewCellDeleteDelegate: AnyObject {
+    func univDelete_Tapped(cell: UnivCalendarTableViewCell)
+}
+
 class UnivCalendarTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: UnivCalendarTableViewCell.self)
+    
+    weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
     
     private let selectView = UIView().then {
         $0.backgroundColor = .gray200
@@ -72,6 +78,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor
         self.contentView.clipsToBounds = true
+        self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 24, bottom: 12, right: 24))
         
         self.contentView.addSubview(selectView)
         selectView.snp.makeConstraints { make in
@@ -99,6 +106,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview().inset(10)
             make.height.width.equalTo(24)
         }
+        deleteButton.addTarget(self, action: #selector(univDelete_Tapped), for: .touchUpInside)
         
         self.contentView.addSubview(recruitImageView)
         recruitImageView.snp.makeConstraints { make in
@@ -128,6 +136,10 @@ class UnivCalendarTableViewCell: UITableViewCell {
             make.height.equalTo(24)
             make.width.equalTo(32)
         }
+    }
+    
+    @objc private func univDelete_Tapped(_ sender: UIButton) {
+        delegate?.univDelete_Tapped(cell: self)
     }
     
     func prepare(univListResult: UnivListResult) {

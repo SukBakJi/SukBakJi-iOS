@@ -11,5 +11,5 @@ import RxCocoa
 
 final class UnivCalendarViewModel {
     var selectUnivCalendarItem: UnivListResult?
-    var univCalendarItems: Observable<[UnivListResult]> = Observable.just([])
+    var univCalendarItems: BehaviorRelay<[UnivListResult]> = BehaviorRelay(value: [])
 }
