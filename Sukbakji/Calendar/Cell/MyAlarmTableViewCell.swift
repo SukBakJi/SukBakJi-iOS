@@ -21,7 +21,7 @@ class MyAlarmTableViewCell: UITableViewCell {
     
     private let labelView = UIView().then {
         $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 6
     }
     private let univLabel = UILabel().then {
         $0.textColor = UIColor(named: "Coquelicot")
@@ -63,6 +63,7 @@ class MyAlarmTableViewCell: UITableViewCell {
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor
         self.contentView.clipsToBounds = true
+        self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 24, bottom: 12, right: 24))
         
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints { make in
@@ -87,7 +88,7 @@ class MyAlarmTableViewCell: UITableViewCell {
         
         self.contentView.addSubview(alarmDateLabel)
         alarmDateLabel.snp.makeConstraints { make in
-            make.top.equalTo(labelView.snp.bottom).offset(8)
+            make.top.equalTo(alarmNameLabel.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(20)
             make.height.equalTo(17)
         }
@@ -111,8 +112,8 @@ class MyAlarmTableViewCell: UITableViewCell {
     }
     
     @objc private func onOffSwitchToggled(_ sender: UISwitch) {
-            delegate?.alarmSwitchToggled(cell: self, isOn: sender.isOn)
-        }
+        delegate?.alarmSwitchToggled(cell: self, isOn: sender.isOn)
+    }
 
     func prepare(alarmListResult: AlarmListResult) {
         self.univLabel.text = alarmListResult.alarmUnivName

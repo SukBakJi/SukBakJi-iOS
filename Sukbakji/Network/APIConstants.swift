@@ -113,23 +113,23 @@ extension APIConstants {
             
             
         case .calendarUniv:
-            return APIConstants.makeEndPoint("/calendar/univ")
+            return APIConstants.makeEndPoint("/calender/univ")
         case .calendarSchedule:
-            return APIConstants.makeEndPoint("/calendar/schedule")
+            return APIConstants.makeEndPoint("/calender/schedule")
         case .calendarAlarm:
-            return APIConstants.makeEndPoint("/calendar/alarm")
+            return APIConstants.makeEndPoint("/calender/alarm")
         case .calendarAlarmOn:
-            return APIConstants.makeEndPoint("/calendar/alarm/on")
+            return APIConstants.makeEndPoint("/calender/alarm/on")
         case .calendarAlarmOff:
-            return APIConstants.makeEndPoint("/calendar/alarm/off")
+            return APIConstants.makeEndPoint("/calender/alarm/off")
         case .calendarUnivMethod:
-            return APIConstants.makeEndPoint("/calendar/univ/method")
+            return APIConstants.makeEndPoint("/calender/univ/method")
         case .calendarSearch:
-            return APIConstants.makeEndPoint("/calendar/search")
+            return APIConstants.makeEndPoint("/calender/search")
         case .calendarScheduleDate(let date):
-            return APIConstants.makeEndPoint("/calendar/schedule/\(date)")
+            return APIConstants.makeEndPoint("/calender/schedule/\(date)")
         case .calendarMember:
-            return APIConstants.makeEndPoint("/calendar/member")
+            return APIConstants.makeEndPoint("/calender/member")
             
             
         case .researchTopics:

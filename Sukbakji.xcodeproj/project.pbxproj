@@ -108,7 +108,6 @@
 		C71AE9BA2CFB60340098FD2A /* FavoriteBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */; };
 		C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */; };
 		C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */; };
-		C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E14882C44CE64003AFCB7 /* Calendar.storyboard */; };
 		C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */; };
 		C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */; };
 		C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CEED52D258CB500EED814 /* UnivStopView.swift */; };
@@ -162,7 +161,7 @@
 		C7BC68252CF6E7CC00CEC0F3 /* UniDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68242CF6E7CC00CEC0F3 /* UniDelete.swift */; };
 		C7BC68272CF6E7D700CEC0F3 /* AlarmEnroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68262CF6E7D700CEC0F3 /* AlarmEnroll.swift */; };
 		C7BC68292CF6E7DF00CEC0F3 /* AlarmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68282CF6E7DF00CEC0F3 /* AlarmList.swift */; };
-		C7BC682B2CF6E7F600CEC0F3 /* AlarmEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC682A2CF6E7F600CEC0F3 /* AlarmEdit.swift */; };
+		C7BC682B2CF6E7F600CEC0F3 /* AlarmOnOff.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC682A2CF6E7F600CEC0F3 /* AlarmOnOff.swift */; };
 		C7BC682D2CF6E8BA00CEC0F3 /* DateSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC682C2CF6E8BA00CEC0F3 /* DateSelect.swift */; };
 		C7BDEA8D2D1338E000001927 /* UnivSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDEA8C2D1338E000001927 /* UnivSearchViewModel.swift */; };
 		C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */; };
@@ -172,8 +171,6 @@
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
-		C7C568712C6F44C500A57821 /* MentorPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C568702C6F44C500A57821 /* MentorPostAPI.swift */; };
-		C7C568732C6F44D100A57821 /* MentoringPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */; };
 		C7C657DD2CFD6891009FFA8E /* FavoriteLabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C657DC2CFD6891009FFA8E /* FavoriteLabViewModel.swift */; };
 		C7DA37522CFCD33A00B26549 /* HotPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */; };
 		C7DA37542CFCD4E900B26549 /* FavoriteBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */; };
@@ -311,7 +308,6 @@
 		C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardTableViewCell.swift; sourceTree = "<group>"; };
 		C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPostTableViewCell.swift; sourceTree = "<group>"; };
 		C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabCollectionViewCell.swift; sourceTree = "<group>"; };
-		C71E14882C44CE64003AFCB7 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		C72CEED52D258CB500EED814 /* UnivStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivStopView.swift; sourceTree = "<group>"; };
@@ -365,7 +361,7 @@
 		C7BC68242CF6E7CC00CEC0F3 /* UniDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDelete.swift; sourceTree = "<group>"; };
 		C7BC68262CF6E7D700CEC0F3 /* AlarmEnroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEnroll.swift; sourceTree = "<group>"; };
 		C7BC68282CF6E7DF00CEC0F3 /* AlarmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmList.swift; sourceTree = "<group>"; };
-		C7BC682A2CF6E7F600CEC0F3 /* AlarmEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEdit.swift; sourceTree = "<group>"; };
+		C7BC682A2CF6E7F600CEC0F3 /* AlarmOnOff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmOnOff.swift; sourceTree = "<group>"; };
 		C7BC682C2CF6E8BA00CEC0F3 /* DateSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelect.swift; sourceTree = "<group>"; };
 		C7BDEA8C2D1338E000001927 /* UnivSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchViewModel.swift; sourceTree = "<group>"; };
 		C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarViewController.swift; sourceTree = "<group>"; };
@@ -375,8 +371,6 @@
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
-		C7C568702C6F44C500A57821 /* MentorPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorPostAPI.swift; sourceTree = "<group>"; };
-		C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringPostAPI.swift; sourceTree = "<group>"; };
 		C7C657DC2CFD6891009FFA8E /* FavoriteLabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabViewModel.swift; sourceTree = "<group>"; };
 		C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPostViewModel.swift; sourceTree = "<group>"; };
 		C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardViewModel.swift; sourceTree = "<group>"; };
@@ -698,14 +692,31 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C70243692D3161EA00D6D3C1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C702436A2D3161EF00D6D3C1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		C70DB27D2C633C7100D6014B /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
 				C70DB27E2C633CBE00D6014B /* Chatting.storyboard */,
+				C702436A2D3161EF00D6D3C1 /* Cell */,
 				C7BC68152CF6E52C00CEC0F3 /* DataModel */,
-				C78E70C12C6C9070004BBCE9 /* ChattingAPI */,
 				C70DB2802C633CDB00D6014B /* ChattingViewController.swift */,
 				C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */,
+				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
+				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
+				C70243692D3161EA00D6D3C1 /* ViewModel */,
 				C7ECF5472C677F3C00283F06 /* Message */,
 				C7ECF5482C677F4600283F06 /* Mentor */,
 			);
@@ -739,7 +750,6 @@
 		C71E14852C44CE4B003AFCB7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				C71E14882C44CE64003AFCB7 /* Calendar.storyboard */,
 				C757F81E2D0A9A6000685F1A /* Cell */,
 				C7BC68142CF6E51600CEC0F3 /* DataModel */,
 				C757F81F2D0A9A6A00685F1A /* ViewModel */,
@@ -806,15 +816,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		C78E70C12C6C9070004BBCE9 /* ChattingAPI */ = {
-			isa = PBXGroup;
-			children = (
-				C7C568702C6F44C500A57821 /* MentorPostAPI.swift */,
-				C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */,
-			);
-			path = ChattingAPI;
-			sourceTree = "<group>";
-		};
 		C7980A842CEF835B00475D94 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -870,7 +871,7 @@
 				C7BC68242CF6E7CC00CEC0F3 /* UniDelete.swift */,
 				C7BC68262CF6E7D700CEC0F3 /* AlarmEnroll.swift */,
 				C7BC68282CF6E7DF00CEC0F3 /* AlarmList.swift */,
-				C7BC682A2CF6E7F600CEC0F3 /* AlarmEdit.swift */,
+				C7BC682A2CF6E7F600CEC0F3 /* AlarmOnOff.swift */,
 				C7BC682C2CF6E8BA00CEC0F3 /* DateSelect.swift */,
 			);
 			path = DataModel;
@@ -949,7 +950,6 @@
 		C7ECF5472C677F3C00283F06 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
 				C71565032C8E9FF10038A782 /* RoomViewController.swift */,
 				C71565092C8EB9A30038A782 /* RoomTableViewCell.swift */,
 				C71565052C8EA4430038A782 /* ChatViewController.swift */,
@@ -961,7 +961,6 @@
 		C7ECF5482C677F4600283F06 /* Mentor */ = {
 			isa = PBXGroup;
 			children = (
-				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
 				C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */,
 				C715650D2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift */,
 				C71565112C8EBC0F0038A782 /* MentoringChatViewController.swift */,
@@ -1086,7 +1085,6 @@
 				C7347E3E2C4D452A00688768 /* Pretendard-Light.otf in Resources */,
 				C7347E3C2C4D452600688768 /* Pretendard-ExtraBold.otf in Resources */,
 				C7347E3B2C4D452400688768 /* Pretendard-Bold.otf in Resources */,
-				C71E14892C44CE64003AFCB7 /* Calendar.storyboard in Resources */,
 				C7347E422C4D453400688768 /* Pretendard-Thin.otf in Resources */,
 				C75C457D2C5A3B6C001DDEA8 /* SUITE-Heavy.otf in Resources */,
 				C75C457E2C5A3B6C001DDEA8 /* SUITE-SemiBold.otf in Resources */,
@@ -1197,7 +1195,7 @@
 				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
-				C7BC682B2CF6E7F600CEC0F3 /* AlarmEdit.swift in Sources */,
+				C7BC682B2CF6E7F600CEC0F3 /* AlarmOnOff.swift in Sources */,
 				C7BC681B2CF6E56900CEC0F3 /* ApplyMentoring.swift in Sources */,
 				C7EFF5CE2CFB2ECC0019F30D /* Logout.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,
@@ -1273,7 +1271,6 @@
 				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
 				415BBC0D2C73442F002768EE /* NetworkAuthManager.swift in Sources */,
-				C7C568712C6F44C500A57821 /* MentorPostAPI.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				7B1C534C2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift in Sources */,
 				C757F8272D0A9C8B00685F1A /* UnivSearchTableViewCell.swift in Sources */,
@@ -1310,7 +1307,6 @@
 				7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */,
 				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
 				C757F8252D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift in Sources */,
-				C7C568732C6F44D100A57821 /* MentoringPostAPI.swift in Sources */,
 				C73483652D02A727004B6FA1 /* Dot+Extension.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */,

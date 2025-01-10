@@ -18,7 +18,7 @@ class ProfileTabViewController: TabmanViewController {
     private let tabView = UIView().then {
        $0.backgroundColor = .white
     }
-    private let backgroundLabel2 = UILabel().then {
+    private let backgroundLabel = UILabel().then {
        $0.backgroundColor = .gray200
     }
     
@@ -53,11 +53,11 @@ class ProfileTabViewController: TabmanViewController {
         self.view.addSubview(tabView)
         tabView.snp.makeConstraints { make in
            make.leading.trailing.top.equalToSuperview()
-           make.height.equalTo(44)
+           make.height.equalTo(40)
         }
         
-        self.tabView.addSubview(backgroundLabel2)
-        backgroundLabel2.snp.makeConstraints { make in
+        self.tabView.addSubview(backgroundLabel)
+        backgroundLabel.snp.makeConstraints { make in
            make.leading.trailing.bottom.equalToSuperview()
            make.height.equalTo(1.5)
         }
@@ -89,7 +89,7 @@ class ProfileTabViewController: TabmanViewController {
         // 배경 회색으로 나옴 -> 하얀색으로 바뀜
         bar.backgroundView.style = .clear
         // 간격 설정
-        bar.layout.contentInset = UIEdgeInsets(top: 5, left: 30, bottom: 0, right: 0)
+        bar.layout.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
         // 버튼 글씨 커스텀
         bar.buttons.customize { (button) in
             button.tintColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1)

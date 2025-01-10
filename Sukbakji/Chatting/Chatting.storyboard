@@ -107,9 +107,6 @@
                             <constraint firstItem="m7q-EU-70q" firstAttribute="top" secondItem="8z6-Cr-CQW" secondAttribute="top" id="msz-fr-Bal"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="tabView" destination="m7q-EU-70q" id="PUf-nf-pt3"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RcT-0r-2be" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -159,9 +156,6 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" name="Coquelicot"/>
                                 </buttonConfiguration>
-                                <connections>
-                                    <action selector="go_Chat:" destination="ETj-ZZ-LMW" eventType="touchUpInside" id="rQo-ym-Kar"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jka-wA-PN5"/>
@@ -227,9 +221,6 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" name="Coquelicot"/>
                                 </buttonConfiguration>
-                                <connections>
-                                    <action selector="apply_Mentoring:" destination="72a-b2-KdO" eventType="touchUpInside" id="oQh-P4-hXC"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="멘토링 어떻게 진행되나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2o0-Jb-uLY">
                                 <rect key="frame" x="28" y="420" width="189" height="26"/>
@@ -284,9 +275,6 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Sukbakji_MentorButton"/>
-                                <connections>
-                                    <action selector="apply_Mentor:" destination="72a-b2-KdO" eventType="touchUpInside" id="luz-uI-QK5"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="miZ-El-uIQ"/>
@@ -486,9 +474,6 @@
                                                         <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="baseBackgroundColor" name="Coquelicot"/>
                                                     </buttonConfiguration>
-                                                    <connections>
-                                                        <action selector="apply_Mentoring:" destination="72a-b2-KdO" eventType="touchUpInside" id="K6k-8n-WiF"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
