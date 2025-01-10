@@ -171,8 +171,6 @@
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
-		C7C568712C6F44C500A57821 /* MentorPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C568702C6F44C500A57821 /* MentorPostAPI.swift */; };
-		C7C568732C6F44D100A57821 /* MentoringPostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */; };
 		C7C657DD2CFD6891009FFA8E /* FavoriteLabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C657DC2CFD6891009FFA8E /* FavoriteLabViewModel.swift */; };
 		C7DA37522CFCD33A00B26549 /* HotPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */; };
 		C7DA37542CFCD4E900B26549 /* FavoriteBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */; };
@@ -373,8 +371,6 @@
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
-		C7C568702C6F44C500A57821 /* MentorPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorPostAPI.swift; sourceTree = "<group>"; };
-		C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringPostAPI.swift; sourceTree = "<group>"; };
 		C7C657DC2CFD6891009FFA8E /* FavoriteLabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabViewModel.swift; sourceTree = "<group>"; };
 		C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPostViewModel.swift; sourceTree = "<group>"; };
 		C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardViewModel.swift; sourceTree = "<group>"; };
@@ -696,14 +692,31 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C70243692D3161EA00D6D3C1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C702436A2D3161EF00D6D3C1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		C70DB27D2C633C7100D6014B /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
 				C70DB27E2C633CBE00D6014B /* Chatting.storyboard */,
+				C702436A2D3161EF00D6D3C1 /* Cell */,
 				C7BC68152CF6E52C00CEC0F3 /* DataModel */,
-				C78E70C12C6C9070004BBCE9 /* ChattingAPI */,
 				C70DB2802C633CDB00D6014B /* ChattingViewController.swift */,
 				C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */,
+				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
+				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
+				C70243692D3161EA00D6D3C1 /* ViewModel */,
 				C7ECF5472C677F3C00283F06 /* Message */,
 				C7ECF5482C677F4600283F06 /* Mentor */,
 			);
@@ -801,15 +814,6 @@
 				C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		C78E70C12C6C9070004BBCE9 /* ChattingAPI */ = {
-			isa = PBXGroup;
-			children = (
-				C7C568702C6F44C500A57821 /* MentorPostAPI.swift */,
-				C7C568722C6F44D100A57821 /* MentoringPostAPI.swift */,
-			);
-			path = ChattingAPI;
 			sourceTree = "<group>";
 		};
 		C7980A842CEF835B00475D94 /* Shared */ = {
@@ -946,7 +950,6 @@
 		C7ECF5472C677F3C00283F06 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
 				C71565032C8E9FF10038A782 /* RoomViewController.swift */,
 				C71565092C8EB9A30038A782 /* RoomTableViewCell.swift */,
 				C71565052C8EA4430038A782 /* ChatViewController.swift */,
@@ -958,7 +961,6 @@
 		C7ECF5482C677F4600283F06 /* Mentor */ = {
 			isa = PBXGroup;
 			children = (
-				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
 				C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */,
 				C715650D2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift */,
 				C71565112C8EBC0F0038A782 /* MentoringChatViewController.swift */,
@@ -1269,7 +1271,6 @@
 				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
 				415BBC0D2C73442F002768EE /* NetworkAuthManager.swift in Sources */,
-				C7C568712C6F44C500A57821 /* MentorPostAPI.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				7B1C534C2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift in Sources */,
 				C757F8272D0A9C8B00685F1A /* UnivSearchTableViewCell.swift in Sources */,
@@ -1306,7 +1307,6 @@
 				7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */,
 				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
 				C757F8252D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift in Sources */,
-				C7C568732C6F44D100A57821 /* MentoringPostAPI.swift in Sources */,
 				C73483652D02A727004B6FA1 /* Dot+Extension.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */,

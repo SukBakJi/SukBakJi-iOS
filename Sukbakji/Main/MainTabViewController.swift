@@ -13,7 +13,7 @@ class MainTabViewController: UITabBarController {
     let homeVC = HomeViewController()
     let calendarVC = CalendarViewController()
     let swiftUIBoardView = BoardViewController()
-    let Chattingstoryboard = UIStoryboard(name: "Chatting", bundle: nil)
+    let chattingVC = ChattingViewController()
     let swiftUIDirectoryView = DirectoryMainViewController()
     
     let customTabBar = CustomTabBar()
@@ -35,19 +35,18 @@ class MainTabViewController: UITabBarController {
         tabBar.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
 
         let boardVC = UIHostingController(rootView: swiftUIBoardView)
-        let chatVC = Chattingstoryboard.instantiateViewController(withIdentifier: "ChattingVC")
         let directoryVC = UIHostingController(rootView: swiftUIDirectoryView)
         
         homeVC.title = "홈"
         calendarVC.title = "캘린더"
         boardVC.title = "게시판"
-        chatVC.title = "채팅"
+        chattingVC.title = "채팅"
         directoryVC.title = "디렉토리"
         
         homeVC.navigationItem.title = ""
         calendarVC.navigationItem.title = ""
         boardVC.navigationItem.title = ""
-        chatVC.navigationItem.title = ""
+        chattingVC.navigationItem.title = ""
         directoryVC.navigationItem.title = ""
         
         let homeImage = UIImage(named: "Sukbakji_Home")?.withRenderingMode(.alwaysOriginal)
@@ -78,8 +77,8 @@ class MainTabViewController: UITabBarController {
         calendarVC.tabBarItem.selectedImage = resizedCalendarImage
         boardVC.tabBarItem.image = resizedBoardImage
         boardVC.tabBarItem.selectedImage = resizedBoardImage
-        chatVC.tabBarItem.image = resizedChatImage
-        chatVC.tabBarItem.selectedImage = resizedChatImage
+        chattingVC.tabBarItem.image = resizedChatImage
+        chattingVC.tabBarItem.selectedImage = resizedChatImage
         directoryVC.tabBarItem.image = resizedDirectoryImage
         directoryVC.tabBarItem.selectedImage = resizedDirectoryImage
         
@@ -98,10 +97,10 @@ class MainTabViewController: UITabBarController {
         boardVC.tabBarItem.image = resizedBoardImage.withTintColor(.gray300, renderingMode: .alwaysOriginal)
         boardVC.tabBarItem.selectedImage = resizedBoardImage.withTintColor(UIColor(named: "Coquelicot")!, renderingMode: .alwaysOriginal)
         
-        chatVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray300], for: .normal)
-        chatVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor(named: "Coquelicot")!], for: .selected)
-        chatVC.tabBarItem.image = resizedChatImage.withTintColor(.gray300, renderingMode: .alwaysOriginal)
-        chatVC.tabBarItem.selectedImage = resizedChatImage.withTintColor(UIColor(named: "Coquelicot")!, renderingMode: .alwaysOriginal)
+        chattingVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray300], for: .normal)
+        chattingVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor(named: "Coquelicot")!], for: .selected)
+        chattingVC.tabBarItem.image = resizedChatImage.withTintColor(.gray300, renderingMode: .alwaysOriginal)
+        chattingVC.tabBarItem.selectedImage = resizedChatImage.withTintColor(UIColor(named: "Coquelicot")!, renderingMode: .alwaysOriginal)
         
         directoryVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray300], for: .normal)
         directoryVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor(named: "Coquelicot")!], for: .selected)
@@ -111,19 +110,19 @@ class MainTabViewController: UITabBarController {
         homeVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
         calendarVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
         boardVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
-        chatVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
+        chattingVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
         directoryVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
         
         homeVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
         calendarVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
         boardVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
-        chatVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
+        chattingVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
         directoryVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
         
         let navigationHome = UINavigationController(rootViewController: homeVC)
         let navigationCalendar = UINavigationController(rootViewController: calendarVC)
         let navigationBoard = UINavigationController(rootViewController: boardVC)
-        let navigationChat = UINavigationController(rootViewController: chatVC)
+        let navigationChatting = UINavigationController(rootViewController: chattingVC)
         let navigationDirectory = UINavigationController(rootViewController: directoryVC)
         
         let appearance = UINavigationBarAppearance()
@@ -138,13 +137,13 @@ class MainTabViewController: UITabBarController {
         navigationBoard.navigationBar.standardAppearance = appearance
         navigationBoard.navigationBar.scrollEdgeAppearance = appearance
         
-        navigationChat.navigationBar.standardAppearance = appearance
-        navigationChat.navigationBar.scrollEdgeAppearance = appearance
+        navigationChatting.navigationBar.standardAppearance = appearance
+        navigationChatting.navigationBar.scrollEdgeAppearance = appearance
         
         navigationDirectory.navigationBar.standardAppearance = appearance
         navigationDirectory.navigationBar.scrollEdgeAppearance = appearance
         
-        setViewControllers([navigationHome, navigationCalendar, navigationBoard, navigationChat, navigationDirectory], animated: false)
+        setViewControllers([navigationHome, navigationCalendar, navigationBoard, navigationChatting, navigationDirectory], animated: false)
     }
 }
 

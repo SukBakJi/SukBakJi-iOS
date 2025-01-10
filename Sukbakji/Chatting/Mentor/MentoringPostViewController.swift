@@ -137,7 +137,6 @@ class MentoringPostViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func set_Tapped(_ sender: Any) {
         let parameters = MentoringPostModel(memberId: memberId, mentorId: mentorId, subject: titleTV.text, question: questionTV.text)
-        APIMentoringPost.instance.SendingPostMentoring(parameters: parameters) { result in self.mentoringData = result }
         self.presentingViewController?.dismiss(animated: true)
     }
     
