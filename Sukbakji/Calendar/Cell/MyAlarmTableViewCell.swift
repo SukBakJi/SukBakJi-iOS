@@ -11,6 +11,7 @@ import SnapKit
 
 protocol MyAlarmTableViewCellSwitchDelegate: AnyObject {
     func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool)
+    func editToggled(cell: MyAlarmTableViewCell)
 }
 
 class MyAlarmTableViewCell: UITableViewCell {
@@ -100,6 +101,7 @@ class MyAlarmTableViewCell: UITableViewCell {
             make.height.equalTo(20)
             make.width.equalTo(40)
         }
+        editButton.addTarget(self, action: #selector(editToggled), for: .touchUpInside)
         
         self.contentView.addSubview(onOffSwitch)
         onOffSwitch.snp.makeConstraints { make in
@@ -108,11 +110,15 @@ class MyAlarmTableViewCell: UITableViewCell {
             make.height.equalTo(31)
             make.width.equalTo(51)
         }
-        onOffSwitch.addTarget(self, action: #selector(onOffSwitchToggled(_:)), for: .valueChanged)
+        onOffSwitch.addTarget(self, action: #selector(onOffSwitchToggled), for: .valueChanged)
     }
     
-    @objc private func onOffSwitchToggled(_ sender: UISwitch) {
-        delegate?.alarmSwitchToggled(cell: self, isOn: sender.isOn)
+    @objc private func onOffSwitchToggled() {
+        delegate?.alarmSwitchToggled(cell: self, isOn: onOffSwitch.isOn)
+    }
+    
+    @objc private func editToggled() {
+        delegate?.editToggled(cell: self)
     }
 
     func prepare(alarmListResult: AlarmListResult) {

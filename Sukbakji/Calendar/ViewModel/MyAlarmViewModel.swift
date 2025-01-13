@@ -20,7 +20,7 @@ final class MyAlarmViewModel {
         currentItems[index].onoff = isOn // 스위치 상태 업데이트
         myAlarmItems.accept(currentItems) // 변경된 값 반영
         
-        print("✅ Alarm \(currentItems[index].alarmName) is now \((isOn != 0) ? "ON" : "OFF")")
+        print("✅ Alarm \(currentItems[index].alarmName) is now \((isOn == 0) ? "OFF" : "ON")")
     }
 }
 
