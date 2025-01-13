@@ -119,32 +119,40 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         myAlarmTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        let dataSource = RxTableViewSectionedReloadDataSource<AlarmListSection>(
-            configureCell: { _, tableView, indexPath, item in
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: MyAlarmTableViewCell.identifier, for: indexPath) as? MyAlarmTableViewCell else {
-                    return UITableViewCell()
-                }
+        self.myAlarmViewModel.myAlarmItems
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.myAlarmTableView.rx.items(cellIdentifier: MyAlarmTableViewCell.identifier, cellType: MyAlarmTableViewCell.self)) { index, item, cell in
                 cell.prepare(alarmListResult: item)
                 cell.delegate = self
-                return cell
             }
-        )
-        
-        self.myAlarmViewModel.myAlarmItems
-                .map { [AlarmListSection(items: $0)] } // 각 아이템을 섹션으로 만듦
-                .observe(on: MainScheduler.instance)
-                .bind(to: self.myAlarmTableView.rx.items(dataSource: dataSource))
-                .disposed(by: disposeBag)
-        
-        self.myAlarmTableView.rx.modelSelected(AlarmListResult.self)
-            .subscribe(onNext: { [weak self] myAlarmItem in
-                guard let self = self else { return }
-                self.myAlarmViewModel.selectMyAlarmItem = myAlarmItem
-                let viewController = EditMyAlarmViewController(myAlarmViewModel: self.myAlarmViewModel)
-                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
-                self.present(bottomSheetVC, animated: true)
-            })
             .disposed(by: disposeBag)
+        
+//        let dataSource = RxTableViewSectionedReloadDataSource<AlarmListSection>(
+//            configureCell: { _, tableView, indexPath, item in
+//                guard let cell = tableView.dequeueReusableCell(withIdentifier: MyAlarmTableViewCell.identifier, for: indexPath) as? MyAlarmTableViewCell else {
+//                    return UITableViewCell()
+//                }
+//                cell.prepare(alarmListResult: item)
+//                cell.delegate = self
+//                return cell
+//            }
+//        )
+//        
+//        self.myAlarmViewModel.myAlarmItems
+//                .map { [AlarmListSection(items: $0)] } // 각 아이템을 섹션으로 만듦
+//                .observe(on: MainScheduler.instance)
+//                .bind(to: self.myAlarmTableView.rx.items(dataSource: dataSource))
+//                .disposed(by: disposeBag)
+        
+//        self.myAlarmTableView.rx.modelSelected(AlarmListResult.self)
+//            .subscribe(onNext: { [weak self] myAlarmItem in
+//                guard let self = self else { return }
+//                self.myAlarmViewModel.selectMyAlarmItem = myAlarmItem
+//                let viewController = EditMyAlarmViewController(myAlarmViewModel: self.myAlarmViewModel)
+//                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
+//                self.present(bottomSheetVC, animated: true)
+//            })
+//            .disposed(by: disposeBag)
     }
     
     private func setMyAlarmAPI() {
@@ -153,7 +161,7 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         }
         let url = APIConstants.calendarAlarm.path
         
-        APIService().getWithAccessToken(of: APIResponse<AlarmList>.self, url: url, AccessToken: retrievedToken) { response in
+        APIService().getWithAccessToken(of: APIResponse<AlarmList>.self, url: url, AccessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwams5NzExMTNAbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTczNjc3MDE4NX0.98H1XGxrsXZpdMBFqR9wVOrDXXWq3HmiNnNS0j3LOko") { response in
             switch response.code {
             case "COMMON200":
                 let resultData = response.result.alarmList
@@ -171,29 +179,42 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         let alarmItem = myAlarmViewModel.myAlarmItems.value[indexPath.row]
         
         if isOn {
-            alarmOff(alarmId: alarmItem.alarmId)
-            myAlarmViewModel.alarmSwitchToggled(at: indexPath.row, isOn: 0)
-        } else {
             alarmOn(alarmId: alarmItem.alarmId)
             myAlarmViewModel.alarmSwitchToggled(at: indexPath.row, isOn: 1)
+        } else {
+            alarmOff(alarmId: alarmItem.alarmId)
+            myAlarmViewModel.alarmSwitchToggled(at: indexPath.row, isOn: 0)
         }
+    }
+    
+    func editToggled(cell: MyAlarmTableViewCell) {
+        guard let indexPath = myAlarmTableView.indexPath(for: cell) else { return }
+        let alarmItem = myAlarmViewModel.myAlarmItems.value[indexPath.row]
+        
+        self.myAlarmViewModel.selectMyAlarmItem = alarmItem
+        let viewController = EditMyAlarmViewController(myAlarmViewModel: self.myAlarmViewModel)
+        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
+        self.present(bottomSheetVC, animated: true)
     }
     
     private func alarmOn(alarmId: Int) {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
+        
         let url = APIConstants.calendarAlarmOn.path
         
         let params = [
             "alarmId": alarmId
         ] as [String : Any]
         
-        APIService().getWithAccessTokenParameters(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+        APIService().patchWithAccessToken(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwams5NzExMTNAbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTczNjc3MDE4NX0.98H1XGxrsXZpdMBFqR9wVOrDXXWq3HmiNnNS0j3LOko") { response in
             switch response.code {
             case "COMMON200":
                 self.view.layoutIfNeeded()
+                print("알람 변경 완료")
             default:
+                print("\(alarmId)")
                 AlertController(message: response.message).show()
             }
         }
@@ -203,17 +224,19 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
+        
         let url = APIConstants.calendarAlarmOff.path
         
         let params = [
             "alarmId": alarmId
         ] as [String : Any]
         
-        APIService().getWithAccessTokenParameters(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+        APIService().patchWithAccessToken(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwams5NzExMTNAbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTczNjc3MDE4NX0.98H1XGxrsXZpdMBFqR9wVOrDXXWq3HmiNnNS0j3LOko") { response in
             switch response.code {
             case "COMMON200":
                 self.view.layoutIfNeeded()
             default:
+                print("\(alarmId)")
                 AlertController(message: response.message).show()
             }
         }
