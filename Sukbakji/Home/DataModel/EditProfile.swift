@@ -7,11 +7,6 @@
 
 import Foundation
 
-struct EditProfile : Encodable {
-    let degreeLevel: DegreeLevel
-    let researchTopics: [String]
-}
-
 struct EditProfileResult : Codable {
     let name: String
     let degreeLevel: String

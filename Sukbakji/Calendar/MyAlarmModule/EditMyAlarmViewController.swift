@@ -349,6 +349,7 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
             make.height.equalTo(28)
             make.width.equalTo(100)
         }
+        deleteButton.addTarget(self, action: #selector(delete_Tapped), for: .touchUpInside)
     }
     
     private func setMyAlarmData() {
@@ -568,6 +569,20 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
+        }
+    }
+    
+    @objc func delete_Tapped() {
+        let deleteView = DeleteView(title: "알람 삭제하기", content: "해당 알람을 삭제할까요? 삭제 후 복구되지 않습니다.", myAlarmViewModel: myAlarmViewModel, uniDelete: UniDelete(memberId: 0, univId: 0, season: "", method: ""))
+        
+        self.view.addSubview(deleteView)
+        deleteView.alpha = 0
+        deleteView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            deleteView.alpha = 1
         }
     }
 }

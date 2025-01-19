@@ -46,13 +46,14 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         super.viewDidLoad()
 
         setUI()
-        setMyAlarmAPI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         /// 탭 바 숨기기
         self.tabBarController?.tabBar.isHidden = true
+        
+        setMyAlarmAPI()
     }
     
     private func setUI() {
@@ -161,7 +162,7 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         }
         let url = APIConstants.calendarAlarm.path
         
-        APIService().getWithAccessToken(of: APIResponse<AlarmList>.self, url: url, AccessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwams5NzExMTNAbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTczNjc3MDE4NX0.98H1XGxrsXZpdMBFqR9wVOrDXXWq3HmiNnNS0j3LOko") { response in
+        APIService().getWithAccessToken(of: APIResponse<AlarmList>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
             case "COMMON200":
                 let resultData = response.result.alarmList
@@ -208,7 +209,7 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
             "alarmId": alarmId
         ] as [String : Any]
         
-        APIService().patchWithAccessToken(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwams5NzExMTNAbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTczNjc3MDE4NX0.98H1XGxrsXZpdMBFqR9wVOrDXXWq3HmiNnNS0j3LOko") { response in
+        APIService().patchWithAccessToken(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
             switch response.code {
             case "COMMON200":
                 self.view.layoutIfNeeded()
@@ -231,7 +232,7 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
             "alarmId": alarmId
         ] as [String : Any]
         
-        APIService().patchWithAccessToken(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwams5NzExMTNAbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTczNjc3MDE4NX0.98H1XGxrsXZpdMBFqR9wVOrDXXWq3HmiNnNS0j3LOko") { response in
+        APIService().patchWithAccessToken(of: APIResponse<AlarmPatchResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
             switch response.code {
             case "COMMON200":
                 self.view.layoutIfNeeded()

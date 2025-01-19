@@ -142,6 +142,8 @@
 		C75C45822C5A3B6C001DDEA8 /* SUITE-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C75C457B2C5A3B6C001DDEA8 /* SUITE-Bold.otf */; };
 		C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */; };
 		C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78611C92D014B70002B67B4 /* PWAlertView.swift */; };
+		C7875A2F2D3609CF00D6FCF7 /* SukbakjiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */; };
+		C7875A312D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A302D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift */; };
 		C7980A832CEF7D5400475D94 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A822CEF7D5400475D94 /* APIService.swift */; };
 		C7980A862CEF838C00475D94 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */; };
 		C7980A882CEF841E00475D94 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A872CEF841E00475D94 /* AlertViewController.swift */; };
@@ -188,8 +190,6 @@
 		C7EFF5C82CFB2E2D0019F30D /* FavoritesLab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5C72CFB2E2D0019F30D /* FavoritesLab.swift */; };
 		C7EFF5CA2CFB2E4C0019F30D /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5C92CFB2E4C0019F30D /* MyProfile.swift */; };
 		C7EFF5CC2CFB2E690019F30D /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5CB2CFB2E690019F30D /* EditProfile.swift */; };
-		C7EFF5CE2CFB2ECC0019F30D /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5CD2CFB2ECC0019F30D /* Logout.swift */; };
-		C7EFF5D02CFB2EEA0019F30D /* ChangePW.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5CF2CFB2EEA0019F30D /* ChangePW.swift */; };
 		C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */; };
 		C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */; };
 		C7F455362C39B8F000A4D0EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F455352C39B8F000A4D0EE /* Assets.xcassets */; };
@@ -203,6 +203,16 @@
 		C7FD93762D2AD58A0084DC9C /* MyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FD93752D2AD58A0084DC9C /* MyAlarmViewController.swift */; };
 		C7FD93782D2AE5290084DC9C /* MyAlarmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FD93772D2AE5290084DC9C /* MyAlarmViewModel.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C7875A322D3609CF00D6FCF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7F455212C39B8EE00A4D0EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7F455282C39B8EE00A4D0EE;
+			remoteInfo = Sukbakji;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1E927070D6FD31E7F56AC090 /* Pods-Sukbakji.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.release.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.release.xcconfig"; sourceTree = "<group>"; };
@@ -342,6 +352,9 @@
 		C75C457B2C5A3B6C001DDEA8 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SUITE-Bold.otf"; path = "../../../../../Downloads/SUITE-otf/SUITE-Bold.otf"; sourceTree = "<group>"; };
 		C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchViewController.swift; sourceTree = "<group>"; };
 		C78611C92D014B70002B67B4 /* PWAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertView.swift; sourceTree = "<group>"; };
+		C7875A2C2D3609CF00D6FCF7 /* SukbakjiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SukbakjiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SukbakjiUITests.swift; sourceTree = "<group>"; };
+		C7875A302D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SukbakjiUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C7980A822CEF7D5400475D94 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C7980A872CEF841E00475D94 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -388,8 +401,6 @@
 		C7EFF5C72CFB2E2D0019F30D /* FavoritesLab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLab.swift; sourceTree = "<group>"; };
 		C7EFF5C92CFB2E4C0019F30D /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
 		C7EFF5CB2CFB2E690019F30D /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
-		C7EFF5CD2CFB2ECC0019F30D /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
-		C7EFF5CF2CFB2EEA0019F30D /* ChangePW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePW.swift; sourceTree = "<group>"; };
 		C7F455292C39B8EE00A4D0EE /* Sukbakji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sukbakji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -407,6 +418,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C7875A292D3609CF00D6FCF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7F455262C39B8EE00A4D0EE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -723,26 +741,14 @@
 			path = Chatting;
 			sourceTree = "<group>";
 		};
-		C71AE9B62CFB5FF10098FD2A /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				C71AE9B72CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift */,
-				C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */,
-				C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */,
-				C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */,
-				C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		C71E14842C44CE44003AFCB7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C71AE9B62CFB5FF10098FD2A /* Cell */,
+				C742431E2D3CC02F003EA9FF /* HomeModule */,
+				C742431F2D3CC03D003EA9FF /* MyPageModule */,
+				C74243202D3CC1F5003EA9FF /* EditInfoModule */,
+				C74243212D3CC207003EA9FF /* EditPWModule */,
 				C7BC68132CF6E50000CEC0F3 /* DataModel */,
-				C7DA37502CFCD31400B26549 /* ViewModel */,
-				C7E3EF552C60ABE300DDC36B /* HomeVC */,
-				C7E3EF562C60B9BF00DDC36B /* MyPageVC */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -750,10 +756,11 @@
 		C71E14852C44CE4B003AFCB7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				C757F81E2D0A9A6000685F1A /* Cell */,
+				C74243222D3CC807003EA9FF /* CalendarModule */,
+				C74243232D3CC86B003EA9FF /* UnivEnrollModule */,
+				C74243242D3CC8E0003EA9FF /* UnivCalendarModule */,
+				C74243252D3CC8EA003EA9FF /* MyAlarmModule */,
 				C7BC68142CF6E51600CEC0F3 /* DataModel */,
-				C757F81F2D0A9A6A00685F1A /* ViewModel */,
-				C7E3EF592C60BF4200DDC36B /* CalendarVC */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -781,30 +788,95 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		C757F81E2D0A9A6000685F1A /* Cell */ = {
+		C742431E2D3CC02F003EA9FF /* HomeModule */ = {
 			isa = PBXGroup;
 			children = (
+				C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */,
+				C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */,
+				C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */,
+				C7C657DC2CFD6891009FFA8E /* FavoriteLabViewModel.swift */,
+				C71AE9B72CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift */,
+				C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */,
+				C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */,
+				C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */,
+			);
+			path = HomeModule;
+			sourceTree = "<group>";
+		};
+		C742431F2D3CC03D003EA9FF /* MyPageModule */ = {
+			isa = PBXGroup;
+			children = (
+				C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */,
+				C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */,
+				C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */,
+			);
+			path = MyPageModule;
+			sourceTree = "<group>";
+		};
+		C74243202D3CC1F5003EA9FF /* EditInfoModule */ = {
+			isa = PBXGroup;
+			children = (
+				C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */,
+				C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */,
+				C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */,
+			);
+			path = EditInfoModule;
+			sourceTree = "<group>";
+		};
+		C74243212D3CC207003EA9FF /* EditPWModule */ = {
+			isa = PBXGroup;
+			children = (
+				C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */,
+			);
+			path = EditPWModule;
+			sourceTree = "<group>";
+		};
+		C74243222D3CC807003EA9FF /* CalendarModule */ = {
+			isa = PBXGroup;
+			children = (
+				C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */,
+				C7A23D8F2D0C2224008657B0 /* UpComingViewModel.swift */,
+				C7A23D912D0C277C008657B0 /* DateSelectViewModel.swift */,
 				C757F8202D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift */,
 				C757F8242D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift */,
 				C757F8222D0A9B5400685F1A /* UpComingCalendarCollectionViewCell.swift */,
+			);
+			path = CalendarModule;
+			sourceTree = "<group>";
+		};
+		C74243232D3CC86B003EA9FF /* UnivEnrollModule */ = {
+			isa = PBXGroup;
+			children = (
+				C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */,
+				C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */,
+				C7BDEA8C2D1338E000001927 /* UnivSearchViewModel.swift */,
 				C757F8262D0A9C8B00685F1A /* UnivSearchTableViewCell.swift */,
+			);
+			path = UnivEnrollModule;
+			sourceTree = "<group>";
+		};
+		C74243242D3CC8E0003EA9FF /* UnivCalendarModule */ = {
+			isa = PBXGroup;
+			children = (
+				C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */,
+				C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */,
+				C7BF189B2D26846C00E48F77 /* UnivCalendarViewModel.swift */,
 				C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */,
+			);
+			path = UnivCalendarModule;
+			sourceTree = "<group>";
+		};
+		C74243252D3CC8EA003EA9FF /* MyAlarmModule */ = {
+			isa = PBXGroup;
+			children = (
+				C7F951BD2D2A523500D07051 /* AlarmSettingViewController.swift */,
+				C7FD93752D2AD58A0084DC9C /* MyAlarmViewController.swift */,
+				C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */,
+				C7FD93772D2AE5290084DC9C /* MyAlarmViewModel.swift */,
 				C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */,
 				C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */,
 			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		C757F81F2D0A9A6A00685F1A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C7A23D8F2D0C2224008657B0 /* UpComingViewModel.swift */,
-				C7A23D912D0C277C008657B0 /* DateSelectViewModel.swift */,
-				C7BDEA8C2D1338E000001927 /* UnivSearchViewModel.swift */,
-				C7BF189B2D26846C00E48F77 /* UnivCalendarViewModel.swift */,
-				C7FD93772D2AE5290084DC9C /* MyAlarmViewModel.swift */,
-			);
-			path = ViewModel;
+			path = MyAlarmModule;
 			sourceTree = "<group>";
 		};
 		C763D71E2C3BBA8900201913 /* Main */ = {
@@ -814,6 +886,15 @@
 				C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		C7875A2D2D3609CF00D6FCF7 /* SukbakjiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */,
+				C7875A302D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift */,
+			);
+			path = SukbakjiUITests;
 			sourceTree = "<group>";
 		};
 		C7980A842CEF835B00475D94 /* Shared */ = {
@@ -835,6 +916,7 @@
 		C7B7A1662D001D3A00D5CE14 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				C730327B2D295BF800F717D0 /* BottomSheetViewController.swift */,
 				C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */,
 				C78611C92D014B70002B67B4 /* PWAlertView.swift */,
 				C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */,
@@ -855,8 +937,6 @@
 				C7EFF5C52CFB2E1A0019F30D /* HotPost.swift */,
 				C7EFF5C92CFB2E4C0019F30D /* MyProfile.swift */,
 				C7EFF5CB2CFB2E690019F30D /* EditProfile.swift */,
-				C7EFF5CD2CFB2ECC0019F30D /* Logout.swift */,
-				C7EFF5CF2CFB2EEA0019F30D /* ChangePW.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -887,64 +967,17 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
-		C7DA37502CFCD31400B26549 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */,
-				C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */,
-				C7C657DC2CFD6891009FFA8E /* FavoriteLabViewModel.swift */,
-				C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		C7DA4E3B2C611BF50092F342 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C7980A842CEF835B00475D94 /* Shared */,
 				C7DA4E3C2C611CE10092F342 /* APIConstants.swift */,
 				C7980A822CEF7D5400475D94 /* APIService.swift */,
 				C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */,
-				C7980A842CEF835B00475D94 /* Shared */,
 				415BBC0A2C7343F8002768EE /* AuthInterceptor.swift */,
 				415BBC0C2C73442F002768EE /* NetworkAuthManager.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		C7E3EF552C60ABE300DDC36B /* HomeVC */ = {
-			isa = PBXGroup;
-			children = (
-				C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */,
-			);
-			path = HomeVC;
-			sourceTree = "<group>";
-		};
-		C7E3EF562C60B9BF00DDC36B /* MyPageVC */ = {
-			isa = PBXGroup;
-			children = (
-				C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */,
-				C7C434EB2C5DF14E00BFB2D2 /* EditProfileViewController.swift */,
-				C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */,
-				C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */,
-				C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */,
-			);
-			path = MyPageVC;
-			sourceTree = "<group>";
-		};
-		C7E3EF592C60BF4200DDC36B /* CalendarVC */ = {
-			isa = PBXGroup;
-			children = (
-				C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */,
-				C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */,
-				C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */,
-				C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */,
-				C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */,
-				C7F951BD2D2A523500D07051 /* AlarmSettingViewController.swift */,
-				C7FD93752D2AD58A0084DC9C /* MyAlarmViewController.swift */,
-				C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */,
-				C730327B2D295BF800F717D0 /* BottomSheetViewController.swift */,
-			);
-			path = CalendarVC;
 			sourceTree = "<group>";
 		};
 		C7ECF5472C677F3C00283F06 /* Message */ = {
@@ -977,6 +1010,7 @@
 			isa = PBXGroup;
 			children = (
 				C7F4552B2C39B8EE00A4D0EE /* Sukbakji */,
+				C7875A2D2D3609CF00D6FCF7 /* SukbakjiUITests */,
 				C7F4552A2C39B8EE00A4D0EE /* Products */,
 				A7354ED8CCE70303B1993A7F /* Pods */,
 				58D31CF4877F1948B0BBDBEF /* Frameworks */,
@@ -987,6 +1021,7 @@
 			isa = PBXGroup;
 			children = (
 				C7F455292C39B8EE00A4D0EE /* Sukbakji.app */,
+				C7875A2C2D3609CF00D6FCF7 /* SukbakjiUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -997,7 +1032,6 @@
 				C7DA4E3B2C611BF50092F342 /* Network */,
 				412BFBE42C52A5D20099E442 /* Extension */,
 				C7B7A1662D001D3A00D5CE14 /* Component */,
-				7BFB8C9D2C63458300A31B70 /* Directory */,
 				412BFBD92C52252C0099E442 /* SignUp */,
 				412BFBD42C5224EB0099E442 /* Login */,
 				C763D71E2C3BBA8900201913 /* Main */,
@@ -1005,6 +1039,7 @@
 				C71E14852C44CE4B003AFCB7 /* Calendar */,
 				7BFDEC292C5224CD007280F8 /* Board */,
 				C70DB27D2C633C7100D6014B /* Chatting */,
+				7BFB8C9D2C63458300A31B70 /* Directory */,
 				C7A7BC262C3AF2D4007E66DA /* Font */,
 				C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */,
 				C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */,
@@ -1018,6 +1053,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C7875A2B2D3609CF00D6FCF7 /* SukbakjiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7875A362D3609CF00D6FCF7 /* Build configuration list for PBXNativeTarget "SukbakjiUITests" */;
+			buildPhases = (
+				C7875A282D3609CF00D6FCF7 /* Sources */,
+				C7875A292D3609CF00D6FCF7 /* Frameworks */,
+				C7875A2A2D3609CF00D6FCF7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7875A332D3609CF00D6FCF7 /* PBXTargetDependency */,
+			);
+			name = SukbakjiUITests;
+			productName = SukbakjiUITests;
+			productReference = C7875A2C2D3609CF00D6FCF7 /* SukbakjiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		C7F455282C39B8EE00A4D0EE /* Sukbakji */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7F4553D2C39B8F000A4D0EE /* Build configuration list for PBXNativeTarget "Sukbakji" */;
@@ -1047,6 +1100,10 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					C7875A2B2D3609CF00D6FCF7 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = C7F455282C39B8EE00A4D0EE;
+					};
 					C7F455282C39B8EE00A4D0EE = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -1066,11 +1123,19 @@
 			projectRoot = "";
 			targets = (
 				C7F455282C39B8EE00A4D0EE /* Sukbakji */,
+				C7875A2B2D3609CF00D6FCF7 /* SukbakjiUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C7875A2A2D3609CF00D6FCF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7F455272C39B8EE00A4D0EE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1142,6 +1207,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C7875A282D3609CF00D6FCF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7875A312D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift in Sources */,
+				C7875A2F2D3609CF00D6FCF7 /* SukbakjiUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7F455252C39B8EE00A4D0EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1197,7 +1271,6 @@
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BC682B2CF6E7F600CEC0F3 /* AlarmOnOff.swift in Sources */,
 				C7BC681B2CF6E56900CEC0F3 /* ApplyMentoring.swift in Sources */,
-				C7EFF5CE2CFB2ECC0019F30D /* Logout.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,
 				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,
 				7B1C535A2C69D85800C66D0D /* DirectoryFavoriteLabModel.swift in Sources */,
@@ -1316,7 +1389,6 @@
 				4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */,
 				C7EFF5C02CFB2D8F0019F30D /* UpComing.swift in Sources */,
 				C7A434F92C62233200C47F5E /* HexColor+.swift in Sources */,
-				C7EFF5D02CFB2EEA0019F30D /* ChangePW.swift in Sources */,
 				C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
@@ -1328,6 +1400,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C7875A332D3609CF00D6FCF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7F455282C39B8EE00A4D0EE /* Sukbakji */;
+			targetProxy = C7875A322D3609CF00D6FCF7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C7F455372C39B8F000A4D0EE /* LaunchScreen.storyboard */ = {
@@ -1341,6 +1421,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C7875A342D3609CF00D6FCF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8ZX684WX2;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JKPARK.SukbakjiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sukbakji;
+			};
+			name = Debug;
+		};
+		C7875A352D3609CF00D6FCF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8ZX684WX2;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JKPARK.SukbakjiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sukbakji;
+			};
+			name = Release;
+		};
 		C7F4553B2C39B8F000A4D0EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1527,6 +1643,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C7875A362D3609CF00D6FCF7 /* Build configuration list for PBXNativeTarget "SukbakjiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7875A342D3609CF00D6FCF7 /* Debug */,
+				C7875A352D3609CF00D6FCF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C7F455242C39B8EE00A4D0EE /* Build configuration list for PBXProject "Sukbakji" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

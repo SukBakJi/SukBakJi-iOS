@@ -182,7 +182,17 @@ class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDel
         let season = univCalendarItem.season
         let method = univCalendarItem.method
         
-        univDeleteAPI(univId: univId, season: season, method: method)
+        let deleteView = DeleteView(title: "대학 일정 삭제하기", content: "선택한 대학 일정을 삭제할까요? 삭제 후 복구되지 않습니다.", myAlarmViewModel: MyAlarmViewModel(), uniDelete: UniDelete(memberId: memberId, univId: univId, season: season, method: method))
+        
+        self.view.addSubview(deleteView)
+        deleteView.alpha = 0
+        deleteView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            deleteView.alpha = 1
+        }
     }
     
     private func univDeleteAPI(univId: Int, season: String, method: String) {

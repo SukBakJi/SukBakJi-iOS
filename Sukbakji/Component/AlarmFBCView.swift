@@ -38,7 +38,8 @@ final class AlarmFBCView: UIView {
         super.init(frame: .zero)
         
         self.targetViewController = target
-       setUI()
+        setUI()
+        setupGestureRecognizer()
     }
     
     required init?(coder: NSCoder) {
@@ -84,6 +85,21 @@ final class AlarmFBCView: UIView {
             make.trailing.equalTo(myAlarmButton.snp.leading).offset(-10)
             make.centerY.equalTo(myAlarmButton)
             make.height.equalTo(19)
+        }
+    }
+    
+    private func setupGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func handleBackgroundTap(_ gesture: UITapGestureRecognizer) {
+        // 터치한 위치가 버튼들의 영역 안에 있는지 확인
+        let location = gesture.location(in: self)
+        if !alarmButton.frame.contains(location) &&
+            !alarmSettingButton.frame.contains(location) &&
+            !myAlarmButton.frame.contains(location) {
+            dismissView()
         }
     }
     
