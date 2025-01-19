@@ -21,7 +21,6 @@ final class PWAlertView: UIView {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
     var alertLabel = UILabel().then {
-        $0.text = "카카오 로그인을 이용한 경우 앱 내 비밀번호 변경이 불가합니다"
         $0.textColor = .black
         $0.numberOfLines = 2
         $0.textAlignment = .left
@@ -36,10 +35,11 @@ final class PWAlertView: UIView {
         $0.setTitleColor(.white, for: .normal)
     }
     
-    init() {
-       super.init(frame: .zero)
-
-       setUI()
+    init(title: String) {
+        super.init(frame: .zero)
+        alertLabel.text = title
+        
+        setUI()
     }
     
     required init?(coder: NSCoder) {

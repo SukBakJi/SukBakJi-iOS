@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct AlarmPatch : Encodable {
-    let alarmId: Int
-}
-
 struct AlarmPatchResult : Codable {
     let alarmId: Int
     let onoff: Int

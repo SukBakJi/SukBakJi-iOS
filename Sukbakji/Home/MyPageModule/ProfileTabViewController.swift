@@ -13,6 +13,8 @@ import SnapKit
 
 class ProfileTabViewController: TabmanViewController {
     
+    private var provider = String()
+    
     private var viewControllers: Array<UIViewController> = []
     
     private let tabView = UIView().then {
@@ -108,7 +110,12 @@ class ProfileTabViewController: TabmanViewController {
     
     override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: NavigationDirection, animated: Bool) {
         if (index == 1) && (userPW == "") { // 두 번째 탭이 선택된 경우
-            let moveStopView = PWAlertView()
+            var moveStopView = PWAlertView(title: "")
+            if provider == "kakao" {
+                moveStopView = PWAlertView(title: "카카오 로그인을 이용한 경우 앱 내 비밀번호 변경이 불가합니다")
+            } else {
+                moveStopView = PWAlertView(title: "Apple 로그인을 이용한 경우 앱 내 비밀번호 변경이 불가합니다")
+            }
                 
             self.view.addSubview(moveStopView)
             moveStopView.alpha = 0
@@ -118,6 +125,23 @@ class ProfileTabViewController: TabmanViewController {
                 
             UIView.animate(withDuration: 0.3) {
                 moveStopView.alpha = 1
+            }
+        }
+    }
+    
+    private func setProfileAPI() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        let url = APIConstants.userMypage.path
+        
+        APIService().getWithAccessToken(of: APIResponse<MyProfile>.self, url: url, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
+                let data = response.result
+                self.provider = data.provider
+            default:
+                AlertController(message: response.message).show()
             }
         }
     }

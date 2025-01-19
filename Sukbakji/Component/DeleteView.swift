@@ -10,6 +10,10 @@ import Then
 import SnapKit
 
 final class DeleteView: UIView {
+    
+    private var myAlarmViewModel = MyAlarmViewModel()
+    private var uniDelete: UniDelete?
+    
     var mainView = UIView().then {
        $0.backgroundColor = .white
        $0.layer.cornerRadius = 12
@@ -49,10 +53,12 @@ final class DeleteView: UIView {
         $0.distribution = .fillEqually
     }
     
-    init(title: String, content: String, id: Int) {
+    init(title: String, content: String, myAlarmViewModel: MyAlarmViewModel, uniDelete: UniDelete) {
         super.init(frame: .zero)
-        titleLabel.text = title
-        contentLabel.text = content
+        self.titleLabel.text = title
+        self.contentLabel.text = content
+        self.myAlarmViewModel = myAlarmViewModel
+        self.uniDelete = uniDelete
         setUI()
     }
     
@@ -92,7 +98,7 @@ final class DeleteView: UIView {
             make.height.equalTo(48)
         }
         
-        self.okButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        self.okButton.addTarget(self, action: #selector(delete_Tapped), for: .touchUpInside)
         self.cancelButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
     }
     
@@ -102,5 +108,42 @@ final class DeleteView: UIView {
        }) { _ in
           self.removeFromSuperview() // 애니메이션 후 뷰에서 제거
        }
+    }
+    
+    @objc private func delete_Tapped() {
+        if myAlarmViewModel.selectMyAlarmItem == nil {
+            deleteUnivAPI()
+        } else {
+            
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+           self.alpha = 0
+        }) { _ in
+           self.removeFromSuperview() // 애니메이션 후 뷰에서 제거
+        }
+    }
+    
+    private func deleteUnivAPI() {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        
+        let url = APIConstants.calendarUniv.path
+        
+        let params = [
+            "memberId": uniDelete?.memberId ?? 0,
+            "univId": uniDelete?.univId ?? 0,
+            "season": uniDelete?.season ?? "",
+            "method": uniDelete?.method ?? ""
+        ] as [String : Any]
+        
+        APIService().deleteWithAccessToken(of: APIResponse<UniDeleteResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+            switch response.code {
+            case "COMMON200":
+                print("삭제 성공")
+            default:
+                AlertController(message: response.message).show()
+            }
+        }
     }
 }

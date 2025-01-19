@@ -7,13 +7,6 @@
 
 import Foundation
 
-struct UniPost : Encodable {
-    let memberId: Int
-    let univId: Int
-    let season: String
-    let method: String
-}
-
 struct UniPostResult : Codable {
     let univId: Int
     let memberId: Int

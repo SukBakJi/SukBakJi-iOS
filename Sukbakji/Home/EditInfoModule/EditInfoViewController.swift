@@ -244,18 +244,10 @@ class EditInfoViewController: UIViewController {
         }
         researchLabel.addImageAboveLabel(referenceView: belongTextField, spacing: 124)
         
-        self.view.addSubview(plusButton)
-        plusButton.snp.makeConstraints { make in
-            make.top.equalTo(certificateView.snp.bottom).offset(64)
-            make.trailing.equalToSuperview().inset(22)
-            make.width.equalTo(43)
-        }
-        
         self.view.addSubview(researchTopicCollectionView)
         researchTopicCollectionView.snp.makeConstraints { make in
-            make.centerY.equalTo(plusButton)
+            make.top.equalTo(researchTopicCollectionView.snp.bottom).offset(12)
             make.leading.equalToSuperview().inset(24)
-            make.trailing.equalTo(plusButton.snp.leading).inset(8)
            make.height.equalTo(88)
         }
         
@@ -264,6 +256,13 @@ class EditInfoViewController: UIViewController {
             make.top.equalTo(researchTopicCollectionView.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(1.2)
+        }
+        
+        self.view.addSubview(plusButton)
+        plusButton.snp.makeConstraints { make in
+            make.bottom.equalTo(backgroundLabel.snp.top).inset(64)
+            make.trailing.equalToSuperview().inset(22)
+            make.width.equalTo(43)
         }
         
         self.view.addSubview(editButton)
