@@ -386,6 +386,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
+        setButton.addTarget(self, action: #selector(set_Tapped), for: .touchUpInside)
     }
     
     private func appendMinute() {
@@ -617,6 +618,12 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
         }
+    }
+    
+    @objc private func set_Tapped() {
+//        setAlarmAPI()
+        self.navigationController?.popViewController(animated: true)
+        NotificationCenter.default.post(name: .isAlarmComplete, object: nil)
     }
 }
 
