@@ -105,7 +105,7 @@ class CalendarViewController: UIViewController {
         cv.backgroundColor = .clear
         cv.layer.masksToBounds = false// any value you want
         cv.layer.shadowOpacity = 0.2// any value you want
-        cv.layer.shadowRadius = 2 // any value you want
+        cv.layer.shadowRadius = 1 // any value you want
         cv.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         return cv
@@ -115,6 +115,9 @@ class CalendarViewController: UIViewController {
     }
     private let activityIndicator = UIActivityIndicatorView(style: .medium).then {
         $0.color = UIColor(named: "Coquelicot")
+    }
+    private let alarmCompleteImageView = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_AlarmComplete")
     }
     
     private let disposeBag = DisposeBag()
@@ -130,6 +133,8 @@ class CalendarViewController: UIViewController {
     private var selectedIndexPath: IndexPath?
     
     private var alarmDatas: [String] = []
+    
+    private var alarmFBCView = AlarmFBCView(target: UIViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -315,6 +320,16 @@ class CalendarViewController: UIViewController {
         activityIndicator.snp.makeConstraints { make in
             make.centerY.centerX.equalToSuperview()
         }
+        
+        self.view.addSubview(alarmCompleteImageView)
+        alarmCompleteImageView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(112)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(44)
+            make.width.equalTo(215)
+        }
+        alarmCompleteImageView.alpha = 0
+        NotificationCenter.default.addObserver(self, selector: #selector(alarmSettingComplete), name: .isAlarmComplete, object: nil)
     }
     
     private func configureCalendar() {
@@ -605,7 +620,7 @@ class CalendarViewController: UIViewController {
     }
 
     @objc func alarm_Tapped() {
-        let alarmFBCView = AlarmFBCView(target: self)
+        alarmFBCView = AlarmFBCView(target: self)
         
         self.view.addSubview(alarmFBCView)
         alarmFBCView.alpha = 0
@@ -614,7 +629,23 @@ class CalendarViewController: UIViewController {
         }
         
         UIView.animate(withDuration: 0.3) {
-            alarmFBCView.alpha = 1
+            self.alarmFBCView.alpha = 1
+        }
+    }
+    
+    @objc private func alarmSettingComplete() {
+        alarmFBCView.removeFromSuperview()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alarmCompleteImageView.alpha = 1 // 나타나게
+        }) { _ in
+            // 2초 후 사라지게
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.alarmCompleteImageView.alpha = 0 // 투명하게
+                }) { _ in
+                    self.alarmCompleteImageView.removeFromSuperview() // 뷰 제거
+                }
+            }
         }
     }
 }

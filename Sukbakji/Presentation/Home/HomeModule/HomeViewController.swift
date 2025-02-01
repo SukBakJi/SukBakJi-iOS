@@ -41,31 +41,31 @@ class HomeViewController: UIViewController {
     }
     private let nameLabel = UILabel().then {
         $0.text = "님, 반가워요!"
-        $0.font = UIFont(name: "Pretendard-Bold", size: 14)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
         $0.textColor = UIColor(named: "Coquelicot")
     }
     private let titleLabel = UILabel().then {
         $0.text = "석박지"
-        $0.font = UIFont(name: "Pretendard-Bold", size: 18)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = UIColor(named: "Coquelicot")
     }
     private let titleLabel2 = UILabel().then {
         $0.text = "와 함께"
-        $0.font = UIFont(name: "Pretendard-Bold", size: 18)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = .black
     }
     private let titleLabel3 = UILabel().then {
         $0.text = "오늘의 일정을 확인해 보세요!🏃"
-        $0.font = UIFont(name: "Pretendard-Bold", size: 18)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = .black
     }
     private let upComingView = UIView().then {
         $0.backgroundColor = .white
-        $0.layer.cornerRadius = 10
+        $0.layer.cornerRadius = 6
         $0.layer.masksToBounds = false
-        $0.layer.shadowOpacity = 0.2
-        $0.layer.shadowRadius = 2
-        $0.layer.shadowOffset = .init(width: 0, height: 0.2)
+        $0.clipsToBounds = true
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.gray100.cgColor
     }
     private let layerImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Layer")
@@ -85,12 +85,12 @@ class HomeViewController: UIViewController {
     }
     private let adLabel = UILabel().then {
         $0.text = "석박지"
-        $0.font = UIFont(name: "Pretendard-Bold", size: 18)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = UIColor(named: "Coquelicot")
     }
     private let adLabel2 = UILabel().then {
         $0.text = "가 Pick!했어요"
-        $0.font = UIFont(name: "Pretendard-Bold", size: 18)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = .black
     }
     private let adImageView = UIImageView().then {
@@ -114,7 +114,7 @@ class HomeViewController: UIViewController {
         cv.layer.cornerRadius = 15
         cv.layer.masksToBounds = false// any value you want
         cv.layer.shadowOpacity = 0.2// any value you want
-        cv.layer.shadowRadius = 2 // any value you want
+        cv.layer.shadowRadius = 1 // any value you want
         cv.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         return cv
@@ -153,7 +153,7 @@ class HomeViewController: UIViewController {
         $0.register(FavoriteBoardTableViewCell.self, forCellReuseIdentifier: FavoriteBoardTableViewCell.identifier)
         $0.layer.masksToBounds = true// any value you want
         $0.layer.shadowOpacity = 0.2// any value you want
-        $0.layer.shadowRadius = 2 // any value you want
+        $0.layer.shadowRadius = 1 // any value you want
         $0.layer.shadowOffset = .init(width: 0, height: 0.5)
         $0.contentInset = UIEdgeInsets(top: 12, left: 24, bottom: 0, right: 24)
     }
@@ -210,7 +210,7 @@ class HomeViewController: UIViewController {
         cv.backgroundColor = .clear
         cv.layer.masksToBounds = false// any value you want
         cv.layer.shadowOpacity = 0.2// any value you want
-        cv.layer.shadowRadius = 2 // any value you want
+        cv.layer.shadowRadius = 1 // any value you want
         cv.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         return cv
@@ -349,7 +349,7 @@ extension HomeViewController {
         self.upComingView.addSubview(layerImageView)
         layerImageView.snp.makeConstraints { make in
             make.top.bottom.leading.equalToSuperview()
-            make.width.equalTo(6)
+            make.width.equalTo(8)
         }
         
         self.upComingView.addSubview(upComingLabel)

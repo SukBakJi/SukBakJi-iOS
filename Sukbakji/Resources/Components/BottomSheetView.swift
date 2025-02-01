@@ -1,5 +1,5 @@
 //
-//  BottomSheetViewController.swift
+//  BottomSheetView.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 1/4/25.
