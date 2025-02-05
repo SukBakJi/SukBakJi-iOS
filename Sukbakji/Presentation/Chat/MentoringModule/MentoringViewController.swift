@@ -53,6 +53,19 @@ class MentoringViewController: UIViewController {
         $0.setImage(UIImage(named: "Sukbakji_MentorButton"), for: .normal)
         $0.contentMode = .scaleAspectFill
     }
+    private let MentorLabel = UILabel().then {
+        $0.text = "궁금한 점을 멘토에게 물어 보세요!"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+    }
+    private let MentorLabel2 = UILabel().then {
+        $0.text = "가고 싶은 연구실 선배와 함께 대화해봐요!"
+        $0.font = UIFont(name: "Pretendard-Regular", size: 14)
+    }
+    private var mentoringRoomTableView = UITableView().then {
+        $0.separatorStyle = .none
+        $0.backgroundColor = .clear
+        $0.register(MentoringRoomTableViewCell.self, forCellReuseIdentifier: MentoringRoomTableViewCell.identifier)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,5 +155,28 @@ class MentoringViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(92)
         }
+        
+        self.view.addSubview(MentorLabel)
+        MentorLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(66)
+            make.leading.equalToSuperview().offset(24)
+            make.height.equalTo(21)
+        }
+        MentorLabel.isHidden = true
+        
+        self.view.addSubview(MentorLabel2)
+        MentorLabel2.snp.makeConstraints { make in
+            make.top.equalTo(MentorLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(24)
+            make.height.equalTo(17)
+        }
+        MentorLabel2.isHidden = true
+        
+        self.view.addSubview(mentoringRoomTableView)
+        mentoringRoomTableView.snp.makeConstraints { make in
+            make.top.equalTo(MentorLabel2.snp.bottom).offset(6)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        mentoringRoomTableView.isHidden = true
     }
 }

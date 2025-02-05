@@ -168,11 +168,10 @@ class HomeViewController: UIViewController {
     private let hotPostImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Fire")
     }
-    private var hotPostTableView = UITableView(frame: .zero, style: .insetGrouped).then {
+    private var hotPostTableView = UITableView(frame: .zero, style: .plain).then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
         $0.register(HotPostTableViewCell.self, forCellReuseIdentifier: HotPostTableViewCell.identifier)
-        $0.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
     }
     private let layerView = UIView().then {
         $0.backgroundColor = UIColor(named: "Coquelicot")
@@ -689,21 +688,12 @@ extension HomeViewController {
         hotPostTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        let dataSource = RxTableViewSectionedReloadDataSource<HotPostSection>(
-            configureCell: { _, tableView, indexPath, item in
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: HotPostTableViewCell.identifier, for: indexPath) as? HotPostTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell.prepare(hotPost: item)
-                return cell
-            }
-        )
-        
         self.hotPostViewModel.hotPostItems
-                .map { [HotPostSection(items: $0)] } // 각 아이템을 섹션으로 만듦
-                .observe(on: MainScheduler.instance)
-                .bind(to: self.hotPostTableView.rx.items(dataSource: dataSource))
-                .disposed(by: disposeBag)
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.hotPostTableView.rx.items(cellIdentifier: HotPostTableViewCell.identifier, cellType: HotPostTableViewCell.self)) { index, item, cell in
+                cell.prepare(hotPost: item)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func setHotPostAPI() {
@@ -815,7 +805,7 @@ extension HomeViewController: UITableViewDelegate {
        if tableView == favoriteBoardTableView {
            return 56
        } else {
-           return 147
+           return 155
        }
    }
 }

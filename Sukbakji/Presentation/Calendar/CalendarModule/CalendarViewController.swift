@@ -79,11 +79,10 @@ class CalendarViewController: UIViewController {
         $0.textColor = .white
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
-    private var calendarDetailTableView = UITableView(frame: .zero, style: .insetGrouped).then {
+    private var calendarDetailTableView = UITableView(frame: .zero, style: .plain).then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
         $0.register(CalendarDetailTableViewCell.self, forCellReuseIdentifier: CalendarDetailTableViewCell.identifier)
-        $0.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
     }
     private let upComingLabel = UILabel().then {
         $0.text = "다가오는 일정"
@@ -530,21 +529,12 @@ class CalendarViewController: UIViewController {
         calendarDetailTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        let dataSource = RxTableViewSectionedReloadDataSource<DateSelectSection>(
-            configureCell: { _, tableView, indexPath, item in
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: CalendarDetailTableViewCell.identifier, for: indexPath) as? CalendarDetailTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell.prepare(dateSelectList: item)
-                return cell
-            }
-        )
-        
         self.dateSelectViewModel.dateSelectItems
-                .map { [DateSelectSection(items: $0)] } // 각 아이템을 섹션으로 만듦
-                .observe(on: MainScheduler.instance)
-                .bind(to: self.calendarDetailTableView.rx.items(dataSource: dataSource))
-                .disposed(by: disposeBag)
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.calendarDetailTableView.rx.items(cellIdentifier: CalendarDetailTableViewCell.identifier, cellType: CalendarDetailTableViewCell.self)) { index, item, cell in
+                cell.prepare(dateSelectList: item)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func setDateSelectAPI(date: String) {
@@ -652,7 +642,7 @@ class CalendarViewController: UIViewController {
 
 extension CalendarViewController: UICollectionViewDelegateFlowLayout, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return 48
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

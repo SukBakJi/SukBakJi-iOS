@@ -129,21 +129,12 @@ class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDel
         univCalendarTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        let dataSource = RxTableViewSectionedReloadDataSource<UnivListSection>(
-            configureCell: { _, tableView, indexPath, item in
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: UnivCalendarTableViewCell.identifier, for: indexPath) as? UnivCalendarTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell.prepare(univListResult: item)
-                return cell
-            }
-        )
-        
         self.univCalendarViewModel.univCalendarItems
-                .map { [UnivListSection(items: $0)] } // 각 아이템을 섹션으로 만듦
-                .observe(on: MainScheduler.instance)
-                .bind(to: self.univCalendarTableView.rx.items(dataSource: dataSource))
-                .disposed(by: disposeBag)
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.univCalendarTableView.rx.items(cellIdentifier: UnivCalendarTableViewCell.identifier, cellType: UnivCalendarTableViewCell.self)) { index, item, cell in
+                cell.prepare(univListResult: item)
+            }
+            .disposed(by: disposeBag)
         
         self.univCalendarTableView.rx.modelSelected(UnivListResult.self)
             .subscribe(onNext: { [weak self] univCalendarItem in
