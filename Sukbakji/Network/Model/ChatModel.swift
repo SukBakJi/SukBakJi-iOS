@@ -1,18 +1,11 @@
 //
-//  MentorList.swift
+//  ChatModel.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 11/27/24.
+//  Created by jaegu park on 1/31/25.
 //
 
 import Foundation
-
-struct MentorListResultModel : Codable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    var result: MentorListResponse
-}
 
 struct MentorListResponse : Codable {
     let memberId: Int
@@ -25,4 +18,15 @@ struct MentorList : Codable {
     let profName: String
     let deptName: String
     let researchTopic: [String]
+}
+
+struct MentorPostResponse : Codable {
+    let memberId: Int
+    let message: String
+}
+
+struct MentoringPostResponse : Codable {
+    let mentorId: Int
+    let menteeId: Int
+    let message: String
 }

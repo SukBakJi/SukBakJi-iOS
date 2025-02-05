@@ -1,15 +1,13 @@
 //
-//  MentoringRoomViewController.swift
+//  MessageChatViewController.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 9/9/24.
+//  Created by jaegu park on 2/3/25.
 //
 
 import UIKit
 
-class MentoringRoomViewController: UIViewController {
-    
-    @IBOutlet weak var mentoringRoomTV: UITableView!
+class MessageChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

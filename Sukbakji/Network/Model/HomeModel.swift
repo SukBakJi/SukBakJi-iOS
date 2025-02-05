@@ -37,19 +37,6 @@ struct HotPost : Codable {
     let views: Int
 }
 
-struct HotPostSection {
-    var items: [HotPost]
-}
-
-extension HotPostSection: SectionModelType {
-    typealias Item = HotPost
-    
-    init(original: HotPostSection, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
-
 struct MyProfile : Codable {
     let name: String?
     let provider: String

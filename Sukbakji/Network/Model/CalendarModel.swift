@@ -73,19 +73,6 @@ struct UnivListResult: Codable {
     let showing: Int
 }
 
-struct UnivListSection {
-    var items: [UnivListResult]
-}
-
-extension UnivListSection: SectionModelType {
-    typealias Item = UnivListResult
-    
-    init(original: UnivListSection, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
-
 struct UniDelete : Encodable {
     let memberId: Int
     let univId: Int
@@ -132,19 +119,6 @@ struct AlarmListResult : Codable {
     var onoff: Int
 }
 
-struct AlarmListSection {
-    var items: [AlarmListResult]
-}
-
-extension AlarmListSection: SectionModelType {
-    typealias Item = AlarmListResult
-    
-    init(original: AlarmListSection, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
-
 struct AlarmPatchResult : Codable {
     let alarmId: Int
     let onoff: Int
@@ -158,17 +132,4 @@ struct DateSelect : Codable {
 struct DateSelectList : Codable {
     let univId: Int
     let content: String
-}
-
-struct DateSelectSection {
-    var items: [DateSelectList]
-}
-
-extension DateSelectSection: SectionModelType {
-    typealias Item = DateSelectList
-    
-    init(original: DateSelectSection, items: [Item]) {
-        self = original
-        self.items = items
-    }
 }

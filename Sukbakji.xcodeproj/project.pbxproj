@@ -96,12 +96,8 @@
 		C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */; };
 		C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2842C633F7B00D6014B /* MessageViewController.swift */; };
 		C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2862C633F8600D6014B /* MentoringViewController.swift */; };
-		C71565042C8E9FF10038A782 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565032C8E9FF10038A782 /* RoomViewController.swift */; };
 		C71565062C8EA4430038A782 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565052C8EA4430038A782 /* ChatViewController.swift */; };
-		C71565082C8EB9810038A782 /* MentoringRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */; };
-		C715650A2C8EB9A30038A782 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565092C8EB9A30038A782 /* RoomTableViewCell.swift */; };
 		C715650C2C8EB9AC0038A782 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715650B2C8EB9AC0038A782 /* ChatTableViewCell.swift */; };
-		C715650E2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715650D2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift */; };
 		C71565122C8EBC0F0038A782 /* MentoringChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565112C8EBC0F0038A782 /* MentoringChatViewController.swift */; };
 		C71565142C8EBC1F0038A782 /* MentoringChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71565132C8EBC1F0038A782 /* MentoringChatTableViewCell.swift */; };
 		C71AE9B82CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9B72CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift */; };
@@ -124,6 +120,11 @@
 		C7347E422C4D453400688768 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E342C4D410300688768 /* Pretendard-Thin.otf */; };
 		C73483652D02A727004B6FA1 /* Dot+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483642D02A727004B6FA1 /* Dot+Extension.swift */; };
 		C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */; };
+		C73555052D4BCD86005BDB38 /* MessageRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */; };
+		C73555072D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */; };
+		C73555092D4BCE14005BDB38 /* MessageChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73555082D4BCE14005BDB38 /* MessageChattingTableViewCell.swift */; };
+		C735550B2D4BCE20005BDB38 /* MentoringChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735550A2D4BCE20005BDB38 /* MentoringChattingTableViewCell.swift */; };
+		C735550D2D4BD1B9005BDB38 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735550C2D4BD1B9005BDB38 /* ChatModel.swift */; };
 		C74C65D22D43919D00526D23 /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C65D12D43919D00526D23 /* CalendarModel.swift */; };
 		C74C65DD2D4398C900526D23 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C65DC2D4398C900526D23 /* UIColor+Extension.swift */; };
 		C7548F2A2D147CFF00BA687A /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7548F292D147CFF00BA687A /* UITextField+Extension.swift */; };
@@ -148,11 +149,11 @@
 		C7A23D902D0C2224008657B0 /* UpComingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A23D8F2D0C2224008657B0 /* UpComingViewModel.swift */; };
 		C7A23D922D0C277C008657B0 /* DateSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A23D912D0C277C008657B0 /* DateSelectViewModel.swift */; };
 		C7A434F92C62233200C47F5E /* HexColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor+.swift */; };
+		C7A777652D5078E900046367 /* MessageChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A777642D5078E900046367 /* MessageChatViewController.swift */; };
+		C7A777672D5079F700046367 /* ChatNavigaionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A777662D5079F700046367 /* ChatNavigaionBarView.swift */; };
+		C7A777692D507A1800046367 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A777682D507A1800046367 /* MessageInputView.swift */; };
 		C7B7A1682D001D8200D5CE14 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */; };
 		C7B7A16A2D00360500D5CE14 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7A1692D00360500D5CE14 /* UIButton+Extension.swift */; };
-		C7BC68172CF6E55000CEC0F3 /* MentorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68162CF6E55000CEC0F3 /* MentorList.swift */; };
-		C7BC68192CF6E55C00CEC0F3 /* ApplyMentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC68182CF6E55C00CEC0F3 /* ApplyMentor.swift */; };
-		C7BC681B2CF6E56900CEC0F3 /* ApplyMentoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC681A2CF6E56900CEC0F3 /* ApplyMentoring.swift */; };
 		C7BDEA8D2D1338E000001927 /* UnivSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDEA8C2D1338E000001927 /* UnivSearchViewModel.swift */; };
 		C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */; };
 		C7BF189C2D26846C00E48F77 /* UnivCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BF189B2D26846C00E48F77 /* UnivCalendarViewModel.swift */; };
@@ -287,12 +288,8 @@
 		C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTabViewController.swift; sourceTree = "<group>"; };
 		C70DB2842C633F7B00D6014B /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		C70DB2862C633F8600D6014B /* MentoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringViewController.swift; sourceTree = "<group>"; };
-		C71565032C8E9FF10038A782 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		C71565052C8EA4430038A782 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringRoomViewController.swift; sourceTree = "<group>"; };
-		C71565092C8EB9A30038A782 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
 		C715650B2C8EB9AC0038A782 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
-		C715650D2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringRoomTableViewCell.swift; sourceTree = "<group>"; };
 		C71565112C8EBC0F0038A782 /* MentoringChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringChatViewController.swift; sourceTree = "<group>"; };
 		C71565132C8EBC1F0038A782 /* MentoringChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringChatTableViewCell.swift; sourceTree = "<group>"; };
 		C71AE9B72CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -315,6 +312,11 @@
 		C7347E392C4D410300688768 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		C73483642D02A727004B6FA1 /* Dot+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dot+Extension.swift"; sourceTree = "<group>"; };
 		C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicViewModel.swift; sourceTree = "<group>"; };
+		C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomTableViewCell.swift; sourceTree = "<group>"; };
+		C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringRoomTableViewCell.swift; sourceTree = "<group>"; };
+		C73555082D4BCE14005BDB38 /* MessageChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageChattingTableViewCell.swift; sourceTree = "<group>"; };
+		C735550A2D4BCE20005BDB38 /* MentoringChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringChattingTableViewCell.swift; sourceTree = "<group>"; };
+		C735550C2D4BD1B9005BDB38 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		C74C65D12D43919D00526D23 /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 		C74C65D52D43970B00526D23 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Bold.otf"; sourceTree = "<group>"; };
 		C74C65D62D43970B00526D23 /* SUITE-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -347,11 +349,11 @@
 		C7A23D8F2D0C2224008657B0 /* UpComingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingViewModel.swift; sourceTree = "<group>"; };
 		C7A23D912D0C277C008657B0 /* DateSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectViewModel.swift; sourceTree = "<group>"; };
 		C7A434F82C62233200C47F5E /* HexColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HexColor+.swift"; sourceTree = "<group>"; };
+		C7A777642D5078E900046367 /* MessageChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageChatViewController.swift; sourceTree = "<group>"; };
+		C7A777662D5079F700046367 /* ChatNavigaionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNavigaionBarView.swift; sourceTree = "<group>"; };
+		C7A777682D507A1800046367 /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		C7B7A1692D00360500D5CE14 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
-		C7BC68162CF6E55000CEC0F3 /* MentorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorList.swift; sourceTree = "<group>"; };
-		C7BC68182CF6E55C00CEC0F3 /* ApplyMentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentor.swift; sourceTree = "<group>"; };
-		C7BC681A2CF6E56900CEC0F3 /* ApplyMentoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMentoring.swift; sourceTree = "<group>"; };
 		C7BDEA8C2D1338E000001927 /* UnivSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchViewModel.swift; sourceTree = "<group>"; };
 		C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarViewController.swift; sourceTree = "<group>"; };
 		C7BF189B2D26846C00E48F77 /* UnivCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarViewModel.swift; sourceTree = "<group>"; };
@@ -430,7 +432,7 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		412BFBE42C52A5D20099E442 /* Extension */ = {
+		412BFBE42C52A5D20099E442 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				417AADCA2C673B89002080E0 /* KeychainHelper.swift */,
@@ -446,7 +448,7 @@
 				C780C5072D4143D800DC2031 /* Notification+Extension.swift */,
 				C74C65DC2D4398C900526D23 /* UIColor+Extension.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		412F92282C5C95450042B834 /* ResearchTopic */ = {
@@ -691,25 +693,26 @@
 		C702436A2D3161EF00D6D3C1 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C73555082D4BCE14005BDB38 /* MessageChattingTableViewCell.swift */,
+				C735550A2D4BCE20005BDB38 /* MentoringChattingTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		C70DB27D2C633C7100D6014B /* Chatting */ = {
+		C70DB27D2C633C7100D6014B /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				C70DB27E2C633CBE00D6014B /* Chatting.storyboard */,
-				C702436A2D3161EF00D6D3C1 /* Cell */,
-				C7BC68152CF6E52C00CEC0F3 /* DataModel */,
 				C70DB2802C633CDB00D6014B /* ChattingViewController.swift */,
 				C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */,
-				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
-				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
+				C7A777622D5071A300046367 /* MessageModule */,
+				C7A777632D5071AE00046367 /* MentoringModule */,
+				C70DB27E2C633CBE00D6014B /* Chatting.storyboard */,
+				C702436A2D3161EF00D6D3C1 /* Cell */,
 				C70243692D3161EA00D6D3C1 /* ViewModel */,
 				C7ECF5472C677F3C00283F06 /* Message */,
 				C7ECF5482C677F4600283F06 /* Mentor */,
 			);
-			path = Chatting;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		C71E14842C44CE44003AFCB7 /* Home */ = {
@@ -874,6 +877,8 @@
 				C78611C92D014B70002B67B4 /* PWAlertView.swift */,
 				C730327B2D295BF800F717D0 /* BottomSheetView.swift */,
 				C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */,
+				C7A777662D5079F700046367 /* ChatNavigaionBarView.swift */,
+				C7A777682D507A1800046367 /* MessageInputView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -887,7 +892,7 @@
 				C71E14842C44CE44003AFCB7 /* Home */,
 				C71E14852C44CE4B003AFCB7 /* Calendar */,
 				7BFDEC292C5224CD007280F8 /* Board */,
-				C70DB27D2C633C7100D6014B /* Chatting */,
+				C70DB27D2C633C7100D6014B /* Chat */,
 				7BFB8C9D2C63458300A31B70 /* Directory */,
 			);
 			path = Presentation;
@@ -925,8 +930,28 @@
 			children = (
 				C79EE5362D3CD57000224920 /* HomeModel.swift */,
 				C74C65D12D43919D00526D23 /* CalendarModel.swift */,
+				C735550C2D4BD1B9005BDB38 /* ChatModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C7A777622D5071A300046367 /* MessageModule */ = {
+			isa = PBXGroup;
+			children = (
+				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
+				C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */,
+				C7A777642D5078E900046367 /* MessageChatViewController.swift */,
+			);
+			path = MessageModule;
+			sourceTree = "<group>";
+		};
+		C7A777632D5071AE00046367 /* MentoringModule */ = {
+			isa = PBXGroup;
+			children = (
+				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
+				C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */,
+			);
+			path = MentoringModule;
 			sourceTree = "<group>";
 		};
 		C7A7BC262C3AF2D4007E66DA /* Font */ = {
@@ -938,23 +963,33 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		C7AC382F2D538C26009A3157 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */,
+				C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		C7AC38302D538C5D009A3157 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C7F455372C39B8F000A4D0EE /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		C7B7A1662D001D3A00D5CE14 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C7F455352C39B8F000A4D0EE /* Assets.xcassets */,
+				C7F4553A2C39B8F000A4D0EE /* Info.plist */,
+				412BFBE42C52A5D20099E442 /* Extensions */,
 				C77C927D2D47D68C00B53F21 /* Components */,
 				C7A7BC262C3AF2D4007E66DA /* Font */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		C7BC68152CF6E52C00CEC0F3 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				C7BC68162CF6E55000CEC0F3 /* MentorList.swift */,
-				C7BC68182CF6E55C00CEC0F3 /* ApplyMentor.swift */,
-				C7BC681A2CF6E56900CEC0F3 /* ApplyMentoring.swift */,
-			);
-			path = DataModel;
 			sourceTree = "<group>";
 		};
 		C7DA4E3B2C611BF50092F342 /* Network */ = {
@@ -972,8 +1007,6 @@
 		C7ECF5472C677F3C00283F06 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				C71565032C8E9FF10038A782 /* RoomViewController.swift */,
-				C71565092C8EB9A30038A782 /* RoomTableViewCell.swift */,
 				C71565052C8EA4430038A782 /* ChatViewController.swift */,
 				C715650B2C8EB9AC0038A782 /* ChatTableViewCell.swift */,
 			);
@@ -983,8 +1016,6 @@
 		C7ECF5482C677F4600283F06 /* Mentor */ = {
 			isa = PBXGroup;
 			children = (
-				C71565072C8EB9810038A782 /* MentoringRoomViewController.swift */,
-				C715650D2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift */,
 				C71565112C8EBC0F0038A782 /* MentoringChatViewController.swift */,
 				C71565132C8EBC1F0038A782 /* MentoringChatTableViewCell.swift */,
 				C7ECF54B2C677F9200283F06 /* ApplyMentoringViewController.swift */,
@@ -1018,15 +1049,11 @@
 		C7F4552B2C39B8EE00A4D0EE /* Sukbakji */ = {
 			isa = PBXGroup;
 			children = (
+				C7AC38302D538C5D009A3157 /* Storyboard */,
+				C7AC382F2D538C26009A3157 /* Application */,
 				C7DA4E3B2C611BF50092F342 /* Network */,
-				412BFBE42C52A5D20099E442 /* Extension */,
 				C7B7A1662D001D3A00D5CE14 /* Resources */,
 				C77C927E2D47D6B600B53F21 /* Presentation */,
-				C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */,
-				C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */,
-				C7F455352C39B8F000A4D0EE /* Assets.xcassets */,
-				C7F455372C39B8F000A4D0EE /* LaunchScreen.storyboard */,
-				C7F4553A2C39B8F000A4D0EE /* Info.plist */,
 			);
 			path = Sukbakji;
 			sourceTree = "<group>";
@@ -1203,9 +1230,9 @@
 				7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */,
 				C71565062C8EA4430038A782 /* ChatViewController.swift in Sources */,
 				417AADC42C652228002080E0 /* LoginModel.swift in Sources */,
+				C7A777672D5079F700046367 /* ChatNavigaionBarView.swift in Sources */,
 				41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */,
 				C7A23D922D0C277C008657B0 /* DateSelectViewModel.swift in Sources */,
-				C71565042C8E9FF10038A782 /* RoomViewController.swift in Sources */,
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
 				C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */,
 				C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */,
@@ -1224,6 +1251,7 @@
 				C7ECF54C2C677F9200283F06 /* ApplyMentoringViewController.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */,
+				C73555072D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
 				417AADD12C673E42002080E0 /* SignUpDataManager.swift in Sources */,
 				7BFDEC3B2C5225E7007280F8 /* ColorConstants.swift in Sources */,
@@ -1236,7 +1264,6 @@
 				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
-				C7BC681B2CF6E56900CEC0F3 /* ApplyMentoring.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,
 				C780C5082D4143D800DC2031 /* Notification+Extension.swift in Sources */,
 				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,
@@ -1245,6 +1272,7 @@
 				7BFDEC312C52250A007280F8 /* BoardMasterViewController.swift in Sources */,
 				C7DA37522CFCD33A00B26549 /* HotPostViewModel.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
+				C73555092D4BCE14005BDB38 /* MessageChattingTableViewCell.swift in Sources */,
 				C757F8212D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift in Sources */,
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
@@ -1252,6 +1280,7 @@
 				C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
+				C7A777652D5078E900046367 /* MessageChatViewController.swift in Sources */,
 				C7A23D902D0C2224008657B0 /* UpComingViewModel.swift in Sources */,
 				C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */,
 				C7FD93762D2AD58A0084DC9C /* MyAlarmViewController.swift in Sources */,
@@ -1263,6 +1292,8 @@
 				417AADCB2C673B89002080E0 /* KeychainHelper.swift in Sources */,
 				C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */,
 				C7BF189C2D26846C00E48F77 /* UnivCalendarViewModel.swift in Sources */,
+				C7A777692D507A1800046367 /* MessageInputView.swift in Sources */,
+				C735550B2D4BCE20005BDB38 /* MentoringChattingTableViewCell.swift in Sources */,
 				C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */,
 				41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */,
 				7B3459FB2C688C6F008B711A /* BoardCommentedModel.swift in Sources */,
@@ -1272,7 +1303,6 @@
 				412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */,
 				C7F954E42C6FACFE00A4B275 /* MentoringPostViewController.swift in Sources */,
 				C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */,
-				C71565082C8EB9810038A782 /* MentoringRoomViewController.swift in Sources */,
 				417AADB72C606B17002080E0 /* TOSViewController.swift in Sources */,
 				C757F82B2D0A9D2000685F1A /* MyAlarmTableViewCell.swift in Sources */,
 				7B3459ED2C68870E008B711A /* BoardDetailModel.swift in Sources */,
@@ -1293,17 +1323,16 @@
 				4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */,
 				7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */,
 				7B3459F12C688AB1008B711A /* BoardScrapModel.swift in Sources */,
-				C7BC68192CF6E55C00CEC0F3 /* ApplyMentor.swift in Sources */,
 				C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */,
 				C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */,
 				C757F8232D0A9B5400685F1A /* UpComingCalendarCollectionViewCell.swift in Sources */,
+				C73555052D4BCD86005BDB38 /* MessageRoomTableViewCell.swift in Sources */,
 				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
 				C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */,
 				C75C0BE12D2D2A05000145F3 /* DeleteView.swift in Sources */,
 				C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */,
 				7B1C53482C69D10800C66D0D /* DirectoryLabSearchModel.swift in Sources */,
 				C7C657DD2CFD6891009FFA8E /* FavoriteLabViewModel.swift in Sources */,
-				C715650E2C8EB9B80038A782 /* MentoringRoomTableViewCell.swift in Sources */,
 				41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
 				415BBC0D2C73442F002768EE /* NetworkAuthManager.swift in Sources */,
@@ -1318,6 +1347,7 @@
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				4168E8552C690BBD00A0F292 /* ProfileDataManager.swift in Sources */,
 				C7BDEA8D2D1338E000001927 /* UnivSearchViewModel.swift in Sources */,
+				C735550D2D4BD1B9005BDB38 /* ChatModel.swift in Sources */,
 				C7A23D8E2D0C1087008657B0 /* AlarmFBCView.swift in Sources */,
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
 				C74C65D22D43919D00526D23 /* CalendarModel.swift in Sources */,
@@ -1330,7 +1360,6 @@
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
 				C74C65DD2D4398C900526D23 /* UIColor+Extension.swift in Sources */,
-				C715650A2C8EB9A30038A782 /* RoomTableViewCell.swift in Sources */,
 				C7F951C22D2A775000D07051 /* AlarmDateCollectionViewCell.swift in Sources */,
 				7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */,
 				412F92342C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift in Sources */,
@@ -1339,7 +1368,6 @@
 				C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */,
 				7B1C53502C69D53C00C66D0D /* DirectoryLabReviewListModel.swift in Sources */,
 				7B3459F32C688AEE008B711A /* BoardSearchModel.swift in Sources */,
-				C7BC68172CF6E55000CEC0F3 /* MentorList.swift in Sources */,
 				7B3459EB2C68858E008B711A /* BoardWritePostModel.swift in Sources */,
 				7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */,
 				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
