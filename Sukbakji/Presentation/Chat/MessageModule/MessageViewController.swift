@@ -33,6 +33,16 @@ class MessageViewController: UIViewController {
         $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for:.normal)
         $0.layer.cornerRadius = 8
     }
+    private let ChatLabel = UILabel().then {
+        $0.text = "게시판에서 궁금했던 내용, \n채팅에서 더 나눠 보세요"
+        $0.numberOfLines = 2
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+    }
+    private var messageRoomTableView = UITableView().then {
+        $0.separatorStyle = .none
+        $0.backgroundColor = .clear
+        $0.register(MessageRoomTableViewCell.self, forCellReuseIdentifier: MessageRoomTableViewCell.identifier)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,5 +88,20 @@ class MessageViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
+        
+        self.view.addSubview(ChatLabel)
+        ChatLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(66)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(52)
+        }
+        ChatLabel.isHidden = true
+        
+        self.view.addSubview(messageRoomTableView)
+        messageRoomTableView.snp.makeConstraints { make in
+            make.top.equalTo(ChatLabel.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        messageRoomTableView.isHidden = true
     }
 }

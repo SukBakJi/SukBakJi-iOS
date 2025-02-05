@@ -128,23 +128,6 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
             }
             .disposed(by: disposeBag)
         
-//        let dataSource = RxTableViewSectionedReloadDataSource<AlarmListSection>(
-//            configureCell: { _, tableView, indexPath, item in
-//                guard let cell = tableView.dequeueReusableCell(withIdentifier: MyAlarmTableViewCell.identifier, for: indexPath) as? MyAlarmTableViewCell else {
-//                    return UITableViewCell()
-//                }
-//                cell.prepare(alarmListResult: item)
-//                cell.delegate = self
-//                return cell
-//            }
-//        )
-//        
-//        self.myAlarmViewModel.myAlarmItems
-//                .map { [AlarmListSection(items: $0)] } // 각 아이템을 섹션으로 만듦
-//                .observe(on: MainScheduler.instance)
-//                .bind(to: self.myAlarmTableView.rx.items(dataSource: dataSource))
-//                .disposed(by: disposeBag)
-        
 //        self.myAlarmTableView.rx.modelSelected(AlarmListResult.self)
 //            .subscribe(onNext: { [weak self] myAlarmItem in
 //                guard let self = self else { return }
