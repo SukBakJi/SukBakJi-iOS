@@ -12,7 +12,7 @@ import SnapKit
 final class DeleteView: UIView {
     
     private var myAlarmViewModel = MyAlarmViewModel()
-    private var uniDelete: UniDelete?
+    private var univDelete: UnivDelete?
     
     var mainView = UIView().then {
        $0.backgroundColor = .white
@@ -53,12 +53,12 @@ final class DeleteView: UIView {
         $0.distribution = .fillEqually
     }
     
-    init(title: String, content: String, myAlarmViewModel: MyAlarmViewModel, uniDelete: UniDelete) {
+    init(title: String, content: String, myAlarmViewModel: MyAlarmViewModel, univDelete: UnivDelete) {
         super.init(frame: .zero)
         self.titleLabel.text = title
         self.contentLabel.text = content
         self.myAlarmViewModel = myAlarmViewModel
-        self.uniDelete = uniDelete
+        self.univDelete = univDelete
         setUI()
     }
     
@@ -131,13 +131,13 @@ final class DeleteView: UIView {
         let url = APIConstants.calendarUniv.path
         
         let params = [
-            "memberId": uniDelete?.memberId ?? 0,
-            "univId": uniDelete?.univId ?? 0,
-            "season": uniDelete?.season ?? "",
-            "method": uniDelete?.method ?? ""
+            "memberId": univDelete?.memberId ?? 0,
+            "univId": univDelete?.univId ?? 0,
+            "season": univDelete?.season ?? "",
+            "method": univDelete?.method ?? ""
         ] as [String : Any]
         
-        APIService().deleteWithAccessToken(of: APIResponse<UniDeleteResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
+        APIService().deleteWithAccessToken(of: APIResponse<UnivDeleteResult>.self, url: url, parameters: params, AccessToken: retrievedToken) { response in
             switch response.code {
             case "COMMON200":
                 print("삭제 성공")
