@@ -230,21 +230,20 @@ class HomeViewController: UIViewController {
         $0.contentMode = .scaleAspectFill
     }
     
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+    private var reactor = HomeReactor()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
-//        getMemberID()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
-//        getUserName()
-//        getViewSchedule()
+        bind(reactor: reactor)
 //        setFavoriteBoardAPI()
 //        setHotPostAPI()
 //        setFavoriteLabAPI()
@@ -563,80 +562,36 @@ extension HomeViewController {
 }
 
 extension HomeViewController {
-    
-    private func getUserName() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        let url = APIConstants.userMypage.path
+    private func bind(reactor: HomeReactor) {
+        // Action: View가 나타나면 API 요청
+        reactor.action.onNext(.getUserName)
+        reactor.action.onNext(.getViewSchedule)
+        reactor.action.onNext(.getMemberID)
         
-        APIService().getWithAccessToken(of: APIResponse<MyProfile>.self, url: url, AccessToken: retrievedToken) { response in
-            switch response.code {
-            case "COMMON200":
-                self.nameLabel.text = response.result.name
-                self.view.layoutIfNeeded()
-            default:
-                AlertController(message: response.message).show()
-            }
-        }
-    }
-    
-    private func getViewSchedule() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        let url = APIConstants.calendarSchedule.path
+        // State: 프로필 이름 업데이트
+        reactor.state.map { $0.name }
+            .distinctUntilChanged()
+            .bind(to: nameLabel.rx.text)
+            .disposed(by: disposeBag)
         
-        APIService().getWithAccessToken(of: APIResponse<UpComing>.self, url: url, AccessToken: retrievedToken) { response in
-            switch response.code {
-            case "COMMON200":
-                let scheduleArr = response.result.scheduleList
-                if scheduleArr.count >= 1{
-                    let upComingdDay = scheduleArr[0].dday
-                    let upComingContent = scheduleArr[0].content
-                    let upComingUniv = scheduleArr[0].univId
-                    
-                    if upComingdDay < 0 {
-                        let dayNum = abs(upComingdDay)
-                        self.upComingDate.text = "D+\(dayNum)"
-                    } else {
-                        self.upComingDate.text = "D-\(upComingdDay )"
-                    }
-                    if upComingUniv == 1 {
-                        self.upComingTitle.text = "서울대학교 \(upComingContent)"
-                    } else if upComingUniv == 2 {
-                        self.upComingTitle.text = "연세대학교 \(upComingContent)"
-                    } else if upComingUniv == 3 {
-                        self.upComingTitle.text = "고려대학교 \(upComingContent)"
-                    } else if upComingUniv == 4 {
-                        self.upComingTitle.text = "카이스트 \(upComingContent)"
-                    }
-                } else {
-                    self.upComingDate.isHidden = true
-                    self.upComingTitle.text = "다가오는 일정이 없습니다"
-                }
-                self.view.layoutIfNeeded()
-            default:
-                AlertController(message: response.message).show()
-            }
-        }
-    }
-    
-    private func getMemberID() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        let url = APIConstants.calendarMember.path
+        // State: 일정 정보 업데이트
+        reactor.state.map { $0.upComingDate }
+            .distinctUntilChanged()
+            .bind(to: upComingDate.rx.text)
+            .disposed(by: disposeBag)
         
-        APIService().getWithAccessToken(of: APIResponse<MemberId>.self, url: url, AccessToken: retrievedToken) { response in
-            switch response.code {
-            case "COMMON200":
-                let memberId = response.result.memberId
-                UserDefaults.standard.set(memberId, forKey: "memberID")
-            default:
-                AlertController(message: response.message).show()
-            }
-        }
+        reactor.state.map { $0.upComingTitle }
+            .distinctUntilChanged()
+            .bind(to: upComingTitle.rx.text)
+            .disposed(by: disposeBag)
+        
+        // State: 에러 발생 시 Alert 표시
+        reactor.state.map { $0.errorMessage }
+            .compactMap { $0 }
+            .subscribe(onNext: { message in
+                AlertController(message: message).show()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setFavoriteBoardData() {
