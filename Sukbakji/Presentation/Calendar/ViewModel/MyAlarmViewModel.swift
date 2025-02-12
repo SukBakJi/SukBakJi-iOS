@@ -24,3 +24,7 @@ final class MyAlarmViewModel {
     }
 }
 
+protocol myAlarmSwitchDelegate: AnyObject {
+    func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool)
+    func editToggled(cell: MyAlarmTableViewCell)
+}

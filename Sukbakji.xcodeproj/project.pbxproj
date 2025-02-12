@@ -90,6 +90,7 @@
 		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
 		C704BD882D2BBE9700954EAD /* EditMyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */; };
+		C70C31392D5C6CFC00F17D72 /* HomeReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C31382D5C6CFC00F17D72 /* HomeReactor.swift */; };
 		C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2802C633CDB00D6014B /* ChattingViewController.swift */; };
 		C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */; };
 		C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2842C633F7B00D6014B /* MessageViewController.swift */; };
@@ -112,7 +113,7 @@
 		C7347E402C4D452E00688768 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E332C4D410200688768 /* Pretendard-Regular.otf */; };
 		C7347E412C4D453000688768 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */; };
 		C7347E422C4D453400688768 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E342C4D410300688768 /* Pretendard-Thin.otf */; };
-		C73483652D02A727004B6FA1 /* Dot+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483642D02A727004B6FA1 /* Dot+Extension.swift */; };
+		C73483652D02A727004B6FA1 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483642D02A727004B6FA1 /* UILabel+Extension.swift */; };
 		C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */; };
 		C73555052D4BCD86005BDB38 /* MessageRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */; };
 		C73555072D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */; };
@@ -149,13 +150,13 @@
 		C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78611C92D014B70002B67B4 /* PWAlertView.swift */; };
 		C7875A2F2D3609CF00D6FCF7 /* SukbakjiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */; };
 		C7875A312D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A302D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift */; };
+		C791A2E72D5BAE3300F703B0 /* TabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791A2E62D5BAE3300F703B0 /* TabBar+Extension.swift */; };
 		C7980A832CEF7D5400475D94 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A822CEF7D5400475D94 /* APIService.swift */; };
 		C7980A862CEF838C00475D94 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */; };
 		C7980A882CEF841E00475D94 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A872CEF841E00475D94 /* AlertViewController.swift */; };
 		C7A23D8E2D0C1087008657B0 /* AlarmFBCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */; };
 		C7A23D902D0C2224008657B0 /* UpComingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A23D8F2D0C2224008657B0 /* UpComingViewModel.swift */; };
 		C7A23D922D0C277C008657B0 /* DateSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A23D912D0C277C008657B0 /* DateSelectViewModel.swift */; };
-		C7A434F92C62233200C47F5E /* HexColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor+.swift */; };
 		C7A777672D5079F700046367 /* ChatNavigaionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A777662D5079F700046367 /* ChatNavigaionBarView.swift */; };
 		C7A777692D507A1800046367 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A777682D507A1800046367 /* MessageInputView.swift */; };
 		C7B7A1682D001D8200D5CE14 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */; };
@@ -174,7 +175,6 @@
 		C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E3C2C611CE10092F342 /* APIConstants.swift */; };
 		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
 		C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */; };
-		C7EA31112C777B0900EFC53B /* KeyboardDown+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EA31102C777B0900EFC53B /* KeyboardDown+.swift */; };
 		C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */; };
 		C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */; };
 		C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */; };
@@ -184,7 +184,6 @@
 		C7F951C02D2A738700D07051 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951BF2D2A738700D07051 /* DateView.swift */; };
 		C7F951C22D2A775000D07051 /* AlarmDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */; };
 		C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */; };
-		C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */; };
 		C7FD93762D2AD58A0084DC9C /* MyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FD93752D2AD58A0084DC9C /* MyAlarmViewController.swift */; };
 		C7FD93782D2AE5290084DC9C /* MyAlarmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FD93772D2AE5290084DC9C /* MyAlarmViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -285,6 +284,7 @@
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyAlarmViewController.swift; sourceTree = "<group>"; };
+		C70C31382D5C6CFC00F17D72 /* HomeReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReactor.swift; sourceTree = "<group>"; };
 		C70DB2802C633CDB00D6014B /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTabViewController.swift; sourceTree = "<group>"; };
 		C70DB2842C633F7B00D6014B /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -307,7 +307,7 @@
 		C7347E372C4D410300688768 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		C7347E392C4D410300688768 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
-		C73483642D02A727004B6FA1 /* Dot+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dot+Extension.swift"; sourceTree = "<group>"; };
+		C73483642D02A727004B6FA1 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicViewModel.swift; sourceTree = "<group>"; };
 		C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomTableViewCell.swift; sourceTree = "<group>"; };
 		C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringRoomTableViewCell.swift; sourceTree = "<group>"; };
@@ -352,13 +352,13 @@
 		C7875A2C2D3609CF00D6FCF7 /* SukbakjiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SukbakjiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SukbakjiUITests.swift; sourceTree = "<group>"; };
 		C7875A302D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SukbakjiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C791A2E62D5BAE3300F703B0 /* TabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Extension.swift"; sourceTree = "<group>"; };
 		C7980A822CEF7D5400475D94 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C7980A872CEF841E00475D94 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmFBCView.swift; sourceTree = "<group>"; };
 		C7A23D8F2D0C2224008657B0 /* UpComingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingViewModel.swift; sourceTree = "<group>"; };
 		C7A23D912D0C277C008657B0 /* DateSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectViewModel.swift; sourceTree = "<group>"; };
-		C7A434F82C62233200C47F5E /* HexColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HexColor+.swift"; sourceTree = "<group>"; };
 		C7A777662D5079F700046367 /* ChatNavigaionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNavigaionBarView.swift; sourceTree = "<group>"; };
 		C7A777682D507A1800046367 /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
@@ -377,7 +377,6 @@
 		C7DA4E3C2C611CE10092F342 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivRecruitViewController.swift; sourceTree = "<group>"; };
-		C7EA31102C777B0900EFC53B /* KeyboardDown+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardDown+.swift"; sourceTree = "<group>"; };
 		C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		C7F455292C39B8EE00A4D0EE /* Sukbakji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sukbakji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -389,7 +388,6 @@
 		C7F951BF2D2A738700D07051 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
-		C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarShadow.swift; sourceTree = "<group>"; };
 		C7FD93752D2AD58A0084DC9C /* MyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmViewController.swift; sourceTree = "<group>"; };
 		C7FD93772D2AE5290084DC9C /* MyAlarmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -444,9 +442,8 @@
 				417AADCA2C673B89002080E0 /* KeychainHelper.swift */,
 				41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout.swift */,
 				412BFBE52C52A5E30099E442 /* addBorder+.swift */,
-				C7A434F82C62233200C47F5E /* HexColor+.swift */,
-				C7EA31102C777B0900EFC53B /* KeyboardDown+.swift */,
-				C73483642D02A727004B6FA1 /* Dot+Extension.swift */,
+				C791A2E62D5BAE3300F703B0 /* TabBar+Extension.swift */,
+				C73483642D02A727004B6FA1 /* UILabel+Extension.swift */,
 				C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */,
 				C7B7A1692D00360500D5CE14 /* UIButton+Extension.swift */,
 				C7548F292D147CFF00BA687A /* UITextField+Extension.swift */,
@@ -705,6 +702,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		C70C31372D5C6CE600F17D72 /* Reactor */ = {
+			isa = PBXGroup;
+			children = (
+				C70C31382D5C6CFC00F17D72 /* HomeReactor.swift */,
+			);
+			path = Reactor;
+			sourceTree = "<group>";
+		};
 		C70DB27D2C633C7100D6014B /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,6 +724,7 @@
 		C71E14842C44CE44003AFCB7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C70C31372D5C6CE600F17D72 /* Reactor */,
 				C73C5C442D59179000091C5C /* Model */,
 				C74A159B2D5A4A6700A1698B /* View */,
 				C74A159C2D5A4A7600A1698B /* ViewModel */,
@@ -898,8 +904,7 @@
 		C763D71E2C3BBA8900201913 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */,
-				C7FB5A9E2C43E7D7001857F2 /* TabbarShadow.swift */,
+				C791A2E82D5BAE4F00F703B0 /* View */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -942,6 +947,14 @@
 				C7875A302D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift */,
 			);
 			path = SukbakjiUITests;
+			sourceTree = "<group>";
+		};
+		C791A2E82D5BAE4F00F703B0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C7980A842CEF835B00475D94 /* Shared */ = {
@@ -1223,7 +1236,6 @@
 				C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */,
 				C7B7A16A2D00360500D5CE14 /* UIButton+Extension.swift in Sources */,
 				417AADCD2C673E28002080E0 /* SignUpAPIInput.swift in Sources */,
-				C7EA31112C777B0900EFC53B /* KeyboardDown+.swift in Sources */,
 				4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */,
 				7B3459F92C688C2D008B711A /* BoardWrittenModel.swift in Sources */,
 				417AADBB2C60A8AA002080E0 /* TOSTableViewCell.swift in Sources */,
@@ -1267,7 +1279,6 @@
 				C74A15A82D5A4FAB00A1698B /* UnivPost.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
 				C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */,
-				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7A23D902D0C2224008657B0 /* UpComingViewModel.swift in Sources */,
 				C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */,
@@ -1312,6 +1323,7 @@
 				C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */,
 				C757F8232D0A9B5400685F1A /* UpComingCalendarCollectionViewCell.swift in Sources */,
 				C73555052D4BCD86005BDB38 /* MessageRoomTableViewCell.swift in Sources */,
+				C791A2E72D5BAE3300F703B0 /* TabBar+Extension.swift in Sources */,
 				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
 				C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */,
 				C75C0BE12D2D2A05000145F3 /* DeleteView.swift in Sources */,
@@ -1355,11 +1367,12 @@
 				C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */,
 				7B1C53502C69D53C00C66D0D /* DirectoryLabReviewListModel.swift in Sources */,
 				7B3459F32C688AEE008B711A /* BoardSearchModel.swift in Sources */,
+				C70C31392D5C6CFC00F17D72 /* HomeReactor.swift in Sources */,
 				7B3459EB2C68858E008B711A /* BoardWritePostModel.swift in Sources */,
 				7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */,
 				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
 				C757F8252D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift in Sources */,
-				C73483652D02A727004B6FA1 /* Dot+Extension.swift in Sources */,
+				C73483652D02A727004B6FA1 /* UILabel+Extension.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
@@ -1367,7 +1380,6 @@
 				7B1C53522C69D56A00C66D0D /* DirectoryLabReviewSearchModel.swift in Sources */,
 				C7FD93782D2AE5290084DC9C /* MyAlarmViewModel.swift in Sources */,
 				4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */,
-				C7A434F92C62233200C47F5E /* HexColor+.swift in Sources */,
 				C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,

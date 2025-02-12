@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
 struct APIService {
     
@@ -31,6 +32,32 @@ struct APIService {
                 } else {
                     AlertController(message: error.localizedDescription).show()
                 }
+            }
+        }
+    }
+    
+    func getWithToken<T: Codable>(of type: T.Type, url: URLConvertible, accessToken: String) -> Single<T> {
+        return Single<T>.create { single in
+            let headers: HTTPHeaders = [
+                "Accept": "application/json",
+                "Authorization": "Bearer \(accessToken)"
+            ]
+
+            let request = AF.request(url,
+                                     method: .get,
+                                     encoding: JSONEncoding(options: []),
+                                     headers: headers)
+                .responseDecodable(of: type) { response in
+                    switch response.result {
+                    case .success(let value):
+                        single(.success(value)) // 성공 시 Single을 방출
+                    case .failure(let error):
+                        single(.failure(error)) // 실패 시 에러 방출
+                    }
+                }
+            
+            return Disposables.create {
+                request.cancel() // 구독이 해제되면 요청 취소
             }
         }
     }

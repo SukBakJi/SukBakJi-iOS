@@ -13,3 +13,7 @@ final class UnivCalendarViewModel {
     var selectUnivCalendarItem: UnivListResult?
     var univCalendarItems: BehaviorRelay<[UnivListResult]> = BehaviorRelay(value: [])
 }
+
+protocol univCalendarDeleteDelegate: AnyObject {
+    func univDelete_Tapped(cell: UnivCalendarTableViewCell)
+}

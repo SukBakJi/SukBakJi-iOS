@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDeleteDelegate {
+class UnivCalendarViewController: UIViewController, univCalendarDeleteDelegate {
     
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     

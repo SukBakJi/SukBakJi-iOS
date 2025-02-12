@@ -9,16 +9,11 @@ import UIKit
 import Then
 import SnapKit
 
-protocol MyAlarmTableViewCellSwitchDelegate: AnyObject {
-    func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool)
-    func editToggled(cell: MyAlarmTableViewCell)
-}
-
 class MyAlarmTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: MyAlarmTableViewCell.self)
     
-    weak var delegate: MyAlarmTableViewCellSwitchDelegate?
+    weak var delegate: myAlarmSwitchDelegate?
     
     private let labelView = UIView().then {
         $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
@@ -59,7 +54,7 @@ class MyAlarmTableViewCell: UITableViewCell {
     }
     
     private func setUI() {
-        self.contentView.backgroundColor = UIColor(named: "ViewBackground")
+        self.contentView.backgroundColor = .gray50
         self.contentView.layer.cornerRadius = 12
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor

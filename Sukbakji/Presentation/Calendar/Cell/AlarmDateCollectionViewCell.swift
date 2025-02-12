@@ -43,7 +43,7 @@ class AlarmDateCollectionViewCell: UICollectionViewCell {
                     self.dayLabel.textColor = .white
                 }
             } else {
-                self.dayView.backgroundColor = UIColor(named: "ViewBackground")
+                self.dayView.backgroundColor = .gray50
                 self.dayLabel.textColor = .black
             }
         }

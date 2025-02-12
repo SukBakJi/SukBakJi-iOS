@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegate {
+class MyAlarmViewController: UIViewController, myAlarmSwitchDelegate {
 
     private let myAlarmViewModel = MyAlarmViewModel()
 

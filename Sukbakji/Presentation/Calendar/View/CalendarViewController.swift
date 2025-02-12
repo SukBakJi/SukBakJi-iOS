@@ -50,7 +50,7 @@ class CalendarViewController: UIViewController {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     private let calendarBackgroundView = UIView().then {
-        $0.backgroundColor = UIColor(named: "ViewBackground")
+        $0.backgroundColor = .gray50
         $0.layer.cornerRadius = 10
     }
     private lazy var weekStackView = UIStackView()

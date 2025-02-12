@@ -11,15 +11,11 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-protocol UnivCalendarTableViewCellDeleteDelegate: AnyObject {
-    func univDelete_Tapped(cell: UnivCalendarTableViewCell)
-}
-
 class UnivCalendarTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: UnivCalendarTableViewCell.self)
     
-    weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
+    weak var delegate: univCalendarDeleteDelegate?
     
     private let selectView = UIView().then {
         $0.backgroundColor = .gray200

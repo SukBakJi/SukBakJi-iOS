@@ -12,14 +12,13 @@ target 'Sukbakji' do
   pod 'DropDown', '2.3.13'
   pod 'Alamofire'
   pod 'Tabman', '~> 3.0'
-  pod 'MaterialComponents/BottomSheet'
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
-  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   pod 'RxSwift', '6.8.0'
   pod 'RxCocoa', '6.8.0'
   pod 'RxDataSources', '~> 5.0'
+  pod 'ReactorKit'
 
 end
 post_install do |installer|
