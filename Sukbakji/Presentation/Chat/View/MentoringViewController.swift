@@ -138,7 +138,7 @@ class MentoringViewController: UIViewController {
         
         if let range = fullText.range(of: changeText) {
             let nsRange = NSRange(range, in: fullText)
-            attributedString.addAttribute(.foregroundColor, value: UIColor(named: "Coquelicot")!, range: nsRange)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
         }
         howToMentoringLabel.attributedText = attributedString
         

@@ -25,7 +25,7 @@ extension UITextView {
     
     func addTVRedUnderline() {
         let underline = UIView()
-        underline.backgroundColor = UIColor(hexCode: "FF4A4A")
+        underline.backgroundColor = .gray300
         self.superview?.addSubview(underline)
         
         underline.snp.makeConstraints { make in

@@ -39,7 +39,7 @@ class CalendarDetailTableViewCell: UITableViewCell {
     }
     
     private func setUI() {
-        self.contentView.backgroundColor = UIColor(named: "ViewBackground")
+        self.contentView.backgroundColor = UIColor.gray50
         self.contentView.layer.cornerRadius = 12
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor

@@ -101,6 +101,13 @@
 		C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */; };
 		C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */; };
 		C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */; };
+		C7277D332D5D0C7100E9D14B /* SUITE-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C74C65D92D43970C00526D23 /* SUITE-SemiBold.otf */; };
+		C7277D342D5D0C7300E9D14B /* SUITE-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C74C65D72D43970B00526D23 /* SUITE-Regular.otf */; };
+		C7277D352D5D0C7600E9D14B /* SUITE-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C74C65DB2D43970C00526D23 /* SUITE-Medium.otf */; };
+		C7277D362D5D0C7800E9D14B /* SUITE-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C74C65D82D43970C00526D23 /* SUITE-Light.otf */; };
+		C7277D372D5D0C7A00E9D14B /* SUITE-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C74C65DA2D43970C00526D23 /* SUITE-Heavy.otf */; };
+		C7277D382D5D0C7C00E9D14B /* SUITE-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C74C65D62D43970B00526D23 /* SUITE-ExtraBold.otf */; };
+		C7277D392D5D0C7F00E9D14B /* SUITE-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C74C65D52D43970B00526D23 /* SUITE-Bold.otf */; };
 		C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CEED52D258CB500EED814 /* UnivStopView.swift */; };
 		C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730327B2D295BF800F717D0 /* BottomSheetView.swift */; };
 		C73032802D2974D100F717D0 /* EditUnivCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */; };
@@ -150,6 +157,9 @@
 		C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78611C92D014B70002B67B4 /* PWAlertView.swift */; };
 		C7875A2F2D3609CF00D6FCF7 /* SukbakjiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */; };
 		C7875A312D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A302D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift */; };
+		C78BB0402D5E5029008C2800 /* MyPageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78BB03F2D5E5029008C2800 /* MyPageReactor.swift */; };
+		C78BB0422D5E5035008C2800 /* EditInfoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78BB0412D5E5035008C2800 /* EditInfoReactor.swift */; };
+		C78BB0442D5E503E008C2800 /* EditPWReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78BB0432D5E503E008C2800 /* EditPWReactor.swift */; };
 		C7980A832CEF7D5400475D94 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A822CEF7D5400475D94 /* APIService.swift */; };
 		C7980A862CEF838C00475D94 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */; };
 		C7980A882CEF841E00475D94 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A872CEF841E00475D94 /* AlertViewController.swift */; };
@@ -354,6 +364,9 @@
 		C7875A2C2D3609CF00D6FCF7 /* SukbakjiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SukbakjiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SukbakjiUITests.swift; sourceTree = "<group>"; };
 		C7875A302D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SukbakjiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C78BB03F2D5E5029008C2800 /* MyPageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageReactor.swift; sourceTree = "<group>"; };
+		C78BB0412D5E5035008C2800 /* EditInfoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoReactor.swift; sourceTree = "<group>"; };
+		C78BB0432D5E503E008C2800 /* EditPWReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWReactor.swift; sourceTree = "<group>"; };
 		C7980A822CEF7D5400475D94 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C7980A852CEF838C00475D94 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C7980A872CEF841E00475D94 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -711,6 +724,9 @@
 			isa = PBXGroup;
 			children = (
 				C70C313B2D5CC2DC00F17D72 /* HomeReactor.swift */,
+				C78BB03F2D5E5029008C2800 /* MyPageReactor.swift */,
+				C78BB0412D5E5035008C2800 /* EditInfoReactor.swift */,
+				C78BB0432D5E503E008C2800 /* EditPWReactor.swift */,
 			);
 			path = Reactor;
 			sourceTree = "<group>";
@@ -1145,16 +1161,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7347E3D2C4D452700688768 /* Pretendard-ExtraLight.otf in Resources */,
+				C7277D362D5D0C7800E9D14B /* SUITE-Light.otf in Resources */,
 				C7347E402C4D452E00688768 /* Pretendard-Regular.otf in Resources */,
 				C7F455392C39B8F000A4D0EE /* LaunchScreen.storyboard in Resources */,
+				C7277D342D5D0C7300E9D14B /* SUITE-Regular.otf in Resources */,
+				C7277D332D5D0C7100E9D14B /* SUITE-SemiBold.otf in Resources */,
 				C7347E412C4D453000688768 /* Pretendard-SemiBold.otf in Resources */,
 				C7347E3E2C4D452A00688768 /* Pretendard-Light.otf in Resources */,
 				C7347E3C2C4D452600688768 /* Pretendard-ExtraBold.otf in Resources */,
 				C7347E3B2C4D452400688768 /* Pretendard-Bold.otf in Resources */,
+				C7277D372D5D0C7A00E9D14B /* SUITE-Heavy.otf in Resources */,
+				C7277D392D5D0C7F00E9D14B /* SUITE-Bold.otf in Resources */,
 				C7347E422C4D453400688768 /* Pretendard-Thin.otf in Resources */,
 				C7F455362C39B8F000A4D0EE /* Assets.xcassets in Resources */,
 				C7347E3A2C4D452100688768 /* Pretendard-Black.otf in Resources */,
 				C7347E3F2C4D452C00688768 /* Pretendard-Medium.otf in Resources */,
+				C7277D382D5D0C7C00E9D14B /* SUITE-ExtraBold.otf in Resources */,
+				C7277D352D5D0C7600E9D14B /* SUITE-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1273,10 +1296,12 @@
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
 				C757F8212D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift in Sources */,
 				C74A15B82D5A56EC00A1698B /* MentorList.swift in Sources */,
+				C78BB0402D5E5029008C2800 /* MyPageReactor.swift in Sources */,
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				C74A15AC2D5A4FE200A1698B /* UnivDelete.swift in Sources */,
 				C74A15A82D5A4FAB00A1698B /* UnivPost.swift in Sources */,
 				417AADC62C652253002080E0 /* LoginDataManager.swift in Sources */,
+				C78BB0422D5E5035008C2800 /* EditInfoReactor.swift in Sources */,
 				C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */,
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
@@ -1304,6 +1329,7 @@
 				C757F82B2D0A9D2000685F1A /* MyAlarmTableViewCell.swift in Sources */,
 				7B3459ED2C68870E008B711A /* BoardDetailModel.swift in Sources */,
 				417AADC22C65221D002080E0 /* LoginAPIInput.swift in Sources */,
+				C78BB0442D5E503E008C2800 /* EditPWReactor.swift in Sources */,
 				C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */,
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
 				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,

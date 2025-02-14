@@ -157,7 +157,7 @@ class EditUnivCalendarViewController: UIViewController {
         }
         recruitTypeTextField.errorfix()
         recruitTypeTextField.addTFUnderline()
-        recruitTypeTextField.setLeftPadding(10)
+        recruitTypeTextField.setLeftPadding(15)
         recruitTypeTextField.isEnabled = false
         
         self.view.addSubview(dropButton)

@@ -17,11 +17,11 @@ final class PWAlertView: UIView {
     }
     var titleLabel = UILabel().then {
         $0.text = "비밀번호 변경 불가"
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
     var alertLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.numberOfLines = 2
         $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
@@ -29,7 +29,7 @@ final class PWAlertView: UIView {
     var okButton = UIButton().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
-        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
+        $0.setBackgroundColor(.orange700, for: .normal)
         $0.setTitle("확인했어요", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.setTitleColor(.white, for: .normal)
@@ -47,7 +47,7 @@ final class PWAlertView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.backgroundColor = UIColor(white: 0, alpha: 0.25)
         
         self.addSubview(mainView)
         self.mainView.snp.makeConstraints { make in

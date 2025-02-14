@@ -14,7 +14,7 @@ class ResearchTopicCollectionViewCell: UICollectionViewCell {
     static let identifier = String(describing: ResearchTopicCollectionViewCell.self)
     
     private let labelView = UIView().then {
-        $0.backgroundColor = UIColor(named: "Coquelicot")
+        $0.backgroundColor = UIColor.orange700
         $0.layer.cornerRadius = 15
     }
     private let labelLabel = UILabel().then {

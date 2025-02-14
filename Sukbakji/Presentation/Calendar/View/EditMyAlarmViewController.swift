@@ -194,7 +194,7 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
         }
         univTextField.errorfix()
         univTextField.addTFUnderline()
-        univTextField.setLeftPadding(10)
+        univTextField.setLeftPadding(15)
         univTextField.isEnabled = false
         
         self.view.addSubview(dropButton)
@@ -238,7 +238,7 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
         }
         alarmNameTextField.errorfix()
         alarmNameTextField.addTFUnderline()
-        alarmNameTextField.setLeftPadding(10)
+        alarmNameTextField.setLeftPadding(15)
         alarmNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         
         self.view.addSubview(alarmNameDeleteButton)
@@ -282,7 +282,7 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
         }
         alarmDateTextField.errorfix()
         alarmDateTextField.addTFUnderline()
-        alarmDateTextField.setLeftPadding(10)
+        alarmDateTextField.setLeftPadding(15)
         alarmDateTextField.isEnabled = false
         
         self.view.addSubview(dateButton)

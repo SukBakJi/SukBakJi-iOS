@@ -15,7 +15,7 @@ final class BottomSheetViewController: UIViewController {
         case normal
     }
     private let dimmedView = UIView().then {
-        $0.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        $0.backgroundColor = UIColor(white: 0, alpha: 0.25)
         $0.alpha = 0
     }
     private let bottomSheetView = UIView().then {

@@ -20,39 +20,40 @@ class EditInfoViewController: UIViewController {
     private let idLabel = UILabel().then {
         $0.text = "아이디"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let idTextField = UITextField().then {
-       $0.backgroundColor = .gray100
+       $0.backgroundColor = .gray50
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.textColor = UIColor(hexCode: "E1E1E1")
+        $0.textColor = .gray300
     }
     private let logingImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Kakao")
     }
     private let logingLabel = UILabel().then {
+        $0.text = "카카오 로그인으로 사용 중이에요"
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let nameLabel = UILabel().then {
         $0.text = "이름"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let nameTextField = UITextField().then {
-       $0.backgroundColor = .gray100
+       $0.backgroundColor = .gray50
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.textColor = UIColor(hexCode: "E1E1E1")
+        $0.textColor = .gray300
     }
     private let belongLabel = UILabel().then {
         $0.text = "현재 소속"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let belongTextField = UITextField().then {
-       $0.backgroundColor = .gray100
+       $0.backgroundColor = .gray50
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let dropButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Down2"), for: .normal)
@@ -64,7 +65,7 @@ class EditInfoViewController: UIViewController {
         $0.text = "현재 학사 재학으로 학력인증이\n완료된 상태입니다"
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.textColor = UIColor(hexCode: "767676")
+        $0.textColor = .gray600
     }
     private let certificateButton = UIButton().then {
         $0.clipsToBounds = true
@@ -73,12 +74,12 @@ class EditInfoViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("새로 인증하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
+        $0.setBackgroundColor(.orange700, for: .normal)
     }
     private let researchLabel = UILabel().then {
         $0.text = "연구 주제"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private var researchTopicCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -94,7 +95,7 @@ class EditInfoViewController: UIViewController {
         return cv
     }()
     private let backgroundLabel = UILabel().then {
-       $0.backgroundColor = .gray200
+       $0.backgroundColor = .gray300
     }
     private let plusButton = UIButton().then {
         $0.setImage(UIImage(named: "SBJ_plusButton"), for: .normal)
@@ -103,15 +104,13 @@ class EditInfoViewController: UIViewController {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
 
-        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+        $0.setTitleColor(.white, for: .normal)
         $0.setTitle("수정하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
+        $0.setBackgroundColor(.orange700, for: .normal)
     }
     
     private let disposeBag = DisposeBag()
-    
-    var topicData: [String] = []
     
     private var degreeLevel: String?
     
@@ -156,7 +155,7 @@ class EditInfoViewController: UIViewController {
             make.height.equalTo(44)
         }
         idTextField.addTFUnderline()
-        idTextField.setLeftPadding(10)
+        idTextField.setLeftPadding(15)
         
         self.view.addSubview(logingImageView)
         logingImageView.snp.makeConstraints { make in
@@ -167,8 +166,8 @@ class EditInfoViewController: UIViewController {
         
         self.view.addSubview(logingLabel)
         logingLabel.snp.makeConstraints { make in
-            make.top.equalTo(idTextField.snp.bottom).offset(8)
-            make.leading.equalTo(logingImageView.snp.trailing).inset(6)
+            make.centerY.equalTo(logingImageView)
+            make.leading.equalTo(logingImageView.snp.trailing).offset(6)
             make.height.equalTo(12)
         }
         
@@ -186,7 +185,7 @@ class EditInfoViewController: UIViewController {
             make.height.equalTo(44)
         }
         nameTextField.addTFUnderline()
-        nameTextField.setLeftPadding(10)
+        nameTextField.setLeftPadding(15)
         
         self.view.addSubview(belongLabel)
         belongLabel.snp.makeConstraints { make in
@@ -203,7 +202,7 @@ class EditInfoViewController: UIViewController {
             make.height.equalTo(44)
         }
         belongTextField.addTFUnderline()
-        belongTextField.setLeftPadding(10)
+        belongTextField.setLeftPadding(15)
         belongTextField.isEnabled = false
         
         self.view.addSubview(dropButton)
@@ -227,6 +226,15 @@ class EditInfoViewController: UIViewController {
             make.centerY.equalToSuperview()
             make.height.equalTo(44)
         }
+        let fullText = certificateLabel.text ?? ""
+        let changeText = "학사 재학"
+        let attributedString = NSMutableAttributedString(string: fullText)
+        
+        if let range = fullText.range(of: changeText) {
+            let nsRange = NSRange(range, in: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
+        }
+        certificateLabel.attributedText = attributedString
         
         self.certificateView.addSubview(certificateButton)
         certificateButton.snp.makeConstraints { make in
@@ -244,25 +252,26 @@ class EditInfoViewController: UIViewController {
         }
         researchLabel.addImageAboveLabel(referenceView: belongTextField, spacing: 124)
         
+        self.view.addSubview(plusButton)
+        plusButton.snp.makeConstraints { make in
+            make.top.equalTo(researchLabel.snp.bottom).offset(12)
+            make.trailing.equalToSuperview().inset(22)
+            make.width.equalTo(44)
+        }
+        
         self.view.addSubview(researchTopicCollectionView)
         researchTopicCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(researchTopicCollectionView.snp.bottom).offset(12)
-            make.leading.equalToSuperview().inset(24)
-           make.height.equalTo(88)
+            make.centerY.equalTo(plusButton)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalTo(plusButton.snp.leading).inset(8)
+            make.height.equalTo(45)
         }
         
         self.view.addSubview(backgroundLabel)
         backgroundLabel.snp.makeConstraints { make in
-            make.top.equalTo(researchTopicCollectionView.snp.bottom)
+            make.top.equalTo(plusButton.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(1.2)
-        }
-        
-        self.view.addSubview(plusButton)
-        plusButton.snp.makeConstraints { make in
-            make.bottom.equalTo(backgroundLabel.snp.top).inset(64)
-            make.trailing.equalToSuperview().inset(22)
-            make.width.equalTo(43)
         }
         
         self.view.addSubview(editButton)
@@ -303,29 +312,10 @@ class EditInfoViewController: UIViewController {
             switch response.code {
             case "COMMON200":
                 let data = response.result
-                for i in 0..<(data.researchTopics?.count ?? 0) {
-                    self.topicData.append(data.researchTopics![i])
-                }
                 self.researchTopicViewModel.ResearchTopicItems.accept(data.researchTopics!)
                 self.idTextField.text = retrievedEmail
                 self.nameTextField.text = data.name
-                self.degreeLevel = data.degreeLevel
-                switch data.degreeLevel {
-                case "BACHELORS_STUDYING":
-                    self.belongTextField.text = "학사 재학 중"
-                case "BACHELORS_GRADUATED":
-                    self.belongTextField.text = "학사 졸업"
-                case "MASTERS_STUDYING":
-                    self.belongTextField.text = "석사 재학 중"
-                case "MASTERS_GRADUATED":
-                    self.belongTextField.text = "석사 졸업"
-                case "DOCTORAL_STUDYING":
-                    self.belongTextField.text = "박사 재학 중"
-                case "DOCTORAL_GRADUATED":
-                    self.belongTextField.text = "박사 졸업"
-                default:
-                    self.belongTextField.text = "학사 재학 중"
-                }
+                self.belongTextField.text = DegreeLevel.from(data.degreeLevel)?.korean ?? "학위 정보 없음"
                 self.setTopicData()
                 self.view.layoutIfNeeded()
             default:
@@ -356,6 +346,10 @@ class EditInfoViewController: UIViewController {
         drop.bottomOffset = CGPoint(x: 0, y: 45.5 + belongTextField.bounds.height)
         
         drop.shadowColor = .clear
+        
+        drop.cellConfiguration = { (index, item) in
+            return "  \(item)" // 앞에 4칸 공백 추가
+        }
         
         drop.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
             // separatorInset을 조정하여 separator 앞의 간격을 없앱니다.
@@ -394,7 +388,7 @@ class EditInfoViewController: UIViewController {
                 self?.degreeLevel = "MASTERS_STUDYING"
             case "석사 졸업":
                 self?.degreeLevel = "MASTERS_GRADUATED"
-            case "박사 재학 중 ":
+            case "박사 재학 중":
                 self?.degreeLevel = "DOCTORAL_STUDYING"
             case "박사 졸업":
                 self?.degreeLevel = "DOCTORAL_GRADUATED"
@@ -451,15 +445,5 @@ extension EditInfoViewController: UICollectionViewDelegateFlowLayout {
         let str = items[indexPath.item]
         let width = 40 + str.count * 12
         return CGSize(width: CGFloat(width), height: 29)
-    }
-}
-
-class CustomDropDownCell: DropDownCell {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        // 텍스트 레이블의 여백을 추가합니다.
-        let padding: CGFloat = 16
-        textLabel?.frame = CGRect(x: padding, y: 0, width: bounds.width - 2 * padding, height: bounds.height)
     }
 }

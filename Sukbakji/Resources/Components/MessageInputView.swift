@@ -52,7 +52,7 @@ final class MessageInputView: UIView {
             make.height.equalTo(44)
         }
         inputTextField.addTFUnderline()
-        inputTextField.setLeftPadding(10)
+        inputTextField.setLeftPadding(15)
         inputTextField.errorfix()
         
         shadow()

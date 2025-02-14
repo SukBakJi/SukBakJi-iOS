@@ -19,12 +19,12 @@ final class UnivStopView: UIView {
     }
     var titleLabel = UILabel().then {
         $0.text = "이동하면 내용이 사라져요"
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
     var stopLabel = UILabel().then {
         $0.text = "페이지를 이탈하면 현재 입력한 내용이 사라져요. 그래도 메인 페이지로 이동할까요?"
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
     }
@@ -33,9 +33,9 @@ final class UnivStopView: UIView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
         $0.setTitle("닫기", for: .normal)
-        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+        $0.setTitleColor(UIColor.gray500, for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
+        $0.setBackgroundColor(UIColor.gray200, for: .normal)
     }
     var okButton = UIButton().then {
         $0.tintColor = .clear
@@ -44,7 +44,7 @@ final class UnivStopView: UIView {
         $0.setTitle("이동할게요", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
+        $0.setBackgroundColor(.orange700, for: .normal)
     }
     lazy var buttonStackView = UIStackView().then {
         $0.addArrangedSubview(cancelButton)
@@ -66,7 +66,7 @@ final class UnivStopView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.backgroundColor = UIColor(white: 0, alpha: 0.25)
         
         self.addSubview(mainView)
         self.mainView.snp.makeConstraints { make in
@@ -95,7 +95,7 @@ final class UnivStopView: UIView {
         
         if let range = fullText.range(of: changeText) {
             let nsRange = NSRange(range, in: fullText)
-            attributedString.addAttribute(.foregroundColor, value: UIColor(named: "Coquelicot")!, range: nsRange)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
         }
         stopLabel.attributedText = attributedString
         

@@ -19,7 +19,7 @@ final class NavigationBarView: UIView {
       $0.setImage(UIImage(named: "Sukbakji_Back"), for: .normal)
    }
    var titleLabel = UILabel().then {
-      $0.textColor = .black
+      $0.textColor = .gray900
        $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
    }
    

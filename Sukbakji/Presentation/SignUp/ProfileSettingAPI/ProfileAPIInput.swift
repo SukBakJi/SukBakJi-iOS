@@ -21,4 +21,21 @@ enum DegreeLevel: String, Codable {
     case doctoralStudying = "DOCTORAL_STUDYING"
     case doctoralGraduated = "DOCTORAL_GRADUATED"
     case integratedStudying = "INTEGRATED_STUDYING"
+    
+    var korean: String {
+        switch self {
+        case .bachelorsStudying: return "학사 재학 중"
+        case .bachelorsGraduated: return "학사 졸업"
+        case .mastersStudying: return "석사 재학 중"
+        case .mastersGraduated: return "석사 졸업"
+        case .doctoralStudying: return "박사 재학 중"
+        case .doctoralGraduated: return "박사 졸업"
+        case .integratedStudying: return "석박사 통합 재학"
+        }
+    }
+    
+    static func from(_ rawValue: String?) -> DegreeLevel? {
+        guard let value = rawValue, !value.isEmpty else { return nil }
+        return DegreeLevel(rawValue: value)
+    }
 }

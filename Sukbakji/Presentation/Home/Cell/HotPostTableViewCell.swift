@@ -14,28 +14,28 @@ class HotPostTableViewCell: UITableViewCell {
     static let identifier = String(describing: HotPostTableViewCell.self)
 
     private let labelView = UIView().then {
-        $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
+        $0.backgroundColor = UIColor.orange50
         $0.layer.cornerRadius = 8
     }
     private let labelLabel = UILabel().then {
         $0.text = "조회수 TOP"
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = UIColor.orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let labelView2 = UIView().then {
-        $0.backgroundColor = .gray100
+        $0.backgroundColor = .gray50
         $0.layer.cornerRadius = 8
     }
     private let labelLabel2 = UILabel().then {
-        $0.textColor = .gray200
+        $0.textColor = .gray500
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let titleLabel = UILabel().then {
-       $0.textColor = .black
+       $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     private let contentLabel = UILabel().then {
-       $0.textColor = .black
+       $0.textColor = .gray900
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
@@ -43,7 +43,7 @@ class HotPostTableViewCell: UITableViewCell {
         $0.image = UIImage(named: "Sukbakji_Comment")
     }
     private let commentLabel = UILabel().then {
-        $0.textColor = UIColor(red: 74/255, green: 114/255, blue: 255/255, alpha: 1.0)
+        $0.textColor = UIColor.blue400
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let viewImageView = UIImageView().then {
@@ -69,9 +69,9 @@ class HotPostTableViewCell: UITableViewCell {
     private func setUI() {
         self.contentView.layer.cornerRadius = 12
         self.contentView.layer.borderWidth = 1
-        self.contentView.layer.borderColor = UIColor.gray200.cgColor
+        self.contentView.layer.borderColor = UIColor.gray100.cgColor
         self.contentView.clipsToBounds = true
-        self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 24, bottom: 8, right: 24))
+        self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 12, left: 24, bottom: 0, right: 24))
         
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints { make in

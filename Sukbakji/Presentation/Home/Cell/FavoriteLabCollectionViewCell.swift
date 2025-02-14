@@ -14,46 +14,47 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
     static let identifier = String(describing: FavoriteLabCollectionViewCell.self)
 
     private let labView = UIView().then {
-        $0.backgroundColor = UIColor(red: 233/255, green: 235/255, blue: 255/255, alpha: 1.0)
+        $0.backgroundColor = .white
     }
     private let univLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let labLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     private let professorImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_ProfileImage")
     }
     private let professorNameLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     private let professorLabel = UILabel().then {
-        $0.textColor = .black
+        $0.text = "교수"
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let professorLabLabel = UILabel().then {
         $0.text = "교수"
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let labView2 = UIView().then {
-        $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
+        $0.backgroundColor = UIColor.orange50
         $0.layer.cornerRadius = 8
     }
     private let labLabel2 = UILabel().then {
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = UIColor.orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let labView3 = UIView().then {
-        $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
+        $0.backgroundColor = UIColor.orange50
         $0.layer.cornerRadius = 8
     }
     private let labLabel3 = UILabel().then {
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = UIColor.orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     
@@ -71,8 +72,10 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
     
     private func setUI() {
         contentView.layer.cornerRadius = 15
-        contentView.layer.masksToBounds = true
-        contentView.backgroundColor = .gray200
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.gray100.cgColor
+        contentView.clipsToBounds = true
+        contentView.backgroundColor = .gray50
         
         layer.cornerRadius = 15
         layer.masksToBounds = false

@@ -173,7 +173,7 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
-        uniSearchTextField.setLeftPadding(52)
+        uniSearchTextField.setLeftPadding(15)
         uniSearchTextField.errorfix()
         
         self.view.addSubview(searchImageView)
@@ -220,7 +220,7 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
         
         if let range = fullText.range(of: changeText) {
             let nsRange = NSRange(range, in: fullText)
-            attributedString.addAttribute(.foregroundColor, value: UIColor(named: "Coquelicot")!, range: nsRange)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
         }
         searchWarningLabel.attributedText = attributedString
         

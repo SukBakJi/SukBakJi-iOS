@@ -43,7 +43,7 @@ class UnivRecruitViewController: UIViewController {
         $0.image = UIImage(named: "Sukbakji_Progress2")
     }
     private let recruitView = UIView().then {
-        $0.backgroundColor = UIColor(named: "ViewBackground")
+        $0.backgroundColor = UIColor.gray50
         $0.layer.masksToBounds = false
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 1
@@ -203,7 +203,7 @@ class UnivRecruitViewController: UIViewController {
         
         if let range = fullText.range(of: changeText) {
             let nsRange = NSRange(range, in: fullText)
-            attributedString.addAttribute(.foregroundColor, value: UIColor(named: "Coquelicot")!, range: nsRange)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
         }
         dateSelectLabel.attributedText = attributedString
         
@@ -303,7 +303,7 @@ class UnivRecruitViewController: UIViewController {
         }
         recruitTypeTextField.errorfix()
         recruitTypeTextField.addTFUnderline()
-        recruitTypeTextField.setLeftPadding(10)
+        recruitTypeTextField.setLeftPadding(15)
         recruitTypeTextField.isEnabled = false
         
         self.view.addSubview(dropButton)

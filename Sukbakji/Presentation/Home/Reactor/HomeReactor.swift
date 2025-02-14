@@ -11,6 +11,9 @@ import RxSwift
 import Alamofire
 
 final class HomeReactor: Reactor {
+    let initialState = State()
+    let apiService = APIService()
+    
     enum Action {
         case getUserName
         case getViewSchedule
@@ -25,15 +28,12 @@ final class HomeReactor: Reactor {
     }
 
     struct State {
-        var name: String?
+        var nameLabel: String?
         var upComingDate: String?
         var upComingTitle: String?
         var memberID: Int?
         var errorMessage: String?
     }
-
-    let initialState = State()
-    private let apiService = APIService()
     
     private func fetchData<T: Codable>(
         _ type: T.Type,
@@ -73,7 +73,7 @@ final class HomeReactor: Reactor {
         var newState = state
         switch mutation {
         case .setUserName(let profile):
-            newState.name = profile.name
+            newState.nameLabel = (profile.name ?? "석박지") + "님, 반가워요!"
         case .setViewSchedule(let upComing):
             if let upComing = upComing, let firstSchedule = upComing.scheduleList.first {
                 let dday = firstSchedule.dday

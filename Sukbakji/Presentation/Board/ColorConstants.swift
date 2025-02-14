@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct Constants {
-    
     static let Gray100: Color = Color(red: 0.96, green: 0.96, blue: 0.96)
     static let Gray900: Color = Color(red: 0.13, green: 0.13, blue: 0.13)
     static let Gray50: Color = Color(red: 0.98, green: 0.98, blue: 0.98)
@@ -28,5 +27,4 @@ struct Constants {
     static let fontWeightMedium: Font.Weight = .medium
     static let fontWeightSemibold: Font.Weight = .semibold
     static let fontSize7: CGFloat = 11
-
 }

@@ -16,12 +16,15 @@ class MypageViewController: UIViewController {
     
     private let navigationbarView = NavigationBarView(title: "마이페이지")
     private let backgroundLabel = UILabel().then {
-        $0.backgroundColor = .gray200
+        $0.backgroundColor = .gray100
+    }
+    private let myInfoView = UIView().then {
+        $0.backgroundColor = .white
     }
     private let myInfoLabel = UILabel().then {
         $0.text = "내 정보"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let myInfoImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Myinfo")
@@ -30,18 +33,18 @@ class MypageViewController: UIViewController {
         $0.setImage(UIImage(named: "Sukbakji_More"), for: .normal)
         $0.setTitle("수정하기 ", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 12)
-        $0.setTitleColor(.gray400, for: .normal)
+        $0.setTitleColor(.gray500, for: .normal)
         $0.semanticContentAttribute = .forceRightToLeft
     }
     private let nameLabel = UILabel().then {
         $0.text = "석박지"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let degreeLabel = UILabel().then {
-        $0.text = "학사 재학 중"
+        $0.text = "학위 정보 없음"
         $0.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let certificateView = UIView().then {
         $0.backgroundColor = .gray50
@@ -56,7 +59,7 @@ class MypageViewController: UIViewController {
     private let certificateLabel = UILabel().then {
         $0.text = "현재 학적 인증이 완료된 상태입니다"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let warningImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Warning")
@@ -64,7 +67,7 @@ class MypageViewController: UIViewController {
     private let warningLabel = UILabel().then {
         $0.text = "학적 인증 후에 앱 기능 사용이 가능합니다."
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = .orange700
     }
     private let pointView = UIView().then {
         $0.backgroundColor = .gray50
@@ -72,7 +75,7 @@ class MypageViewController: UIViewController {
     private let pointLabel = UILabel().then {
         $0.text = "내 포인트"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let pointImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Point")
@@ -80,17 +83,17 @@ class MypageViewController: UIViewController {
     private let myPointLabel = UILabel().then {
         $0.text = "현재 모인 포인트"
         $0.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.textColor = .gray500
+        $0.textColor = .gray600
     }
     private let pointNumberLabel = UILabel().then {
         $0.text = "1,000"
         $0.font = UIFont(name: "Pretendard-Bold", size: 26)
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = .orange700
     }
     private let pLabel = UILabel().then {
         $0.text = "P"
         $0.font = UIFont(name: "Pretendard-Bold", size: 26)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let chargeButton = UIButton().then {
         $0.clipsToBounds = true
@@ -99,18 +102,23 @@ class MypageViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("충전하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
+        $0.setBackgroundColor(.orange700, for: .normal)
     }
     private let logOutButton = UIButton().then {
         $0.setTitle("로그아웃", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.setTitleColor(.gray400, for: .normal)
+        $0.setTitleColor(.gray500, for: .normal)
     }
     private let resignButton = UIButton().then {
         $0.setTitle("탈퇴하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.setTitleColor(.gray400, for: .normal)
+        $0.setTitleColor(.gray500, for: .normal)
     }
+    
+    private var disposeBag = DisposeBag()
+    private var reactor = HomeReactor()
+    
+    private var myInfoViewheightConstraint: Constraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,44 +152,51 @@ class MypageViewController: UIViewController {
             make.height.equalTo(1)
         }
         
-        self.view.addSubview(myInfoLabel)
+        self.view.addSubview(myInfoView)
+        myInfoView.snp.makeConstraints { make in
+            make.top.equalTo(backgroundLabel.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            myInfoViewheightConstraint = make.height.equalTo(180).constraint
+        }
+        
+        self.myInfoView.addSubview(myInfoLabel)
         myInfoLabel.snp.makeConstraints { make in
-            make.top.equalTo(backgroundLabel.snp.bottom).offset(28)
+            make.top.equalToSuperview().offset(28)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(21)
         }
         
-        self.view.addSubview(myInfoImageView)
+        self.myInfoView.addSubview(myInfoImageView)
         myInfoImageView.snp.makeConstraints { make in
-            make.top.equalTo(backgroundLabel.snp.bottom).offset(28.5)
+            make.centerY.equalTo(myInfoLabel)
             make.leading.equalTo(myInfoLabel.snp.trailing).offset(4)
             make.height.width.equalTo(20)
         }
         
-        self.view.addSubview(myInfoEditButton)
+        self.myInfoView.addSubview(myInfoEditButton)
         myInfoEditButton.snp.makeConstraints { make in
-            make.top.equalTo(backgroundLabel.snp.bottom).offset(28)
+            make.centerY.equalTo(myInfoLabel)
             make.trailing.equalToSuperview().inset(16)
             make.height.equalTo(21)
             make.width.equalTo(64)
         }
         myInfoEditButton.addTarget(self, action: #selector(edit_Tapped), for: .touchUpInside)
         
-        self.view.addSubview(nameLabel)
+        self.myInfoView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(myInfoLabel.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(21)
         }
         
-        self.view.addSubview(degreeLabel)
+        self.myInfoView.addSubview(degreeLabel)
         degreeLabel.snp.makeConstraints { make in
-            make.top.equalTo(myInfoLabel.snp.bottom).offset(25)
+            make.centerY.equalTo(nameLabel)
             make.leading.equalTo(nameLabel.snp.trailing).offset(8)
             make.height.equalTo(19)
         }
         
-        self.view.addSubview(certificateView)
+        self.myInfoView.addSubview(certificateView)
         certificateView.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview().inset(24)
@@ -197,28 +212,39 @@ class MypageViewController: UIViewController {
         
         self.certificateView.addSubview(certificateLabel)
         certificateLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(certificateImageView)
             make.leading.equalTo(certificateImageView.snp.trailing).offset(8)
             make.height.equalTo(19)
         }
+        let fullText = certificateLabel.text ?? ""
+        let changeText = "완료된 상태"
+        let attributedString = NSMutableAttributedString(string: fullText)
         
-        self.view.addSubview(warningImageView)
+        if let range = fullText.range(of: changeText) {
+            let nsRange = NSRange(range, in: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
+        }
+        certificateLabel.attributedText = attributedString
+        
+        self.myInfoView.addSubview(warningImageView)
         warningImageView.snp.makeConstraints { make in
             make.top.equalTo(certificateView.snp.bottom).offset(6)
             make.leading.equalToSuperview().offset(28)
-            make.height.width.equalTo(12)
+            make.width.height.equalTo(12)
         }
+        warningImageView.isHidden = true
         
-        self.view.addSubview(warningLabel)
+        self.myInfoView.addSubview(warningLabel)
         warningLabel.snp.makeConstraints { make in
-            make.top.equalTo(certificateView.snp.bottom).offset(6)
+            make.centerY.equalTo(warningImageView)
             make.leading.equalTo(warningImageView.snp.trailing).offset(4)
             make.height.equalTo(12)
         }
+        warningLabel.isHidden = true
         
         self.view.addSubview(pointView)
         pointView.snp.makeConstraints { make in
-            make.top.equalTo(warningImageView.snp.bottom).offset(20)
+            make.top.equalTo(myInfoView.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(164)
         }
@@ -232,7 +258,7 @@ class MypageViewController: UIViewController {
         
         self.pointView.addSubview(pointImageView)
         pointImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(28.5)
+            make.centerY.equalTo(pointLabel)
             make.leading.equalTo(pointLabel.snp.trailing).offset(4)
             make.height.width.equalTo(20)
         }
@@ -253,7 +279,7 @@ class MypageViewController: UIViewController {
         
         self.pointView.addSubview(pLabel)
         pLabel.snp.makeConstraints { make in
-            make.top.equalTo(myPointLabel.snp.bottom).offset(8)
+            make.centerY.equalTo(pointNumberLabel)
             make.leading.equalTo(pointNumberLabel.snp.trailing).offset(5)
             make.height.equalTo(40)
         }
@@ -294,24 +320,10 @@ class MypageViewController: UIViewController {
             switch response.code {
             case "COMMON200":
                 self.nameLabel.text = response.result.name
-                switch response.result.degreeLevel {
-                case "BACHELORS_STUDYING":
-                    self.degreeLabel.text = "학사 재학 중"
-                case "BACHELORS_GRADUATED":
-                    self.degreeLabel.text = "학사 졸업"
-                case "MASTERS_STUDYING":
-                    self.degreeLabel.text = "석사 재학 중"
-                case "MASTERS_GRADUATED":
-                    self.degreeLabel.text = "석사 졸업"
-                case "DOCTORAL_STUDYING":
-                    self.degreeLabel.text = "박사 재학 중"
-                case "DOCTORAL_GRADUATED":
-                    self.degreeLabel.text = "박사 졸업"
-                default:
+                self.degreeLabel.text = DegreeLevel.from(response.result.degreeLevel)?.korean ?? "학위 정보 없음"
+                if self.degreeLabel.text == "학위 정보 없음" {
+                    self.myInfoViewheightConstraint?.update(offset: 198)
                     self.warningImageView.isHidden = false
-                    self.warningImageView.snp.makeConstraints { make in
-                        make.height.width.equalTo(1)
-                    }
                     self.warningLabel.isHidden = false
                     self.certificateLabel.text = "아직 학적 인증이 완료되지 않은 상태입니다"
                 }

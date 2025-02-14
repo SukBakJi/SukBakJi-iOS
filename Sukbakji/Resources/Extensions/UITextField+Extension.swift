@@ -27,7 +27,7 @@ public extension UITextField {
             self.borderStyle = .none
             
             let underline = UIView()
-            underline.backgroundColor = UIColor(hexCode: "E1E1E1")
+            underline.backgroundColor = .gray300
             self.superview?.addSubview(underline)
             
             underline.snp.makeConstraints { make in

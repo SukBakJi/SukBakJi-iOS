@@ -17,7 +17,7 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
         $0.backgroundColor = .clear
     }
     private let dayLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "SUITE-Medium", size: 14)
     }
     let dotImageView = UIImageView().then {
@@ -46,7 +46,7 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
                     self.dayLabel.textColor = .white
                 }
             } else {
-                self.dayView.backgroundColor = UIColor(named: "ViewBackground")
+                self.dayView.backgroundColor = UIColor.gray50
                 self.dayLabel.textColor = .black
             }
         }

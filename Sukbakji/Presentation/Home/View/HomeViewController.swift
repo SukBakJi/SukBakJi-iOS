@@ -15,9 +15,9 @@ import RxDataSources
 
 class HomeViewController: UIViewController {
     
-    let favoriteBoardViewModel = FavoriteBoardViewModel()
-    let hotPostViewModel = HotPostViewModel()
-    let favoriteLabViewModel = FavoriteLabViewModel()
+    private let favoriteBoardViewModel = FavoriteBoardViewModel()
+    private let hotPostViewModel = HotPostViewModel()
+    private let favoriteLabViewModel = FavoriteLabViewModel()
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -37,27 +37,21 @@ class HomeViewController: UIViewController {
         $0.contentMode = .scaleAspectFill
     }
     private let backgroundLabel = UILabel().then {
-        $0.backgroundColor = .gray200
+        $0.backgroundColor = .gray100
+    }
+    private let helloView = UIView().then {
+        $0.backgroundColor = .white
     }
     private let nameLabel = UILabel().then {
         $0.text = "님, 반가워요!"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = .orange800
     }
     private let titleLabel = UILabel().then {
-        $0.text = "석박지"
+        $0.text = "석박지와 함께\n오늘의 일정을 확인해 보세요!🏃"
+        $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = UIColor(named: "Coquelicot")
-    }
-    private let titleLabel2 = UILabel().then {
-        $0.text = "와 함께"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
-    }
-    private let titleLabel3 = UILabel().then {
-        $0.text = "오늘의 일정을 확인해 보세요!🏃"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let upComingView = UIView().then {
         $0.backgroundColor = .white
@@ -77,29 +71,24 @@ class HomeViewController: UIViewController {
     }
     private let upComingDate = UILabel().then {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = .orange700
     }
     private let upComingTitle = UILabel().then {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let adLabel = UILabel().then {
-        $0.text = "석박지"
+        $0.text = "석박지가 Pick!했어요"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = UIColor(named: "Coquelicot")
-    }
-    private let adLabel2 = UILabel().then {
-        $0.text = "가 Pick!했어요"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let adImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Pick")
     }
-    private let adLabel3 = UILabel().then {
+    private let adLabel2 = UILabel().then {
         $0.text = "AD"
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
-        $0.textColor = .gray600
+        $0.textColor = .gray500
     }
     private var advertiseCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -113,9 +102,6 @@ class HomeViewController: UIViewController {
         cv.backgroundColor = .clear
         cv.layer.cornerRadius = 15
         cv.layer.masksToBounds = false// any value you want
-        cv.layer.shadowOpacity = 0.2// any value you want
-        cv.layer.shadowRadius = 1 // any value you want
-        cv.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         return cv
     }()
@@ -125,7 +111,7 @@ class HomeViewController: UIViewController {
     private let favoriteBoardLabel = UILabel().then {
         $0.text = "즐겨찾는 게시판"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let favoriteBoardImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Favorite")
@@ -134,18 +120,18 @@ class HomeViewController: UIViewController {
         $0.setImage(UIImage(named: "Sukbakji_More"), for: .normal)
         $0.setTitle("더보기 ", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 12)
-        $0.setTitleColor(.gray400, for: .normal)
+        $0.setTitleColor(.gray500, for: .normal)
         $0.semanticContentAttribute = .forceRightToLeft
     }
     private let noFavoriteBoard = UILabel().then {
         $0.text = "아직 즐겨찾는 게시판이 없어요"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
-        $0.textColor = .gray400
+        $0.textColor = .gray500
     }
     private let noFavoriteBoardLabel = UILabel().then {
         $0.text = "게시판을 탐색하고 즐겨찾기를 등록해 보세요!"
         $0.font = UIFont(name: "Pretendard-Regular", size: 11)
-        $0.textColor = .gray400
+        $0.textColor = .gray500
     }
     private var favoriteBoardTableView = UITableView(frame: .zero, style: .insetGrouped).then {
         $0.separatorStyle = .singleLine
@@ -163,7 +149,7 @@ class HomeViewController: UIViewController {
     private let hotPostLabel = UILabel().then {
         $0.text = "실시간 인기글"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let hotPostImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Fire")
@@ -174,7 +160,7 @@ class HomeViewController: UIViewController {
         $0.register(HotPostTableViewCell.self, forCellReuseIdentifier: HotPostTableViewCell.identifier)
     }
     private let layerView = UIView().then {
-        $0.backgroundColor = UIColor(named: "Coquelicot")
+        $0.backgroundColor = UIColor.orange500
     }
     private let favoriteLabView = UIView().then {
         $0.backgroundColor = .clear
@@ -182,7 +168,7 @@ class HomeViewController: UIViewController {
     private let favoriteLabLabel = UILabel().then {
         $0.text = "즐겨찾는 연구실"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let favoriteLabImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Lab")
@@ -190,12 +176,12 @@ class HomeViewController: UIViewController {
     private let noFavoriteLab = UILabel().then {
         $0.text = "아직 즐겨찾는 연구실이 없어요"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
-        $0.textColor = .gray400
+        $0.textColor = .gray500
     }
     private let noFavoriteLabLabel = UILabel().then {
         $0.text = "연구실을 탐색하고 즐겨찾기를 등록해 보세요!"
         $0.font = UIFont(name: "Pretendard-Regular", size: 11)
-        $0.textColor = .gray400
+        $0.textColor = .gray500
     }
     private var favoriteLabCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -215,15 +201,15 @@ class HomeViewController: UIViewController {
         return cv
     }()
     private var favoriteLabProgressView = UIProgressView().then {
-        $0.progressTintColor = UIColor(named: "Coquelicot")
-        $0.trackTintColor = .gray200
+        $0.progressTintColor = UIColor.orange400
+        $0.trackTintColor = .gray100
         $0.progress = 0.0
         $0.clipsToBounds = true
     }
     private let personalInfoButton = UIButton().then {
         $0.setTitle("개인정보처리방침", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
-        $0.setTitleColor(.gray400, for: .normal)
+        $0.setTitleColor(.gray500, for: .normal)
     }
     private let topButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_FABtop"), for: .normal)
@@ -243,10 +229,8 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
-        bind(reactor: reactor)
-//        setFavoriteBoardAPI()
-//        setHotPostAPI()
-//        setFavoriteLabAPI()
+//        bind(reactor: reactor)
+//        setAPI()
     }
 }
     
@@ -307,37 +291,40 @@ extension HomeViewController {
             make.height.equalTo(1)
         }
         
-        self.contentView.addSubview(nameLabel)
+        self.contentView.addSubview(helloView)
+        helloView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(95)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(103)
+        }
+        
+        self.helloView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(115)
+            make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(17)
         }
         
-        self.contentView.addSubview(titleLabel)
+        self.helloView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(6)
             make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(26)
+            make.height.equalTo(52)
+            make.width.equalTo(230)
         }
+        let fullText = titleLabel.text ?? ""
+        let changeText = "석박지"
+        let attributedString = NSMutableAttributedString(string: fullText)
         
-        self.contentView.addSubview(titleLabel2)
-        titleLabel2.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(6)
-            make.leading.equalTo(titleLabel.snp.trailing)
-            make.height.equalTo(26)
+        if let range = fullText.range(of: changeText) {
+            let nsRange = NSRange(range, in: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
         }
-        
-        self.contentView.addSubview(titleLabel3)
-        titleLabel3.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(26)
-        }
+        titleLabel.attributedText = attributedString
         
         self.contentView.addSubview(upComingView)
         upComingView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel3.snp.bottom).offset(8)
+            make.top.equalTo(helloView.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(93)
         }
@@ -371,26 +358,28 @@ extension HomeViewController {
         adLabel.snp.makeConstraints { make in
             make.top.equalTo(upComingView.snp.bottom).offset(28)
             make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(26)
+            make.height.equalTo(21)
+        }
+        let fullText2 = adLabel.text ?? ""
+        let changeText2 = "석박지"
+        let attributedString2 = NSMutableAttributedString(string: fullText2)
+        
+        if let range = fullText2.range(of: changeText2) {
+            let nsRange = NSRange(range, in: fullText2)
+            attributedString2.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
+        }
+        adLabel.attributedText = attributedString2
+        
+        self.contentView.addSubview(adImageView)
+        adImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(adLabel)
+            make.leading.equalTo(adLabel.snp.trailing).offset(4)
+            make.height.width.equalTo(20)
         }
         
         self.contentView.addSubview(adLabel2)
         adLabel2.snp.makeConstraints { make in
-            make.top.equalTo(upComingView.snp.bottom).offset(28)
-            make.leading.equalTo(adLabel.snp.trailing)
-            make.height.equalTo(26)
-        }
-        
-        self.contentView.addSubview(adImageView)
-        adImageView.snp.makeConstraints { make in
-            make.top.equalTo(upComingView.snp.bottom).offset(31)
-            make.leading.equalTo(adLabel2.snp.trailing).offset(4)
-            make.height.width.equalTo(20)
-        }
-        
-        self.contentView.addSubview(adLabel3)
-        adLabel3.snp.makeConstraints { make in
-            make.top.equalTo(upComingView.snp.bottom).offset(34)
+            make.centerY.equalTo(adLabel)
             make.trailing.equalToSuperview().inset(24)
         }
         
@@ -415,18 +404,19 @@ extension HomeViewController {
         favoriteBoardLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(28)
             make.leading.equalToSuperview().offset(24)
+            make.height.equalTo(21)
         }
         
         self.favoriteBoardView.addSubview(favoriteBoardImageView)
         favoriteBoardImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(28)
+            make.centerY.equalTo(favoriteBoardLabel)
             make.leading.equalTo(favoriteBoardLabel.snp.trailing).offset(4)
             make.height.width.equalTo(21)
         }
         
         self.favoriteBoardView.addSubview(favoriteBoardButton)
         favoriteBoardButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(28)
+            make.centerY.equalTo(favoriteBoardLabel)
             make.trailing.equalToSuperview().inset(20)
             make.height.equalTo(26)
             make.width.equalTo(64)
@@ -449,7 +439,8 @@ extension HomeViewController {
         self.favoriteBoardView.addSubview(favoriteBoardTableView)
         favoriteBoardTableView.snp.makeConstraints { make in
             make.top.equalTo(favoriteBoardLabel.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(24)
         }
         favoriteBoardTableView.isScrollEnabled = false
         
@@ -468,7 +459,7 @@ extension HomeViewController {
         
         self.hotPostView.addSubview(hotPostImageView)
         hotPostImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(28)
+            make.centerY.equalTo(hotPostLabel)
             make.leading.equalTo(hotPostLabel.snp.trailing).offset(4)
             make.height.width.equalTo(21)
         }
@@ -476,7 +467,8 @@ extension HomeViewController {
         self.hotPostView.addSubview(hotPostTableView)
         hotPostTableView.snp.makeConstraints { make in
             make.top.equalTo(hotPostLabel.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(8)
         }
         hotPostTableView.isScrollEnabled = false
         
@@ -502,7 +494,7 @@ extension HomeViewController {
         
         self.favoriteLabView.addSubview(favoriteLabImageView)
         favoriteLabImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(28)
+            make.centerY.equalTo(favoriteLabLabel)
             make.leading.equalTo(favoriteLabLabel.snp.trailing).offset(4)
             make.height.width.equalTo(21)
         }
@@ -562,6 +554,12 @@ extension HomeViewController {
 }
 
 extension HomeViewController {
+    private func setAPI() {
+        setFavoriteBoardAPI()
+        setHotPostAPI()
+        setFavoriteLabAPI()
+    }
+    
     private func bind(reactor: HomeReactor) {
         // Action: View가 나타나면 API 요청
         reactor.action.onNext(.getUserName)
@@ -569,7 +567,7 @@ extension HomeViewController {
         reactor.action.onNext(.getMemberID)
         
         // State: 프로필 이름 업데이트
-        reactor.state.map { $0.name }
+        reactor.state.map { $0.nameLabel }
             .distinctUntilChanged()
             .bind(to: nameLabel.rx.text)
             .disposed(by: disposeBag)
@@ -758,7 +756,7 @@ extension HomeViewController: UITableViewDelegate {
        if tableView == favoriteBoardTableView {
            return 56
        } else {
-           return 155
+           return 159
        }
    }
 }

@@ -21,7 +21,7 @@ class ProfileTabViewController: TabmanViewController {
        $0.backgroundColor = .white
     }
     private let backgroundLabel = UILabel().then {
-       $0.backgroundColor = .gray200
+       $0.backgroundColor = .gray100
     }
     
     private var userPW: String = ""
@@ -94,8 +94,8 @@ class ProfileTabViewController: TabmanViewController {
         bar.layout.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
         // 버튼 글씨 커스텀
         bar.buttons.customize { (button) in
-            button.tintColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1)
-            button.selectedTintColor = UIColor(named: "Coquelicot")
+            button.tintColor = .gray600
+            button.selectedTintColor = .orange700
             button.font = UIFont(name: "Pretendard-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
             button.selectedFont = UIFont(name: "Pretendard-SemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
         }
@@ -104,7 +104,7 @@ class ProfileTabViewController: TabmanViewController {
         
         // 밑줄 쳐지는 부분
         bar.indicator.weight = .custom(value: 2)
-        bar.indicator.tintColor = UIColor(named: "Coquelicot")
+        bar.indicator.tintColor = .orange700
         addBar(bar, dataSource: self, at: .custom(view: tabView, layout: nil))
     }
     

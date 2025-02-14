@@ -14,15 +14,15 @@ class FavoriteBoardTableViewCell: UITableViewCell {
     static let identifier = String(describing: FavoriteBoardTableViewCell.self)
     
     private let labelView = UIView().then {
-        $0.backgroundColor = UIColor(red: 233/255, green: 235/255, blue: 255/255, alpha: 1.0)
+        $0.backgroundColor = UIColor.blue50
         $0.layer.cornerRadius = 8
     }
     private let labelLabel = UILabel().then {
-        $0.textColor = UIColor(red: 74/255, green: 114/255, blue: 255/255, alpha: 1.0)
+        $0.textColor = UIColor.blue400
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let contentLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     

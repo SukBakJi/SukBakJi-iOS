@@ -25,7 +25,7 @@ final class DateView: UIView {
         $0.setImage(UIImage(named: "Sukbakji_Dismiss"), for: .normal)
     }
     var yearLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
     var previousButton = UIButton().then {
@@ -33,7 +33,7 @@ final class DateView: UIView {
         $0.setImage(UIImage(named: "Sukbakji_LeftDisabled"), for: .disabled)
     }
     var monthLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
     var nextButton = UIButton().then {
@@ -83,7 +83,7 @@ final class DateView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.backgroundColor = UIColor(white: 0, alpha: 0.25)
         
         self.addSubview(mainView)
         self.mainView.snp.makeConstraints { make in

@@ -19,11 +19,11 @@ final class DeleteView: UIView {
        $0.layer.cornerRadius = 12
     }
     var titleLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
     var contentLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
     }
@@ -32,9 +32,9 @@ final class DeleteView: UIView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
         $0.setTitle("닫기", for: .normal)
-        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+        $0.setTitleColor(.gray500, for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
+        $0.setBackgroundColor(.gray200, for: .normal)
     }
     var okButton = UIButton().then {
         $0.tintColor = .clear
@@ -43,7 +43,7 @@ final class DeleteView: UIView {
         $0.setTitle("삭제할게요", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for: .normal)
+        $0.setBackgroundColor(.orange700, for: .normal)
     }
     lazy var buttonStackView = UIStackView().then {
         $0.addArrangedSubview(cancelButton)
@@ -67,7 +67,7 @@ final class DeleteView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.backgroundColor = UIColor(white: 0, alpha: 0.25)
         
         self.addSubview(mainView)
         self.mainView.snp.makeConstraints { make in
