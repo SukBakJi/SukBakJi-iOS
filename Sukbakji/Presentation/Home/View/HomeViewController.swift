@@ -614,7 +614,7 @@ extension HomeViewController {
         }
         let url = APIConstants.communityFavoriteBoard.path
         
-        APIService().getWithAccessToken(of: APIResponse<[FavoritesBoard]>.self, url: url, AccessToken: retrievedToken) { response in
+        APIService().getWithAccessToken(of: APIResponse<[FavoriteBoard]>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
             case "COMMON200":
                 if response.result.isEmpty {
@@ -692,7 +692,7 @@ extension HomeViewController {
         }
         let url = APIConstants.labsFavoriteLab.path
         
-        APIService().getWithAccessToken(of: APIResponse<[FavoritesLab]>.self, url: url, AccessToken: retrievedToken) { response in
+        APIService().getWithAccessToken(of: APIResponse<[FavoriteLab]>.self, url: url, AccessToken: retrievedToken) { response in
             switch response.code {
             case "COMMON200":
                 if response.result.isEmpty {

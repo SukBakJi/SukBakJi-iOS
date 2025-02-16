@@ -19,12 +19,12 @@ class EditUnivCalendarViewController: UIViewController {
     
     private let univLabel = UILabel().then {
         $0.font = UIFont(name: "Pretendard-Medium", size: 22)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let recruitDateLabel = UILabel().then {
         $0.text = "모집시기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let recruitFirstButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
@@ -32,7 +32,7 @@ class EditUnivCalendarViewController: UIViewController {
     private let recruitFirstLabel = UILabel().then {
         $0.text = "2025년 전기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let recruitSecondButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
@@ -40,17 +40,17 @@ class EditUnivCalendarViewController: UIViewController {
     private let recruitSecondLabel = UILabel().then {
         $0.text = "2025년 후기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let recruitTypeLabel = UILabel().then {
         $0.text = "모집전형"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let recruitTypeTextField = UITextField().then {
-        $0.backgroundColor = .gray100
+        $0.backgroundColor = .gray50
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let dropButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Down2"), for: .normal)
@@ -59,12 +59,12 @@ class EditUnivCalendarViewController: UIViewController {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
 
-        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
-        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .disabled)
+        $0.setTitleColor(.gray500, for: .normal)
+        $0.setTitleColor(.gray500, for: .disabled)
         $0.setTitle("저장하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
-        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .disabled)
+        $0.setBackgroundColor(.gray200, for: .normal)
+        $0.setBackgroundColor(.gray200, for: .disabled)
     }
     
     private let disposeBag = DisposeBag()
@@ -229,20 +229,20 @@ class EditUnivCalendarViewController: UIViewController {
     private func updateButtonColor() {
         if (recruitTypeTextField.text?.isEmpty == false) {
             editButton.isEnabled = true
-            editButton.setBackgroundColor(UIColor(named: "Coquelicot")!, for:.normal)
+            editButton.setBackgroundColor(.orange700, for:.normal)
             editButton.setTitleColor(.white, for: .normal)
         } else {
             editButton.isEnabled = false
-            editButton.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
-            editButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+            editButton.setBackgroundColor(.gray200, for: .normal)
+            editButton.setTitleColor(.gray500, for: .normal)
         }
     }
     
     private func initUI() {
-        DropDown.appearance().textColor = UIColor.black // 아이템 텍스트 색상
-        DropDown.appearance().selectedTextColor = UIColor(red: 236/255, green: 73/255, blue: 8/255, alpha: 1.0) // 선택된 아이템 텍스트 색상
+        DropDown.appearance().textColor = .gray900 // 아이템 텍스트 색상
+        DropDown.appearance().selectedTextColor = .orange700 // 선택된 아이템 텍스트 색상
         DropDown.appearance().backgroundColor = .gray50 // 아이템 팝업 배경 색상
-        DropDown.appearance().selectionBackgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0) // 선택한 아이템 배경 색상
+        DropDown.appearance().selectionBackgroundColor = .orange50 // 선택한 아이템 배경 색상
         DropDown.appearance().setupCornerRadius(5)
         DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
         drop.dismissMode = .automatic // 팝업을 닫을 모드 설정
@@ -261,6 +261,10 @@ class EditUnivCalendarViewController: UIViewController {
         
         drop.shadowColor = .clear
         
+        drop.cellConfiguration = { (index, item) in
+            return "  \(item)" // 앞에 4칸 공백 추가
+        }
+        
         drop.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
             // separatorInset을 조정하여 separator 앞의 간격을 없앱니다.
             cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
@@ -269,7 +273,7 @@ class EditUnivCalendarViewController: UIViewController {
 
             // 새로운 separator 추가
             let separator = UIView()
-            separator.backgroundColor = UIColor(hexCode: "E1E1E1")
+            separator.backgroundColor = .gray300
             separator.translatesAutoresizingMaskIntoConstraints = false
             cell.addSubview(separator)
                         
@@ -289,17 +293,6 @@ class EditUnivCalendarViewController: UIViewController {
             //선택한 Item을 TextField에 넣어준다.
             self?.recruitTypeTextField.text = "\(item)"
             self?.updateButtonColor()
-            self?.recruitTypeTextField.backgroundColor = UIColor(hexCode: "FAFAFA")
-            self?.recruitTypeTextField.setPlaceholderColor(UIColor(hexCode: "9F9F9F"))
-            self?.recruitTypeTextField.updateUnderlineColor(to: UIColor(hexCode: "E1E1E1"))
-        }
-        
-        // 취소 시 처리
-        drop.cancelAction = { [weak self] in
-            self?.recruitTypeTextField.text = ""
-            self?.recruitTypeTextField.backgroundColor = UIColor(hexCode: "FFEBEE")
-            self?.recruitTypeTextField.setPlaceholderColor(UIColor(hexCode: "FF4A4A"))
-            self?.recruitTypeTextField.updateUnderlineColor(to: UIColor(hexCode: "FF4A4A"))
         }
     }
     

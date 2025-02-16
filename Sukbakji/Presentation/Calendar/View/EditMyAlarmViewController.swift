@@ -28,17 +28,17 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
     private let titleLabel = UILabel().then {
         $0.text = "알람 수정"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 22)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let univLabel = UILabel().then {
         $0.text = "학교"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let univTextField = UITextField().then {
-        $0.backgroundColor = .gray100
+        $0.backgroundColor = .gray50
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let dropButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Down2"), for: .normal)
@@ -49,17 +49,17 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
     private let warningUnivLabel = UILabel().then {
         $0.text = "학교는 필수 선택입니다"
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
-        $0.textColor = UIColor(hexCode: "FF4A4A")
+        $0.textColor = .warning400
     }
     private let alarmNameLabel = UILabel().then {
         $0.text = "알람 이름"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let alarmNameTextField = UITextField().then {
-        $0.backgroundColor = .gray100
+        $0.backgroundColor = .gray50
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let alarmNameDeleteButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Delete"), for: .normal)
@@ -70,17 +70,17 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
     private let warningAlarmNameLabel = UILabel().then {
         $0.text = "알람 이름은 필수 입력입니다"
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
-        $0.textColor = UIColor(hexCode: "FF4A4A")
+        $0.textColor = .warning400
     }
     private let alarmDateLabel = UILabel().then {
         $0.text = "알람 날짜"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let alarmDateTextField = UITextField().then {
-        $0.backgroundColor = .gray100
+        $0.backgroundColor = .gray50
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let dateButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_CalendarButton"), for: .normal)
@@ -88,19 +88,19 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
     private let alarmTimeLabel = UILabel().then {
         $0.text = "시간 설정"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let dateLabel = UILabel().then {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let timeButton = UIButton().then {
         $0.setTitle("오전 8:00", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setTitleColor(UIColor(named: "Coquelicot"), for: .normal)
+        $0.setTitleColor(.orange700, for: .normal)
     }
     private let pickerView = UIView().then {
-        $0.backgroundColor = .gray200
+        $0.backgroundColor = .gray100
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 1.0
         $0.layer.borderColor = UIColor.gray300.cgColor
@@ -112,17 +112,17 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
 
-        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
-        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .disabled)
+        $0.setTitleColor(.gray500, for: .normal)
+        $0.setTitleColor(.gray500, for: .disabled)
         $0.setTitle("저장하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
-        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .disabled)
+        $0.setBackgroundColor(.gray200, for: .normal)
+        $0.setBackgroundColor(.gray200, for: .disabled)
     }
     private let deleteButton = UIButton().then {
         $0.setTitle("삭제하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.setTitleColor(.black, for: .normal)
+        $0.setTitleColor(.gray900, for: .normal)
     }
     
     private var warningImageViewHeightConstraint: Constraint?
@@ -389,10 +389,10 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
     }
     
     private func initUI() {
-        DropDown.appearance().textColor = UIColor.black // 아이템 텍스트 색상
-        DropDown.appearance().selectedTextColor = UIColor(red: 236/255, green: 73/255, blue: 8/255, alpha: 1.0) // 선택된 아이템 텍스트 색상
+        DropDown.appearance().textColor = .gray900 // 아이템 텍스트 색상
+        DropDown.appearance().selectedTextColor = .orange700 // 선택된 아이템 텍스트 색상
         DropDown.appearance().backgroundColor = .gray50 // 아이템 팝업 배경 색상
-        DropDown.appearance().selectionBackgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0) // 선택한 아이템 배경 색상
+        DropDown.appearance().selectionBackgroundColor = .orange50 // 선택한 아이템 배경 색상
         DropDown.appearance().setupCornerRadius(5)
         DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
         drop.dismissMode = .automatic // 팝업을 닫을 모드 설정
@@ -411,6 +411,10 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
         
         drop.shadowColor = .clear
         
+        drop.cellConfiguration = { (index, item) in
+            return "  \(item)" // 앞에 4칸 공백 추가
+        }
+        
         drop.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
             // separatorInset을 조정하여 separator 앞의 간격을 없앱니다.
             cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
@@ -419,7 +423,7 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
 
             // 새로운 separator 추가
             let separator = UIView()
-            separator.backgroundColor = UIColor(hexCode: "E1E1E1")
+            separator.backgroundColor = .gray300
             separator.translatesAutoresizingMaskIntoConstraints = false
             cell.addSubview(separator)
                         
@@ -439,18 +443,17 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
             //선택한 Item을 TextField에 넣어준다.
             self?.univTextField.text = "\(item)"
             self?.updateButtonColor()
-            self?.univTextField.backgroundColor = UIColor(hexCode: "FAFAFA")
-            self?.univTextField.setPlaceholderColor(UIColor(hexCode: "9F9F9F"))
-            self?.univTextField.updateUnderlineColor(to: UIColor(hexCode: "E1E1E1"))
+            self?.univTextField.backgroundColor = .gray50
+            self?.univTextField.setPlaceholderColor(.gray500)
+            self?.univTextField.updateUnderlineColor(to: .gray300)
             self?.deleteWarningUnivName()
         }
         
         // 취소 시 처리
         drop.cancelAction = { [weak self] in
-            self?.univTextField.text = ""
-            self?.univTextField.backgroundColor = UIColor(hexCode: "FFEBEE")
-            self?.univTextField.setPlaceholderColor(UIColor(hexCode: "FF4A4A"))
-            self?.univTextField.updateUnderlineColor(to: UIColor(hexCode: "FF4A4A"))
+            self?.univTextField.backgroundColor = .warning50
+            self?.univTextField.setPlaceholderColor(.warning400)
+            self?.univTextField.updateUnderlineColor(to: .warning400)
             self?.warningUnivName()
         }
     }
@@ -486,9 +489,9 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
         warningAlarmNameLabel.isHidden = false
         warningAlarmNameLabelHeightConstraint?.update(offset: 12)
         
-        alarmNameTextField.backgroundColor = UIColor(hexCode: "FFEBEE")
-        alarmNameTextField.setPlaceholderColor(UIColor(hexCode: "FF4A4A"))
-        alarmNameTextField.updateUnderlineColor(to: UIColor(hexCode: "FF4A4A"))
+        alarmNameTextField.backgroundColor = .warning50
+        alarmNameTextField.setPlaceholderColor(.warning400)
+        alarmNameTextField.updateUnderlineColor(to: .warning400)
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
@@ -502,9 +505,9 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
         warningAlarmNameLabel.isHidden = true
         warningAlarmNameLabelHeightConstraint?.update(offset: 1)
         
-        alarmNameTextField.backgroundColor = UIColor(hexCode: "FAFAFA")
-        alarmNameTextField.setPlaceholderColor(UIColor(hexCode: "9F9F9F"))
-        alarmNameTextField.updateUnderlineColor(to: UIColor(hexCode: "E1E1E1"))
+        alarmNameTextField.backgroundColor = .gray50
+        alarmNameTextField.setPlaceholderColor(.gray500)
+        alarmNameTextField.updateUnderlineColor(to: .gray300)
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
@@ -531,12 +534,12 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
     private func updateButtonColor() {
         if (univTextField.text?.isEmpty == false && alarmNameTextField.text?.isEmpty == false) {
             saveButton.isEnabled = true
-            saveButton.setBackgroundColor(UIColor(named: "Coquelicot")!, for:.normal)
+            saveButton.setBackgroundColor(.orange700, for:.normal)
             saveButton.setTitleColor(.white, for: .normal)
         } else {
             saveButton.isEnabled = false
-            saveButton.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
-            saveButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
+            saveButton.setBackgroundColor(.gray200, for: .normal)
+            saveButton.setTitleColor(.gray500, for: .normal)
         }
     }
     
@@ -573,7 +576,7 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
     }
     
     @objc func delete_Tapped() {
-        let deleteView = DeleteView(title: "알람 삭제하기", content: "해당 알람을 삭제할까요? 삭제 후 복구되지 않습니다.", myAlarmViewModel: myAlarmViewModel, univDelete: UnivDelete(memberId: 0, univId: 0, season: "", method: ""))
+        let deleteView = DeleteView(title: "알람 삭제하기", content: "해당 알람을 삭제할까요? 삭제 후 복구되지 않습\n니다.", myAlarmViewModel: myAlarmViewModel, univDelete: UnivDelete(memberId: 0, univId: 0, season: "", method: ""))
         
         self.view.addSubview(deleteView)
         deleteView.alpha = 0

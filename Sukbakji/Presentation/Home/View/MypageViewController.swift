@@ -98,7 +98,7 @@ class MypageViewController: UIViewController {
     private let chargeButton = UIButton().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
-
+        
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("충전하기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
@@ -119,7 +119,7 @@ class MypageViewController: UIViewController {
     private var reactor = HomeReactor()
     
     private var myInfoViewheightConstraint: Constraint?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -130,8 +130,11 @@ class MypageViewController: UIViewController {
         super.viewWillAppear(animated)
         /// 탭 바 숨기기
         self.tabBarController?.tabBar.isHidden = true
-//        setMyProfile()
+        //        setMyProfile()
     }
+}
+    
+extension MypageViewController {
     
     private func setUI() {
         self.view.backgroundColor = .white
@@ -142,7 +145,7 @@ class MypageViewController: UIViewController {
         self.view.addSubview(navigationbarView)
         navigationbarView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-           make.height.equalTo(95)
+            make.height.equalTo(95)
         }
         
         self.view.addSubview(backgroundLabel)
@@ -309,6 +312,9 @@ class MypageViewController: UIViewController {
         }
         logOutButton.addTarget(self, action: #selector(logOutAPI), for: .touchUpInside)
     }
+}
+
+extension MypageViewController {
     
     private func setMyProfile() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {

@@ -156,7 +156,7 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func prepare(favoriteLab: FavoritesLab) {
+    func prepare(favoriteLab: FavoriteLab) {
         univLabel.text = favoriteLab.universityName
         labLabel.text = favoriteLab.labName
         professorNameLabel.text = favoriteLab.professorName

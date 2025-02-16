@@ -37,14 +37,18 @@ enum APIConstants {
     
     
     case calendarUniv
+    case calendarUnivId(Int)
     case calendarSchedule
     case calendarAlarm
+    case calendarAlarmId(Int)
     case calendarAlarmOn
     case calendarAlarmOff
     case calendarUnivMethod
     case calendarSearch
     case calendarScheduleDate(String)
     case calendarMember
+    case calendarUnivSelected
+    case calendarUnivAll
     
     
     case researchTopics
@@ -114,10 +118,14 @@ extension APIConstants {
             
         case .calendarUniv:
             return APIConstants.makeEndPoint("/calender/univ")
+        case .calendarUnivId(let univId):
+            return APIConstants.makeEndPoint("/calender/univ/\(univId)")
         case .calendarSchedule:
             return APIConstants.makeEndPoint("/calender/schedule")
         case .calendarAlarm:
             return APIConstants.makeEndPoint("/calender/alarm")
+        case .calendarAlarmId(let alarmId):
+            return APIConstants.makeEndPoint("/calender/alarm/\(alarmId)")
         case .calendarAlarmOn:
             return APIConstants.makeEndPoint("/calender/alarm/on")
         case .calendarAlarmOff:
@@ -130,7 +138,10 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/calender/schedule/\(date)")
         case .calendarMember:
             return APIConstants.makeEndPoint("/calender/member")
-            
+        case .calendarUnivSelected:
+            return APIConstants.makeEndPoint("/calender/univ/selected")
+        case .calendarUnivAll:
+            return APIConstants.makeEndPoint("/calender/univ/all")
             
         case .researchTopics:
             return APIConstants.makeEndPoint("/research-topics")

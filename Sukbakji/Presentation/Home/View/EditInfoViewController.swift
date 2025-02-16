@@ -325,11 +325,11 @@ class EditInfoViewController: UIViewController {
     }
     
     private func initUI() {
-        DropDown.appearance().textColor = UIColor.black // 아이템 텍스트 색상
-        DropDown.appearance().selectedTextColor = UIColor(red: 236/255, green: 73/255, blue: 8/255, alpha: 1.0) // 선택된 아이템 텍스트 색상
+        DropDown.appearance().textColor = .gray900 // 아이템 텍스트 색상
+        DropDown.appearance().selectedTextColor = .orange700 // 선택된 아이템 텍스트 색상
         DropDown.appearance().backgroundColor = .gray50 // 아이템 팝업 배경 색상
-        DropDown.appearance().selectionBackgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0) // 선택한 아이템 배경 색상
-        DropDown.appearance().setupCornerRadius(10)
+        DropDown.appearance().selectionBackgroundColor = .orange50 // 선택한 아이템 배경 색상
+        DropDown.appearance().setupCornerRadius(5)
         DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
         drop.dismissMode = .automatic // 팝업을 닫을 모드 설정
         DropDown.appearance().textFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 12)
@@ -359,7 +359,7 @@ class EditInfoViewController: UIViewController {
             
             // 새로운 separator 추가
             let separator = UIView()
-            separator.backgroundColor = UIColor(hexCode: "E1E1E1")
+            separator.backgroundColor = .gray300
             separator.translatesAutoresizingMaskIntoConstraints = false
             cell.addSubview(separator)
             

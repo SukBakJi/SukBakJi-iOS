@@ -22,7 +22,7 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         $0.setImage(UIImage(named: "Sukbakji_Add"), for: .normal)
     }
     private let backgroundLabel = UILabel().then {
-        $0.backgroundColor = .gray200
+        $0.backgroundColor = .gray100
     }
     private let dateLabel = UILabel().then {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)

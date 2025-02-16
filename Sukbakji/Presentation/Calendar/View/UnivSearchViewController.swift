@@ -23,20 +23,23 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     private let titleLabel = UILabel().then {
         $0.text = "대학교 선택"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let backgroundLabel = UILabel().then {
-        $0.backgroundColor = .gray200
+        $0.backgroundColor = .gray100
     }
-    private let uniSelectLabel = UILabel().then {
+    private let univSelectView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    private let univSelectLabel = UILabel().then {
         $0.text = "대학교를 선택해 주세요"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let maxSelectLabel = UILabel().then {
         $0.text = "최대 1개까지 선택할 수 있어요"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14)
-        $0.textColor = .gray400
+        $0.textColor = .gray500
     }
     private let stepImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Progress1")
@@ -44,12 +47,12 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     private let selectImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_CalendarImage")
     }
-    private let uniSearchTextField = UITextField().then {
+    private let univSearchTextField = UITextField().then {
         $0.backgroundColor = .gray50
-         $0.placeholder = "대학교명을 입력해 주세요"
-         $0.setPlaceholderColor(UIColor(hexCode: "9F9F9F"))
-         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-         $0.textColor = .black
+        $0.placeholder = "대학교명을 입력해 주세요"
+        $0.setPlaceholderColor(.gray300)
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = .gray900
     }
     private let searchImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_SearchImage")
@@ -68,18 +71,18 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     private let searchWarningLabel = UILabel().then {
         $0.text = "석박지대학교에 대한 검색 결과가 없어요"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .black
+        $0.textColor = .gray900
     }
     private let nextButton = UIButton().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
 
-        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
-        $0.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .disabled)
+        $0.setTitleColor(.gray500, for: .normal)
+        $0.setTitleColor(.gray500, for: .disabled)
         $0.setTitle("다음으로", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .normal)
-        $0.setBackgroundColor(UIColor(hexCode: "EFEFEF"), for: .disabled)
+        $0.setBackgroundColor(.gray200, for: .normal)
+        $0.setBackgroundColor(.gray200, for: .disabled)
     }
     
     private let selectedIndex = BehaviorRelay<IndexPath?>(value: nil)
@@ -136,21 +139,28 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
             make.height.equalTo(1)
         }
         
-        self.view.addSubview(uniSelectLabel)
-        uniSelectLabel.snp.makeConstraints { make in
-            make.top.equalTo(backgroundLabel.snp.bottom).offset(30)
+        self.view.addSubview(univSelectView)
+        univSelectView.snp.makeConstraints { make in
+            make.top.equalTo(backgroundLabel.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(130)
+        }
+        
+        self.univSelectView.addSubview(univSelectLabel)
+        univSelectLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(21)
         }
         
-        self.view.addSubview(maxSelectLabel)
+        self.univSelectView.addSubview(maxSelectLabel)
         maxSelectLabel.snp.makeConstraints { make in
-            make.top.equalTo(uniSelectLabel.snp.bottom).offset(8)
+            make.top.equalTo(univSelectLabel.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(17)
         }
         
-        self.view.addSubview(stepImageView)
+        self.univSelectView.addSubview(stepImageView)
         stepImageView.snp.makeConstraints { make in
             make.top.equalTo(maxSelectLabel.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(24)
@@ -158,34 +168,34 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
             make.width.equalTo(100)
         }
         
-        self.view.addSubview(selectImageView)
+        self.univSelectView.addSubview(selectImageView)
         selectImageView.snp.makeConstraints { make in
-            make.top.equalTo(backgroundLabel.snp.bottom).offset(22)
+            make.top.equalToSuperview().offset(22)
             make.trailing.equalToSuperview().inset(30)
             make.height.equalTo(100)
             make.width.equalTo(93)
         }
         selectImageView.alpha = 0.5
         
-        self.view.addSubview(uniSearchTextField)
-        uniSearchTextField.snp.makeConstraints { make in
-            make.top.equalTo(stepImageView.snp.bottom).offset(20)
+        self.view.addSubview(univSearchTextField)
+        univSearchTextField.snp.makeConstraints { make in
+            make.top.equalTo(univSelectView.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
-        uniSearchTextField.setLeftPadding(15)
-        uniSearchTextField.errorfix()
+        univSearchTextField.setLeftPadding(52)
+        univSearchTextField.errorfix()
         
         self.view.addSubview(searchImageView)
         searchImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(uniSearchTextField)
+            make.centerY.equalTo(univSearchTextField)
             make.leading.equalToSuperview().offset(40)
             make.height.width.equalTo(24)
         }
         
         self.view.addSubview(deleteButton)
         deleteButton.snp.makeConstraints { make in
-            make.centerY.equalTo(uniSearchTextField)
+            make.centerY.equalTo(univSearchTextField)
             make.trailing.equalToSuperview().inset(34)
             make.height.width.equalTo(24)
         }
@@ -194,14 +204,14 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
         
         self.view.addSubview(univSearchTableView)
         univSearchTableView.snp.makeConstraints { make in
-            make.top.equalTo(uniSearchTextField.snp.bottom)
+            make.top.equalTo(univSearchTextField.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
         bindTableView()
         
         self.view.addSubview(searchWarningImageView)
         searchWarningImageView.snp.makeConstraints { make in
-            make.top.equalTo(uniSearchTextField.snp.bottom).offset(36)
+            make.top.equalTo(univSearchTextField.snp.bottom).offset(36)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(32)
         }
@@ -246,19 +256,19 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
                         // 이미 선택된 버튼 클릭 시 선택 해제
                         self.selectedIndex.accept(nil)
                         self.nextButton.isEnabled = false
-                        self.nextButton.backgroundColor = UIColor(hexCode: "EFEFEF")
-                        self.nextButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .normal)
-                        self.nextButton.setTitleColor(UIColor(hexCode: "9F9F9F"), for: .selected)
-                        self.uniSearchTextField.text = ""
+                        self.nextButton.backgroundColor = .gray200
+                        self.nextButton.setTitleColor(.gray500, for: .normal)
+                        self.nextButton.setTitleColor(.gray500, for: .selected)
+                        self.univSearchTextField.text = ""
                     } else {
                         // 새로 선택된 버튼 설정
                         self.selectedIndex.accept(IndexPath(row: row, section: 0))
                         self.nextButton.isEnabled = true
-                        self.nextButton.backgroundColor = UIColor(named: "Coquelicot")
+                        self.nextButton.backgroundColor = .orange700
                         self.nextButton.setTitleColor(.white, for: .normal)
                         self.nextButton.setTitleColor(.white, for: .selected)
                         self.deleteButton.isHidden = false
-                        self.uniSearchTextField.text = title.name
+                        self.univSearchTextField.text = title.name
                         self.univId = title.id
                     }
                 }
@@ -330,7 +340,7 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
         }
         
         searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { [weak self] _ in
-            self?.setUnivSearchAPI(keyword: self?.uniSearchTextField.text ?? "")
+            self?.setUnivSearchAPI(keyword: self?.univSearchTextField.text ?? "")
         })
         
         return true
@@ -351,12 +361,12 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func clickNextButton() {
-        let univRecruitVC = UnivRecruitViewController(univName: uniSearchTextField.text ?? "", univId: univId ?? 0)
+        let univRecruitVC = UnivRecruitViewController(univName: univSearchTextField.text ?? "", univId: univId ?? 0)
         self.navigationController?.pushViewController(univRecruitVC, animated: true)
     }
     
     @objc private func delete_Tapped() {
-        uniSearchTextField.text = ""
+        univSearchTextField.text = ""
     }
 }
 

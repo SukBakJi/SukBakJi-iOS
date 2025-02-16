@@ -124,6 +124,7 @@
 		C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */; };
 		C73555052D4BCD86005BDB38 /* MessageRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */; };
 		C73555072D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */; };
+		C73828D32D6220F4007A21A0 /* AllDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73828D22D6220F4007A21A0 /* AllDeleteView.swift */; };
 		C73C5C462D5917C500091C5C /* MemberId.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C5C452D5917C500091C5C /* MemberId.swift */; };
 		C74A15942D5A477000A1698B /* FavoriteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74A15932D5A477000A1698B /* FavoriteBoard.swift */; };
 		C74A15962D5A477800A1698B /* HotPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74A15952D5A477800A1698B /* HotPost.swift */; };
@@ -323,6 +324,7 @@
 		C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicViewModel.swift; sourceTree = "<group>"; };
 		C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomTableViewCell.swift; sourceTree = "<group>"; };
 		C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringRoomTableViewCell.swift; sourceTree = "<group>"; };
+		C73828D22D6220F4007A21A0 /* AllDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDeleteView.swift; sourceTree = "<group>"; };
 		C73C5C452D5917C500091C5C /* MemberId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberId.swift; sourceTree = "<group>"; };
 		C74A15932D5A477000A1698B /* FavoriteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoard.swift; sourceTree = "<group>"; };
 		C74A15952D5A477800A1698B /* HotPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPost.swift; sourceTree = "<group>"; };
@@ -757,12 +759,20 @@
 		C71E14852C44CE4B003AFCB7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				C73828D12D61C32F007A21A0 /* Reactor */,
 				C74A159E2D5A4B1600A1698B /* Model */,
 				C74A15B32D5A560000A1698B /* View */,
 				C74A15B42D5A560700A1698B /* ViewModel */,
 				C74A15B52D5A561200A1698B /* Cell */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		C73828D12D61C32F007A21A0 /* Reactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Reactor;
 			sourceTree = "<group>";
 		};
 		C73C5C442D59179000091C5C /* Model */ = {
@@ -937,6 +947,7 @@
 				C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */,
 				C72CEED52D258CB500EED814 /* UnivStopView.swift */,
 				C75C0BE02D2D2A05000145F3 /* DeleteView.swift */,
+				C73828D22D6220F4007A21A0 /* AllDeleteView.swift */,
 				C7F951BF2D2A738700D07051 /* DateView.swift */,
 				C78611C92D014B70002B67B4 /* PWAlertView.swift */,
 				C730327B2D295BF800F717D0 /* BottomSheetView.swift */,
@@ -1282,6 +1293,7 @@
 				7B1C534E2C69D4E800C66D0D /* DirectoryLabReviewWriteModel.swift in Sources */,
 				7B259B002C75EB5700D3DFE5 /* LabReviewWriteViewController.swift in Sources */,
 				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
+				C73828D32D6220F4007A21A0 /* AllDeleteView.swift in Sources */,
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FavoritesBoard : Codable {
+struct FavoriteBoard : Codable {
     let postId: Int
     let title: String
     let boardName: String

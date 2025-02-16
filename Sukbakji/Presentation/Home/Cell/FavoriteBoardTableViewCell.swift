@@ -61,7 +61,7 @@ class FavoriteBoardTableViewCell: UITableViewCell {
         }
     }
     
-    func prepare(favoriteBoard: FavoritesBoard) {
+    func prepare(favoriteBoard: FavoriteBoard) {
         self.labelLabel.text = favoriteBoard.boardName
         self.contentLabel.text = favoriteBoard.title
     }

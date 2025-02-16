@@ -22,11 +22,12 @@ class CalendarViewController: UIViewController {
     private let contentView = UIView()
     
     private let titleView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .clear
     }
     private let titleLabel = UILabel().then {
         $0.text = "캘린더"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 22)
+        $0.textColor = .gray900
     }
     private let notificationButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Notification"), for: .normal)
@@ -37,20 +38,24 @@ class CalendarViewController: UIViewController {
         $0.contentMode = .scaleAspectFill
     }
     private let backgroundLabel = UILabel().then {
-        $0.backgroundColor = .gray200
+        $0.backgroundColor = .gray100
+    }
+    private let dateView = UIView().then {
+        $0.backgroundColor = .clear
     }
     private let dateLabel = UILabel().then {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .gray900
     }
     private let univSettingButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Down"), for: .normal)
         $0.setTitle("대학교를 설정하세요!  ", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setTitleColor(UIColor(named: "Coquelicot"), for: .normal)
+        $0.setTitleColor(.orange700, for: .normal)
         $0.semanticContentAttribute = .forceRightToLeft
     }
     private let calendarBackgroundView = UIView().then {
-        $0.backgroundColor = UIColor.gray50
+        $0.backgroundColor = .gray50
         $0.layer.cornerRadius = 10
     }
     private lazy var weekStackView = UIStackView()
@@ -71,7 +76,7 @@ class CalendarViewController: UIViewController {
         $0.image = UIImage(named: "Sukbakji_Rectangle")
     }
     private let univAlertView = UIView().then {
-        $0.backgroundColor = UIColor(hexCode: "FF5614")
+        $0.backgroundColor = .orange500
         $0.layer.cornerRadius = 10
     }
     private let univAlertLabel = UILabel().then {
@@ -84,9 +89,12 @@ class CalendarViewController: UIViewController {
         $0.backgroundColor = .clear
         $0.register(CalendarDetailTableViewCell.self, forCellReuseIdentifier: CalendarDetailTableViewCell.identifier)
     }
+    private let upComingView = UIView().then {
+        $0.backgroundColor = .clear
+    }
     private let upComingLabel = UILabel().then {
         $0.text = "다가오는 일정"
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
     private let upComingImageView = UIImageView().then {
@@ -121,8 +129,8 @@ class CalendarViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
-    private var calendarHeightConstraint: NSLayoutConstraint?
-    private var dateSelectHeightConstraint: NSLayoutConstraint?
+    private var calendarHeightConstraint: Constraint?
+    private var dateSelectHeightConstraint: Constraint?
     
     private let calendar = Calendar.current
     private let dateFormatter = DateFormatter()
@@ -146,10 +154,8 @@ class CalendarViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
-        
-//        getAlarmList()
-//        setUpComingAPI()
-//        getUnivList()
+       
+//        setUnivListAPI()
 //        callAPI()
     }
     
@@ -157,7 +163,7 @@ class CalendarViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         // collectionView의 contentSize로 backgroundView의 높이 업데이트
-        calendarHeightConstraint?.constant = calendarMainCollectionView.contentSize.height + 65
+        self.calendarHeightConstraint?.update(offset: calendarMainCollectionView.contentSize.height + 65)
     }
     
     private func setUI() {
@@ -214,14 +220,21 @@ class CalendarViewController: UIViewController {
             make.height.equalTo(1)
         }
         
-        self.contentView.addSubview(dateLabel)
+        self.contentView.addSubview(dateView)
+        dateView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(95)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(61)
+        }
+        
+        self.dateView.addSubview(dateLabel)
         dateLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(115)
+            make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(21)
         }
         
-        self.contentView.addSubview(univSettingButton)
+        self.dateView.addSubview(univSettingButton)
         univSettingButton.snp.makeConstraints { make in
             make.centerY.equalTo(dateLabel)
             make.trailing.equalToSuperview().inset(24)
@@ -234,9 +247,8 @@ class CalendarViewController: UIViewController {
         calendarBackgroundView.snp.makeConstraints { make in
             make.top.equalTo(dateLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(24)
+            calendarHeightConstraint = make.height.equalTo(300).constraint
         }
-        calendarHeightConstraint = calendarBackgroundView.heightAnchor.constraint(equalToConstant: 300)
-        calendarHeightConstraint?.isActive = true
         
         self.calendarBackgroundView.addSubview(weekStackView)
         self.weekStackView.distribution = .fillEqually
@@ -259,7 +271,7 @@ class CalendarViewController: UIViewController {
             make.top.equalTo(univSettingButton.snp.bottom).offset(5.5)
             make.trailing.equalToSuperview().inset(20)
         }
-        univAlertImageView.isHidden = true
+        univAlertImageView.isHidden = false
         
         self.contentView.addSubview(univAlertView)
         univAlertView.snp.makeConstraints { make in
@@ -267,7 +279,7 @@ class CalendarViewController: UIViewController {
             make.trailing.equalToSuperview().inset(8)
             make.height.equalTo(36)
         }
-        univAlertView.isHidden = true
+        univAlertView.isHidden = false
         
         self.univAlertView.addSubview(univAlertLabel)
         univAlertLabel.snp.makeConstraints { make in
@@ -280,19 +292,24 @@ class CalendarViewController: UIViewController {
         calendarDetailTableView.snp.makeConstraints { make in
             make.top.equalTo(calendarBackgroundView.snp.bottom)
             make.trailing.leading.equalToSuperview()
-            make.height.equalTo(10)
+            dateSelectHeightConstraint = make.height.equalTo(10).constraint
         }
-        dateSelectHeightConstraint = calendarDetailTableView.heightAnchor.constraint(equalToConstant: 10)
-        dateSelectHeightConstraint?.isActive = true
         
-        self.contentView.addSubview(upComingLabel)
+        self.contentView.addSubview(upComingView)
+        upComingView.snp.makeConstraints { make in
+            make.top.equalTo(calendarDetailTableView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(169)
+        }
+        
+        self.upComingView.addSubview(upComingLabel)
         upComingLabel.snp.makeConstraints { make in
-            make.top.equalTo(calendarDetailTableView.snp.bottom).offset(20)
+            make.top.equalToSuperview().offset(28)
             make.leading.equalToSuperview().offset(24)
             make.height.equalTo(21)
         }
         
-        self.contentView.addSubview(upComingImageView)
+        self.upComingView.addSubview(upComingImageView)
         upComingImageView.snp.makeConstraints { make in
             make.centerY.equalTo(upComingLabel)
             make.leading.equalTo(upComingLabel.snp.trailing).offset(4)
@@ -300,7 +317,7 @@ class CalendarViewController: UIViewController {
         }
         
         upComingCalendarCollectionView.tag = 2
-        self.contentView.addSubview(upComingCalendarCollectionView)
+        self.upComingView.addSubview(upComingCalendarCollectionView)
         upComingCalendarCollectionView.snp.makeConstraints { make in
             make.top.equalTo(upComingLabel.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview()
@@ -333,8 +350,8 @@ class CalendarViewController: UIViewController {
     
     private func configureCalendar() {
         self.configureWeekLabel()
-        self.bindCollectionView()
         self.configureDate()
+        self.bindCollectionView()
     }
     
     private func configureWeekLabel() {
@@ -345,6 +362,7 @@ class CalendarViewController: UIViewController {
             label.text = dayOfTheWeek[i]
             label.textAlignment = .center
             label.font = UIFont(name: "SUITE-SemiBold", size: 14)
+            label.textColor = .gray900
             self.weekStackView.addArrangedSubview(label)
         }
     }
@@ -354,6 +372,11 @@ class CalendarViewController: UIViewController {
         self.calendarDate = self.calendar.date(from: components) ?? Date()
         self.dateFormatter.dateFormat = "yyyy년 MM월"
         self.updateCalendar()
+    }
+    
+    private func updateCalendar() {
+        self.updateTitle()
+        self.updateDays()
     }
     
     private func startDayOfTheWeek() -> Int {
@@ -382,16 +405,12 @@ class CalendarViewController: UIViewController {
         self.calendarMainCollectionView.reloadData()
     }
     
-    private func updateCalendar() {
-        self.updateTitle()
-        self.updateDays()
-    }
-    
     private func callAPI() {
         activityIndicator.startAnimating()
         DispatchQueue.global().async {
             sleep(1)
             self.setAlarmListAPI()
+            self.setUpComingAPI()
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
             }
@@ -566,16 +585,16 @@ class CalendarViewController: UIViewController {
     }
     
     private func expandHeight(num: Int) {
-        let addHeight: CGFloat = CGFloat(44 * num + 10) // 늘리고 싶은 높이 값을 설정 (예시)
+        let addHeight: CGFloat = CGFloat(44 * num + 8)
         
-        self.dateSelectHeightConstraint?.constant = addHeight
+        self.dateSelectHeightConstraint?.update(offset: addHeight)
         self.view.layoutIfNeeded()
     }
     
     private func reduceHeight() {
-        let minusHeight: CGFloat = 10 // 줄이고 싶은 높이 값을 설정 (예시)
+        let minusHeight: CGFloat = 8
         
-        self.dateSelectHeightConstraint?.constant = minusHeight
+        self.dateSelectHeightConstraint?.update(offset: minusHeight)
         self.view.layoutIfNeeded()
     }
     

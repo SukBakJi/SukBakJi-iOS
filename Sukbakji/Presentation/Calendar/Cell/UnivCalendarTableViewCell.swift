@@ -78,7 +78,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor
         self.contentView.clipsToBounds = true
-        self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 24, bottom: 12, right: 24))
+        self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 24, bottom: 12, right: 24))
         
         self.contentView.addSubview(selectView)
         selectView.snp.makeConstraints { make in
