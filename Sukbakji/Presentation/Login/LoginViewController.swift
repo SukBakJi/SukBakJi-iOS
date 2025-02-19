@@ -108,13 +108,26 @@ class LoginViewController: UIViewController {
         
         setupViews()
         setupLayout()
-        setUpNavigationBar()
     }
     
-    // MARK: - navigationBar Title
-    private func setUpNavigationBar(){
-        self.title = "이메일로 로그인"
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground() 
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+
     
     // MARK: - Screen transition
     // 회원가입
@@ -241,7 +254,6 @@ class LoginViewController: UIViewController {
     
     // MARK: - addView
     func setupViews() {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
             print("자동 로그인 활성화: \(accessToken)")
