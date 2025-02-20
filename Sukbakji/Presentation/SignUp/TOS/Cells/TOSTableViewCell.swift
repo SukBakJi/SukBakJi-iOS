@@ -9,14 +9,14 @@ import UIKit
 import SnapKit
 
 class TOSTableViewCell: UITableViewCell {
+    weak var delegate: TOSCellDelegate?
+    
     let checkButton = UIButton().then {
         $0.setImage(UIImage(named: "SBJ_check=off"), for: .normal)
         $0.setImage(UIImage(named: "SBJ_check=on"), for: .selected)
-        $0.adjustsImageWhenHighlighted = false
     }
     let readMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "SBJ_arrow-right"), for: .normal)
-        $0.adjustsImageWhenHighlighted = false
     }
     let consentLabel = UILabel().then {
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
@@ -34,13 +34,19 @@ class TOSTableViewCell: UITableViewCell {
         $0.textColor = .orange600
     }
     
+    @objc
+    private func didTapReadMoreButton() {
+        delegate?.didTapReadMore(in: self)
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(checkButton)
-        contentView.addSubview(requiredView)
+        
+        readMoreButton.addTarget(self, action: #selector(didTapReadMoreButton), for: .touchUpInside)
+
+
         requiredView.addSubview(requiredLabel)
-        contentView.addSubview(consentLabel)
-        contentView.addSubview(readMoreButton)
+        contentView.addSubviews([checkButton, requiredView, consentLabel, readMoreButton])
         
         checkButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(40)

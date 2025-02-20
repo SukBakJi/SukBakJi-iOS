@@ -7,8 +7,7 @@
 
 import UIKit
 
-class TOSViewController: UIViewController {
-    
+class TOSViewController: UIViewController, TOSCellDelegate {
     // MARK: - Properties
     var isKakaoSignUp: Bool = false
     
@@ -66,6 +65,21 @@ class TOSViewController: UIViewController {
         self.title = "회원가입"
     }
     
+    // MARK: - Delegate Method
+    // 각 이용약관 페이지 이동
+    func didTapReadMore(in cell: TOSTableViewCell) {
+        guard let indexPath = tosView.tableView.indexPath(for: cell) else { return }
+        
+        let tosData = TOSData.data()[indexPath.row]
+        let nextVC = DetailTOSViewController(tosData: tosData)
+        navigationController?.pushViewController(nextVC, animated: true)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
+            $0.tintColor = .black
+        }
+    }
+
+    
     // MARK: - Functional
     @objc func finalAgreeCheckButtonTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
@@ -119,6 +133,7 @@ extension TOSViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TOSTableViewCell", for: indexPath) as? TOSTableViewCell else { return UITableViewCell() }
         cell.consentLabel.text = tosView.consent[indexPath.item]
         cell.checkButton.addTarget(self, action: #selector(checkButtonTapped(_:)), for: .touchUpInside)
+        cell.delegate = self
         return cell
     }
     

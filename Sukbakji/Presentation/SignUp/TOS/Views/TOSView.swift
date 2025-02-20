@@ -53,7 +53,9 @@ class TOSView: UIView {
         $0.setTitleColor(.gray500, for: .normal)
     }
     
-    private let scrollView = UIScrollView()
+    private let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+    }
     private let containerView = UIView()
     private let contentView = UIView()
     

@@ -87,6 +87,7 @@
 		7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */; };
 		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
 		915C68E12D6471D200EA87C8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C68E02D6471D200EA87C8 /* UIView+Extension.swift */; };
+		91F849112D65AF3C0048B41A /* TOSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F849102D65AF3C0048B41A /* TOSData.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
 		C704BD882D2BBE9700954EAD /* EditMyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */; };
 		C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2802C633CDB00D6014B /* ChattingViewController.swift */; };
@@ -280,6 +281,7 @@
 		7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabDetailViewController.swift; sourceTree = "<group>"; };
 		7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListGetModel.swift; sourceTree = "<group>"; };
 		915C68E02D6471D200EA87C8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		91F849102D65AF3C0048B41A /* TOSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSData.swift; sourceTree = "<group>"; };
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyAlarmViewController.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 		915C66CE2D64710F00EA87C8 /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
 		915C66CF2D64711900EA87C8 /* ViewControllers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewControllers; sourceTree = "<group>"; };
 		915C66D02D64712200EA87C8 /* Cells */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Cells; sourceTree = "<group>"; };
+		91F8490D2D65ABA50048B41A /* Protocols */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Protocols; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -515,9 +518,11 @@
 		417AADD22C676B9B002080E0 /* TOS */ = {
 			isa = PBXGroup;
 			children = (
+				91F8490D2D65ABA50048B41A /* Protocols */,
 				915C66D02D64712200EA87C8 /* Cells */,
 				915C66CF2D64711900EA87C8 /* ViewControllers */,
 				915C66CE2D64710F00EA87C8 /* Views */,
+				91F849102D65AF3C0048B41A /* TOSData.swift */,
 			);
 			path = TOS;
 			sourceTree = "<group>";
@@ -1088,6 +1093,7 @@
 				915C66CE2D64710F00EA87C8 /* Views */,
 				915C66CF2D64711900EA87C8 /* ViewControllers */,
 				915C66D02D64712200EA87C8 /* Cells */,
+				91F8490D2D65ABA50048B41A /* Protocols */,
 			);
 			name = Sukbakji;
 			productName = Sukbakji;
@@ -1317,6 +1323,7 @@
 				C7DA37542CFCD4E900B26549 /* FavoriteBoardViewModel.swift in Sources */,
 				4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */,
 				7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */,
+				91F849112D65AF3C0048B41A /* TOSData.swift in Sources */,
 				7B3459F12C688AB1008B711A /* BoardScrapModel.swift in Sources */,
 				C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */,
 				C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */,
