@@ -14,7 +14,11 @@ import RxSwift
 
 class ProfileTabViewController: TabmanViewController {
     
-    private var provider = String()
+    private var provider: String = ""
+    private var userPW: String = ""
+    
+    private let viewModel = MyProfileViewModel()
+    private let disposeBag = DisposeBag()
     
     private var viewControllers: Array<UIViewController> = []
     
@@ -24,10 +28,6 @@ class ProfileTabViewController: TabmanViewController {
     private let backgroundLabel = UILabel().then {
         $0.backgroundColor = .gray100
     }
-    
-    private var userPW: String = ""
-    
-    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +40,12 @@ class ProfileTabViewController: TabmanViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = true
-        self.getUserPW()
+//        getUserPW()
+//        setAPI()
     }
     
     private func setUI() {
         self.view.backgroundColor = .white
-        self.navigationItem.setHidesBackButton(true, animated: false)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         NotificationCenter.default.addObserver(
@@ -92,10 +92,14 @@ class ProfileTabViewController: TabmanViewController {
     
 extension ProfileTabViewController {
     
+    private func setAPI() {
+        setProfileAPI()
+        viewModel.loadMyProfile()
+    }
+    
     private func getUserPW() {
         if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
             userPW = retrievedPW
-            print(userPW)
         } else {
             print("Failed to retrieve password.")
         }
@@ -132,18 +136,19 @@ extension ProfileTabViewController {
     }
     
     private func setProfileAPI() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        let url = APIConstants.userMypage.path
-        
-        APIService.shared.getWithToken(of: APIResponse<MyProfile>.self, url: url, accessToken: retrievedToken)
+        // 데이터 변경 시 UI 자동 업데이트
+        viewModel.myProfile
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                let data = response.result
-                self.provider = data.provider ?? ""
-            }, onFailure: { error in
-                print("❌ 오류:", error.localizedDescription)
+            .subscribe(onNext: { [weak self] profile in
+                self?.provider = profile.provider ?? ""
+            })
+            .disposed(by: disposeBag)
+        
+        // 에러 메시지 바인딩
+        viewModel.errorMessage
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { message in
+                AlertController(message: message).show()
             })
             .disposed(by: disposeBag)
     }

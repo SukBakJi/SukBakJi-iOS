@@ -15,7 +15,7 @@ class FavoriteBoardTableViewCell: UITableViewCell {
     
     private let labelView = UIView().then {
         $0.backgroundColor = UIColor.blue50
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 4
     }
     private let labelLabel = UILabel().then {
         $0.textColor = UIColor.blue400
@@ -24,6 +24,9 @@ class FavoriteBoardTableViewCell: UITableViewCell {
     private let contentLabel = UILabel().then {
         $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+    }
+    private let separatorView = UIView().then {
+        $0.backgroundColor = .gray100
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -39,11 +42,13 @@ class FavoriteBoardTableViewCell: UITableViewCell {
     }
     
     private func setUI() {
+        self.contentView.backgroundColor = .white
+        
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints { make in
-           make.leading.equalToSuperview().offset(18)
-           make.centerY.equalToSuperview()
-           make.height.equalTo(20)
+            make.leading.equalToSuperview().offset(18)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(20)
         }
         
         self.labelView.addSubview(labelLabel)
@@ -58,6 +63,13 @@ class FavoriteBoardTableViewCell: UITableViewCell {
             make.leading.equalTo(labelView.snp.trailing).offset(12)
            make.centerY.equalToSuperview()
            make.height.equalTo(26)
+        }
+        
+        self.contentView.addSubview(separatorView)
+        separatorView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
     

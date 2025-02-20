@@ -15,7 +15,7 @@ class HotPostTableViewCell: UITableViewCell {
 
     private let labelView = UIView().then {
         $0.backgroundColor = UIColor.orange50
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 4
     }
     private let labelLabel = UILabel().then {
         $0.text = "조회수 TOP"
@@ -24,7 +24,7 @@ class HotPostTableViewCell: UITableViewCell {
     }
     private let labelView2 = UIView().then {
         $0.backgroundColor = .gray50
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 4
     }
     private let labelLabel2 = UILabel().then {
         $0.textColor = .gray500
@@ -43,14 +43,14 @@ class HotPostTableViewCell: UITableViewCell {
         $0.image = UIImage(named: "Sukbakji_Comment")
     }
     private let commentLabel = UILabel().then {
-        $0.textColor = UIColor.blue400
+        $0.textColor = .blue400
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let viewImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_View")
     }
     private let viewLabel = UILabel().then {
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = .orange700
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     
@@ -71,6 +71,7 @@ class HotPostTableViewCell: UITableViewCell {
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray100.cgColor
         self.contentView.clipsToBounds = true
+        self.contentView.backgroundColor = .white
         self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 12, left: 24, bottom: 0, right: 24))
         
         self.contentView.addSubview(labelView)
@@ -111,7 +112,7 @@ class HotPostTableViewCell: UITableViewCell {
         self.contentView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(1)
-            make.leading.equalToSuperview().offset(18)
+            make.leading.trailing.equalToSuperview().inset(18)
            make.height.equalTo(36)
         }
         
@@ -125,21 +126,21 @@ class HotPostTableViewCell: UITableViewCell {
         self.contentView.addSubview(viewImageView)
         viewImageView.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(17)
-            make.trailing.equalTo(viewLabel.snp.leading).inset(3)
+            make.trailing.equalTo(viewLabel.snp.leading).offset(-3)
             make.width.height.equalTo(12)
         }
         
         self.contentView.addSubview(commentLabel)
         commentLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(16)
-            make.trailing.equalTo(viewImageView.snp.leading).inset(12)
+            make.trailing.equalTo(viewImageView.snp.leading).offset(-12)
            make.height.equalTo(14)
         }
         
         self.contentView.addSubview(commentImageView)
         commentImageView.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(17)
-            make.trailing.equalTo(commentLabel.snp.leading).inset(3)
+            make.trailing.equalTo(commentLabel.snp.leading).offset(-3)
             make.width.height.equalTo(12)
         }
     }
