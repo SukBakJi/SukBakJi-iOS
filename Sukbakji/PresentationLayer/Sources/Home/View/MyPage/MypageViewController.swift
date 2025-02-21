@@ -14,7 +14,6 @@ import RxCocoa
 class MypageViewController: UIViewController {
     
     private let mypageView = MyPageView()
-    
     private let viewModel = MyProfileViewModel()
     private var disposeBag = DisposeBag()
     

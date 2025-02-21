@@ -15,10 +15,12 @@ class FavoriteBoardViewModel {
     let favoriteBoardList = BehaviorRelay<[FavoriteBoard]>(value: [])
     let errorMessage = PublishSubject<String>()
     
-    func loadFavoriteBoard(token: String) {
-        let url = APIConstants.communityFavoriteBoard.path
+    func loadFavoriteBoard() {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
         
-        HomeRepository.shared.fetchFavoriteBoard(token: token, url: url)
+        HomeRepository.shared.fetchFavoriteBoard(token: token)
             .observe(on: MainScheduler.instance) // ✅ UI 업데이트를 위해 Main 스레드에서 실행
             .subscribe(onSuccess: { response in
                 self.favoriteBoardList.accept(response.result)

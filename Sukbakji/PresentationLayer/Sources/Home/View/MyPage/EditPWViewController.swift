@@ -13,7 +13,6 @@ import RxSwift
 class EditPWViewController: UIViewController {
     
     private let editPWView = EditPWView()
-    
     private let viewModel = MyProfileViewModel()
     private let disposeBag = DisposeBag()
     

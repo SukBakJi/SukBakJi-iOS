@@ -14,7 +14,6 @@ import RxCocoa
 class HomeViewController: UIViewController {
     
     private let homeView = HomeView()
-    
     private let favoriteBoardViewModel = FavoriteBoardViewModel()
     private let hotPostViewModel = HotPostViewModel()
     private let favoriteLabViewModel = FavoriteLabViewModel()
@@ -36,7 +35,6 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
-        
 //        fetchFavoriteBoards()
     }
 }
@@ -55,7 +53,7 @@ extension HomeViewController {
         bindFavoriteBoardViewModel()
         bindHotPostViewModel()
         bindFavoriteLabViewModel()
-        fetchFavoriteBoards()
+        fetchCellData()
     }
     
     @objc func scrollToTop() {
@@ -159,13 +157,10 @@ extension HomeViewController {
             .disposed(by: disposeBag)
     }
     
-    private func fetchFavoriteBoards() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        favoriteBoardViewModel.loadFavoriteBoard(token: retrievedToken)
-        hotPostViewModel.loadHotPost(token: retrievedToken)
-        favoriteLabViewModel.loadFavoriteLab(token: retrievedToken)
+    private func fetchCellData() {
+        favoriteBoardViewModel.loadFavoriteBoard()
+        hotPostViewModel.loadHotPost()
+        favoriteLabViewModel.loadFavoriteLab()
     }
 }
 

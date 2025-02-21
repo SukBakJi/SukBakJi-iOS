@@ -15,10 +15,12 @@ class FavoriteLabViewModel {
     let favoriteLabList = BehaviorRelay<[FavoriteLab]>(value: [])
     let errorMessage = PublishSubject<String>()
     
-    func loadFavoriteLab(token: String) {
-        let url = APIConstants.labsFavoriteLab.path
+    func loadFavoriteLab() {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
         
-        HomeRepository.shared.fetchFavoriteLab(token: token, url: url)
+        HomeRepository.shared.fetchFavoriteLab(token: token)
             .observe(on: MainScheduler.instance) // ✅ UI 업데이트를 위해 Main 스레드에서 실행
             .subscribe(onSuccess: { response in
                 self.favoriteLabList.accept(response.result)

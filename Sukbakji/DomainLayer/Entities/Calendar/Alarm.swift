@@ -1,5 +1,5 @@
 //
-//  AlarmList.swift
+//  Alarm.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 2/11/25.

@@ -27,9 +27,7 @@ class MyProfileViewModel {
             return
         }
         
-        let url = APIConstants.userMypage.path
-        
-        HomeRepository.shared.fetchMyProfile(token: token, url: url)
+        HomeRepository.shared.fetchMyProfile(token: token)
             .observe(on: MainScheduler.instance) // ✅ UI 업데이트를 위해 Main 스레드에서 실행
             .subscribe(onSuccess: { response in
                 self.myProfile.onNext(response.result)
@@ -44,9 +42,7 @@ class MyProfileViewModel {
             return
         }
         
-        let url = APIConstants.authLogout.path
-        
-        HomeRepository.shared.fetchLogOut(token: token, url: url, parameters: nil)
+        HomeRepository.shared.fetchLogOut(token: token, parameters: nil)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.logoutResult.onNext(true)
@@ -61,14 +57,12 @@ class MyProfileViewModel {
             return
         }
         
-        let url = APIConstants.userProfile.path
-        
         let params = [
             "degreeLevel": degree,
             "researchTopics": topics
         ] as [String : Any]
         
-        HomeRepository.shared.fetchEditProfile(token: token, url: url, parameters: params)
+        HomeRepository.shared.fetchEditProfile(token: token, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.profileUpdated.onNext(true)
@@ -83,15 +77,13 @@ class MyProfileViewModel {
             return
         }
         
-        let url = APIConstants.userPassword.path
-        
         let params = [
             "currentPassword": currentPWInput.value,
             "newPassword": newPWInput.value,
             "confirmPassword": confirmPWInput.value
         ] as [String : Any]
         
-        HomeRepository.shared.fetchChangePW(token: token, url: url, parameters: params)
+        HomeRepository.shared.fetchChangePW(token: token, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.pwChanged.onNext(true)

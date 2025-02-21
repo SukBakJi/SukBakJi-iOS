@@ -15,10 +15,12 @@ class HotPostViewModel {
     let hotPostList = BehaviorRelay<[HotPost]>(value: [])
     let errorMessage = PublishSubject<String>()
     
-    func loadHotPost(token: String) {
-        let url = APIConstants.communityHotPost.path
+    func loadHotPost() {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
         
-        HomeRepository.shared.fetchHotPost(token: token, url: url)
+        HomeRepository.shared.fetchHotPost(token: token)
             .observe(on: MainScheduler.instance) // ✅ UI 업데이트를 위해 Main 스레드에서 실행
             .subscribe(onSuccess: { response in
                 self.hotPostList.accept(response.result)

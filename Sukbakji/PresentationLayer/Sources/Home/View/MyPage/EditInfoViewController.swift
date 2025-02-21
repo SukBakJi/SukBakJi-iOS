@@ -16,7 +16,6 @@ import RxCocoa
 class EditInfoViewController: UIViewController {
     
     private let editInfoView = EdifInfoView()
-    
     private let viewModel = MyProfileViewModel()
     private let researchTopicViewModel = ResearchTopicViewModel()
     private let disposeBag = DisposeBag()
