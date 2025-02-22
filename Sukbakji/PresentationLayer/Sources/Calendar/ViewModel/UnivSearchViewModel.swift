@@ -10,6 +10,26 @@ import RxSwift
 import RxCocoa
 
 final class UnivSearchViewModel {
-    var selectUnivSearchItem: UnivSearchList?
-    var univSearchItems: Observable<[UnivSearchList]> = Observable.just([])
+    private let repository = CalendarRepository()
+    private let disposeBag = DisposeBag()
+    
+    let selectUnivItem = BehaviorRelay<UnivSearchList?>(value: nil)
+    let univSearchList = BehaviorRelay<[UnivSearchList]>(value: [])
+    
+    func loadUnivSearch(keyword: String) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        
+        repository.fetchUnivSearch(token: token, keyword: keyword)
+            .map { $0.result.universityList }
+            .subscribe(onSuccess: { [weak self] schedules in
+                self?.univSearchList.accept(schedules)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func selectUniversity(_ univ: UnivSearchList?) {
+        selectUnivItem.accept(univ)
+    }
 }

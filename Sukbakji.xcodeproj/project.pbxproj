@@ -158,6 +158,10 @@
 		C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */; };
 		C757F82B2D0A9D2000685F1A /* MyAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */; };
 		C75C0BE12D2D2A05000145F3 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C0BE02D2D2A05000145F3 /* DeleteView.swift */; };
+		C7675F782D6981BD00F99294 /* UnivSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F772D6981BD00F99294 /* UnivSearchView.swift */; };
+		C7675F7A2D6981DD00F99294 /* UnivRecruitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F792D6981DD00F99294 /* UnivRecruitView.swift */; };
+		C7675F7C2D6981ED00F99294 /* UnivView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F7B2D6981ED00F99294 /* UnivView.swift */; };
+		C7675F7E2D6981FF00F99294 /* EditUnivView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F7D2D6981FF00F99294 /* EditUnivView.swift */; };
 		C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */; };
 		C780C5082D4143D800DC2031 /* Notification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C780C5072D4143D800DC2031 /* Notification+.swift */; };
 		C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78611C92D014B70002B67B4 /* PWAlertView.swift */; };
@@ -371,6 +375,10 @@
 		C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmTableViewCell.swift; sourceTree = "<group>"; };
 		C75C0BE02D2D2A05000145F3 /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
+		C7675F772D6981BD00F99294 /* UnivSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchView.swift; sourceTree = "<group>"; };
+		C7675F792D6981DD00F99294 /* UnivRecruitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivRecruitView.swift; sourceTree = "<group>"; };
+		C7675F7B2D6981ED00F99294 /* UnivView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivView.swift; sourceTree = "<group>"; };
+		C7675F7D2D6981FF00F99294 /* EditUnivView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUnivView.swift; sourceTree = "<group>"; };
 		C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchViewController.swift; sourceTree = "<group>"; };
 		C780C5072D4143D800DC2031 /* Notification+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+.swift"; sourceTree = "<group>"; };
 		C78611C92D014B70002B67B4 /* PWAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertView.swift; sourceTree = "<group>"; };
@@ -1095,11 +1103,15 @@
 			isa = PBXGroup;
 			children = (
 				C74BC6EB2D677ABA00103D04 /* CalendarView.swift */,
+				C7675F772D6981BD00F99294 /* UnivSearchView.swift */,
+				C7675F792D6981DD00F99294 /* UnivRecruitView.swift */,
+				C7675F7B2D6981ED00F99294 /* UnivView.swift */,
+				C7675F7D2D6981FF00F99294 /* EditUnivView.swift */,
 				C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */,
-				C7F951BF2D2A738700D07051 /* DateView.swift */,
 				C72CEED52D258CB500EED814 /* UnivStopView.swift */,
 				C75C0BE02D2D2A05000145F3 /* DeleteView.swift */,
 				C73828D22D6220F4007A21A0 /* AllDeleteView.swift */,
+				C7F951BF2D2A738700D07051 /* DateView.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -1388,6 +1400,7 @@
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
 				C734BD5A2D66DE2000AE81E9 /* EditPWView.swift in Sources */,
 				C78953122D636AB700E5041C /* APIService.swift in Sources */,
+				C7675F7E2D6981FF00F99294 /* EditUnivView.swift in Sources */,
 				C74A159A2D5A47F600A1698B /* MyProfile.swift in Sources */,
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift in Sources */,
 				7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */,
@@ -1419,6 +1432,7 @@
 				7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */,
 				C7B7A1682D001D8200D5CE14 /* NavigationBarView.swift in Sources */,
 				C7548F2A2D147CFF00BA687A /* UITextField+.swift in Sources */,
+				C7675F7C2D6981ED00F99294 /* UnivView.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				417AADCF2C673E32002080E0 /* SignUpModel.swift in Sources */,
 				C73555072D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift in Sources */,
@@ -1454,6 +1468,7 @@
 				C7FB5A9F2C43E7D7001857F2 /* TabbarShadow.swift in Sources */,
 				C7C379D02D65877E00C224A1 /* HomeView.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
+				C7675F7A2D6981DD00F99294 /* UnivRecruitView.swift in Sources */,
 				C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */,
 				C7FD93762D2AD58A0084DC9C /* MyAlarmViewController.swift in Sources */,
 				C7C379D92D65A1AB00C224A1 /* AppCoordinator.swift in Sources */,
@@ -1472,6 +1487,7 @@
 				41EE13442C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift in Sources */,
 				7B1C53562C69D79200C66D0D /* DirectoryFavoriteModel.swift in Sources */,
 				7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */,
+				C7675F782D6981BD00F99294 /* UnivSearchView.swift in Sources */,
 				412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */,
 				C7B407F12D645B21009B349F /* CalendarRepository.swift in Sources */,
 				C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */,

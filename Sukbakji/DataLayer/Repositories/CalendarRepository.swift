@@ -31,4 +31,10 @@ class CalendarRepository {
         let params = ["date": date]
         return APIService.shared.getWithTokenAndParams(of: APIResponse<DateSelect>.self, url: url, parameters: params, accessToken: token)
     }
+    
+    func fetchUnivSearch(token: String, keyword: String) -> Single<APIResponse<UnivSearch>> {
+        let url = APIConstants.calendarSearch.path
+        let params = ["keyword": keyword]
+        return APIService.shared.getWithTokenAndParams(of: APIResponse<UnivSearch>.self, url: url, parameters: params, accessToken: token)
+    }
 }
