@@ -15,13 +15,12 @@ import RxCocoa
 class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     
     private let univSearchView = UnivSearchView()
-    private let viewModel = UnivSearchViewModel()
+    private let viewModel = UnivViewModel()
     private let disposeBag = DisposeBag()
     
     private let selectedIndex = BehaviorRelay<IndexPath?>(value: nil)
     
     private var searchTimer: Timer?
-    
     private var univId: Int?
     
     override func loadView() {
@@ -37,7 +36,6 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        /// 탭 바 숨기기
         self.tabBarController?.tabBar.isHidden = true
     }
 }

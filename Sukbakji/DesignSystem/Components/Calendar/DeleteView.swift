@@ -12,7 +12,7 @@ import RxSwift
 
 final class DeleteView: UIView {
     
-    private var myAlarmViewModel = MyAlarmViewModel()
+    private var myAlarmViewModel = AlarmViewModel()
     private var univDelete: UnivDelete?
     
     var mainView = UIView().then {
@@ -56,7 +56,7 @@ final class DeleteView: UIView {
     
     let disposeBag = DisposeBag()
     
-    init(title: String, content: String, myAlarmViewModel: MyAlarmViewModel, univDelete: UnivDelete) {
+    init(title: String, content: String, myAlarmViewModel: AlarmViewModel, univDelete: UnivDelete) {
         super.init(frame: .zero)
         self.titleLabel.text = title
         self.contentLabel.text = content

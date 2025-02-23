@@ -1,5 +1,5 @@
 //
-//  MyAlarmViewModel.swift
+//  AlarmViewModel.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 1/6/25.
@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class MyAlarmViewModel {
+final class AlarmViewModel {
     var selectMyAlarmItem: AlarmList?
     var myAlarmItems: BehaviorRelay<[AlarmList]> = BehaviorRelay(value: [])
     

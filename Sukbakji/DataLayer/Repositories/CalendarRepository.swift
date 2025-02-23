@@ -37,4 +37,25 @@ class CalendarRepository {
         let params = ["keyword": keyword]
         return APIService.shared.getWithTokenAndParams(of: APIResponse<UnivSearch>.self, url: url, parameters: params, accessToken: token)
     }
+    
+    func fetchUnivMethod(token: String, univId: Int) -> Single<APIResponse<UnivMethod>> {
+        let url = APIConstants.calendarUnivMethod.path
+        let params = ["univId": univId]
+        return APIService.shared.getWithTokenAndParams(of: APIResponse<UnivMethod>.self, url: url, parameters: params, accessToken: token)
+    }
+    
+    func fetchUnivEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
+        let url = APIConstants.calendarUniv.path
+        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
+    func fetchUnivEdit(token: String, univId: Int, parameters: [String: Any]?) -> Single<APIResponse<String>> {
+        let url = APIConstants.calendarUnivId(univId).path
+        return APIService.shared.patchWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
+    func fetchUnivDelete(token: String, parameters: [String: Any]?) -> Single<APIResponse<UnivDeleteResult>> {
+        let url = APIConstants.calendarUniv.path
+        return APIService.shared.deleteWithToken(of: APIResponse<UnivDeleteResult>.self, url: url, parameters: parameters, accessToken: token)
+    }
 }

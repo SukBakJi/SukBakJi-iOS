@@ -19,7 +19,6 @@ class EditPWViewController: UIViewController {
     private var currentPWViewheightConstraint: Constraint?
     private var newPWViewheightConstraint: Constraint?
     private var newPWAgainViewheightConstraint: Constraint?
-    
     private var userPW: String?
     
     override func loadView() {
