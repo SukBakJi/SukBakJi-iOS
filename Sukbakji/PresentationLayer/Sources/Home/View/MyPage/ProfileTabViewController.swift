@@ -14,11 +14,11 @@ import RxSwift
 
 class ProfileTabViewController: TabmanViewController {
     
-    private var provider: String = ""
-    private var userPW: String = ""
-    
     private let viewModel = MyProfileViewModel()
     private let disposeBag = DisposeBag()
+    
+    private var provider: String = ""
+    private var userPW: String = ""
     
     private var viewControllers: Array<UIViewController> = []
     

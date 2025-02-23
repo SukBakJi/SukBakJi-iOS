@@ -52,7 +52,7 @@ class CalendarViewController: UIViewController {
 extension CalendarViewController {
     
     private func setUI() {
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
 
         calendarView.calendarBackgroundView.snp.makeConstraints { make in
             calendarHeightConstraint = make.height.equalTo(300).constraint
@@ -141,10 +141,10 @@ extension CalendarViewController {
             })
             .disposed(by: disposeBag)
         
+        // 일정 바인딩
         calendarView.upComingCalendarCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        // 일정 바인딩
         viewModel.upComingSchedules
             .bind(to: calendarView.upComingCalendarCollectionView.rx.items(cellIdentifier: UpComingCalendarCollectionViewCell.identifier, cellType: UpComingCalendarCollectionViewCell.self)) { _, schedule, cell in
                 cell.prepare(upComingList: schedule)
@@ -156,6 +156,16 @@ extension CalendarViewController {
             .subscribe(onNext: { alarmDates in
                 self.calendarView.calendarMainCollectionView.reloadData()
             })
+            .disposed(by: disposeBag)
+        
+        // 일정 디테일 바인딩
+        calendarView.calendarDetailTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        viewModel.dateSelectSchedules
+            .bind(to: calendarView.calendarDetailTableView.rx.items(cellIdentifier: CalendarDetailTableViewCell.identifier, cellType: CalendarDetailTableViewCell.self)) { _, schedule, cell in
+                cell.prepare(dateSelectList: schedule)
+            }
             .disposed(by: disposeBag)
         
         viewModel.dateSelectSchedules
