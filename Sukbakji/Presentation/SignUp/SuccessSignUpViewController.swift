@@ -34,42 +34,6 @@ class successSignUpViewController: UIViewController {
         $0.font = UIFont(name: "Pretendard-Bold", size: 26)
         $0.numberOfLines = 0
     }
-    private let pointLabel = UILabel().then {
-        let fullText = "석박지 가입을 축하하는 마음을 담아\n1000 포인트를 드려요"
-        let attributedString = NSMutableAttributedString(string: fullText)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 8
-        
-        let rangeText = (fullText as NSString).range(of: "1000 포인트")
-        attributedString.addAttribute(.foregroundColor,
-                                      value: UIColor.orange700,
-                                      range: rangeText)
-        attributedString.addAttribute(NSAttributedString.Key.init(kCTFontAttributeName as String),
-                                      value: UIFont(name: "Pretendard-SemiBold", size: 14)!,
-                                      range: rangeText)
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle,
-                                      value: paragraphStyle,
-                                      range: NSMakeRange(0, attributedString.length))
-        
-        let rangeText2 = (fullText as NSString).range(of: "석박지 가입을 축하하는 마음을 담아")
-        attributedString.addAttribute(.foregroundColor,
-                                      value: UIColor.gray600,
-                                      range: rangeText2)
-        attributedString.addAttribute(NSAttributedString.Key.init(kCTFontAttributeName as String),
-                                      value: UIFont(name: "Pretendard-Regular", size: 14)!,
-                                      range: rangeText2)
-        let rangeText3 = (fullText as NSString).range(of: "를 드려요")
-        attributedString.addAttribute(.foregroundColor,
-                                      value: UIColor.gray600,
-                                      range: rangeText3)
-        attributedString.addAttribute(NSAttributedString.Key.init(kCTFontAttributeName as String),
-                                      value: UIFont(name: "Pretendard-Regular", size: 14)!,
-                                      range: rangeText3)
-        
-        $0.attributedText = attributedString
-        $0.textAlignment = .center
-        $0.numberOfLines = 0
-    }
     
     // MARK: - Button
     private let nextButton = UIButton().then {
@@ -110,7 +74,6 @@ class successSignUpViewController: UIViewController {
     func setupViews() {
         view.addSubview(RocketImage)
         view.addSubview(successLabel)
-        view.addSubview(pointLabel)
         view.addSubview(nextButton)
     }
     
@@ -128,12 +91,8 @@ class successSignUpViewController: UIViewController {
             make.top.equalTo(RocketImage.snp.bottom).offset(48)
         }
         
-        pointLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(successLabel.snp.bottom).offset(33)
-        }
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(pointLabel.snp.bottom).offset(142)
+            make.top.equalTo(successLabel.snp.bottom).offset(218)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
         }
