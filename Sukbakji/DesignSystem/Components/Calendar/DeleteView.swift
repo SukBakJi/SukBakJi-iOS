@@ -12,7 +12,7 @@ import RxSwift
 
 final class DeleteView: UIView {
     
-    private var myAlarmViewModel = AlarmViewModel()
+    private var alarmViewModel = AlarmViewModel()
     private var univDelete: UnivDelete?
     
     var mainView = UIView().then {
@@ -56,11 +56,11 @@ final class DeleteView: UIView {
     
     let disposeBag = DisposeBag()
     
-    init(title: String, content: String, myAlarmViewModel: AlarmViewModel, univDelete: UnivDelete) {
+    init(title: String, content: String, alarmViewModel: AlarmViewModel, univDelete: UnivDelete) {
         super.init(frame: .zero)
         self.titleLabel.text = title
         self.contentLabel.text = content
-        self.myAlarmViewModel = myAlarmViewModel
+        self.alarmViewModel = alarmViewModel
         self.univDelete = univDelete
         setUI()
     }
@@ -114,7 +114,7 @@ final class DeleteView: UIView {
     }
     
     @objc private func delete_Tapped() {
-        if myAlarmViewModel.selectMyAlarmItem == nil {
+        if alarmViewModel.selectMyAlarmItem == nil {
             deleteUnivAPI()
         } else {
             

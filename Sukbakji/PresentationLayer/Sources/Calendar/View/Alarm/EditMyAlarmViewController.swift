@@ -15,7 +15,7 @@ import DropDown
 
 class EditMyAlarmViewController: UIViewController, dateProtocol {
     
-    private var myAlarmViewModel = MyAlarmViewModel()
+    private var alarmViewModel = AlarmViewModel()
     
     private let titleLabel = UILabel().then {
         $0.text = "알람 수정"
@@ -137,9 +137,9 @@ class EditMyAlarmViewController: UIViewController, dateProtocol {
     private var timeValue: String = "8:00"
     private var dateValue: String = ""
     
-    init(myAlarmViewModel: MyAlarmViewModel) {
+    init(alarmViewModel: AlarmViewModel) {
         super.init(nibName: nil, bundle: nil)
-        self.myAlarmViewModel = myAlarmViewModel
+        self.alarmViewModel = alarmViewModel
     }
     
     required init?(coder: NSCoder) {
@@ -359,7 +359,7 @@ extension EditMyAlarmViewController {
     }
     
     private func setMyAlarmData() {
-        guard let selectMyAlarmItem = self.myAlarmViewModel.selectMyAlarmItem else { return }
+        guard let selectMyAlarmItem = self.alarmViewModel.selectMyAlarmItem else { return }
         let alarmUnivName = selectMyAlarmItem.alarmUnivName
         let alarmName = selectMyAlarmItem.alarmName
         let alarmDate = selectMyAlarmItem.alarmDate
@@ -582,7 +582,7 @@ extension EditMyAlarmViewController {
     }
     
     @objc func delete_Tapped() {
-        let deleteView = DeleteView(title: "알람 삭제하기", content: "해당 알람을 삭제할까요? 삭제 후 복구되지 않습\n니다.", myAlarmViewModel: myAlarmViewModel, univDelete: UnivDelete(memberId: 0, univId: 0, season: "", method: ""))
+        let deleteView = DeleteView(title: "알람 삭제하기", content: "해당 알람을 삭제할까요? 삭제 후 복구되지 않습\n니다.", alarmViewModel: alarmViewModel, univDelete: UnivDelete(memberId: 0, univId: 0, season: "", method: ""))
         
         self.view.addSubview(deleteView)
         deleteView.alpha = 0
