@@ -15,7 +15,7 @@ import RxDataSources
 
 class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegate {
     
-    private let myAlarmViewModel = MyAlarmViewModel()
+    private let alarmViewModel = AlarmViewModel()
     
     private let navigationbarView = NavigationBarView(title: "내 알람")
     private let addAlarmButton = UIButton().then {
@@ -117,30 +117,30 @@ extension MyAlarmViewController {
     }
     
     @objc private func bottomSheet_Tapped() {
-        let viewController = EditMyAlarmViewController(myAlarmViewModel: self.myAlarmViewModel)
+        let viewController = EditMyAlarmViewController(alarmViewModel: self.alarmViewModel)
         let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
     }
     
     func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool) {
         guard let indexPath = myAlarmTableView.indexPath(for: cell) else { return }
-        let alarmItem = myAlarmViewModel.myAlarmItems.value[indexPath.row]
+        let alarmItem = alarmViewModel.myAlarmItems.value[indexPath.row]
         
         if isOn {
             alarmOn(alarmId: alarmItem.alarmId)
-            myAlarmViewModel.alarmSwitchToggled(at: indexPath.row, isOn: 1)
+            alarmViewModel.alarmSwitchToggled(at: indexPath.row, isOn: 1)
         } else {
             alarmOff(alarmId: alarmItem.alarmId)
-            myAlarmViewModel.alarmSwitchToggled(at: indexPath.row, isOn: 0)
+            alarmViewModel.alarmSwitchToggled(at: indexPath.row, isOn: 0)
         }
     }
     
     func editToggled(cell: MyAlarmTableViewCell) {
         guard let indexPath = myAlarmTableView.indexPath(for: cell) else { return }
-        let alarmItem = myAlarmViewModel.myAlarmItems.value[indexPath.row]
+        let alarmItem = alarmViewModel.myAlarmItems.value[indexPath.row]
         
-        self.myAlarmViewModel.selectMyAlarmItem = alarmItem
-        let viewController = EditMyAlarmViewController(myAlarmViewModel: self.myAlarmViewModel)
+        self.alarmViewModel.selectMyAlarmItem = alarmItem
+        let viewController = EditMyAlarmViewController(alarmViewModel: self.alarmViewModel)
         let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
     }
@@ -155,7 +155,7 @@ extension MyAlarmViewController {
         myAlarmTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        self.myAlarmViewModel.myAlarmItems
+        self.alarmViewModel.myAlarmItems
             .observe(on: MainScheduler.instance)
             .bind(to: self.myAlarmTableView.rx.items(cellIdentifier: MyAlarmTableViewCell.identifier, cellType: MyAlarmTableViewCell.self)) { index, item, cell in
                 cell.prepare(alarmList: item)
@@ -166,8 +166,8 @@ extension MyAlarmViewController {
         self.myAlarmTableView.rx.modelSelected(AlarmList.self)
             .subscribe(onNext: { [weak self] myAlarmItem in
                 guard let self = self else { return }
-                self.myAlarmViewModel.selectMyAlarmItem = myAlarmItem
-                let viewController = EditMyAlarmViewController(myAlarmViewModel: self.myAlarmViewModel)
+                self.alarmViewModel.selectMyAlarmItem = myAlarmItem
+                let viewController = EditMyAlarmViewController(alarmViewModel: self.alarmViewModel)
                 let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
                 self.present(bottomSheetVC, animated: true)
             })
@@ -184,7 +184,7 @@ extension MyAlarmViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 let resultData = response.result.alarmList
-                self.myAlarmViewModel.myAlarmItems.accept(resultData)
+                self.alarmViewModel.myAlarmItems.accept(resultData)
                 self.setAlarmData()
                 self.view.layoutIfNeeded()
             }, onFailure: { error in

@@ -7,14 +7,15 @@ target 'Sukbakji' do
 
   # Pods for Sukbakji
 
-  pod 'Then'
-  pod 'SnapKit', '~> 5.7.0'
-  pod 'DropDown', '2.3.13'
-  pod 'Alamofire'
-  pod 'Tabman', '~> 3.0'
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
+  pod 'Then'
+  pod 'SnapKit', '~> 5.7.0'
+  pod 'DropDown', '2.3.13'
+  pod 'Tabman', '~> 3.0'
+  pod 'SkeletonView'
+  pod 'Alamofire'
   pod 'RxSwift', '6.8.0'
   pod 'RxCocoa', '6.8.0'
   pod 'RxDataSources', '~> 5.0'

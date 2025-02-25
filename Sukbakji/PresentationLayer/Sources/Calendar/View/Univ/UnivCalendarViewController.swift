@@ -185,7 +185,7 @@ extension UnivCalendarViewController {
         let season = univCalendarItem.season
         let method = univCalendarItem.method
         
-        let deleteView = DeleteView(title: "대학 일정 삭제하기", content: "선택한 대학 일정을 삭제할까요? 삭제 후 복구되지 않\n습니다.", myAlarmViewModel: AlarmViewModel(), univDelete: UnivDelete(memberId: memberId, univId: univId, season: season, method: method))
+        let deleteView = DeleteView(title: "대학 일정 삭제하기", content: "선택한 대학 일정을 삭제할까요? 삭제 후 복구되지 않\n습니다.", alarmViewModel: AlarmViewModel(), univDelete: UnivDelete(memberId: memberId, univId: univId, season: season, method: method))
         
         self.view.addSubview(deleteView)
         deleteView.alpha = 0
