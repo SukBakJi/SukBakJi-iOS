@@ -10,6 +10,7 @@
 
 - [🖥️ 개발환경](#🖥%EF%B8%8F-개발-환경)
 - [🔑 핵심기술](#%F0%9F%94%91-핵심-기술)
+- [🔭 프로젝트 구조](#🔭-프로젝트-구조)
 - [🧑🏻‍💻 팀원 소개](#🧑🏻%E2%80%8D💻-팀원-소개)
 
 <br>
@@ -36,6 +37,11 @@
 - 네트워크 통신: Alamofire
 - 비동기 이벤트: RxSwift
 - 단방향 데이터 흐름: ReactorKit
+
+<br>
+
+## 🔭 프로젝트 구조
+<img width="800" alt="Image" src="https://github.com/user-attachments/assets/7bd8d18c-d4c4-4876-b646-e21a38c1e80e" />
 
 <br>
 
