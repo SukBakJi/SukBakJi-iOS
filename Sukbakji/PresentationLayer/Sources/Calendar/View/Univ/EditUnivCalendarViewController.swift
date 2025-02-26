@@ -15,7 +15,7 @@ import DropDown
 
 class EditUnivCalendarViewController: UIViewController {
     
-    private var univCalendarViewModel = UnivCalendarViewModel()
+    private var calendarViewModel = CalendarViewModel()
     
     private let univLabel = UILabel().then {
         $0.font = UIFont(name: "Pretendard-Medium", size: 22)
@@ -72,9 +72,9 @@ class EditUnivCalendarViewController: UIViewController {
     private let drop = DropDown()
     private var recruitType: [String] = []
     
-    init(univCalendarViewModel: UnivCalendarViewModel) {
+    init(calendarViewModel: CalendarViewModel) {
         super.init(nibName: nil, bundle: nil)
-        self.univCalendarViewModel = univCalendarViewModel
+        self.calendarViewModel = calendarViewModel
     }
     
     required init?(coder: NSCoder) {
@@ -184,7 +184,7 @@ extension EditUnivCalendarViewController {
 extension EditUnivCalendarViewController {
     
     private func setUnivCalendarData() {
-        guard let selectUnivCalendarItem = self.univCalendarViewModel.selectUnivCalendarItem else { return }
+        guard let selectUnivCalendarItem = self.calendarViewModel.selectUnivList.value else { return }
         let univName = selectUnivCalendarItem.univId
         let season = selectUnivCalendarItem.season
         let method = selectUnivCalendarItem.method
