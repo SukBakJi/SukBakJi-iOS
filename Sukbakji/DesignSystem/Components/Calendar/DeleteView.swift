@@ -13,6 +13,7 @@ import RxSwift
 final class DeleteView: UIView {
     
     private var alarmViewModel = AlarmViewModel()
+    private let viewModel = CalendarViewModel()
     private var univDelete: UnivDelete?
     
     var mainView = UIView().then {
@@ -115,7 +116,7 @@ final class DeleteView: UIView {
     
     @objc private func delete_Tapped() {
         if alarmViewModel.selectMyAlarmItem == nil {
-            deleteUnivAPI()
+            viewModel.deleteUnivCalendar(memberId: univDelete?.memberId, univId: univDelete?.univId, season: univDelete?.season, method: univDelete?.method)
         } else {
             
         }
@@ -124,29 +125,5 @@ final class DeleteView: UIView {
         }) { _ in
            self.removeFromSuperview() // 애니메이션 후 뷰에서 제거
         }
-    }
-    
-    private func deleteUnivAPI() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        
-        let url = APIConstants.calendarUniv.path
-        
-        let params = [
-            "memberId": univDelete?.memberId ?? 0,
-            "univId": univDelete?.univId ?? 0,
-            "season": univDelete?.season ?? "",
-            "method": univDelete?.method ?? ""
-        ] as [String : Any]
-        
-        APIService.shared.deleteWithToken(of: APIResponse<UnivDeleteResult>.self, url: url, parameters: params, accessToken: retrievedToken)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                print("✅ 사용자 등록 성공:", response)
-            }, onFailure: { error in
-                print("❌ 오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
     }
 }
