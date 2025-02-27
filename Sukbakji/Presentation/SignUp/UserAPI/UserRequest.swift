@@ -22,3 +22,8 @@ enum DegreeLevel: String, Codable {
     case doctoralGraduated = "DOCTORAL_GRADUATED"
     case integratedStudying = "INTEGRATED_STUDYING"
 }
+
+struct PostEduImageRequestDTO: Codable {
+    let certificationPicture: String
+    let educationCertificateType: String
+}

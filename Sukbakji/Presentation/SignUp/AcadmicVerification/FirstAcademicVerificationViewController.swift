@@ -15,6 +15,7 @@ class FirstAcademicVerificationViewController: UIViewController {
     private var isConfirm = false
     var userName: String?
     var degreeLevel: DegreeLevel?
+    private var selectedImage: UIImage?
     
     // MARK: - imageView
     private let noticeImageView = UIImageView().then {
@@ -235,6 +236,35 @@ class FirstAcademicVerificationViewController: UIViewController {
     
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
+        openPopUp()
+        
+        // 이미지 업로드 여부 검사
+        guard let imageData = selectedImage?.pngData() else { return }
+        
+        // 이미지 변환
+        let imageBase64 = imageData.base64EncodedString()
+        if imageBase64.isEmpty { return }
+        
+        let requestBody = PostEduImageRequestDTO(
+            certificationPicture: imageBase64,
+            educationCertificateType: "재학증명서"
+        )
+        
+        UserDataManager().PostEduImageDataManager(requestBody) { response in
+            if let response = response, response.isSuccess == true {
+                DispatchQueue.main.async {
+                    let UploadCompletedpopUpVC = UploadCompletedPopUpViewController()
+                    UploadCompletedpopUpVC.modalPresentationStyle = .overFullScreen
+                    self.present(UploadCompletedpopUpVC, animated: false)
+                }
+            } else {
+                print("서버 업로드 실패")
+            }
+        }
+    }
+    
+    // 팝업 띄우기
+    private func openPopUp() {
         let UploadCompletedpopUpVC = UploadCompletedPopUpViewController()
         UploadCompletedpopUpVC.modalPresentationStyle = .overFullScreen
         self.present(UploadCompletedpopUpVC, animated: false)
@@ -251,9 +281,7 @@ class FirstAcademicVerificationViewController: UIViewController {
             self.navigationItem.backBarButtonItem = backBarButtonItem
             
         }
-        
     }
-    
     
     // MARK: - TabBar
     @objc private func changeTabBarView(_ sender: UIButton) {
@@ -527,6 +555,11 @@ extension FirstAcademicVerificationViewController: UIDocumentPickerDelegate {
 // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate Extension
 extension FirstAcademicVerificationViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            self.selectedImage = image // 선택한 이미지 저장
+            DidUploadSetUp()
+        }
+        
         if let imageURL = info[.imageURL] as? URL {
             // 파일명 가져오기
             let fileName = imageURL.lastPathComponent

@@ -20,6 +20,7 @@ enum APIConstants {
     case userMypage
     case userProfile
     case userPassword
+    case userEducationCertification
     
     
     case board
@@ -89,7 +90,8 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/user/profile")
         case .userPassword:
             return APIConstants.makeEndPoint("/user/password")
-            
+        case .userEducationCertification:
+            return APIConstants.makeEndPoint("/user/education-certification")
             
         case .board:
             return APIConstants.makeEndPoint("/board")
