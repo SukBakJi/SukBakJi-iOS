@@ -161,18 +161,18 @@ class SignUpViewController: UIViewController {
                 let email = user?.kakaoAccount?.email
                 print("카카오톡 이메일 : \(email ?? "이메일 없음 오류")")
                 
-                let loginDataManager = LoginDataManager()
+                let authDataManager = AuthDataManager()
                 
-                let input = LoginAPIInput(email: email)
+                let input = LoginRequestDTO(email: email)
                 print("전송된 데이터: \(input)")
                 print("카카오톡으로 로그인 호출")
-                loginDataManager.kakaoLoginDataManager(input) {
-                    [weak self] loginModel in
+                authDataManager.kakaoLoginDataManager(input) {
+                    [weak self] data in
                     guard let self = self else { return }
                     
                     
                     // 응답
-                    if let model = loginModel, model.code == "COMMON200" {
+                    if let model = data, model.code == "COMMON200" {
                         self.navigateToTOSScreen(isKakaoSignUp: true)
                         self.showMessage(message: model.message ?? "로그인에 성공했습니다")
                     } else {

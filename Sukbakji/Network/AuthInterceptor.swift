@@ -75,11 +75,11 @@ class AuthInterceptor: RequestInterceptor {
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
         .validate(statusCode: 200..<500)
-        .responseDecodable(of: LoginModel.self) { response in
+        .responseDecodable(of: LoginResponseDTO.self) { response in
             switch response.result {
-            case .success(let loginModel):
-                if let newAccessToken = loginModel.result?.accessToken,
-                   let newRefreshToken = loginModel.result?.refreshToken { // 리프레시 토큰도 모델에서 가져오기
+            case .success(let data):
+                if let newAccessToken = data.result?.accessToken,
+                   let newRefreshToken = data.result?.refreshToken { // 리프레시 토큰도 모델에서 가져오기
                     // 새로운 액세스 토큰을 Keychain에 저장
                     if let accessTokenData = newAccessToken.data(using: .utf8) {
                         KeychainHelper.standard.save(accessTokenData, service: "access-token", account: "user")
@@ -89,7 +89,7 @@ class AuthInterceptor: RequestInterceptor {
                         KeychainHelper.standard.save(refreshTokenData, service: "refresh-token", account: "user")
                     }
                     print("리프레시 토큰 갱신 완료")
-                    print("리프레시토큰: \(loginModel)")
+                    print("리프레시토큰: \(data)")
                     completion(true)
                 } else {
                     print("토큰 갱신 실패, 로그아웃 진행하겠습니다.")

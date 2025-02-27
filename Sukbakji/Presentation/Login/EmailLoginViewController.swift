@@ -295,13 +295,13 @@ class EmailLoginViewController: UIViewController {
         
         // 유효성 검사를 통과한 경우
         if isEmailValid && isPasswordValid {
-            let loginDataManager = LoginDataManager()
+            let authDataManager = AuthDataManager()
             
-            let input = LoginAPIInput(email: email, password: password)
+            let input = LoginRequestDTO(email: email, password: password)
             print("전송된 데이터: \(input)")
             print("이메일로 로그인 호출")
             
-            loginDataManager.loginDataManager(input) {
+            authDataManager.loginDataManager(input) {
                 [weak self] loginModel in
                 guard let self = self else { return }
                 

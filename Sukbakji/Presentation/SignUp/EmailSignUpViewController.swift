@@ -315,27 +315,30 @@ class EmailSignUpViewController: UIViewController {
         
         // 유효성 검사를 통과한 경우
         if isEmailValid && isPasswordValid && ischeckPasswordValid {
-            let signUpDataManager = SignUpDataManager()
+            // MARK: - NetWork (이메일로 로그인)
+            let input = SignupRequestDTO(
+                provider: provider,
+                email: email,
+                password: password
+            )
             
-            let input = SignUpAPIInput(provider: provider, email: email, password: password)
-            print("전송된 데이터: \(input)")
-            
-            signUpDataManager.signUpDataManager(input) {
-                [weak self] SignUpModel in
+            let authDataManager = AuthDataManager()
+            authDataManager.signupDataManager(input) {
+                [weak self] AuthResponse in
                 guard let self = self else { return }
                 
                 // 응답
-                if let model = SignUpModel, model.code == "COMMON200" {
+                if let model = AuthResponse, model.code == "COMMON200" {
                     self.navigateToNextPage()
                     print("회원가입 성공 : ID(\(email))")
-                    self.showMessage(message: model.message ?? "로그인에 성공했습니다")
+                    self.showMessage(message: model.message)
                     
                     getToken(email, password)
                 }
-                else if let model = SignUpModel, model.code == "MEMBER4002" {
+                else if let model = AuthResponse, model.code == "MEMBER4002" {
                     changeStateError(emailTextField)
                     emailErrorLabel.text = "이미 가입된 이메일입니다"
-                    self.showMessage(message: model.message ?? "로그인에 실패했습니다")
+                    self.showMessage(message: model.message)
                 }
             }
         }
@@ -344,20 +347,21 @@ class EmailSignUpViewController: UIViewController {
         }
     }
     private func getToken(_ email: String, _ password: String) {
-        let loginDataManager = LoginDataManager()
+        // MARK: - NetWork
+        let authDataManager = AuthDataManager()
         
-        let input = LoginAPIInput(email: email, password: password)
+        let input = LoginRequestDTO(email: email, password: password)
         print("전송된 데이터: \(input)")
         print("이메일로 로그인 호출")
         
-        loginDataManager.loginDataManager(input) {
-            [weak self] loginModel in
+        authDataManager.loginDataManager(input) {
+            [weak self] data in
             guard let self = self else { return }
             
             
             // 응답
-            if let model = loginModel, model.code == "COMMON200" {
-                print("토큰 \(model.result?.accessToken ?? "발급실패")")
+            if let data = data, data.code == "COMMON200" {
+                print("토큰 \(data.result?.accessToken ?? "발급실패")")
             }
         }
     }
@@ -369,9 +373,9 @@ class EmailSignUpViewController: UIViewController {
             let workItem = DispatchWorkItem { [weak self] in
                 guard let self = self else { return }
                 
-                // 이메일 데이터 매니저 호출
-                let signUpDataManager = SignUpDataManager()
-                signUpDataManager.EmailDataManager(email) { [weak self] SignUpModel in
+                // MARK: - NetWork
+                let authDataManager = AuthDataManager()
+                authDataManager.EmailDataManager(email) { [weak self] SignUpModel in
                     guard let self = self else { return }
                     
                     // 서버로부터의 응답 처리

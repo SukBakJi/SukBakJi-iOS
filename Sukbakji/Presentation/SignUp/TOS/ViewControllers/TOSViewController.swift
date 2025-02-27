@@ -21,11 +21,13 @@ class TOSViewController: UIViewController, TOSCellDelegate {
     private lazy var tosView = TOSView().then {
         $0.finalAgreeCheckButton.addTarget(self, action: #selector(finalAgreeCheckButtonTapped), for: .touchUpInside)
         $0.AllAgreeCheckButton.addTarget(self, action: #selector(AllAgreeCheckButtonTapped), for: .touchUpInside)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
 
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
+        print(isKakaoSignUp)
+        // 카카오톡 회원가입인 경우
         if isKakaoSignUp {
             let AcademicVerificationVC = AcademicVerificationViewController()
             self.navigationController?.pushViewController(AcademicVerificationVC, animated: true)
@@ -33,7 +35,9 @@ class TOSViewController: UIViewController, TOSCellDelegate {
             let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
             backBarButtonItem.tintColor = .black
             self.navigationItem.backBarButtonItem = backBarButtonItem
-        } else {
+        }
+        // 일반 회원가입인 경우
+        else {
             let EmailSignUpVC = EmailSignUpViewController()
             self.navigationController?.pushViewController(EmailSignUpVC, animated: true)
             //self.dismiss(animated: true)

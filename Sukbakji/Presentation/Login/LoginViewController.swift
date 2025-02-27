@@ -205,12 +205,12 @@ class LoginViewController: UIViewController {
                 let email = user?.kakaoAccount?.email
                 print("카카오톡 이메일 : \(email ?? "이메일 없음 오류")")
                 
-                let loginDataManager = LoginDataManager()
+                let authDataManager = AuthDataManager()
                 
-                let input = LoginAPIInput(email: email)
+                let input = LoginRequestDTO(email: email)
                 print("전송된 데이터: \(input)")
                 print("카카오톡으로 로그인 호출")
-                loginDataManager.kakaoLoginDataManager(input) {
+                authDataManager.kakaoLoginDataManager(input) {
                     [weak self] loginModel in
                     guard let self = self else { return }
                     
