@@ -8,23 +8,24 @@
 import Foundation
 import Alamofire
 
-class ProfileDataManager {
-
-    func ProfileDataManager(_ parameters: ProfileAPIInput, completion: @escaping (ProfileModel?) -> Void) {
-        
-        let url = APIConstants.userProfile.path
-        let headers: HTTPHeaders = [
-            "Accept": "*/*",
-            "Content-Type": "application/json"
-        ]
+class UserDataManager {
+    let profileUrl = APIConstants.userProfile.path
+    let myPageurl = APIConstants.userMypage.path
     
-        NetworkAuthManager.shared.request(url,
+    let headers: HTTPHeaders = [
+        "Accept": "*/*",
+        "Content-Type": "application/json"
+    ]
+
+    // 프로필 설정
+    func PostProfileDataManager(_ parameters: PostProfileRequestDTO, completion: @escaping (PostProfileResponseDTO?) -> Void) {
+        NetworkAuthManager.shared.request(profileUrl,
                    method: .post,
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
         .validate(statusCode: 200..<500)
-        .responseDecodable(of: ProfileModel.self) { response in
+        .responseDecodable(of: PostProfileResponseDTO.self) { response in
             switch response.result {
             case .success(let profileModel):
                 completion(profileModel)
@@ -36,21 +37,15 @@ class ProfileDataManager {
         }
     }
     
-    
-    func ProfileGetDataManager(completion: @escaping (ProfileModel?) -> Void) {
-       
-        let url = APIConstants.userMypage.path
-        let headers: HTTPHeaders = [
-            "Accept": "*/*",
-        ]
-    
-        NetworkAuthManager.shared.request(url,
+    // 마이페이지 정보 불러오기
+    func GetMypageDataManager(completion: @escaping (PostProfileResponseDTO?) -> Void) {
+        NetworkAuthManager.shared.request(myPageurl,
                    method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default,
                    headers: headers)
         .validate(statusCode: 200..<500)
-        .responseDecodable(of: ProfileModel.self) { response in
+        .responseDecodable(of: PostProfileResponseDTO.self) { response in
             switch response.result {
             case .success(let profileModel):
                 completion(profileModel)

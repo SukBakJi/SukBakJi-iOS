@@ -19,9 +19,9 @@
 		415BBC0D2C73442F002768EE /* NetworkAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBC0C2C73442F002768EE /* NetworkAuthManager.swift */; };
 		4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E84B2C68ACC500A0F292 /* ResearchTopicDataManager.swift */; };
 		4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E84D2C68ACCC00A0F292 /* ResearchTopicModel.swift */; };
-		4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */; };
-		4168E8532C690BB500A0F292 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8522C690BB500A0F292 /* ProfileModel.swift */; };
-		4168E8552C690BBD00A0F292 /* ProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8542C690BBD00A0F292 /* ProfileDataManager.swift */; };
+		4168E8512C690BAC00A0F292 /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8502C690BAC00A0F292 /* UserRequest.swift */; };
+		4168E8532C690BB500A0F292 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8522C690BB500A0F292 /* UserResponse.swift */; };
+		4168E8552C690BBD00A0F292 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168E8542C690BBD00A0F292 /* UserDataManager.swift */; };
 		417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADB22C606132002080E0 /* SearchTableViewCell.swift */; };
 		417AADCB2C673B89002080E0 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADCA2C673B89002080E0 /* KeychainHelper.swift */; };
 		417AADCD2C673E28002080E0 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADCC2C673E28002080E0 /* AuthRequest.swift */; };
@@ -210,9 +210,9 @@
 		415BBC0C2C73442F002768EE /* NetworkAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAuthManager.swift; sourceTree = "<group>"; };
 		4168E84B2C68ACC500A0F292 /* ResearchTopicDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicDataManager.swift; sourceTree = "<group>"; };
 		4168E84D2C68ACCC00A0F292 /* ResearchTopicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicModel.swift; sourceTree = "<group>"; };
-		4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIInput.swift; sourceTree = "<group>"; };
-		4168E8522C690BB500A0F292 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
-		4168E8542C690BBD00A0F292 /* ProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManager.swift; sourceTree = "<group>"; };
+		4168E8502C690BAC00A0F292 /* UserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
+		4168E8522C690BB500A0F292 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		4168E8542C690BBD00A0F292 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		417AADB22C606132002080E0 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		417AADCA2C673B89002080E0 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		417AADCC2C673E28002080E0 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 		412BFBD92C52252C0099E442 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				4168E84F2C690B7000A0F292 /* ProfileSettingAPI */,
+				4168E84F2C690B7000A0F292 /* UserAPI */,
 				417AADC92C666253002080E0 /* AuthAPI */,
 				41EE13452C54EC8A0037EDD6 /* AcadmicVerification */,
 				412F92282C5C95450042B834 /* ResearchTopic */,
@@ -478,14 +478,14 @@
 			path = ResearchTopicAPI;
 			sourceTree = "<group>";
 		};
-		4168E84F2C690B7000A0F292 /* ProfileSettingAPI */ = {
+		4168E84F2C690B7000A0F292 /* UserAPI */ = {
 			isa = PBXGroup;
 			children = (
-				4168E8502C690BAC00A0F292 /* ProfileAPIInput.swift */,
-				4168E8522C690BB500A0F292 /* ProfileModel.swift */,
-				4168E8542C690BBD00A0F292 /* ProfileDataManager.swift */,
+				4168E8502C690BAC00A0F292 /* UserRequest.swift */,
+				4168E8522C690BB500A0F292 /* UserResponse.swift */,
+				4168E8542C690BBD00A0F292 /* UserDataManager.swift */,
 			);
-			path = ProfileSettingAPI;
+			path = UserAPI;
 			sourceTree = "<group>";
 		};
 		417AADC92C666253002080E0 /* AuthAPI */ = {
@@ -1224,7 +1224,7 @@
 				C7B7A16A2D00360500D5CE14 /* UIButton+Extension.swift in Sources */,
 				417AADCD2C673E28002080E0 /* AuthRequest.swift in Sources */,
 				C7EA31112C777B0900EFC53B /* KeyboardDown+.swift in Sources */,
-				4168E8512C690BAC00A0F292 /* ProfileAPIInput.swift in Sources */,
+				4168E8512C690BAC00A0F292 /* UserRequest.swift in Sources */,
 				7B3459F92C688C2D008B711A /* BoardWrittenModel.swift in Sources */,
 				C7980A832CEF7D5400475D94 /* APIService.swift in Sources */,
 				C74A15A02D5A4C7B00A1698B /* DateSelect.swift in Sources */,
@@ -1328,7 +1328,7 @@
 				7BFDEC2B2C5224EF007280F8 /* BoardViewController.swift in Sources */,
 				C71AE9BA2CFB60340098FD2A /* FavoriteBoardTableViewCell.swift in Sources */,
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
-				4168E8552C690BBD00A0F292 /* ProfileDataManager.swift in Sources */,
+				4168E8552C690BBD00A0F292 /* UserDataManager.swift in Sources */,
 				C7BDEA8D2D1338E000001927 /* UnivSearchViewModel.swift in Sources */,
 				C7A23D8E2D0C1087008657B0 /* AlarmFBCView.swift in Sources */,
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
@@ -1337,7 +1337,7 @@
 				7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
 				C704BD882D2BBE9700954EAD /* EditMyAlarmViewController.swift in Sources */,
-				4168E8532C690BB500A0F292 /* ProfileModel.swift in Sources */,
+				4168E8532C690BB500A0F292 /* UserResponse.swift in Sources */,
 				C7C434EA2C5DF14200BFB2D2 /* MypageViewController.swift in Sources */,
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
 				C74C65DD2D4398C900526D23 /* UIColor+Extension.swift in Sources */,

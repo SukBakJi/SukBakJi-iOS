@@ -227,9 +227,9 @@ class LoginViewController: UIViewController {
         }
     }
     private func checkIsSignUp() {
-        let profileDataManager = ProfileDataManager()
+        let userDataManager = UserDataManager()
         
-        profileDataManager.ProfileGetDataManager() {
+        userDataManager.GetMypageDataManager() {
             [weak self] profileModel in
             guard let self = self else { return }
             

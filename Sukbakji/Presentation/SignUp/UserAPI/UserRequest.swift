@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProfileAPIInput : Encodable {
+struct PostProfileRequestDTO : Encodable {
     var name : String?
     var degreeLevel : DegreeLevel
     var researchTopics: [String] = []
