@@ -22,9 +22,7 @@ struct LoginResponseDTO: Decodable {
 }
 
 struct LoginResult: Decodable {
-    let email: String?
-    let accessToken : String?
-    let refreshToken: String?
+    let provider, email, accessToken, refreshToken: String
 }
 
 // 이메일 중복 확인
