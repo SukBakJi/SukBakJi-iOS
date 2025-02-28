@@ -15,6 +15,8 @@ class SecondAcademicVerificationViewController: UIViewController {
     private var isConfirm = false
     var userName: String?
     var degreeLevel: DegreeLevel?
+    private var selectedImage: UIImage?
+    private var selectedCertificateType: String = "재학증명서"
     
     // MARK: - imageView
     private let noticeImageView = UIImageView().then {
@@ -225,6 +227,35 @@ class SecondAcademicVerificationViewController: UIViewController {
     
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
+        openPopUp()
+        
+        // 이미지 업로드 여부 검사
+        guard let imageData = selectedImage?.pngData() else { return }
+        
+        // 이미지 변환
+        let imageBase64 = imageData.base64EncodedString()
+        if imageBase64.isEmpty { return }
+        
+        let requestBody = PostEduImageRequestDTO(
+            certificationPicture: imageBase64,
+            educationCertificateType: selectedCertificateType
+        )
+        
+        UserDataManager().PostEduImageDataManager(requestBody) { response in
+            if let response = response, response.isSuccess == true {
+                DispatchQueue.main.async {
+                    let UploadCompletedpopUpVC = UploadCompletedPopUpViewController()
+                    UploadCompletedpopUpVC.modalPresentationStyle = .overFullScreen
+                    self.present(UploadCompletedpopUpVC, animated: false)
+                }
+            } else {
+                print("서버 업로드 실패")
+            }
+        }
+    }
+    
+    // 팝업 띄우기
+    private func openPopUp() {
         let UploadCompletedpopUpVC = UploadCompletedPopUpViewController()
         UploadCompletedpopUpVC.modalPresentationStyle = .overFullScreen
         self.present(UploadCompletedpopUpVC, animated: false)
@@ -241,7 +272,6 @@ class SecondAcademicVerificationViewController: UIViewController {
             self.navigationItem.backBarButtonItem = backBarButtonItem
             
         }
-        
     }
     
     
@@ -249,6 +279,7 @@ class SecondAcademicVerificationViewController: UIViewController {
     @objc private func changeTabBarView(_ sender: UIButton) {
         switch sender.tag {
         case 1:
+            selectedCertificateType = "재학증명서"
             if isUpload {
                 // 팝업 띄우기
                 let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 재학증명서 페이지로 이동할까요?", rangeText: "재학증명서")
@@ -268,6 +299,7 @@ class SecondAcademicVerificationViewController: UIViewController {
             }
             
         case 2:
+            selectedCertificateType = "학생증"
             if isUpload {
                 let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 학생증 인증 페이지로 이동할까요?", rangeText: "학생증 인증")
                 popUpVC.modalPresentationStyle = .overFullScreen

@@ -16,6 +16,7 @@ class FirstAcademicVerificationViewController: UIViewController {
     var userName: String?
     var degreeLevel: DegreeLevel?
     private var selectedImage: UIImage?
+    private var selectedCertificateType: String = "재학증명서"
     
     // MARK: - imageView
     private let noticeImageView = UIImageView().then {
@@ -247,7 +248,7 @@ class FirstAcademicVerificationViewController: UIViewController {
         
         let requestBody = PostEduImageRequestDTO(
             certificationPicture: imageBase64,
-            educationCertificateType: "재학증명서"
+            educationCertificateType: selectedCertificateType
         )
         
         UserDataManager().PostEduImageDataManager(requestBody) { response in
@@ -287,6 +288,7 @@ class FirstAcademicVerificationViewController: UIViewController {
     @objc private func changeTabBarView(_ sender: UIButton) {
         switch sender.tag {
         case 1:
+            selectedCertificateType = "재학증명서"
             if isUpload {
                 // 팝업 띄우기
                 let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 재학증명서 페이지로 이동할까요?", rangeText: "재학증명서")
@@ -306,6 +308,7 @@ class FirstAcademicVerificationViewController: UIViewController {
             }
             
         case 2:
+            selectedCertificateType = "학생증"
             if isUpload {
                 let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 학생증 인증 페이지로 이동할까요?", rangeText: "학생증 인증")
                 popUpVC.modalPresentationStyle = .overFullScreen
@@ -323,6 +326,7 @@ class FirstAcademicVerificationViewController: UIViewController {
             }
             
         case 3:
+            selectedCertificateType = "졸업증명서"
             if isUpload {
                 let popUpVC = PopUpViewController(desc: "페이지를 이탈하면 현재 업로드한 이미지가 사라져요. 그래도 졸업증명서 페이지로 이동할까요?", rangeText: "졸업증명서")
                 popUpVC.modalPresentationStyle = .overFullScreen
