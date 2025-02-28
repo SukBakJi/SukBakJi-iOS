@@ -13,7 +13,6 @@ enum APIConstants {
     case authOauth2Login
     case authLogout
     case authLogin
-    case authKakao
     case authEmail
     
     
@@ -78,8 +77,6 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/auth/logout")
         case .authLogin:
             return APIConstants.makeEndPoint("/auth/login")
-        case .authKakao:
-            return APIConstants.makeEndPoint("/auth/kakao-token")
         case .authEmail:
             return APIConstants.makeEndPoint("/auth/email")
             

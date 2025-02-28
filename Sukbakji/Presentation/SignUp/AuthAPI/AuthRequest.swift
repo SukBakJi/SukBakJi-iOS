@@ -17,3 +17,8 @@ struct LoginRequestDTO : Encodable {
     var email : String?
     var password : String?
 }
+
+struct Oauth2RequestDTO: Encodable {
+    var provider: String
+    var accessToken: String
+}

@@ -11,7 +11,7 @@ class AuthDataManager {
     let signupUrl = APIConstants.authSignUp.path
     let emailUrl = APIConstants.authEmail.path
     let loginUrl = APIConstants.authLogin.path
-    let kakaoUrl = APIConstants.authKakao.path
+    let oauth2LoginUrl = APIConstants.authOauth2Login.path
     
     let headers:HTTPHeaders = [
         "Accept": "*/*",
@@ -89,21 +89,19 @@ class AuthDataManager {
             }
         }
     }
-    
-    // 카카오톡 로그인
-    func kakaoLoginDataManager(_ parameters: LoginRequestDTO, completion: @escaping (LoginResponseDTO?) -> Void) {
-        AF.request(kakaoUrl,
+    // Oauth2 로그인
+    func oauth2LoginDataManager(_ parameters: Oauth2RequestDTO, completion: @escaping (OAuthLoginResponseDTO?) -> Void) {
+        AF.request(oauth2LoginUrl,
                    method: .post,
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
         .validate(statusCode: 200..<500)
-        .responseDecodable(of: LoginResponseDTO.self) { response in
+        .responseDecodable(of: OAuthLoginResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
-                print("카카오톡 회원가입/로그인 성공 : \(data)")
                 completion(data)
-                
+                print("OAuth2 로그인 성공 ; \(data)")
                 if let accessToken = data.result?.accessToken,
                    let refreshToken = data.result?.refreshToken,
                    let email = data.result?.email {
@@ -120,4 +118,35 @@ class AuthDataManager {
             }
         }
     }
+    
+//    // 카카오톡 로그인
+//    func kakaoLoginDataManager(_ parameters: LoginRequestDTO, completion: @escaping (LoginResponseDTO?) -> Void) {
+//        AF.request(kakaoUrl,
+//                   method: .post,
+//                   parameters: parameters,
+//                   encoder: JSONParameterEncoder.default,
+//                   headers: headers)
+//        .validate(statusCode: 200..<500)
+//        .responseDecodable(of: LoginResponseDTO.self) { response in
+//            switch response.result {
+//            case .success(let data):
+//                print("카카오톡 회원가입/로그인 성공 : \(data)")
+//                completion(data)
+//                
+//                if let accessToken = data.result?.accessToken,
+//                   let refreshToken = data.result?.refreshToken,
+//                   let email = data.result?.email {
+//                    // 키체인에 저장
+//                    KeychainHelper.standard.save(Data(accessToken.utf8), service: "access-token", account: "user")
+//                    KeychainHelper.standard.save(Data(refreshToken.utf8), service: "refresh-token", account: "user")
+//                    KeychainHelper.standard.save(Data(email.utf8), service: "email", account: "user")
+//                    KeychainHelper.standard.delete(service: "password", account: "user")
+//                    
+//                }
+//                
+//            case .failure(let error):
+//                print("요청 실패: \(error.localizedDescription)")
+//            }
+//        }
+//    }
 }

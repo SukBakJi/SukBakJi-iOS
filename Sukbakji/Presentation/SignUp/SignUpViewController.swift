@@ -120,9 +120,12 @@ class SignUpViewController: UIViewController {
                 else {
                     print("카카오톡 회원가입 성공")
                     
-                    //do something
-                    _ = oauthToken
-                    self.setUserInfo()
+                    // 토큰 저장 후 네트워크에 넣기
+                    guard let accessToken = oauthToken?.accessToken else { return }
+                    self.postOAuth2Login(
+                        provider: "KAKAO",
+                        accessToken: accessToken
+                    )
                 }
             }
         }
@@ -134,8 +137,12 @@ class SignUpViewController: UIViewController {
                 } else {
                     print("카카오 계정으로 회원가입 성공")
                     
-                    _ = oauthToken
-                    self.setUserInfo()
+                    // 토큰 저장 후 네트워크에 넣기
+                    guard let accessToken = oauthToken?.accessToken else { return }
+                    self.postOAuth2Login(
+                        provider: "KAKAO",
+                        accessToken: accessToken
+                    )
                 }
             }
         }
@@ -153,20 +160,19 @@ class SignUpViewController: UIViewController {
     }
     
     // MARK: - Functional
-    private func setUserInfo() {
+    private func postOAuth2Login(provider: String, accessToken: String) {
         UserApi.shared.me {(user, error) in
             if let error = error {
                 print(error)
             } else {
-                let email = user?.kakaoAccount?.email
-                print("카카오톡 이메일 : \(email ?? "이메일 없음 오류")")
-                
                 let authDataManager = AuthDataManager()
                 
-                let input = LoginRequestDTO(email: email)
-                print("전송된 데이터: \(input)")
-                print("카카오톡으로 로그인 호출")
-                authDataManager.kakaoLoginDataManager(input) {
+                let requestBody = Oauth2RequestDTO(
+                    provider: provider,
+                    accessToken: accessToken
+                )
+                
+                authDataManager.oauth2LoginDataManager(requestBody) {
                     [weak self] data in
                     guard let self = self else { return }
                     
@@ -174,7 +180,6 @@ class SignUpViewController: UIViewController {
                     // 응답
                     if let model = data, model.code == "COMMON200" {
                         self.navigateToTOSScreen(isKakaoSignUp: true)
-                        self.showMessage(message: model.message ?? "로그인에 성공했습니다")
                     } else {
                         print("카카오톡 로그인 실패")
                     }
@@ -183,9 +188,6 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    private func showMessage(message: String) {
-        print("메시지 : \(message)")
-    }
     // MARK: - addView
     func setupViews() {
         view.addSubview(symbolImageView)

@@ -21,6 +21,13 @@ struct LoginResponseDTO: Decodable {
     let result: LoginResult?
 }
 
+//OAuth2 로그인
+struct OAuthLoginResponseDTO: Decodable {
+    let isSuccess: Bool?
+    let code, message: String?
+    let result: LoginResult?
+}
+
 struct LoginResult: Decodable {
     let provider, email, accessToken, refreshToken: String
 }
@@ -31,3 +38,5 @@ struct CheckEmailResponseDTO: Decodable {
     let code, message: String
     let result: String?
 }
+
+
