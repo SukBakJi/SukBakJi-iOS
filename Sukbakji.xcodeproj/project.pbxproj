@@ -85,6 +85,8 @@
 		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
 		915C68E12D6471D200EA87C8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C68E02D6471D200EA87C8 /* UIView+Extension.swift */; };
 		91F849112D65AF3C0048B41A /* TOSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F849102D65AF3C0048B41A /* TOSData.swift */; };
+		91FEEB762D71782C00D0502D /* FindEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB752D71782C00D0502D /* FindEmailView.swift */; };
+		91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB832D718DA600D0502D /* FindEmailViewController.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
 		C704BD882D2BBE9700954EAD /* EditMyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */; };
 		C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2802C633CDB00D6014B /* ChattingViewController.swift */; };
@@ -276,6 +278,8 @@
 		7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListGetModel.swift; sourceTree = "<group>"; };
 		915C68E02D6471D200EA87C8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		91F849102D65AF3C0048B41A /* TOSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSData.swift; sourceTree = "<group>"; };
+		91FEEB752D71782C00D0502D /* FindEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailView.swift; sourceTree = "<group>"; };
+		91FEEB832D718DA600D0502D /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyAlarmViewController.swift; sourceTree = "<group>"; };
@@ -417,8 +421,8 @@
 		412BFBD42C5224EB0099E442 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				412BFBD52C5225010099E442 /* LoginViewController.swift */,
-				412BFBD72C5225250099E442 /* EmailLoginViewController.swift */,
+				91FEEB862D719DFF00D0502D /* ViewControllers */,
+				91FEEB872D719E1A00D0502D /* Views */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -672,6 +676,24 @@
 				7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */,
 			);
 			path = BoardModel;
+			sourceTree = "<group>";
+		};
+		91FEEB862D719DFF00D0502D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				412BFBD72C5225250099E442 /* EmailLoginViewController.swift */,
+				91FEEB832D718DA600D0502D /* FindEmailViewController.swift */,
+				412BFBD52C5225010099E442 /* LoginViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		91FEEB872D719E1A00D0502D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				91FEEB752D71782C00D0502D /* FindEmailView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A7354ED8CCE70303B1993A7F /* Pods */ = {
@@ -1293,6 +1315,7 @@
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
 				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
+				91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */,
 				C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */,
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
 				7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */,
@@ -1313,6 +1336,7 @@
 				C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */,
 				C75C0BE12D2D2A05000145F3 /* DeleteView.swift in Sources */,
 				C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */,
+				91FEEB762D71782C00D0502D /* FindEmailView.swift in Sources */,
 				7B1C53482C69D10800C66D0D /* DirectoryLabSearchModel.swift in Sources */,
 				C74A15B22D5A509600A1698B /* AlarmPatch.swift in Sources */,
 				C7C657DD2CFD6891009FFA8E /* FavoriteLabViewModel.swift in Sources */,

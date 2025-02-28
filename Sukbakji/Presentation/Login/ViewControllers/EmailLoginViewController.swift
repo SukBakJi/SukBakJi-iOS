@@ -151,6 +151,7 @@ class EmailLoginViewController: UIViewController {
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 12)
         $0.titleLabel?.textAlignment = .center
         $0.setTitleColor(.gray600, for: .normal)
+        $0.addTarget(self, action: #selector(emailFindButtonTapped), for: .touchUpInside)
     }
     private let passwordFindButton = UIButton().then {
         $0.setTitle("비밀번호 재설정", for: .normal)
@@ -226,6 +227,15 @@ class EmailLoginViewController: UIViewController {
     @objc private func signUpButtonTapped() {
         let SignUpVC = SignUpViewController()
         self.navigationController?.pushViewController(SignUpVC, animated: true)
+        
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+    }
+    
+    @objc private func emailFindButtonTapped() {
+        let findVC = FindEmailViewController()
+        self.navigationController?.pushViewController(findVC, animated: true)
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .black

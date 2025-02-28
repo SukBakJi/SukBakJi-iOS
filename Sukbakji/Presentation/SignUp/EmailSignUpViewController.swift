@@ -174,30 +174,30 @@ class EmailSignUpViewController: UIViewController {
     // MARK: - TextField Button
     private var emailClearButton = UIButton().then {
         $0.setImage(UIImage(named: "SBJ_clear"), for: .normal)
-        $0.adjustsImageWhenHighlighted = false
+        $0.setImage(UIImage(named: "SBJ_clear"), for: .highlighted)
         $0.isHidden = true
         $0.addTarget(self, action: #selector(emailClearButtonTapped(_:)), for: .touchUpInside)
     }
     private var passwordEyeButton = UIButton().then {
         $0.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
         $0.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
-        $0.adjustsImageWhenHighlighted = false
+        $0.setImage(UIImage(named: "SBJ_Password-shown"), for: .highlighted)
         $0.addTarget(self, action: #selector(eyeButtonTapped(_:)), for: .touchUpInside)
     }
     private var passwordClearButton = UIButton().then {
         $0.setImage(UIImage(named: "SBJ_clear"), for: .normal)
-        $0.adjustsImageWhenHighlighted = false
+        $0.setImage(UIImage(named: "SBJ_clear"), for: .highlighted)
         $0.addTarget(self, action: #selector(clearButtonTapped(_:)), for: .touchUpInside)
     }
     private var checkPasswordEyeButton = UIButton().then {
         $0.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
         $0.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
-        $0.adjustsImageWhenHighlighted = false
+        $0.setImage(UIImage(named: "SBJ_Password-shown"), for: .highlighted)
         $0.addTarget(self, action: #selector(eyeSecondButtonTapped(_:)), for: .touchUpInside)
     }
     private var checkPasswordClearButton = UIButton().then {
         $0.setImage(UIImage(named: "SBJ_clear"), for: .normal)
-        $0.adjustsImageWhenHighlighted = false
+        $0.setImage(UIImage(named: "SBJ_clear"), for: .normal)
         $0.addTarget(self, action: #selector(clearSecondButtonTapped(_:)), for: .touchUpInside)
     }
     
@@ -228,7 +228,7 @@ class EmailSignUpViewController: UIViewController {
         checkPasswordTextField.delegate = self
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            view.endEditing(true)
+        view.endEditing(true)
     }
     // MARK: - navigationBar Title
     private func setUpNavigationBar(){
@@ -366,36 +366,36 @@ class EmailSignUpViewController: UIViewController {
         }
     }
     func checkEmail(_ email: String) {
-            // 이전에 실행 중이던 작업이 있다면 취소합니다.
-            emailWorkItem?.cancel()
+        // 이전에 실행 중이던 작업이 있다면 취소합니다.
+        emailWorkItem?.cancel()
+        
+        // 새로운 작업 생성
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
             
-            // 새로운 작업 생성
-            let workItem = DispatchWorkItem { [weak self] in
+            // MARK: - NetWork
+            let authDataManager = AuthDataManager()
+            authDataManager.EmailDataManager(email) { [weak self] SignUpModel in
                 guard let self = self else { return }
                 
-                // MARK: - NetWork
-                let authDataManager = AuthDataManager()
-                authDataManager.EmailDataManager(email) { [weak self] SignUpModel in
-                    guard let self = self else { return }
-                    
-                    // 서버로부터의 응답 처리
-                    if let model = SignUpModel {
-                        if model.result == "사용 가능한 이메일입니다." {
-                            print("사용 가능한 이메일입니다.")
-                            self.changeStateCorrect()
-                        } else {
-                            // 이미 사용 중인 이메일인 경우 상태를 오류로 변경
-                            self.changeStateError(self.emailTextField)
-                            self.emailErrorLabel.text = "이미 가입된 이메일입니다"
-                        }
+                // 서버로부터의 응답 처리
+                if let model = SignUpModel {
+                    if model.result == "사용 가능한 이메일입니다." {
+                        print("사용 가능한 이메일입니다.")
+                        self.changeStateCorrect()
+                    } else {
+                        // 이미 사용 중인 이메일인 경우 상태를 오류로 변경
+                        self.changeStateError(self.emailTextField)
+                        self.emailErrorLabel.text = "이미 가입된 이메일입니다"
                     }
                 }
             }
-            
-            // 새로운 작업을 큐에 추가, 0.5초 후 실행
-            emailWorkItem = workItem
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workItem)
         }
+        
+        // 새로운 작업을 큐에 추가, 0.5초 후 실행
+        emailWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workItem)
+    }
     
     private func showMessage(message: String) {
         print("메시지 : \(message)")
@@ -748,16 +748,16 @@ extension EmailSignUpViewController: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-           validateFieldForButtonUpdate()
-           if textField == emailTextField {
-               // 이메일 형식이 유효하지 않거나 이미 존재하는 이메일인 경우 상태를 오류로 변경
-               let email = emailTextField.text ?? ""
-               if !isValidEmail(email) {
-                   changeStateError(emailTextField)
-                   emailErrorLabel.text = "올바르지 않은 형식의 이메일 입니다"
-               } else {
-                   checkEmail(email)
-               }
-           }
-       }
+        validateFieldForButtonUpdate()
+        if textField == emailTextField {
+            // 이메일 형식이 유효하지 않거나 이미 존재하는 이메일인 경우 상태를 오류로 변경
+            let email = emailTextField.text ?? ""
+            if !isValidEmail(email) {
+                changeStateError(emailTextField)
+                emailErrorLabel.text = "올바르지 않은 형식의 이메일 입니다"
+            } else {
+                checkEmail(email)
+            }
+        }
+    }
 }
