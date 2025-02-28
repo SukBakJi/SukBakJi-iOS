@@ -7,11 +7,8 @@
 
 import UIKit
 import SnapKit
-import Alamofire
-import Then
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDeleteDelegate {
     
@@ -57,6 +54,13 @@ extension UnivCalendarViewController {
             .observe(on: MainScheduler.instance)
             .bind(to: univView.univCalendarTableView.rx.items(cellIdentifier: UnivCalendarTableViewCell.identifier, cellType: UnivCalendarTableViewCell.self)) { index, item, cell in
                 cell.prepare(univList: item)
+                
+                self.viewModel.selectedUnivAll
+                    .bind { isSelected in
+                        let imageName = isSelected ? "Sukbakji_Check2" : "Sukbakji_Check"
+                        cell.selectButton.setImage(UIImage(named: imageName), for: .normal)
+                    }
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
         
@@ -67,6 +71,12 @@ extension UnivCalendarViewController {
                 let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 150, isPannedable: true)
                 self?.present(bottomSheetVC, animated: true)
             })
+            .disposed(by: disposeBag)
+        
+        univView.allSelectButton.rx.tap
+            .bind { [weak self] in
+                self?.viewModel.toggleSelectState()
+            }
             .disposed(by: disposeBag)
     }
     

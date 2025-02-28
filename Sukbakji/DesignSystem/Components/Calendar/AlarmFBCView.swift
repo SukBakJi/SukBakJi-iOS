@@ -125,7 +125,7 @@ final class AlarmFBCView: UIView {
     
     @objc func alarmSettingButtonTarget(target: UIViewController) {
         if let navigationController = target.navigationController {
-            let alarmVC = AlarmSettingViewController()
+            let alarmVC = SetAlarmViewController()
             navigationController.pushViewController(alarmVC, animated: true)
         }
     }

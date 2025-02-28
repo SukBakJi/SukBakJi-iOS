@@ -21,39 +21,39 @@ class UnivCalendarTableViewCell: UITableViewCell {
     
     weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
     
-    private let selectView = UIView().then {
+    var disposeBag = DisposeBag()
+    
+    let selectView = UIView().then {
         $0.backgroundColor = .gray200
     }
-    private let selectButton = UIButton().then {
+    let selectButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
         $0.contentMode = .scaleAspectFill
     }
-    private let univLabel = UILabel().then {
+    let univLabel = UILabel().then {
         $0.textColor = .black
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
     }
-    private let deleteButton = UIButton().then {
+    let deleteButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Delete2"), for: .normal)
         $0.contentMode = .scaleAspectFill
     }
-    private let recruitImageView = UIImageView().then {
+    let recruitImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_RecruitType")
     }
-    private let recruitLabel = UILabel().then {
+    let recruitLabel = UILabel().then {
         $0.textColor = .black
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
-    private let recruitTypeLabel = UILabel().then {
+    let recruitTypeLabel = UILabel().then {
         $0.textColor = UIColor(named: "Coquelicot")
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
-    private let editButton = UIButton().then {
+    let editButton = UIButton().then {
         $0.setTitle("수정", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 12)
         $0.setTitleColor(.gray400, for: .normal)
     }
-    
-    private var disposeBag = DisposeBag()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
        super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -73,7 +73,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
         disposeBag = DisposeBag() // DisposeBag 재설정
     }
 
-    private func setUI() {
+    func setUI() {
         self.contentView.layer.cornerRadius = 12
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor
@@ -138,7 +138,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
         }
     }
     
-    @objc private func univDelete_Tapped(_ sender: UIButton) {
+    @objc func univDelete_Tapped(_ sender: UIButton) {
         delegate?.univDelete_Tapped(cell: self)
     }
     
@@ -154,5 +154,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
         }
         recruitLabel.text = univList.season
         recruitTypeLabel.text = univList.method
+        
+        disposeBag = DisposeBag()
     }
 }

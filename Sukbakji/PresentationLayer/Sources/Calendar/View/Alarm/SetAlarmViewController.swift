@@ -1,5 +1,5 @@
 //
-//  AlarmSettingViewController.swift
+//  SetAlarmViewController.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 1/5/25.
@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 import DropDown
 
-class AlarmSettingViewController: UIViewController, dateProtocol {
+class SetAlarmViewController: UIViewController, dateProtocol {
     
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     
@@ -165,7 +165,7 @@ class AlarmSettingViewController: UIViewController, dateProtocol {
     }
 }
     
-extension AlarmSettingViewController {
+extension SetAlarmViewController {
     
     private func setDrop() {
         initUI()
@@ -387,7 +387,7 @@ extension AlarmSettingViewController {
     }
 }
 
-extension AlarmSettingViewController {
+extension SetAlarmViewController {
     
     func dateSend(data: String) {
         alarmDateTextField.text = "\(data)"
@@ -613,7 +613,7 @@ extension AlarmSettingViewController {
     }
 }
     
-extension AlarmSettingViewController {
+extension SetAlarmViewController {
     
     private func setAlarmAPI() {
         guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
@@ -640,7 +640,7 @@ extension AlarmSettingViewController {
     }
 }
 
-extension AlarmSettingViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension SetAlarmViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }

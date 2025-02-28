@@ -58,4 +58,15 @@ class CalendarRepository {
         let url = APIConstants.calendarUniv.path
         return APIService.shared.deleteWithToken(of: APIResponse<UnivDeleteResult>.self, url: url, parameters: parameters, accessToken: token)
     }
+    
+    func fetchUnivDeleteAll(token: String) -> Single<APIResponse<String>> {
+        let url = APIConstants.calendarUnivAll.path
+        return APIService.shared.deleteWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)
+    }
+    
+    func fetchUnivDeleteSelected(token: String, univIds: [Int]) -> Single<APIResponse<String>> {
+        let url = APIConstants.calendarUnivSelected.path
+        let params = ["univIds": [univIds]]
+        return APIService.shared.deleteWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
+    }
 }

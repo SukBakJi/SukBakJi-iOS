@@ -140,11 +140,6 @@ extension UnivRecruitViewController {
             .subscribe(onNext: { univList in self.drop.dataSource = self.viewModel.recruitTypes.value })
             .disposed(by: disposeBag)
         
-        drop.selectionAction = { [weak self] index, item in
-            self?.univRecruitView.recruitTypeTextField.text = item
-            self?.updateButtonColor()
-        }
-        
         univRecruitView.nextButton.rx.tap
             .bind { [weak self] in self?.showLogoutAlert() }
             .disposed(by: disposeBag)

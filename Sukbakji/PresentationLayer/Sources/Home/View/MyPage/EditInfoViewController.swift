@@ -7,9 +7,7 @@
 
 import UIKit
 import DropDown
-import Alamofire
 import SnapKit
-import Then
 import RxSwift
 import RxCocoa
 
