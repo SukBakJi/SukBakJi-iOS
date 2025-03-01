@@ -54,6 +54,7 @@ extension UnivCalendarViewController {
             .observe(on: MainScheduler.instance)
             .bind(to: univView.univCalendarTableView.rx.items(cellIdentifier: UnivCalendarTableViewCell.identifier, cellType: UnivCalendarTableViewCell.self)) { index, item, cell in
                 cell.prepare(univList: item)
+                cell.delegate = self
                 
                 self.viewModel.selectedUnivAll
                     .bind { isSelected in

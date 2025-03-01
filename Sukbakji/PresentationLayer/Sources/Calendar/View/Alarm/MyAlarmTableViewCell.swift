@@ -8,16 +8,19 @@
 import UIKit
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
 
 protocol MyAlarmTableViewCellSwitchDelegate: AnyObject {
     func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool)
-    func editToggled(cell: MyAlarmTableViewCell)
+    func editButtonTapped(cell: MyAlarmTableViewCell)
 }
 
 class MyAlarmTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: MyAlarmTableViewCell.self)
     
+    private let disposeBag = DisposeBag()
     weak var delegate: MyAlarmTableViewCellSwitchDelegate?
     
     private let labelView = UIView().then {
@@ -46,16 +49,14 @@ class MyAlarmTableViewCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-       super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setUI()
+        setupBinding()
     }
     
     required init?(coder: NSCoder) {
        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        
-       setUI()
     }
     
     private func setUI() {
@@ -101,7 +102,6 @@ class MyAlarmTableViewCell: UITableViewCell {
             make.height.equalTo(20)
             make.width.equalTo(40)
         }
-        editButton.addTarget(self, action: #selector(editToggled), for: .touchUpInside)
         
         self.contentView.addSubview(onOffSwitch)
         onOffSwitch.snp.makeConstraints { make in
@@ -110,15 +110,22 @@ class MyAlarmTableViewCell: UITableViewCell {
             make.height.equalTo(31)
             make.width.equalTo(51)
         }
-        onOffSwitch.addTarget(self, action: #selector(onOffSwitchToggled), for: .valueChanged)
     }
     
-    @objc private func onOffSwitchToggled() {
-        delegate?.alarmSwitchToggled(cell: self, isOn: onOffSwitch.isOn)
-    }
-    
-    @objc private func editToggled() {
-        delegate?.editToggled(cell: self)
+    private func setupBinding() {
+        onOffSwitch.rx.isOn
+            .subscribe(onNext: { [weak self] isOn in
+                guard let self = self else { return }
+                let toggledState = !isOn
+                self.delegate?.alarmSwitchToggled(cell: self, isOn: toggledState)
+            })
+            .disposed(by: disposeBag)
+        
+        editButton.rx.tap
+            .bind { [weak self] in 
+                guard let self = self else { return }
+                self.delegate?.editButtonTapped(cell: self) }
+            .disposed(by: disposeBag)
     }
 
     func prepare(alarmList: AlarmList) {

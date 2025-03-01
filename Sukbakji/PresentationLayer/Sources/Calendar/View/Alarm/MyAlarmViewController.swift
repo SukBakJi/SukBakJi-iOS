@@ -25,13 +25,12 @@ class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegat
         super.viewDidLoad()
         
         setUI()
+        setAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-        
-        setMyAlarmAPI()
     }
 }
     
@@ -41,10 +40,30 @@ extension MyAlarmViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         myAlarmView.navigationbarView.delegate = self
-        myAlarmView.addAlarmButton.addTarget(self, action: #selector(bottomSheet_Tapped), for: .touchUpInside)
+        myAlarmView.addAlarmButton.addTarget(self, action: #selector(addAlarm_Tapped), for: .touchUpInside)
     }
     
-    @objc private func bottomSheet_Tapped() {
+    private func setAPI() {
+        bindViewModel()
+        viewModel.fetchMyAlarms()
+    }
+    
+    private func bindViewModel() {
+        myAlarmView.myAlarmTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        viewModel.alarmItems
+            .observe(on: MainScheduler.instance)
+            .bind(to: myAlarmView.myAlarmTableView.rx.items(cellIdentifier: MyAlarmTableViewCell.identifier, cellType: MyAlarmTableViewCell.self)) { index, item, cell in
+                cell.prepare(alarmList: item)
+                cell.delegate = self
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func editButtonTapped(cell: MyAlarmTableViewCell) {
+        guard let indexPath = myAlarmView.myAlarmTableView.indexPath(for: cell) else { return }
+        self.viewModel.selectAlarmItem = viewModel.alarmItems.value[indexPath.row]
         let viewController = EditMyAlarmViewController(alarmViewModel: self.viewModel)
         let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
@@ -52,112 +71,12 @@ extension MyAlarmViewController {
     
     func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool) {
         guard let indexPath = myAlarmView.myAlarmTableView.indexPath(for: cell) else { return }
-        let alarmItem = viewModel.myAlarmItems.value[indexPath.row]
-        
-        if isOn {
-            alarmOn(alarmId: alarmItem.alarmId)
-            viewModel.alarmSwitchToggled(at: indexPath.row, isOn: 1)
-        } else {
-            alarmOff(alarmId: alarmItem.alarmId)
-            viewModel.alarmSwitchToggled(at: indexPath.row, isOn: 0)
-        }
+        viewModel.toggleAlarm(at: indexPath.row, isOn: isOn)
     }
     
-    func editToggled(cell: MyAlarmTableViewCell) {
-        guard let indexPath = myAlarmView.myAlarmTableView.indexPath(for: cell) else { return }
-        let alarmItem = viewModel.myAlarmItems.value[indexPath.row]
-        
-        self.viewModel.selectMyAlarmItem = alarmItem
-        let viewController = EditMyAlarmViewController(alarmViewModel: self.viewModel)
-        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
-        self.present(bottomSheetVC, animated: true)
-    }
-}
-
-extension MyAlarmViewController {
-    
-    private func setAlarmData() {
-        myAlarmView.myAlarmTableView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
-        
-        self.viewModel.myAlarmItems
-            .observe(on: MainScheduler.instance)
-            .bind(to: myAlarmView.myAlarmTableView.rx.items(cellIdentifier: MyAlarmTableViewCell.identifier, cellType: MyAlarmTableViewCell.self)) { index, item, cell in
-                cell.prepare(alarmList: item)
-                cell.delegate = self
-            }
-            .disposed(by: disposeBag)
-        
-        myAlarmView.myAlarmTableView.rx.modelSelected(AlarmList.self)
-            .subscribe(onNext: { [weak self] myAlarmItem in
-                guard let self = self else { return }
-                self.viewModel.selectMyAlarmItem = myAlarmItem
-                let viewController = EditMyAlarmViewController(alarmViewModel: self.viewModel)
-                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
-                self.present(bottomSheetVC, animated: true)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func setMyAlarmAPI() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        let url = APIConstants.calendarAlarm.path
-        
-        APIService.shared.getWithToken(of: APIResponse<Alarm>.self, url: url, accessToken: retrievedToken)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                let resultData = response.result.alarmList
-                self.viewModel.myAlarmItems.accept(resultData)
-                self.setAlarmData()
-                self.view.layoutIfNeeded()
-            }, onFailure: { error in
-                print("❌ 오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func alarmOn(alarmId: Int) {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        
-        let url = APIConstants.calendarAlarmOn.path
-        
-        let params = [
-            "alarmId": alarmId
-        ] as [String : Any]
-        
-        APIService.shared.patchWithToken(of: APIResponse<AlarmPatch>.self, url: url, parameters: params, accessToken: retrievedToken)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.view.layoutIfNeeded()
-            }, onFailure: { error in
-                print("❌ 오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func alarmOff(alarmId: Int) {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-            return
-        }
-        
-        let url = APIConstants.calendarAlarmOff.path
-        
-        let params = [
-            "alarmId": alarmId
-        ] as [String : Any]
-        
-        APIService.shared.patchWithToken(of: APIResponse<AlarmPatch>.self, url: url, parameters: params, accessToken: retrievedToken)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.view.layoutIfNeeded()
-            }, onFailure: { error in
-                print("❌ 오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
+    @objc private func addAlarm_Tapped() {
+        let setAlarmVC = SetAlarmViewController()
+        self.navigationController?.pushViewController(setAlarmVC, animated: true)
     }
 }
 

@@ -69,4 +69,10 @@ class CalendarRepository {
         let params = ["univIds": [univIds]]
         return APIService.shared.deleteWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
     }
+    
+    func fetchAlarmPatch(token: String, alarmId: Int, isOn: Bool) -> Single<APIResponse<AlarmPatch>> {
+        let url = isOn ? APIConstants.calendarAlarmOn.path : APIConstants.calendarAlarmOff.path
+        let params = ["alarmId": alarmId]
+        return APIService.shared.patchWithToken(of: APIResponse<AlarmPatch>.self, url: url, parameters: params, accessToken: token)
+    }
 }
