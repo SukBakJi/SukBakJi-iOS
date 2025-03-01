@@ -27,6 +27,7 @@ PODS:
   - RxRelay (6.8.0):
     - RxSwift (= 6.8.0)
   - RxSwift (6.8.0)
+  - SkeletonView (1.30.4)
   - SnapKit (5.7.1)
   - Tabman (3.2.0):
     - Pageboy (~> 4.2.0)
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - RxCocoa (= 6.8.0)
   - RxDataSources (~> 5.0)
   - RxSwift (= 6.8.0)
+  - SkeletonView
   - SnapKit (~> 5.7.0)
   - Tabman (~> 3.0)
   - Then
@@ -61,6 +63,7 @@ SPEC REPOS:
     - RxDataSources
     - RxRelay
     - RxSwift
+    - SkeletonView
     - SnapKit
     - Tabman
     - Then
@@ -79,11 +82,12 @@ SPEC CHECKSUMS:
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
   RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
+  SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   Tabman: 49f9181a2bfe5c29d002864dac2de8e0b7ea9180
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: e142820333d9b340b34d329c0fa6f716fb6f4573
+PODFILE CHECKSUM: eeea67d868db30c8edc08a6d2665a0113edee362
 
 COCOAPODS: 1.15.2

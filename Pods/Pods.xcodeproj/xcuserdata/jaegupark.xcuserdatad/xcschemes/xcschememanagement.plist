@@ -137,47 +137,73 @@
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
-		<key>SnapKit-SnapKit_Privacy.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>20</integer>
-		</dict>
-		<key>SnapKit.xcscheme</key>
+		<key>SkeletonView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>19</integer>
 		</dict>
+<<<<<<< HEAD
 		<key>Tabman-Tabman.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>22</integer>
-		</dict>
-		<key>Tabman.xcscheme</key>
+=======
+		<key>SnapKit-SnapKit_Privacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
-		<key>Then.xcscheme</key>
+		<key>SnapKit.xcscheme</key>
+>>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
+<<<<<<< HEAD
+=======
+		<key>Tabman-Tabman.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>23</integer>
 		</dict>
+>>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669
+		<key>Tabman.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+<<<<<<< HEAD
+			<integer>21</integer>
+=======
+			<integer>22</integer>
+>>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669
+		</dict>
+		<key>Then.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+<<<<<<< HEAD
+			<integer>23</integer>
+=======
+			<integer>24</integer>
+>>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669
+		</dict>
 		<key>WeakMapTable.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
+<<<<<<< HEAD
 			<integer>24</integer>
+=======
+			<integer>25</integer>
+>>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
