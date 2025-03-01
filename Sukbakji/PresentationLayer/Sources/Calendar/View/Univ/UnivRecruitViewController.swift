@@ -186,7 +186,7 @@ extension UnivRecruitViewController {
     
     private func showLogoutAlert() {
         AlertController(message: "대학교를 등록하시겠어요?", isCancel: true) { [weak self] in
-            self?.viewModel.loadUnivEnroll(
+            self?.viewModel.EnrollUniv(
                 memberId: self?.memberId,
                 univId: self?.univId,
                 season: self?.univRecruitView.recruitTitleLabel.text,

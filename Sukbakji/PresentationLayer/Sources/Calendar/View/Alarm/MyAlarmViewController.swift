@@ -40,7 +40,7 @@ extension MyAlarmViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         myAlarmView.navigationbarView.delegate = self
-        myAlarmView.addAlarmButton.addTarget(self, action: #selector(addAlarm_Tapped), for: .touchUpInside)
+//        myAlarmView.addAlarmButton.addTarget(self, action: #selector(addAlarm_Tapped), for: .touchUpInside)
     }
     
     private func setAPI() {
@@ -74,10 +74,10 @@ extension MyAlarmViewController {
         viewModel.toggleAlarm(at: indexPath.row, isOn: isOn)
     }
     
-    @objc private func addAlarm_Tapped() {
-        let setAlarmVC = SetAlarmViewController()
-        self.navigationController?.pushViewController(setAlarmVC, animated: true)
-    }
+//    @objc private func addAlarm_Tapped() {
+//        let setAlarmVC = SetAlarmViewController()
+//        self.navigationController?.pushViewController(setAlarmVC, animated: true)
+//    }
 }
 
 extension MyAlarmViewController: UITableViewDelegate {

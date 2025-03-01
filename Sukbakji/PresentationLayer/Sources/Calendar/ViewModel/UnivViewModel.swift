@@ -51,7 +51,7 @@ final class UnivViewModel {
             .disposed(by: disposeBag)
     }
     
-    func loadUnivEnroll(memberId: Int?, univId: Int?, season: String?, method: String?) {
+    func EnrollUniv(memberId: Int?, univId: Int?, season: String?, method: String?) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }

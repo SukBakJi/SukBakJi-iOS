@@ -75,4 +75,9 @@ class CalendarRepository {
         let params = ["alarmId": alarmId]
         return APIService.shared.patchWithToken(of: APIResponse<AlarmPatch>.self, url: url, parameters: params, accessToken: token)
     }
+    
+    func fetchAlarmEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<AlarmPost>> {
+        let url = APIConstants.calendarAlarm.path
+        return APIService.shared.postWithToken(of: APIResponse<AlarmPost>.self, url: url, parameters: parameters, accessToken: token)
+    }
 }

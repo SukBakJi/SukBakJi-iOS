@@ -57,38 +57,38 @@ class MyAlarmView: UIView {
     }
     
     private func setupConstraints() {
-        navigationbarView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(95)
+        navigationbarView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(95)
         }
         
-        addAlarmButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(47)
-            make.trailing.equalToSuperview().inset(8)
-            make.height.width.equalTo(48)
+        addAlarmButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(47)
+            $0.trailing.equalToSuperview().inset(8)
+            $0.height.width.equalTo(48)
         }
         
-        backgroundLabel.snp.makeConstraints { make in
-            make.top.equalTo(navigationbarView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(1)
+        backgroundLabel.snp.makeConstraints {
+            $0.top.equalTo(navigationbarView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
-        dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(backgroundLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(21)
+        dateLabel.snp.makeConstraints {
+            $0.top.equalTo(backgroundLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(21)
         }
         
-        dateSelectButton.snp.makeConstraints { make in
-            make.centerY.equalTo(dateLabel)
-            make.leading.equalTo(dateLabel.snp.trailing).offset(2)
-            make.height.equalTo(32)
+        dateSelectButton.snp.makeConstraints {
+            $0.centerY.equalTo(dateLabel)
+            $0.leading.equalTo(dateLabel.snp.trailing).offset(2)
+            $0.height.equalTo(32)
         }
         
-        myAlarmTableView.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.bottom).offset(20)
-            make.leading.trailing.bottom.equalToSuperview()
+        myAlarmTableView.snp.makeConstraints {
+            $0.top.equalTo(dateLabel.snp.bottom).offset(20)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     

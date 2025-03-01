@@ -16,6 +16,8 @@ final class AlarmViewModel {
     var alarmItems: BehaviorRelay<[AlarmList]> = BehaviorRelay(value: [])
     var selectAlarmItem: AlarmList?
     
+    let alarmEnrolled = PublishSubject<Bool>()
+    
     func fetchMyAlarms() {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
@@ -46,14 +48,29 @@ final class AlarmViewModel {
             .disposed(by: disposeBag)
     }
     
-    func alarmSwitchToggled(at index: Int, isOn: Int) {
-        var currentItems = alarmItems.value // 현재 값 가져오기
-        guard index >= 0, index < currentItems.count else { return }
+    func loadAlarmEnroll(memberId: Int?, univName: String?, name: String?, date: String?, time: String?) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
         
-        currentItems[index].onoff = isOn // 스위치 상태 업데이트
-        alarmItems.accept(currentItems) // 변경된 값 반영
+        let params = [
+            "memberId": memberId!,
+            "univName": univName!,
+            "name": name!,
+            "date": date!,
+            "time": time!,
+            "onoff": 1
+        ] as [String : Any]
         
-        print("✅ Alarm \(currentItems[index].alarmName) is now \((isOn == 0) ? "OFF" : "ON")")
+        repository.fetchAlarmEnroll(token: token, parameters: params)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.alarmEnrolled.onNext(true)
+                NotificationCenter.default.post(name: .isAlarmComplete, object: nil)
+            }, onFailure: { error in
+                self.alarmEnrolled.onNext(false)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
