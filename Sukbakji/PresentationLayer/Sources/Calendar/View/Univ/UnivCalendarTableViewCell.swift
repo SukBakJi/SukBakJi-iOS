@@ -11,11 +11,15 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
+protocol UnivCalendarTableViewCellDeleteDelegate: AnyObject {
+    func univDelete_Tapped(cell: UnivCalendarTableViewCell)
+}
+
 class UnivCalendarTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: UnivCalendarTableViewCell.self)
     
-    weak var delegate: univCalendarDeleteDelegate?
+    weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
     
     var disposeBag = DisposeBag()
     

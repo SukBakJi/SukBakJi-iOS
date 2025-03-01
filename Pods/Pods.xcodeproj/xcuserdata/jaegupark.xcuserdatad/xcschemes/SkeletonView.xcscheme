@@ -14,15 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-<<<<<<<< HEAD:Pods/Pods.xcodeproj/xcuserdata/jaegupark.xcuserdatad/xcschemes/WeakMapTable.xcscheme
-               BlueprintIdentifier = "FDAD00A3F94FDF0C9810CDD8F98A86EF"
-               BuildableName = "WeakMapTable.framework"
-               BlueprintName = "WeakMapTable"
-========
                BlueprintIdentifier = "8CEEFD1CB630CA790F0396E2E24A4C8C"
                BuildableName = "SkeletonView.framework"
                BlueprintName = "SkeletonView"
->>>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669:Pods/Pods.xcodeproj/xcuserdata/jaegupark.xcuserdatad/xcschemes/SkeletonView.xcscheme
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

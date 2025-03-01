@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-protocol MyAlarmTableViewCellSwitchDelegate: AnyObject {
+protocol MyAlarmTableViewCellDelegate: AnyObject {
     func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool)
     func editButtonTapped(cell: MyAlarmTableViewCell)
 }
@@ -21,7 +21,7 @@ class MyAlarmTableViewCell: UITableViewCell {
     static let identifier = String(describing: MyAlarmTableViewCell.self)
     
     private let disposeBag = DisposeBag()
-    weak var delegate: MyAlarmTableViewCellSwitchDelegate?
+    weak var delegate: MyAlarmTableViewCellDelegate?
     
     private let labelView = UIView().then {
         $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)

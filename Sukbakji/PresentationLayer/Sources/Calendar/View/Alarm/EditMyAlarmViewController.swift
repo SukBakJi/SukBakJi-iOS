@@ -359,7 +359,7 @@ extension EditMyAlarmViewController {
     }
     
     private func setMyAlarmData() {
-        guard let selectMyAlarmItem = self.alarmViewModel.selectMyAlarmItem else { return }
+        guard let selectMyAlarmItem = self.alarmViewModel.selectAlarmItem else { return }
         let alarmUnivName = selectMyAlarmItem.alarmUnivName
         let alarmName = selectMyAlarmItem.alarmName
         let alarmDate = selectMyAlarmItem.alarmDate

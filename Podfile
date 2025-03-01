@@ -18,7 +18,6 @@ target 'Sukbakji' do
   pod 'Alamofire'
   pod 'RxSwift', '6.8.0'
   pod 'RxCocoa', '6.8.0'
-  pod 'RxDataSources', '~> 5.0'
   pod 'ReactorKit'
 
 end

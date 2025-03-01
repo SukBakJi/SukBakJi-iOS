@@ -43,11 +43,8 @@ class AlarmDateCollectionViewCell: UICollectionViewCell {
                     self.dayLabel.textColor = .white
                 }
             } else {
-<<<<<<< HEAD:Sukbakji/Presentation/Calendar/Cell/AlarmDateCollectionViewCell.swift
                 self.dayView.backgroundColor = .gray50
-=======
                 self.dayView.backgroundColor = UIColor.orange50
->>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669:Sukbakji/PresentationLayer/Sources/Calendar/View/Alarm/AlarmDateCollectionViewCell.swift
                 self.dayLabel.textColor = .black
             }
         }

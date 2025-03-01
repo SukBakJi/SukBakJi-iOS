@@ -1,9 +1,5 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
-<<<<<<<< HEAD:Pods/Target Support Files/WeakMapTable/WeakMapTable.release.xcconfig
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/WeakMapTable
-========
-CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/SkeletonView
->>>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669:Pods/Target Support Files/SkeletonView/SkeletonView.release.xcconfig
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LIBRARY_SEARCH_PATHS = $(inherited) "${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}" /usr/lib/swift
 OTHER_LDFLAGS = $(inherited) -framework "Foundation"
@@ -12,11 +8,7 @@ PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_DEVELOPMENT_LANGUAGE = ${DEVELOPMENT_LANGUAGE}
 PODS_ROOT = ${SRCROOT}
-<<<<<<<< HEAD:Pods/Target Support Files/WeakMapTable/WeakMapTable.release.xcconfig
 PODS_TARGET_SRCROOT = ${PODS_ROOT}/WeakMapTable
-========
-PODS_TARGET_SRCROOT = ${PODS_ROOT}/SkeletonView
->>>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669:Pods/Target Support Files/SkeletonView/SkeletonView.release.xcconfig
 PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
 PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
 SKIP_INSTALL = YES

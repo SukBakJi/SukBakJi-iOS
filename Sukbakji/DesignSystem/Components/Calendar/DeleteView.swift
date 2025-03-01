@@ -115,7 +115,7 @@ final class DeleteView: UIView {
     }
     
     @objc private func delete_Tapped() {
-        if alarmViewModel.selectMyAlarmItem == nil {
+        if alarmViewModel.selectAlarmItem == nil {
             viewModel.deleteUnivCalendar(memberId: univDelete?.memberId, univId: univDelete?.univId, season: univDelete?.season, method: univDelete?.method)
         } else {
             
