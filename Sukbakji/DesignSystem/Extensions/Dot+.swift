@@ -1,9 +1,6 @@
 //
-<<<<<<<< HEAD:Sukbakji/DesignSystem/Extensions/UILabel+Extension.swift
 //  UILabel+Extension.swift
-========
 //  Dot+.swift
->>>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669:Sukbakji/DesignSystem/Extensions/Dot+.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 12/6/24.

@@ -39,11 +39,8 @@ class CalendarDetailTableViewCell: UITableViewCell {
     }
     
     private func setUI() {
-<<<<<<< HEAD:Sukbakji/Presentation/Calendar/Cell/CalendarDetailTableViewCell.swift
         self.contentView.backgroundColor = .gray50
-=======
         self.contentView.backgroundColor = UIColor.gray50
->>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669:Sukbakji/PresentationLayer/Sources/Calendar/View/Calendar/CalendarDetailTableViewCell.swift
         self.contentView.layer.cornerRadius = 12
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor

@@ -11,41 +11,10 @@ import Alamofire
 import RxSwift
 import RxCocoa
 
-<<<<<<< HEAD:Sukbakji/Presentation/Calendar/View/MyAlarmViewController.swift
-class MyAlarmViewController: UIViewController, myAlarmSwitchDelegate {
-
-    private let myAlarmViewModel = MyAlarmViewModel()
-
-=======
-class MyAlarmViewController: UIViewController, MyAlarmTableViewCellSwitchDelegate {
+class MyAlarmViewController: UIViewController, MyAlarmTableViewCellDelegate {
     
-<<<<<<< HEAD
-    private let alarmViewModel = AlarmViewModel()
-    
->>>>>>> 6fcfb270c8bf4b9973e1614c6c0270f98ac65669:Sukbakji/PresentationLayer/Sources/Calendar/View/Alarm/MyAlarmViewController.swift
-    private let navigationbarView = NavigationBarView(title: "내 알람")
-    private let addAlarmButton = UIButton().then {
-        $0.setImage(UIImage(named: "Sukbakji_Add"), for: .normal)
-    }
-    private let backgroundLabel = UILabel().then {
-        $0.backgroundColor = .gray100
-    }
-    private let dateLabel = UILabel().then {
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-    }
-    private let dateSelectButton = UIButton().then {
-        $0.setImage(UIImage(named: "More 2"), for: .normal)
-    }
-    private var myAlarmTableView = UITableView(frame: .zero, style: .plain).then {
-        $0.separatorStyle = .none
-        $0.backgroundColor = .clear
-        $0.register(MyAlarmTableViewCell.self, forCellReuseIdentifier: MyAlarmTableViewCell.identifier)
-    }
-    
-=======
     private let myAlarmView = MyAlarmView()
     private let viewModel = AlarmViewModel()
->>>>>>> feat/calendar
     private let disposeBag = DisposeBag()
     
     override func loadView() {
