@@ -10,10 +10,11 @@ import RxSwift
 import RxCocoa
 
 final class UnivViewModel {
+    private let repository = CalendarRepository()
     private let disposeBag = DisposeBag()
     
-    let selectUnivItem = BehaviorRelay<UnivSearchList?>(value: nil)
     let univSearchList = BehaviorRelay<[UnivSearchList]>(value: [])
+    let selectUnivItem = BehaviorRelay<UnivSearchList?>(value: nil)
     
     let recruitTypes = BehaviorRelay<[String]>(value: [])
     let selectedRecruitType = BehaviorRelay<String?>(value: nil)
@@ -25,7 +26,7 @@ final class UnivViewModel {
             return
         }
         
-        CalendarRepository.shared.fetchUnivSearch(token: token, keyword: keyword)
+        repository.fetchUnivSearch(token: token, keyword: keyword)
             .map { $0.result.universityList }
             .subscribe(onSuccess: { [weak self] univs in
                 self?.univSearchList.accept(univs)
@@ -42,7 +43,7 @@ final class UnivViewModel {
             return
         }
         
-        CalendarRepository.shared.fetchUnivMethod(token: token, univId: univId)
+        repository.fetchUnivMethod(token: token, univId: univId)
             .map { $0.result.methodList.map { $0.method } }
             .subscribe(onSuccess: { [weak self] methods in
                 self?.recruitTypes.accept(methods)
@@ -50,7 +51,7 @@ final class UnivViewModel {
             .disposed(by: disposeBag)
     }
     
-    func loadUnivEnroll(memberId: Int?, univId: Int?, season: String?, method: String?) {
+    func EnrollUniv(memberId: Int?, univId: Int?, season: String?, method: String?) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
             return
         }
@@ -62,7 +63,7 @@ final class UnivViewModel {
             "method": method!
         ] as [String : Any]
         
-        CalendarRepository.shared.fetchUnivEnroll(token: token, parameters: params)
+        repository.fetchUnivEnroll(token: token, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.univEnrolled.onNext(true)

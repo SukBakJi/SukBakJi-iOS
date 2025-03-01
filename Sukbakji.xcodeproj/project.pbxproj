@@ -149,6 +149,9 @@
 		C74A15BC2D5A571900A1698B /* MentoringPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74A15BB2D5A571900A1698B /* MentoringPost.swift */; };
 		C74BC6EC2D677ABA00103D04 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74BC6EB2D677ABA00103D04 /* CalendarView.swift */; };
 		C74C65DD2D4398C900526D23 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C65DC2D4398C900526D23 /* UIColor+.swift */; };
+		C750C3922D70C56600BE14EF /* MyAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C750C3912D70C56600BE14EF /* MyAlarmView.swift */; };
+		C750C3942D70C57000BE14EF /* SetAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C750C3932D70C56F00BE14EF /* SetAlarmView.swift */; };
+		C750C3962D70C58300BE14EF /* EditAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C750C3952D70C58300BE14EF /* EditAlarmView.swift */; };
 		C7548F2A2D147CFF00BA687A /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7548F292D147CFF00BA687A /* UITextField+.swift */; };
 		C7548F2C2D147D6400BA687A /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7548F2B2D147D6400BA687A /* UITextView+.swift */; };
 		C757F8212D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F8202D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift */; };
@@ -201,7 +204,7 @@
 		C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */; };
 		C7F455362C39B8F000A4D0EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F455352C39B8F000A4D0EE /* Assets.xcassets */; };
 		C7F455392C39B8F000A4D0EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F455372C39B8F000A4D0EE /* LaunchScreen.storyboard */; };
-		C7F951BE2D2A523500D07051 /* AlarmSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951BD2D2A523500D07051 /* AlarmSettingViewController.swift */; };
+		C7F951BE2D2A523500D07051 /* SetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951BD2D2A523500D07051 /* SetAlarmViewController.swift */; };
 		C7F951C02D2A738700D07051 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951BF2D2A738700D07051 /* DateView.swift */; };
 		C7F951C22D2A775000D07051 /* AlarmDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */; };
 		C7FB5A9D2C43E79B001857F2 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */; };
@@ -365,6 +368,9 @@
 		C74C65DA2D43970C00526D23 /* SUITE-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Heavy.otf"; sourceTree = "<group>"; };
 		C74C65DB2D43970C00526D23 /* SUITE-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Medium.otf"; sourceTree = "<group>"; };
 		C74C65DC2D4398C900526D23 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		C750C3912D70C56600BE14EF /* MyAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmView.swift; sourceTree = "<group>"; };
+		C750C3932D70C56F00BE14EF /* SetAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmView.swift; sourceTree = "<group>"; };
+		C750C3952D70C58300BE14EF /* EditAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAlarmView.swift; sourceTree = "<group>"; };
 		C7548F292D147CFF00BA687A /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C7548F2B2D147D6400BA687A /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
 		C757F8202D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMainCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -421,7 +427,7 @@
 		C7F455352C39B8F000A4D0EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7F455382C39B8F000A4D0EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7F4553A2C39B8F000A4D0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7F951BD2D2A523500D07051 /* AlarmSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingViewController.swift; sourceTree = "<group>"; };
+		C7F951BD2D2A523500D07051 /* SetAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmViewController.swift; sourceTree = "<group>"; };
 		C7F951BF2D2A738700D07051 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7FB5A9C2C43E79B001857F2 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
@@ -808,7 +814,7 @@
 			isa = PBXGroup;
 			children = (
 				C7FD93752D2AD58A0084DC9C /* MyAlarmViewController.swift */,
-				C7F951BD2D2A523500D07051 /* AlarmSettingViewController.swift */,
+				C7F951BD2D2A523500D07051 /* SetAlarmViewController.swift */,
 				C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */,
 				C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */,
 				C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */,
@@ -1103,6 +1109,9 @@
 				C7675F792D6981DD00F99294 /* UnivRecruitView.swift */,
 				C7675F7B2D6981ED00F99294 /* UnivView.swift */,
 				C7675F7D2D6981FF00F99294 /* EditUnivView.swift */,
+				C750C3912D70C56600BE14EF /* MyAlarmView.swift */,
+				C750C3932D70C56F00BE14EF /* SetAlarmView.swift */,
+				C750C3952D70C58300BE14EF /* EditAlarmView.swift */,
 				C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */,
 				C72CEED52D258CB500EED814 /* UnivStopView.swift */,
 				C75C0BE02D2D2A05000145F3 /* DeleteView.swift */,
@@ -1401,6 +1410,7 @@
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift in Sources */,
 				7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */,
 				C73032802D2974D100F717D0 /* EditUnivCalendarViewController.swift in Sources */,
+				C750C3942D70C57000BE14EF /* SetAlarmView.swift in Sources */,
 				7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */,
 				C73C5C462D5917C500091C5C /* MemberId.swift in Sources */,
 				417AADC42C652228002080E0 /* LoginModel.swift in Sources */,
@@ -1479,8 +1489,10 @@
 				41EE13402C54ABD70037EDD6 /* SignUpViewController.swift in Sources */,
 				7B3459FB2C688C6F008B711A /* BoardCommentedModel.swift in Sources */,
 				C74A15A62D5A4F4200A1698B /* UnivMethod.swift in Sources */,
+				C750C3922D70C56600BE14EF /* MyAlarmView.swift in Sources */,
 				41EE13442C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift in Sources */,
 				7B1C53562C69D79200C66D0D /* DirectoryFavoriteModel.swift in Sources */,
+				C750C3962D70C58300BE14EF /* EditAlarmView.swift in Sources */,
 				7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */,
 				C7675F782D6981BD00F99294 /* UnivSearchView.swift in Sources */,
 				412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */,
@@ -1572,7 +1584,7 @@
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
 				415BBC0B2C7343F8002768EE /* AuthInterceptor+.swift in Sources */,
-				C7F951BE2D2A523500D07051 /* AlarmSettingViewController.swift in Sources */,
+				C7F951BE2D2A523500D07051 /* SetAlarmViewController.swift in Sources */,
 				7B1C53602C6A680000C66D0D /* BoardNewQnAModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

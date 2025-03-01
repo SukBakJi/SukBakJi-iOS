@@ -140,11 +140,6 @@ extension UnivRecruitViewController {
             .subscribe(onNext: { univList in self.drop.dataSource = self.viewModel.recruitTypes.value })
             .disposed(by: disposeBag)
         
-        drop.selectionAction = { [weak self] index, item in
-            self?.univRecruitView.recruitTypeTextField.text = item
-            self?.updateButtonColor()
-        }
-        
         univRecruitView.nextButton.rx.tap
             .bind { [weak self] in self?.showLogoutAlert() }
             .disposed(by: disposeBag)
@@ -191,7 +186,7 @@ extension UnivRecruitViewController {
     
     private func showLogoutAlert() {
         AlertController(message: "대학교를 등록하시겠어요?", isCancel: true) { [weak self] in
-            self?.viewModel.loadUnivEnroll(
+            self?.viewModel.EnrollUniv(
                 memberId: self?.memberId,
                 univId: self?.univId,
                 season: self?.univRecruitView.recruitTitleLabel.text,

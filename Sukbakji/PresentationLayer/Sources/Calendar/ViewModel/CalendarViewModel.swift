@@ -14,7 +14,9 @@ class CalendarViewModel {
     private let disposeBag = DisposeBag()
     
     let univList = BehaviorRelay<[UnivList]>(value: [])
-    var selectUnivList = BehaviorRelay<UnivList?>(value: nil)
+    let selectUnivList = BehaviorRelay<UnivList?>(value: nil)
+    let selectedUnivList = BehaviorRelay<[UnivList]>(value: [])
+    let selectedUnivAll = BehaviorRelay<Bool>(value: false)
     
     let upComingSchedules = BehaviorRelay<[UpComingList]>(value: [])
     let dateSelectSchedules = BehaviorRelay<[DateSelectList]>(value: [])
@@ -95,5 +97,43 @@ class CalendarViewModel {
                 self.univDeleted.onNext(false)
             })
             .disposed(by: disposeBag)
+    }
+    
+    func deleteUnivCalendarAll() {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        
+        repository.fetchUnivDeleteAll(token: token)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.loadUnivList()
+            }, onFailure: { error in
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func editUnivCalendar(univId: Int?, season: String?, method: String?) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        
+        let params = [
+            "season": season!,
+            "method": method!
+        ] as [String : Any]
+        
+        repository.fetchUnivEdit(token: token, univId: univId!, parameters: params)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.loadUnivList()
+            }, onFailure: { error in
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func toggleSelectState() {
+        let newState = !selectedUnivAll.value
+        selectedUnivAll.accept(newState) // 상태 변경
     }
 }

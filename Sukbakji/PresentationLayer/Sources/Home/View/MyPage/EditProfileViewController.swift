@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Alamofire
 import Then
 import RxSwift
 import RxCocoa

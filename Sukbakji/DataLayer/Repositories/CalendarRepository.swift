@@ -58,4 +58,26 @@ class CalendarRepository {
         let url = APIConstants.calendarUniv.path
         return APIService.shared.deleteWithToken(of: APIResponse<UnivDeleteResult>.self, url: url, parameters: parameters, accessToken: token)
     }
+    
+    func fetchUnivDeleteAll(token: String) -> Single<APIResponse<String>> {
+        let url = APIConstants.calendarUnivAll.path
+        return APIService.shared.deleteWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)
+    }
+    
+    func fetchUnivDeleteSelected(token: String, univIds: [Int]) -> Single<APIResponse<String>> {
+        let url = APIConstants.calendarUnivSelected.path
+        let params = ["univIds": [univIds]]
+        return APIService.shared.deleteWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
+    }
+    
+    func fetchAlarmPatch(token: String, alarmId: Int, isOn: Bool) -> Single<APIResponse<AlarmPatch>> {
+        let url = isOn ? APIConstants.calendarAlarmOn.path : APIConstants.calendarAlarmOff.path
+        let params = ["alarmId": alarmId]
+        return APIService.shared.patchWithToken(of: APIResponse<AlarmPatch>.self, url: url, parameters: params, accessToken: token)
+    }
+    
+    func fetchAlarmEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<AlarmPost>> {
+        let url = APIConstants.calendarAlarm.path
+        return APIService.shared.postWithToken(of: APIResponse<AlarmPost>.self, url: url, parameters: parameters, accessToken: token)
+    }
 }
