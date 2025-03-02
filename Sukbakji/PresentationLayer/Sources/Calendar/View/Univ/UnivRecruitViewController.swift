@@ -13,6 +13,7 @@ import DropDown
 
 class UnivRecruitViewController: UIViewController {
     
+    private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     private let univRecruitView = UnivRecruitView()
     private let viewModel = UnivViewModel()
     private let disposeBag = DisposeBag()
@@ -20,7 +21,6 @@ class UnivRecruitViewController: UIViewController {
     
     private var univName: String?
     private var univId: Int?
-    private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     
     override func loadView() {
         self.view = univRecruitView

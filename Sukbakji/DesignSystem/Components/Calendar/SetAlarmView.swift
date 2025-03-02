@@ -9,16 +9,16 @@ import UIKit
 import SnapKit
 import Then
 
-class SetAlarmView: UIView {
+class SetAlarmView: UIView, dateProtocol {
+    
+    var alarmTimeViewHeightConstraint: Constraint?
     
     let pickerHour = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     var pickerMinute = [String]()
     let pickerDay = ["오전", "오후"]
-    
     var day: String = "오전"
     var hour: String = "8"
     var minute: String = "00"
-    
     var timeValue: String = "8:00"
     var dateValue: String = ""
     
@@ -312,6 +312,7 @@ class SetAlarmView: UIView {
             $0.trailing.equalToSuperview().inset(24)
             $0.height.width.equalTo(36)
         }
+        deleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
         
         warningImageView2.snp.makeConstraints {
             $0.top.equalTo(alarmNameTextField.snp.bottom).offset(6)
@@ -355,10 +356,12 @@ class SetAlarmView: UIView {
             $0.trailing.equalToSuperview().inset(24)
             $0.height.width.equalTo(36)
         }
+        dateButton.addTarget(self, action: #selector(date_Tapped), for: .touchUpInside)
         
         alarmTimeView.snp.makeConstraints {
             $0.top.equalTo(alarmDateView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
+            alarmTimeViewHeightConstraint = $0.height.equalTo(88).constraint
         }
         
         alarmTimeLabel.snp.makeConstraints {
@@ -380,6 +383,7 @@ class SetAlarmView: UIView {
             $0.height.equalTo(35)
             $0.width.equalTo(73)
         }
+        timeButton.addTarget(self, action: #selector(time_Tapped), for: .touchUpInside)
         
         pickerView.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(8)
@@ -422,6 +426,41 @@ class SetAlarmView: UIView {
         
         alarmDateTextField.text = formattedDate
         dateLabel.text = formattedDate
+    }
+    
+    func dateSend(data: String) {
+        alarmDateTextField.text = "\(data)"
+        dateLabel.text = "\(data)"
+        let replacedString = data.replacingOccurrences(of: " ", with: "")
+        let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
+        dateValue = reReplacedString.replacingOccurrences(of: "일", with: "")
+    }
+    
+    @objc func date_Tapped() {
+        let dateView = DateView()
+        dateView.delegate = self
+        
+        addSubview(dateView)
+        dateView.alpha = 0
+        dateView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            dateView.alpha = 1
+        }
+    }
+    
+    @objc private func time_Tapped() {
+        alarmTimeViewHeightConstraint?.update(offset: 268)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.pickerView.isHidden = false // 레이아웃 변경 애니메이션 적용
+        }
+    }
+    
+    @objc private func textDelete_Tapped() {
+        alarmNameTextField.text = ""
     }
 }
 

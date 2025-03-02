@@ -118,7 +118,7 @@ final class DeleteView: UIView {
         if alarmViewModel.selectAlarmItem == nil {
             viewModel.deleteUnivCalendar(memberId: univDelete?.memberId, univId: univDelete?.univId, season: univDelete?.season, method: univDelete?.method)
         } else {
-            
+            alarmViewModel.deleteAlarm(alarmId: alarmViewModel.selectAlarmItem?.alarmId)
         }
         UIView.animate(withDuration: 0.3, animations: {
            self.alpha = 0

@@ -16,8 +16,6 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     private let viewModel = UnivViewModel()
     private let disposeBag = DisposeBag()
     
-    private let selectedIndex = BehaviorRelay<IndexPath?>(value: nil)
-    
     private var searchTimer: Timer?
     private var univId: Int?
     
@@ -37,6 +35,7 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
         self.tabBarController?.tabBar.isHidden = true
     }
 }
+
 extension UnivSearchViewController {
     
     private func setUI() {

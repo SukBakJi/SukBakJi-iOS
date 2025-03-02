@@ -15,6 +15,9 @@ class EditUnivView: UIView {
         $0.font = UIFont(name: "Pretendard-Medium", size: 22)
         $0.textColor = .gray900
     }
+    let recruitDateView = UIView().then {
+        $0.backgroundColor = .clear
+    }
     let recruitDateLabel = UILabel().then {
         $0.text = "모집시기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
@@ -35,6 +38,9 @@ class EditUnivView: UIView {
         $0.text = "2025년 후기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
+    }
+    let recruitTypeView = UIView().then {
+        $0.backgroundColor = .clear
     }
     let recruitTypeLabel = UILabel().then {
         $0.text = "모집전형"
@@ -75,14 +81,19 @@ class EditUnivView: UIView {
         backgroundColor = .white
         
         addSubview(univLabel)
-        addSubview(recruitDateLabel)
-        addSubview(recruitFirstButton)
-        addSubview(recruitFirstLabel)
-        addSubview(recruitSecondButton)
-        addSubview(recruitSecondLabel)
-        addSubview(recruitTypeLabel)
-        addSubview(recruitTypeTextField)
-        addSubview(dropButton)
+        
+        addSubview(recruitDateView)
+        recruitDateView.addSubview(recruitDateLabel)
+        recruitDateView.addSubview(recruitFirstButton)
+        recruitDateView.addSubview(recruitFirstLabel)
+        recruitDateView.addSubview(recruitSecondButton)
+        recruitDateView.addSubview(recruitSecondLabel)
+        
+        addSubview(recruitTypeView)
+        recruitTypeView.addSubview(recruitTypeLabel)
+        recruitTypeView.addSubview(recruitTypeTextField)
+        recruitTypeView.addSubview(dropButton)
+        
         addSubview(editButton)
     }
     
@@ -93,8 +104,14 @@ class EditUnivView: UIView {
             $0.height.equalTo(26)
         }
         
+        recruitDateView.snp.makeConstraints {
+            $0.top.equalTo(univLabel.snp.top).offset(12)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(88)
+        }
+        
         recruitDateLabel.snp.makeConstraints {
-            $0.top.equalTo(univLabel.snp.bottom).offset(32)
+            $0.top.equalToSuperview().offset(12)
             $0.leading.equalToSuperview().offset(28)
             $0.height.equalTo(24)
         }
@@ -124,12 +141,18 @@ class EditUnivView: UIView {
             $0.height.equalTo(19)
         }
         
+        recruitTypeView.snp.makeConstraints {
+            $0.top.equalTo(recruitDateView.snp.top)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(100)
+        }
+        
         recruitTypeLabel.snp.makeConstraints {
-            $0.top.equalTo(recruitFirstButton.snp.bottom).offset(30)
+            $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(28)
             $0.height.equalTo(24)
         }
-        recruitTypeLabel.addImageAboveLabel(referenceView: recruitFirstButton, spacing: 30)
+        recruitTypeLabel.addImageAboveLabel(referenceView: recruitDateView, spacing: 20)
         
         recruitTypeTextField.snp.makeConstraints {
             $0.top.equalTo(recruitTypeLabel.snp.bottom).offset(12)
@@ -148,7 +171,7 @@ class EditUnivView: UIView {
         }
         
         editButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(112)
+            $0.top.equalTo(recruitTypeView.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(48)
         }

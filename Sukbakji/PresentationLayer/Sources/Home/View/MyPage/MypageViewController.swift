@@ -40,10 +40,10 @@ extension MypageViewController {
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         mypageView.navigationbarView.delegate = self
+        mypageView.myInfoEditButton.addTarget(self, action: #selector(edit_Tapped), for: .touchUpInside)
         mypageView.myInfoView.snp.makeConstraints { make in
             myInfoViewheightConstraint = make.height.equalTo(180).constraint
         }
-        mypageView.myInfoEditButton.addTarget(self, action: #selector(edit_Tapped), for: .touchUpInside)
     }
     
     private func setAPI() {

@@ -120,7 +120,7 @@
 		C7347E402C4D452E00688768 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E332C4D410200688768 /* Pretendard-Regular.otf */; };
 		C7347E412C4D453000688768 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */; };
 		C7347E422C4D453400688768 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E342C4D410300688768 /* Pretendard-Thin.otf */; };
-		C73483652D02A727004B6FA1 /* Dot+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483642D02A727004B6FA1 /* Dot+.swift */; };
+		C73483652D02A727004B6FA1 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483642D02A727004B6FA1 /* UILabel+.swift */; };
 		C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */; };
 		C734BD582D66DE1700AE81E9 /* EdifInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C734BD572D66DE1700AE81E9 /* EdifInfoView.swift */; };
 		C734BD5A2D66DE2000AE81E9 /* EditPWView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C734BD592D66DE2000AE81E9 /* EditPWView.swift */; };
@@ -175,7 +175,6 @@
 		C7980A862CEF838C00475D94 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A852CEF838C00475D94 /* UIViewController+.swift */; };
 		C7980A882CEF841E00475D94 /* APIAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A872CEF841E00475D94 /* APIAlertView.swift */; };
 		C7A23D8E2D0C1087008657B0 /* AlarmFBCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */; };
-		C7A434F92C62233200C47F5E /* HexColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A434F82C62233200C47F5E /* HexColor+.swift */; };
 		C7A777672D5079F700046367 /* ChatNavigaionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A777662D5079F700046367 /* ChatNavigaionBarView.swift */; };
 		C7A777692D507A1800046367 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A777682D507A1800046367 /* MessageInputView.swift */; };
 		C7AB97442D63AA1B00D2DBCA /* PWWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AB97432D63AA1B00D2DBCA /* PWWarning.swift */; };
@@ -333,7 +332,7 @@
 		C7347E372C4D410300688768 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		C7347E382C4D410300688768 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		C7347E392C4D410300688768 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
-		C73483642D02A727004B6FA1 /* Dot+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dot+.swift"; sourceTree = "<group>"; };
+		C73483642D02A727004B6FA1 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicViewModel.swift; sourceTree = "<group>"; };
 		C734BD572D66DE1700AE81E9 /* EdifInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdifInfoView.swift; sourceTree = "<group>"; };
 		C734BD592D66DE2000AE81E9 /* EditPWView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWView.swift; sourceTree = "<group>"; };
@@ -394,7 +393,6 @@
 		C7980A852CEF838C00475D94 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		C7980A872CEF841E00475D94 /* APIAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAlertView.swift; sourceTree = "<group>"; };
 		C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmFBCView.swift; sourceTree = "<group>"; };
-		C7A434F82C62233200C47F5E /* HexColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HexColor+.swift"; sourceTree = "<group>"; };
 		C7A777662D5079F700046367 /* ChatNavigaionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNavigaionBarView.swift; sourceTree = "<group>"; };
 		C7A777682D507A1800046367 /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		C7AB97432D63AA1B00D2DBCA /* PWWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWWarning.swift; sourceTree = "<group>"; };
@@ -485,14 +483,13 @@
 				417AADCA2C673B89002080E0 /* KeychainHelper+.swift */,
 				41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift */,
 				412BFBE52C52A5E30099E442 /* addBorder+.swift */,
-				C7A434F82C62233200C47F5E /* HexColor+.swift */,
-				C73483642D02A727004B6FA1 /* Dot+.swift */,
+				C780C5072D4143D800DC2031 /* Notification+.swift */,
 				C7980A852CEF838C00475D94 /* UIViewController+.swift */,
 				C7B7A1692D00360500D5CE14 /* UIButton+.swift */,
 				C7548F292D147CFF00BA687A /* UITextField+.swift */,
 				C7548F2B2D147D6400BA687A /* UITextView+.swift */,
+				C73483642D02A727004B6FA1 /* UILabel+.swift */,
 				C74C65DC2D4398C900526D23 /* UIColor+.swift */,
-				C780C5072D4143D800DC2031 /* Notification+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1573,7 +1570,7 @@
 				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
 				C7AB97442D63AA1B00D2DBCA /* PWWarning.swift in Sources */,
 				C757F8252D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift in Sources */,
-				C73483652D02A727004B6FA1 /* Dot+.swift in Sources */,
+				C73483652D02A727004B6FA1 /* UILabel+.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
@@ -1581,7 +1578,6 @@
 				7B1C53522C69D56A00C66D0D /* DirectoryLabReviewSearchModel.swift in Sources */,
 				C7FD93782D2AE5290084DC9C /* AlarmViewModel.swift in Sources */,
 				4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */,
-				C7A434F92C62233200C47F5E /* HexColor+.swift in Sources */,
 				C70C313C2D5CC2DC00F17D72 /* HomeReactor.swift in Sources */,
 				C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,

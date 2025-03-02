@@ -20,7 +20,7 @@ class MyAlarmTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: MyAlarmTableViewCell.self)
     
-    private let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     weak var delegate: MyAlarmTableViewCellDelegate?
     
     private let labelView = UIView().then {
@@ -57,6 +57,11 @@ class MyAlarmTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag() // DisposeBag 재설정
     }
     
     private func setUI() {

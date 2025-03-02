@@ -13,15 +13,15 @@ import RxCocoa
 
 protocol UnivCalendarTableViewCellDeleteDelegate: AnyObject {
     func univDelete_Tapped(cell: UnivCalendarTableViewCell)
+    func editButton_Tapped(cell: UnivCalendarTableViewCell)
 }
 
 class UnivCalendarTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: UnivCalendarTableViewCell.self)
     
-    weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
-    
     var disposeBag = DisposeBag()
+    weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
     
     let selectView = UIView().then {
         $0.backgroundColor = .gray200
@@ -56,16 +56,14 @@ class UnivCalendarTableViewCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-       super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setUI()
+        setupBinding()
     }
     
     required init?(coder: NSCoder) {
        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        
-       setUI()
     }
     
     override func prepareForReuse() {
@@ -106,7 +104,6 @@ class UnivCalendarTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview().inset(10)
             make.height.width.equalTo(24)
         }
-        deleteButton.addTarget(self, action: #selector(univDelete_Tapped), for: .touchUpInside)
         
         self.contentView.addSubview(recruitImageView)
         recruitImageView.snp.makeConstraints { make in
@@ -138,8 +135,18 @@ class UnivCalendarTableViewCell: UITableViewCell {
         }
     }
     
-    @objc func univDelete_Tapped(_ sender: UIButton) {
-        delegate?.univDelete_Tapped(cell: self)
+    private func setupBinding() {
+        deleteButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.univDelete_Tapped(cell: self) }
+            .disposed(by: disposeBag)
+        
+        editButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.editButton_Tapped(cell: self) }
+            .disposed(by: disposeBag)
     }
     
     func prepare(univList: UnivList) {

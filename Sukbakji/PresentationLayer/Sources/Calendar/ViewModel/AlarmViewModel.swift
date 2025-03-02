@@ -17,6 +17,7 @@ final class AlarmViewModel {
     var selectAlarmItem: AlarmList?
     
     let alarmEnrolled = PublishSubject<Bool>()
+    let alarmDeleted = PublishSubject<Bool>()
     
     func fetchMyAlarms() {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
@@ -37,7 +38,7 @@ final class AlarmViewModel {
         }
         
         let alarmItem = alarmItems.value[index]
-        repository.fetchAlarmPatch(token: token, alarmId: alarmItem.alarmId, isOn: isOn)
+        repository.fetchAlarmOnOff(token: token, alarmId: alarmItem.alarmId, isOn: isOn)
             .subscribe(onSuccess: { _ in
                 var updatedItems = self.alarmItems.value
                 updatedItems[index].onoff = isOn ? 1 : 0
@@ -69,6 +70,43 @@ final class AlarmViewModel {
                 NotificationCenter.default.post(name: .isAlarmComplete, object: nil)
             }, onFailure: { error in
                 self.alarmEnrolled.onNext(false)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func deleteAlarm(alarmId: Int?) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+
+        repository.fetchAlarmDelete(token: token, alarmId: alarmId!)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.alarmDeleted.onNext(true)
+            }, onFailure: { error in
+                self.alarmDeleted.onNext(false)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func editAlarm(memberId: Int?, alarmId: Int?, univName: String?, name: String?, date: String?, time: String?, onoff: Int?) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+            return
+        }
+        
+        let params = [
+            "memberId": memberId!,
+            "univName": univName!,
+            "name": name!,
+            "date": date!,
+            "time": time!,
+            "onoff": onoff!
+        ] as [String : Any]
+        
+        repository.fetchAlarmEdit(token: token, alarmId: alarmId!, parameters: params)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+            }, onFailure: { error in
             })
             .disposed(by: disposeBag)
     }
