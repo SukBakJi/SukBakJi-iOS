@@ -773,7 +773,6 @@
 		C71E14852C44CE4B003AFCB7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				C73828D12D61C32F007A21A0 /* Reactor */,
 				C74A15B32D5A560000A1698B /* View */,
 				C74A15B42D5A560700A1698B /* ViewModel */,
 			);
@@ -814,13 +813,6 @@
 				C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */,
 			);
 			path = Alarm;
-			sourceTree = "<group>";
-		};
-		C73828D12D61C32F007A21A0 /* Reactor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Reactor;
 			sourceTree = "<group>";
 		};
 		C74A159B2D5A4A6700A1698B /* View */ = {
