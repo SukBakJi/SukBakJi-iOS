@@ -317,7 +317,7 @@ struct DummyBoardDetail: View {
     }
 
     // ProfileGetDataManager 함수 정의
-    func ProfileGetDataManager(completion: @escaping (ProfileModel?) -> Void) {
+    func ProfileGetDataManager(completion: @escaping (PostProfileResponseDTO?) -> Void) {
         let url = APIConstants.userMypage.path
         let headers: HTTPHeaders = [
             "Accept": "*/*"
@@ -325,7 +325,7 @@ struct DummyBoardDetail: View {
 
         NetworkAuthManager.shared.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
             .validate(statusCode: 200..<500)
-            .responseDecodable(of: ProfileModel.self) { response in
+            .responseDecodable(of: PostProfileResponseDTO.self) { response in
                 switch response.result {
                 case .success(let profileModel):
                     completion(profileModel)

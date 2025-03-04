@@ -119,14 +119,14 @@ class ResearchTopicViewController: UIViewController {
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
         if validateField() {
-            let profileDataManager = ProfileDataManager()
+            let userDataManager = UserDataManager()
             
-            let input = ProfileAPIInput(name: userName,
+            let input = PostProfileRequestDTO(name: userName,
                                         degreeLevel: degreeLevel!,
                                         researchTopics: selectedTags)
             
             print("전송된 데이터: \(input)")
-            profileDataManager.ProfileDataManager(input) {
+            userDataManager.PostProfileDataManager(input) {
                 [weak self] ProfileModel in
                 guard let self = self else { return }
                 

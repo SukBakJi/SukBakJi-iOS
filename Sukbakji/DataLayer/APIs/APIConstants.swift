@@ -10,16 +10,20 @@ import Foundation
 enum APIConstants {
     case authSignUp
     case authRefreshToken
+    case authOauth2Login
     case authLogout
     case authLogin
-    case authKakao
     case authEmail
     
     
     case userMypage
     case userProfile
     case userPassword
+    case userEducationCertification
     
+    
+    case smsFindEmail
+    case smsCode
     
     case board
     
@@ -74,12 +78,12 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/auth/signup")
         case .authRefreshToken:
             return APIConstants.makeEndPoint("/auth/refresh-token")
+        case .authOauth2Login:
+            return APIConstants.makeEndPoint("/auth/oauth2/login")
         case .authLogout:
             return APIConstants.makeEndPoint("/auth/logout")
         case .authLogin:
             return APIConstants.makeEndPoint("/auth/login")
-        case .authKakao:
-            return APIConstants.makeEndPoint("/auth/kakao")
         case .authEmail:
             return APIConstants.makeEndPoint("/auth/email")
             
@@ -90,7 +94,13 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/user/profile")
         case .userPassword:
             return APIConstants.makeEndPoint("/user/password")
+        case .userEducationCertification:
+            return APIConstants.makeEndPoint("/user/education-certification")
             
+        case .smsFindEmail:
+            return APIConstants.makeEndPoint("/sms/find-email")
+        case .smsCode:
+            return APIConstants.makeEndPoint("/sms/code")
             
         case .board:
             return APIConstants.makeEndPoint("/board")
