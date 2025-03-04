@@ -17,10 +17,10 @@ class EditInfoViewController: UIViewController {
     private let viewModel = MyProfileViewModel()
     private let researchTopicViewModel = ResearchTopicViewModel()
     private let disposeBag = DisposeBag()
+    private let drop = DropDown()
     
     private var degree: String = ""
     private var topics: [String] = []
-    private let drop = DropDown()
     private let belongType = ["학사 재학 중", "학사 졸업", "석사 재학 중", "석사 졸업", "박사 재학 중", "박사 졸업"]
     private let degreeMapping: [String: String] = [
         "학사 재학 중": "BACHELORS_STUDYING",
@@ -45,7 +45,6 @@ class EditInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-        //        setProfileAPI()
     }
 }
 
@@ -57,6 +56,77 @@ extension EditInfoViewController {
         editInfoView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
         editInfoView.editButton.addTarget(self, action: #selector(updateProfile), for: .touchUpInside)
     }
+    
+    private func setDrop() {
+        initUI()
+        setDropdown()
+    }
+    
+    private func initUI() {
+        DropDown.appearance().textColor = .gray900 // 아이템 텍스트 색상
+        DropDown.appearance().selectedTextColor = .orange700 // 선택된 아이템 텍스트 색상
+        DropDown.appearance().backgroundColor = .gray50 // 아이템 팝업 배경 색상
+        DropDown.appearance().selectionBackgroundColor = .orange50 // 선택한 아이템 배경 색상
+        DropDown.appearance().setupCornerRadius(5)
+        DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
+        drop.dismissMode = .automatic // 팝업을 닫을 모드 설정
+        DropDown.appearance().textFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 12)
+    }
+    
+    private func setDropdown() {
+        configureDropdownAppearance()
+        configureDropdownSelection()
+    }
+
+    private func configureDropdownAppearance() {
+        drop.dataSource = belongType
+        drop.cellHeight = 44
+        drop.anchorView = self.editInfoView.belongTextField
+        drop.bottomOffset = CGPoint(x: 0, y: 45.5 + editInfoView.belongTextField.bounds.height)
+        drop.shadowColor = .clear
+        
+        drop.cellConfiguration = { _, item in
+            return "  \(item)" // 앞에 4칸 공백 추가
+        }
+        
+        drop.customCellConfiguration = { [weak self] index, item, cell in
+            self?.setupSeparator(for: cell, at: index)
+        }
+    }
+
+    private func configureDropdownSelection() {
+        drop.selectionAction = { [weak self] _, item in
+            self?.handleSelection(for: item)
+        }
+        
+        drop.cancelAction = { [weak self] in
+            self?.editInfoView.belongTextField.text = "학사 졸업 또는 재학"
+        }
+    }
+
+    private func handleSelection(for item: String) {
+        editInfoView.belongTextField.text = item
+        degree = degreeMapping[item] ?? "BACHELORS_STUDYING"
+    }
+
+    private func setupSeparator(for cell: DropDownCell, at index: Int) {
+        guard index != drop.dataSource.count - 1 else { return }
+        
+        let separator = UIView()
+        separator.backgroundColor = .gray300
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        cell.addSubview(separator)
+        
+        NSLayoutConstraint.activate([
+            separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+            separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+            separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
+            separator.heightAnchor.constraint(equalToConstant: 1.5)
+        ])
+    }
+}
+    
+extension EditInfoViewController {
     
     private func setAPI() {
         bindViewModel()
@@ -126,77 +196,6 @@ extension EditInfoViewController {
     
     @objc private func drop_Tapped() {
         drop.show()
-    }
-}
-    
-extension EditInfoViewController {
-    
-    private func setDrop() {
-        initUI()
-        setDropdown()
-    }
-    
-    private func initUI() {
-        DropDown.appearance().textColor = .gray900 // 아이템 텍스트 색상
-        DropDown.appearance().selectedTextColor = .orange700 // 선택된 아이템 텍스트 색상
-        DropDown.appearance().backgroundColor = .gray50 // 아이템 팝업 배경 색상
-        DropDown.appearance().selectionBackgroundColor = .orange50 // 선택한 아이템 배경 색상
-        DropDown.appearance().setupCornerRadius(5)
-        DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
-        drop.dismissMode = .automatic // 팝업을 닫을 모드 설정
-        DropDown.appearance().textFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 12)
-    }
-    
-    private func setDropdown() {
-        configureDropdownAppearance()
-        configureDropdownSelection()
-    }
-
-    private func configureDropdownAppearance() {
-        drop.dataSource = belongType
-        drop.cellHeight = 44
-        drop.anchorView = self.editInfoView.belongTextField
-        drop.bottomOffset = CGPoint(x: 0, y: 45.5 + editInfoView.belongTextField.bounds.height)
-        drop.shadowColor = .clear
-        
-        drop.cellConfiguration = { _, item in
-            return "  \(item)" // 앞에 4칸 공백 추가
-        }
-        
-        drop.customCellConfiguration = { [weak self] index, item, cell in
-            self?.setupSeparator(for: cell, at: index)
-        }
-    }
-
-    private func configureDropdownSelection() {
-        drop.selectionAction = { [weak self] _, item in
-            self?.handleSelection(for: item)
-        }
-        
-        drop.cancelAction = { [weak self] in
-            self?.editInfoView.belongTextField.text = "학사 졸업 또는 재학"
-        }
-    }
-
-    private func handleSelection(for item: String) {
-        editInfoView.belongTextField.text = item
-        degree = degreeMapping[item] ?? "BACHELORS_STUDYING"
-    }
-
-    private func setupSeparator(for cell: DropDownCell, at index: Int) {
-        guard index != drop.dataSource.count - 1 else { return }
-        
-        let separator = UIView()
-        separator.backgroundColor = .gray300
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        cell.addSubview(separator)
-        
-        NSLayoutConstraint.activate([
-            separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-            separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
-            separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 1.5)
-        ])
     }
 }
 

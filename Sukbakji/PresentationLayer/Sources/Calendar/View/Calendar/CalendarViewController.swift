@@ -18,7 +18,6 @@ class CalendarViewController: UIViewController {
     
     private var calendarHeightConstraint: Constraint?
     private var dateSelectHeightConstraint: Constraint?
-    
     private var selectedIndexPath: IndexPath?
     
     private var alarmFBCView = AlarmFBCView(target: UIViewController())
@@ -57,7 +56,6 @@ extension CalendarViewController {
         calendarView.calendarBackgroundView.snp.makeConstraints { make in
             calendarHeightConstraint = make.height.equalTo(300).constraint
         }
-
         calendarView.calendarDetailTableView.snp.makeConstraints { make in
             dateSelectHeightConstraint = make.height.equalTo(10).constraint
         }
@@ -98,7 +96,6 @@ extension CalendarViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.calendarView.alarmCompleteImageView.alpha = 1 // 나타나게
         }) { _ in
-            // 2초 후 사라지게
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.calendarView.alarmCompleteImageView.alpha = 0 // 투명하게

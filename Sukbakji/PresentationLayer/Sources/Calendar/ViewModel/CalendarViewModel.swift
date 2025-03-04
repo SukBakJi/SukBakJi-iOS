@@ -14,7 +14,7 @@ class CalendarViewModel {
     private let disposeBag = DisposeBag()
     
     let univList = BehaviorRelay<[UnivList]>(value: [])
-    let selectUnivList = BehaviorRelay<UnivList?>(value: nil)
+    var selectUnivList: UnivList?
     let selectedUnivList = BehaviorRelay<[UnivList]>(value: [])
     let selectedUnivAll = BehaviorRelay<Bool>(value: false)
     
@@ -92,7 +92,6 @@ class CalendarViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.univDeleted.onNext(true)
-                self.loadUnivList()
             }, onFailure: { error in
                 self.univDeleted.onNext(false)
             })
@@ -126,7 +125,6 @@ class CalendarViewModel {
         repository.fetchUnivEdit(token: token, univId: univId!, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
-                self.loadUnivList()
             }, onFailure: { error in
             })
             .disposed(by: disposeBag)

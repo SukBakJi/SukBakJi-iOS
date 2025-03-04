@@ -13,6 +13,7 @@ import DropDown
 
 class UnivRecruitViewController: UIViewController {
     
+    private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     private let univRecruitView = UnivRecruitView()
     private let viewModel = UnivViewModel()
     private let disposeBag = DisposeBag()
@@ -20,7 +21,6 @@ class UnivRecruitViewController: UIViewController {
     
     private var univName: String?
     private var univId: Int?
-    private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     
     override func loadView() {
         self.view = univRecruitView
@@ -58,8 +58,6 @@ extension UnivRecruitViewController {
         univRecruitView.dateSelectLabel.text = "\(univName ?? "") 일정을 선택해 주세요"
         
         univRecruitView.backButton.addTarget(self, action: #selector(clickXButton), for: .touchUpInside)
-        univRecruitView.recruitFirstButton.addTarget(self, action: #selector(firstButtonTapped), for: .touchUpInside)
-        univRecruitView.recruitSecondButton.addTarget(self, action: #selector(secondButtonTapped), for: .touchUpInside)
         univRecruitView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
     }
     
@@ -158,24 +156,6 @@ extension UnivRecruitViewController {
 }
 
 extension UnivRecruitViewController {
-    
-    @objc func firstButtonTapped() {
-        univRecruitView.recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
-        univRecruitView.recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
-        
-        univRecruitView.recruitFirstButton.isEnabled = false
-        univRecruitView.recruitSecondButton.isEnabled = true
-        univRecruitView.recruitTitleLabel.text = "2025년 전기"
-    }
-    
-    @objc func secondButtonTapped() {
-        univRecruitView.recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
-        univRecruitView.recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
-        
-        univRecruitView.recruitFirstButton.isEnabled = true
-        univRecruitView.recruitSecondButton.isEnabled = false
-        univRecruitView.recruitTitleLabel.text = "2025년 후기"
-    }
     
     private func updateButtonColor() {
         let isFormValid = !(univRecruitView.recruitTypeTextField.text?.isEmpty ?? true)

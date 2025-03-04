@@ -29,7 +29,6 @@ class EditProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        /// 탭 바 숨기기
         self.tabBarController?.tabBar.isHidden = true
     }
     

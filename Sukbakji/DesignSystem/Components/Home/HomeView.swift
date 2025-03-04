@@ -532,5 +532,10 @@ class HomeView: UIView {
             $0.trailing.equalToSuperview().inset(24)
             $0.height.width.equalTo(60)
         }
+        topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
+    }
+    
+    @objc func scrollToTop() {
+        scrollView.setContentOffset(CGPoint(x: 0, y: -scrollView.contentInset.top), animated: true)
     }
 }

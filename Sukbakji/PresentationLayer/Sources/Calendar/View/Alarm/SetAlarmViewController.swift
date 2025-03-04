@@ -11,10 +11,9 @@ import RxSwift
 import RxCocoa
 import DropDown
 
-class SetAlarmViewController: UIViewController, dateProtocol {
+class SetAlarmViewController: UIViewController {
     
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
-    
     private let setAlarmView = SetAlarmView()
     private let viewModel = AlarmViewModel()
     private let disposeBag = DisposeBag()
@@ -24,7 +23,10 @@ class SetAlarmViewController: UIViewController, dateProtocol {
     
     private var univViewHeightConstraint: Constraint?
     private var alarmNameViewHeightConstraint: Constraint?
-    private var alarmTimeViewHeightConstraint: Constraint?
+    
+    override func loadView() {
+        self.view = setAlarmView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,22 +53,14 @@ extension SetAlarmViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         setAlarmView.navigationbarView.delegate = self
-        
         setAlarmView.univView.snp.makeConstraints { make in
             univViewHeightConstraint = make.height.equalTo(99).constraint
         }
         setAlarmView.alarmNameView.snp.makeConstraints { make in
             alarmNameViewHeightConstraint = make.height.equalTo(99).constraint
         }
-        setAlarmView.alarmTimeView.snp.makeConstraints { make in
-            alarmNameViewHeightConstraint = make.height.equalTo(88).constraint
-        }
-        
         setAlarmView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
         setAlarmView.alarmNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
-        setAlarmView.deleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
-        setAlarmView.dateButton.addTarget(self, action: #selector(date_Tapped), for: .touchUpInside)
-        setAlarmView.timeButton.addTarget(self, action: #selector(time_Tapped), for: .touchUpInside)
         setAlarmView.setButton.addTarget(self, action: #selector(set_Tapped), for: .touchUpInside)
     }
     
@@ -102,7 +96,7 @@ extension SetAlarmViewController {
             separator.translatesAutoresizingMaskIntoConstraints = false
             cell.addSubview(separator)
 
-            let separatorHeight: CGFloat = 1.5 // 원하는 굵기 설정
+            let separatorHeight: CGFloat = 1.5
             
             NSLayoutConstraint.activate([
                 separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
@@ -132,14 +126,6 @@ extension SetAlarmViewController {
 
 extension SetAlarmViewController {
     
-    func dateSend(data: String) {
-        setAlarmView.alarmDateTextField.text = "\(data)"
-        setAlarmView.dateLabel.text = "\(data)"
-        let replacedString = data.replacingOccurrences(of: " ", with: "")
-        let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
-        setAlarmView.dateValue = reReplacedString.replacingOccurrences(of: "일", with: "")
-    }
-    
     @objc func textFieldEdited(_ textField: UITextField) {
         updateButtonColor()
         if setAlarmView.alarmNameTextField.text?.isEmpty == true {
@@ -158,9 +144,9 @@ extension SetAlarmViewController {
     }
     
     private func warningUnivName() {
+        univViewHeightConstraint?.update(offset: 115)
         setAlarmView.warningImageView.isHidden = false
         setAlarmView.warningUnivLabel.isHidden = false
-        univViewHeightConstraint?.update(inset: 115)
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
@@ -168,9 +154,9 @@ extension SetAlarmViewController {
     }
     
     private func deleteWarningUnivName() {
+        univViewHeightConstraint?.update(offset: 99)
         setAlarmView.warningImageView.isHidden = true
         setAlarmView.warningUnivLabel.isHidden = true
-        univViewHeightConstraint?.update(offset: 99)
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
@@ -178,14 +164,12 @@ extension SetAlarmViewController {
     }
     
     private func warningAlarmName() {
+        alarmNameViewHeightConstraint?.update(offset: 115)
         setAlarmView.warningImageView2.isHidden = false
         setAlarmView.warningAlarmNameLabel.isHidden = false
-        
         setAlarmView.alarmNameTextField.backgroundColor = .warning50
         setAlarmView.alarmNameTextField.setPlaceholderColor(.warning400)
         setAlarmView.alarmNameTextField.updateUnderlineColor(to: .warning400)
-        
-        alarmNameViewHeightConstraint?.update(inset: 115)
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
@@ -193,14 +177,12 @@ extension SetAlarmViewController {
     }
     
     private func deleteWarningAlarmName() {
+        alarmNameViewHeightConstraint?.update(offset: 99)
         setAlarmView.warningImageView2.isHidden = true
         setAlarmView.warningAlarmNameLabel.isHidden = true
-        
         setAlarmView.alarmNameTextField.backgroundColor = .gray50
         setAlarmView.alarmNameTextField.setPlaceholderColor(.gray500)
         setAlarmView.alarmNameTextField.updateUnderlineColor(to: .gray300)
-        
-        alarmNameViewHeightConstraint?.update(inset: 99)
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
@@ -208,50 +190,18 @@ extension SetAlarmViewController {
     }
     
     private func updateButtonColor() {
-        if (setAlarmView.univTextField.text?.isEmpty == false && setAlarmView.alarmNameTextField.text?.isEmpty == false) {
-            setAlarmView.setButton.isEnabled = true
-            setAlarmView.setButton.setBackgroundColor(.orange700, for:.normal)
-            setAlarmView.setButton.setTitleColor(.white, for: .normal)
-        } else {
-            setAlarmView.setButton.isEnabled = false
-            setAlarmView.setButton.setBackgroundColor(.gray200, for: .normal)
-            setAlarmView.setButton.setTitleColor(.gray500, for: .normal)
-        }
-    }
-    
-    @objc func date_Tapped() {
-        let dateView = DateView()
-        dateView.delegate = self
-        
-        self.view.addSubview(dateView)
-        dateView.alpha = 0
-        dateView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        UIView.animate(withDuration: 0.3) {
-            dateView.alpha = 1
-        }
-    }
-    
-    @objc private func time_Tapped() {
-        alarmTimeViewHeightConstraint?.update(offset: 266)
-        
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
-        }
+        let isFormValid = (setAlarmView.univTextField.text?.isEmpty == false && setAlarmView.alarmNameTextField.text?.isEmpty == false)
+        setAlarmView.setButton.isEnabled = isFormValid
+        setAlarmView.setButton.setBackgroundColor(isFormValid ? .orange700 : .gray200, for: .normal)
+        setAlarmView.setButton.setTitleColor(isFormValid ? .white : .gray500, for: .normal)
     }
     
     @objc private func set_Tapped() {
-        viewModel.loadAlarmEnroll(memberId: memberId, univName: setAlarmView.univTextField.text, name: setAlarmView.alarmNameTextField.text, date: setAlarmView.dateValue, time: setAlarmView.timeValue)
+        viewModel.loadAlarmEnroll(memberId: 3, univName: setAlarmView.univTextField.text, name: setAlarmView.alarmNameTextField.text, date: setAlarmView.dateValue, time: setAlarmView.timeValue)
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc private func drop_Tapped() {
         drop.show()
-    }
-    
-    @objc private func textDelete_Tapped() {
-        setAlarmView.alarmNameTextField.text = ""
     }
 }

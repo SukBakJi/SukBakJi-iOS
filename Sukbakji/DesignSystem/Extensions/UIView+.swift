@@ -2,7 +2,7 @@
 //  UIView+.swift
 //  Sukbakji
 //
-//  Created by 오현민 on 2/18/25.
+//  Created by jaegu park on 3/5/25.
 //
 
 import Foundation

@@ -1,6 +1,6 @@
 //
 //  UILabel+Extension.swift
-//  Dot+.swift
+//  UILabel+.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 12/6/24.

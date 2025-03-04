@@ -203,6 +203,7 @@ class EditPWView: UIView {
             $0.trailing.equalToSuperview().inset(28)
             $0.height.width.equalTo(25)
         }
+        deleteButton.addTarget(self, action: #selector(delete_CurrentPW), for: .touchUpInside)
         deleteButton.isHidden = true
         
         eyeButton.snp.makeConstraints {
@@ -210,6 +211,7 @@ class EditPWView: UIView {
             $0.trailing.equalTo(deleteButton.snp.leading)
             $0.height.width.equalTo(25)
         }
+        eyeButton.addTarget(self, action: #selector(show_currentPW), for: .touchUpInside)
         eyeButton.isHidden = true
         
         warningImageView.snp.makeConstraints {
@@ -253,6 +255,7 @@ class EditPWView: UIView {
             $0.trailing.equalToSuperview().inset(28)
             $0.height.width.equalTo(25)
         }
+        deleteButton2.addTarget(self, action: #selector(delete_NewPW), for: .touchUpInside)
         deleteButton2.isHidden = true
         
         eyeButton2.snp.makeConstraints {
@@ -260,6 +263,7 @@ class EditPWView: UIView {
             $0.trailing.equalTo(deleteButton2.snp.leading)
             $0.height.width.equalTo(25)
         }
+        eyeButton2.addTarget(self, action: #selector(show_newPW), for: .touchUpInside)
         eyeButton2.isHidden = true
         
         warningImageView2.snp.makeConstraints {
@@ -303,6 +307,7 @@ class EditPWView: UIView {
             $0.trailing.equalToSuperview().inset(28)
             $0.height.width.equalTo(25)
         }
+        deleteButton3.addTarget(self, action: #selector(delete_NewAgainPW), for: .touchUpInside)
         deleteButton3.isHidden = true
         
         eyeButton3.snp.makeConstraints {
@@ -310,6 +315,7 @@ class EditPWView: UIView {
             $0.trailing.equalTo(deleteButton3.snp.leading)
             $0.height.width.equalTo(25)
         }
+        eyeButton3.addTarget(self, action: #selector(show_newAgainPW), for: .touchUpInside)
         eyeButton3.isHidden = true
         
         warningImageView3.snp.makeConstraints {
@@ -337,5 +343,51 @@ class EditPWView: UIView {
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(48)
         }
+    }
+    
+    private func togglePasswordVisibility(for textField: UITextField, eyeButton: UIButton) {
+        textField.isSecureTextEntry.toggle()
+        eyeButton.isSelected.toggle()
+        
+        let eyeImageNormal: String
+        let eyeImageSelected: String
+        
+        if eyeButton.image(for: .normal) == UIImage(named: "Sukbakji_PW_View") || eyeButton.image(for: .selected) == UIImage(named: "Sukbakji_PW_noView"){
+            eyeImageNormal = "Sukbakji_PW_View"
+            eyeImageSelected = "Sukbakji_PW_noView"
+        } else {
+            eyeImageNormal = "Sukbakji_PWView"
+            eyeImageSelected = "Sukbakji_PWnoView"
+        }
+        
+        let newImage = eyeButton.isSelected ? eyeImageSelected : eyeImageNormal
+        eyeButton.setImage(UIImage(named: newImage), for: .normal)
+        eyeButton.setImage(UIImage(named: newImage), for: .selected)
+        
+        eyeButton.tintColor = .clear
+    }
+    
+    @objc private func show_currentPW() {
+        togglePasswordVisibility(for: currentPWTextField, eyeButton: eyeButton)
+    }
+    
+    @objc private func show_newPW() {
+        togglePasswordVisibility(for: newPWTextField, eyeButton: eyeButton2)
+    }
+    
+    @objc private func show_newAgainPW() {
+        togglePasswordVisibility(for: newPWAgainTextField, eyeButton: eyeButton3)
+    }
+    
+    @objc private func delete_CurrentPW() {
+        currentPWTextField.text = ""
+    }
+    
+    @objc private func delete_NewPW() {
+        newPWTextField.text = ""
+    }
+    
+    @objc private func delete_NewAgainPW() {
+        newPWAgainTextField.text = ""
     }
 }

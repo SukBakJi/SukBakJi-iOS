@@ -12,27 +12,27 @@ import RxSwift
 import RxCocoa
 
 protocol MyAlarmTableViewCellDelegate: AnyObject {
-    func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool)
-    func editButtonTapped(cell: MyAlarmTableViewCell)
+    func alarmSwitch_Toggled(cell: MyAlarmTableViewCell, isOn: Bool)
+    func editButton_Tapped(cell: MyAlarmTableViewCell)
 }
 
 class MyAlarmTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: MyAlarmTableViewCell.self)
     
-    private let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     weak var delegate: MyAlarmTableViewCellDelegate?
     
     private let labelView = UIView().then {
-        $0.backgroundColor = UIColor(red: 253/255, green: 233/255, blue: 230/255, alpha: 1.0)
+        $0.backgroundColor = .orange50
         $0.layer.cornerRadius = 6
     }
     private let univLabel = UILabel().then {
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = .orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let alarmNameLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
     private let alarmDateLabel = UILabel().then {
@@ -45,27 +45,39 @@ class MyAlarmTableViewCell: UITableViewCell {
         $0.setTitleColor(.gray400, for: .normal)
     }
     private let onOffSwitch = UISwitch().then {
-        $0.onTintColor = UIColor(named: "Coquelicot")
+        $0.onTintColor = .orange600
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setUI()
-        setupBinding()
     }
     
     required init?(coder: NSCoder) {
        fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        setUI()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag() // DisposeBag 재설정
+    }
+    
     private func setUI() {
-        self.contentView.backgroundColor = UIColor.orange50
+        self.contentView.backgroundColor = UIColor.gray50
         self.contentView.layer.cornerRadius = 12
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor
-        self.contentView.clipsToBounds = true
-        self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 24, bottom: 12, right: 24))
+        self.contentView.clipsToBounds = false
+        
+        self.contentView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().inset(24)
+            make.bottom.equalToSuperview().inset(12)
+        }
         
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints { make in
@@ -102,6 +114,7 @@ class MyAlarmTableViewCell: UITableViewCell {
             make.height.equalTo(20)
             make.width.equalTo(40)
         }
+        editButton.addTarget(self, action: #selector(editButton_Tapped), for: .touchUpInside)
         
         self.contentView.addSubview(onOffSwitch)
         onOffSwitch.snp.makeConstraints { make in
@@ -110,22 +123,15 @@ class MyAlarmTableViewCell: UITableViewCell {
             make.height.equalTo(31)
             make.width.equalTo(51)
         }
+        onOffSwitch.addTarget(self, action: #selector(alarmSwitch_Toggled), for: .valueChanged)
     }
     
-    private func setupBinding() {
-        onOffSwitch.rx.isOn
-            .subscribe(onNext: { [weak self] isOn in
-                guard let self = self else { return }
-                let toggledState = !isOn
-                self.delegate?.alarmSwitchToggled(cell: self, isOn: toggledState)
-            })
-            .disposed(by: disposeBag)
-        
-        editButton.rx.tap
-            .bind { [weak self] in 
-                guard let self = self else { return }
-                self.delegate?.editButtonTapped(cell: self) }
-            .disposed(by: disposeBag)
+    @objc private func editButton_Tapped() {
+        delegate?.editButton_Tapped(cell: self)
+    }
+    
+    @objc private func alarmSwitch_Toggled() {
+        delegate?.alarmSwitch_Toggled(cell: self, isOn: onOffSwitch.isOn)
     }
 
     func prepare(alarmList: AlarmList) {
