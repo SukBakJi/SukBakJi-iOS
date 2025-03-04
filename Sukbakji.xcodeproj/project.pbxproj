@@ -87,6 +87,9 @@
 		91F849112D65AF3C0048B41A /* TOSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F849102D65AF3C0048B41A /* TOSData.swift */; };
 		91FEEB762D71782C00D0502D /* FindEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB752D71782C00D0502D /* FindEmailView.swift */; };
 		91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB832D718DA600D0502D /* FindEmailViewController.swift */; };
+		91FEEB892D71A02800D0502D /* SmsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB882D71A02800D0502D /* SmsRequest.swift */; };
+		91FEEB8C2D71A03B00D0502D /* SmsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB8B2D71A03B00D0502D /* SmsResponse.swift */; };
+		91FEEB8E2D71A04400D0502D /* SmsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB8D2D71A04400D0502D /* SmsDataManager.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
 		C704BD882D2BBE9700954EAD /* EditMyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */; };
 		C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2802C633CDB00D6014B /* ChattingViewController.swift */; };
@@ -280,6 +283,9 @@
 		91F849102D65AF3C0048B41A /* TOSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSData.swift; sourceTree = "<group>"; };
 		91FEEB752D71782C00D0502D /* FindEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailView.swift; sourceTree = "<group>"; };
 		91FEEB832D718DA600D0502D /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
+		91FEEB882D71A02800D0502D /* SmsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmsRequest.swift; sourceTree = "<group>"; };
+		91FEEB8B2D71A03B00D0502D /* SmsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmsResponse.swift; sourceTree = "<group>"; };
+		91FEEB8D2D71A04400D0502D /* SmsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmsDataManager.swift; sourceTree = "<group>"; };
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyAlarmViewController.swift; sourceTree = "<group>"; };
@@ -423,6 +429,7 @@
 			children = (
 				91FEEB862D719DFF00D0502D /* ViewControllers */,
 				91FEEB872D719E1A00D0502D /* Views */,
+				91FEEB8A2D71A03100D0502D /* SmsAPI */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -694,6 +701,16 @@
 				91FEEB752D71782C00D0502D /* FindEmailView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		91FEEB8A2D71A03100D0502D /* SmsAPI */ = {
+			isa = PBXGroup;
+			children = (
+				91FEEB882D71A02800D0502D /* SmsRequest.swift */,
+				91FEEB8B2D71A03B00D0502D /* SmsResponse.swift */,
+				91FEEB8D2D71A04400D0502D /* SmsDataManager.swift */,
+			);
+			path = SmsAPI;
 			sourceTree = "<group>";
 		};
 		A7354ED8CCE70303B1993A7F /* Pods */ = {
@@ -1242,6 +1259,7 @@
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
 				C74A15A22D5A4C9200A1698B /* UpComing.swift in Sources */,
 				C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */,
+				91FEEB892D71A02800D0502D /* SmsRequest.swift in Sources */,
 				C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */,
 				C7B7A16A2D00360500D5CE14 /* UIButton+Extension.swift in Sources */,
 				417AADCD2C673E28002080E0 /* AuthRequest.swift in Sources */,
@@ -1256,6 +1274,7 @@
 				7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */,
 				C7B7A1682D001D8200D5CE14 /* NavigationBarView.swift in Sources */,
 				C7548F2A2D147CFF00BA687A /* UITextField+Extension.swift in Sources */,
+				91FEEB8E2D71A04400D0502D /* SmsDataManager.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				417AADCF2C673E32002080E0 /* AuthResponse.swift in Sources */,
 				C73555072D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift in Sources */,
@@ -1272,6 +1291,7 @@
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,
+				91FEEB8C2D71A03B00D0502D /* SmsResponse.swift in Sources */,
 				C74A15982D5A477F00A1698B /* FavoriteLab.swift in Sources */,
 				C780C5082D4143D800DC2031 /* Notification+Extension.swift in Sources */,
 				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,
