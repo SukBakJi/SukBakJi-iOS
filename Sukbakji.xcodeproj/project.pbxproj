@@ -83,6 +83,10 @@
 		7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */; };
 		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
 		910CC1BF2D76C55500E6B58E /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC1BE2D76C55500E6B58E /* UIView+.swift */; };
+		910CC2312D76ECAC00E6B58E /* smallTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2302D76ECAC00E6B58E /* smallTextButton.swift */; };
+		910CC2342D76ECC100E6B58E /* SocialAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2332D76ECC100E6B58E /* SocialAuthButton.swift */; };
+		910CC2362D76ECEE00E6B58E /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2352D76ECEE00E6B58E /* UIStackView+.swift */; };
+		910CC2382D76ED0400E6B58E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2372D76ED0400E6B58E /* LoginView.swift */; };
 		91F849112D65AF3C0048B41A /* TOSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F849102D65AF3C0048B41A /* TOSData.swift */; };
 		91FEEB762D71782C00D0502D /* FindEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB752D71782C00D0502D /* FindEmailView.swift */; };
 		91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB832D718DA600D0502D /* FindEmailViewController.swift */; };
@@ -307,6 +311,10 @@
 		7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabDetailViewController.swift; sourceTree = "<group>"; };
 		7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListGetModel.swift; sourceTree = "<group>"; };
 		910CC1BE2D76C55500E6B58E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		910CC2302D76ECAC00E6B58E /* smallTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smallTextButton.swift; sourceTree = "<group>"; };
+		910CC2332D76ECC100E6B58E /* SocialAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthButton.swift; sourceTree = "<group>"; };
+		910CC2352D76ECEE00E6B58E /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		910CC2372D76ED0400E6B58E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		91F849102D65AF3C0048B41A /* TOSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSData.swift; sourceTree = "<group>"; };
 		91FEEB752D71782C00D0502D /* FindEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailView.swift; sourceTree = "<group>"; };
 		91FEEB832D718DA600D0502D /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
@@ -508,6 +516,7 @@
 				C74C65DC2D4398C900526D23 /* UIColor+.swift */,
 				C780C5072D4143D800DC2031 /* Notification+.swift */,
 				910CC1BE2D76C55500E6B58E /* UIView+.swift */,
+				910CC2352D76ECEE00E6B58E /* UIStackView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -728,6 +737,15 @@
 			path = BoardModel;
 			sourceTree = "<group>";
 		};
+		910CC2322D76ECAF00E6B58E /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				910CC2302D76ECAC00E6B58E /* smallTextButton.swift */,
+				910CC2332D76ECC100E6B58E /* SocialAuthButton.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		91FEEB862D719DFF00D0502D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +760,7 @@
 			isa = PBXGroup;
 			children = (
 				91FEEB752D71782C00D0502D /* FindEmailView.swift */,
+				910CC2372D76ED0400E6B58E /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -960,6 +979,7 @@
 				C7C379CD2D65873C00C224A1 /* Home */,
 				C7C379CB2D6586B600C224A1 /* Calendar */,
 				C7C379CE2D65874D00C224A1 /* Chat */,
+				910CC2322D76ECAF00E6B58E /* Login */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1453,6 +1473,7 @@
 			files = (
 				C734BD5C2D66EA9300AE81E9 /* MypageViewController.swift in Sources */,
 				C734BD5B2D66EA8800AE81E9 /* ColorConstants.swift in Sources */,
+				910CC2312D76ECAC00E6B58E /* smallTextButton.swift in Sources */,
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
 				C734BD5A2D66DE2000AE81E9 /* EditPWView.swift in Sources */,
 				C78953122D636AB700E5041C /* APIService.swift in Sources */,
@@ -1480,6 +1501,7 @@
 				C7EA8CB12D689AB600B25FBC /* CalendarViewModel.swift in Sources */,
 				4168E8512C690BAC00A0F292 /* UserRequest.swift in Sources */,
 				C70BBC192D64EAA7002C26E6 /* MyProfileViewModel.swift in Sources */,
+				910CC2382D76ED0400E6B58E /* LoginView.swift in Sources */,
 				7B3459F92C688C2D008B711A /* BoardWrittenModel.swift in Sources */,
 				C74A15A02D5A4C7B00A1698B /* DateSelect.swift in Sources */,
 				7B0E5D262C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift in Sources */,
@@ -1556,6 +1578,7 @@
 				C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */,
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
 				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,
+				910CC2342D76ECC100E6B58E /* SocialAuthButton.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */,
 				C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */,
@@ -1623,6 +1646,7 @@
 				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
 				C7AB97442D63AA1B00D2DBCA /* PWWarning.swift in Sources */,
 				C757F8252D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift in Sources */,
+				910CC2362D76ECEE00E6B58E /* UIStackView+.swift in Sources */,
 				C73483652D02A727004B6FA1 /* Dot+.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */,
