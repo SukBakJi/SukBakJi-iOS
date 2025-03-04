@@ -51,8 +51,6 @@ extension EditUnivCalendarViewController {
     }
     
     private func setUI() {
-        editUnivView.recruitFirstButton.addTarget(self, action: #selector(firstButtonTapped), for: .touchUpInside)
-        editUnivView.recruitSecondButton.addTarget(self, action: #selector(secondButtonTapped), for: .touchUpInside)
         editUnivView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
     }
     
@@ -164,22 +162,6 @@ extension EditUnivCalendarViewController {
             self.updateButtonColor()
         }
         return true
-    }
-    
-    @objc func firstButtonTapped() {
-        editUnivView.recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
-        editUnivView.recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
-                
-        editUnivView.recruitFirstButton.isEnabled = false
-        editUnivView.recruitSecondButton.isEnabled = true
-    }
-    
-    @objc func secondButtonTapped() {
-        editUnivView.recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
-        editUnivView.recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
-                
-        editUnivView.recruitFirstButton.isEnabled = true
-        editUnivView.recruitSecondButton.isEnabled = false
     }
     
     @objc private func drop_Tapped() {

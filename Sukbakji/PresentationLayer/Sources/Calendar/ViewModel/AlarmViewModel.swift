@@ -13,8 +13,10 @@ final class AlarmViewModel {
     private let repository = CalendarRepository()
     private let disposeBag = DisposeBag()
     
-    var alarmItems: BehaviorRelay<[AlarmList]> = BehaviorRelay(value: [])
+    let alarmItems = BehaviorRelay<[AlarmList]>(value: [])
     var selectAlarmItem: AlarmList?
+    
+    var patchAlarmItem: AlarmPatch?
     
     let alarmEnrolled = PublishSubject<Bool>()
     let alarmDeleted = PublishSubject<Bool>()
@@ -25,9 +27,11 @@ final class AlarmViewModel {
         }
         
         repository.fetchAlarmList(token: token)
-            .map { $0.result.alarmList }
-            .subscribe(onSuccess: { [weak self] alarm in
-                self?.alarmItems.accept(alarm)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.alarmItems.accept(response.result.alarmList)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -37,14 +41,15 @@ final class AlarmViewModel {
             return
         }
         
-        let alarmItem = alarmItems.value[index]
-        repository.fetchAlarmOnOff(token: token, alarmId: alarmItem.alarmId, isOn: isOn)
-            .subscribe(onSuccess: { _ in
+        let alarmItem = selectAlarmItem
+        repository.fetchAlarmOnOff(token: token, alarmId: alarmItem?.alarmId ?? 0, isOn: isOn)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
                 var updatedItems = self.alarmItems.value
                 updatedItems[index].onoff = isOn ? 1 : 0
                 self.alarmItems.accept(updatedItems)
             }, onFailure: { error in
-                print("❌ 오류:", error.localizedDescription)
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -70,6 +75,7 @@ final class AlarmViewModel {
                 NotificationCenter.default.post(name: .isAlarmComplete, object: nil)
             }, onFailure: { error in
                 self.alarmEnrolled.onNext(false)
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

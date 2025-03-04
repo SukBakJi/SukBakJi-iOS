@@ -99,7 +99,7 @@ class EditUnivView: UIView {
     
     private func setupConstraints() {
         univLabel.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(28)
+            $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(58)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(26)
         }
@@ -122,6 +122,7 @@ class EditUnivView: UIView {
             $0.leading.equalToSuperview().offset(22)
             $0.height.width.equalTo(24)
         }
+        recruitFirstButton.addTarget(self, action: #selector(firstButtonTapped), for: .touchUpInside)
         
         recruitFirstLabel.snp.makeConstraints {
             $0.centerY.equalTo(recruitFirstButton)
@@ -134,6 +135,7 @@ class EditUnivView: UIView {
             $0.leading.equalTo(recruitFirstLabel.snp.trailing).offset(18)
             $0.height.width.equalTo(24)
         }
+        recruitSecondButton.addTarget(self, action: #selector(secondButtonTapped), for: .touchUpInside)
         
         recruitSecondLabel.snp.makeConstraints {
             $0.centerY.equalTo(recruitFirstButton)
@@ -176,5 +178,21 @@ class EditUnivView: UIView {
             $0.height.equalTo(48)
         }
         editButton.isEnabled = false
+    }
+    
+    @objc func firstButtonTapped() {
+        recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
+        recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
+                
+        recruitFirstButton.isEnabled = false
+        recruitSecondButton.isEnabled = true
+    }
+    
+    @objc func secondButtonTapped() {
+        recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
+        recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
+                
+        recruitFirstButton.isEnabled = true
+        recruitSecondButton.isEnabled = false
     }
 }

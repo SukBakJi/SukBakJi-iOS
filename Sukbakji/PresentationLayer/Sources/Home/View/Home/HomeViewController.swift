@@ -41,8 +41,8 @@ extension HomeViewController {
     
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
-        homeView.topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
         homeView.adCollectionView.delegate = self
         homeView.adCollectionView.dataSource = self
     }

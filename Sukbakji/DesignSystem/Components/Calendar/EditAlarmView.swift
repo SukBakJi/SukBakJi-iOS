@@ -149,11 +149,11 @@ class EditAlarmView: UIView, dateProtocol {
         univView.addSubview(dropButton)
         
         addSubview(alarmNameView)
-        univView.addSubview(alarmNameLabel)
-        univView.addSubview(alarmNameTextField)
-        univView.addSubview(alarmNameDeleteButton)
-        univView.addSubview(warningImageView)
-        univView.addSubview(warningAlarmNameLabel)
+        alarmNameView.addSubview(alarmNameLabel)
+        alarmNameView.addSubview(alarmNameTextField)
+        alarmNameView.addSubview(alarmNameDeleteButton)
+        alarmNameView.addSubview(warningImageView)
+        alarmNameView.addSubview(warningAlarmNameLabel)
         
         addSubview(alarmDateView)
         alarmDateView.addSubview(alarmDateLabel)
@@ -165,7 +165,7 @@ class EditAlarmView: UIView, dateProtocol {
         alarmTimeView.addSubview(dateLabel)
         alarmTimeView.addSubview(timeButton)
         alarmTimeView.addSubview(pickerView)
-        alarmTimeView.addSubview(alarmPickerView)
+        pickerView.addSubview(alarmPickerView)
         
         addSubview(saveButton)
         addSubview(deleteButton)
@@ -173,13 +173,13 @@ class EditAlarmView: UIView, dateProtocol {
     
     private func setupConstraints() {
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(28)
+            $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(58)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(26)
         }
         
         univView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.top).offset(12)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
         }
@@ -208,7 +208,7 @@ class EditAlarmView: UIView, dateProtocol {
         }
         
         alarmNameView.snp.makeConstraints {
-            $0.top.equalTo(univView.snp.top)
+            $0.top.equalTo(univView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -240,15 +240,17 @@ class EditAlarmView: UIView, dateProtocol {
             $0.leading.equalToSuperview().offset(28)
             $0.height.width.equalTo(12)
         }
+        warningImageView.isHidden = true
         
         warningAlarmNameLabel.snp.makeConstraints {
             $0.centerY.equalTo(warningImageView)
             $0.leading.equalTo(warningImageView.snp.trailing).offset(4)
             $0.height.equalTo(12)
         }
+        warningAlarmNameLabel.isHidden = true
         
         alarmDateView.snp.makeConstraints {
-            $0.top.equalTo(alarmNameView.snp.top)
+            $0.top.equalTo(alarmNameView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
         }
@@ -278,7 +280,7 @@ class EditAlarmView: UIView, dateProtocol {
         dateButton.addTarget(self, action: #selector(date_Tapped), for: .touchUpInside)
         
         alarmTimeView.snp.makeConstraints {
-            $0.top.equalTo(alarmDateView.snp.top)
+            $0.top.equalTo(alarmDateView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             alarmTimeViewHeightConstraint = $0.height.equalTo(103).constraint
         }
@@ -307,8 +309,9 @@ class EditAlarmView: UIView, dateProtocol {
         pickerView.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(180)
+            $0.height.equalTo(130)
         }
+        pickerView.isHidden = true
         
         alarmPickerView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
@@ -381,10 +384,10 @@ class EditAlarmView: UIView, dateProtocol {
     }
     
     @objc private func time_Tapped() {
-        alarmTimeViewHeightConstraint?.update(offset: 283)
+        alarmTimeViewHeightConstraint?.update(offset: 233)
         
         UIView.animate(withDuration: 0.3) {
-            self.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
+            self.pickerView.isHidden = false
         }
     }
 }

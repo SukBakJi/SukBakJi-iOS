@@ -59,7 +59,6 @@ class UnivCalendarTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setUI()
-        setupBinding()
     }
     
     required init?(coder: NSCoder) {
@@ -104,6 +103,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview().inset(10)
             make.height.width.equalTo(24)
         }
+        deleteButton.addTarget(self, action: #selector(univDelete_Tapped), for: .touchUpInside)
         
         self.contentView.addSubview(recruitImageView)
         recruitImageView.snp.makeConstraints { make in
@@ -133,20 +133,15 @@ class UnivCalendarTableViewCell: UITableViewCell {
             make.height.equalTo(24)
             make.width.equalTo(32)
         }
+        editButton.addTarget(self, action: #selector(editButton_Tapped), for: .touchUpInside)
     }
     
-    private func setupBinding() {
-        deleteButton.rx.tap
-            .bind { [weak self] in
-                guard let self = self else { return }
-                self.delegate?.univDelete_Tapped(cell: self) }
-            .disposed(by: disposeBag)
-        
-        editButton.rx.tap
-            .bind { [weak self] in
-                guard let self = self else { return }
-                self.delegate?.editButton_Tapped(cell: self) }
-            .disposed(by: disposeBag)
+    @objc private func univDelete_Tapped() {
+        delegate?.univDelete_Tapped(cell: self)
+    }
+    
+    @objc private func editButton_Tapped() {
+        delegate?.editButton_Tapped(cell: self)
     }
     
     func prepare(univList: UnivList) {

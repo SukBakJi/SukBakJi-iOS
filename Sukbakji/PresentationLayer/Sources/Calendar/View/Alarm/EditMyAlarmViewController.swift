@@ -152,6 +152,8 @@ extension EditMyAlarmViewController {
     
     private func warningAlarmName() {
         alarmNameViewHeightConstraint?.update(offset: 116)
+        editAlarmView.warningImageView.isHidden = false
+        editAlarmView.warningAlarmNameLabel.isHidden = false
         
         editAlarmView.alarmNameTextField.backgroundColor = .warning50
         editAlarmView.alarmNameTextField.setPlaceholderColor(.warning400)
@@ -164,6 +166,8 @@ extension EditMyAlarmViewController {
     
     private func deleteWarningAlarmName() {
         alarmNameViewHeightConstraint?.update(offset: 100)
+        editAlarmView.warningImageView.isHidden = true
+        editAlarmView.warningAlarmNameLabel.isHidden = true
         
         editAlarmView.alarmNameTextField.backgroundColor = .gray50
         editAlarmView.alarmNameTextField.setPlaceholderColor(.gray500)

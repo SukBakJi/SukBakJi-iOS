@@ -49,24 +49,18 @@ extension EditPWViewController {
         }
         editPWView.currentPWTextField.addTarget(self, action: #selector(currentPWRegex), for: .editingChanged)
         editPWView.currentPWTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
-        editPWView.deleteButton.addTarget(self, action: #selector(delete_CurrentPW), for: .touchUpInside)
-        editPWView.eyeButton.addTarget(self, action: #selector(show_currentPW), for: .touchUpInside)
         
         editPWView.newPWView.snp.makeConstraints { make in
             newPWViewheightConstraint = make.height.equalTo(99).constraint
         }
         editPWView.newPWTextField.addTarget(self, action: #selector(newPWRegex(_:)), for: .editingChanged)
         editPWView.newPWTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
-        editPWView.deleteButton2.addTarget(self, action: #selector(delete_NewPW), for: .touchUpInside)
-        editPWView.eyeButton2.addTarget(self, action: #selector(show_newPW), for: .touchUpInside)
     
         editPWView.newPWAgainView.snp.makeConstraints { make in
             newPWAgainViewheightConstraint = make.height.equalTo(99).constraint
         }
         editPWView.newPWAgainTextField.addTarget(self, action: #selector(newPWAgainRegex), for: .editingChanged)
         editPWView.newPWAgainTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
-        editPWView.deleteButton3.addTarget(self, action: #selector(delete_NewAgainPW), for: .touchUpInside)
-        editPWView.eyeButton3.addTarget(self, action: #selector(show_newAgainPW), for: .touchUpInside)
     }
 
     private func getUserPW() {
@@ -149,28 +143,6 @@ extension EditPWViewController {
         )
         updatePasswordFieldAppearance(isValid: isValid, components: components, heightConstraint: newPWAgainViewheightConstraint)
     }
-    
-    private func togglePasswordVisibility(for textField: UITextField, eyeButton: UIButton) {
-        textField.isSecureTextEntry.toggle()
-        eyeButton.isSelected.toggle()
-        
-        let eyeImageNormal: String
-        let eyeImageSelected: String
-        
-        if eyeButton.image(for: .normal) == UIImage(named: "Sukbakji_PW_View") || eyeButton.image(for: .selected) == UIImage(named: "Sukbakji_PW_noView"){
-            eyeImageNormal = "Sukbakji_PW_View"
-            eyeImageSelected = "Sukbakji_PW_noView"
-        } else {
-            eyeImageNormal = "Sukbakji_PWView"
-            eyeImageSelected = "Sukbakji_PWnoView"
-        }
-        
-        let newImage = eyeButton.isSelected ? eyeImageSelected : eyeImageNormal
-        eyeButton.setImage(UIImage(named: newImage), for: .normal)
-        eyeButton.setImage(UIImage(named: newImage), for: .selected)
-        
-        eyeButton.tintColor = .clear
-    }
 }
 
 extension EditPWViewController {
@@ -220,30 +192,6 @@ extension EditPWViewController {
     private func navigateToLogin() {
         let loginVC = UINavigationController(rootViewController: LoginViewController())
         SceneDelegate().setRootViewController(loginVC)
-    }
-    
-    @objc private func show_currentPW() {
-        togglePasswordVisibility(for: editPWView.currentPWTextField, eyeButton: editPWView.eyeButton)
-    }
-    
-    @objc private func show_newPW() {
-        togglePasswordVisibility(for: editPWView.newPWTextField, eyeButton: editPWView.eyeButton2)
-    }
-    
-    @objc private func show_newAgainPW() {
-        togglePasswordVisibility(for: editPWView.newPWAgainTextField, eyeButton: editPWView.eyeButton3)
-    }
-    
-    @objc private func delete_CurrentPW() {
-        editPWView.currentPWTextField.text = ""
-    }
-    
-    @objc private func delete_NewPW() {
-        editPWView.newPWTextField.text = ""
-    }
-    
-    @objc private func delete_NewAgainPW() {
-        editPWView.newPWAgainTextField.text = ""
     }
     
     @objc func textFieldEdited(_ textField: UITextField) {

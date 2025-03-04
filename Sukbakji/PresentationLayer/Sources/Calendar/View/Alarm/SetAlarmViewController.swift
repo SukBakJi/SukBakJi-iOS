@@ -190,14 +190,14 @@ extension SetAlarmViewController {
     }
     
     private func updateButtonColor() {
-        let isFormValid = !(setAlarmView.univTextField.text?.isEmpty == false && setAlarmView.alarmNameTextField.text?.isEmpty == false)
+        let isFormValid = (setAlarmView.univTextField.text?.isEmpty == false && setAlarmView.alarmNameTextField.text?.isEmpty == false)
         setAlarmView.setButton.isEnabled = isFormValid
         setAlarmView.setButton.setBackgroundColor(isFormValid ? .orange700 : .gray200, for: .normal)
         setAlarmView.setButton.setTitleColor(isFormValid ? .white : .gray500, for: .normal)
     }
     
     @objc private func set_Tapped() {
-        viewModel.loadAlarmEnroll(memberId: memberId, univName: setAlarmView.univTextField.text, name: setAlarmView.alarmNameTextField.text, date: setAlarmView.dateValue, time: setAlarmView.timeValue)
+        viewModel.loadAlarmEnroll(memberId: 3, univName: setAlarmView.univTextField.text, name: setAlarmView.alarmNameTextField.text, date: setAlarmView.dateValue, time: setAlarmView.timeValue)
         self.navigationController?.popViewController(animated: true)
     }
     

@@ -61,16 +61,17 @@ extension MyAlarmViewController {
             .disposed(by: disposeBag)
     }
     
-    func editButtonTapped(cell: MyAlarmTableViewCell) {
+    func editButton_Tapped(cell: MyAlarmTableViewCell) {
         guard let indexPath = myAlarmView.myAlarmTableView.indexPath(for: cell) else { return }
         self.viewModel.selectAlarmItem = viewModel.alarmItems.value[indexPath.row]
         let viewController = EditMyAlarmViewController(alarmViewModel: self.viewModel)
-        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 15, isPannedable: true)
+        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 700, bottomSheetPanMinTopConstant: 15, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
     }
     
-    func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool) {
+    func alarmSwitch_Toggled(cell: MyAlarmTableViewCell, isOn: Bool) {
         guard let indexPath = myAlarmView.myAlarmTableView.indexPath(for: cell) else { return }
+        self.viewModel.selectAlarmItem = viewModel.alarmItems.value[indexPath.row]
         viewModel.toggleAlarm(at: indexPath.row, isOn: isOn)
     }
     
