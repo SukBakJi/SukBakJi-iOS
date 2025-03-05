@@ -107,6 +107,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        KeychainHelper.standard.delete(service: "access-token", account: "user")
+        KeychainHelper.standard.delete(service: "refresh-token", account: "user")
         
         setupViews()
         setupLayout()
@@ -273,7 +275,7 @@ class LoginViewController: UIViewController {
     // MARK: - addView
     func setupViews() {
         
-        if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
+        if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user") {
             print("자동 로그인 활성화: \(accessToken)")
             let tabBarVC = MainTabViewController()
             self.navigationController?.pushViewController(tabBarVC, animated: true)

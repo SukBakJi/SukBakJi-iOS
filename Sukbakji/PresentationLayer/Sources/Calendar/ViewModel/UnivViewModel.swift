@@ -22,7 +22,7 @@ final class UnivViewModel {
     let univEnrolled = PublishSubject<Bool>()
     
     func loadUnivSearch(keyword: String) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -39,7 +39,7 @@ final class UnivViewModel {
     }
     
     func loadUnivMethod(univId: Int) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -52,7 +52,7 @@ final class UnivViewModel {
     }
     
     func EnrollUniv(memberId: Int?, univId: Int?, season: String?, method: String?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         

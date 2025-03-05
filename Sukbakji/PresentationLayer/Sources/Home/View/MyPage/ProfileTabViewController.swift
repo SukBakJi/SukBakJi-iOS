@@ -118,7 +118,7 @@ class ProfileTabViewController: TabmanViewController {
 extension ProfileTabViewController {
     
     private func getUserPW() {
-        if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
+        if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user") {
             userPW = retrievedPW
         } else {
             print("Failed to retrieve password.")

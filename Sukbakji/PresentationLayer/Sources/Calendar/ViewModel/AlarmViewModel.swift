@@ -22,7 +22,7 @@ final class AlarmViewModel {
     let alarmDeleted = PublishSubject<Bool>()
     
     func fetchMyAlarms() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -37,7 +37,7 @@ final class AlarmViewModel {
     }
     
     func toggleAlarm(at index: Int, isOn: Bool) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -55,7 +55,7 @@ final class AlarmViewModel {
     }
     
     func loadAlarmEnroll(memberId: Int?, univName: String?, name: String?, date: String?, time: String?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -81,7 +81,7 @@ final class AlarmViewModel {
     }
     
     func deleteAlarm(alarmId: Int?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
 
@@ -96,7 +96,7 @@ final class AlarmViewModel {
     }
     
     func editAlarm(memberId: Int?, alarmId: Int?, univName: String?, name: String?, date: String?, time: String?, onoff: Int?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
