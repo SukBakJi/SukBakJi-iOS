@@ -64,7 +64,7 @@ extension EditPWViewController {
     }
 
     private func getUserPW() {
-        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
+        if let retrievedData = KeychainHelper.standard.read(service: "password", account: "user") {
             userPW = retrievedData
         } else {
             print("Failed to retrieve password.")

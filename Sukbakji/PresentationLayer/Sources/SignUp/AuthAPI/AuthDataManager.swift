@@ -74,21 +74,21 @@ class AuthDataManager {
                    let refreshToken = data.result?.refreshToken,
                    let email = data.result?.email {
                     // 키체인에 저장
-                    KeychainHelper.standard.save(Data(accessToken.utf8), service: "access-token", account: "user")
-                    KeychainHelper.standard.save(Data(refreshToken.utf8), service: "refresh-token", account: "user")
-                    KeychainHelper.standard.save(Data(email.utf8), service: "email", account: "user")
-                    
+                    KeychainHelper.standard.save(accessToken, service: "access-token", account: "user")
+                    KeychainHelper.standard.save(refreshToken, service: "refresh-token", account: "user")
+                    KeychainHelper.standard.save(email, service: "email", account: "user")
+
                     // 비밀번호 저장 추가
                     if let password = parameters.password {
-                        KeychainHelper.standard.save(Data(password.utf8), service: "password", account: "user")
+                        KeychainHelper.standard.save(password, service: "password", account: "user")
                     }
                 }
-                
             case .failure(let error):
-                print("요청 실패: \(error.localizedDescription)")
+                print("❌ 로그인 요청 실패: \(error.localizedDescription)")
             }
         }
     }
+
     // Oauth2 로그인
     func oauth2LoginDataManager(_ parameters: Oauth2RequestDTO, completion: @escaping (OAuthLoginResponseDTO?) -> Void) {
         AF.request(oauth2LoginUrl,
@@ -106,9 +106,9 @@ class AuthDataManager {
                    let refreshToken = data.result?.refreshToken,
                    let email = data.result?.email {
                     // 키체인에 저장
-                    KeychainHelper.standard.save(Data(accessToken.utf8), service: "access-token", account: "user")
-                    KeychainHelper.standard.save(Data(refreshToken.utf8), service: "refresh-token", account: "user")
-                    KeychainHelper.standard.save(Data(email.utf8), service: "email", account: "user")
+                    KeychainHelper.standard.save(accessToken, service: "access-token", account: "user")
+                    KeychainHelper.standard.save(refreshToken, service: "refresh-token", account: "user")
+                    KeychainHelper.standard.save(email, service: "email", account: "user")
                     KeychainHelper.standard.delete(service: "password", account: "user")
                     
                 }

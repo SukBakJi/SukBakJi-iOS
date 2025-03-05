@@ -17,12 +17,12 @@ class AuthInterceptor: RequestInterceptor {
     // 요청에 액세스 토큰 추가
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var request = urlRequest
-        if let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
+        if let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user") {
             request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-            //request.setValue("Bearer ssdfsds", forHTTPHeaderField: "Authorization")
         }
         completion(.success(request))
     }
+
 
     // 401 에러 발생 시 처리
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
@@ -55,11 +55,14 @@ class AuthInterceptor: RequestInterceptor {
 
     // 리프레시 토큰을 사용하여 액세스 토큰 갱신
     private func refreshToken(completion: @escaping (Bool) -> Void) {
-        guard let refreshToken = KeychainHelper.standard.read(service: "refresh-token", account: "user", type: String.self) else {
+        guard let refreshToken = KeychainHelper.standard.read(service: "refresh-token", account: "user") else {
+            print("❌ 리프레시 토큰 없음")
             completion(false)
             return
         }
-        
+
+        print("🔄 리프레시 토큰 요청: \(refreshToken)")
+
         let url = APIConstants.authRefreshToken.path
         let headers: HTTPHeaders = [
             "Accept": "*/*",
@@ -68,7 +71,7 @@ class AuthInterceptor: RequestInterceptor {
         let parameters: [String: String] = [
             "refresh_token": refreshToken
         ]
-        
+
         AF.request(url,
                    method: .post,
                    parameters: parameters,
@@ -79,26 +82,35 @@ class AuthInterceptor: RequestInterceptor {
             switch response.result {
             case .success(let data):
                 if let newAccessToken = data.result?.accessToken,
-                   let newRefreshToken = data.result?.refreshToken { // 리프레시 토큰도 모델에서 가져오기
-                    // 새로운 액세스 토큰을 Keychain에 저장
-                    if let accessTokenData = newAccessToken.data(using: .utf8) {
-                        KeychainHelper.standard.save(accessTokenData, service: "access-token", account: "user")
+                   let newRefreshToken = data.result?.refreshToken {
+
+                    print("✅ 새로운 액세스 토큰 저장 전: \(newAccessToken)")
+                    print("✅ 새로운 리프레시 토큰 저장 전: \(newRefreshToken)")
+
+                    // 액세스 토큰과 리프레시 토큰을 비교해서 저장 오류 확인
+                    if newAccessToken == newRefreshToken {
+                        print("❌ [경고] 액세스 토큰과 리프레시 토큰이 동일함! 저장 오류 가능성 있음!")
                     }
-                    // 새로운 리프레시 토큰을 Keychain에 저장
-                    if let refreshTokenData = newRefreshToken.data(using: .utf8) {
-                        KeychainHelper.standard.save(refreshTokenData, service: "refresh-token", account: "user")
-                    }
-                    print("리프레시 토큰 갱신 완료")
-                    print("리프레시토큰: \(data)")
+
+                    // 올바른 값 저장
+                    KeychainHelper.standard.save(newAccessToken, service: "access-token", account: "user")
+                    KeychainHelper.standard.save(newRefreshToken, service: "refresh-token", account: "user")
+
+
+                    print("🔍 저장된 액세스 토큰: \(KeychainHelper.standard.read(service: "access-token", account: "user") ?? "없음")")
+                    print("🔍 저장된 리프레시 토큰: \(KeychainHelper.standard.read(service: "refresh-token", account: "user") ?? "없음")")
+
                     completion(true)
                 } else {
-                    print("토큰 갱신 실패, 로그아웃 진행하겠습니다.")
+                    print("❌ 토큰 갱신 실패: 서버 응답에 새로운 토큰이 없음")
                     completion(false)
                 }
-            case .failure:
+            case .failure(let error):
+                print("❌ 리프레시 토큰 요청 실패: \(error.localizedDescription)")
                 completion(false)
             }
         }
     }
+
 }
 

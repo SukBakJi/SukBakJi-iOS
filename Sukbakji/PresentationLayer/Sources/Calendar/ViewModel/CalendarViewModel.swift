@@ -25,7 +25,7 @@ class CalendarViewModel {
     let univDeleted = PublishSubject<Bool>()
 
     func loadUnivList() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -38,7 +38,7 @@ class CalendarViewModel {
     }
     
     func loadUpComingSchedule() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -51,7 +51,7 @@ class CalendarViewModel {
     }
     
     func loadDateSelect(date: String) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -64,7 +64,7 @@ class CalendarViewModel {
     }
     
     func loadAlarmList() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -77,7 +77,7 @@ class CalendarViewModel {
     }
     
     func deleteUnivCalendar(memberId: Int?, univId: Int?, season: String?, method: String?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -99,7 +99,7 @@ class CalendarViewModel {
     }
     
     func deleteUnivCalendarAll() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -113,7 +113,7 @@ class CalendarViewModel {
     }
     
     func editUnivCalendar(univId: Int?, season: String?, method: String?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         

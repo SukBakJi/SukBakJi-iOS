@@ -20,8 +20,7 @@ class AccessTokenManager {
         // ✅ 앱 실행 시 한 번만 Keychain에서 가져와서 캐싱
         cachedToken = KeychainHelper.standard.read(
             service: keychainService,
-            account: keychainAccount,
-            type: String.self
+            account: keychainAccount
         )
     }
 

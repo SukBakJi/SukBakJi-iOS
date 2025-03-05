@@ -147,7 +147,7 @@ extension EditInfoViewController {
     }
     
     private func bindViewModel() {
-        guard let retrievedEmail = KeychainHelper.standard.read(service: "email", account: "user", type: String.self) else {
+        guard let retrievedEmail = KeychainHelper.standard.read(service: "email", account: "user") else {
             return
         }
         // 데이터 변경 시 UI 자동 업데이트
