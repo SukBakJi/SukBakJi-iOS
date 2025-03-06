@@ -8,7 +8,7 @@
 import UIKit
 
 class smallTextButton: UIButton {
-
+    
     init(title: String) {
         super.init(frame: .zero)
         configure(title: title)
@@ -30,5 +30,14 @@ class smallTextButton: UIButton {
         
         self.configuration = config
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        guard let title = self.title(for: .normal), let font = self.titleLabel?.font else {
+            return super.intrinsicContentSize
+        }
+        
+        let textSize = (title as NSString).size(withAttributes: [.font: font])
+        return CGSize(width: textSize.width + 16, height: textSize.height + 16) // 좌우 +8, 위아래 +8
     }
 }

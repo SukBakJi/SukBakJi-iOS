@@ -87,6 +87,9 @@
 		910CC2342D76ECC100E6B58E /* SocialAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2332D76ECC100E6B58E /* SocialAuthButton.swift */; };
 		910CC2362D76ECEE00E6B58E /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2352D76ECEE00E6B58E /* UIStackView+.swift */; };
 		910CC2382D76ED0400E6B58E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2372D76ED0400E6B58E /* LoginView.swift */; };
+		910CC2782D77ED4D00E6B58E /* CommonTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2772D77ED4D00E6B58E /* CommonTextFieldView.swift */; };
+		910CC4932D783FE500E6B58E /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC4922D783FE500E6B58E /* EmailView.swift */; };
+		910CC4952D7840D800E6B58E /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC4942D7840D800E6B58E /* OrangeButton.swift */; };
 		91F849112D65AF3C0048B41A /* TOSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F849102D65AF3C0048B41A /* TOSData.swift */; };
 		91FEEB762D71782C00D0502D /* FindEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB752D71782C00D0502D /* FindEmailView.swift */; };
 		91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB832D718DA600D0502D /* FindEmailViewController.swift */; };
@@ -315,6 +318,9 @@
 		910CC2332D76ECC100E6B58E /* SocialAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthButton.swift; sourceTree = "<group>"; };
 		910CC2352D76ECEE00E6B58E /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		910CC2372D76ED0400E6B58E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		910CC2772D77ED4D00E6B58E /* CommonTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextFieldView.swift; sourceTree = "<group>"; };
+		910CC4922D783FE500E6B58E /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		910CC4942D7840D800E6B58E /* OrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrangeButton.swift; sourceTree = "<group>"; };
 		91F849102D65AF3C0048B41A /* TOSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSData.swift; sourceTree = "<group>"; };
 		91FEEB752D71782C00D0502D /* FindEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailView.swift; sourceTree = "<group>"; };
 		91FEEB832D718DA600D0502D /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
@@ -742,6 +748,8 @@
 			children = (
 				910CC2302D76ECAC00E6B58E /* smallTextButton.swift */,
 				910CC2332D76ECC100E6B58E /* SocialAuthButton.swift */,
+				910CC2772D77ED4D00E6B58E /* CommonTextFieldView.swift */,
+				910CC4942D7840D800E6B58E /* OrangeButton.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -761,6 +769,7 @@
 			children = (
 				91FEEB752D71782C00D0502D /* FindEmailView.swift */,
 				910CC2372D76ED0400E6B58E /* LoginView.swift */,
+				910CC4922D783FE500E6B58E /* EmailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1540,6 +1549,7 @@
 				7BFDEC312C52250A007280F8 /* BoardMasterViewController.swift in Sources */,
 				C7DA37522CFCD33A00B26549 /* HotPostViewModel.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
+				910CC2782D77ED4D00E6B58E /* CommonTextFieldView.swift in Sources */,
 				C757F8212D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift in Sources */,
 				C74A15B82D5A56EC00A1698B /* MentorList.swift in Sources */,
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
@@ -1555,6 +1565,7 @@
 				C7C379D92D65A1AB00C224A1 /* AppCoordinator.swift in Sources */,
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
 				7B1CFFA82C6F788900DE07F5 /* BoardScrapApi.swift in Sources */,
+				910CC4952D7840D800E6B58E /* OrangeButton.swift in Sources */,
 				7B1C53582C69D80A00C66D0D /* DirectoryFavoriteCancelModel.swift in Sources */,
 				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,
 				417AADCB2C673B89002080E0 /* KeychainHelper+.swift in Sources */,
@@ -1582,6 +1593,7 @@
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */,
 				C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */,
+				910CC4932D783FE500E6B58E /* EmailView.swift in Sources */,
 				412BFBDD2C52257F0099E442 /* SuccessSignUpViewController.swift in Sources */,
 				7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */,
 				7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */,
