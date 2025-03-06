@@ -120,7 +120,7 @@ struct CommentedBoardViewController: View {
 //            }
 //            self.isLoading = false
 //        }
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user"), !accessToken.isEmpty else {
             print("토큰이 없습니다.")
             self.isLoading = false
             return

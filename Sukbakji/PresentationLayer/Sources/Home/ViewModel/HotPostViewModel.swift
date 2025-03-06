@@ -16,7 +16,7 @@ class HotPostViewModel {
     let errorMessage = PublishSubject<String>()
     
     func loadHotPost() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         

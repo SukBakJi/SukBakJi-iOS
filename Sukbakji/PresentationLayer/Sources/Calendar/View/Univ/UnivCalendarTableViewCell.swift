@@ -13,15 +13,15 @@ import RxCocoa
 
 protocol UnivCalendarTableViewCellDeleteDelegate: AnyObject {
     func univDelete_Tapped(cell: UnivCalendarTableViewCell)
+    func editButton_Tapped(cell: UnivCalendarTableViewCell)
 }
 
 class UnivCalendarTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: UnivCalendarTableViewCell.self)
     
-    weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
-    
     var disposeBag = DisposeBag()
+    weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
     
     let selectView = UIView().then {
         $0.backgroundColor = .gray200
@@ -56,16 +56,13 @@ class UnivCalendarTableViewCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-       super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setUI()
     }
     
     required init?(coder: NSCoder) {
        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        
-       setUI()
     }
     
     override func prepareForReuse() {
@@ -77,8 +74,14 @@ class UnivCalendarTableViewCell: UITableViewCell {
         self.contentView.layer.cornerRadius = 12
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor
-        self.contentView.clipsToBounds = true
-        self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 24, bottom: 12, right: 24))
+        self.contentView.clipsToBounds = false
+        
+        self.contentView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().inset(24)
+            make.bottom.equalToSuperview().inset(12)
+        }
         
         self.contentView.addSubview(selectView)
         selectView.snp.makeConstraints { make in
@@ -136,10 +139,15 @@ class UnivCalendarTableViewCell: UITableViewCell {
             make.height.equalTo(24)
             make.width.equalTo(32)
         }
+        editButton.addTarget(self, action: #selector(editButton_Tapped), for: .touchUpInside)
     }
     
-    @objc func univDelete_Tapped(_ sender: UIButton) {
+    @objc private func univDelete_Tapped() {
         delegate?.univDelete_Tapped(cell: self)
+    }
+    
+    @objc private func editButton_Tapped() {
+        delegate?.editButton_Tapped(cell: self)
     }
     
     func prepare(univList: UnivList) {

@@ -259,6 +259,7 @@ class UnivRecruitView: UIView {
             $0.leading.equalToSuperview().offset(22)
             $0.height.width.equalTo(24)
         }
+        recruitFirstButton.addTarget(self, action: #selector(firstButtonTapped), for: .touchUpInside)
         
         recruitFirstLabel.snp.makeConstraints {
             $0.centerY.equalTo(recruitFirstButton)
@@ -271,6 +272,7 @@ class UnivRecruitView: UIView {
             $0.leading.equalTo(recruitFirstLabel.snp.trailing).offset(18)
             $0.height.width.equalTo(24)
         }
+        recruitSecondButton.addTarget(self, action: #selector(secondButtonTapped), for: .touchUpInside)
         
         recruitSecondLabel.snp.makeConstraints {
             $0.centerY.equalTo(recruitFirstButton)
@@ -327,5 +329,23 @@ class UnivRecruitView: UIView {
             $0.height.equalTo(48)
         }
         nextButton.isEnabled = false
+    }
+    
+    @objc func firstButtonTapped() {
+        recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
+        recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
+        
+        recruitFirstButton.isEnabled = false
+        recruitSecondButton.isEnabled = true
+        recruitTitleLabel.text = "2025년 전기"
+    }
+    
+    @objc func secondButtonTapped() {
+        recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
+        recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
+        
+        recruitFirstButton.isEnabled = true
+        recruitSecondButton.isEnabled = false
+        recruitTitleLabel.text = "2025년 후기"
     }
 }

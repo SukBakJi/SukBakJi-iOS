@@ -117,7 +117,7 @@ struct SearchViewController: View {
         isLoading = true
         filteredResults = [] // 이전 결과 초기화
 
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user"), !accessToken.isEmpty else {
             print("토큰이 없습니다.")
             isLoading = false
             return

@@ -74,7 +74,7 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 15
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.gray100.cgColor
-        contentView.clipsToBounds = true
+        contentView.clipsToBounds = false
         contentView.backgroundColor = .gray50
         
         layer.cornerRadius = 15

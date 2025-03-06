@@ -24,8 +24,13 @@ class MainTabViewController: UITabBarController {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     func setup() {
-        self.navigationItem.setHidesBackButton(true, animated: false)
         self.setValue(customTabBar, forKey: "tabBar")
 
         tabBar.backgroundColor = .white

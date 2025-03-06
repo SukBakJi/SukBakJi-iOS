@@ -121,7 +121,7 @@ final class AllDeleteView: UIView {
     }
     
     private func selectDeleteUnivAPI() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -141,7 +141,7 @@ final class AllDeleteView: UIView {
     }
     
     private func allDeleteUnivAPI() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         

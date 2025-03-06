@@ -65,15 +65,6 @@ extension UnivCalendarViewController {
             }
             .disposed(by: disposeBag)
         
-        univView.univCalendarTableView.rx.modelSelected(UnivList.self)
-            .subscribe(onNext: { [weak self] univItem in
-                self?.viewModel.selectUnivList.accept(univItem)
-                let viewController = EditUnivCalendarViewController(calendarViewModel: self?.viewModel ?? CalendarViewModel())
-                let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 150, isPannedable: true)
-                self?.present(bottomSheetVC, animated: true)
-            })
-            .disposed(by: disposeBag)
-        
         univView.allSelectButton.rx.tap
             .bind { [weak self] in
                 self?.viewModel.toggleSelectState()
@@ -99,6 +90,14 @@ extension UnivCalendarViewController {
         UIView.animate(withDuration: 0.3) {
             deleteView.alpha = 1
         }
+    }
+    
+    func editButton_Tapped(cell: UnivCalendarTableViewCell) {
+        guard let indexPath = univView.univCalendarTableView.indexPath(for: cell) else { return }
+        self.viewModel.selectUnivList = viewModel.univList.value[indexPath.row]
+        let viewController = EditUnivCalendarViewController(calendarViewModel: self.viewModel)
+        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 150, isPannedable: true)
+        self.present(bottomSheetVC, animated: true)
     }
 }
 

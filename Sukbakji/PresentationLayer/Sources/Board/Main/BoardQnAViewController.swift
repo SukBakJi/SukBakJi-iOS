@@ -259,7 +259,7 @@ struct BoardQnAViewController: View {
     }
 
     func loadPosts(_ menu: String, completion: @escaping () -> Void) {
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user"), !accessToken.isEmpty else {
             print("토큰이 없습니다.")
             completion()
             return

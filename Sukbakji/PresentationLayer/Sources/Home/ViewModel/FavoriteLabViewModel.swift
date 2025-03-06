@@ -16,7 +16,7 @@ class FavoriteLabViewModel {
     let errorMessage = PublishSubject<String>()
     
     func loadFavoriteLab() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         

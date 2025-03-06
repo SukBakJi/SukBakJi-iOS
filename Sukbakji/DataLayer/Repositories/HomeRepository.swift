@@ -11,11 +11,6 @@ import RxSwift
 class HomeRepository {
     static let shared = HomeRepository()
     
-    func fetchMyProfile(token: String) -> Single<APIResponse<MyProfile>> {
-        let url = APIConstants.userMypage.path
-        return APIService.shared.getWithToken(of: APIResponse<MyProfile>.self, url: url, accessToken: token)
-    }
-    
     func fetchFavoriteBoard(token: String) -> Single<APIResponse<[FavoriteBoard]>> {
         let url = APIConstants.communityFavoriteBoard.path
         return APIService.shared.getWithToken(of: APIResponse<[FavoriteBoard]>.self, url: url, accessToken: token)
@@ -34,6 +29,11 @@ class HomeRepository {
     func fetchLogOut(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
         let url = APIConstants.authLogout.path
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
+    func fetchMyProfile(token: String) -> Single<APIResponse<MyProfile>> {
+        let url = APIConstants.userMypage.path
+        return APIService.shared.getWithToken(of: APIResponse<MyProfile>.self, url: url, accessToken: token)
     }
     
     func fetchEditProfile(token: String, parameters: [String: Any]?) -> Single<APIResponse<EditProfile>> {

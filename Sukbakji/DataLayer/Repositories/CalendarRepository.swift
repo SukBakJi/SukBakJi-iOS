@@ -11,19 +11,9 @@ import RxSwift
 class CalendarRepository {
     static let shared = CalendarRepository()
     
-    func fetchUnivList(token: String) -> Single<APIResponse<Univ>> {
-        let url = APIConstants.calendarUniv.path
-        return APIService.shared.getWithToken(of: APIResponse<Univ>.self, url: url, accessToken: token)
-    }
-    
     func fetchUpComing(token: String) -> Single<APIResponse<UpComing>> {
         let url = APIConstants.calendarSchedule.path
         return APIService.shared.getWithToken(of: APIResponse<UpComing>.self, url: url, accessToken: token)
-    }
-    
-    func fetchAlarmList(token: String) -> Single<APIResponse<Alarm>> {
-        let url = APIConstants.calendarAlarm.path
-        return APIService.shared.getWithToken(of: APIResponse<Alarm>.self, url: url, accessToken: token)
     }
     
     func fetchDateSelect(token: String, date: String) -> Single<APIResponse<DateSelect>> {
@@ -42,6 +32,12 @@ class CalendarRepository {
         let url = APIConstants.calendarUnivMethod.path
         let params = ["univId": univId]
         return APIService.shared.getWithTokenAndParams(of: APIResponse<UnivMethod>.self, url: url, parameters: params, accessToken: token)
+    }
+    
+    
+    func fetchUnivList(token: String) -> Single<APIResponse<Univ>> {
+        let url = APIConstants.calendarUniv.path
+        return APIService.shared.getWithToken(of: APIResponse<Univ>.self, url: url, accessToken: token)
     }
     
     func fetchUnivEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
@@ -70,14 +66,30 @@ class CalendarRepository {
         return APIService.shared.deleteWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
     }
     
-    func fetchAlarmPatch(token: String, alarmId: Int, isOn: Bool) -> Single<APIResponse<AlarmPatch>> {
-        let url = isOn ? APIConstants.calendarAlarmOn.path : APIConstants.calendarAlarmOff.path
-        let params = ["alarmId": alarmId]
-        return APIService.shared.patchWithToken(of: APIResponse<AlarmPatch>.self, url: url, parameters: params, accessToken: token)
+    
+    func fetchAlarmList(token: String) -> Single<APIResponse<Alarm>> {
+        let url = APIConstants.calendarAlarm.path
+        return APIService.shared.getWithToken(of: APIResponse<Alarm>.self, url: url, accessToken: token)
     }
     
     func fetchAlarmEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<AlarmPost>> {
         let url = APIConstants.calendarAlarm.path
         return APIService.shared.postWithToken(of: APIResponse<AlarmPost>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
+    func fetchAlarmOnOff(token: String, alarmId: Int, isOn: Bool) -> Single<APIResponse<AlarmPatch>> {
+        let url = isOn ? APIConstants.calendarAlarmOn.path : APIConstants.calendarAlarmOff.path
+        let params = ["alarmId": alarmId]
+        return APIService.shared.patchWithToken(of: APIResponse<AlarmPatch>.self, url: url, parameters: params, accessToken: token)
+    }
+    
+    func fetchAlarmEdit(token: String, alarmId: Int, parameters: [String: Any]?) -> Single<APIResponse<AlarmList>> {
+        let url = APIConstants.calendarAlarmId(alarmId).path
+        return APIService.shared.patchWithToken(of: APIResponse<AlarmList>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
+    func fetchAlarmDelete(token: String, alarmId: Int) -> Single<APIResponse<String>> {
+        let url = APIConstants.calendarAlarmId(alarmId).path
+        return APIService.shared.deleteWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)
     }
 }

@@ -17,10 +17,10 @@ class EditInfoViewController: UIViewController {
     private let viewModel = MyProfileViewModel()
     private let researchTopicViewModel = ResearchTopicViewModel()
     private let disposeBag = DisposeBag()
+    private let drop = DropDown()
     
     private var degree: String = ""
     private var topics: [String] = []
-    private let drop = DropDown()
     private let belongType = ["학사 재학 중", "학사 졸업", "석사 재학 중", "석사 졸업", "박사 재학 중", "박사 졸업"]
     private let degreeMapping: [String: String] = [
         "학사 재학 중": "BACHELORS_STUDYING",
@@ -45,7 +45,6 @@ class EditInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-        //        setProfileAPI()
     }
 }
 
@@ -57,79 +56,6 @@ extension EditInfoViewController {
         editInfoView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
         editInfoView.editButton.addTarget(self, action: #selector(updateProfile), for: .touchUpInside)
     }
-    
-    private func setAPI() {
-        bindViewModel()
-        viewModel.loadMyProfile()
-    }
-    
-    private func setTopicData() {
-        editInfoView.researchTopicCollectionView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
-
-        /// CollectionView에 들어갈 Cell에 정보 제공
-        self.researchTopicViewModel.ResearchTopicItems
-            .observe(on: MainScheduler.instance)
-            .bind(to: editInfoView.researchTopicCollectionView.rx.items(cellIdentifier: ResearchTopicCollectionViewCell.identifier, cellType: ResearchTopicCollectionViewCell.self)) { index, item, cell in
-                cell.prepare(topics: item)
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindViewModel() {
-        guard let retrievedEmail = KeychainHelper.standard.read(service: "email", account: "user", type: String.self) else {
-            return
-        }
-        // 데이터 변경 시 UI 자동 업데이트
-        viewModel.myProfile
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] profile in
-                self?.researchTopicViewModel.ResearchTopicItems.accept(profile.researchTopics!)
-                self?.editInfoView.idTextField.text = retrievedEmail
-                self?.editInfoView.nameTextField.text = profile.name
-                self?.editInfoView.belongTextField.text = DegreeLevel.from(profile.degreeLevel)?.korean ?? "학위 정보 없음"
-                self?.setTopicData()
-            })
-            .disposed(by: disposeBag)
-        
-        // 에러 메시지 바인딩
-        viewModel.errorMessage
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { message in
-                AlertController(message: message).show()
-            })
-            .disposed(by: disposeBag)
-        
-        // 프로필 업데이트 성공 시 알림 표시 후 화면 닫기
-        viewModel.profileUpdated
-            .subscribe(onNext: { [weak self] success in
-                if success {
-                    AlertController(message: "프로필이 성공적으로 업데이트되었습니다.") {
-                        self?.navigationController?.popViewController(animated: true)
-                    }.show()
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        // 에러 발생 시 Alert 표시
-        viewModel.errorMessage
-            .subscribe(onNext: { message in
-                AlertController(message: message).show()
-            })
-            .disposed(by: disposeBag)
-    }
-        
-    // 프로필 업데이트 실행
-    @objc private func updateProfile() {
-        viewModel.loadEditProfile(degree: degree, topics: topics)
-    }
-    
-    @objc private func drop_Tapped() {
-        drop.show()
-    }
-}
-    
-extension EditInfoViewController {
     
     private func setDrop() {
         initUI()
@@ -197,6 +123,79 @@ extension EditInfoViewController {
             separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
             separator.heightAnchor.constraint(equalToConstant: 1.5)
         ])
+    }
+}
+    
+extension EditInfoViewController {
+    
+    private func setAPI() {
+        bindViewModel()
+        viewModel.loadMyProfile()
+    }
+    
+    private func setTopicData() {
+        editInfoView.researchTopicCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+
+        /// CollectionView에 들어갈 Cell에 정보 제공
+        self.researchTopicViewModel.ResearchTopicItems
+            .observe(on: MainScheduler.instance)
+            .bind(to: editInfoView.researchTopicCollectionView.rx.items(cellIdentifier: ResearchTopicCollectionViewCell.identifier, cellType: ResearchTopicCollectionViewCell.self)) { index, item, cell in
+                cell.prepare(topics: item)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindViewModel() {
+        guard let retrievedEmail = KeychainHelper.standard.read(service: "email", account: "user") else {
+            return
+        }
+        // 데이터 변경 시 UI 자동 업데이트
+        viewModel.myProfile
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] profile in
+                self?.researchTopicViewModel.ResearchTopicItems.accept(profile.researchTopics!)
+                self?.editInfoView.idTextField.text = retrievedEmail
+                self?.editInfoView.nameTextField.text = profile.name
+                self?.editInfoView.belongTextField.text = DegreeLevel.from(profile.degreeLevel)?.korean ?? "학위 정보 없음"
+                self?.setTopicData()
+            })
+            .disposed(by: disposeBag)
+        
+        // 에러 메시지 바인딩
+        viewModel.errorMessage
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { message in
+                AlertController(message: message).show()
+            })
+            .disposed(by: disposeBag)
+        
+        // 프로필 업데이트 성공 시 알림 표시 후 화면 닫기
+        viewModel.profileUpdated
+            .subscribe(onNext: { [weak self] success in
+                if success {
+                    AlertController(message: "프로필이 성공적으로 업데이트되었습니다.") {
+                        self?.navigationController?.popViewController(animated: true)
+                    }.show()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // 에러 발생 시 Alert 표시
+        viewModel.errorMessage
+            .subscribe(onNext: { message in
+                AlertController(message: message).show()
+            })
+            .disposed(by: disposeBag)
+    }
+        
+    // 프로필 업데이트 실행
+    @objc private func updateProfile() {
+        viewModel.loadEditProfile(degree: degree, topics: topics)
+    }
+    
+    @objc private func drop_Tapped() {
+        drop.show()
     }
 }
 

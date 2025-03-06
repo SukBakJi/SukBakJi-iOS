@@ -34,26 +34,21 @@ class ProfileTabViewController: TabmanViewController {
         
         setUI()
         setupTabMan()
+//        setAPI()
+//        getUserPW()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.tabBarController?.tabBar.isHidden = true
-//        getUserPW()
-//        setAPI()
     }
     
     private func setUI() {
         self.view.backgroundColor = .white
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.didDismissDetailNotification(_:)),
-            name: NSNotification.Name("CannotChangePW"),
-            object: nil
-        )
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissNotification(_:)), name: NSNotification.Name("CannotChangePW"),
+            object: nil)
         
         self.view.addSubview(tabView)
         tabView.snp.makeConstraints { make in
@@ -65,43 +60,6 @@ class ProfileTabViewController: TabmanViewController {
         backgroundLabel.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(1.5)
-        }
-    }
-    
-    override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: NavigationDirection, animated: Bool) {
-        if (index == 1) && (userPW == "") { // 두 번째 탭이 선택된 경우
-            var moveStopView = PWAlertView(title: "")
-            if provider == "kakao" {
-                moveStopView = PWAlertView(title: "카카오 로그인을 이용한 경우 앱 내 비밀번호 변경이 불가합니다")
-            } else {
-                moveStopView = PWAlertView(title: "Apple 로그인을 이용한 경우 앱 내 비밀번호 변경이 불가합니다")
-            }
-                
-            self.view.addSubview(moveStopView)
-            moveStopView.alpha = 0
-            moveStopView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
-                
-            UIView.animate(withDuration: 0.3) {
-                moveStopView.alpha = 1
-            }
-        }
-    }
-}
-    
-extension ProfileTabViewController {
-    
-    private func setAPI() {
-        setProfileAPI()
-        viewModel.loadMyProfile()
-    }
-    
-    private func getUserPW() {
-        if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user", type: String.self) {
-            userPW = retrievedPW
-        } else {
-            print("Failed to retrieve password.")
         }
     }
     
@@ -135,6 +93,43 @@ extension ProfileTabViewController {
         addBar(bar, dataSource: self, at: .custom(view: tabView, layout: nil))
     }
     
+    override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: NavigationDirection, animated: Bool) {
+        if (index == 1) && (userPW == "") { // 두 번째 탭이 선택된 경우
+            var moveStopView = PWAlertView(title: "")
+            if provider == "kakao" {
+                moveStopView = PWAlertView(title: "카카오 로그인을 이용한 경우 앱 내 비밀번호 변경이 불가합니다")
+            } else {
+                moveStopView = PWAlertView(title: "Apple 로그인을 이용한 경우 앱 내 비밀번호 변경이 불가합니다")
+            }
+                
+            self.view.addSubview(moveStopView)
+            moveStopView.alpha = 0
+            moveStopView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+                
+            UIView.animate(withDuration: 0.3) {
+                moveStopView.alpha = 1
+            }
+        }
+    }
+}
+    
+extension ProfileTabViewController {
+    
+    private func getUserPW() {
+        if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user") {
+            userPW = retrievedPW
+        } else {
+            print("Failed to retrieve password.")
+        }
+    }
+    
+    private func setAPI() {
+        setProfileAPI()
+        viewModel.loadMyProfile()
+    }
+    
     private func setProfileAPI() {
         // 데이터 변경 시 UI 자동 업데이트
         viewModel.myProfile
@@ -153,7 +148,7 @@ extension ProfileTabViewController {
             .disposed(by: disposeBag)
     }
     
-    @objc func didDismissDetailNotification(_ notification: Notification) {
+    @objc func didDismissNotification(_ notification: Notification) {
         self.scrollToPage(.at(index: 0), animated: true)
     }
 }

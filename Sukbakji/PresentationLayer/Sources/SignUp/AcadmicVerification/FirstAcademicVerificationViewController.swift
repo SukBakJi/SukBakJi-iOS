@@ -253,11 +253,7 @@ class FirstAcademicVerificationViewController: UIViewController {
         
         UserDataManager().PostEduImageDataManager(requestBody) { response in
             if let response = response, response.isSuccess == true {
-                DispatchQueue.main.async {
-                    let UploadCompletedpopUpVC = UploadCompletedPopUpViewController()
-                    UploadCompletedpopUpVC.modalPresentationStyle = .overFullScreen
-                    self.present(UploadCompletedpopUpVC, animated: false)
-                }
+                self.openPopUp()
             } else {
                 print("서버 업로드 실패")
             }

@@ -14,7 +14,7 @@ class CalendarViewModel {
     private let disposeBag = DisposeBag()
     
     let univList = BehaviorRelay<[UnivList]>(value: [])
-    let selectUnivList = BehaviorRelay<UnivList?>(value: nil)
+    var selectUnivList: UnivList?
     let selectedUnivList = BehaviorRelay<[UnivList]>(value: [])
     let selectedUnivAll = BehaviorRelay<Bool>(value: false)
     
@@ -25,7 +25,7 @@ class CalendarViewModel {
     let univDeleted = PublishSubject<Bool>()
 
     func loadUnivList() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -38,7 +38,7 @@ class CalendarViewModel {
     }
     
     func loadUpComingSchedule() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -51,7 +51,7 @@ class CalendarViewModel {
     }
     
     func loadDateSelect(date: String) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -64,7 +64,7 @@ class CalendarViewModel {
     }
     
     func loadAlarmList() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -77,7 +77,7 @@ class CalendarViewModel {
     }
     
     func deleteUnivCalendar(memberId: Int?, univId: Int?, season: String?, method: String?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -92,7 +92,6 @@ class CalendarViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.univDeleted.onNext(true)
-                self.loadUnivList()
             }, onFailure: { error in
                 self.univDeleted.onNext(false)
             })
@@ -100,7 +99,7 @@ class CalendarViewModel {
     }
     
     func deleteUnivCalendarAll() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -114,7 +113,7 @@ class CalendarViewModel {
     }
     
     func editUnivCalendar(univId: Int?, season: String?, method: String?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -126,7 +125,6 @@ class CalendarViewModel {
         repository.fetchUnivEdit(token: token, univId: univId!, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
-                self.loadUnivList()
             }, onFailure: { error in
             })
             .disposed(by: disposeBag)

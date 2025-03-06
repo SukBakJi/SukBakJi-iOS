@@ -23,7 +23,7 @@ class MyProfileViewModel {
     let confirmPWInput = BehaviorRelay<String>(value: "")
     
     func loadMyProfile() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -38,7 +38,7 @@ class MyProfileViewModel {
     }
     
     func loadLogOut() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -53,7 +53,7 @@ class MyProfileViewModel {
     }
     
     func loadEditProfile(degree: String, topics: [String]) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
@@ -73,7 +73,7 @@ class MyProfileViewModel {
     }
     
     func loadChangePW() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         

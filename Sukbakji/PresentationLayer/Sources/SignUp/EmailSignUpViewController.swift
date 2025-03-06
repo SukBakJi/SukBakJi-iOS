@@ -330,15 +330,11 @@ class EmailSignUpViewController: UIViewController {
                 // 응답
                 if let model = AuthResponse, model.code == "COMMON200" {
                     self.navigateToNextPage()
-                    print("회원가입 성공 : ID(\(email))")
-                    self.showMessage(message: model.message)
-                    
                     getToken(email, password)
                 }
                 else if let model = AuthResponse, model.code == "MEMBER4002" {
                     changeStateError(emailTextField)
                     emailErrorLabel.text = "이미 가입된 이메일입니다"
-                    self.showMessage(message: model.message)
                 }
             }
         }
@@ -351,17 +347,14 @@ class EmailSignUpViewController: UIViewController {
         let authDataManager = AuthDataManager()
         
         let input = LoginRequestDTO(email: email, password: password)
-        print("전송된 데이터: \(input)")
-        print("이메일로 로그인 호출")
         
         authDataManager.loginDataManager(input) {
             [weak self] data in
             guard let self = self else { return }
             
-            
             // 응답
             if let data = data, data.code == "COMMON200" {
-                print("토큰 \(data.result?.accessToken ?? "발급실패")")
+                print("토큰 발급 성공")
             }
         }
     }
@@ -381,7 +374,6 @@ class EmailSignUpViewController: UIViewController {
                 // 서버로부터의 응답 처리
                 if let model = SignUpModel {
                     if model.result == "사용 가능한 이메일입니다." {
-                        print("사용 가능한 이메일입니다.")
                         self.changeStateCorrect()
                     } else {
                         // 이미 사용 중인 이메일인 경우 상태를 오류로 변경
@@ -395,10 +387,6 @@ class EmailSignUpViewController: UIViewController {
         // 새로운 작업을 큐에 추가, 0.5초 후 실행
         emailWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workItem)
-    }
-    
-    private func showMessage(message: String) {
-        print("메시지 : \(message)")
     }
     
     private func changeStateError(_ tf: UITextField) {

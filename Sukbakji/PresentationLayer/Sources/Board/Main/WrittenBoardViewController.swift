@@ -121,7 +121,7 @@ struct WrittenBoardViewController: View {
 //            }
 //            self.isLoading = false
 //        }
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user"), !accessToken.isEmpty else {
             print("No token available.")
             self.isLoading = false
             return

@@ -131,7 +131,7 @@ struct LabDetailViewController: View {
         isLoading = true
         errorMessage = nil
         
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user"), !accessToken.isEmpty else {
             self.errorMessage = "인증 토큰이 없습니다."
             self.isLoading = false
             return

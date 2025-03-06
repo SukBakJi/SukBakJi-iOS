@@ -49,7 +49,7 @@ final class HomeReactor: Reactor {
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
+        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .empty()
         }
 

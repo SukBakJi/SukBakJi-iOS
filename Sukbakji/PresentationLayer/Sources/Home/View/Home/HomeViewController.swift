@@ -27,14 +27,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
-//        bind(reactor: reactor)
         setAPI()
+        //        bind(reactor: reactor)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
-//        fetchFavoriteBoards()
     }
 }
 
@@ -42,8 +41,8 @@ extension HomeViewController {
     
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
-        homeView.topButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
         homeView.adCollectionView.delegate = self
         homeView.adCollectionView.dataSource = self
     }
@@ -52,16 +51,9 @@ extension HomeViewController {
         bindFavoriteBoardViewModel()
         bindHotPostViewModel()
         bindFavoriteLabViewModel()
-        fetchCellData()
-    }
-    
-    @objc func scrollToTop() {
-        homeView.scrollView.setContentOffset(CGPoint(x: 0, y: -homeView.scrollView.contentInset.top), animated: true)
-    }
-    
-    @objc private func info_Tapped() {
-        let mypageViewController = MypageViewController()
-        self.navigationController?.pushViewController(mypageViewController, animated: true)
+        favoriteBoardViewModel.loadFavoriteBoard()
+        hotPostViewModel.loadHotPost()
+        favoriteLabViewModel.loadFavoriteLab()
     }
     
     private func bind(reactor: HomeReactor) {
@@ -156,16 +148,19 @@ extension HomeViewController {
             .disposed(by: disposeBag)
     }
     
-    private func fetchCellData() {
-        favoriteBoardViewModel.loadFavoriteBoard()
-        hotPostViewModel.loadHotPost()
-        favoriteLabViewModel.loadFavoriteLab()
+    @objc func scrollToTop() {
+        homeView.scrollView.setContentOffset(CGPoint(x: 0, y: -homeView.scrollView.contentInset.top), animated: true)
+    }
+    
+    @objc private func info_Tapped() {
+        let mypageViewController = MypageViewController()
+        self.navigationController?.pushViewController(mypageViewController, animated: true)
     }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
