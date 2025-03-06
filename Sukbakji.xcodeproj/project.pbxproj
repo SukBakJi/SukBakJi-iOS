@@ -81,7 +81,6 @@
 		7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */; };
 		7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */; };
 		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
-		910CC1BF2D76C55500E6B58E /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC1BE2D76C55500E6B58E /* UIView+.swift */; };
 		910CC2312D76ECAC00E6B58E /* smallTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2302D76ECAC00E6B58E /* smallTextButton.swift */; };
 		910CC2342D76ECC100E6B58E /* SocialAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2332D76ECC100E6B58E /* SocialAuthButton.swift */; };
 		910CC2362D76ECEE00E6B58E /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2352D76ECEE00E6B58E /* UIStackView+.swift */; };
@@ -89,6 +88,8 @@
 		910CC2782D77ED4D00E6B58E /* CommonTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC2772D77ED4D00E6B58E /* CommonTextFieldView.swift */; };
 		910CC4932D783FE500E6B58E /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC4922D783FE500E6B58E /* EmailView.swift */; };
 		910CC4952D7840D800E6B58E /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC4942D7840D800E6B58E /* OrangeButton.swift */; };
+		910CC6BA2D7986BE00E6B58E /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC6B92D7986BE00E6B58E /* UIView+.swift */; };
+		910CC6BB2D7986BE00E6B58E /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910CC6B92D7986BE00E6B58E /* UIView+.swift */; };
 		91F849112D65AF3C0048B41A /* TOSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F849102D65AF3C0048B41A /* TOSData.swift */; };
 		91FEEB762D71782C00D0502D /* FindEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB752D71782C00D0502D /* FindEmailView.swift */; };
 		91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB832D718DA600D0502D /* FindEmailViewController.swift */; };
@@ -97,7 +98,6 @@
 		91FEEB8E2D71A04400D0502D /* SmsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB8D2D71A04400D0502D /* SmsDataManager.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
 		C704BD882D2BBE9700954EAD /* EditMyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */; };
-		C70523F12D775442009AED8C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70523F02D775442009AED8C /* UIView+.swift */; };
 		C70523FE2D7757BA009AED8C /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7548F292D147CFF00BA687A /* UITextField+.swift */; };
 		C70523FF2D7757D4009AED8C /* AuthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD02C673E42002080E0 /* AuthDataManager.swift */; };
 		C70BBC192D64EAA7002C26E6 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70BBC182D64EAA7002C26E6 /* MyProfileViewModel.swift */; };
@@ -320,6 +320,7 @@
 		910CC2772D77ED4D00E6B58E /* CommonTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextFieldView.swift; sourceTree = "<group>"; };
 		910CC4922D783FE500E6B58E /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		910CC4942D7840D800E6B58E /* OrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrangeButton.swift; sourceTree = "<group>"; };
+		910CC6B92D7986BE00E6B58E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		91F849102D65AF3C0048B41A /* TOSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSData.swift; sourceTree = "<group>"; };
 		91FEEB752D71782C00D0502D /* FindEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailView.swift; sourceTree = "<group>"; };
 		91FEEB832D718DA600D0502D /* FindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailViewController.swift; sourceTree = "<group>"; };
@@ -512,7 +513,6 @@
 				417AADCA2C673B89002080E0 /* KeychainHelper+.swift */,
 				41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift */,
 				412BFBE52C52A5E30099E442 /* addBorder+.swift */,
-				C780C5072D4143D800DC2031 /* Notification+.swift */,
 				C7980A852CEF838C00475D94 /* UIViewController+.swift */,
 				C7B7A1692D00360500D5CE14 /* UIButton+.swift */,
 				C7548F292D147CFF00BA687A /* UITextField+.swift */,
@@ -520,8 +520,8 @@
 				C73483642D02A727004B6FA1 /* UILabel+.swift */,
 				C74C65DC2D4398C900526D23 /* UIColor+.swift */,
 				C780C5072D4143D800DC2031 /* Notification+.swift */,
-				910CC1BE2D76C55500E6B58E /* UIView+.swift */,
 				910CC2352D76ECEE00E6B58E /* UIStackView+.swift */,
+				910CC6B92D7986BE00E6B58E /* UIView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1235,6 +1235,7 @@
 				417AADC52C652253002080E0 /* LoginDataManager.swift */,
 				417AADB62C606B17002080E0 /* TOSViewController.swift */,
 				910CC1BE2D76C55500E6B58E /* UIView+.swift */,
+				C70523F02D775442009AED8C /* UIView+.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1463,6 +1464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				910CC6BB2D7986BE00E6B58E /* UIView+.swift in Sources */,
 				C7875A312D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift in Sources */,
 				C7875A2F2D3609CF00D6FCF7 /* SukbakjiUITests.swift in Sources */,
 			);
@@ -1494,7 +1496,6 @@
 				C74A15962D5A477800A1698B /* HotPost.swift in Sources */,
 				C78953152D636FF700E5041C /* AccessTokenManager+.swift in Sources */,
 				7BFDEC2D2C5224F7007280F8 /* BoardMainViewController.swift in Sources */,
-				C70523F12D775442009AED8C /* UIView+.swift in Sources */,
 				C74A15A22D5A4C9200A1698B /* UpComing.swift in Sources */,
 				C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */,
 				91FEEB892D71A02800D0502D /* SmsRequest.swift in Sources */,
@@ -1565,6 +1566,7 @@
 				C74A15A62D5A4F4200A1698B /* UnivMethod.swift in Sources */,
 				C750C3922D70C56600BE14EF /* MyAlarmView.swift in Sources */,
 				41EE13442C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift in Sources */,
+				910CC6BA2D7986BE00E6B58E /* UIView+.swift in Sources */,
 				7B1C53562C69D79200C66D0D /* DirectoryFavoriteModel.swift in Sources */,
 				C750C3962D70C58300BE14EF /* EditAlarmView.swift in Sources */,
 				7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */,
@@ -1647,7 +1649,7 @@
 				C7AB97442D63AA1B00D2DBCA /* PWWarning.swift in Sources */,
 				C757F8252D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift in Sources */,
 				910CC2362D76ECEE00E6B58E /* UIStackView+.swift in Sources */,
-				C73483652D02A727004B6FA1 /* Dot+.swift in Sources */,
+				C73483652D02A727004B6FA1 /* UILabel+.swift in Sources */,
 				C73483652D02A727004B6FA1 /* UILabel+.swift in Sources */,
 				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */,

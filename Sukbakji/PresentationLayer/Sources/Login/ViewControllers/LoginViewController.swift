@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.view = loginView
         
-        if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
+        if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user") {
             print("자동 로그인 활성화: \(accessToken)")
             let tabBarVC = MainTabViewController()
             self.navigationController?.setViewControllers([tabBarVC], animated: true)

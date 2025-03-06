@@ -183,9 +183,9 @@ class CommonTextFieldView: UIView {
     
     private lazy var stateIcon = UIImageView().then {
         $0.image = UIImage(named: "SBJ_ErrorCircle")
-        $0.snp.makeConstraints {
-            $0.size.equalTo(CGSize(width: 12, height: 12))
-        }
+//        $0.snp.makeConstraints {
+//            $0.size.equalTo(CGSize(width: 12, height: 12))
+//        }
     }
     
     private lazy var stateLabel = UILabel().then {
