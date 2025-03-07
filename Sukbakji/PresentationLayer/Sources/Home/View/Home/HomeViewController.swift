@@ -51,9 +51,12 @@ extension HomeViewController {
         bindFavoriteBoardViewModel()
         bindHotPostViewModel()
         bindFavoriteLabViewModel()
-        favoriteBoardViewModel.loadFavoriteBoard()
-        hotPostViewModel.loadHotPost()
-        favoriteLabViewModel.loadFavoriteLab()
+//        favoriteBoardViewModel.loadFavoriteBoard()
+//        hotPostViewModel.loadHotPost()
+//        favoriteLabViewModel.loadFavoriteLab()
+        favoriteBoardViewModel.loadTestData()
+        hotPostViewModel.loadTestData()
+        favoriteLabViewModel.loadTestData()
     }
     
     private func bind(reactor: HomeReactor) {

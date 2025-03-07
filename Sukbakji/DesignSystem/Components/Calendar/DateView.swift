@@ -94,8 +94,8 @@ final class DateView: UIView {
         
         self.mainView.addSubview(backButton)
         self.backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(6)
-            make.trailing.equalToSuperview().inset(14)
+            make.top.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().inset(8)
             make.height.width.equalTo(32)
         }
         self.backButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
