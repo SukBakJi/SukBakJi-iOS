@@ -32,10 +32,10 @@ class OrangeButton: UIButton {
     }
     
     
-    func setButtonState(isEnabled: Bool, enabledColor: UIColor, disabledColor: UIColor, enabledTitleColor: UIColor, disabledTitleColor: UIColor) {
+    func setButtonState(isEnabled: Bool) {
         // isEnabled 값에 따라 배경색을 다르게 설정
-        self.backgroundColor = isEnabled ? enabledColor : disabledColor
-        self.setTitleColor(isEnabled ? enabledTitleColor : disabledTitleColor, for: .normal)
+        self.backgroundColor = isEnabled ? .orange700 : .gray200
+        self.setTitleColor(isEnabled ? .white : .gray500, for: .normal)
     }
     
 
