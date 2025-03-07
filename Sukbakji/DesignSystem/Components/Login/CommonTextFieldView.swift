@@ -11,6 +11,7 @@ class CommonTextFieldView: UIView {
     //MARK: - Properties
     private var isPassword: Bool = false
     var validationHandler: ((String?) -> Bool)? /// 유효성 검사 핸들러
+    var textFieldChanged: (() -> Void)? /// 입력값 변경 이벤트 전달용 클로저
     private var stateViewHeightConstraint: NSLayoutConstraint!
 
     
@@ -99,6 +100,8 @@ class CommonTextFieldView: UIView {
         guard let validationHandler = validationHandler else { return }
         let isValid = validationHandler(textField.text)
         setErrorState(!isValid)
+        
+        textFieldChanged?() // 입력값 변경 시 ViewController에 이벤트 전달
     }
 
     /// 포커스를 잃었을 때 검사
@@ -118,7 +121,7 @@ class CommonTextFieldView: UIView {
         rightView.isHidden = false
     }
     
-    func validation(textField: CommonTextFieldView, regex: String, errorMessage: String, emptyErrorMessage: String) {
+    public func validation(textField: CommonTextFieldView, regex: String, errorMessage: String, emptyErrorMessage: String) {
         textField.validationHandler = { text in
             guard let text = text, !text.isEmpty else {
                 textField.setErrorMessage(emptyErrorMessage)
@@ -151,7 +154,7 @@ class CommonTextFieldView: UIView {
         }
     }
     
-    private lazy var textField = UITextField().then {
+    public var textField = UITextField().then {
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.clearButtonMode = .never
         
@@ -183,9 +186,6 @@ class CommonTextFieldView: UIView {
     
     private lazy var stateIcon = UIImageView().then {
         $0.image = UIImage(named: "SBJ_ErrorCircle")
-//        $0.snp.makeConstraints {
-//            $0.size.equalTo(CGSize(width: 12, height: 12))
-//        }
     }
     
     private lazy var stateLabel = UILabel().then {
