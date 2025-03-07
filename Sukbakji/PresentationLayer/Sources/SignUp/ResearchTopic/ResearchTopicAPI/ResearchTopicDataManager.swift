@@ -10,7 +10,7 @@ import Alamofire
 class ResearchTopicDataManager {
     func ResearchTopicDataManager(_ topicName: String, completion: @escaping (ResearchTopicModel?) -> Void) {
         
-        let url = APIConstants.researchTopics.path + "/search" + "?topicName=\(topicName)"
+        let url = APIConstants.researchTopicsSearch.path + "?topicName=\(topicName)"
         
         let headers: HTTPHeaders = [
             "Accept": "*/*"

@@ -74,10 +74,10 @@ class UnivCalendarTableViewCell: UITableViewCell {
         self.contentView.layer.cornerRadius = 12
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor
-        self.contentView.clipsToBounds = false
+        self.contentView.clipsToBounds = true
         
         self.contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview()
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().inset(24)
             make.bottom.equalToSuperview().inset(12)

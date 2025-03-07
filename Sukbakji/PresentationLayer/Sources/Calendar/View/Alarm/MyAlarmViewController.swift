@@ -45,7 +45,8 @@ extension MyAlarmViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.fetchMyAlarms()
+//        viewModel.fetchMyAlarms()
+        viewModel.loadTestData()
     }
     
     private func bindViewModel() {

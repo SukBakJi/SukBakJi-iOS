@@ -25,7 +25,7 @@ class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDel
         super.viewDidLoad()
         
         setUI()
-//        setAPI()
+        setAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +43,8 @@ extension UnivCalendarViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadUnivList()
+        viewModel.loadTestData()
+//        viewModel.loadUnivList()
     }
     
     private func bindViewModel() {

@@ -134,4 +134,12 @@ class CalendarViewModel {
         let newState = !selectedUnivAll.value
         selectedUnivAll.accept(newState) // 상태 변경
     }
+    
+    func loadTestData() {
+        let testUnivList: [UnivList] = [
+            UnivList(univId: 1, season: "ㅇㅇ", method: "ㅇㅇ", showing: 1),
+            UnivList(univId: 2, season: "ㅇㅇ", method: "ㅇㅇ", showing: 1)
+        ]
+        univList.accept(testUnivList)
+    }
 }
