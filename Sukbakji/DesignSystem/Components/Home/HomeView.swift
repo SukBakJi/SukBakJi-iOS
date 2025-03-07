@@ -261,7 +261,7 @@ class HomeView: UIView {
         favBoardView.addSubview(noFavBoard)
         favBoardView.addSubview(noFavBoardLabel)
         favBoardView.addSubview(favBoardContainerView)
-        favBoardView.addSubview(favBoardTableView)
+        favBoardContainerView.addSubview(favBoardTableView)
         
         contentView.addSubview(hotPostView)
         hotPostView.addSubview(hotPostLabel)

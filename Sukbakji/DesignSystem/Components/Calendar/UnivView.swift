@@ -33,6 +33,7 @@ class UnivView: UIView {
     }
     var univCalendarTableView = UITableView(frame: .zero, style: .plain).then {
         $0.separatorStyle = .none
+        $0.allowsSelection = false
         $0.backgroundColor = .clear
         $0.register(UnivCalendarTableViewCell.self, forCellReuseIdentifier: UnivCalendarTableViewCell.identifier)
     }

@@ -41,15 +41,11 @@ extension UnivSearchViewController {
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        univSearchView.backButton.rx.tap
-                    .bind { [weak self] in self?.clickXButton() }
-                    .disposed(by: disposeBag)
         univSearchView.deleteButton.rx.tap
                     .bind { [weak self] in self?.univSearchView.univSearchTextField.text = "" }
                     .disposed(by: disposeBag)
-        univSearchView.nextButton.rx.tap
-                    .bind { [weak self] in self?.clickNextButton() }
-                    .disposed(by: disposeBag)
+        univSearchView.backButton.addTarget(self, action: #selector(clickXButton), for: .touchUpInside)
+        univSearchView.nextButton.addTarget(self, action: #selector(clickNextButton), for: .touchUpInside)
 
         bindTableView()
     }

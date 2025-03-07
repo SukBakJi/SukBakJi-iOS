@@ -25,6 +25,11 @@ enum APIConstants {
     case smsFindEmail
     case smsCode
     
+    
+    case reportsPost
+    case reportsComment
+    
+    
     case board
     
     
@@ -55,7 +60,7 @@ enum APIConstants {
     case calendarUnivAll
     
     
-    case researchTopics
+    case researchTopicsSearch
     
     
     case mentor
@@ -97,10 +102,18 @@ extension APIConstants {
         case .userEducationCertification:
             return APIConstants.makeEndPoint("/user/education-certification")
             
+            
         case .smsFindEmail:
             return APIConstants.makeEndPoint("/sms/find-email")
         case .smsCode:
             return APIConstants.makeEndPoint("/sms/code")
+            
+            
+        case .reportsPost:
+            return APIConstants.makeEndPoint("/reports/post")
+        case .reportsComment:
+            return APIConstants.makeEndPoint("/reports/comment")
+            
             
         case .board:
             return APIConstants.makeEndPoint("/board")
@@ -153,8 +166,9 @@ extension APIConstants {
         case .calendarUnivAll:
             return APIConstants.makeEndPoint("/calender/univ/all")
             
-        case .researchTopics:
-            return APIConstants.makeEndPoint("/research-topics")
+            
+        case .researchTopicsSearch:
+            return APIConstants.makeEndPoint("/research-topics/search")
             
             
         case .mentor:
