@@ -77,16 +77,16 @@ class UnivCalendarTableViewCell: UITableViewCell {
         self.contentView.clipsToBounds = true
         
         self.contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(12)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().inset(24)
-            make.bottom.equalToSuperview().inset(12)
+            make.bottom.equalToSuperview()
         }
         
         self.contentView.addSubview(selectView)
         selectView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-           make.height.equalTo(48)
+            make.height.equalTo(48)
         }
         
         self.selectView.addSubview(selectButton)

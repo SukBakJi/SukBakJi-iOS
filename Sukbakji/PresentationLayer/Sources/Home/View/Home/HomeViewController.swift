@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
         
         setUI()
         setAPI()
-        //        bind(reactor: reactor)
+//        bind(reactor: reactor)
     }
     
     override func viewWillAppear(_ animated: Bool) {

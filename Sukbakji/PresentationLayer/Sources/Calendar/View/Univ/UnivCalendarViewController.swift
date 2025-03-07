@@ -97,7 +97,7 @@ extension UnivCalendarViewController {
         guard let indexPath = univView.univCalendarTableView.indexPath(for: cell) else { return }
         self.viewModel.selectUnivList = viewModel.univList.value[indexPath.row]
         let viewController = EditUnivCalendarViewController(calendarViewModel: self.viewModel)
-        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 150, isPannedable: true)
+        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 380, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
     }
 }

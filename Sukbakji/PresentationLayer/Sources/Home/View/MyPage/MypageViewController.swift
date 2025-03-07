@@ -26,6 +26,7 @@ class MypageViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
+        print(UserDefaults.standard.integer(forKey: "memberID"))
 //        setAPI()
     }
     
