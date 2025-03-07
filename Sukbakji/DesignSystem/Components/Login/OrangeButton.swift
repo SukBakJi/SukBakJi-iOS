@@ -9,7 +9,7 @@ import UIKit
 
 class OrangeButton: UIButton {
 
-    init(title: String, isEnabled: Bool = true) {
+    init(title: String, isEnabled: Bool = true, height: Int = 48) {
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
         self.setTitleColor(.gray500, for: .normal)
@@ -19,7 +19,7 @@ class OrangeButton: UIButton {
         self.layer.cornerRadius = 8
         
         self.snp.makeConstraints { make in
-            make.height.equalTo(48)
+            make.height.equalTo(height)
         }
     }
     

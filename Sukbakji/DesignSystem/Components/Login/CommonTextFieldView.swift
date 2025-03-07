@@ -9,18 +9,25 @@ import UIKit
 
 class CommonTextFieldView: UIView {
     //MARK: - Properties
+    enum ValidationMode {
+        case errorWithMessage
+        case errorOnly
+        case silentValidation
+    }
+    
+    private var validationMode: ValidationMode = .errorWithMessage
     private var isPassword: Bool = false
     var validationHandler: ((String?) -> Bool)? /// 유효성 검사 핸들러
     var textFieldChanged: (() -> Void)? /// 입력값 변경 이벤트 전달용 클로저
     private var stateViewHeightConstraint: NSLayoutConstraint!
-
+    
     
     //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: .zero)
         stateView.isHidden = true
         rightView.isHidden = true
-
+        
         setView()
         setConstraints()
         addTargets()
@@ -30,7 +37,7 @@ class CommonTextFieldView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-   
+    
     //MARK: - SetText
     func setTitle(_ text: String) {
         titleLabel.text = text
@@ -51,22 +58,46 @@ class CommonTextFieldView: UIView {
         eyeButton.isHidden = false
     }
     
+    func setValidationMode(_ mode: ValidationMode) {
+        self.validationMode = mode
+    }
+    
     func setErrorState(_ isError: Bool) {
-        stateView.isHidden = !isError
-        if isError {
-            textField.setErrorState()
-            clearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
-            eyeButton.setImage(UIImage(named: "SBJ_Password-hidden-red"), for: .normal)
-            eyeButton.setImage(UIImage(named: "SBJ_Password-shown-red"), for: .selected)
+        switch validationMode {
+        case .errorWithMessage:
+            if isError {
+                textField.setErrorState()
+                clearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
+                eyeButton.setImage(UIImage(named: "SBJ_Password-hidden-red"), for: .normal)
+                eyeButton.setImage(UIImage(named: "SBJ_Password-shown-red"), for: .selected)
+                
+                stateViewHeightConstraint.constant = 20
+            } else {
+                textField.setNormalState()
+                clearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
+                eyeButton.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
+                eyeButton.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
+                
+                stateViewHeightConstraint.constant = 0
+            }
             
-            stateViewHeightConstraint.constant = 20
-        } else {
-            textField.setNormalState()
-            clearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
-            eyeButton.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
-            eyeButton.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
-            
-            stateViewHeightConstraint.constant = 0
+        case .errorOnly:
+            stateView.isHidden = true
+            if isError {
+                textField.setErrorState()
+                clearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
+                eyeButton.setImage(UIImage(named: "SBJ_Password-hidden-red"), for: .normal)
+                eyeButton.setImage(UIImage(named: "SBJ_Password-shown-red"), for: .selected)
+                
+            } else {
+                textField.setNormalState()
+                clearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
+                eyeButton.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
+                eyeButton.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
+                
+            }
+        case .silentValidation:
+            stateView.isHidden = true
         }
     }
     
@@ -77,6 +108,24 @@ class CommonTextFieldView: UIView {
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
         textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
+    }
+    
+    public func validation(textField: CommonTextFieldView, regex: String, errorMessage: String = "", emptyErrorMessage: String = "") {
+        textField.validationHandler = { text in
+            guard let text = text, !text.isEmpty else {
+                textField.setErrorMessage(emptyErrorMessage)
+                return false
+            }
+            
+            let regex = regex
+            let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+            let isValid = predicate.evaluate(with: text)
+            if !isValid {
+                textField.setErrorMessage(errorMessage)
+            }
+            
+            return isValid
+        }
     }
     
     @objc
@@ -103,13 +152,13 @@ class CommonTextFieldView: UIView {
         
         textFieldChanged?() // 입력값 변경 시 ViewController에 이벤트 전달
     }
-
+    
     /// 포커스를 잃었을 때 검사
     @objc
     private func textFieldDidEndEditing(_ textField: UITextField) {
         textField.updateUnderlineColor(to: .gray300)
         rightView.isHidden = true
-
+        
         guard let validationHandler = validationHandler else { return }
         let isValid = validationHandler(textField.text)
         setErrorState(!isValid)
@@ -120,27 +169,7 @@ class CommonTextFieldView: UIView {
         textField.updateUnderlineColor(to: .blue400)
         rightView.isHidden = false
     }
-    
-    public func validation(textField: CommonTextFieldView, regex: String, errorMessage: String, emptyErrorMessage: String) {
-        textField.validationHandler = { text in
-            guard let text = text, !text.isEmpty else {
-                textField.setErrorMessage(emptyErrorMessage)
-                return false
-            }
-            
-            let regex = regex
-            let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
 
-            let isValid = predicate.evaluate(with: text)
-            
-            if !isValid {
-                textField.setErrorMessage(errorMessage)
-            }
-            
-            return isValid
-        }
-    }
-    
     //MARK: - Components
     private lazy var titleLabel = UILabel().then {
         $0.textAlignment = .left
@@ -195,14 +224,13 @@ class CommonTextFieldView: UIView {
     }
     
     private func makeStack(axis: NSLayoutConstraint.Axis, spacing: CGFloat) -> UIStackView {
-            let stack = UIStackView()
-            stack.axis = axis
-            stack.spacing = spacing
-            stack.distribution = .fill
-            stack.alignment = .center
-            return stack
-        }
-    
+        let stack = UIStackView()
+        stack.axis = axis
+        stack.spacing = spacing
+        stack.distribution = .fill
+        stack.alignment = .center
+        return stack
+    }
     
     //MARK: - SetUI
     private func setView() {
