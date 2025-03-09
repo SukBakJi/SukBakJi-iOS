@@ -69,7 +69,7 @@ class FavoriteBoardTableViewCell: UITableViewCell {
         separatorView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(1.2)
         }
     }
     

@@ -25,7 +25,7 @@ class MyAlarmTableViewCell: UITableViewCell {
     
     private let labelView = UIView().then {
         $0.backgroundColor = .orange50
-        $0.layer.cornerRadius = 6
+        $0.layer.cornerRadius = 4
     }
     private let univLabel = UILabel().then {
         $0.textColor = .orange600

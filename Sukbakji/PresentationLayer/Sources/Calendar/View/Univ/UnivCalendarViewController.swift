@@ -61,6 +61,7 @@ extension UnivCalendarViewController {
                     .bind { isSelected in
                         let imageName = isSelected ? "Sukbakji_Check2" : "Sukbakji_Check"
                         cell.selectButton.setImage(UIImage(named: imageName), for: .normal)
+                        self.univView.allSelectButton.setImage(UIImage(named: imageName), for: .normal)
                     }
                     .disposed(by: cell.disposeBag)
             }
