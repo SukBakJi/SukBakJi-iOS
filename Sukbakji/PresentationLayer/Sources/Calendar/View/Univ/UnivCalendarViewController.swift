@@ -25,7 +25,7 @@ class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDel
         super.viewDidLoad()
         
         setUI()
-//        setAPI()
+        setAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +43,8 @@ extension UnivCalendarViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadUnivList()
+        viewModel.loadTestData()
+//        viewModel.loadUnivList()
     }
     
     private func bindViewModel() {
@@ -60,6 +61,7 @@ extension UnivCalendarViewController {
                     .bind { isSelected in
                         let imageName = isSelected ? "Sukbakji_Check2" : "Sukbakji_Check"
                         cell.selectButton.setImage(UIImage(named: imageName), for: .normal)
+                        self.univView.allSelectButton.setImage(UIImage(named: imageName), for: .normal)
                     }
                     .disposed(by: cell.disposeBag)
             }
@@ -96,7 +98,7 @@ extension UnivCalendarViewController {
         guard let indexPath = univView.univCalendarTableView.indexPath(for: cell) else { return }
         self.viewModel.selectUnivList = viewModel.univList.value[indexPath.row]
         let viewController = EditUnivCalendarViewController(calendarViewModel: self.viewModel)
-        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 150, isPannedable: true)
+        let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 380, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
     }
 }

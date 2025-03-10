@@ -105,7 +105,7 @@ class EditUnivView: UIView {
         }
         
         recruitDateView.snp.makeConstraints {
-            $0.top.equalTo(univLabel.snp.top).offset(12)
+            $0.top.equalTo(univLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(88)
         }
@@ -115,7 +115,7 @@ class EditUnivView: UIView {
             $0.leading.equalToSuperview().offset(28)
             $0.height.equalTo(24)
         }
-        recruitDateLabel.addImageAboveLabel(referenceView: univLabel, spacing: 32)
+        recruitDateLabel.addImageAboveLabel(referenceView: univLabel, spacing: 24)
         
         recruitFirstButton.snp.makeConstraints {
             $0.top.equalTo(recruitDateLabel.snp.bottom).offset(10)
@@ -144,7 +144,7 @@ class EditUnivView: UIView {
         }
         
         recruitTypeView.snp.makeConstraints {
-            $0.top.equalTo(recruitDateView.snp.top)
+            $0.top.equalTo(recruitDateView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
         }

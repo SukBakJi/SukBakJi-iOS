@@ -33,6 +33,7 @@ class UnivView: UIView {
     }
     var univCalendarTableView = UITableView(frame: .zero, style: .plain).then {
         $0.separatorStyle = .none
+        $0.allowsSelection = false
         $0.backgroundColor = .clear
         $0.register(UnivCalendarTableViewCell.self, forCellReuseIdentifier: UnivCalendarTableViewCell.identifier)
     }
@@ -89,12 +90,12 @@ class UnivView: UIView {
         allSelectButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(24)
-            $0.height.width.equalTo(32)
+            $0.height.width.equalTo(20)
         }
         
         allSelectLabel.snp.makeConstraints {
             $0.centerY.equalTo(allSelectButton)
-            $0.leading.equalTo(allSelectButton.snp.trailing).offset(2)
+            $0.leading.equalTo(allSelectButton.snp.trailing).offset(8)
             $0.height.equalTo(17)
         }
         

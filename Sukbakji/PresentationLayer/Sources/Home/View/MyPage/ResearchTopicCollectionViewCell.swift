@@ -37,7 +37,7 @@ class ResearchTopicCollectionViewCell: UICollectionViewCell {
     private func setUI() {
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints { make in
-           make.edges.equalToSuperview().offset(18)
+           make.edges.equalToSuperview()
         }
         
         self.labelView.addSubview(labelLabel)
@@ -47,6 +47,6 @@ class ResearchTopicCollectionViewCell: UICollectionViewCell {
     }
     
     func prepare(topics: String) {
-        labelLabel.text = topics
+        labelLabel.text = "#\(topics)"
     }
 }

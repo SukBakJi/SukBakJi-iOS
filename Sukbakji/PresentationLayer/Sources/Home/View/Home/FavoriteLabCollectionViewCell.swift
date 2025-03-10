@@ -161,7 +161,7 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         labLabel.text = favoriteLab.labName
         professorNameLabel.text = favoriteLab.professorName
         professorLabLabel.text = favoriteLab.departmentName
-        labLabel2.text = favoriteLab.researchTopics[0]
-        labLabel3.text = favoriteLab.researchTopics[1]
+        labLabel2.text = "#\(favoriteLab.researchTopics[0])"
+        labLabel3.text = "#\(favoriteLab.researchTopics[1])"
     }
 }

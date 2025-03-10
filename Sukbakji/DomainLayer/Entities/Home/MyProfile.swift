@@ -8,16 +8,15 @@
 import Foundation
 
 struct MyProfile : Codable {
-    let name: String?
-    let provider: String?
+    let name: String
+    let provider: String
     let degreeLevel: String
-    let researchTopics: [String]?
-    let point: Int?
+    let researchTopics: [String]
 }
 
 struct EditProfile : Codable {
     let name: String
+    let provider: String
     let degreeLevel: String
     let researchTopics: [String]
-    let point: Int
 }

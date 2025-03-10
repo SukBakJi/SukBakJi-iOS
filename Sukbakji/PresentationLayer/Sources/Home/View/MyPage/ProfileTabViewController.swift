@@ -34,8 +34,8 @@ class ProfileTabViewController: TabmanViewController {
         
         setUI()
         setupTabMan()
-//        setAPI()
-//        getUserPW()
+        setAPI()
+        getUserPW()
     }
     
     override func viewWillAppear(_ animated: Bool) {

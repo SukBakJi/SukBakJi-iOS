@@ -24,7 +24,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
     weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
     
     let selectView = UIView().then {
-        $0.backgroundColor = .gray200
+        $0.backgroundColor = .gray50
     }
     let selectButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
@@ -74,33 +74,33 @@ class UnivCalendarTableViewCell: UITableViewCell {
         self.contentView.layer.cornerRadius = 12
         self.contentView.layer.borderWidth = 1
         self.contentView.layer.borderColor = UIColor.gray200.cgColor
-        self.contentView.clipsToBounds = false
+        self.contentView.clipsToBounds = true
         
         self.contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(12)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().inset(24)
-            make.bottom.equalToSuperview().inset(12)
+            make.bottom.equalToSuperview()
         }
         
         self.contentView.addSubview(selectView)
         selectView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-           make.height.equalTo(48)
+            make.height.equalTo(48)
         }
         
         self.selectView.addSubview(selectButton)
         selectButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(6)
-            make.height.width.equalTo(32)
+            make.leading.equalToSuperview().offset(12)
+            make.height.width.equalTo(20)
         }
         
         self.selectView.addSubview(univLabel)
         univLabel.snp.makeConstraints { make in
             make.centerY.equalTo(selectButton)
-            make.leading.equalTo(selectButton.snp.trailing).offset(2)
-           make.height.equalTo(19)
+            make.leading.equalTo(selectButton.snp.trailing).offset(8)
+            make.height.equalTo(19)
         }
         
         self.selectView.addSubview(deleteButton)
@@ -121,7 +121,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
         self.contentView.addSubview(recruitLabel)
         recruitLabel.snp.makeConstraints { make in
             make.centerY.equalTo(recruitImageView)
-            make.leading.equalTo(recruitImageView.snp.trailing).offset(6)
+            make.leading.equalTo(recruitImageView.snp.trailing).offset(8)
             make.height.equalTo(17)
         }
         

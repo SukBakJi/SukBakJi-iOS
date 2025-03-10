@@ -40,6 +40,7 @@ class EditInfoViewController: UIViewController {
         
         setUI()
         setDrop()
+        setAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -154,7 +155,7 @@ extension EditInfoViewController {
         viewModel.myProfile
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
-                self?.researchTopicViewModel.ResearchTopicItems.accept(profile.researchTopics!)
+                self?.researchTopicViewModel.ResearchTopicItems.accept(profile.researchTopics)
                 self?.editInfoView.idTextField.text = retrievedEmail
                 self?.editInfoView.nameTextField.text = profile.name
                 self?.editInfoView.belongTextField.text = DegreeLevel.from(profile.degreeLevel)?.korean ?? "학위 정보 없음"

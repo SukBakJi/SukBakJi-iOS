@@ -25,10 +25,10 @@ class EdifInfoView: UIView {
         $0.textColor = .gray300
     }
     let logingImageView = UIImageView().then {
-        $0.image = UIImage(named: "Sukbakji_Kakao")
+        $0.image = UIImage(named: "Sukbakji_Email")
     }
     let logingLabel = UILabel().then {
-        $0.text = "카카오 로그인으로 사용 중이에요"
+        $0.text = "이메일 로그인으로 사용 중이에요"
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
         $0.textColor = .gray900
     }
@@ -91,7 +91,6 @@ class EdifInfoView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 8
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(ResearchTopicCollectionViewCell.self, forCellWithReuseIdentifier: ResearchTopicCollectionViewCell.identifier)
@@ -273,7 +272,7 @@ class EdifInfoView: UIView {
         plusButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(53)
             $0.trailing.equalToSuperview().inset(22)
-            $0.width.equalTo(44)
+            $0.height.width.equalTo(44)
         }
         
         researchTopicCollectionView.snp.makeConstraints {
