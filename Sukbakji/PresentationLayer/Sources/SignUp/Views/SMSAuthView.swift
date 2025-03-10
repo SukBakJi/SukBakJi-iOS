@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SMSAuthView: UIView, UITextFieldDelegate {
+class SMSAuthView: UIView {
     //MARK: - Properties
     var textFieldChanged: (() -> Void)? // 입력값 변경 이벤트 전달용 클로저
     
@@ -40,34 +40,6 @@ class SMSAuthView: UIView, UITextFieldDelegate {
     private func setDelegates() {
         phoneNumTF.textField.delegate = self
         verifyCodeTF.textField.delegate = self
-    }
-    
-    // 특정 문자 입력 방지 (숫자만 허용 & 하이픈(-) 입력 방지)
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = CharacterSet.decimalDigits
-        let characterSet = CharacterSet(charactersIn: string)
-        
-        // 숫자 입력만 허용
-        guard allowedCharacters.isSuperset(of: characterSet) else {
-            return false
-        }
-        
-        // 현재 텍스트
-        guard let currentText = textField.text as NSString? else {
-            return true
-        }
-        
-        // 변경 후 예상되는 텍스트
-        let newText = currentText.replacingCharacters(in: range, with: string)
-        
-        // 최대 글자수 제한
-        if textField == phoneNumTF.textField {
-            return newText.count <= 11
-        } else if textField == verifyCodeTF.textField {
-            return newText.count <= 6
-        }
-        
-        return true
     }
     
     private func makeStack(axis: NSLayoutConstraint.Axis, spacing: CGFloat) -> UIStackView {
@@ -136,5 +108,35 @@ class SMSAuthView: UIView, UITextFieldDelegate {
             $0.horizontalEdges.equalToSuperview().inset(24)
             $0.bottom.equalToSuperview().inset(100)
         }
+    }
+}
+
+extension SMSAuthView: UITextFieldDelegate {
+    // 특정 문자 입력 방지 (숫자만 허용 & 하이픈(-) 입력 방지)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        
+        // 숫자 입력만 허용
+        guard allowedCharacters.isSuperset(of: characterSet) else {
+            return false
+        }
+        
+        // 현재 텍스트
+        guard let currentText = textField.text as NSString? else {
+            return true
+        }
+        
+        // 변경 후 예상되는 텍스트
+        let newText = currentText.replacingCharacters(in: range, with: string)
+        
+        // 최대 글자수 제한
+        if textField == phoneNumTF.textField {
+            return newText.count <= 11
+        } else if textField == verifyCodeTF.textField {
+            return newText.count <= 6
+        }
+        
+        return true
     }
 }

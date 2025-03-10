@@ -45,14 +45,12 @@ class SMSAuthViewController: UIViewController {
     
     private func updateNextButtonState() {
         let isPhoneNumValid = smsAuthView.phoneNumTF.validationHandler?(smsAuthView.phoneNumTF.textField.text) ?? false
-//        let isVerifyCodeValid = smsAuthView.verifyCodeTF.validationHandler?(smsAuthView.verifyCodeTF.textField.text) ?? false
         
         smsAuthView.sendCode.setButtonState(isEnabled: isPhoneNumValid)
 
-        // 번호 발송 성공 시 인증하기 버튼 활성화
+        // 인증요청 성공 시 인증하기 버튼 활성화
         let isSuccessSendCode = smsAuthView.phoneNumTF.textField.isUserInteractionEnabled
-        smsAuthView.verifyCode.isEnabled = isSuccessSendCode
-        smsAuthView.verifyCode.setButtonState(isEnabled: isSuccessSendCode)
+        smsAuthView.verifyCode.setButtonState(isEnabled: !isSuccessSendCode)
     }
     
     private func pushToNextVC(_ nextVC: UIViewController) {
@@ -87,7 +85,6 @@ class SMSAuthViewController: UIViewController {
             ToastView.show(image: UIImage(named: "SBJ_warning") ?? UIImage(), message: "인증번호를 입력해 주세요", in: self.view)
         } else {
             callPostVerifyCode()
-            
         }
     }
     
@@ -104,6 +101,7 @@ class SMSAuthViewController: UIViewController {
             guard let self = self else { return }
             
             if let model = data, model.code == "COMMON200" {
+                // 인증요청 성공 시 전화번호 필드 막기
                 smsAuthView.phoneNumTF.textField.isUserInteractionEnabled = false
                 print("인증번호 요청 성공")
             }

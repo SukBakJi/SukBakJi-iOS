@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 프로필 설정
 struct PostProfileRequestDTO : Encodable {
     var name : String?
     var degreeLevel : DegreeLevel
@@ -40,7 +41,20 @@ enum DegreeLevel: String, Codable {
     }
 }
 
+// 학력인증 이미지 첨부
 struct PostEduImageRequestDTO: Codable {
     let certificationPicture: String
     let educationCertificateType: String
+}
+
+// 이름과 전화번호로 이메일 찾기
+struct PostUserEmailRequestDTO: Codable {
+    let name: String
+    let phoneNumber: String
+}
+
+// 이메일 인증번호 인증
+struct PostUserEmailCodeRequestDTO: Codable {
+    let email: String
+    let code: String
 }

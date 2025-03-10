@@ -12,7 +12,7 @@ class OrangeButton: UIButton {
     init(title: String, isEnabled: Bool = true, height: Int = 48) {
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
-        self.setTitleColor(.white, for: .normal)
+        self.setTitleColor(isEnabled ? .white : .gray500, for: .normal)
         self.backgroundColor = isEnabled ? .orange700 : .gray200
         
         self.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)

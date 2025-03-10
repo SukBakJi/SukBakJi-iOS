@@ -8,80 +8,95 @@
 import UIKit
 
 class FindEmailViewController: UIViewController {
-    
-    private lazy var findView = FindEmailView()
-    
-    override func loadView() {
-        self.view = findView
+    // MARK: - View
+    private lazy var findEmailView = FindEmailView().then {
+        $0.nextButton.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
+        
+        // 입력값 변경 시 버튼 활성화 상태 업데이트
+        $0.textFieldChanged = { [weak self] in
+            self?.updateNextButtonState()
+        }
     }
     
+    //MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view = findEmailView
         self.title = "이메일 찾기"
-        setTextFieldDelegate()
+        
+        updateNextButtonState()
+        validation()
     }
     
-    private func setTextFieldDelegate() {
-        findView.nameTextField.delegate = self
-        findView.phoneNumTextField.delegate = self
-    }
-}
-
-extension FindEmailViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.addBorder([.bottom], color: .blue400, width: 0.5)
-        if textField == findView.nameTextField {
-            findView.nameClearButton.isHidden = false
-        }
-        if textField == findView.phoneNumTextField {
-            findView.phoneNumClearButton.isHidden = false
-        }
-        
+    //MARK: - Functional
+    private func validation() {
+        findEmailView.nameTF.validation(
+            textField: findEmailView.nameTF,
+            regex: "^(?=.*[가-힣a-zA-Z])[가-힣a-zA-Z]+$",
+            errorMessage: "이름이 형식에 맞지 않습니다",
+            emptyErrorMessage: "이름을 입력해 주세요"
+        )
+        findEmailView.phoneNumTF.validation(
+            textField: findEmailView.phoneNumTF,
+            regex: "^01[0-9]\\d{3,4}\\d{4}$",
+            errorMessage: "전화번호가 형식에 맞지 않습니다",
+            emptyErrorMessage: "전화번호를 입력해 주세요"
+        )
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.layer.addBorder([.bottom], color: .gray300, width: 0.5)
-        if textField == findView.nameTextField {
-            findView.nameClearButton.isHidden = true
-        }
-        if textField == findView.phoneNumTextField {
-            findView.phoneNumClearButton.isHidden = true
-        }
-        return true
+    private func updateNextButtonState() {
+        let isNameValid = findEmailView.nameTF.validationHandler?(findEmailView.nameTF.textField.text) ?? false
+        let isPhoneNumValid = findEmailView.phoneNumTF.validationHandler?(findEmailView.phoneNumTF.textField.text) ?? false
+        
+        findEmailView.nextButton.setButtonState(isEnabled: isNameValid && isPhoneNumValid)
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        findView.validateFieldForButtonUpdate()
-        
-        if textField == findView.nameTextField {
-            let name = findView.nameTextField.text ?? ""
-            if !findView.isValidName(name) {
-                findView.changeStateError(findView.nameTextField)
-                findView.nameErrorLabel.text = "올바르지 않은 형식의 이름입니다"
-            } else {
-                findView.changeStateBack(findView.nameTextField)
-            }
-        }
-        
-        if textField == findView.phoneNumTextField {
-            let phoneNum = findView.phoneNumTextField.text ?? ""
-            if phoneNum.count < 6 {
-                findView.changeStateError(findView.phoneNumTextField)
-                findView.phoneNumErrorLabel.text = "전화번호가 형식에 맞지 않습니다"
-            } else {
-                findView.changeStateBack(findView.phoneNumTextField)
-            }
-        }
+    //MARK: Event
+    @objc
+    private func didTapNext() {
+        callPostUserEmail()
     }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // 전화번호 입력 필드일 경우 하이픈 제거 처리
-        if textField == findView.phoneNumTextField {
-            let allowedCharacters = CharacterSet.decimalDigits
-            let characterSet = CharacterSet(charactersIn: string)
+    
+    //MARK: - Network
+    // 이름과 전화번호로 이메일 찾기
+    private func callPostUserEmail() {
+        let name = findEmailView.nameTF.textField.text ?? ""
+        let phoneNum = findEmailView.phoneNumTF.textField.text ?? ""
+        let request = PostUserEmailRequestDTO(name: name, phoneNumber: phoneNum)
+        
+        let userDataManager = UserDataManager()
+        
+        userDataManager.PostUserEmailDataManager(request) {
+            [weak self] data in
+            guard let self = self else { return }
             
-            // 숫자만 입력 가능하도록 설정 (하이픈 입력 방지)
-            return allowedCharacters.isSuperset(of: characterSet)
+            if let model = data, model.code == "COMMON200" {
+                // 성공
+                guard let email = model.result else { return }
+                // 이메일 확인 팝업 띄우기
+                let popup = DoubleButtonPopup(
+                    title: "가입하신 이메일을 확인해 주세요",
+                    desc: "\(name) 님이 가입하신 이메일은\n \(email)입니다.",
+                    range: email,
+                    confirmText: "로그인 하기",
+                    cancleText: "비밀번호 찾기",
+                    confirmAction: { [weak self] in
+                        // 화면 이동
+                    })
+                popup.show()
+                
+            } else {
+                // 실패
+                // 실패 팝업 띄우기
+                let popup = SingleButtonPopup(
+                    title: "입력한 정보가 일치하지 않습니다",
+                    confirmText: "다시 입력할게요",
+                    confirmAction: { [weak self] in
+                        // 화면 이동
+                    })
+                popup.show()
+
+            }
         }
-        return true
     }
 }
