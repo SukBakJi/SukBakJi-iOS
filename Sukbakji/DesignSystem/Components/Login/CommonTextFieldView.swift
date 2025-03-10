@@ -65,6 +65,7 @@ class CommonTextFieldView: UIView {
     func setErrorState(_ isError: Bool) {
         switch validationMode {
         case .errorWithMessage:
+            stateView.isHidden = false
             if isError {
                 textField.setErrorState()
                 clearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)

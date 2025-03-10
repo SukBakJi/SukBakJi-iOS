@@ -20,6 +20,7 @@ class SmsDataManager {
     func smsVerifyDataManager(_ parameters: VerifyCodeRequestDTO, completion: @escaping (SmsResponseDTO?) -> Void) {
         AF.request(
             smsVerifylUrl,
+            method: .post,
             parameters: parameters,
             encoder: JSONParameterEncoder.default,
             headers: headers)
@@ -38,8 +39,10 @@ class SmsDataManager {
     
     // 인증번호 요청
     func smsCodeDataManager(_ parameters: SmsCodeRequestDTO, completion: @escaping (SmsResponseDTO?) -> Void) {
+        print(parameters)
         AF.request(
             smsCodeUrl,
+            method: .post,
             parameters: parameters,
             encoder: JSONParameterEncoder.default,
             headers: headers)

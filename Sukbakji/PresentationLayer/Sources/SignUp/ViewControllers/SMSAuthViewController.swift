@@ -38,21 +38,21 @@ class SMSAuthViewController: UIViewController {
         )
         smsAuthView.verifyCodeTF.validation(
             textField: smsAuthView.verifyCodeTF,
-            regex: "^[0-9]{0,6}$"
+            regex: "^[0-9]{0,6}$",
+            errorMessage: "인증번호가 일치하지 않습니다"
         )
     }
     
     private func updateNextButtonState() {
         let isPhoneNumValid = smsAuthView.phoneNumTF.validationHandler?(smsAuthView.phoneNumTF.textField.text) ?? false
-        let isVerifyCodeValid = smsAuthView.verifyCodeTF.validationHandler?(smsAuthView.verifyCodeTF.textField.text) ?? false
+//        let isVerifyCodeValid = smsAuthView.verifyCodeTF.validationHandler?(smsAuthView.verifyCodeTF.textField.text) ?? false
         
-        smsAuthView.sendCode.isEnabled = isPhoneNumValid
         smsAuthView.sendCode.setButtonState(isEnabled: isPhoneNumValid)
 
-        // 번호 발송이 성공했을때만도 이내이블 조건에 추가해야함
-        smsAuthView.verifyCode.isEnabled = isVerifyCodeValid
-        
-        
+        // 번호 발송 성공 시 인증하기 버튼 활성화
+        let isSuccessSendCode = smsAuthView.phoneNumTF.textField.isUserInteractionEnabled
+        smsAuthView.verifyCode.isEnabled = isSuccessSendCode
+        smsAuthView.verifyCode.setButtonState(isEnabled: isSuccessSendCode)
     }
     
     private func pushToNextVC(_ nextVC: UIViewController) {
@@ -72,12 +72,26 @@ class SMSAuthViewController: UIViewController {
     
     @objc
     private func didTapSendCode() {
-        print("엥")
+        let isPhoneNumValid = smsAuthView.phoneNumTF.validationHandler?(smsAuthView.phoneNumTF.textField.text) ?? false
+        if !isPhoneNumValid {
+            // 팝업
+            print("전화번호를 입력해 주세요")
+        } else {
+            callPostRequestSMS()
+        }
     }
     
     @objc
     private func didTapVerifyCode() {
-        
+        let isVerifyCodeValid = smsAuthView.verifyCodeTF.validationHandler?(smsAuthView.verifyCodeTF.textField.text) ?? false
+        if !isVerifyCodeValid {
+            // 팝업
+            print("인증번호를 입력해 주세요")
+            
+        } else {
+            callPostVerifyCode()
+            
+        }
     }
     
     //MARK: - Network
@@ -89,11 +103,37 @@ class SMSAuthViewController: UIViewController {
         let smsDataManager = SmsDataManager()
         
         smsDataManager.smsCodeDataManager(request) {
-            [weak self] loginModel in
+            [weak self] data in
             guard let self = self else { return }
             
-            if let model = loginModel, model.code == "COMMON200" {
+            if let model = data, model.code == "COMMON200" {
+                smsAuthView.phoneNumTF.textField.isUserInteractionEnabled = false
                 print("인증번호 요청 성공")
+            }
+        }
+    }
+    
+    private func callPostVerifyCode() {
+        let code = smsAuthView.verifyCodeTF.textField.text ?? ""
+        let phoneNum = smsAuthView.phoneNumTF.textField.text ?? ""
+        let request = VerifyCodeRequestDTO(phoneNumber: phoneNum, verificationCode: code)
+        
+        let smsDataManager = SmsDataManager()
+        
+        smsDataManager.smsVerifyDataManager(request) {
+            [weak self] data in
+            guard let self = self else { return }
+            
+            if let model = data, model.code == "COMMON200" {
+                smsAuthView.phoneNumTF.textField.setUnableState()
+                smsAuthView.verifyCodeTF.textField.setUnableState()
+                print("인증번호 검증 성공")
+                // 다음으로 버튼 활성화
+                smsAuthView.nextButton.setButtonState(isEnabled: true)
+            } else {
+                smsAuthView.verifyCodeTF.setValidationMode(.errorWithMessage)
+                smsAuthView.verifyCodeTF.setErrorState(true)
+                smsAuthView.verifyCodeTF.setErrorMessage("인증번호가 일치하지 않습니다")
             }
         }
     }

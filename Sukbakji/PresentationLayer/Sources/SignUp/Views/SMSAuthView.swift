@@ -46,7 +46,28 @@ class SMSAuthView: UIView, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: characterSet)
+        
+        // 숫자 입력만 허용
+        guard allowedCharacters.isSuperset(of: characterSet) else {
+            return false
+        }
+        
+        // 현재 텍스트
+        guard let currentText = textField.text as NSString? else {
+            return true
+        }
+        
+        // 변경 후 예상되는 텍스트
+        let newText = currentText.replacingCharacters(in: range, with: string)
+        
+        // 최대 글자수 제한
+        if textField == phoneNumTF.textField {
+            return newText.count <= 11
+        } else if textField == verifyCodeTF.textField {
+            return newText.count <= 6
+        }
+        
+        return true
     }
     
     private func makeStack(axis: NSLayoutConstraint.Axis, spacing: CGFloat) -> UIStackView {
@@ -82,7 +103,9 @@ class SMSAuthView: UIView, UITextFieldDelegate {
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     
-    public lazy var nextButton = OrangeButton(title: "다음으로")
+    public lazy var nextButton = OrangeButton(title: "다음으로").then {
+        $0.isEnabled = false
+    }
     
     //MARK: - SetUI
     private func setView() {
