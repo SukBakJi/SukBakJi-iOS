@@ -74,8 +74,7 @@ class SMSAuthViewController: UIViewController {
     private func didTapSendCode() {
         let isPhoneNumValid = smsAuthView.phoneNumTF.validationHandler?(smsAuthView.phoneNumTF.textField.text) ?? false
         if !isPhoneNumValid {
-            // 팝업
-            print("전화번호를 입력해 주세요")
+            ToastView.show(image: UIImage(named: "SBJ_warning") ?? UIImage(), message: "전화번호를 입력해 주세요", in: self.view)
         } else {
             callPostRequestSMS()
         }
@@ -85,9 +84,7 @@ class SMSAuthViewController: UIViewController {
     private func didTapVerifyCode() {
         let isVerifyCodeValid = smsAuthView.verifyCodeTF.validationHandler?(smsAuthView.verifyCodeTF.textField.text) ?? false
         if !isVerifyCodeValid {
-            // 팝업
-            print("인증번호를 입력해 주세요")
-            
+            ToastView.show(image: UIImage(named: "SBJ_warning") ?? UIImage(), message: "인증번호를 입력해 주세요", in: self.view)
         } else {
             callPostVerifyCode()
             
