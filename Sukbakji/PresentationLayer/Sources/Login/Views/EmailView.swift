@@ -72,7 +72,7 @@ class EmailView: UIView {
     }
     
     //Login
-    public var loginButton = OrangeButton(title: "로그인")
+    public var loginButton = OrangeButton(title: "로그인", isEnabled: false)
 
     //Auth
     private lazy var authView = UIStackView().then {

@@ -88,7 +88,7 @@ class SMSAuthView: UIView, UITextFieldDelegate {
         $0.textField.keyboardType = .numberPad
     }
     
-    public lazy var sendCode = OrangeButton(title: "번호 발송", height: 44).then {
+    public lazy var sendCode = OrangeButton(title: "번호 발송", isEnabled: false, height: 44).then {
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     
@@ -99,11 +99,11 @@ class SMSAuthView: UIView, UITextFieldDelegate {
         $0.textField.keyboardType = .numberPad
     }
     
-    public lazy var verifyCode = OrangeButton(title: "인증하기", height: 44).then {
+    public lazy var verifyCode = OrangeButton(title: "인증하기", isEnabled: false, height: 44).then {
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     
-    public lazy var nextButton = OrangeButton(title: "다음으로").then {
+    public lazy var nextButton = OrangeButton(title: "다음으로", isEnabled: false).then {
         $0.isEnabled = false
     }
     
