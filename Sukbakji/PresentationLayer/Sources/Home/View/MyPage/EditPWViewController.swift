@@ -148,10 +148,6 @@ extension EditPWViewController {
 extension EditPWViewController {
     
     private func bindViewModel() {
-        editPWView.currentPWTextField.rx.text.orEmpty
-            .bind(to: viewModel.currentPWInput)
-            .disposed(by: disposeBag)
-        
         editPWView.newPWTextField.rx.text.orEmpty
             .bind(to: viewModel.newPWInput)
             .disposed(by: disposeBag)

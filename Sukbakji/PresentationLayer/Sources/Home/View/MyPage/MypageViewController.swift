@@ -26,8 +26,7 @@ class MypageViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
-        print(UserDefaults.standard.integer(forKey: "memberID"))
-//        setAPI()
+        setAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,10 +83,6 @@ extension MypageViewController {
                     self?.mypageView.warningLabel.isHidden = false
                     self?.mypageView.certificateLabel.text = "아직 학적 인증이 완료되지 않은 상태입니다"
                 }
-                let numberFormatter = NumberFormatter()
-                numberFormatter.numberStyle = .decimal
-                let pointNumber = String(numberFormatter.string(from: NSNumber(value: profile.point ?? 0)) ?? "")
-                self?.mypageView.pointLabel.text = pointNumber
             })
             .disposed(by: disposeBag)
         

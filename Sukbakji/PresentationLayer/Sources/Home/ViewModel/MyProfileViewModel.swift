@@ -18,7 +18,6 @@ class MyProfileViewModel {
     let profileUpdated = PublishSubject<Bool>()
     let pwChanged = PublishSubject<Bool>()
     
-    let currentPWInput = BehaviorRelay<String>(value: "")
     let newPWInput = BehaviorRelay<String>(value: "")
     let confirmPWInput = BehaviorRelay<String>(value: "")
     
@@ -78,7 +77,6 @@ class MyProfileViewModel {
         }
         
         let params = [
-            "currentPassword": currentPWInput.value,
             "newPassword": newPWInput.value,
             "confirmPassword": confirmPWInput.value
         ] as [String : Any]

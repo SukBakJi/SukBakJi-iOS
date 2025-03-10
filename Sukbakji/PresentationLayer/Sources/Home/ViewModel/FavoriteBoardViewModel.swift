@@ -32,8 +32,8 @@ class FavoriteBoardViewModel {
     
     func loadTestData() {
         let testfavoriteBoardList: [FavoriteBoard] = [
-            FavoriteBoard(postId: 0, title: "DIY 소모임", boardName: "배고프다"),
-            FavoriteBoard(postId: 0, title: "석박지 동아리", boardName: "배고프다")
+            FavoriteBoard(postId: 0, title: "DIY 소모임", content: "", views: 10, boardName: "배고프다", menu: "", commentCount: 0),
+            FavoriteBoard(postId: 0, title: "석박지 동아리", content: "", views: 10, boardName: "배고프다", menu: "", commentCount: 0)
         ]
         favoriteBoardList.accept(testfavoriteBoardList)
     }

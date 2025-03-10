@@ -10,5 +10,9 @@ import Foundation
 struct FavoriteBoard : Codable {
     let postId: Int
     let title: String
+    let content: String
+    let views: Int
     let boardName: String
+    let menu: String
+    let commentCount: Int
 }
