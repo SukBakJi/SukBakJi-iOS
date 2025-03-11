@@ -14,6 +14,7 @@ struct PostProfileResponseDTO: Decodable {
     let result: ProfileSettingResult?
 }
 
+// 프로필 설정
 struct ProfileSettingResult: Decodable{
     let name: String?
     let provider: String?
@@ -22,6 +23,7 @@ struct ProfileSettingResult: Decodable{
     let point: Int?
 }
 
+// 학력인증 이미지 첨부
 struct PostEduImageResponseDTO: Decodable {
     let isSuccess: Bool?
     let code: String?
@@ -29,3 +31,10 @@ struct PostEduImageResponseDTO: Decodable {
     let result: String?
 }
 
+// 이름과 전화번호로 이메일 찾기 공용
+struct PostUserEmailResponseDTO: Decodable {
+    let isSuccess: Bool?
+    let code: String?
+    let message: String?
+    let result: String?
+}

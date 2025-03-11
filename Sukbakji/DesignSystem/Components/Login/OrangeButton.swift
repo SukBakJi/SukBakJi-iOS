@@ -9,17 +9,17 @@ import UIKit
 
 class OrangeButton: UIButton {
 
-    init(title: String, isEnabled: Bool = true) {
+    init(title: String, isEnabled: Bool = true, height: Int = 48) {
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
-        self.setTitleColor(.gray500, for: .normal)
-        self.backgroundColor = isEnabled ? .gray200 : .orange700
+        self.setTitleColor(isEnabled ? .white : .gray500, for: .normal)
+        self.backgroundColor = isEnabled ? .orange700 : .gray200
         
-        self.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
+        self.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         self.layer.cornerRadius = 8
         
         self.snp.makeConstraints { make in
-            make.height.equalTo(48)
+            make.height.equalTo(height)
         }
     }
     

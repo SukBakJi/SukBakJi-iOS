@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct FindEmailRequestDTO: Codable {
-    var phoneNumber: String
-    var verificationCode: String
-}
-
 struct SmsCodeRequestDTO: Codable {
     var phoneNumber: String
+}
+
+struct VerifyCodeRequestDTO: Codable {
+    var phoneNumber: String
+    var verificationCode: String
 }

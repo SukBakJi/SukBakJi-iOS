@@ -25,12 +25,12 @@ class EmailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Functional
     @objc
     private func textFieldDidChange() {
         textFieldChanged?() // 입력값이 변경될 때 VC에 이벤트 전달
     }
     
-    //MARK: - Functional
     private func addTargets() {
         emailTF.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         passwordTF.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -46,27 +46,24 @@ class EmailView: UIView {
     
     
     //MARK: - Components
+    //TextField
     private lazy var TFView = makeStack(axis: .vertical, spacing: 8)
-    
     public var emailTF = CommonTextFieldView().then {
         $0.setTitle("이메일")
         $0.setPlaceholder("이메일을 입력해 주세요")
     }
-    
     public var passwordTF = CommonTextFieldView().then {
         $0.setTitle("비밀번호")
         $0.setPlaceholder("비밀번호를 입력해 주세요")
         $0.setPasswordTF()
-       
     }
     
+    //AutoLogin
     private lazy var autoLoginView = makeStack(axis: .horizontal, spacing: 8)
-    
     public var autoLoginButton = UIButton().then {
         $0.setImage(UIImage(named: "SBJ_state=off"), for: .normal)
         $0.setImage(UIImage(named: "SBJ_state=on"), for: .selected)
     }
-    
     private lazy var autoLoginLabel = UILabel().then {
         $0.text = "자동 로그인"
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
@@ -74,8 +71,10 @@ class EmailView: UIView {
         $0.textColor = .gray600
     }
     
-    public var loginButton = OrangeButton(title: "로그인")
+    //Login
+    public var loginButton = OrangeButton(title: "로그인", isEnabled: false)
 
+    //Auth
     private lazy var authView = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .center
@@ -90,8 +89,8 @@ class EmailView: UIView {
     public var findEmailButton = smallTextButton(title: "이메일 찾기")
     public var resetPWButton = smallTextButton(title: "비밀번호 재설정")
     
+    //SignUp
     private lazy var signUpView = makeStack(axis: .horizontal, spacing: 0)
-    
     private lazy var signUpLabel = UILabel().then {
         $0.text = "아직 석박지 계정이 없다면?"
         $0.textAlignment = .center

@@ -12,6 +12,8 @@ class UserDataManager {
     let profileUrl = APIConstants.userProfile.path
     let myPageurl = APIConstants.userMypage.path
     let EduImageUrl = APIConstants.userEducationCertification.path
+    let userEmailUrl = APIConstants.userEmail.path
+    let userEmailCodeUrl = APIConstants.userEmailCode.path
     
     let headers: HTTPHeaders = [
         "Accept": "*/*",
@@ -86,4 +88,24 @@ class UserDataManager {
                 }
             }
         }
+    
+    // 이름과 전화번호로 이메일 찾기
+    func PostUserEmailDataManager(_ parameters: PostUserEmailRequestDTO, completion: @escaping (PostUserEmailResponseDTO?) -> Void) {
+        AF.request(userEmailUrl,
+                   method: .post,
+                   parameters: parameters,
+                   encoder: JSONParameterEncoder.default,
+                   headers: headers)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: PostUserEmailResponseDTO.self) { response in
+            switch response.result {
+            case .success(let data):
+                completion(data)
+                print("성공. \(data)")
+                
+            case .failure(let error):
+                print("에러 : \(error.localizedDescription)")
+            }
+        }
+    }
     }

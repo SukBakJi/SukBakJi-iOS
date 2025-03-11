@@ -20,10 +20,12 @@ enum APIConstants {
     case userProfile
     case userPassword
     case userEducationCertification
+    case userEmail
+    case userEmailCode
     
     
-    case smsFindEmail
-    case smsCode
+    case smsPhone
+    case smsPhoneVerify
     
     
     case reportsPost
@@ -101,12 +103,15 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/user/password")
         case .userEducationCertification:
             return APIConstants.makeEndPoint("/user/education-certification")
+        case .userEmail:
+            return APIConstants.makeEndPoint("/user/email")
+        case .userEmailCode:
+            return APIConstants.makeEndPoint("/user/email-code")
             
-            
-        case .smsFindEmail:
-            return APIConstants.makeEndPoint("/sms/find-email")
-        case .smsCode:
-            return APIConstants.makeEndPoint("/sms/code")
+        case .smsPhone:
+            return APIConstants.makeEndPoint("/sms/phone")
+        case .smsPhoneVerify:
+            return APIConstants.makeEndPoint("/sms/phone/verify")
             
             
         case .reportsPost:

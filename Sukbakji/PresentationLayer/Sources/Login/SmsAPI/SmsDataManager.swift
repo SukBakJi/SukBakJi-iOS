@@ -8,18 +8,19 @@
 import Alamofire
 
 class SmsDataManager {
-    let findEmailUrl = APIConstants.smsFindEmail.path
-    let smsCodeUrl = APIConstants.smsCode.path
+    let smsVerifylUrl = APIConstants.smsPhoneVerify.path
+    let smsCodeUrl = APIConstants.smsPhone.path
     
     let headers: HTTPHeaders = [
         "Accept": "*/*",
         "Content-Type": "application/json"
     ]
     
-    // 아이디(이메일) 찾기
-    func findEmailDataManager(_ parameters: FindEmailRequestDTO, completion: @escaping (SmsResponseDTO?) -> Void) {
-        NetworkAuthManager.shared.request(
-            findEmailUrl,
+    // 인증번호 검증
+    func smsVerifyDataManager(_ parameters: VerifyCodeRequestDTO, completion: @escaping (SmsResponseDTO?) -> Void) {
+        AF.request(
+            smsVerifylUrl,
+            method: .post,
             parameters: parameters,
             encoder: JSONParameterEncoder.default,
             headers: headers)
@@ -38,8 +39,10 @@ class SmsDataManager {
     
     // 인증번호 요청
     func smsCodeDataManager(_ parameters: SmsCodeRequestDTO, completion: @escaping (SmsResponseDTO?) -> Void) {
-        NetworkAuthManager.shared.request(
-            findEmailUrl,
+        print(parameters)
+        AF.request(
+            smsCodeUrl,
+            method: .post,
             parameters: parameters,
             encoder: JSONParameterEncoder.default,
             headers: headers)

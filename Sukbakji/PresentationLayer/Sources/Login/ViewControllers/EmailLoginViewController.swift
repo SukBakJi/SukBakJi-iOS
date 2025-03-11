@@ -81,7 +81,7 @@ class EmailLoginViewController: UIViewController {
     
     @objc
     private func didTapLogin() {
-        network()
+        callPostLogin()
     }
     
     @objc
@@ -100,7 +100,7 @@ class EmailLoginViewController: UIViewController {
     }
     
     //MARK: - Network
-    private func network() {
+    private func callPostLogin() {
         let email = emailView.emailTF.textField.text ?? ""
         let password = emailView.passwordTF.textField.text ?? ""
         let request = LoginRequestDTO(email: email, password: password)
