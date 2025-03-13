@@ -164,8 +164,8 @@ class ResearchTopicViewController: UIViewController {
 
     
     private func navigateToSuccessPage() {
-        let SuccessSignUpVC = successSignUpViewController()
-        self.navigationController?.pushViewController(SuccessSignUpVC, animated: true)
+        let nextVC = CompleteViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     // MARK: - Funtional
