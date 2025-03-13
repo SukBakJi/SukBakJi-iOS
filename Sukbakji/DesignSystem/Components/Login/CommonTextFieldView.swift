@@ -10,9 +10,7 @@ import UIKit
 class CommonTextFieldView: UIView {
     //MARK: - Properties
     enum ValidationMode {
-        case errorWithMessage
-        case errorOnly
-        case silentValidation
+        case errorWithMessage, errorOnly, silentValidation
     }
     
     private var validationMode: ValidationMode = .errorWithMessage
@@ -38,70 +36,59 @@ class CommonTextFieldView: UIView {
     }
     
     
-    //MARK: - SetText
-    func setTitle(_ text: String) {
-        titleLabel.text = text
-    }
-    
-    func setPlaceholder(_ text: String) {
-        textField.placeholder = text
-    }
-    
-    func setErrorMessage(_ text: String) {
-        stateLabel.text = text
-    }
-    
-    //MARK: - SetState
-    /// 비밀번호 필드인지 구분
-    func setPasswordTF() {
+    //MARK: - public methods
+    public func setTitle(_ text: String) { titleLabel.text = text }
+    public func setPlaceholder(_ text: String) { textField.placeholder = text }
+    public func setErrorMessage(_ text: String) { stateLabel.text = text }
+    public func setValidationMode(_ mode: ValidationMode) { self.validationMode = mode }
+    public func setPasswordTF() {
         textField.isSecureTextEntry = true
         eyeButton.isHidden = false
-    }
-    
-    func setValidationMode(_ mode: ValidationMode) {
-        self.validationMode = mode
     }
     
     func setErrorState(_ isError: Bool) {
         switch validationMode {
         case .errorWithMessage:
             stateView.isHidden = false
-            if isError {
-                textField.setErrorState()
-                clearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
-                eyeButton.setImage(UIImage(named: "SBJ_Password-hidden-red"), for: .normal)
-                eyeButton.setImage(UIImage(named: "SBJ_Password-shown-red"), for: .selected)
-                
-                stateViewHeightConstraint.constant = 20
-            } else {
-                textField.setNormalState()
-                clearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
-                eyeButton.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
-                eyeButton.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
-                
-                stateViewHeightConstraint.constant = 0
-            }
+            stateLabel.textColor = .warning400
+            stateIcon.image = UIImage(named: "SBJ_ErrorCircle")
+            stateViewHeightConstraint.constant = isError ? 20 : 0
+            
+            updateTextFieldUI(isError: isError)
             
         case .errorOnly:
             stateView.isHidden = true
-            if isError {
-                textField.setErrorState()
-                clearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
-                eyeButton.setImage(UIImage(named: "SBJ_Password-hidden-red"), for: .normal)
-                eyeButton.setImage(UIImage(named: "SBJ_Password-shown-red"), for: .selected)
-                
-            } else {
-                textField.setNormalState()
-                clearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
-                eyeButton.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
-                eyeButton.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
-                
-            }
+            updateTextFieldUI(isError: isError)
+            
         case .silentValidation:
             stateView.isHidden = true
         }
     }
-    
+
+    func setCorrectState(_ message: String? = nil) {
+        stateLabel.text = message
+        stateLabel.textColor = .blue400
+        stateIcon.image = UIImage(named: "SBJ_CorrectCircle")
+        stateView.isHidden = false
+        stateViewHeightConstraint.constant = 20
+        
+        textField.updateUnderlineColor(to: .blue400)
+    }
+
+    private func updateTextFieldUI(isError: Bool) {
+        if isError {
+            textField.setErrorState()
+            clearButton.setImage(UIImage(named: "SBJ_clear-red"), for: .normal)
+            eyeButton.setImage(UIImage(named: "SBJ_Password-hidden-red"), for: .normal)
+            eyeButton.setImage(UIImage(named: "SBJ_Password-shown-red"), for: .selected)
+        } else {
+            textField.setNormalState()
+            clearButton.setImage(UIImage(named: "SBJ_clear"), for: .normal)
+            eyeButton.setImage(UIImage(named: "SBJ_Password-hidden"), for: .normal)
+            eyeButton.setImage(UIImage(named: "SBJ_Password-shown"), for: .selected)
+        }
+    }
+
     //MARK: - Functional
     private func addTargets() {
         clearButton.addTarget(self, action: #selector(clearButtonDidTap), for: .touchUpInside)
@@ -117,14 +104,23 @@ class CommonTextFieldView: UIView {
                 textField.setErrorMessage(emptyErrorMessage)
                 return false
             }
-            
-            let regex = regex
+    
             let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
             let isValid = predicate.evaluate(with: text)
-            if !isValid {
-                textField.setErrorMessage(errorMessage)
+            if !isValid { textField.setErrorMessage(errorMessage) }
+            return isValid
+        }
+    }
+    
+    public func checkPassword(textField: CommonTextFieldView, passwordField: CommonTextFieldView, errorMessage: String = "", emptyErrorMessage: String = "") {
+        textField.validationHandler = { text in
+            guard let text = text, !text.isEmpty else {
+                textField.setErrorMessage(emptyErrorMessage)
+                return false
             }
-            
+
+            let isValid = passwordField.textField.text == text
+            if !isValid { textField.setErrorMessage(errorMessage) }
             return isValid
         }
     }
@@ -132,6 +128,7 @@ class CommonTextFieldView: UIView {
     @objc
     private func clearButtonDidTap() {
         textField.text = ""
+        NotificationCenter.default.post(name: .textFieldDidClear, object: textField)
     }
     
     @objc

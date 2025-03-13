@@ -96,7 +96,7 @@ class EmailLoginViewController: UIViewController {
     
     @objc
     private func didTapSignUp() {
-        pushToNextVC(SignUpViewController())
+        pushToNextVC(SignupViewController())
     }
     
     //MARK: - Network
