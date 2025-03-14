@@ -51,7 +51,6 @@ class LoginViewController: UIViewController {
     
     private func navigateToTOSScreen(isKakaoSignUp: Bool = false) {
         let TOSVC = TOSViewController()
-        TOSVC.isKakaoSignUp = isKakaoSignUp
         self.navigationController?.pushViewController(TOSVC, animated: true)
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)

@@ -12,6 +12,9 @@ class AuthDataManager {
     let emailUrl = APIConstants.authEmail.path
     let loginUrl = APIConstants.authLogin.path
     let oauth2LoginUrl = APIConstants.authOauth2Login.path
+    let MemberEmailUrl = APIConstants.authMemberEmail.path
+    let EmailCodeUrl = APIConstants.authEmailCode.path
+    let passwordUrl = APIConstants.authPassword.path
     
     let headers:HTTPHeaders = [
         "Accept": "*/*",
@@ -118,4 +121,66 @@ class AuthDataManager {
             }
         }
     }
+    
+    // 이름과 전화번호로 이메일 찾기
+    func MemberEmailDataManager(_ parameters: PostUserEmailRequestDTO, completion: @escaping (PostUserEmailResponseDTO?) -> Void) {
+        AF.request(MemberEmailUrl,
+                   method: .post,
+                   parameters: parameters,
+                   encoder: JSONParameterEncoder.default,
+                   headers: headers)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: PostUserEmailResponseDTO.self) { response in
+            switch response.result {
+            case .success(let data):
+                completion(data)
+                print("성공. \(data)")
+                
+            case .failure(let error):
+                print("에러 : \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    // 비밀번호 찾기
+    func EmailSentCodeDataManager(_ email: String, completion: @escaping (PostUserEmailResponseDTO?) -> Void) {
+        AF.request(passwordUrl,
+                   method: .post,
+                   parameters: email,
+                   encoder: JSONParameterEncoder.default,
+                   headers: headers)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: PostUserEmailResponseDTO.self) { response in
+            switch response.result {
+            case .success(let data):
+                completion(data)
+                print("성공. \(data)")
+                
+            case .failure(let error):
+                print("에러 : \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    // 이메일 인증번호 인증
+    func EmailCodeCheckDataManager(_ parameters: PostUserEmailCodeRequestDTO, completion: @escaping (PostUserEmailResponseDTO?) -> Void) {
+        AF.request(EmailCodeUrl,
+                   method: .post,
+                   parameters: parameters,
+                   encoder: JSONParameterEncoder.default,
+                   headers: headers)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: PostUserEmailResponseDTO.self) { response in
+            switch response.result {
+            case .success(let data):
+                completion(data)
+                print("성공. \(data)")
+                
+            case .failure(let error):
+                print("에러 : \(error.localizedDescription)")
+            }
+        }
+    }
 }
+
+

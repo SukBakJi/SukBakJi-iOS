@@ -47,14 +47,3 @@ struct PostEduImageRequestDTO: Codable {
     let educationCertificateType: String
 }
 
-// 이름과 전화번호로 이메일 찾기
-struct PostUserEmailRequestDTO: Codable {
-    let name: String
-    let phoneNumber: String
-}
-
-// 이메일 인증번호 인증
-struct PostUserEmailCodeRequestDTO: Codable {
-    let email: String
-    let code: String
-}

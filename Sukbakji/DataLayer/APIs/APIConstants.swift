@@ -10,18 +10,19 @@ import Foundation
 enum APIConstants {
     case authSignUp
     case authRefreshToken
+    case authPassword
     case authOauth2Login
+    case authMemberEmail
     case authLogout
     case authLogin
     case authEmail
+    case authEmailCode
     
     
-    case userMypage
     case userProfile
-    case userPassword
+    case userPasswordReset
     case userEducationCertification
-    case userEmail
-    case userEmailCode
+    case userMypage
     
     
     case smsPhone
@@ -85,28 +86,29 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/auth/signup")
         case .authRefreshToken:
             return APIConstants.makeEndPoint("/auth/refresh-token")
+        case .authPassword:
+            return APIConstants.makeEndPoint("/auth/password")
         case .authOauth2Login:
             return APIConstants.makeEndPoint("/auth/oauth2/login")
+        case .authMemberEmail:
+            return APIConstants.makeEndPoint("/auth/member-email")
         case .authLogout:
             return APIConstants.makeEndPoint("/auth/logout")
         case .authLogin:
             return APIConstants.makeEndPoint("/auth/login")
         case .authEmail:
             return APIConstants.makeEndPoint("/auth/email")
-            
-            
-        case .userMypage:
-            return APIConstants.makeEndPoint("/user/mypage")
+        case .authEmailCode:
+            return APIConstants.makeEndPoint("/auth/email-code")
+        
         case .userProfile:
             return APIConstants.makeEndPoint("/user/profile")
-        case .userPassword:
-            return APIConstants.makeEndPoint("/user/password")
+        case .userPasswordReset:
+            return APIConstants.makeEndPoint("/user/password-reset")
         case .userEducationCertification:
             return APIConstants.makeEndPoint("/user/education-certification")
-        case .userEmail:
-            return APIConstants.makeEndPoint("/user/email")
-        case .userEmailCode:
-            return APIConstants.makeEndPoint("/user/email-code")
+        case .userMypage:
+            return APIConstants.makeEndPoint("/user/mypage")
             
         case .smsPhone:
             return APIConstants.makeEndPoint("/sms/phone")
