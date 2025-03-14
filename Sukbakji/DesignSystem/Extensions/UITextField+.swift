@@ -104,7 +104,7 @@ public extension UITextField {
     
     func setUnableState() {
         self.backgroundColor = .gray50
-        self.setPlaceholderColor(.gray300)
+        self.textColor = .gray300
         self.updateUnderlineColor(to: .gray300)
         self.isUserInteractionEnabled = false
     }

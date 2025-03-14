@@ -9,7 +9,6 @@ import UIKit
 
 class TOSViewController: UIViewController, TOSCellDelegate {
     // MARK: - Properties
-    var isKakaoSignUp: Bool = false
     
     private var allChecked: Bool {
         return tosView.tableView.visibleCells
@@ -26,25 +25,14 @@ class TOSViewController: UIViewController, TOSCellDelegate {
 
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
-        print(isKakaoSignUp)
-        // 카카오톡 회원가입인 경우
-        if isKakaoSignUp {
-            let AcademicVerificationVC = AcademicVerificationViewController()
-            self.navigationController?.pushViewController(AcademicVerificationVC, animated: true)
-            
-            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-            backBarButtonItem.tintColor = .black
-            self.navigationItem.backBarButtonItem = backBarButtonItem
-        }
-        // 일반 회원가입인 경우
-        else {
-            let EmailSignUpVC = EmailSignUpViewController()
-            self.navigationController?.pushViewController(EmailSignUpVC, animated: true)
-            //self.dismiss(animated: true)
-            
-            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-            backBarButtonItem.tintColor = .black
-            self.navigationItem.backBarButtonItem = backBarButtonItem
+        pushToNextVC(SMSAuthViewController())
+    }
+    
+    private func pushToNextVC(_ nextVC: UIViewController) {
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
+            $0.tintColor = .black
         }
     }
     
@@ -123,9 +111,6 @@ class TOSViewController: UIViewController, TOSCellDelegate {
         tosView.nextButton.backgroundColor = allSelected ? .orange700 : .gray200
         tosView.nextButton.setTitleColor(allSelected ? .white : .gray500, for: .normal)
     }
-    
-    
-    
 }
 
 extension TOSViewController: UITableViewDelegate, UITableViewDataSource {

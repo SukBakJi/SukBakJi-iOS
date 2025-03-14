@@ -11,5 +11,5 @@ import Foundation
 struct SmsResponseDTO: Decodable {
     let isSuccess: Bool
     let code, message: String
-    let result: String
+    let result: String?
 }
