@@ -91,7 +91,7 @@ class EmailLoginViewController: UIViewController {
     
     @objc
     private func didTapResetPW() {
-        
+        pushToNextVC(FindPwViewController())
     }
     
     @objc
