@@ -63,19 +63,19 @@ class FindEmailViewController: UIViewController {
     //MARK: Event
     @objc
     private func didTapNext() {
-        callPostUserEmail()
+        callPostMemberEmail()
     }
     
     //MARK: - Network
     // 이름과 전화번호로 이메일 찾기
-    private func callPostUserEmail() {
+    private func callPostMemberEmail() {
         let name = findEmailView.nameTF.textField.text ?? ""
         let phoneNum = findEmailView.phoneNumTF.textField.text ?? ""
         let request = PostUserEmailRequestDTO(name: name, phoneNumber: phoneNum)
         
         let authDataManager = AuthDataManager()
         
-        authDataManager.PostUserEmailDataManager(request) {
+        authDataManager.MemberEmailDataManager(request) {
             [weak self] data in
             guard let self = self else { return }
             
@@ -97,7 +97,7 @@ class FindEmailViewController: UIViewController {
                         self?.pushToNextVC(EmailLoginViewController())
                     },
                     cancleAction: { [weak self] in
-                        //                        self?.pushToNextVC(FindPwViewController())
+                        self?.pushToNextVC(FindPwViewController())
                     })
                 
                 popup.show()

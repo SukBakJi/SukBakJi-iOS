@@ -19,7 +19,6 @@ class FindPwView: UIView {
         setView()
         setConstraints()
         addTargets()
-        setDelegates()
     }
     
     required init?(coder: NSCoder) {
@@ -30,10 +29,6 @@ class FindPwView: UIView {
     @objc
     private func textFieldDidChange() {
         textFieldChanged?() // 입력값이 변경될 때 VC에 이벤트 전달
-    }
-    
-    private func setDelegates() {
-        verifyCodeTF.textField.delegate = self
     }
 
     private func addTargets() {
@@ -64,9 +59,8 @@ class FindPwView: UIView {
     
     public lazy var verifyCodeTF = CommonTextFieldView().then {
         $0.setTitle("인증번호")
-        $0.setPlaceholder("인증번호 4자리를 입력해 주세요")
+        $0.setPlaceholder("인증번호 8자리를 입력해 주세요")
         $0.setValidationMode(.silentValidation)
-        $0.textField.keyboardType = .numberPad
     }
     
     public lazy var verifyCode = OrangeButton(title: "인증하기", height: 44).then {
@@ -109,29 +103,3 @@ class FindPwView: UIView {
     }
 }
 
-extension FindPwView: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = CharacterSet.decimalDigits
-        let characterSet = CharacterSet(charactersIn: string)
-        
-        // 숫자 입력만 허용
-        guard allowedCharacters.isSuperset(of: characterSet) else {
-            return false
-        }
-        
-        // 현재 텍스트
-        guard let currentText = textField.text as NSString? else {
-            return true
-        }
-        
-        // 변경 후 예상되는 텍스트
-        let newText = currentText.replacingCharacters(in: range, with: string)
-        
-        // 인증번호 필드는 4자리까지만 입력 가능
-        if textField == verifyCodeTF.textField {
-            return newText.count <= 4
-        }
-        
-        return true
-    }
-}

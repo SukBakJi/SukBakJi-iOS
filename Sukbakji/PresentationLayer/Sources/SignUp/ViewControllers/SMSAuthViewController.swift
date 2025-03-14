@@ -9,7 +9,7 @@ import UIKit
 
 class SMSAuthViewController: UIViewController {
     private var verifiedPhoneNumber: String?  // 인증된 전화번호 저장
-    private var isSuccessSent:Bool = false
+    private var isSuccessSent: Bool = false
 
     private lazy var smsAuthView = SMSAuthView().then {
         $0.nextButton.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
@@ -133,8 +133,8 @@ class SMSAuthViewController: UIViewController {
     }
     
     private func callPostVerifyCode() {
+        guard let phoneNum = verifiedPhoneNumber else { return }
         let code = smsAuthView.verifyCodeTF.textField.text ?? ""
-        let phoneNum = smsAuthView.phoneNumTF.textField.text ?? ""
         let request = VerifyCodeRequestDTO(phoneNumber: phoneNum, verificationCode: code)
         let smsDataManager = SmsDataManager()
         

@@ -8,6 +8,9 @@
 import UIKit
 
 class FindPwViewController: UIViewController {
+    private var verifiedEmail: String?  // 인증된 전화번호 저장
+    private var isSuccessSent: Bool = false
+
     // MARK: - View
     private lazy var findPwView = FindPwView().then {
         $0.nextButton.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
@@ -40,18 +43,19 @@ class FindPwViewController: UIViewController {
         )
         findPwView.verifyCodeTF.validation(
             textField: findPwView.verifyCodeTF,
-            regex: "^[0-9]{0,6}$",
+            regex: "^.{4,8}$",
             errorMessage: "인증번호가 일치하지 않습니다"
         )
     }
     
     private func updateNextButtonState() {
         let isEmailValid = findPwView.emailTF.validationHandler?(findPwView.emailTF.textField.text) ?? false
+        let isCodeValid = findPwView.verifyCodeTF.validationHandler?(findPwView.verifyCodeTF.textField.text) ?? false
         findPwView.sendCode.setButtonState(isEnabled: isEmailValid)
 
         // 인증요청 성공 시 인증하기 버튼 활성화
-        let isSuccessSendCode = findPwView.emailTF.textField.isUserInteractionEnabled
-        findPwView.verifyCode.setButtonState(isEnabled: !isSuccessSendCode)
+        let isEnable = isCodeValid && isSuccessSent
+        findPwView.verifyCode.setButtonState(isEnabled: isEnable)
     }
     
     private func pushToNextVC(_ nextVC: UIViewController) {
@@ -92,7 +96,7 @@ class FindPwViewController: UIViewController {
         if !isEmailValid {
             ToastView.show(image: UIImage(named: "SBJ_warning") ?? UIImage(), message: "이메일을 입력해 주세요", in: self.view)
         } else {
-            // 이메일 인증 코드 발송
+            callPostEmailCode()
         }
     }
     
@@ -102,9 +106,44 @@ class FindPwViewController: UIViewController {
         if !isVerifyCodeValid {
             ToastView.show(image: UIImage(named: "SBJ_warning") ?? UIImage(), message: "인증번호를 입력해 주세요", in: self.view)
         } else {
-            // 인증번호 인증
+            callPostEmailCodeCheck()
         }
     }
     
     //MARK: - Network
+    // 비밀번호 찾기 이메일 코드
+    private func callPostEmailCode() {
+        let email = findPwView.emailTF.textField.text ?? ""
+        
+        let authDataManager = AuthDataManager()
+        print(email)
+        authDataManager.EmailSentCodeDataManager(email) {
+            [weak self] data in
+            guard let self = self else { return }
+            
+            if let model = data, model.code == "COMMON200" {
+                self.verifiedEmail = email // 인증된 전화번호 저장
+                self.isSuccessSent = true
+            }
+        }
+    }
+    
+    // 이메일 코드 인증
+    private func callPostEmailCodeCheck() {
+        guard let email = verifiedEmail else { return }
+        let code = findPwView.verifyCodeTF.textField.text ?? ""
+        let request = PostUserEmailCodeRequestDTO(email: email, code: code)
+        
+        let authDataManager = AuthDataManager()
+        authDataManager.EmailCodeCheckDataManager(request) {
+            [weak self] data in
+            guard let self = self else { return }
+            
+            if let model = data, model.result == "이메일 인증에 성공하였습니다." {
+                setUnableState(isSuccess: true)
+            } else {
+                setUnableState(isSuccess: false)
+            }
+        }
+    }
 }
