@@ -77,6 +77,7 @@ class FindPwViewController: UIViewController {
             findPwView.verifyCode.isUserInteractionEnabled = false
             findPwView.nextButton.setButtonState(isEnabled: true)
             findPwView.nextButton.isEnabled = true
+            ToastView.show(image: UIImage(named: "SBJ_complete") ?? UIImage(), message: "인증번호 인증을 완료했어요", in: self.view)
         } else {
             findPwView.verifyCodeTF.setValidationMode(.errorWithMessage)
             findPwView.verifyCodeTF.setErrorState(true)

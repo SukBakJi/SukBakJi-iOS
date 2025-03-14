@@ -74,6 +74,7 @@ class SMSAuthViewController: UIViewController {
             smsAuthView.verifyCode.isUserInteractionEnabled = false
             smsAuthView.nextButton.setButtonState(isEnabled: true)
             smsAuthView.nextButton.isEnabled = true
+            ToastView.show(image: UIImage(named: "SBJ_complete") ?? UIImage(), message: "인증번호 인증을 완료했어요", in: self.view)
         } else {
             smsAuthView.verifyCodeTF.setValidationMode(.errorWithMessage)
             smsAuthView.verifyCodeTF.setErrorState(true)
