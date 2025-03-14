@@ -31,10 +31,3 @@ struct PostEduImageResponseDTO: Decodable {
     let result: String?
 }
 
-// 이름과 전화번호로 이메일 찾기 공용
-struct PostUserEmailResponseDTO: Decodable {
-    let isSuccess: Bool?
-    let code: String?
-    let message: String?
-    let result: String?
-}

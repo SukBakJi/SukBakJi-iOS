@@ -51,6 +51,15 @@ class FindEmailViewController: UIViewController {
         findEmailView.nextButton.setButtonState(isEnabled: isNameValid && isPhoneNumValid)
     }
     
+    private func pushToNextVC(_ nextVC: UIViewController) {
+        let nextVC = nextVC
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
+            $0.tintColor = .black
+        }
+    }
+    
     //MARK: Event
     @objc
     private func didTapNext() {
@@ -64,16 +73,20 @@ class FindEmailViewController: UIViewController {
         let phoneNum = findEmailView.phoneNumTF.textField.text ?? ""
         let request = PostUserEmailRequestDTO(name: name, phoneNumber: phoneNum)
         
-        let userDataManager = UserDataManager()
+        let authDataManager = AuthDataManager()
         
-        userDataManager.PostUserEmailDataManager(request) {
+        authDataManager.PostUserEmailDataManager(request) {
             [weak self] data in
             guard let self = self else { return }
             
-            if let model = data, model.code == "COMMON200" {
-                // 성공
+            if let model = data, model.result == "AUTH4003" {
+                let popup = SingleButtonPopup(
+                    title: "입력한 정보가 일치하지 않습니다",
+                    confirmText: "다시 입력할게요"
+                )
+                popup.show()
+            } else if let model = data {
                 guard let email = model.result else { return }
-                // 이메일 확인 팝업 띄우기
                 let popup = DoubleButtonPopup(
                     title: "가입하신 이메일을 확인해 주세요",
                     desc: "\(name) 님이 가입하신 이메일은\n \(email)입니다.",
@@ -81,21 +94,14 @@ class FindEmailViewController: UIViewController {
                     confirmText: "로그인 하기",
                     cancleText: "비밀번호 찾기",
                     confirmAction: { [weak self] in
-                        // 화면 이동
+                        self?.pushToNextVC(EmailLoginViewController())
+                    },
+                    cancleAction: { [weak self] in
+                        //                        self?.pushToNextVC(FindPwViewController())
                     })
+                
                 popup.show()
                 
-            } else {
-                // 실패
-                // 실패 팝업 띄우기
-                let popup = SingleButtonPopup(
-                    title: "입력한 정보가 일치하지 않습니다",
-                    confirmText: "다시 입력할게요",
-                    confirmAction: { [weak self] in
-                        // 화면 이동
-                    })
-                popup.show()
-
             }
         }
     }

@@ -14,7 +14,8 @@ class DoubleButtonPopup: UIView {
     private var range: String
     private var confirmText: String
     private var cancleText: String
-    private var confirmAction: (() -> Void)? // 버튼 클릭 시 실행할 클로저
+    var confirmAction: (() -> Void)? // 버튼 클릭 시 실행할 클로저
+    var cancleAction: (() -> Void)? // 버튼 클릭 시 실행할 클로저
     
     //MARK: - init
     init(
@@ -23,16 +24,20 @@ class DoubleButtonPopup: UIView {
         range: String = "",
         confirmText: String,
         cancleText: String,
-        confirmAction: (() -> Void)? = nil
+        confirmAction: (() -> Void)? = nil,
+        cancleAction: (() -> Void)? = nil
     ) {
         self.title = title
         self.desc = desc
         self.range = range
         self.confirmText = confirmText
         self.cancleText = cancleText
+        self.confirmAction = confirmAction
+        self.cancleAction = cancleAction
+        
         super.init(frame: UIScreen.main.bounds)
         confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
-        cancleButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+        cancleButton.addTarget(self, action: #selector(cancleButtonTapped), for: .touchUpInside)
         
         setUI()
     }
@@ -133,8 +138,14 @@ class DoubleButtonPopup: UIView {
     
     // dismiss + 다른동작(다음화면)
     @objc private func confirmButtonTapped() {
-        dismissPopup()
         confirmAction?()
+        dismissPopup()
+    }
+    
+    // dismiss + 다른동작(다음화면)
+    @objc private func cancleButtonTapped() {
+        cancleAction?()
+        dismissPopup()
     }
     
     // dismiss 만 필요한 경우
