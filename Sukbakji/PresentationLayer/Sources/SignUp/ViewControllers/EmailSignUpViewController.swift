@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class EmailSignUpViewController: UIViewController {
+    //MARK: - Properties
+    var phoneNum: String = ""
     private var emailDupCheck: Bool = false
     
     // MARK: - View
@@ -27,6 +29,7 @@ class EmailSignUpViewController: UIViewController {
         
         updateLoginButtonState()
         validation()
+        print(phoneNum)
         
         emailSignupView.emailTF.textField.delegate = self
     }
@@ -105,7 +108,8 @@ class EmailSignUpViewController: UIViewController {
         let password = emailSignupView.passwordTF.textField.text ?? ""
         let request = SignupRequestDTO(provider: "BASIC",
                                        email: email,
-                                       password: password)
+                                       password: password,
+                                       phoneNumber: phoneNum)
         
         let authDataManager = AuthDataManager()
         

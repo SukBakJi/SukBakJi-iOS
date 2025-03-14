@@ -8,7 +8,8 @@
 import UIKit
 
 class SMSAuthViewController: UIViewController {
-    
+    private var verifiedPhoneNumber: String?  // 인증된 전화번호 저장
+
     private lazy var smsAuthView = SMSAuthView().then {
         $0.nextButton.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
         $0.sendCode.addTarget(self, action: #selector(didTapSendCode), for: .touchUpInside)
@@ -81,7 +82,14 @@ class SMSAuthViewController: UIViewController {
     //MARK: Event
     @objc
     private func didTapNext() {
-        pushToNextVC(EmailSignUpViewController())
+        guard let phoneNumber = verifiedPhoneNumber else {
+            print("오류: 인증된 전화번호가 없음")
+            return
+        }
+        
+        let nextVC = EmailSignUpViewController()
+        nextVC.phoneNum = smsAuthView.phoneNumTF.textField.text ?? ""
+        pushToNextVC(nextVC)
     }
     
     @objc
@@ -117,6 +125,7 @@ class SMSAuthViewController: UIViewController {
             guard let self = self else { return }
             
             if let model = data, model.code == "COMMON200" {
+                self.verifiedPhoneNumber = phoneNum // 인증된 전화번호 저장
                 // 인증요청 성공 시 전화번호 필드 막기
                 smsAuthView.phoneNumTF.textField.isUserInteractionEnabled = false
                 smsAuthView.sendCode.isEnabled = false
