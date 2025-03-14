@@ -72,4 +72,12 @@ final class UnivViewModel {
             })
             .disposed(by: disposeBag)
     }
+    
+    func loadTestData() {
+        let testUnivList: [UnivSearchList] = [
+            UnivSearchList(id: 1, name: "서울대학교"),
+            UnivSearchList(id: 1, name: "서경대학교")
+        ]
+        univSearchList.accept(testUnivList)
+    }
 }
