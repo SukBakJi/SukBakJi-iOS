@@ -15,7 +15,10 @@ class UnivSearchTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: UnivSearchTableViewCell.self)
     
-    private let selectButton = UIButton().then {
+    var disposeBag = DisposeBag()
+    var isSelectedCell = BehaviorRelay<Bool>(value: false)
+    
+    let selectButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
         $0.contentMode = .scaleAspectFill
     }
@@ -23,8 +26,6 @@ class UnivSearchTableViewCell: UITableViewCell {
         $0.textColor = .black
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
-    
-    private var disposeBag = DisposeBag()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
        super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,7 +37,8 @@ class UnivSearchTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         
-       setUI()
+        setUI()
+        bindUI()
     }
     
     override func prepareForReuse() {
@@ -60,12 +62,13 @@ class UnivSearchTableViewCell: UITableViewCell {
         }
     }
     
-    func bind(isSelected: Bool, buttonTap: @escaping () -> Void) {
-        let imageName = isSelected ? "Sukbakji_Check2" : "Sukbakji_Check"
-        selectButton.setImage(UIImage(named: imageName), for: .normal)
-        
-        selectButton.rx.tap
-            .bind { buttonTap() } // 버튼 클릭 시 이벤트 전달
+    private func bindUI() {
+        isSelectedCell
+            .subscribe(onNext: { [weak self] isSelected in
+                let imageName = isSelected ? "Sukbakji_Check2" : "Sukbakji_Check"
+                self?.selectButton.setImage(UIImage(named: imageName), for: .normal)
+                self?.univLabel.textColor = isSelected ? .orange700 : .gray900
+            })
             .disposed(by: disposeBag)
     }
 

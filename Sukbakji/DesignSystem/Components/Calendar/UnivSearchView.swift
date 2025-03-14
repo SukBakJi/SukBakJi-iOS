@@ -48,6 +48,7 @@ class UnivSearchView: UIView {
         $0.setPlaceholderColor(.gray300)
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .gray900
+        $0.layer.cornerRadius = 12
     }
     let searchImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_SearchImage")
@@ -58,6 +59,7 @@ class UnivSearchView: UIView {
     var univSearchTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
+        $0.allowsMultipleSelection = false
         $0.register(UnivSearchTableViewCell.self, forCellReuseIdentifier: UnivSearchTableViewCell.identifier)
     }
     let searchWarningImageView = UIImageView().then {
@@ -75,7 +77,7 @@ class UnivSearchView: UIView {
         $0.setTitleColor(.gray500, for: .normal)
         $0.setTitleColor(.gray500, for: .disabled)
         $0.setTitle("다음으로", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
+        $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.setBackgroundColor(.gray200, for: .normal)
         $0.setBackgroundColor(.gray200, for: .disabled)
     }

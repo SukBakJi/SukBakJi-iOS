@@ -20,7 +20,7 @@ class MyAlarmTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: MyAlarmTableViewCell.self)
     
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     weak var delegate: MyAlarmTableViewCellDelegate?
     
     private let labelView = UIView().then {

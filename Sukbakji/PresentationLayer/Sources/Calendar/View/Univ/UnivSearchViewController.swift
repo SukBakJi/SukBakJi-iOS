@@ -79,7 +79,8 @@ extension UnivSearchViewController {
             .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] keyword in
                 guard !keyword.isEmpty else { return }
-                self?.viewModel.loadUnivSearch(keyword: keyword)
+//                self?.viewModel.loadUnivSearch(keyword: keyword)
+                self?.viewModel.loadTestData()
             })
             .disposed(by: disposeBag)
         
@@ -89,19 +90,26 @@ extension UnivSearchViewController {
                 self.univSearchView.univSearchTableView.isHidden = list.isEmpty
                 self.univSearchView.searchWarningImageView.isHidden = !list.isEmpty
                 self.univSearchView.searchWarningLabel.isHidden = !list.isEmpty
+                self.univSearchView.searchWarningLabel.text = "\(univSearchView.univSearchTextField.text ?? "")대학교에 대한 검색 결과가 없어요"
             })
             .disposed(by: disposeBag)
         
         viewModel.univSearchList
             .bind(to: univSearchView.univSearchTableView.rx.items(cellIdentifier: UnivSearchTableViewCell.identifier, cellType: UnivSearchTableViewCell.self)) { row, univ, cell in
                 cell.prepare(uniSearchList: univ)
+                
+                self.viewModel.selectUnivItem
+                    .map { $0 == univ }
+                    .bind(to: cell.isSelectedCell)
+                    .disposed(by: cell.disposeBag)
+                
+                cell.selectButton.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        guard let self = self else { return }
+                        self.viewModel.selectUniversity(univ) // 선택 해제 기능 추가
+                    })
+                    .disposed(by: cell.disposeBag)
             }
-            .disposed(by: disposeBag)
-        
-        univSearchView.univSearchTableView.rx.modelSelected(UnivSearchList.self)
-            .subscribe(onNext: { [weak self] univ in
-                self?.viewModel.selectUniversity(univ)
-            })
             .disposed(by: disposeBag)
         
         viewModel.selectUnivItem
@@ -114,7 +122,7 @@ extension UnivSearchViewController {
     private func updateSelectionUI(_ selectedUniv: UnivSearchList?) {
         let isSelected = selectedUniv != nil
         univSearchView.nextButton.isEnabled = isSelected
-        univSearchView.nextButton.backgroundColor = isSelected ? .orange700 : .gray200
+        univSearchView.nextButton.setBackgroundColor(isSelected ? .orange700 : .gray200, for: .normal)
         univSearchView.nextButton.setTitleColor(isSelected ? .white : .gray500, for: .normal)
         univSearchView.univSearchTextField.text = selectedUniv?.name
     }
