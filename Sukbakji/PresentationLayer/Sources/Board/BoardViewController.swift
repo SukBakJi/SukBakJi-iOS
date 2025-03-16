@@ -93,6 +93,7 @@ struct BoardViewController: View {
                 
             }
         }
+        .navigationBarHidden(true)
         .accessibilityIdentifier("BoardViewController")
     }
     
