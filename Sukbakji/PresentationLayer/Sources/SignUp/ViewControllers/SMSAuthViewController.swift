@@ -52,7 +52,7 @@ class SMSAuthViewController: UIViewController {
 
         // 인증요청 성공 시 인증하기 버튼 활성화
         let isEnable = isCodeValid && isSuccessSent
-        smsAuthView.verifyCode.setButtonState(isEnabled: isCodeValid)
+        smsAuthView.verifyCode.setButtonState(isEnabled: isEnable)
     }
     
     private func pushToNextVC(_ nextVC: UIViewController) {
