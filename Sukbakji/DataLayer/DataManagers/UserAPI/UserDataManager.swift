@@ -74,7 +74,7 @@ class UserDataManager {
             if let typeData = parameters.educationCertificateType.data(using: .utf8) {
                 multipartFormData.append(typeData, withName: "educationCertificateType")
             }
-        }, to: EduImageUrl, method: .post, headers: headers)
+        }, to: EduImageUrl, method: .post, headers: multipartHeaders)
         .validate(statusCode: 200..<500)
         .responseDecodable(of: PostEduImageResponseDTO.self) { response in
             switch response.result {
