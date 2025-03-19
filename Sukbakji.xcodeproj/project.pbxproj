@@ -64,6 +64,7 @@
 		7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */; };
 		7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */; };
 		7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */; };
+		7BC4E7842D8AC39300963B61 /* SavedBoardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC4E7832D8AC39300963B61 /* SavedBoardResponse.swift */; };
 		7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C992C62778D00A31B70 /* SearchViewController.swift */; };
 		7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */; };
 		7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */; };
@@ -311,6 +312,7 @@
 		7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentedBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentReviewWriteBoardViewController.swift; sourceTree = "<group>"; };
+		7BC4E7832D8AC39300963B61 /* SavedBoardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBoardResponse.swift; sourceTree = "<group>"; };
 		7BFB8C992C62778D00A31B70 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyBoards.swift; sourceTree = "<group>"; };
 		7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMainViewController.swift; sourceTree = "<group>"; };
@@ -731,6 +733,7 @@
 			children = (
 				7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */,
 				7B3459EA2C68858E008B711A /* BoardWritePostModel.swift */,
+				7BC4E7832D8AC39300963B61 /* SavedBoardResponse.swift */,
 				7B3459EC2C68870E008B711A /* BoardDetailModel.swift */,
 				7B3459EE2C688A28008B711A /* BoardCommentsModel.swift */,
 				7B3459F02C688AB1008B711A /* BoardScrapModel.swift */,
@@ -1702,6 +1705,7 @@
 				C7A23D8E2D0C1087008657B0 /* AlarmFBCView.swift in Sources */,
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
+				7BC4E7842D8AC39300963B61 /* SavedBoardResponse.swift in Sources */,
 				91D413262D82696500020CEC /* DetailTOSViewController.swift in Sources */,
 				91D413272D82696500020CEC /* TOSViewController.swift in Sources */,
 				7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */,

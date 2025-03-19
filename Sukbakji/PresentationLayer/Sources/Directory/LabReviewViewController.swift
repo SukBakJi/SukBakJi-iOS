@@ -92,7 +92,7 @@ struct LabReviewViewController: View {
                             VStack(alignment: .leading, spacing: 16) {
                                 
                                 Text("검색 결과")
-                                    .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemibold))
+                                    .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemiBold))
                                     .foregroundColor(Constants.Gray900)
                                     .padding(.top, 16)
                                     .padding(.horizontal, 24)
@@ -115,7 +115,7 @@ struct LabReviewViewController: View {
                                 VStack {
                                     HStack {
                                         Text("최신 연구실 후기")
-                                            .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemibold))
+                                            .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemiBold))
                                             .foregroundColor(Constants.Gray900)
                                             .padding(.top, 28)
                                         
@@ -239,7 +239,7 @@ struct LabReviewView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Text(review.departmentName)
-                .font(Font.custom("Pretendard", size: Constants.fontSize5).weight(Constants.fontWeightSemibold))
+                .font(Font.custom("Pretendard", size: Constants.fontSize5).weight(Constants.fontWeightSemiBold))
                 .foregroundColor(Constants.Gray900)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -279,7 +279,7 @@ struct DirectoryLabReviewSearchResultView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Text(review.departmentName)
-                .font(Font.custom("Pretendard", size: Constants.fontSize5).weight(Constants.fontWeightSemibold))
+                .font(Font.custom("Pretendard", size: Constants.fontSize5).weight(Constants.fontWeightSemiBold))
                 .foregroundColor(Constants.Gray900)
                 .frame(maxWidth: .infinity, alignment: .leading)
             

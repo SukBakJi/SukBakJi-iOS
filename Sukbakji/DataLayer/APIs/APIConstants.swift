@@ -35,6 +35,8 @@ enum APIConstants {
     
     
     case board
+    case boardFavoriteAdd(Int)
+    case boardsMenu(String)
     
     
     case posts
@@ -127,6 +129,11 @@ extension APIConstants {
             
         case .board:
             return APIConstants.makeEndPoint("/board")
+        case .boardFavoriteAdd(let boardId):
+            return APIConstants.makeEndPoint("/boards/\(boardId)/favorite/add")
+        case .boardsMenu(let menu):
+            return APIConstants.makeEndPoint("/boards/\(menu)")
+            
             
             
         case .posts:

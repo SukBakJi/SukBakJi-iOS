@@ -25,6 +25,10 @@ struct Constants {
     static let fontSize6: CGFloat = 12
     static let fontSize5: CGFloat = 14
     static let fontWeightMedium: Font.Weight = .medium
-    static let fontWeightSemibold: Font.Weight = .semibold
     static let fontSize7: CGFloat = 11
+    
+    static let fontSizeL: CGFloat = 18
+    static let fontWeightSemiBold: Font.Weight = .semibold
+    static let fontSizeXs: CGFloat = 12
+    static let fontSizeM: CGFloat = 16
 }
