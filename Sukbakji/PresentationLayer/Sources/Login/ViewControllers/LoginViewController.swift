@@ -59,29 +59,22 @@ class LoginViewController: UIViewController {
     }
     
     private func postOAuth2Login(provider: String, accessToken: String) {
-        UserApi.shared.me {(user, error) in
-            if let error = error {
-                print(error)
+        let authDataManager = AuthDataManager()
+        
+        let requestBody = Oauth2RequestDTO(
+            provider: provider,
+            accessToken: accessToken
+        )
+        print("requestBody: \(requestBody)")
+        authDataManager.oauth2LoginDataManager(requestBody) {
+            [weak self] data in
+            guard let self = self else { return }
+            
+            // 응답
+            if let model = data, model.code == "COMMON200" {
+                checkIsSignUp()
             } else {
-                let authDataManager = AuthDataManager()
-                
-                let requestBody = Oauth2RequestDTO(
-                    provider: provider,
-                    accessToken: accessToken
-                )
-                
-                authDataManager.oauth2LoginDataManager(requestBody) {
-                    [weak self] data in
-                    guard let self = self else { return }
-                    
-                    
-                    // 응답
-                    if let model = data, model.code == "COMMON200" {
-                        checkIsSignUp()
-                    } else {
-                        print("OAuth2 로그인 실패")
-                    }
-                }
+                print("OAuth2 로그인 실패")
             }
         }
     }
