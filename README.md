@@ -17,7 +17,7 @@
 
 ## 🖥️ 개발 환경
 
-- Xcode: 15+
+- Xcode: 16+
 - Swift: 5.9+
 - 배포타겟: iOS 17+
 - 의존성 관리: CocoaPods

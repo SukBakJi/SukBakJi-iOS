@@ -17,6 +17,7 @@ class SocialAuthButton: UIButton {
     init(type: ButtonType, title: String) {
         super.init(frame: .zero)
         configure(type: type, title: title)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -24,8 +25,12 @@ class SocialAuthButton: UIButton {
     }
     
     private func configure(type: ButtonType, title: String) {
+        self.snp.makeConstraints {
+            $0.height.equalTo(54)
+        }
+        
         var loginTitleContainer = AttributeContainer()
-        loginTitleContainer.font = UIFont(name: "Pretendard-Medium", size: 16)
+        loginTitleContainer.font = .body1()
         
         var config = UIButton.Configuration.filled()
         config.attributedTitle = AttributedString(title, attributes: loginTitleContainer)

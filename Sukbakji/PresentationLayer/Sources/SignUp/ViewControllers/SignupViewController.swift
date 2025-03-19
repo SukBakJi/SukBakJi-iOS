@@ -1,49 +1,33 @@
 //
-//  ViewController.swift
+//  SelectSignUpViewController.swift
 //  SeokBakJi
 //
 //  Created by 오현민 on 7/16/24.
 //
+
 import UIKit
+import Then
+import SnapKit
 import KakaoSDKUser
 import AuthenticationServices
 
-class LoginViewController: UIViewController {
-    // MARK: - Properties
-    private let isAutoLoginEnabled = UserDefaults.standard.bool(forKey: "isAutoLogin")
-    
+class SignupViewController: UIViewController {
     // MARK: - Views
-    private lazy var loginView = LoginView().then {
-        $0.kakaoButton.addTarget(self, action: #selector(didTapKakaoLogin), for: .touchUpInside)
-        $0.appleButton.addTarget(self, action: #selector(didTapAppleLogin), for: .touchUpInside)
-        $0.emailButton.addTarget(self, action: #selector(didTapEmailLogin), for: .touchUpInside)
-        $0.signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
+    private lazy var signupView = SignupView().then {
+        $0.kakaoButton.addTarget(self, action: #selector(didTapKakao), for: .touchUpInside)
+        $0.appleButton.addTarget(self, action: #selector(didTapApple), for: .touchUpInside)
+        $0.emailButton.addTarget(self, action: #selector(didTapEmail), for: .touchUpInside)
         $0.findAccountButton.addTarget(self, action: #selector(didTapfindAccount), for: .touchUpInside)
     }
     
-    //MARK: - init
+    // MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = loginView
-        
-        if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user") {
-            print("자동 로그인 활성화: \(accessToken)")
-            let tabBarVC = MainTabViewController()
-            self.navigationController?.setViewControllers([tabBarVC], animated: true)
-        }
+        self.view = signupView
+        self.title = "회원가입"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true // 뷰 컨트롤러가 나타날 때 숨기기
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false // 뷰 컨트롤러가 사라질 때 나타내기
-    }
-    
-    //MARK: - Functional
+    // MARK: - Functional
     private func navigateToHomeScreen() {
         let tabBarVC = MainTabViewController()
         self.navigationController?.setViewControllers([tabBarVC], animated: true)
@@ -53,28 +37,35 @@ class LoginViewController: UIViewController {
         let TOSVC = TOSViewController()
         self.navigationController?.pushViewController(TOSVC, animated: true)
         
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .black
-        self.navigationItem.backBarButtonItem = backBarButtonItem
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
+            $0.tintColor = .black
+        }
     }
     
     private func postOAuth2Login(provider: String, accessToken: String) {
-        let authDataManager = AuthDataManager()
-        
-        let requestBody = Oauth2RequestDTO(
-            provider: provider,
-            accessToken: accessToken
-        )
-        print("requestBody: \(requestBody)")
-        authDataManager.oauth2LoginDataManager(requestBody) {
-            [weak self] data in
-            guard let self = self else { return }
-            
-            // 응답
-            if let model = data, model.code == "COMMON200" {
-                checkIsSignUp()
+        UserApi.shared.me {(user, error) in
+            if let error = error {
+                print(error)
             } else {
-                print("OAuth2 로그인 실패")
+                let authDataManager = AuthDataManager()
+                
+                let requestBody = Oauth2RequestDTO(
+                    provider: provider,
+                    accessToken: accessToken
+                )
+                
+                authDataManager.oauth2LoginDataManager(requestBody) {
+                    [weak self] data in
+                    guard let self = self else { return }
+                    
+                    
+                    // 응답
+                    if let model = data, model.code == "COMMON200" {
+                        checkIsSignUp()
+                    } else {
+                        print("OAuth2 로그인 실패")
+                    }
+                }
             }
         }
     }
@@ -102,7 +93,8 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: Event
-    @objc func didTapKakaoLogin() {
+    @objc
+    func didTapKakao() {
         if (UserApi.isKakaoTalkLoginAvailable()) {
             //카톡 설치되어있으면 -> 카톡으로 로그인
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
@@ -134,7 +126,8 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @objc func didTapAppleLogin() {
+    @objc
+    func didTapApple() {
         let provider = ASAuthorizationAppleIDProvider()
         let request = provider.createRequest()
         let controller = ASAuthorizationController(authorizationRequests: [request])
@@ -144,39 +137,26 @@ class LoginViewController: UIViewController {
         controller.performRequests()
     }
     
-    @objc func didTapEmailLogin() {
-        let EmailLoginVC = EmailLoginViewController()
-        self.navigationController?.pushViewController(EmailLoginVC, animated: true)
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
-            $0.tintColor = .black
-        }
+    @objc
+    func didTapEmail() {
+        navigateToTOSScreen()
     }
     
-    @objc func didTapSignUp() {
-        let SignUpVC = SignupViewController()
-        self.navigationController?.pushViewController(SignUpVC, animated: true)
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
-            $0.tintColor = .black
-        }
-    }
-    
-    @objc func didTapfindAccount() {
+    @objc
+    func didTapfindAccount() {
         
     }
-    
 }
 
 // MARK: - extension
-extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+extension SignupViewController: ASAuthorizationControllerPresentationContextProviding {
     // 인증창을 보여주기 위한 메서드 (인증창을 보여 줄 화면을 설정)
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         self.view.window ?? UIWindow()
     }
 }
 
-extension LoginViewController: ASAuthorizationControllerDelegate {
+extension SignupViewController: ASAuthorizationControllerDelegate {
     // 로그인 실패 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
         print("로그인 실패", error.localizedDescription)

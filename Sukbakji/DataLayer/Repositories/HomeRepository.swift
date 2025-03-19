@@ -42,7 +42,7 @@ class HomeRepository {
     }
     
     func fetchChangePW(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
-        let url = APIConstants.userPassword.path
+        let url = APIConstants.authPassword.path
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
     }
 }

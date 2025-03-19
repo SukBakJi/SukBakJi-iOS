@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let isAlarmComplete = Notification.Name("isAlarmComplete")
+    static let textFieldDidClear = Notification.Name("textFieldDidClear")
 }

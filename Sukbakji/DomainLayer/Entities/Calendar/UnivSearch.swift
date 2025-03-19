@@ -11,7 +11,7 @@ struct UnivSearch : Codable {
     var universityList: [UnivSearchList]
 }
 
-struct UnivSearchList : Codable {
+struct UnivSearchList : Codable, Equatable {
     let id: Int
     let name: String
 }

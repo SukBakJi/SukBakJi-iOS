@@ -8,7 +8,9 @@
 import UIKit
 
 class SMSAuthViewController: UIViewController {
-    
+    private var verifiedPhoneNumber: String?  // 인증된 전화번호 저장
+    private var isSuccessSent: Bool = false
+
     private lazy var smsAuthView = SMSAuthView().then {
         $0.nextButton.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
         $0.sendCode.addTarget(self, action: #selector(didTapSendCode), for: .touchUpInside)
@@ -45,12 +47,12 @@ class SMSAuthViewController: UIViewController {
     
     private func updateNextButtonState() {
         let isPhoneNumValid = smsAuthView.phoneNumTF.validationHandler?(smsAuthView.phoneNumTF.textField.text) ?? false
-        
+        let isCodeValid = smsAuthView.verifyCodeTF.validationHandler?(smsAuthView.verifyCodeTF.textField.text) ?? false
         smsAuthView.sendCode.setButtonState(isEnabled: isPhoneNumValid)
 
         // 인증요청 성공 시 인증하기 버튼 활성화
-        let isSuccessSendCode = smsAuthView.phoneNumTF.textField.isUserInteractionEnabled
-        smsAuthView.verifyCode.setButtonState(isEnabled: !isSuccessSendCode)
+        let isEnable = isCodeValid && isSuccessSent
+        smsAuthView.verifyCode.setButtonState(isEnabled: isEnable)
     }
     
     private func pushToNextVC(_ nextVC: UIViewController) {
@@ -62,10 +64,35 @@ class SMSAuthViewController: UIViewController {
         }
     }
     
+    private func setUnableState(isSuccess: Bool, message: String = "") {
+        if isSuccess {
+            smsAuthView.phoneNumTF.textField.setUnableState()
+            smsAuthView.verifyCodeTF.textField.setUnableState()
+            smsAuthView.sendCode.setButtonState(isEnabled: false)
+            smsAuthView.verifyCode.setButtonState(isEnabled: false)
+            smsAuthView.sendCode.isUserInteractionEnabled = false
+            smsAuthView.verifyCode.isUserInteractionEnabled = false
+            smsAuthView.nextButton.setButtonState(isEnabled: true)
+            smsAuthView.nextButton.isEnabled = true
+            ToastView.show(image: UIImage(named: "SBJ_complete") ?? UIImage(), message: "인증번호 인증을 완료했어요", in: self.view)
+        } else {
+            smsAuthView.verifyCodeTF.setValidationMode(.errorWithMessage)
+            smsAuthView.verifyCodeTF.setErrorState(true)
+            smsAuthView.verifyCodeTF.setErrorMessage(message)
+        }
+    }
+    
     //MARK: Event
     @objc
     private func didTapNext() {
-        pushToNextVC(EmailSignUpViewController())
+        guard let phoneNumber = verifiedPhoneNumber else {
+            print("오류: 인증된 전화번호가 없음")
+            return
+        }
+        
+        let nextVC = EmailSignUpViewController()
+        nextVC.phoneNum = smsAuthView.phoneNumTF.textField.text ?? ""
+        pushToNextVC(nextVC)
     }
     
     @objc
@@ -95,40 +122,32 @@ class SMSAuthViewController: UIViewController {
         let request = SmsCodeRequestDTO(phoneNumber: phoneNum)
         
         let smsDataManager = SmsDataManager()
-        
         smsDataManager.smsCodeDataManager(request) {
             [weak self] data in
             guard let self = self else { return }
-            
             if let model = data, model.code == "COMMON200" {
-                // 인증요청 성공 시 전화번호 필드 막기
-                smsAuthView.phoneNumTF.textField.isUserInteractionEnabled = false
-                print("인증번호 요청 성공")
+                self.verifiedPhoneNumber = phoneNum // 인증된 전화번호 저장
+                self.isSuccessSent = true
+
             }
         }
     }
     
     private func callPostVerifyCode() {
+        guard let phoneNum = verifiedPhoneNumber else { return }
         let code = smsAuthView.verifyCodeTF.textField.text ?? ""
-        let phoneNum = smsAuthView.phoneNumTF.textField.text ?? ""
         let request = VerifyCodeRequestDTO(phoneNumber: phoneNum, verificationCode: code)
-        
         let smsDataManager = SmsDataManager()
         
         smsDataManager.smsVerifyDataManager(request) {
             [weak self] data in
             guard let self = self else { return }
-            
             if let model = data, model.code == "COMMON200" {
-                smsAuthView.phoneNumTF.textField.setUnableState()
-                smsAuthView.verifyCodeTF.textField.setUnableState()
-                print("인증번호 검증 성공")
-                // 다음으로 버튼 활성화
-                smsAuthView.nextButton.setButtonState(isEnabled: true)
+                setUnableState(isSuccess: true)
+            } else if let model = data, model.code == "AUTH4005" {
+                setUnableState(isSuccess: false, message: "이미 등록된 휴대폰 번호입니다")
             } else {
-                smsAuthView.verifyCodeTF.setValidationMode(.errorWithMessage)
-                smsAuthView.verifyCodeTF.setErrorState(true)
-                smsAuthView.verifyCodeTF.setErrorMessage("인증번호가 일치하지 않습니다")
+                setUnableState(isSuccess: false, message: "인증번호가 일치하지 않습니다")
             }
         }
     }
