@@ -79,29 +79,47 @@ struct SavedBoardsView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text("즐겨찾기한 게시판")
-                    .font(Font.custom("Pretendard", size: Constants.fontSizeL)
-                        .weight(Constants.fontWeightMedium))
-                    .foregroundColor(Constants.Gray900)
-                
-                Image("Rectangle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 14, height: 14)
-                
-                Spacer()
+            if !boards.isEmpty {
+                HStack {
+                    Text("즐겨찾기한 게시판")
+                        .font(Font.custom("Pretendard", size: Constants.fontSizeL)
+                            .weight(Constants.fontWeightMedium))
+                        .foregroundColor(Constants.Gray900)
+                    
+                    Image("Rectangle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 14, height: 14)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 8)
             }
-            .padding(.horizontal, 24)
             
             if boards.isEmpty {
-                Text("즐겨찾기한 게시판이 없습니다.")
-                    .font(Font.custom("Pretendard", size: 14))
-                    .foregroundColor(Constants.Gray500)
-                    .padding(.horizontal, 24)
-                    .padding(.top, 10)
+                VStack {
+                    Text("아직 즐겨찾기한 게시판이 없어요")
+                        .font(
+                            Font.custom("Pretendard", size: Constants.fontSizeS)
+                                .weight(Constants.fontWeightSemiBold)
+                        )
+                        .foregroundColor(Constants.Gray500)
+                        .padding(.top, 24)
+                    
+                    Text("게시판을 탐색하고 즐겨찾기를 등록해 보세요!")
+                        .font(
+                            Font.custom("Pretendard", size: Constants.fontSizeXxs)
+                                .weight(Constants.fontWeightRegular)
+                        )
+                        .foregroundColor(Constants.Gray500)
+                        .padding(.top, 8)
+                        .padding(.bottom, 42)
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.vertical, 20)
             } else {
-                ForEach(boards, id: \ .self) { boardName in
+                ForEach(boards, id: \.self) { boardName in
                     HStack {
                         Image("star")
                             .resizable()
@@ -112,16 +130,17 @@ struct SavedBoardsView: View {
                         Text(boardName)
                             .font(Font.custom("Pretendard", size: Constants.fontSizeL)
                                 .weight(Constants.fontWeightMedium))
-                            .foregroundStyle(Constants.Gray900)
+                            .foregroundColor(Constants.Gray900)
                             .padding(.leading, 6)
                         
                         Spacer()
                         
                         Image(systemName: "chevron.right")
                             .frame(width: 24, height: 24)
-                            .foregroundStyle(Constants.Gray400)
+                            .foregroundColor(Constants.Gray400)
                     }
                     .padding(.horizontal, 24)
+                    .padding(.vertical, 8)
                 }
             }
         }

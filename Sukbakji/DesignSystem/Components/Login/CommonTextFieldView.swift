@@ -190,6 +190,7 @@ class CommonTextFieldView: UIView {
         $0.setLeftPadding(16)
         $0.errorfix()
         $0.setTFStyle()
+        $0.autocapitalizationType = .none
     }
     
     private lazy var rightView: UIStackView = makeStack(axis: .horizontal, spacing: 8)
