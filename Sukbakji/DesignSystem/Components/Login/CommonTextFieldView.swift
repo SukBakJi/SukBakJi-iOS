@@ -184,7 +184,8 @@ class CommonTextFieldView: UIView {
     public var textField = UITextField().then {
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.clearButtonMode = .never
-        
+        $0.autocapitalizationType = .none
+
         $0.setNormalState()
         $0.setLeftPadding(16)
         $0.errorfix()
