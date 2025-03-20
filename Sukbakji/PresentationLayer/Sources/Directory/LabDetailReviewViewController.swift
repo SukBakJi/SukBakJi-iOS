@@ -14,7 +14,7 @@ struct LabDetailReviewViewController: View {
     @State private var highestAttributesText: String = "" // 가장 높은 항목을 표시할 텍스트
 
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .center, spacing: 8) {
                 Text("연구실의 후기를 확인해 보세요")
                     .font(
@@ -143,6 +143,7 @@ struct LabDetailReviewViewController: View {
                 }
             }
             .padding(.horizontal, 24)
+            .padding(.bottom, 48)
         }
         .onAppear {
             loadLabReviews(labId: labId)

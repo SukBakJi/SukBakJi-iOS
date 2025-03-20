@@ -51,7 +51,7 @@ struct DirectoryMainViewController: View {
                                         .foregroundColor(.gray)
                                         .padding(.leading, 8) // 아이콘 왼쪽 여백
                                     
-                                    Text("게시판에서 궁금한 내용을 검색해 보세요!")
+                                    Text("학과와 연구 주제로 검색해 보세요")
                                         .font(.system(size: 14))
                                         .foregroundColor(Constants.Gray300)
                                         .padding(.vertical, 12) // 상하 여백 추가
