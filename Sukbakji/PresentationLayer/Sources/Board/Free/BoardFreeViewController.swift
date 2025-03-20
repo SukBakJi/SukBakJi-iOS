@@ -37,10 +37,9 @@ struct BoardFreeViewController: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Constants.Gray50)
             .cornerRadius(8)
-            .padding(.top, 20)
-            .padding(.bottom, 28)
             .padding(.horizontal, 24)
-            
+            .padding(.top, 20)
+                        
             // 즐겨찾기한 게시판 목록
             SavedBoardsView(boards: boards)
             

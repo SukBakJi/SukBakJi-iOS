@@ -8,6 +8,13 @@
 import Foundation
 
 struct LatestQnAModel: Decodable {
+    let isSuccess: Bool
+    let code: String
+    let message: String
+    let result: [LatestQnAModelResult]
+}
+
+struct LatestQnAModelResult: Decodable {
     let menu: String
-    let title: String
+    let title: String 
 }
