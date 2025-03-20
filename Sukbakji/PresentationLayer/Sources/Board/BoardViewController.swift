@@ -34,7 +34,7 @@ struct BoardViewController: View {
                     
                     VStack(spacing: 0) {
                         HStack(spacing: 0) {
-                            ForEach(["메인", "박사", "석사", "입학 예정"], id: \.self) { title in
+                            ForEach(["메인", "박사", "석사", "입학 예정", "자유"], id: \.self) { title in
                                 Button(action: {
                                     selectedButton = title
                                     print("\(title) 클릭")
@@ -81,8 +81,8 @@ struct BoardViewController: View {
                         MasterView()
                     case "입학 예정":
                         AdmissionView()
-//                    case "자유":
-//                        FreeView()
+                    case "자유":
+                        FreeView()
                     default:
                         Text("여기에 컨텐츠를 추가하세요")
                             .font(.body)
@@ -93,6 +93,7 @@ struct BoardViewController: View {
                 
             }
         }
+        .navigationBarHidden(true)
         .accessibilityIdentifier("BoardViewController")
     }
     

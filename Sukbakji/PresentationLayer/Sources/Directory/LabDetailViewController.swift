@@ -330,7 +330,7 @@ struct LabInfoView: View {
                     Text("홈페이지")
                         .font(
                             Font.custom("Pretendard", size: 16)
-                                .weight(Constants.fontWeightSemibold)
+                                .weight(Constants.fontWeightSemiBold)
                         )
                         .foregroundColor(Constants.Gray900)
                     
@@ -338,7 +338,7 @@ struct LabInfoView: View {
                         Text("\(labURL)")
                             .font(
                                 Font.custom("Pretendard", size: 16)
-                                    .weight(Constants.fontWeightSemibold)
+                                    .weight(Constants.fontWeightSemiBold)
                             )
                             .underline()
                             .foregroundColor(Constants.Orange700)
@@ -346,7 +346,7 @@ struct LabInfoView: View {
                         Text("해당 연구실은 홈페이지가 없습니다.")
                             .font(
                                 Font.custom("Pretendard", size: 12)
-                                    .weight(Constants.fontWeightSemibold)
+                                    .weight(Constants.fontWeightSemiBold)
                             )
                             .foregroundColor(Constants.Gray600)
                     }

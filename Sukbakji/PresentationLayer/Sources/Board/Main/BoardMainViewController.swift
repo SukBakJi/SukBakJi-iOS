@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct BoardMainViewController: View {
     
@@ -291,136 +292,143 @@ struct tapMenu: View {
     }
 }
 
-// MARK: -- 질문 게시판
+// MARK: -- 최신 질문 게시판
 struct qnaBoard: View {
+    @State private var qnaPosts: [LatestQnAModelResult] = []
+    @State private var isLoading: Bool = false
+
     var body: some View {
-        Rectangle()
-            .foregroundStyle(.clear)
-            .frame(height: 245)
-            .background(Constants.Gray50)
-            .overlay(
-                VStack {
-                    
-                    HStack {
-                        Text("최신 질문글")
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(.leading, 24)
-                            .padding(.top, 14)
-                        Image("Magnifier 1")
+        VStack(spacing: 12) {
+            HStack {
+                Text("최신 질문글")
+                    .font(.system(size: 18, weight: .bold))
+                    .padding(.leading, 24)
+                
+                Image("Magnifier 1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+
+                Spacer()
+
+                Button(action: {
+                    print("최신 질문글 tapped")
+                }) {
+                    NavigationLink(destination: BoardQnAViewController()) {
+                        Text("더보기")
+                            .font(.system(size: 12, weight: .medium))
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(Constants.Gray500)
+
+                        Image("More 1")
                             .resizable()
-                            .frame(width: 20, height: 20, alignment: .center)
-                            .padding(.top, 14)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            print("최신 질문글 tapped")
-                            // 버튼 클릭 시 동작
-                        }) {
-                            NavigationLink(destination: BoardQnAViewController()) {
-                                Text("더보기")
-                                    .font(.system(size: 12, weight: .medium))
-                                    .multilineTextAlignment(.center)
-                                    .foregroundStyle(Constants.Gray500)
-                                
-                                Image("More 1")
-                                    .resizable()
-                                    .frame(width: 4, height: 8)
-                            }
-                        }
-                        .padding(.horizontal, 24)
-                        .padding(.top, 14)
-                        .frame(alignment: .center)
-                        .buttonStyle(PlainButtonStyle()) // 기본 버튼 스타일
+                            .frame(width: 4, height: 8)
                     }
-                    
-                    VStack(alignment: .leading, spacing: 0) {
-                        
-                        
-                        Button(action: {
-                            print("최신 질문글 첫 번재 게시글 tapped")
-                            // 취업후기 버튼 동작
-                        }) {
-                            HStack(alignment: .center, spacing: 12) {
-                                Text("입학 예정")
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundStyle(Color(red: 0.29, green: 0.45, blue: 1))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 3)
-                                    .background(RoundedRectangle(cornerRadius: 4)
-                                        .fill(Color(red: 0.91, green: 0.92, blue: 1)))
-                                    .padding(.leading, 18)
-                                
-                                Text("면접 때 해당 전공교수님만 들어오나?")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundStyle(Constants.Gray900)
-                                    .padding(.leading, 12)
-                                    .padding(.vertical, 18)
-                            }
-                        }
-                        
-                        Divider()
-                            .background(Constants.Gray50) // 구분선 색상 설정
-                        
-                        Button(action: {
-                            print("최신 질문글 두 번재 게시글 tapped")
-                            // 대학원생활 버튼 동작
-                        }) {
-                            HStack(alignment: .center, spacing: 12) {
-                                Text("석사")
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundStyle(Color(red: 0.29, green: 0.45, blue: 1))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 3)
-                                    .background(RoundedRectangle(cornerRadius: 4)
-                                        .fill(Color(red: 0.91, green: 0.92, blue: 1)))
-                                    .padding(.leading, 18)
-                                
-                                Text("연세대 서류학점 필요한가요?")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundStyle(Constants.Gray900)
-                                    .padding(.leading, 12)
-                                    .padding(.vertical, 18)
-                            }
-                        }
-                        
-                        Divider()
-                            .background(Constants.Gray50) // 구분선 색상 설정
-                        
-                        Button(action: {
-                            print("최신 질문글 세 번재 게시글 tapped")
-                            // 대학원생활 버튼 동작
-                        }) {
-                            HStack(alignment: .center, spacing: 12) {
-                                Text("박사")
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundStyle(Color(red: 0.29, green: 0.45, blue: 1))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 3)
-                                    .background(RoundedRectangle(cornerRadius: 4)
-                                        .fill(Color(red: 0.91, green: 0.92, blue: 1)))
-                                    .padding(.leading, 18)
-                                
-                                Text("졸업논문 쓸 때 이거 필요한가요?")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundStyle(Constants.Gray900)
-                                    .padding(.leading, 12)
-                                    .padding(.vertical, 18)
-                            }
-                        }
-                    }
-                    .padding(0)
-                    .frame(width: 342, alignment: .topLeading)
-                    .cornerRadius(12)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .inset(by: 0.5)
-                            .stroke(Constants.Gray100, lineWidth: 1)
-                    )
-                    
-                    
                 }
+                .padding(.horizontal, 24)
+                .buttonStyle(PlainButtonStyle())
+            }
+            .padding(.top, 28)
+
+            VStack(alignment: .leading, spacing: 0) {
+                if qnaPosts.isEmpty {
+                    Text("최신 질문글이 없습니다.")
+                        .font(.system(size: 14))
+                        .foregroundColor(Constants.Gray900)
+                        .padding()
+                } else {
+                    ForEach(qnaPosts.prefix(3), id: \.title) { question in
+                        Button(action: {
+                            print("\(question.title) tapped")
+                        }) {
+                            HStack(alignment: .center, spacing: 12) {
+                                Text(question.menu)
+                                    .font(.system(size: 12, weight: .medium))
+                                    .foregroundStyle(Color(red: 0.29, green: 0.45, blue: 1))
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 3)
+                                    .background(RoundedRectangle(cornerRadius: 4)
+                                        .fill(Color(red: 0.91, green: 0.92, blue: 1))
+                                    )
+                                    .padding(.leading, 18)
+
+                                Text(question.title)
+                                    .font(.system(size: 14, weight: .semibold))
+                                    .foregroundStyle(Constants.Gray900)
+                                    .padding(.leading, 12)
+                                    .padding(.vertical, 18)
+                            }
+                        }
+
+                        Divider()
+                            .background(Constants.Gray50)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .background(.white)
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .inset(by: 0.5)
+                    .stroke(Constants.Gray100, lineWidth: 1)
             )
+            .padding(.horizontal, 24)
+
+            Spacer(minLength: 16)
+        }
+        .background(Constants.Gray50)
+        .padding(.top, 20)
+        .onAppear {
+            loadQnAPosts()
+        }
+    }
+
+    /// 최신 질문글을 가져오는 함수
+    private func loadQnAPosts() {
+        isLoading = true
+        fetchLatestQnA { result in
+            switch result {
+            case .success(let posts):
+                self.qnaPosts = posts
+            case .failure(let error):
+                print("❌ 최신 질문글 로딩 실패: \(error.localizedDescription)")
+            }
+            self.isLoading = false
+        }
+    }
+
+    /// 최신 질문글 API 요청 함수 (참고 코드 양식 그대로 유지)
+    private func fetchLatestQnA(completion: @escaping (Result<[LatestQnAModelResult], Error>) -> Void) {
+        let url = APIConstants.communityLastestQuestions.path
+
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user"), !accessToken.isEmpty else {
+            print("❌ JWT 토큰이 없습니다.")
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "JWT 토큰이 없습니다."])))
+            return
+        }
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+
+        AF.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: LatestQnAModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        completion(.success(data.result))
+                    } else {
+                        let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: data.message])
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
     }
 }
 

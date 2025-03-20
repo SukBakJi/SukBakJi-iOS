@@ -55,13 +55,13 @@ struct LabReviewWriteViewController: View {
                         Text("연구실에 대한 정보")
                             .font(
                                 Font.custom("Pretendard", size: 18)
-                                    .weight(Constants.fontWeightSemibold)
+                                    .weight(Constants.fontWeightSemiBold)
                             )
                             .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
                         + Text("를 \n석박지에서 공유해 보세요")
                             .font(
                                 Font.custom("Pretendard", size: 18)
-                                    .weight(Constants.fontWeightSemibold)
+                                    .weight(Constants.fontWeightSemiBold)
                             )
                     }
                     .padding(.top, 20)
@@ -76,14 +76,14 @@ struct LabReviewWriteViewController: View {
                             Text(universityName)
                                 .font(
                                     Font.custom("Pretendard", size: 16)
-                                        .weight(Constants.fontWeightSemibold)
+                                        .weight(Constants.fontWeightSemiBold)
                                 )
                                 .foregroundColor(Constants.Gray900)
 
                             Text(departmentName)
                                 .font(
                                     Font.custom("Pretendard", size: 16)
-                                        .weight(Constants.fontWeightSemibold)
+                                        .weight(Constants.fontWeightSemiBold)
                                 )
                                 .foregroundColor(Constants.Orange700)
                         }
@@ -108,7 +108,7 @@ struct LabReviewWriteViewController: View {
                             Text("\(professorName) 교수")
                                 .font(
                                     Font.custom("Pretendard", size: 16)
-                                        .weight(Constants.fontWeightSemibold)
+                                        .weight(Constants.fontWeightSemiBold)
                                 )
                                 .foregroundColor(Constants.Gray900)
                         }
@@ -142,7 +142,7 @@ struct LabReviewWriteViewController: View {
                 Text("지도력은 어떤가요?")
                     .font(
                         Font.custom("Pretendard", size: 16)
-                            .weight(Constants.fontWeightSemibold)
+                            .weight(Constants.fontWeightSemiBold)
                     )
                     .foregroundColor(Constants.Gray900)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -172,7 +172,7 @@ struct LabReviewWriteViewController: View {
                 Text("인건비는 어떤가요?")
                     .font(
                         Font.custom("Pretendard", size: 16)
-                            .weight(Constants.fontWeightSemibold)
+                            .weight(Constants.fontWeightSemiBold)
                     )
                     .padding(.top, 13)
                     .foregroundColor(Constants.Gray900)
@@ -203,7 +203,7 @@ struct LabReviewWriteViewController: View {
                 Text("자율성은 어떤가요?")
                     .font(
                         Font.custom("Pretendard", size: 16)
-                            .weight(Constants.fontWeightSemibold)
+                            .weight(Constants.fontWeightSemiBold)
                     )
                     .padding(.top, 13)
                     .foregroundColor(Constants.Gray900)

@@ -481,7 +481,7 @@ struct LabReviewDummy: View {
                     Text("화학에너지융합학부 에너지재료연구실")
                         .font(
                             Font.custom("Pretendard", size: Constants.fontSize5)
-                                .weight(Constants.fontWeightSemibold)
+                                .weight(Constants.fontWeightSemiBold)
                         )
                         .foregroundColor(Constants.Gray900)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
@@ -549,7 +549,7 @@ struct EmptyScrappedLaboratory: View {
             Text("아직 즐겨찾기 연구실이 없어요")
                 .font(
                     Font.custom("Pretendard", size: Constants.fontSize5)
-                        .weight(Constants.fontWeightSemibold)
+                        .weight(Constants.fontWeightSemiBold)
                 )
                 .multilineTextAlignment(.center)
                 .foregroundColor(Constants.Gray500)

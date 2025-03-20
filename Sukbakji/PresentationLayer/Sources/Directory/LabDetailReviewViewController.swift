@@ -36,7 +36,7 @@ struct LabDetailReviewViewController: View {
                 Text("간단 Check")
                   .font(
                     Font.custom("Pretendard", size: 18)
-                      .weight(Constants.fontWeightSemibold)
+                      .weight(Constants.fontWeightSemiBold)
                   )
                   .foregroundColor(Constants.Gray900)
                 
@@ -79,7 +79,7 @@ struct LabDetailReviewViewController: View {
                 Text("연구실 한줄평")
                   .font(
                     Font.custom("Pretendard", size: 18)
-                      .weight(Constants.fontWeightSemibold)
+                      .weight(Constants.fontWeightSemiBold)
                   )
                   .foregroundColor(Constants.Gray900)
                 
@@ -216,7 +216,7 @@ struct LabReviewInfoView: View {
             Text(review.departmentName)
                 .font(
                     Font.custom("Pretendard", size: Constants.fontSize5)
-                        .weight(Constants.fontWeightSemibold)
+                        .weight(Constants.fontWeightSemiBold)
                 )
                 .foregroundColor(Constants.Gray900)
                 .frame(maxWidth: .infinity, alignment: .leading)

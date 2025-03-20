@@ -32,7 +32,7 @@ struct BoardWritePostResponseModel: Decodable {
     let isSuccess: Bool
     let code: String
     let message: String
-    let result: BoardPostResult
+    let result: BoardPostResult?
 }
 
 // 응답 모델 내부 일반 게시물 result 구조체

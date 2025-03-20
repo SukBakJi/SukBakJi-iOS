@@ -140,6 +140,7 @@ struct BoardQnAViewController: View {
                     .background(Constants.White)
                     .cornerRadius(12)
                     .shadow(radius: 8)
+                    .padding(.horizontal, 24)
                 }
 
                 if showBookmarkOverlay {
