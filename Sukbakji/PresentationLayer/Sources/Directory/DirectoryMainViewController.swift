@@ -43,7 +43,7 @@ struct DirectoryMainViewController: View {
                     .padding(.trailing, 8)
                     
                     // MARK: -- 검색창
-                    ScrollView(.vertical) {
+                    ScrollView(.vertical, showsIndicators: false) {
                         VStack {
                             NavigationLink(destination: DirectorySearchViewController(searchText: $searchText)) {
                                 HStack {
@@ -163,7 +163,7 @@ struct DirectoryMainViewController: View {
                                 .foregroundColor(Constants.Gray500)
                                 .padding(.horizontal, 24)
                         }
-
+                        
                         // 광고 배너 뷰
                         AdvertisementView()
                         
@@ -193,7 +193,7 @@ struct DirectoryMainViewController: View {
                                             .multilineTextAlignment(.center)
                                             .foregroundStyle(Constants.Gray500)
                                         
-                                            Image("More 1")
+                                        Image("More 1")
                                             .resizable()
                                             .frame(width: 4, height: 8)
                                     }
@@ -206,6 +206,7 @@ struct DirectoryMainViewController: View {
                             
                             LabReviewView(review: latestReview)
                                 .padding(.horizontal, 24)
+                                .padding(.bottom, 48)
                         } else if let errorMessage = errorMessage {
                             Text("Error: \(errorMessage)")
                                 .foregroundColor(.red)
@@ -324,7 +325,7 @@ struct ScrappedLaboratory: View {
     var labName: String
     var professorName: String
     var labId: Int // Add labId to the view
-
+    
     var body: some View {
         NavigationLink(destination: LabDetailViewController(labId: labId)) {
             HStack {
@@ -435,8 +436,8 @@ struct AdvertisementView: View {
         .overlay(
             Text(" \(selectedPage + 1) / \(images.count) ")
                 .font(
-                Font.custom("Pretendard", size: Constants.fontSize6)
-                .weight(Constants.fontWeightMedium)
+                    Font.custom("Pretendard", size: Constants.fontSize6)
+                        .weight(Constants.fontWeightMedium)
                 )
                 .multilineTextAlignment(.center)
                 .foregroundColor(Constants.Gray300)
@@ -464,7 +465,7 @@ struct LabReviewDummy: View {
                         .inset(by: 0.5)
                         .stroke(Constants.Gray100, lineWidth: 1)
                 )
-
+                
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
                         HStack(alignment: .center, spacing: 4) {
@@ -491,8 +492,8 @@ struct LabReviewDummy: View {
                             
                             Text("모든 학생들의 연구 진행상황을 상세히 검토해 주시고 올바른 길로 나아가도록 지도해 주시는 교수님이에요")
                                 .font(
-                                Font.custom("Pretendard", size: Constants.fontSize6)
-                                .weight(Constants.fontWeightMedium)
+                                    Font.custom("Pretendard", size: Constants.fontSize6)
+                                        .weight(Constants.fontWeightMedium)
                                 )
                                 .foregroundColor(Constants.Gray900)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

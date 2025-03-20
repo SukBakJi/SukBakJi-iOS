@@ -90,16 +90,20 @@ struct LabReviewViewController: View {
                         // 검색 결과 표시
                         if !searchResults.isEmpty {
                             VStack(alignment: .leading, spacing: 16) {
-                                
-                                Text("검색 결과")
-                                    .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemiBold))
-                                    .foregroundColor(Constants.Gray900)
-                                    .padding(.top, 16)
-                                    .padding(.horizontal, 24)
-                                
+                                HStack {
+                                    Text("검색 결과")
+                                        .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemiBold))
+                                        .foregroundColor(Constants.Gray900)
+                                        .padding(.top, 28)
+                                    
+                                    Spacer() // 최신 연구실 후기와 일치하도록 추가
+                                }
+                                .padding(.horizontal, 24)
+
                                 ForEach(searchResults, id: \.content) { review in
                                     DirectoryLabReviewSearchResultView(review: review)
                                 }
+                                .padding(.horizontal, 24)
                             }
                         } else if !isSearchActive {
                             // 최신 연구실 후기
@@ -112,21 +116,22 @@ struct LabReviewViewController: View {
                                     .foregroundColor(.red)
                                     .padding()
                             } else {
-                                VStack {
+                                VStack(alignment: .leading, spacing: 16) { // 검색 결과와 동일하게 조정
                                     HStack {
                                         Text("최신 연구실 후기")
                                             .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemiBold))
                                             .foregroundColor(Constants.Gray900)
                                             .padding(.top, 28)
                                         
-                                        Spacer()
+                                        Spacer() // 검색 결과와 일치하도록 추가
                                     }
                                     .padding(.horizontal, 24)
-                                    
+
                                     ForEach(reviews.prefix(showMoreReviews ? reviews.count : 3), id: \.content) { review in
                                         LabReviewView(review: review)
                                     }
-                                    
+                                    .padding(.horizontal, 24)
+
                                     if reviews.count > 3 {
                                         Button(action: {
                                             showMoreReviews.toggle()
@@ -136,7 +141,7 @@ struct LabReviewViewController: View {
                                                 Text(showMoreReviews ? "숨기기" : "연구실 후기 더보기")
                                                     .font(Font.custom("Pretendard", size: Constants.fontSize7).weight(.regular))
                                                     .foregroundColor(Constants.Gray900)
-                                                
+
                                                 Image(showMoreReviews ? "hide" : "More 2")
                                                     .resizable()
                                                     .frame(width: 12, height: 12)
