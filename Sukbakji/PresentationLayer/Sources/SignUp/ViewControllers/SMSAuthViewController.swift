@@ -85,13 +85,10 @@ class SMSAuthViewController: UIViewController {
     //MARK: Event
     @objc
     private func didTapNext() {
-        guard let phoneNumber = verifiedPhoneNumber else {
-            print("오류: 인증된 전화번호가 없음")
-            return
-        }
+        guard let phoneNumber = verifiedPhoneNumber else { return }
         
         let nextVC = EmailSignUpViewController()
-        nextVC.phoneNum = smsAuthView.phoneNumTF.textField.text ?? ""
+        nextVC.phoneNum = phoneNumber
         pushToNextVC(nextVC)
     }
     
@@ -128,7 +125,7 @@ class SMSAuthViewController: UIViewController {
             if let model = data, model.code == "COMMON200" {
                 self.verifiedPhoneNumber = phoneNum // 인증된 전화번호 저장
                 self.isSuccessSent = true
-
+                ToastView.show(image: UIImage(named: "SBJ_complete") ?? UIImage(), message: "인증번호를 발송했어요", in: self.view)
             }
         }
     }

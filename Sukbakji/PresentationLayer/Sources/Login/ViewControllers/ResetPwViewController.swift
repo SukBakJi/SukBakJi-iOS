@@ -8,6 +8,8 @@
 import UIKit
 
 class ResetPwViewController: UIViewController {
+    var email: String = ""
+    
     // MARK: - View
     private lazy var resetPwView = ResetPwView().then {
         $0.nextButton.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
@@ -57,8 +59,25 @@ class ResetPwViewController: UIViewController {
     @objc
     private func didTapNext() {
         // 비밀번호 재설정하기
+        callPostResetPassword()
     }
     
     //MARK: - Network
-
+    private func callPostResetPassword() {
+        let confirmPassword = resetPwView.passwordCheckTF.textField.text ?? ""
+        let request = PostResetPasswordRequestDTO(
+            email: email,
+            password: confirmPassword
+        )
+        print(request)
+        let authDataManager = AuthDataManager()
+        authDataManager.ResetPasswordDataManager(request){
+            [weak self] data in
+            guard let self = self else { return }
+            print(request)
+            if let model = data, model.result == "비밀번호를 재설정하였습니다." {
+                navigationController?.popToRootViewController(animated: true)
+            }
+        }
+    }
 }

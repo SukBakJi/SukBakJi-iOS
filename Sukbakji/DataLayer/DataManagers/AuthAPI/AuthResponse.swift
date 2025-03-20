@@ -46,3 +46,12 @@ struct PostUserEmailResponseDTO: Decodable {
     let message: String?
     let result: String?
 }
+
+// 비밀번호 재설정 (로그인 되어있지 않은 경우)
+struct PostResetPasswordResponseDTO: Decodable {
+    let isSuccess: Bool?
+    let code: String?
+    let message: String?
+    let result: String?
+}
+

@@ -88,7 +88,11 @@ class FindPwViewController: UIViewController {
     //MARK: Event
     @objc
     private func didTapNext() {
-        // 비밀번호 재설정하기
+        guard let email = verifiedEmail else { return }
+        
+        let nextVC = ResetPwViewController()
+        nextVC.email = email
+        pushToNextVC(nextVC)
     }
     
     @objc
@@ -125,6 +129,7 @@ class FindPwViewController: UIViewController {
             if let model = data, model.code == "COMMON200" {
                 self.verifiedEmail = email // 인증된 전화번호 저장
                 self.isSuccessSent = true
+                ToastView.show(image: UIImage(named: "SBJ_complete") ?? UIImage(), message: "인증번호를 발송했어요", in: self.view)
             }
         }
     }

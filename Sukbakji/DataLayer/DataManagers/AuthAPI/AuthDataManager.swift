@@ -15,6 +15,7 @@ class AuthDataManager {
     let MemberEmailUrl = APIConstants.authMemberEmail.path
     let EmailCodeUrl = APIConstants.authEmailCode.path
     let passwordUrl = APIConstants.authPassword.path
+    let resetPasswordUrl = APIConstants.authPasswordReset.path
     
     let headers:HTTPHeaders = [
         "Accept": "*/*",
@@ -171,6 +172,25 @@ class AuthDataManager {
                    headers: headers)
         .validate(statusCode: 200..<500)
         .responseDecodable(of: PostUserEmailResponseDTO.self) { response in
+            switch response.result {
+            case .success(let data):
+                completion(data)
+                print("성공. \(data)")
+                
+            case .failure(let error):
+                print("에러 : \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func ResetPasswordDataManager(_ parameters: PostResetPasswordRequestDTO, completion: @escaping (PostResetPasswordResponseDTO?) -> Void) {
+        AF.request(resetPasswordUrl,
+                   method: .post,
+                   parameters: parameters,
+                   encoder: JSONParameterEncoder.default,
+                   headers: headers)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: PostResetPasswordResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
                 completion(data)
