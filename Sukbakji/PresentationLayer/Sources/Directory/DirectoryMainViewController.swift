@@ -219,7 +219,7 @@ struct DirectoryMainViewController: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
         .onAppear {
             loadLatestLabReview()
             loadInterestTopics()

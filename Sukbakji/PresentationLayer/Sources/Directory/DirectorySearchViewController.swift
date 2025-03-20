@@ -203,32 +203,36 @@ struct DirectorySearchViewController: View {
     }
 
     func DirectoryLabSearchApi(keyword: String, userToken: String, completion: @escaping (Result<[LabResult], Error>) -> Void) {
-        let url = APIConstants.baseURL + "/labs/search"
-
-        let requestModel = DirectoryLabSearchModel(topicName: keyword)
-
+        // API 엔드포인트에 Query Parameters 추가
+        let url = "\(APIConstants.baseURL)/labs/search?topicName=\(keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&page=0&size=6"
+        
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json",
             "Authorization": "Bearer \(userToken)"
         ]
+        
+        print("Request URL: \(url)")
 
         AF.request(url,
                    method: .post,
-                   parameters: requestModel,
-                   encoder: JSONParameterEncoder.default,
+                   encoding: JSONEncoding.default, // body를 보내지 않으므로 encoding 제거 가능
                    headers: headers)
         .validate(statusCode: 200..<300)
         .responseDecodable(of: DirectoryLabSearchGetModel.self) { response in
             switch response.result {
             case .success(let data):
                 if data.isSuccess {
-                    completion(.success(data.result))
+                    completion(.success(data.result.responseDTOList))
                 } else {
                     let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: data.message])
                     completion(.failure(error))
                 }
             case .failure(let error):
+                if let data = response.data, let jsonString = String(data: data, encoding: .utf8) {
+                    print("Response JSON: \(jsonString)")
+                }
+                print("Response Error: \(response.debugDescription)")
                 completion(.failure(error))
             }
         }
