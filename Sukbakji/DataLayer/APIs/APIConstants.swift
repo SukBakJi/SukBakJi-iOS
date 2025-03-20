@@ -17,6 +17,7 @@ enum APIConstants {
     case authLogin
     case authEmail
     case authEmailCode
+    case authPasswordReset
     
     
     case userProfile
@@ -100,6 +101,8 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/auth/email")
         case .authEmailCode:
             return APIConstants.makeEndPoint("/auth/email-code")
+        case .authPasswordReset:
+            return APIConstants.makeEndPoint("/auth/password-reset")
         
         case .userProfile:
             return APIConstants.makeEndPoint("/user/profile")

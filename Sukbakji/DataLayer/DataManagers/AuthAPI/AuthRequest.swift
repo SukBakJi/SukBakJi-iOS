@@ -35,3 +35,9 @@ struct PostUserEmailCodeRequestDTO: Codable {
     let email: String
     let code: String
 }
+
+// 비밀번호 재설정 (로그인 되어있지 않은 경우)
+struct PostResetPasswordRequestDTO: Codable {
+    let email: String
+    let password: String
+}
