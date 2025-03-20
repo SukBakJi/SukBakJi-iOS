@@ -190,7 +190,7 @@ struct LabInfoView: View {
             .overlay(
                 VStack {
                     HStack {
-                        Image("Symbol")
+                        Image("symbol")
                             .resizable()
                             .frame(width: 56, height: 56)
                             .padding(22)
