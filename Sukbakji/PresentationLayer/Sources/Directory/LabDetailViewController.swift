@@ -335,13 +335,18 @@ struct LabInfoView: View {
                         .foregroundColor(Constants.Gray900)
                     
                     if hasLabURL {
-                        Text("\(labURL)")
-                            .font(
-                                Font.custom("Pretendard", size: 16)
-                                    .weight(Constants.fontWeightSemiBold)
-                            )
-                            .underline()
-                            .foregroundColor(Constants.Orange700)
+                        Link(destination: URL(string: labURL) ?? URL(string: "https://default.com")!) {
+                            Text(labURL)
+                                .font(
+                                    Font.custom("Pretendard", size: 16)
+                                        .weight(Constants.fontWeightSemiBold)
+                                )
+                                .underline()
+                                .foregroundColor(Constants.Orange700)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                                .minimumScaleFactor(0.5)
+                        }
                     } else {
                         Text("해당 연구실은 홈페이지가 없습니다.")
                             .font(
