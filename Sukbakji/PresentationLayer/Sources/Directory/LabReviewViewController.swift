@@ -318,12 +318,15 @@ struct KeywordView: View {
     
     var body: some View {
         Text(keywordName)
-            .font(.system(size: 12, weight: .medium))
+            .font(.system(size: 10, weight: .medium)) // 글씨 크기 줄임
             .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 6) // 패딩 줄임
             .padding(.vertical, 3)
             .background(Color(red: 0.99, green: 0.91, blue: 0.9))
             .cornerRadius(4)
+            .lineLimit(1) // 한 줄 유지
+            .minimumScaleFactor(0.8) // 너무 길면 글씨 크기 줄이기
+            .fixedSize(horizontal: true, vertical: false) // 자동 줄바꿈 방지
     }
 }
 
