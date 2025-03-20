@@ -298,98 +298,90 @@ struct qnaBoard: View {
     @State private var isLoading: Bool = false
 
     var body: some View {
-        Rectangle()
-            .foregroundStyle(.clear)
-            .frame(height: 245)
-            .background(Constants.Gray50)
-            .overlay(
-                VStack {
-                    HStack {
-                        Text("최신 질문글")
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(.leading, 24)
-                        
-                        Image("Magnifier 1")
+        VStack(spacing: 12) {
+            HStack {
+                Text("최신 질문글")
+                    .font(.system(size: 18, weight: .bold))
+                    .padding(.leading, 24)
+                
+                Image("Magnifier 1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+
+                Spacer()
+
+                Button(action: {
+                    print("최신 질문글 tapped")
+                }) {
+                    NavigationLink(destination: BoardQnAViewController()) {
+                        Text("더보기")
+                            .font(.system(size: 12, weight: .medium))
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(Constants.Gray500)
+
+                        Image("More 1")
                             .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                        
-
-                        Spacer()
-
-                        Button(action: {
-                            print("최신 질문글 tapped")
-                        }) {
-                            NavigationLink(destination: BoardQnAViewController()) {
-                                Text("더보기")
-                                    .font(.system(size: 12, weight: .medium))
-                                    .multilineTextAlignment(.center)
-                                    .foregroundStyle(Constants.Gray500)
-
-                                Image("More 1")
-                                    .resizable()
-                                    .frame(width: 4, height: 8)
-                            }
-                        }
-                        .padding(.horizontal, 24)
-                        .frame(alignment: .center)
-                        .buttonStyle(PlainButtonStyle())
+                            .frame(width: 4, height: 8)
                     }
-
-                    VStack(alignment: .leading, spacing: 0) {
-                        if isLoading {
-                            Text("로딩 중...")
-                                .font(.system(size: 14))
-                                .foregroundColor(.gray)
-                                .padding()
-                        } else if qnaPosts.isEmpty {
-                            Text("최신 질문글이 없습니다.")
-                                .font(.system(size: 14))
-                                .foregroundColor(Constants.Gray900)
-                                .padding()
-                        } else {
-                            ForEach(qnaPosts.prefix(3), id: \.title) { question in
-                                Button(action: {
-                                    print("\(question.title) tapped")
-                                }) {
-                                    HStack(alignment: .center, spacing: 12) {
-                                        Text(question.menu)
-                                            .font(.system(size: 12, weight: .medium))
-                                            .foregroundStyle(Color(red: 0.29, green: 0.45, blue: 1))
-                                            .padding(.horizontal, 8)
-                                            .padding(.vertical, 3)
-                                            .background(RoundedRectangle(cornerRadius: 4)
-                                                .fill(Color(red: 0.91, green: 0.92, blue: 1))
-                                            )
-                                            .padding(.leading, 18)
-
-                                        Text(question.title)
-                                            .font(.system(size: 14, weight: .semibold))
-                                            .foregroundStyle(Constants.Gray900)
-                                            .padding(.leading, 12)
-                                            .padding(.vertical, 18)
-                                    }
-                                }
-
-                                Divider()
-                                    .background(Constants.Gray50)
-                            }
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                    .background(.white)
-                    .cornerRadius(12)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .inset(by: 0.5)
-                            .stroke(Constants.Gray100, lineWidth: 1)
-                    )
-                    .padding(.horizontal, 24)
                 }
-            )
-            .onAppear {
-                loadQnAPosts()
+                .padding(.horizontal, 24)
+                .buttonStyle(PlainButtonStyle())
             }
+            .padding(.top, 28)
+
+            VStack(alignment: .leading, spacing: 0) {
+                if qnaPosts.isEmpty {
+                    Text("최신 질문글이 없습니다.")
+                        .font(.system(size: 14))
+                        .foregroundColor(Constants.Gray900)
+                        .padding()
+                } else {
+                    ForEach(qnaPosts.prefix(3), id: \.title) { question in
+                        Button(action: {
+                            print("\(question.title) tapped")
+                        }) {
+                            HStack(alignment: .center, spacing: 12) {
+                                Text(question.menu)
+                                    .font(.system(size: 12, weight: .medium))
+                                    .foregroundStyle(Color(red: 0.29, green: 0.45, blue: 1))
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 3)
+                                    .background(RoundedRectangle(cornerRadius: 4)
+                                        .fill(Color(red: 0.91, green: 0.92, blue: 1))
+                                    )
+                                    .padding(.leading, 18)
+
+                                Text(question.title)
+                                    .font(.system(size: 14, weight: .semibold))
+                                    .foregroundStyle(Constants.Gray900)
+                                    .padding(.leading, 12)
+                                    .padding(.vertical, 18)
+                            }
+                        }
+
+                        Divider()
+                            .background(Constants.Gray50)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .background(.white)
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .inset(by: 0.5)
+                    .stroke(Constants.Gray100, lineWidth: 1)
+            )
+            .padding(.horizontal, 24)
+
+            Spacer(minLength: 16)
+        }
+        .background(Constants.Gray50)
+        .padding(.top, 20)
+        .onAppear {
+            loadQnAPosts()
+        }
     }
 
     /// 최신 질문글을 가져오는 함수
@@ -410,7 +402,6 @@ struct qnaBoard: View {
     private func fetchLatestQnA(completion: @escaping (Result<[LatestQnAModelResult], Error>) -> Void) {
         let url = APIConstants.communityLastestQuestions.path
 
-        // ✅ 참고 코드와 동일한 방식으로 JWT 토큰 가져오기
         guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user"), !accessToken.isEmpty else {
             print("❌ JWT 토큰이 없습니다.")
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "JWT 토큰이 없습니다."])))
