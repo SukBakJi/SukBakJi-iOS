@@ -16,5 +16,5 @@ struct LatestQnAModel: Decodable {
 
 struct LatestQnAModelResult: Decodable {
     let menu: String
-    let title: String 
+    let title: String
 }

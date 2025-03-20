@@ -147,7 +147,7 @@ extension APIConstants {
         case .communityPostList:
             return APIConstants.makeEndPoint("/community/post-list")
         case .communityLastestQuestions:
-            return APIConstants.makeEndPoint("/community/lastest-questions")
+            return APIConstants.makeEndPoint("/community/latest-questions")
         case .communityHotPost:
             return APIConstants.makeEndPoint("/community/hot-boards")
         case .communityFavoriteBoard:
