@@ -49,13 +49,14 @@ class LoginViewController: UIViewController {
         self.navigationController?.setViewControllers([tabBarVC], animated: true)
     }
     
-    private func navigateToTOSScreen(isKakaoSignUp: Bool = false) {
+    private func navigateToTOSScreen(isOAuth2: Bool = false) {
         let TOSVC = TOSViewController()
+        TOSVC.isOAuth2 = isOAuth2
         self.navigationController?.pushViewController(TOSVC, animated: true)
         
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .black
-        self.navigationItem.backBarButtonItem = backBarButtonItem
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
+            $0.tintColor = .black
+        }
     }
     
     private func postOAuth2Login(provider: String, accessToken: String) {
@@ -89,7 +90,7 @@ class LoginViewController: UIViewController {
             // 응답
             if let model = profileModel, model.result?.name == nil {
                 print("프로필 설정 진행 안 함 -> 회원가입으로 이동")
-                navigateToTOSScreen(isKakaoSignUp: true)
+                navigateToTOSScreen(isOAuth2: true)
             }
             else if let model = profileModel, model.result?.name != nil {
                 print("프로필 설정 진행 되어있음 -> 홈화면으로 이동")
