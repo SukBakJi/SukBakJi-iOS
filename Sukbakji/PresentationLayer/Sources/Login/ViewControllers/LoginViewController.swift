@@ -59,27 +59,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func postOAuth2Login(provider: String, accessToken: String) {
-        let authDataManager = AuthDataManager()
-        
-        let requestBody = Oauth2RequestDTO(
-            provider: provider,
-            accessToken: accessToken
-        )
-        print("requestBody: \(requestBody)")
-        authDataManager.oauth2LoginDataManager(requestBody) {
-            [weak self] data in
-            guard let self = self else { return }
-            
-            // 응답
-            if let model = data, model.code == "COMMON200" {
-                checkIsSignUp()
-            } else {
-                print("OAuth2 로그인 실패")
-            }
-        }
-    }
-    
     private func checkIsSignUp() {
         let userDataManager = UserDataManager()
         
@@ -138,6 +117,9 @@ class LoginViewController: UIViewController {
     @objc func didTapAppleLogin() {
         let provider = ASAuthorizationAppleIDProvider()
         let request = provider.createRequest()
+        
+        // 사용자에게 제공받을 정보
+        request.requestedScopes = [.email, .fullName]
         let controller = ASAuthorizationController(authorizationRequests: [request])
         
         controller.delegate = self
@@ -167,6 +149,40 @@ class LoginViewController: UIViewController {
         
     }
     
+    // MARK: - Network
+    private func postOAuth2Login(provider: String, accessToken: String) {
+        let authDataManager = AuthDataManager()
+        
+        let requestBody = Oauth2RequestDTO(
+            provider: provider,
+            accessToken: accessToken
+        )
+        print("requestBody: \(requestBody)")
+        authDataManager.oauth2LoginDataManager(requestBody) {
+            [weak self] data in
+            guard let self = self else { return }
+            
+            // 응답
+            if let model = data, model.code == "COMMON200" {
+                checkIsSignUp()
+            } else {
+                print("OAuth2 로그인 실패")
+            }
+        }
+    }
+    
+    private func postAppleEmail(email: String) {
+        let userDatamanager = UserDataManager()
+    
+        userDatamanager.PostAppleEmailDataManager(email) {
+            [weak self] data in
+            guard let self = self else { return }
+            
+            if let model = data, model.code == "COMMON200" {
+                print("애플 이메일 설정 성공")
+            }
+        }
+    }
 }
 
 // MARK: - extension
@@ -188,17 +204,27 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let appleIdCredential as ASAuthorizationAppleIDCredential:
             
+            // 애플 이메일 저장용
+            var userAppleEmail: String?
+            
+            if let email = appleIdCredential.email {
+                userAppleEmail = email
+                print("애플 이메일: \(userAppleEmail ?? "애플 이메일 저장 실패")")
+            }
+            
             guard let authorizationCodeData = appleIdCredential.authorizationCode,
                   let authorizationCodeString = String(data: authorizationCodeData, encoding: .utf8) else {
                 print("Authorization Code 변환 실패")
                 return
             }
             
-            print("Apple ID 로그인에 성공하였습니다.")
-            print("authorizationCode: \(authorizationCodeString)")
-            
             // 여기에 로그인 성공 후 수행할 작업을 추가하세요.
+            print("Apple ID 로그인에 성공하였습니다.")
             postOAuth2Login(provider: "APPLE", accessToken: authorizationCodeString)
+
+            if let userAppleEmail = userAppleEmail {
+                postAppleEmail(email: userAppleEmail)
+            }
             
         default: break
             
