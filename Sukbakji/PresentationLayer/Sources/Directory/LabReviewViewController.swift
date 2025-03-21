@@ -320,7 +320,10 @@ struct KeywordView: View {
     
     var body: some View {
         Text(keywordName)
-            .font(.system(size: 10, weight: .medium)) // 글씨 크기 줄임
+            .font(
+                Font.custom("Pretendard", size: Constants.fontSizeXs)
+                    .weight(Constants.fontWeightMedium)
+            )
             .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
             .padding(.horizontal, 6) // 패딩 줄임
             .padding(.vertical, 3)

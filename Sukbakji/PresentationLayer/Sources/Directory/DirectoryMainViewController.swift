@@ -152,6 +152,7 @@ struct DirectoryMainViewController: View {
                                 HStack {
                                     ForEach(interestTopics, id: \.self) { topic in
                                         TagView(tagName: topic)
+                                            .padding(.top, 12)
                                     }
                                 }
                                 .padding(.horizontal, 24)
@@ -168,6 +169,7 @@ struct DirectoryMainViewController: View {
                         
                         // 광고 배너 뷰
                         AdvertisementView()
+                            .padding(.top, 20)
                         
                         // 연구실 후기 표시
                         if isLoading {

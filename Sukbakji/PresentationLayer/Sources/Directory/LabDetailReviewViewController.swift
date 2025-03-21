@@ -231,40 +231,9 @@ struct LabReviewInfoView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             
             HStack(alignment: .center, spacing: 6) {
-                Text("지도력이 \(review.leadershipStyle)")
-                    .font(
-                    Font.custom("Pretendard", size: Constants.fontSize6)
-                    .weight(Constants.fontWeightMedium)
-                    )
-                    .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(Color(red: 0.99, green: 0.91, blue: 0.9))
-                    .cornerRadius(4)
-                
-                Text("인건비가 \(review.salaryLevel)")
-                    .font(
-                        Font.custom("Pretendard", size: Constants.fontSize6)
-                        .weight(Constants.fontWeightMedium)
-                    )
-                    .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(Color(red: 0.99, green: 0.91, blue: 0.9))
-                    .cornerRadius(4)
-                    .lineLimit(1) // Ensure the text is on one line
-                    .minimumScaleFactor(0.5) // Scale the text down if it overflows
-                
-                Text("자율성이 \(review.autonomy)")
-                    .font(
-                    Font.custom("Pretendard", size: Constants.fontSize6)
-                    .weight(Constants.fontWeightMedium)
-                    )
-                    .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(Color(red: 0.99, green: 0.91, blue: 0.9))
-                    .cornerRadius(4)
+                KeywordView(keywordName: "지도력이 \(review.leadershipStyle)")
+                KeywordView(keywordName: "인건비가 \(review.salaryLevel)")
+                KeywordView(keywordName: "자율성이 \(review.autonomy)")
             }
             .font(.system(size: 12, weight: .medium))
             .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
@@ -307,12 +276,12 @@ struct RadarChart: View {
 
     private func radarChartBackground(geometry: GeometryProxy) -> some View {
         let background = RadarChartBackground(categories: ["지도력", "자율성", "인건비"])
-            .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+            .stroke(Constants.Gray300, lineWidth: 1)
         
         return ZStack {
             ForEach(1..<4) { i in
                 RadarChartBackground(categories: ["지도력", "자율성", "인건비"])
-                    .stroke(Color.gray.opacity(0.3), lineWidth: 0.5)
+                    .stroke(Constants.Gray200, lineWidth: 0.5)
                     .scaleEffect(CGFloat(i) / 4)
             }
             background
@@ -346,7 +315,7 @@ struct RadarChart: View {
             Text(["지도력", "자율성", "인건비"][i])
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(Constants.Gray900)
-                .position(x: x, y: y)
+                .position(x: x - 14, y: y - 14)
         }
     }
 

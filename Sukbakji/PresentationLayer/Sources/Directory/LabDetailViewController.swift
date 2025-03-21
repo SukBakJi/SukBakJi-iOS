@@ -55,7 +55,7 @@ struct LabDetailViewController: View {
                                 .frame(width: 24, height: 24)
                         }
                     }
-                    .padding(.horizontal, 8)
+                    .padding(.horizontal, 24)
                     .padding(.vertical, 12)
                     
                     // 세그먼트 컨트롤 및 탭 전환: 수직 패딩을 줄여 간격을 좁게 함
@@ -175,11 +175,14 @@ struct CustomSegmentedControl: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: 16) {
+            HStack(spacing: 36) {
                 ForEach(tabs.indices, id: \.self) { index in
                     Text(tabs[index])
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(selectedTab == tabs[index] ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray600)
+                        .font(
+                            Font.custom("Pretendard", size: Constants.fontSizeM)
+                                .weight(Constants.fontWeightSemiBold)
+                        )
+                        .foregroundColor(selectedTab == tabs[index] ? Constants.Orange700 : Constants.Gray600)
                         .background(
                             GeometryReader { geo in
                                 Color.clear
@@ -200,10 +203,11 @@ struct CustomSegmentedControl: View {
                 GeometryReader { geo in
                     let selectedIndex = tabs.firstIndex(of: selectedTab) ?? 0
                     let frame = tabFrames[selectedIndex]
-                    RoundedRectangle(cornerRadius: 3)
+                    Rectangle()
                         .fill(Color(red: 0.93, green: 0.29, blue: 0.03))
-                        .frame(width: frame.width, height: 3)
-                        .offset(x: frame.minX - geo.frame(in: .global).minX, y: 30)
+                        .frame(width: frame.width + 20, height: 2)
+                        .offset(x: frame.minX - geo.frame(in: .global).minX - 10,
+                                y: geo.size.height + 12)
                         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: selectedTab)
                 }
             )
@@ -287,22 +291,21 @@ struct LabInfoView: View {
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(Constants.Gray800)
             }
-            .padding(.bottom, 28)
             
             HStack {
                 Text("교수 정보")
                     .font(.system(size: 18, weight: .bold))
                     .padding(.leading, 24)
-                    .padding(.top, 14)
                 Image("SearchRecommend 1")
                     .resizable()
                     .frame(width: 20, height: 20, alignment: .center)
-                    .padding(.top, 14)
+
                 Spacer()
             }
+            .padding(.top, 28)
             
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(alignment: .center, spacing: 20) {
+            HStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 20) {
                     Text("최종학력")
                         .font(
                             Font.custom("Pretendard", size: Constants.fontSize6)
@@ -311,16 +314,6 @@ struct LabInfoView: View {
                         .foregroundColor(Constants.Gray600)
                         .frame(width: 50, alignment: .leading)
 
-                    Text("\(universityName) \(departmentName)")
-                        .font(
-                            Font.custom("Pretendard", size: Constants.fontSize5)
-                                .weight(Constants.fontWeightMedium)
-                        )
-                        .foregroundColor(Constants.Gray900)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                
-                HStack(alignment: .center, spacing: 20) {
                     Text("이메일")
                         .font(
                             Font.custom("Pretendard", size: Constants.fontSize6)
@@ -328,27 +321,40 @@ struct LabInfoView: View {
                         )
                         .foregroundColor(Constants.Gray600)
                         .frame(width: 50, alignment: .leading)
-
-                    Text(professorEmail)
+                }
+                
+                VStack(alignment: .leading, spacing: 17) {
+                    Text("\(universityName) \(departmentName)")
                         .font(
                             Font.custom("Pretendard", size: Constants.fontSize5)
                                 .weight(Constants.fontWeightMedium)
                         )
-                        .underline()
                         .foregroundColor(Constants.Gray900)
-                        .frame(alignment: .leading)
-                    
-                    Button(action: {
-                        UIPasteboard.general.string = professorEmail
-                    }) {
-                        Image("copy")
-                            .resizable()
-                            .frame(width: 16, height: 16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    HStack(spacing: 8) {
+                        Text(professorEmail)
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSize5)
+                                    .weight(Constants.fontWeightMedium)
+                            )
+                            .underline()
+                            .foregroundColor(Constants.Gray900)
+                            .frame(alignment: .leading)
+                        
+                        Button(action: {
+                            UIPasteboard.general.string = professorEmail
+                        }) {
+                            Image("copy")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 16, height: 16)
+                        }
                     }
-                     
                 }
             }
-            .padding(10)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 17)
             .frame(maxWidth: .infinity, alignment: .topLeading)
             .background(Constants.Gray50)
             .cornerRadius(8)
@@ -409,7 +415,7 @@ struct LabInfoView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 17)
-            .frame(width: 342, alignment: .topLeading)
+            .frame(maxWidth: .infinity, alignment: .topLeading)
             .background(Constants.Gray50)
             .cornerRadius(8)
             .overlay(
@@ -417,6 +423,7 @@ struct LabInfoView: View {
                 .inset(by: 0.5)
                 .stroke(Constants.Gray100, lineWidth: 1)
             )
+            .padding(.horizontal, 24)
             
             HStack {
                 Text("연구 주제")

@@ -327,9 +327,9 @@ struct LabReviewWriteViewController: View {
                     .background(isFormValid ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray200) // 배경색 조건부 변경
                     .cornerRadius(8)
                 }
+                .padding(.bottom, 20)
             }
             .padding(.horizontal, 24)
-            .padding(.bottom, 20)
         }
         .navigationBarBackButtonHidden()
     }
