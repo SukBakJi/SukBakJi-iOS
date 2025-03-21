@@ -563,8 +563,8 @@ struct RoundedCorner: Shape {
 
 struct BookmarkButtonView: View {
     @State private var isBookmarked: Bool = false
-    var postId: Int // Post ID to be passed when toggling scrap status
-    
+    var postId: Int // 현재 게시물의 postId
+
     var body: some View {
         Button(action: {
             toggleScrapStatus()
@@ -578,10 +578,17 @@ struct BookmarkButtonView: View {
         }
     }
     
+    // [POST] /api/scraps/{postId}/toggle
     private func toggleScrapStatus() {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user"),
+              !token.isEmpty else {
+            print("토큰이 없습니다.")
+            return
+        }
+        
         let url = "\(APIConstants.baseURL)/scraps/\(postId)/toggle"
         let headers: HTTPHeaders = [
-            "Content-Type": "application/json"
+            "Authorization": "Bearer \(token)"
         ]
         
         NetworkAuthManager.shared.request(url, method: .post, headers: headers)
@@ -596,7 +603,8 @@ struct BookmarkButtonView: View {
                         print("Failed to toggle scrap status: \(data.message)")
                     }
                 case .failure(let error):
-                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                    if let data = response.data,
+                       let errorMessage = String(data: data, encoding: .utf8) {
                         print("Server Error Message: \(errorMessage)")
                     } else {
                         print("Error toggling scrap status: \(error.localizedDescription)")
@@ -605,18 +613,31 @@ struct BookmarkButtonView: View {
             }
     }
     
+    // [GET] /api/community/scrap-list
     private func checkInitialScrapStatus() {
-        let url = "\(APIConstants.baseURL)/scraps/\(postId)"
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user"),
+              !token.isEmpty else {
+            print("토큰이 없습니다.")
+            return
+        }
+        
+        let url = "\(APIConstants.baseURL)/community/scrap-list"
         let headers: HTTPHeaders = [
-            "Content-Type": "application/json"
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
         ]
         
         NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
-            .responseDecodable(of: ScrapStatusResponse.self) { response in
+            .responseDecodable(of: BoardScarppedModel.self) { response in
                 switch response.result {
                 case .success(let data):
-                    isBookmarked = data.isScrapped
+                    if data.isSuccess {
+                        // 응답 result 배열의 게시물 ID(postId)를 확인
+                        isBookmarked = data.result.contains { $0.postId == postId }
+                    } else {
+                        print("Scrap list fetch failed: \(data.message)")
+                    }
                 case .failure(let error):
                     print("Error checking scrap status: \(error.localizedDescription)")
                 }
