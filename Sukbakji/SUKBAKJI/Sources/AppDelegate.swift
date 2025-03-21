@@ -8,11 +8,23 @@
 import UIKit
 import KakaoSDKCommon
 import KakaoSDKAuth
+import Firebase
+import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in}
+        )
+        application.registerForRemoteNotifications()
         
         KakaoSDK.initSDK(appKey: "0cf7886895af19a6dcd4ec656890f126")
         
@@ -47,7 +59,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 
+extension AppDelegate: MessagingDelegate {
+    // FCM Token 업데이트 시
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("🥳", #function, fcmToken ?? "nil")
+    }
+    
+    // error 발생 시
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("😭", error)
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // 앱 화면을 보고있는 중(포그라운드)에 푸시 올 때
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+        print("😎", #function)
+        
+        // 푸시 알림 데이터가 userInfo에 담겨있다.
+        let userInfo = notification.request.content.userInfo
+        print(userInfo)
+        
+        if #available(iOS 14.0, *) {
+            return [.sound, .banner, .list]
+        } else {
+            return []
+        }
+    }
+}
