@@ -69,7 +69,7 @@ class AuthInterceptor: RequestInterceptor {
             "Content-Type": "application/json"
         ]
         let parameters: [String: String] = [
-            "refresh_token": refreshToken
+            "refreshToken": refreshToken
         ]
 
         AF.request(url,
