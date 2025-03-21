@@ -186,7 +186,6 @@ struct DirectorySearchViewController: View {
                         }
                     }
                 }
-                AdvertisementView()
             }
             .onAppear {
                 isSearchFieldFocused = true // 화면이 나타날 때 검색창에 자동으로 포커스를 설정
@@ -282,12 +281,15 @@ struct SearchView: View {
     }
 
     var filteredResults: [LabResult] {
-        if let selectedUniversity = selectedUniversity, selectedUniversity != "전체" {
-            return searchResults.filter { $0.universityName == selectedUniversity }
+        if let selected = selectedUniversity, selected != "전체" {
+            return searchResults.filter { $0.universityName == selected }
         } else {
             return searchResults
         }
     }
+    
+    // 보여줄 검색 결과 개수 상태 변수
+    @State private var visibleCount: Int = 3
 
     var body: some View {
         VStack(spacing: 16) {
@@ -301,28 +303,33 @@ struct SearchView: View {
                 
                 Spacer()
                 
+                // 동적 색상 적용된 필터 메뉴
+                let filterColor: Color = (selectedUniversity != "전체" && selectedUniversity != nil) ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray800
+                
                 Menu {
                     Button("전체") {
                         selectedUniversity = "전체"
-                        performSearch() // 필요 시 API 재호출 또는 생략 가능
+                        performSearch()
                     }
                     
-                    // 동적으로 대학교 필터 메뉴 생성
                     ForEach(distinctUniversities, id: \.self) { uni in
-                        Button("\(uni)") {
+                        Button(uni) {
                             selectedUniversity = uni
-                            performSearch() // 선택 시 해당 조건에 맞게 다시 검색하거나, 로컬 필터링 적용
+                            performSearch()
                         }
                     }
                 } label: {
                     HStack(spacing: 4) {
-                        Text(selectedUniversity ?? "전체")
+                        // 메뉴 레이블은 선택된 대학이 있으면 해당 이름, 없으면 "대학교 정렬"
+                        let labelText = (selectedUniversity == "전체" || selectedUniversity == nil) ? "대학교 정렬" : selectedUniversity!
+                        Text(labelText)
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Constants.Gray800)
-                        
-                        Image("More 2")
+                            .foregroundColor(filterColor)
+                        (Image("More 2")
                             .resizable()
-                            .frame(width: 8, height: 8)
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(filterColor))
                     }
                 }
             }
@@ -332,7 +339,8 @@ struct SearchView: View {
             
             ScrollView {
                 VStack(spacing: 16) {
-                    ForEach(filteredResults, id: \.labId) { result in
+                    // visibleCount만큼의 검색 결과만 보여줌
+                    ForEach(filteredResults.prefix(visibleCount), id: \.labId) { result in
                         NavigationLink(destination: LabDetailViewController(labId: result.labId)) {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(result.universityName)
@@ -363,31 +371,37 @@ struct SearchView: View {
                 }
             }
             
-            Button(action: {
-                print("연구실 정보 더보기 tapped!")
-            }) {
-                HStack {
-                    Text("연구실 정보 더보기")
-                        .font(.system(size: 14))
-                        .foregroundColor(Constants.Gray900)
+            // "연구실 정보 더보기" 버튼은 visibleCount가 filteredResults.count 미만일 때만 보임
+            if visibleCount < filteredResults.count {
+                Button(action: {
+                    visibleCount = min(visibleCount + 3, filteredResults.count)
+                }) {
+                    HStack {
+                        Text("연구실 정보 더보기")
+                            .font(.system(size: 14))
+                            .foregroundColor(Constants.Gray900)
                         
-                    Image("More 2")
-                        .resizable()
-                        .frame(width: 12, height: 12)
+                        Image("More 2")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                    }
+                    .padding(10)
+                    .padding(.horizontal, 10)
+                    .cornerRadius(999)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 999)
+                            .inset(by: 0.5)
+                            .stroke(Constants.Gray300, lineWidth: 1)
+                    )
                 }
-                .padding(10)
-                .padding(.horizontal, 10)
-                .frame(alignment: .center)
-                .cornerRadius(999)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 999)
-                        .inset(by: 0.5)
-                        .stroke(Constants.Gray300, lineWidth: 1)
-                )
+                .padding(.top, 16)
             }
-            .padding(.top, 16)
         }
         .padding(.vertical, 16)
+        // 새로운 검색 결과가 도착하면 visibleCount를 초기화
+        .onChange(of: filteredResults.count) { _ in
+            visibleCount = 3
+        }
     }
 }
 

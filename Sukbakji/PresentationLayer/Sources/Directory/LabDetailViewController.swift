@@ -358,8 +358,8 @@ struct LabInfoView: View {
                         )
                         .foregroundColor(Constants.Gray900)
                     
-                    if hasLabURL {
-                        Link(destination: URL(string: labURL) ?? URL(string: "https://default.com")!) {
+                    if hasLabURL, labURL.lowercased() != "nan", let url = URL(string: labURL) {
+                        Link(destination: url) {
                             Text(labURL)
                                 .font(
                                     Font.custom("Pretendard", size: 16)
