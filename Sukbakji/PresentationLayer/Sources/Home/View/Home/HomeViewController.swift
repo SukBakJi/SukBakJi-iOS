@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import ReactorKit
 
 class HomeViewController: UIViewController {
     
@@ -45,6 +46,8 @@ extension HomeViewController {
         homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
         homeView.adCollectionView.delegate = self
         homeView.adCollectionView.dataSource = self
+        
+        reactor.isStubEnabled = true
     }
     
     private func setAPI() {
