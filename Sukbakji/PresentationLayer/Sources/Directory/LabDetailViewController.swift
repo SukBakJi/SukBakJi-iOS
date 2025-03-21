@@ -124,6 +124,7 @@ struct LabDetailViewController: View {
         .navigationBarBackButtonHidden()
         .onAppear {
             fetchLabDetail()
+            checkBookmarkStatus()
         }
     }
 
@@ -157,6 +158,29 @@ struct LabDetailViewController: View {
                     self.errorMessage = error.localizedDescription
                 }
                 self.isLoading = false
+            }
+    }
+    
+    func checkBookmarkStatus() {
+        let url = APIConstants.baseURL + "/labs/mypage/favorite-labs"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: ScrappedLabModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        // 현재 labId가 즐겨찾기 목록에 있으면 true로 설정
+                        self.isBookmarked = data.result.contains(where: { $0.labId == self.labId })
+                    } else {
+                        print("즐겨찾기 조회 실패: \(data.message)")
+                    }
+                case .failure(let error):
+                    print("즐겨찾기 조회 API 에러: \(error.localizedDescription)")
+                }
             }
     }
 }
