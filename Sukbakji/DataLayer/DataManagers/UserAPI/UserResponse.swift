@@ -31,3 +31,11 @@ struct PostEduImageResponseDTO: Decodable {
     let result: String?
 }
 
+// 애플 이메일 설정
+struct AppleEmailResponseDTO: Decodable {
+    let isSuccess: Bool?
+    let code: String?
+    let message: String?
+    let result: String?
+}
+

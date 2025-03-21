@@ -45,7 +45,7 @@ class TOSView: UIView {
     }
     
     lazy var nextButton = UIButton().then {
-        $0.setTitle("휴대폰 인증하기", for: .normal)
+        $0.setTitle("다음으로", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.titleLabel?.textAlignment = .center
         $0.layer.cornerRadius = 8

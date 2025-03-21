@@ -9,7 +9,7 @@ import UIKit
 
 class TOSViewController: UIViewController, TOSCellDelegate {
     // MARK: - Properties
-    
+    public var isOAuth2: Bool = false
     private var allChecked: Bool {
         return tosView.tableView.visibleCells
             .compactMap { $0 as? TOSTableViewCell }
@@ -21,19 +21,6 @@ class TOSViewController: UIViewController, TOSCellDelegate {
         $0.finalAgreeCheckButton.addTarget(self, action: #selector(finalAgreeCheckButtonTapped), for: .touchUpInside)
         $0.AllAgreeCheckButton.addTarget(self, action: #selector(AllAgreeCheckButtonTapped), for: .touchUpInside)
         $0.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-    }
-
-    // MARK: - Screen transition
-    @objc private func nextButtonTapped() {
-        pushToNextVC(SMSAuthViewController())
-    }
-    
-    private func pushToNextVC(_ nextVC: UIViewController) {
-        self.navigationController?.pushViewController(nextVC, animated: true)
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
-            $0.tintColor = .black
-        }
     }
     
     // MARK: - viewDidLoad
@@ -47,14 +34,9 @@ class TOSViewController: UIViewController, TOSCellDelegate {
         
         tosView.tableView.delegate = self
         tosView.tableView.dataSource = self
-        
-        setUpNavigationBar()
-        updateNextButtonState()
-    }
-
-    // MARK: - navigationBar Title
-    private func setUpNavigationBar(){
         self.title = "회원가입"
+        
+        updateNextButtonState()
     }
     
     // MARK: - Delegate Method
@@ -70,10 +52,37 @@ class TOSViewController: UIViewController, TOSCellDelegate {
             $0.tintColor = .black
         }
     }
-
+    
     
     // MARK: - Functional
-    @objc func finalAgreeCheckButtonTapped(_ sender: UIButton) {
+    private func pushToNextVC(_ nextVC: UIViewController) {
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
+            $0.tintColor = .black
+        }
+    }
+    
+    private func updateNextButtonState() {
+        let allSelected = allChecked && tosView.finalAgreeCheckButton.isSelected
+        tosView.nextButton.isEnabled = allSelected
+        tosView.nextButton.backgroundColor = allSelected ? .orange700 : .gray200
+        tosView.nextButton.setTitleColor(allSelected ? .white : .gray500, for: .normal)
+    }
+    
+    //MARK: Event
+    @objc
+    private func nextButtonTapped() {
+        if isOAuth2 {
+            pushToNextVC(AcademicVerificationViewController())
+        } else {
+            pushToNextVC(SMSAuthViewController())
+        }
+        
+    }
+    
+    @objc
+    func finalAgreeCheckButtonTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
         if !sender.isSelected {
             tosView.AllAgreeCheckButton.isSelected = false
@@ -83,7 +92,8 @@ class TOSViewController: UIViewController, TOSCellDelegate {
         updateNextButtonState()
     }
     
-    @objc func AllAgreeCheckButtonTapped(_ sender: UIButton) {
+    @objc
+    func AllAgreeCheckButtonTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
         let isSelected = sender.isSelected
         
@@ -95,7 +105,8 @@ class TOSViewController: UIViewController, TOSCellDelegate {
         updateNextButtonState()
     }
     
-    @objc func checkButtonTapped(_ sender: UIButton) {
+    @objc
+    func checkButtonTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
         if !sender.isSelected {
             tosView.AllAgreeCheckButton.isSelected = false
@@ -105,12 +116,6 @@ class TOSViewController: UIViewController, TOSCellDelegate {
         updateNextButtonState()
     }
     
-    private func updateNextButtonState() {
-        let allSelected = allChecked && tosView.finalAgreeCheckButton.isSelected
-        tosView.nextButton.isEnabled = allSelected
-        tosView.nextButton.backgroundColor = allSelected ? .orange700 : .gray200
-        tosView.nextButton.setTitleColor(allSelected ? .white : .gray500, for: .normal)
-    }
 }
 
 extension TOSViewController: UITableViewDelegate, UITableViewDataSource {

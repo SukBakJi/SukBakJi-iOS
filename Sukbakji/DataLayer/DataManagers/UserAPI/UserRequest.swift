@@ -46,4 +46,3 @@ struct PostEduImageRequestDTO: Codable {
     let certificationPicture: String
     let educationCertificateType: String
 }
-
