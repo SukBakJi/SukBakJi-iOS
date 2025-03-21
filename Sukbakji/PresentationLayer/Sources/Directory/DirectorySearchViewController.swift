@@ -15,7 +15,7 @@ struct DirectorySearchViewController: View {
     @State private var hasSearchResults: Bool = true
     @State private var filteredResults: [LabResult] = []
     @State private var recentSearches: [String] = [] // 최근 검색어 저장 (더미데이터 삭제)
-    @State private var selectedUniversity: String? = "대학교 정렬"
+    @State private var selectedUniversity: String? = "전체"
     @State private var isLoading: Bool = false
     @State private var hasSearched: Bool = false // 사용자가 실제 검색을 시도했는지 여부
 
@@ -274,49 +274,49 @@ struct SearchView: View {
     var searchResults: [LabResult]
     @Binding var selectedUniversity: String?
     var performSearch: () -> Void
-    
+
+    // API 응답 결과에서 중복 제거된 대학교 목록 계산
+    var distinctUniversities: [String] {
+        let universities = searchResults.map { $0.universityName }
+        return Array(Set(universities)).sorted() // 정렬 방식은 필요에 따라 변경 가능
+    }
+
     var filteredResults: [LabResult] {
-        // selectedUniversity가 설정된 경우 해당 학교에 속한 연구실만 필터링
-        if let selectedUniversity = selectedUniversity, selectedUniversity != "대학교 정렬" {
+        if let selectedUniversity = selectedUniversity, selectedUniversity != "전체" {
             return searchResults.filter { $0.universityName == selectedUniversity }
         } else {
             return searchResults
         }
     }
-    
+
     var body: some View {
         VStack(spacing: 16) {
             HStack {
                 Text("\(filteredResults.count)건")
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(
+                        Font.custom("Pretendard", size: Constants.fontSizeS)
+                            .weight(Constants.fontWeightMedium)
+                    )
                     .foregroundColor(Constants.Gray900)
                 
                 Spacer()
                 
                 Menu {
-                    Button("대학교 정렬") {
-                        selectedUniversity = "대학교 정렬"
-                        performSearch()
+                    Button("전체") {
+                        selectedUniversity = "전체"
+                        performSearch() // 필요 시 API 재호출 또는 생략 가능
                     }
-                    Button("서울대학교") {
-                        selectedUniversity = "서울대학교"
-                        performSearch()
-                    }
-                    Button("연세대학교") {
-                        selectedUniversity = "연세대학교"
-                        performSearch()
-                    }
-                    Button("고려대학교") {
-                        selectedUniversity = "고려대학교"
-                        performSearch()
-                    }
-                    Button("카이스트") {
-                        selectedUniversity = "카이스트"
-                        performSearch()
+                    
+                    // 동적으로 대학교 필터 메뉴 생성
+                    ForEach(distinctUniversities, id: \.self) { uni in
+                        Button("\(uni)") {
+                            selectedUniversity = uni
+                            performSearch() // 선택 시 해당 조건에 맞게 다시 검색하거나, 로컬 필터링 적용
+                        }
                     }
                 } label: {
                     HStack(spacing: 4) {
-                        Text(selectedUniversity ?? "대학교 정렬")
+                        Text(selectedUniversity ?? "전체")
                             .font(.system(size: 14, weight: .medium))
                             .foregroundColor(Constants.Gray800)
                         
@@ -327,6 +327,8 @@ struct SearchView: View {
                 }
             }
             .padding(.horizontal, 24)
+            
+            Divider()
             
             ScrollView {
                 VStack(spacing: 16) {
