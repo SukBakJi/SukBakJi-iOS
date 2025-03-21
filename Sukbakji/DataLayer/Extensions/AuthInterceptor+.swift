@@ -77,7 +77,7 @@ class AuthInterceptor: RequestInterceptor {
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: LoginResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
