@@ -40,6 +40,8 @@ struct LabReviewViewController: View {
                         .frame(width: Constants.nav, height: Constants.nav)
                 }
                 
+                Divider()
+                
                 ScrollView {
                     VStack(spacing: 20) {
                         HStack {

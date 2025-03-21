@@ -42,6 +42,8 @@ struct DirectoryMainViewController: View {
                     .padding(.leading, 24)
                     .padding(.trailing, 8)
                     
+                    Divider()
+                    
                     // MARK: -- 검색창
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
