@@ -12,11 +12,17 @@ struct DirectoryLabSearchModel: Encodable {
     let topicName: String
 }
 
-// MARK: - DirectoryLabSearchGetModel
+// MARK: - DirectoryLabSearchGetModel (Response)
 struct DirectoryLabSearchGetModel: Decodable {
     let isSuccess: Bool
     let code, message: String
-    let result: [LabResult]
+    let result: DirectoryLabSearchResult
+}
+
+// MARK: - DirectoryLabSearchResult
+struct DirectoryLabSearchResult: Decodable {
+    let responseDTOList: [LabResult]
+    let totalNumber: Int
 }
 
 // MARK: - LabResult
