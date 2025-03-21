@@ -16,7 +16,12 @@ struct BoardViewController: View {
                 VStack(spacing: 0) {
                     HStack {
                         Text("게시판")
-                            .font(.system(size: 22, weight: .bold))
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeXxl)
+                                    .weight(Constants.fontWeightSemiBold)
+                            )
+                            .foregroundColor(Constants.Gray900)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         
                         Spacer()
                         
