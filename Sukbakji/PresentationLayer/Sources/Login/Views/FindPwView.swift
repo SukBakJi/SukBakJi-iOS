@@ -51,6 +51,7 @@ class FindPwView: UIView {
         $0.setTitle("이메일")
         $0.setPlaceholder("이메일을 입력해 주세요")
         $0.setValidationMode(.errorWithMessage)
+        $0.textField.keyboardType = .emailAddress
     }
     
     public lazy var sendCode = OrangeButton(title: "번호 발송", height: 44).then {

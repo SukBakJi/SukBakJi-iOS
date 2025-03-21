@@ -29,7 +29,7 @@ class AuthDataManager {
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: SignupResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
@@ -49,7 +49,7 @@ class AuthDataManager {
                    parameters: email,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: CheckEmailResponseDTO.self) { response in
             switch response.result {
             case .success(let data) :
@@ -68,7 +68,7 @@ class AuthDataManager {
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: LoginResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
@@ -100,7 +100,7 @@ class AuthDataManager {
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: OAuthLoginResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
@@ -130,7 +130,7 @@ class AuthDataManager {
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: PostUserEmailResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
@@ -150,7 +150,7 @@ class AuthDataManager {
                    parameters: email,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: PostUserEmailResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
@@ -170,7 +170,7 @@ class AuthDataManager {
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: PostUserEmailResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
@@ -189,7 +189,7 @@ class AuthDataManager {
                    parameters: parameters,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: PostResetPasswordResponseDTO.self) { response in
             switch response.result {
             case .success(let data):
