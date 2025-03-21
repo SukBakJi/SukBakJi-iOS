@@ -224,7 +224,11 @@ struct DirectoryMainViewController: View {
         .onAppear {
             loadLatestLabReview()
             loadInterestTopics()
-            loadScrappedLaboratories() // Load favorite laboratories
+            loadScrappedLaboratories()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("BookmarkStatusChanged"))) { _ in
+            // 즐겨찾기 상태 변경 알림을 받으면 즐겨찾기 데이터를 다시 로드
+            loadScrappedLaboratories()
         }
     }
     

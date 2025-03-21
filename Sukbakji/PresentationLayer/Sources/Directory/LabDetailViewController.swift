@@ -392,12 +392,9 @@ struct LabInfoView: View {
     }
     
     func toggleBookmark() {
-        // labId를 쿼리 파라미터로 전달
         let url = APIConstants.baseURL + "/labs/\(labId)/favorite"
         let parameters: [String: Any] = ["labId": labId]
-        let headers: HTTPHeaders = [
-            "Accept": "application/json"
-        ]
+        let headers: HTTPHeaders = ["Accept": "application/json"]
 
         NetworkAuthManager.shared.request(url, method: .post, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .validate(statusCode: 200..<300)
@@ -405,15 +402,16 @@ struct LabInfoView: View {
                 switch response.result {
                 case .success(let data):
                     if data.isSuccess {
-                        self.isBookmarked.toggle() // 즐겨찾기 상태 토글
+                        self.isBookmarked.toggle()
+
+                        // 즐겨찾기 상태 변경 성공 알림 발송
+                        NotificationCenter.default.post(name: NSNotification.Name("BookmarkStatusChanged"), object: nil)
+                        
                         print("북마크 상태 변경 성공: \(data.message)")
                     } else {
                         print("북마크 상태 변경 실패: \(data.message)")
                     }
                 case .failure(let error):
-                    if let data = response.data, let responseString = String(data: data, encoding: .utf8) {
-                        print("Error response from server: \(responseString)")
-                    }
                     print("Request failed with error: \(error)")
                 }
             }
