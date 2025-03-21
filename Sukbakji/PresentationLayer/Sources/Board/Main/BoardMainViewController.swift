@@ -23,33 +23,27 @@ struct BoardMainViewController: View {
                         .frame(height: 116)
                         .edgesIgnoringSafeArea(.horizontal) // 가로로 안전 영역을 무시하여 전체 너비를 사용
                     
-                    VStack(alignment: .leading) {
-                        Text("석박지에서")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(.white) // 텍스트 색상 흰색
-                            .padding(.leading, 24) // 왼쪽 여백 추가
-                            .padding(.top, 24) // 위쪽 여백 추가
-                        
-                        Text("함께 소통해 보세요!📢")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(.white) // 텍스트 색상 흰색
-                            .padding(.leading, 24) // 왼쪽 여백 추가
-                            .padding(.top, 4) // 위쪽 여백 추가
-                    }
-                    .padding(.bottom, 8) // 하단 여백 추가
+                    Text("석박지에서\n함께 소통해 보세요!📢")
+                        .font(Font.custom("Pretendard", size: Constants.fontSizeL).weight(Constants.fontWeightSemiBold))
+                        .multilineTextAlignment(.leading)
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 20)
+                        .padding(.horizontal, 24)
                 }
                 // MARK - 검색창
                 .overlay(
                     VStack {
                         HStack {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.gray)
-                                .padding(.leading, 8) // 아이콘 왼쪽 여백
+                            Image("Search")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .padding(.leading, 16) // 아이콘 왼쪽 여백
+                                .padding(.vertical, 12) // 상하 여백 추가
                             
                             Text("게시판에서 궁금한 내용을 검색해 보세요!")
                                 .font(.system(size: 14))
                                 .foregroundColor(Constants.Gray300)
-                                .padding(.vertical, 12) // 상하 여백 추가
                                 .padding(.horizontal, 4) // 아이콘과 텍스트 사이의 여백 추가
                                 .onTapGesture {
                                     isSearchActive = true
@@ -59,8 +53,7 @@ struct BoardMainViewController: View {
                         }
                         .padding(.leading, 4) // 좌우 여백 추가
                         .background(Constants.Gray50) // 밝은 회색 배경색
-                        .cornerRadius(8) // 모서리 둥글게
-                        .shadow(radius: 5) // 그림자 효과
+                        .cornerRadius(12) // 모서리 둥글게
                         .padding(.top, 120) // 검색창과 주황색 배경 간의 공간 조정
                         
                         Spacer() // 검색창과 다른 요소 간의 공간을 만듭니다.
@@ -79,8 +72,11 @@ struct BoardMainViewController: View {
                 if hasBookmarkedBoard {
                     HStack(alignment: .center) {
                         Text("즐겨찾기한 게시판")
-                            .font(.system(size: 18, weight:.semibold))
-                            .foregroundStyle(Constants.Gray900)
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeL)
+                                    .weight(Constants.fontWeightSemiBold)
+                            )
+                            .foregroundColor(Constants.Gray900)
                         
                         Image("Star 1")
                             .resizable()
@@ -93,9 +89,12 @@ struct BoardMainViewController: View {
                             // 버튼 클릭 시 동작
                         }) {
                             Text("더보기")
-                                .font(.system(size: 12, weight: .medium))
+                                .font(
+                                    Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                        .weight(Constants.fontWeightMedium)
+                                )
                                 .multilineTextAlignment(.center)
-                                .foregroundStyle(Constants.Gray500)
+                                .foregroundColor(Constants.Gray500)
                             
                             Image("More 1")
                                 .resizable()
@@ -103,7 +102,7 @@ struct BoardMainViewController: View {
                         }
                     }
                     .padding(.horizontal, 24)
-                    .padding(.top, 14)
+                    .padding(.top, 28)
                     .padding(.bottom, 12)
                     .frame(alignment: .center)
                     .background(Constants.White)
@@ -115,8 +114,11 @@ struct BoardMainViewController: View {
                         
                         HStack(alignment: .center) {
                             Text("즐겨찾기한 게시판")
-                                .font(.system(size: 18, weight:.semibold))
-                                .foregroundStyle(Constants.Gray900)
+                                .font(
+                                    Font.custom("Pretendard", size: Constants.fontSizeL)
+                                        .weight(Constants.fontWeightSemiBold)
+                                )
+                                .foregroundColor(Constants.Gray900)
                             
                             Image("Star 1")
                                 .resizable()
@@ -125,7 +127,7 @@ struct BoardMainViewController: View {
                             Spacer()
                         }
                         .padding(.horizontal, 24)
-                        .padding(.top, 14)
+                        .padding(.top, 28)
                         .padding(.bottom, 12)
                         .frame(alignment: .center)
                         .background(Constants.White)
@@ -159,11 +161,15 @@ struct tapMenu: View {
                     NavigationLink(destination: HotBoardViewController()) {
                         ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color(red: 0.98, green: 0.98, blue: 0.98))
-                                .shadow(radius: 3)
+                                .fill(Constants.Gray50)
                             
                             HStack {
                                 Text("HOT 게시판")
+                                    .font(
+                                        Font.custom("Pretendard", size: 14)
+                                            .weight(.semibold)
+                                    )
+                                    .foregroundColor(Constants.Gray900)
                                     .padding(.top, 16) // 위쪽 여백
                                     .padding(.leading, 12) // 왼쪽 여백
                                     .padding(.bottom, 47)
@@ -172,13 +178,14 @@ struct tapMenu: View {
                                 
                                 
                                 Image("Magnifier") // 이미지 추가
-                                
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                                    .padding(.top, 20)
                                 
                             }
                         }
                     }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(Constants.Gray900)
                 }
                 .buttonStyle(PlainButtonStyle()) // 기본 버튼 스타일
                 
@@ -190,24 +197,28 @@ struct tapMenu: View {
                     NavigationLink(destination: WrittenBoardViewController()) {
                         ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color(red: 0.98, green: 0.98, blue: 0.98))
-                                .shadow(radius: 3)
-                            
+                                .fill(Constants.Gray50)
+
                             HStack {
                                 Text("내가 쓴 글")
-                                    .font(.system(size: 15, weight: .semibold))
+                                    .font(
+                                        Font.custom("Pretendard", size: 14)
+                                            .weight(.semibold)
+                                    )
+                                    .foregroundColor(Constants.Gray900)
                                     .padding(.top, 16) // 위쪽 여백
                                     .padding(.leading, 12) // 왼쪽 여백
                                     .padding(.bottom, 47)
                                     .frame(maxWidth: .infinity, alignment: .topLeading) // 왼쪽 위 정렬
                                 
                                 
+                                
                                 Image("Pencil") // 이미지 추가
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 60, height: 60)
-                                    .padding(.trailing, 0) // 오른쪽 여백 없음
-                                    .padding(.bottom, 0) // 아래 여백 없음
+                                    .padding(.top, 20)
+                                
                             }
                         }
                     }
@@ -226,24 +237,28 @@ struct tapMenu: View {
                     NavigationLink(destination: ScrappedBoardViewController()) {
                         ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color(red: 0.98, green: 0.98, blue: 0.98))
-                                .shadow(radius: 3)
-                            
+                                .fill(Constants.Gray50)
+
                             HStack {
                                 Text("스크랩")
-                                    .font(.system(size: 15, weight: .semibold))
+                                    .font(
+                                        Font.custom("Pretendard", size: 14)
+                                            .weight(.semibold)
+                                    )
+                                    .foregroundColor(Constants.Gray900)
                                     .padding(.top, 16) // 위쪽 여백
                                     .padding(.leading, 12) // 왼쪽 여백
                                     .padding(.bottom, 47)
                                     .frame(maxWidth: .infinity, alignment: .topLeading) // 왼쪽 위 정렬
                                 
                                 
+                                
                                 Image("Folder") // 이미지 추가
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 60, height: 60)
-                                    .padding(.trailing, 0) // 오른쪽 여백 없음
-                                    .padding(.bottom, 0) // 아래 여백 없음
+                                    .padding(.top, 20)
+                                
                             }
                         }
                     }
@@ -260,24 +275,28 @@ struct tapMenu: View {
                     NavigationLink(destination: CommentedBoardViewController()) {
                         ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color(red: 0.98, green: 0.98, blue: 0.98))
-                                .shadow(radius: 3)
-                            
+                                .fill(Constants.Gray50)
+
                             HStack {
                                 Text("댓글 단 글")
-                                    .font(.system(size: 15, weight: .semibold))
+                                    .font(
+                                        Font.custom("Pretendard", size: 14)
+                                            .weight(.semibold)
+                                    )
+                                    .foregroundColor(Constants.Gray900)
                                     .padding(.top, 16) // 위쪽 여백
                                     .padding(.leading, 12) // 왼쪽 여백
                                     .padding(.bottom, 47)
                                     .frame(maxWidth: .infinity, alignment: .topLeading) // 왼쪽 위 정렬
                                 
                                 
+                                
                                 Image("Chat") // 이미지 추가
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 60, height: 60)
-                                    .padding(.trailing, 0) // 오른쪽 여백 없음
-                                    .padding(.bottom, 0) // 아래 여백 없음
+                                    .padding(.top, 20)
+                                
                             }
                         }
                     }
@@ -299,16 +318,20 @@ struct qnaBoard: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            HStack {
+            HStack(spacing: 4) {
                 Text("최신 질문글")
-                    .font(.system(size: 18, weight: .bold))
+                    .font(
+                        Font.custom("Pretendard", size: Constants.fontSizeL)
+                            .weight(Constants.fontWeightSemiBold)
+                    )
+                    .foregroundColor(Constants.Gray900)
                     .padding(.leading, 24)
                 
                 Image("Magnifier 1")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 20, height: 20)
-
+                    .frame(width: 15.41667, height: 15.79834)
+                
                 Spacer()
 
                 Button(action: {
@@ -316,9 +339,12 @@ struct qnaBoard: View {
                 }) {
                     NavigationLink(destination: BoardQnAViewController()) {
                         Text("더보기")
-                            .font(.system(size: 12, weight: .medium))
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                    .weight(Constants.fontWeightMedium)
+                            )
                             .multilineTextAlignment(.center)
-                            .foregroundStyle(Constants.Gray500)
+                            .foregroundColor(Constants.Gray500)
 
                         Image("More 1")
                             .resizable()
@@ -343,18 +369,25 @@ struct qnaBoard: View {
                         }) {
                             HStack(alignment: .center, spacing: 12) {
                                 Text(question.menu)
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundStyle(Color(red: 0.29, green: 0.45, blue: 1))
+                                    .font(
+                                        Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                            .weight(Constants.fontWeightMedium)
+                                    )
+                                    .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 3)
                                     .background(RoundedRectangle(cornerRadius: 4)
                                         .fill(Color(red: 0.91, green: 0.92, blue: 1))
                                     )
                                     .padding(.leading, 18)
-
+                                
                                 Text(question.title)
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundStyle(Constants.Gray900)
+                                    .font(
+                                        Font.custom("Pretendard", size: Constants.fontSizeS)
+                                            .weight(Constants.fontWeightSemiBold)
+                                    )
+                                    .foregroundColor(Constants.Gray900)
+                                    .frame(maxWidth: .infinity, alignment: .topLeading)
                                     .padding(.leading, 12)
                                     .padding(.vertical, 18)
                             }
@@ -378,7 +411,6 @@ struct qnaBoard: View {
             Spacer(minLength: 16)
         }
         .background(Constants.Gray50)
-        .padding(.top, 20)
         .onAppear {
             loadQnAPosts()
         }
