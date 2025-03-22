@@ -101,7 +101,7 @@ struct BoardSegmentedControl: View {
                         let frame = tabFrames[selectedIndex]
                         Rectangle()
                             .fill(Color(red: 0.93, green: 0.29, blue: 0.03))
-                            .frame(width: frame.width + 20, height: 3)
+                            .frame(width: frame.width + 20, height: 2)
                             .offset(x: frame.minX - geo.frame(in: .global).minX - 10,
                                     y: geo.size.height + 6)
                             .animation(.spring(response: 0.3, dampingFraction: 0.7), value: selectedTab)

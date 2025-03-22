@@ -144,7 +144,7 @@ struct ContainerDummyBoard: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .inset(by: 0.5)
-                    .stroke(Constants.Gray300, lineWidth: 1)
+                    .stroke(Constants.Gray100, lineWidth: 1)
             )
             .padding(.horizontal, 24)
         }
@@ -192,7 +192,7 @@ struct dummyBoard: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .inset(by: 0.5)
-                    .stroke(Constants.Gray300, lineWidth: 1)
+                    .stroke(Constants.Gray100, lineWidth: 1)
             )
         }
     }
