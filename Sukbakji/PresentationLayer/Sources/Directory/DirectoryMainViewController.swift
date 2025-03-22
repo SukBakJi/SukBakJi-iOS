@@ -102,11 +102,11 @@ struct DirectoryMainViewController: View {
                                 }
                             }
                         }
-                        .padding(.horizontal, 24)
                         .padding(.top, 28)
                         .padding(.bottom, 12)
-                        .frame(width: 390, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .center)
                         .background(Constants.White)
+                        .padding(.horizontal, 24)
                         
                         if hasScrappedLaboratories {
                             ScrollView(.horizontal, showsIndicators: false) {
@@ -120,8 +120,9 @@ struct DirectoryMainViewController: View {
                                         )
                                     }
                                 }
+                                .padding(.horizontal, 24)
+
                             }
-                            .padding(.horizontal, 24)
                         } else {
                             EmptyScrappedLaboratory()
                                 .frame(maxWidth: .infinity, minHeight: 150)
@@ -435,9 +436,9 @@ struct AdvertisementView: View {
                     .resizable()
                     .scaledToFit()
                     .tag(index)
+                    .padding(.horizontal, 24)
             }
         }
-        .padding(.horizontal, 24)
         .frame(height: 100)
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         .overlay(
