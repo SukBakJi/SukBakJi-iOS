@@ -8,17 +8,12 @@
 import Foundation
 
 // MARK: - DirectoryFavoriteCancelPostModel
-struct DirectoryFavoriteCancelPostModel: Codable {
-    let labIDS: [Int]
-
-    enum CodingKeys: String, CodingKey {
-        case labIDS = "labIds"
-    }
+struct DirectoryFavoriteCancelPostModel: Encodable {
+    let labIds: [Int]
 }
 
 // MARK: - DirectoryFavoriteCancelGetModel
-struct DirectoryFavoriteCancelGetModel: Codable {
+struct DirectoryFavoriteCancelGetModel: Decodable {
     let isSuccess: Bool
     let code, message, result: String
 }
-

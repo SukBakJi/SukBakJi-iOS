@@ -310,20 +310,12 @@ struct DirectoryMainViewController: View {
                 case .success(let data):
                     if data.isSuccess {
                         self.scrappedLaboratories = data.result
-                        self.hasScrappedLaboratories = !data.result.isEmpty
                     } else {
                         self.errorMessage = data.message
-                        self.hasScrappedLaboratories = false
                     }
                 case .failure(let error):
-                    if let data = response.data,
-                       let errorMessage = String(data: data, encoding: .utf8) {
-                        print("Server error response: \(errorMessage)")
-                    }
                     self.errorMessage = error.localizedDescription
-                    self.hasScrappedLaboratories = false
                 }
-                self.isLoading = false
             }
     }
 }
