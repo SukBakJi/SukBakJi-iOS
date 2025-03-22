@@ -11,14 +11,14 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, View {
     
     private let homeView = HomeView()
     private let favoriteBoardViewModel = FavoriteBoardViewModel()
     private let hotPostViewModel = HotPostViewModel()
     private let favoriteLabViewModel = FavoriteLabViewModel()
-    private var disposeBag = DisposeBag()
-    private var reactor = HomeReactor()
+    var disposeBag = DisposeBag()
+    var reactor: HomeReactor?
     
     override func loadView() {
         self.view = homeView
@@ -29,7 +29,8 @@ class HomeViewController: UIViewController {
         
         setUI()
         setAPI()
-//        bind(reactor: reactor)
+        self.reactor = HomeReactor()
+        bind(reactor: reactor!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,8 +47,6 @@ extension HomeViewController {
         homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
         homeView.adCollectionView.delegate = self
         homeView.adCollectionView.dataSource = self
-        
-        reactor.isStubEnabled = true
     }
     
     private func setAPI() {
@@ -62,7 +61,7 @@ extension HomeViewController {
         favoriteLabViewModel.loadTestData()
     }
     
-    private func bind(reactor: HomeReactor) {
+    func bind(reactor: HomeReactor) {
         // Action: View가 나타나면 API 요청
         reactor.action.onNext(.getUserName)
         reactor.action.onNext(.getViewSchedule)

@@ -20,10 +20,11 @@ struct APIService {
         headers: HTTPHeaders? = nil
     ) -> Single<T> {
         return Single<T>.create { single in
+            let encoding: ParameterEncoding = method == .get ? URLEncoding.default : JSONEncoding.default
             let request = AF.request(url,
                                      method: method,
                                      parameters: parameters,
-                                     encoding: JSONEncoding.default,
+                                     encoding: encoding,
                                      headers: headers)
                 .responseDecodable(of: type) { response in
                     switch response.result {

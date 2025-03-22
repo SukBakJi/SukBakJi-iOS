@@ -34,7 +34,6 @@ class CalendarRepository {
         return APIService.shared.getWithTokenAndParams(of: APIResponse<UnivMethod>.self, url: url, parameters: params, accessToken: token)
     }
     
-    
     func fetchUnivList(token: String) -> Single<APIResponse<Univ>> {
         let url = APIConstants.calendarUniv.path
         return APIService.shared.getWithToken(of: APIResponse<Univ>.self, url: url, accessToken: token)
