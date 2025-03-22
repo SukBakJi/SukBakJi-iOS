@@ -41,7 +41,7 @@ class MyProfileViewModel {
             return
         }
         
-        HomeRepository.shared.fetchLogOut(token: token, parameters: nil)
+        HomeRepository.shared.fetchLogOut(token: token)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.logoutResult.onNext(true)
