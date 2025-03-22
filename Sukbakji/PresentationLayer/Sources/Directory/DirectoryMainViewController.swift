@@ -209,7 +209,6 @@ struct DirectoryMainViewController: View {
                             .background(Constants.White)
                             
                             LabReviewView(review: latestReview)
-                                .padding(.horizontal, 24)
                                 .padding(.bottom, 48)
                         } else if let errorMessage = errorMessage {
                             Text("Error: \(errorMessage)")

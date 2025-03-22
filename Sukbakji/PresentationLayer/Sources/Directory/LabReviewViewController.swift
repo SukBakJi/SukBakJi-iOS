@@ -278,7 +278,7 @@ struct LabReviewView: View {
             .padding(.vertical, 3)
         }
         .padding(16)
-        .frame(width: 342, alignment: .topLeading)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(Constants.White)
         .cornerRadius(12)
         .overlay(
@@ -286,6 +286,7 @@ struct LabReviewView: View {
                 .inset(by: 0.5)
                 .stroke(Constants.Gray100, lineWidth: 1)
         )
+        .padding(.horizontal, 24)
     }
 }
 
