@@ -29,7 +29,7 @@ class UserDataManager {
                                           parameters: parameters,
                                           encoder: JSONParameterEncoder.default,
                                           headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: PostProfileResponseDTO.self) { response in
             switch response.result {
             case .success(let profileModel):
@@ -49,7 +49,7 @@ class UserDataManager {
                                           parameters: nil,
                                           encoding: URLEncoding.default,
                                           headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: PostProfileResponseDTO.self) { response in
             switch response.result {
             case .success(let profileModel):
@@ -75,7 +75,7 @@ class UserDataManager {
                 multipartFormData.append(typeData, withName: "educationCertificateType")
             }
         }, to: EduImageUrl, method: .post, headers: multipartHeaders)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: PostEduImageResponseDTO.self) { response in
             switch response.result {
             case .success(let result):
@@ -94,7 +94,7 @@ class UserDataManager {
                                           parameters: email,
                                           encoder: JSONParameterEncoder.default,
                                           headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: AppleEmailResponseDTO.self) { response in
             switch response.result {
             case .success(let data):

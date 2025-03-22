@@ -21,7 +21,7 @@ class ResearchTopicDataManager {
                    parameters: topicName,
                    encoder: JSONParameterEncoder.default,
                    headers: headers)
-        .validate(statusCode: 200..<500)
+        .validate(statusCode: 200..<300)
         .responseDecodable(of: ResearchTopicModel.self) { response in
             switch response.result {
             case .success(let researchTopicModel) :

@@ -8,10 +8,14 @@
 import SwiftUI
 import Alamofire
 
+import SwiftUI
+import Alamofire
+
 struct LabDetailViewController: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isBookmarked = false
-    @State private var selectedButton: String? = "연구실 정보"
+    @State private var selectedTab: String = "연구실 정보"  // 세그먼트 컨트롤 선택 상태
+    private let tabs = ["연구실 정보", "후기"]
     
     var labId: Int
     @State private var labInfo: DirectoryLabInfoResult?
@@ -26,6 +30,7 @@ struct LabDetailViewController: View {
                     .padding(.top, 50)
             } else if let labInfo = labInfo {
                 VStack(spacing: 0) {
+                    // 상단 네비게이션 바
                     HStack {
                         Button(action: {
                             self.presentationMode.wrappedValue.dismiss()
@@ -51,89 +56,67 @@ struct LabDetailViewController: View {
                         }
                     }
                     .padding(.horizontal, 8)
-                    .padding(.bottom, 10)
+                    .padding(.vertical, 12)
                     
-                    VStack(spacing: 0) {
-                        HStack(spacing: 0) {
-                            ForEach(["연구실 정보", "후기"], id: \.self) { title in
-                                Button(action: {
-                                    selectedButton = title
-                                    print("\(title) 클릭")
-                                }) {
-                                    VStack {
-                                        Text(title)
-                                            .font(.system(size: 16, weight: .semibold))
-                                            .foregroundColor(selectedButton == title ? Color(red: 0.93, green: 0.29, blue: 0.03) : .gray)
-                                            .padding(.horizontal, 10)
-                                    }
-                                    .padding(.vertical, 8)
-                                    .background(
-                                        GeometryReader { geometry in
-                                            if selectedButton == title {
-                                                Rectangle()
-                                                    .fill(Color(red: 0.93, green: 0.29, blue: 0.03))
-                                                    .frame(width: geometry.size.width, height: 3)
-                                                    .offset(y: 16)
-                                            }
-                                        }
-                                            .frame(height: 0)
-                                    )
-                                }
-                                .padding(.leading, title == "연구실 정보" ? 0 : 16)
-                            }
+                    // 세그먼트 컨트롤 및 탭 전환: 수직 패딩을 줄여 간격을 좁게 함
+                    VStack {
+                        HStack {
+                            CustomSegmentedControl(selectedTab: $selectedTab, tabs: tabs)
+                                .padding(.horizontal, 24)
+                                .padding(.vertical, 6)
+                            Spacer()
                         }
-                        .padding(.leading, 24)
-                        .padding(.trailing, 24)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        TabView(selection: $selectedTab) {
+                            LabInfoView(
+                                universityName: labInfo.universityName,
+                                labName: labInfo.departmentName,
+                                professorName: labInfo.professorName,
+                                professorEmail: labInfo.professorEmail,
+                                departmentName: labInfo.departmentName,
+                                hasLabURL: !labInfo.labLink.isEmpty,
+                                labURL: labInfo.labLink,
+                                isBookmarked: $isBookmarked,
+                                researchTopics: labInfo.researchTopics,
+                                labId: labId
+                            )
+                            .tag("연구실 정보")
+                            
+                            LabDetailReviewViewController(
+                                labId: labId,
+                                universityName: labInfo.universityName,
+                                departmentName: labInfo.departmentName,
+                                professorName: labInfo.professorName
+                            )
+                            .tag("후기")
+                        }
+                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                        .animation(.easeInOut(duration: 0.25), value: selectedTab)
                     }
-                    .background(Color.white)
-                    .fixedSize(horizontal: false, vertical: true)
                 }
                 .background(Color.white)
-                
-                VStack {
-                    switch selectedButton {
-                    case "연구실 정보":
-                        LabInfoView(
-                            universityName: labInfo.universityName,
-                            labName: labInfo.departmentName,
-                            professorName: labInfo.professorName,
-                            professorEmail: labInfo.professorEmail, departmentName: labInfo.departmentName, // 이메일 전달
-                            hasLabURL: !labInfo.labLink.isEmpty,
-                            labURL: labInfo.labLink,
-                            isBookmarked: $isBookmarked,
-                            researchTopics: labInfo.researchTopics,
-                            labId: labId
-                        )
-                    case "후기":
-                        LabDetailReviewViewController(labId: labId, universityName: labInfo.universityName, departmentName: labInfo.departmentName, professorName: labInfo.professorName)
-                    default:
-                        Text("오류 발생. 관리자에게 문의하세요.")
-                            .font(.body)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .padding(.top, 2)
             } else if let errorMessage = errorMessage {
                 Text(errorMessage)
                     .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(Color.red)
+                    .foregroundColor(.red)
                     .padding()
             }
         }
         .navigationBarBackButtonHidden()
         .onAppear {
             fetchLabDetail()
+            checkBookmarkStatus()
         }
     }
-
+    
     func fetchLabDetail() {
         isLoading = true
         errorMessage = nil
         
-        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user"), !accessToken.isEmpty else {
-            self.errorMessage = "인증 토큰이 없습니다."
-            self.isLoading = false
+        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user"),
+              !accessToken.isEmpty else {
+            errorMessage = "인증 토큰이 없습니다."
+            isLoading = false
             return
         }
         
@@ -149,15 +132,82 @@ struct LabDetailViewController: View {
                 switch response.result {
                 case .success(let data):
                     if data.isSuccess {
-                        self.labInfo = data.result
+                        labInfo = data.result
                     } else {
-                        self.errorMessage = data.message
+                        errorMessage = data.message
                     }
                 case .failure(let error):
-                    self.errorMessage = error.localizedDescription
+                    errorMessage = error.localizedDescription
                 }
-                self.isLoading = false
+                isLoading = false
             }
+    }
+    
+    func checkBookmarkStatus() {
+        let url = APIConstants.baseURL + "/labs/mypage/favorite-labs"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: ScrappedLabModel.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        isBookmarked = data.result.contains(where: { $0.labId == labId })
+                    } else {
+                        print("즐겨찾기 조회 실패: \(data.message)")
+                    }
+                case .failure(let error):
+                    print("즐겨찾기 조회 API 에러: \(error.localizedDescription)")
+                }
+            }
+    }
+}
+
+struct CustomSegmentedControl: View {
+    @Binding var selectedTab: String
+    let tabs: [String]
+    
+    @Namespace private var animationNamespace
+    @State private var tabFrames: [CGRect] = Array(repeating: .zero, count: 2)
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 16) {
+                ForEach(tabs.indices, id: \.self) { index in
+                    Text(tabs[index])
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(selectedTab == tabs[index] ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray600)
+                        .background(
+                            GeometryReader { geo in
+                                Color.clear
+                                    .onAppear {
+                                        tabFrames[index] = geo.frame(in: .global)
+                                    }
+                            }
+                        )
+                        .onTapGesture {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                selectedTab = tabs[index]
+                            }
+                        }
+                }
+            }
+            .padding(0)
+            .background(
+                GeometryReader { geo in
+                    let selectedIndex = tabs.firstIndex(of: selectedTab) ?? 0
+                    let frame = tabFrames[selectedIndex]
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(Color(red: 0.93, green: 0.29, blue: 0.03))
+                        .frame(width: frame.width, height: 3)
+                        .offset(x: frame.minX - geo.frame(in: .global).minX, y: 30)
+                        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: selectedTab)
+                }
+            )
+        }
     }
 }
 
@@ -190,7 +240,7 @@ struct LabInfoView: View {
             .overlay(
                 VStack {
                     HStack {
-                        Image("Symbol")
+                        Image("symbol")
                             .resizable()
                             .frame(width: 56, height: 56)
                             .padding(22)
@@ -334,14 +384,19 @@ struct LabInfoView: View {
                         )
                         .foregroundColor(Constants.Gray900)
                     
-                    if hasLabURL {
-                        Text("\(labURL)")
-                            .font(
-                                Font.custom("Pretendard", size: 16)
-                                    .weight(Constants.fontWeightSemiBold)
-                            )
-                            .underline()
-                            .foregroundColor(Constants.Orange700)
+                    if hasLabURL, labURL.lowercased() != "nan", let url = URL(string: labURL) {
+                        Link(destination: url) {
+                            Text(labURL)
+                                .font(
+                                    Font.custom("Pretendard", size: 16)
+                                        .weight(Constants.fontWeightSemiBold)
+                                )
+                                .underline()
+                                .foregroundColor(Constants.Orange700)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                                .minimumScaleFactor(0.5)
+                        }
                     } else {
                         Text("해당 연구실은 홈페이지가 없습니다.")
                             .font(
@@ -387,12 +442,9 @@ struct LabInfoView: View {
     }
     
     func toggleBookmark() {
-        // labId를 쿼리 파라미터로 전달
         let url = APIConstants.baseURL + "/labs/\(labId)/favorite"
         let parameters: [String: Any] = ["labId": labId]
-        let headers: HTTPHeaders = [
-            "Accept": "application/json"
-        ]
+        let headers: HTTPHeaders = ["Accept": "application/json"]
 
         NetworkAuthManager.shared.request(url, method: .post, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .validate(statusCode: 200..<300)
@@ -400,15 +452,16 @@ struct LabInfoView: View {
                 switch response.result {
                 case .success(let data):
                     if data.isSuccess {
-                        self.isBookmarked.toggle() // 즐겨찾기 상태 토글
+                        self.isBookmarked.toggle()
+
+                        // 즐겨찾기 상태 변경 성공 알림 발송
+                        NotificationCenter.default.post(name: NSNotification.Name("BookmarkStatusChanged"), object: nil)
+                        
                         print("북마크 상태 변경 성공: \(data.message)")
                     } else {
                         print("북마크 상태 변경 실패: \(data.message)")
                     }
                 case .failure(let error):
-                    if let data = response.data, let responseString = String(data: data, encoding: .utf8) {
-                        print("Error response from server: \(responseString)")
-                    }
                     print("Request failed with error: \(error)")
                 }
             }

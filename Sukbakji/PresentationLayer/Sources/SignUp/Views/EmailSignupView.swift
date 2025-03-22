@@ -51,6 +51,7 @@ class EmailSignupView: UIView {
     public var emailTF = CommonTextFieldView().then {
         $0.setTitle("이메일")
         $0.setPlaceholder("올바른 형식의 이메일을 입력해 주세요")
+        $0.textField.keyboardType = .emailAddress
     }
     
     public var passwordTF = CommonTextFieldView().then {

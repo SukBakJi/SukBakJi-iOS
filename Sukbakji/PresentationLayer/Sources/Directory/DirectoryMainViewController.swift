@@ -42,8 +42,10 @@ struct DirectoryMainViewController: View {
                     .padding(.leading, 24)
                     .padding(.trailing, 8)
                     
+                    Divider()
+                    
                     // MARK: -- 검색창
-                    ScrollView(.vertical) {
+                    ScrollView(.vertical, showsIndicators: false) {
                         VStack {
                             NavigationLink(destination: DirectorySearchViewController(searchText: $searchText)) {
                                 HStack {
@@ -51,7 +53,7 @@ struct DirectoryMainViewController: View {
                                         .foregroundColor(.gray)
                                         .padding(.leading, 8) // 아이콘 왼쪽 여백
                                     
-                                    Text("게시판에서 궁금한 내용을 검색해 보세요!")
+                                    Text("학과와 연구 주제로 검색해 보세요")
                                         .font(.system(size: 14))
                                         .foregroundColor(Constants.Gray300)
                                         .padding(.vertical, 12) // 상하 여백 추가
@@ -163,7 +165,7 @@ struct DirectoryMainViewController: View {
                                 .foregroundColor(Constants.Gray500)
                                 .padding(.horizontal, 24)
                         }
-
+                        
                         // 광고 배너 뷰
                         AdvertisementView()
                         
@@ -193,7 +195,7 @@ struct DirectoryMainViewController: View {
                                             .multilineTextAlignment(.center)
                                             .foregroundStyle(Constants.Gray500)
                                         
-                                            Image("More 1")
+                                        Image("More 1")
                                             .resizable()
                                             .frame(width: 4, height: 8)
                                     }
@@ -206,6 +208,7 @@ struct DirectoryMainViewController: View {
                             
                             LabReviewView(review: latestReview)
                                 .padding(.horizontal, 24)
+                                .padding(.bottom, 48)
                         } else if let errorMessage = errorMessage {
                             Text("Error: \(errorMessage)")
                                 .foregroundColor(.red)
@@ -219,11 +222,15 @@ struct DirectoryMainViewController: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
         .onAppear {
             loadLatestLabReview()
             loadInterestTopics()
-            loadScrappedLaboratories() // Load favorite laboratories
+            loadScrappedLaboratories()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("BookmarkStatusChanged"))) { _ in
+            // 즐겨찾기 상태 변경 알림을 받으면 즐겨찾기 데이터를 다시 로드
+            loadScrappedLaboratories()
         }
     }
     
@@ -324,7 +331,7 @@ struct ScrappedLaboratory: View {
     var labName: String
     var professorName: String
     var labId: Int // Add labId to the view
-
+    
     var body: some View {
         NavigationLink(destination: LabDetailViewController(labId: labId)) {
             HStack {
@@ -435,8 +442,8 @@ struct AdvertisementView: View {
         .overlay(
             Text(" \(selectedPage + 1) / \(images.count) ")
                 .font(
-                Font.custom("Pretendard", size: Constants.fontSize6)
-                .weight(Constants.fontWeightMedium)
+                    Font.custom("Pretendard", size: Constants.fontSize6)
+                        .weight(Constants.fontWeightMedium)
                 )
                 .multilineTextAlignment(.center)
                 .foregroundColor(Constants.Gray300)
@@ -464,7 +471,7 @@ struct LabReviewDummy: View {
                         .inset(by: 0.5)
                         .stroke(Constants.Gray100, lineWidth: 1)
                 )
-
+                
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
                         HStack(alignment: .center, spacing: 4) {
@@ -491,8 +498,8 @@ struct LabReviewDummy: View {
                             
                             Text("모든 학생들의 연구 진행상황을 상세히 검토해 주시고 올바른 길로 나아가도록 지도해 주시는 교수님이에요")
                                 .font(
-                                Font.custom("Pretendard", size: Constants.fontSize6)
-                                .weight(Constants.fontWeightMedium)
+                                    Font.custom("Pretendard", size: Constants.fontSize6)
+                                        .weight(Constants.fontWeightMedium)
                                 )
                                 .foregroundColor(Constants.Gray900)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

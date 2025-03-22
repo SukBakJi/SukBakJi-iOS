@@ -60,6 +60,7 @@ class FindEmailView: UIView {
     public var phoneNumTF = CommonTextFieldView().then {
         $0.setTitle("전화번호")
         $0.setPlaceholder("전화번호를 입력해 주세요")
+        $0.textField.keyboardType = .numberPad
     }
     
     public var nextButton = OrangeButton(title: "이메일 찾기", isEnabled: false)
