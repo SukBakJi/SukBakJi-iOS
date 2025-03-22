@@ -100,14 +100,20 @@ struct HotBoardViewController: View {
                 if showAlert {
                     Color.black.opacity(0.2)
                         .edgesIgnoringSafeArea(.all)
-                    
+
                     VStack(spacing: 16) {
                         Text("공지")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeL)
+                                    .weight(Constants.fontWeightSemiBold)
+                            )
                             .foregroundColor(Constants.Gray900)
                         
-                        Text("스크랩 20개 이상\n또는 조회수 100회 이상인 게시글의 경우\nHOT 게시판에 선정되어 게시됩니다")
-                            .font(.system(size: 14, weight: .medium))
+                        Text("스크랩 20개 이상 또는 조회수 100회 이상인 게시글의 경우 HOT 게시판에 선정되어 게시됩니다")
+                            .font(
+                                Font.custom("Pretendard", size: 14)
+                                    .weight(.medium)
+                            )
                             .foregroundStyle(Constants.Gray800)
                             .frame(alignment: .topLeading)
                         
@@ -115,7 +121,7 @@ struct HotBoardViewController: View {
                             showAlert = false
                         }) {
                             Text("확인했어요")
-                                .padding(.horizontal, 60)
+                                .padding(.horizontal, 93)
                                 .padding(.vertical, 10)
                                 .font(.system(size: 16, weight: .semibold))
                                 .multilineTextAlignment(.center)
@@ -124,11 +130,11 @@ struct HotBoardViewController: View {
                                 .cornerRadius(8)
                         }
                     }
-                    .padding(.horizontal, 48)
+                    .padding(.horizontal, 20)
                     .padding(.vertical, 24)
                     .background(Constants.White)
-                    .cornerRadius(12)
-                    .shadow(radius: 8)
+                    .cornerRadius(16)
+                    .padding(.horizontal, 48)
                 }
             }
             .onAppear {
@@ -203,26 +209,33 @@ struct hotNoticeView: View {
                     Image("Speaker")
                         .resizable()
                         .frame(width: 20, height: 20, alignment: .center)
-                    
+
                     Text("공지")
                         .padding(.leading, 6)
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(
+                            Font.custom("Pretendard", size: Constants.fontSizeS)
+                                .weight(Constants.fontWeightSemiBold)
+                        )
                         .foregroundStyle(Constants.Orange400)
-                    
+
                     Divider()
                         .background(Constants.Gray400)
                         .padding(.horizontal, 8.8)
-                    
+
                     Text("HOT 게시판 선정 기준 안내드립니다")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(
+                            Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                .weight(Constants.fontWeightMedium)
+                        )
                         .foregroundStyle(Constants.Gray800)
                         .frame(alignment: .topLeading)
                     
                     Spacer()
                 }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 9)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 9)
+            .frame(maxWidth: .infinity)
             .frame(height: 40, alignment: .topLeading)
             .background(Constants.White)
             .overlay(

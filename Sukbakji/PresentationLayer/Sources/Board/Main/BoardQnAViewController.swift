@@ -84,6 +84,7 @@ struct BoardQnAViewController: View {
                     ScrollView {
                         // 공지사항 글
                         noticeView(showAlert: $showAlert)
+                            .padding(.horizontal, 24)
 
                         if isLoading {
                             ProgressView()
@@ -114,19 +115,25 @@ struct BoardQnAViewController: View {
 
                     VStack(spacing: 16) {
                         Text("공지")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeL)
+                                    .weight(Constants.fontWeightSemiBold)
+                            )
                             .foregroundColor(Constants.Gray900)
-
+                        
                         Text("게시판 내 개인정보 유추 금지와 관련하여 안내드립니다")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(
+                                Font.custom("Pretendard", size: 14)
+                                    .weight(.medium)
+                            )
                             .foregroundStyle(Constants.Gray800)
                             .frame(alignment: .topLeading)
-
+                        
                         Button(action: {
                             showAlert = false
                         }) {
                             Text("확인했어요")
-                                .padding(.horizontal, 60)
+                                .padding(.horizontal, 93)
                                 .padding(.vertical, 10)
                                 .font(.system(size: 16, weight: .semibold))
                                 .multilineTextAlignment(.center)
@@ -135,12 +142,11 @@ struct BoardQnAViewController: View {
                                 .cornerRadius(8)
                         }
                     }
-                    .padding(.horizontal, 48)
+                    .padding(.horizontal, 20)
                     .padding(.vertical, 24)
                     .background(Constants.White)
-                    .cornerRadius(12)
-                    .shadow(radius: 8)
-                    .padding(.horizontal, 24)
+                    .cornerRadius(16)
+                    .padding(.horizontal, 48)
                 }
 
                 if showBookmarkOverlay {
@@ -339,7 +345,10 @@ struct noticeView: View {
 
                     Text("공지")
                         .padding(.leading, 6)
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(
+                            Font.custom("Pretendard", size: Constants.fontSizeS)
+                                .weight(Constants.fontWeightSemiBold)
+                        )
                         .foregroundStyle(Constants.Orange400)
 
                     Divider()
@@ -347,13 +356,19 @@ struct noticeView: View {
                         .padding(.horizontal, 8.8)
 
                     Text("게시판 내 개인정보 유추 금지와 관련하여 안내드립니다")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(
+                            Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                .weight(Constants.fontWeightMedium)
+                        )
                         .foregroundStyle(Constants.Gray800)
                         .frame(alignment: .topLeading)
+                    
+                    Spacer()
                 }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 9)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 9)
+            .frame(maxWidth: .infinity)
             .frame(height: 40, alignment: .topLeading)
             .background(Constants.White)
             .overlay(

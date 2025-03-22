@@ -411,6 +411,7 @@ struct qnaBoard: View {
             Spacer(minLength: 16)
         }
         .background(Constants.Gray50)
+        .padding(.top, 20)
         .onAppear {
             loadQnAPosts()
         }
