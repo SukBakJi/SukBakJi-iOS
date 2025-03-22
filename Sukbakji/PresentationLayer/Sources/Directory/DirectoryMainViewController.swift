@@ -414,7 +414,7 @@ struct ScrappedLaboratory: View {
                     }
                     .padding(.horizontal, 18)
                     .padding(.vertical, 16)
-                    .frame(width: 300, alignment: .topLeading)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
             }
         }
