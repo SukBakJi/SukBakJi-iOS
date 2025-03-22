@@ -35,4 +35,5 @@ struct Constants {
     static let fontSizeXxs: CGFloat = 11
     static let fontWeightRegular: Font.Weight = .regular
     static let fontSizeXxl: CGFloat = 22
+    static let fontSizeXl: CGFloat = 20
 }

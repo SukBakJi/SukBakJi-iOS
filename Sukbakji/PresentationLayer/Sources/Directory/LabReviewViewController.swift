@@ -57,8 +57,10 @@ struct LabReviewViewController: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .overlay(
-                                Image("Folder")
+                                Image("Folder 1")
                                     .resizable()
+                                    .opacity(0.5)
+                                    .offset(y: 10)
                                     .frame(width: 107.16239, height: 87.06912), alignment: .topTrailing
                             )
                         }
@@ -69,7 +71,7 @@ struct LabReviewViewController: View {
                         // 검색창
                         VStack {
                             HStack {
-                                Image(systemName: "magnifyingglass")
+                                Image("Search")
                                     .foregroundColor(.gray)
                                     .padding(.leading, 8)
                                 
@@ -135,30 +137,35 @@ struct LabReviewViewController: View {
                                     .padding(.horizontal, 24)
 
                                     if reviews.count > 3 {
-                                        Button(action: {
-                                            showMoreReviews.toggle()
-                                            print("연구실 후기 더보기 버튼 tapped")
-                                        }) {
-                                            HStack {
-                                                Text(showMoreReviews ? "숨기기" : "연구실 후기 더보기")
-                                                    .font(Font.custom("Pretendard", size: Constants.fontSize7).weight(.regular))
-                                                    .foregroundColor(Constants.Gray900)
-
-                                                Image(showMoreReviews ? "hide" : "More 2")
-                                                    .resizable()
-                                                    .frame(width: 12, height: 12)
+                                        HStack {
+                                            Button(action: {
+                                                withAnimation(.easeInOut) {
+                                                    showMoreReviews.toggle()
+                                                }
+                                                print("연구실 후기 더보기 버튼 tapped")
+                                            }) {
+                                                HStack {
+                                                    Text(showMoreReviews ? "숨기기" : "연구실 후기 더보기")
+                                                        .font(Font.custom("Pretendard", size: Constants.fontSize7).weight(.regular))
+                                                        .foregroundColor(Constants.Gray900)
+                                                    
+                                                    Image(showMoreReviews ? "hide" : "More 2")
+                                                        .resizable()
+                                                        .frame(width: 12, height: 12)
+                                                }
+                                                .padding(.horizontal, 10)
+                                                .padding(10)
+                                                .cornerRadius(999)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 999)
+                                                        .inset(by: 0.5)
+                                                        .stroke(Constants.Gray300, lineWidth: 1)
+                                                )
                                             }
-                                            .padding(.horizontal, 10)
-                                            .padding(10)
-                                            .frame(alignment: .center)
-                                            .cornerRadius(999)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 999)
-                                                    .inset(by: 0.5)
-                                                    .stroke(Constants.Gray300, lineWidth: 1)
-                                            )
                                         }
+                                        .frame(maxWidth: .infinity, alignment: .center)
                                         .padding(.top, 16)
+                                        .padding(.bottom, 48)
                                     }
                                 }
                             }
@@ -264,7 +271,7 @@ struct LabReviewView: View {
             .padding(.vertical, 3)
         }
         .padding(16)
-        .frame(width: 342, alignment: .topLeading)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(Constants.White)
         .cornerRadius(12)
         .overlay(
@@ -304,7 +311,7 @@ struct DirectoryLabReviewSearchResultView: View {
             .padding(.vertical, 3)
         }
         .padding(16)
-        .frame(width: 342, alignment: .topLeading)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(Constants.White)
         .cornerRadius(12)
         .overlay(
@@ -335,4 +342,3 @@ struct KeywordView: View {
 #Preview {
     LabReviewViewController()
 }
-

@@ -82,11 +82,11 @@ struct DirectoryMainViewController: View {
                             
                             Spacer()
                             
-                            if hasScrappedLaboratories {
+                            // Only show "더보기" button if there are scrapped laboratories
+                            if !scrappedLaboratories.isEmpty {
                                 Button(action: {
                                     print("즐겨찾는 연구실 더보기 tapped!")
                                 }) {
-                                    
                                     NavigationLink(destination: ScrappedLabDetailViewController()) {
                                         HStack(spacing: 4) {
                                             Text("더보기")
@@ -102,13 +102,20 @@ struct DirectoryMainViewController: View {
                                 }
                             }
                         }
-                        .padding(.horizontal, 24)
                         .padding(.top, 28)
                         .padding(.bottom, 12)
-                        .frame(width: 390, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .center)
                         .background(Constants.White)
+                        .padding(.horizontal, 24)
                         
-                        if hasScrappedLaboratories {
+                        // Show EmptyScrappedLaboratory if no scrapped laboratories
+                        if scrappedLaboratories.isEmpty {
+                            EmptyScrappedLaboratory()
+                                .frame(maxWidth: .infinity, minHeight: 150)
+                                .background(Constants.Gray50)
+                                .cornerRadius(12)
+                                .padding(.horizontal, 24)
+                        } else {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
                                     ForEach(scrappedLaboratories, id: \.labId) { lab in
@@ -116,18 +123,14 @@ struct DirectoryMainViewController: View {
                                             title: lab.universityName,
                                             universityName: lab.universityName,
                                             labName: lab.labName,
-                                            professorName: lab.professorName, labId: lab.labId
+                                            professorName: lab.professorName,
+                                            labId: lab.labId,
+                                            researchTopics: lab.researchTopics
                                         )
                                     }
                                 }
-                            }
-                            .padding(.horizontal, 24)
-                        } else {
-                            EmptyScrappedLaboratory()
-                                .frame(maxWidth: .infinity, minHeight: 150)
-                                .background(Constants.Gray50)
-                                .cornerRadius(12)
                                 .padding(.horizontal, 24)
+                            }
                         }
                         
                         HStack(alignment: .center) {
@@ -152,6 +155,7 @@ struct DirectoryMainViewController: View {
                                 HStack {
                                     ForEach(interestTopics, id: \.self) { topic in
                                         TagView(tagName: topic)
+                                            .padding(.top, 12)
                                     }
                                 }
                                 .padding(.horizontal, 24)
@@ -168,6 +172,7 @@ struct DirectoryMainViewController: View {
                         
                         // 광고 배너 뷰
                         AdvertisementView()
+                            .padding(.top, 20)
                         
                         // 연구실 후기 표시
                         if isLoading {
@@ -306,20 +311,12 @@ struct DirectoryMainViewController: View {
                 case .success(let data):
                     if data.isSuccess {
                         self.scrappedLaboratories = data.result
-                        self.hasScrappedLaboratories = !data.result.isEmpty
                     } else {
                         self.errorMessage = data.message
-                        self.hasScrappedLaboratories = false
                     }
                 case .failure(let error):
-                    if let data = response.data,
-                       let errorMessage = String(data: data, encoding: .utf8) {
-                        print("Server error response: \(errorMessage)")
-                    }
                     self.errorMessage = error.localizedDescription
-                    self.hasScrappedLaboratories = false
                 }
-                self.isLoading = false
             }
     }
 }
@@ -331,6 +328,7 @@ struct ScrappedLaboratory: View {
     var labName: String
     var professorName: String
     var labId: Int // Add labId to the view
+    var researchTopics: [String] // researchTopics를 배열로 받음
     
     var body: some View {
         NavigationLink(destination: LabDetailViewController(labId: labId)) {
@@ -350,14 +348,20 @@ struct ScrappedLaboratory: View {
                     
                     VStack(alignment: .leading, spacing: 12) {
                         Text(title)
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                    .weight(Constants.fontWeightMedium)
+                            )
                             .foregroundColor(.black)
-                            .lineLimit(1) // 텍스트가 길면 한 줄로 제한하고 '...'로 표시
-                            .truncationMode(.tail) // '...' 표시 위치 설정
+                            .lineLimit(1)
+                            .truncationMode(.tail)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         Text(labName)
-                            .font(.system(size: 14, weight: .medium))
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeS)
+                                    .weight(Constants.fontWeightSemiBold)
+                            )
                             .foregroundColor(.black)
                             .lineLimit(1)
                             .truncationMode(.tail)
@@ -372,30 +376,46 @@ struct ScrappedLaboratory: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 HStack {
                                     Text(professorName)
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(
+                                            Font.custom("Pretendard", size: Constants.fontSizeS)
+                                                .weight(Constants.fontWeightSemiBold)
+                                        )
                                         .foregroundColor(.black)
                                         .lineLimit(1)
                                         .truncationMode(.tail)
                                     
                                     Text("교수")
-                                        .font(.system(size: 12, weight: .medium))
+                                        .font(
+                                            Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                                .weight(Constants.fontWeightMedium)
+                                        )
                                         .foregroundColor(.black)
                                         .lineLimit(1)
                                         .truncationMode(.tail)
                                 }
                                 
                                 Text("\(universityName) \(labName)")
-                                    .font(.system(size: 12, weight: .medium))
+                                    .font(
+                                        Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                            .weight(Constants.fontWeightMedium)
+                                    )
                                     .foregroundColor(.black)
                                     .lineLimit(1)
                                     .truncationMode(.tail)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
+                        
+                        // 연구 주제들 출력
+                        HStack(spacing: 6) {
+                            ForEach(researchTopics, id: \.self) { topic in
+                                KeywordView(keywordName: topic)
+                            }
+                        }
                     }
                     .padding(.horizontal, 18)
                     .padding(.vertical, 16)
-                    .frame(width: 300, alignment: .topLeading)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
             }
         }
@@ -434,9 +454,9 @@ struct AdvertisementView: View {
                     .resizable()
                     .scaledToFit()
                     .tag(index)
+                    .padding(.horizontal, 24)
             }
         }
-        .padding(.horizontal, 24)
         .frame(height: 100)
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         .overlay(
