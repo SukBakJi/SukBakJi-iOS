@@ -27,8 +27,10 @@ struct LabReviewViewController: View {
                     Spacer()
                     
                     Text("연구실 후기")
-                        .font(.system(size: 20, weight: .semibold))
-                        .multilineTextAlignment(.center)
+                        .font(
+                            Font.custom("Pretendard", size: Constants.fontSizeXl)
+                                .weight(Constants.fontWeightSemiBold)
+                        )
                         .foregroundColor(Constants.Gray900)
                         .frame(alignment: .center)
                     
@@ -57,8 +59,10 @@ struct LabReviewViewController: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .overlay(
-                                Image("Folder")
+                                Image("Folder 1")
                                     .resizable()
+                                    .opacity(0.5)
+                                    .offset(x: 8, y: 11.25)
                                     .frame(width: 107.16239, height: 87.06912), alignment: .topTrailing
                             )
                         }
@@ -88,6 +92,7 @@ struct LabReviewViewController: View {
                             .cornerRadius(8)
                             .padding(.horizontal, 24)
                         }
+                        .offset(y: -20) // 원하는 만큼의 위쪽 이동 (값은 조정 가능)
 
                         // 검색 결과 표시
                         if !searchResults.isEmpty {
