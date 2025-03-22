@@ -98,7 +98,7 @@ class ProfileTabViewController: TabmanViewController {
             var moveStopView = PWAlertView(title: "")
             if provider == "kakao" {
                 moveStopView = PWAlertView(title: "카카오 로그인을 이용한 경우 앱 내 비밀번호 변경이 불가합니다")
-            } else {
+            } else if provider == "apple" {
                 moveStopView = PWAlertView(title: "Apple 로그인을 이용한 경우 앱 내 비밀번호 변경이 불가합니다")
             }
                 
@@ -120,6 +120,7 @@ extension ProfileTabViewController {
     private func getUserPW() {
         if let retrievedPW = KeychainHelper.standard.read(service: "password", account: "user") {
             userPW = retrievedPW
+            print(userPW)
         } else {
             print("Failed to retrieve password.")
         }
@@ -135,7 +136,7 @@ extension ProfileTabViewController {
         viewModel.myProfile
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
-                self?.provider = profile.provider ?? ""
+                self?.provider = profile.provider
             })
             .disposed(by: disposeBag)
         

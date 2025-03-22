@@ -26,9 +26,9 @@ class HomeRepository {
         return APIService.shared.getWithToken(of: APIResponse<[FavoriteLab]>.self, url: url, accessToken: token)
     }
     
-    func fetchLogOut(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
+    func fetchLogOut(token: String) -> Single<APIResponse<String>> {
         let url = APIConstants.authLogout.path
-        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
+        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)
     }
     
     func fetchMyProfile(token: String) -> Single<APIResponse<MyProfile>> {
@@ -42,7 +42,7 @@ class HomeRepository {
     }
     
     func fetchChangePW(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
-        let url = APIConstants.authPassword.path
+        let url = APIConstants.userPasswordReset.path
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
     }
 }

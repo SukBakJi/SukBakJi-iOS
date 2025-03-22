@@ -72,7 +72,7 @@ extension EditPWViewController {
     }
     
     private func updateButtonColor() {
-        let isFormValid = !(editPWView.currentPWTextField.text == userPW) && (isValidPW(testStr: editPWView.newPWTextField.text)) && (editPWView.newPWAgainTextField.text == editPWView.newPWTextField.text)
+        let isFormValid = ((editPWView.currentPWTextField.text == userPW) && (isValidPW(testStr: editPWView.newPWTextField.text)) && (editPWView.newPWAgainTextField.text == editPWView.newPWTextField.text))
         editPWView.changeButton.isEnabled = isFormValid
         editPWView.changeButton.setBackgroundColor(isFormValid ? .orange700 : .gray200, for: .normal)
         editPWView.changeButton.setTitleColor(isFormValid ? .white : .gray500, for: .normal)
@@ -179,8 +179,8 @@ extension EditPWViewController {
     // 로그아웃 확인 Alert 띄우기
     private func showLogoutAlert() {
         AlertController(message: "비밀번호를 변경하시겠어요?", isCancel: true) { [weak self] in
-            self?.viewModel.loadLogOut()  // ✅ 로그아웃 API 호출
             self?.viewModel.loadChangePW()
+            self?.viewModel.loadLogOut()
         }.show()
     }
     
