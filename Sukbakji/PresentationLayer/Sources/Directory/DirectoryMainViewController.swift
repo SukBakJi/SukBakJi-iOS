@@ -82,11 +82,11 @@ struct DirectoryMainViewController: View {
                             
                             Spacer()
                             
-                            if hasScrappedLaboratories {
+                            // Only show "더보기" button if there are scrapped laboratories
+                            if !scrappedLaboratories.isEmpty {
                                 Button(action: {
                                     print("즐겨찾는 연구실 더보기 tapped!")
                                 }) {
-                                    
                                     NavigationLink(destination: ScrappedLabDetailViewController()) {
                                         HStack(spacing: 4) {
                                             Text("더보기")
@@ -108,7 +108,14 @@ struct DirectoryMainViewController: View {
                         .background(Constants.White)
                         .padding(.horizontal, 24)
                         
-                        if hasScrappedLaboratories {
+                        // Show EmptyScrappedLaboratory if no scrapped laboratories
+                        if scrappedLaboratories.isEmpty {
+                            EmptyScrappedLaboratory()
+                                .frame(maxWidth: .infinity, minHeight: 150)
+                                .background(Constants.Gray50)
+                                .cornerRadius(12)
+                                .padding(.horizontal, 24)
+                        } else {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
                                     ForEach(scrappedLaboratories, id: \.labId) { lab in
@@ -124,12 +131,6 @@ struct DirectoryMainViewController: View {
                                 }
                                 .padding(.horizontal, 24)
                             }
-                        } else {
-                            EmptyScrappedLaboratory()
-                                .frame(maxWidth: .infinity, minHeight: 150)
-                                .background(Constants.Gray50)
-                                .cornerRadius(12)
-                                .padding(.horizontal, 24)
                         }
                         
                         HStack(alignment: .center) {
