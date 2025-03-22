@@ -27,10 +27,8 @@ struct LabReviewViewController: View {
                     Spacer()
                     
                     Text("연구실 후기")
-                        .font(
-                            Font.custom("Pretendard", size: Constants.fontSizeXl)
-                                .weight(Constants.fontWeightSemiBold)
-                        )
+                        .font(.system(size: 20, weight: .semibold))
+                        .multilineTextAlignment(.center)
                         .foregroundColor(Constants.Gray900)
                         .frame(alignment: .center)
                     
@@ -59,10 +57,8 @@ struct LabReviewViewController: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .overlay(
-                                Image("Folder 1")
+                                Image("Folder")
                                     .resizable()
-                                    .opacity(0.5)
-                                    .offset(x: 8, y: 11.25)
                                     .frame(width: 107.16239, height: 87.06912), alignment: .topTrailing
                             )
                         }
@@ -92,7 +88,6 @@ struct LabReviewViewController: View {
                             .cornerRadius(8)
                             .padding(.horizontal, 24)
                         }
-                        .offset(y: -20) // 원하는 만큼의 위쪽 이동 (값은 조정 가능)
 
                         // 검색 결과 표시
                         if !searchResults.isEmpty {
@@ -123,8 +118,7 @@ struct LabReviewViewController: View {
                                     .foregroundColor(.red)
                                     .padding()
                             } else {
-                                // 최신 연구실 후기 부분 (수정된 ForEach와 버튼)
-                                VStack(alignment: .leading, spacing: 16) {
+                                VStack(alignment: .leading, spacing: 16) { // 검색 결과와 동일하게 조정
                                     HStack {
                                         Text("최신 연구실 후기")
                                             .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemiBold))
@@ -137,24 +131,19 @@ struct LabReviewViewController: View {
 
                                     ForEach(reviews.prefix(showMoreReviews ? reviews.count : 3), id: \.content) { review in
                                         LabReviewView(review: review)
-                                            .transition(.move(edge: .bottom).combined(with: .opacity))
                                     }
                                     .padding(.horizontal, 24)
-                                    
+
                                     if reviews.count > 3 {
                                         Button(action: {
-                                            withAnimation(.easeInOut) {
-                                                showMoreReviews.toggle()
-                                            }
+                                            showMoreReviews.toggle()
                                             print("연구실 후기 더보기 버튼 tapped")
                                         }) {
-                                            Spacer()
-                                            
                                             HStack {
                                                 Text(showMoreReviews ? "숨기기" : "연구실 후기 더보기")
                                                     .font(Font.custom("Pretendard", size: Constants.fontSize7).weight(.regular))
                                                     .foregroundColor(Constants.Gray900)
-                                                
+
                                                 Image(showMoreReviews ? "hide" : "More 2")
                                                     .resizable()
                                                     .frame(width: 12, height: 12)
@@ -168,11 +157,8 @@ struct LabReviewViewController: View {
                                                     .inset(by: 0.5)
                                                     .stroke(Constants.Gray300, lineWidth: 1)
                                             )
-                                            
-                                            Spacer()
                                         }
                                         .padding(.top, 16)
-                                        .padding(.bottom, 48)
                                     }
                                 }
                             }
@@ -286,7 +272,6 @@ struct LabReviewView: View {
                 .inset(by: 0.5)
                 .stroke(Constants.Gray100, lineWidth: 1)
         )
-        .padding(.horizontal, 24)
     }
 }
 
@@ -319,7 +304,7 @@ struct DirectoryLabReviewSearchResultView: View {
             .padding(.vertical, 3)
         }
         .padding(16)
-        .frame(width: 342, alignment: .topLeading)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(Constants.White)
         .cornerRadius(12)
         .overlay(
@@ -335,10 +320,7 @@ struct KeywordView: View {
     
     var body: some View {
         Text(keywordName)
-            .font(
-                Font.custom("Pretendard", size: Constants.fontSizeXs)
-                    .weight(Constants.fontWeightMedium)
-            )
+            .font(.system(size: 10, weight: .medium)) // 글씨 크기 줄임
             .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
             .padding(.horizontal, 6) // 패딩 줄임
             .padding(.vertical, 3)
@@ -353,4 +335,3 @@ struct KeywordView: View {
 #Preview {
     LabReviewViewController()
 }
-
