@@ -57,8 +57,10 @@ struct LabReviewViewController: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .overlay(
-                                Image("Folder")
+                                Image("Folder 1")
                                     .resizable()
+                                    .opacity(0.5)
+                                    .offset(y: 10)
                                     .frame(width: 107.16239, height: 87.06912), alignment: .topTrailing
                             )
                         }
@@ -69,7 +71,7 @@ struct LabReviewViewController: View {
                         // 검색창
                         VStack {
                             HStack {
-                                Image(systemName: "magnifyingglass")
+                                Image("Search")
                                     .foregroundColor(.gray)
                                     .padding(.leading, 8)
                                 
