@@ -116,12 +116,13 @@ struct DirectoryMainViewController: View {
                                             title: lab.universityName,
                                             universityName: lab.universityName,
                                             labName: lab.labName,
-                                            professorName: lab.professorName, labId: lab.labId
+                                            professorName: lab.professorName,
+                                            labId: lab.labId,
+                                            researchTopics: lab.researchTopics
                                         )
                                     }
                                 }
                                 .padding(.horizontal, 24)
-
                             }
                         } else {
                             EmptyScrappedLaboratory()
@@ -334,6 +335,7 @@ struct ScrappedLaboratory: View {
     var labName: String
     var professorName: String
     var labId: Int // Add labId to the view
+    var researchTopics: [String] // researchTopics를 배열로 받음
     
     var body: some View {
         NavigationLink(destination: LabDetailViewController(labId: labId)) {
@@ -353,14 +355,20 @@ struct ScrappedLaboratory: View {
                     
                     VStack(alignment: .leading, spacing: 12) {
                         Text(title)
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                    .weight(Constants.fontWeightMedium)
+                            )
                             .foregroundColor(.black)
-                            .lineLimit(1) // 텍스트가 길면 한 줄로 제한하고 '...'로 표시
-                            .truncationMode(.tail) // '...' 표시 위치 설정
+                            .lineLimit(1)
+                            .truncationMode(.tail)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         Text(labName)
-                            .font(.system(size: 14, weight: .medium))
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeS)
+                                    .weight(Constants.fontWeightSemiBold)
+                            )
                             .foregroundColor(.black)
                             .lineLimit(1)
                             .truncationMode(.tail)
@@ -375,24 +383,40 @@ struct ScrappedLaboratory: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 HStack {
                                     Text(professorName)
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(
+                                            Font.custom("Pretendard", size: Constants.fontSizeS)
+                                                .weight(Constants.fontWeightSemiBold)
+                                        )
                                         .foregroundColor(.black)
                                         .lineLimit(1)
                                         .truncationMode(.tail)
                                     
                                     Text("교수")
-                                        .font(.system(size: 12, weight: .medium))
+                                        .font(
+                                            Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                                .weight(Constants.fontWeightMedium)
+                                        )
                                         .foregroundColor(.black)
                                         .lineLimit(1)
                                         .truncationMode(.tail)
                                 }
                                 
                                 Text("\(universityName) \(labName)")
-                                    .font(.system(size: 12, weight: .medium))
+                                    .font(
+                                        Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                            .weight(Constants.fontWeightMedium)
+                                    )
                                     .foregroundColor(.black)
                                     .lineLimit(1)
                                     .truncationMode(.tail)
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                        
+                        // 연구 주제들 출력
+                        HStack(spacing: 6) {
+                            ForEach(researchTopics, id: \.self) { topic in
+                                KeywordView(keywordName: topic)
                             }
                         }
                     }
