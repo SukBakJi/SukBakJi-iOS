@@ -118,7 +118,8 @@ struct LabReviewViewController: View {
                                     .foregroundColor(.red)
                                     .padding()
                             } else {
-                                VStack(alignment: .leading, spacing: 16) { // 검색 결과와 동일하게 조정
+                                // 최신 연구실 후기 부분 (수정된 ForEach와 버튼)
+                                VStack(alignment: .leading, spacing: 16) {
                                     HStack {
                                         Text("최신 연구실 후기")
                                             .font(Font.custom("Pretendard", size: 18).weight(Constants.fontWeightSemiBold))
@@ -131,19 +132,24 @@ struct LabReviewViewController: View {
 
                                     ForEach(reviews.prefix(showMoreReviews ? reviews.count : 3), id: \.content) { review in
                                         LabReviewView(review: review)
+                                            .transition(.move(edge: .bottom).combined(with: .opacity))
                                     }
                                     .padding(.horizontal, 24)
-
+                                    
                                     if reviews.count > 3 {
                                         Button(action: {
-                                            showMoreReviews.toggle()
+                                            withAnimation(.easeInOut) {
+                                                showMoreReviews.toggle()
+                                            }
                                             print("연구실 후기 더보기 버튼 tapped")
                                         }) {
+                                            Spacer()
+                                            
                                             HStack {
                                                 Text(showMoreReviews ? "숨기기" : "연구실 후기 더보기")
                                                     .font(Font.custom("Pretendard", size: Constants.fontSize7).weight(.regular))
                                                     .foregroundColor(Constants.Gray900)
-
+                                                
                                                 Image(showMoreReviews ? "hide" : "More 2")
                                                     .resizable()
                                                     .frame(width: 12, height: 12)
@@ -157,8 +163,11 @@ struct LabReviewViewController: View {
                                                     .inset(by: 0.5)
                                                     .stroke(Constants.Gray300, lineWidth: 1)
                                             )
+                                            
+                                            Spacer()
                                         }
                                         .padding(.top, 16)
+                                        .padding(.bottom, 48)
                                     }
                                 }
                             }

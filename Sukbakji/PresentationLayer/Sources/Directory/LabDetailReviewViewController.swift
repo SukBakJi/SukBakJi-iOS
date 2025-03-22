@@ -11,7 +11,8 @@ struct LabDetailReviewViewController: View {
     @State private var triangleGraphData: TriangleGraphData? // 삼각형 그래프 데이터
     @State private var showMoreReviews: Bool = false // '연구실 후기 더보기' 버튼 상태 변수
     @State private var isLoading: Bool = true // 로딩 상태 변수
-    @State private var highestAttributesText: String = "" // 가장 높은 항목을 표시할 텍스트
+    @State private var highestAttributeName: String = ""
+    @State private var highestAttributeSuffix: String = ""
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -48,28 +49,29 @@ struct LabDetailReviewViewController: View {
             }
             .padding(.horizontal, 24)
             .padding(.top, 28)
+            .padding(.bottom, 12)
             
             if let triangleGraphData = triangleGraphData {
-                // 삼각형 그래프 표시
                 VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Text(highestAttributesText)
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
+                    HStack(spacing: 0) {
+                        Text(highestAttributeName)
+                            .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
+                        Text(highestAttributeSuffix)
+                            .foregroundColor(Constants.Gray900)
                     }
+                    .font(.system(size: 18, weight: .semibold))
                     
                     Text("키워드를 통해 간단하게 볼 수 있어요")
                         .font(Font.custom("Pretendard", size: 14))
                         .foregroundColor(Constants.Gray500)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .topLeading)
                 .padding(.horizontal, 24)
-                .padding(.top, 20)
-                .padding(.bottom, 16)
-                .frame(width: 390, alignment: .topLeading)
+                .padding(.top, 12)
                 
+                // 삼각형 그래프 표시
                 RadarChart(triangleGraphData: triangleGraphData)
-                    .padding(.top, 28)
+                    .padding(.top, 53)
                     .padding(.horizontal, 58)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -199,7 +201,9 @@ struct LabDetailReviewViewController: View {
         
         // 인건비만 "가", 나머지는 "이"를 사용
         let marker = (highestAttribute.0 == "인건비") ? "가" : "이"
-        highestAttributesText = "\(highestAttribute.0)\(marker) 가장 높게 나탔어요"
+        
+        highestAttributeName = highestAttribute.0
+        highestAttributeSuffix = "\(marker) 가장 높게 나타났어요"
     }
 }
 
@@ -242,7 +246,7 @@ struct LabReviewInfoView: View {
             .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
         }
         .padding(16)
-        .frame(width: 342, alignment: .topLeading)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(Constants.White)
         .cornerRadius(12)
         .overlay(
