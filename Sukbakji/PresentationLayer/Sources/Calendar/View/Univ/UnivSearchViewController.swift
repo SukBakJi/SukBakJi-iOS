@@ -80,7 +80,6 @@ extension UnivSearchViewController {
             .subscribe(onNext: { [weak self] keyword in
                 guard !keyword.isEmpty else { return }
                 self?.viewModel.loadUnivSearch(keyword: keyword)
-//                self?.viewModel.loadTestData()
             })
             .disposed(by: disposeBag)
         

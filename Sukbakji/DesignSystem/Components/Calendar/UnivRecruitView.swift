@@ -280,7 +280,7 @@ class UnivRecruitView: UIView {
             $0.height.equalTo(19)
         }
         
-        recruitDateView.snp.makeConstraints {
+        recruitTypeView.snp.makeConstraints {
             $0.top.equalTo(recruitDateView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(115)
