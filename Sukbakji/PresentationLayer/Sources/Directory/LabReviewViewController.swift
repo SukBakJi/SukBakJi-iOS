@@ -135,30 +135,35 @@ struct LabReviewViewController: View {
                                     .padding(.horizontal, 24)
 
                                     if reviews.count > 3 {
-                                        Button(action: {
-                                            showMoreReviews.toggle()
-                                            print("연구실 후기 더보기 버튼 tapped")
-                                        }) {
-                                            HStack {
-                                                Text(showMoreReviews ? "숨기기" : "연구실 후기 더보기")
-                                                    .font(Font.custom("Pretendard", size: Constants.fontSize7).weight(.regular))
-                                                    .foregroundColor(Constants.Gray900)
-
-                                                Image(showMoreReviews ? "hide" : "More 2")
-                                                    .resizable()
-                                                    .frame(width: 12, height: 12)
+                                        HStack {
+                                            Button(action: {
+                                                withAnimation(.easeInOut) {
+                                                    showMoreReviews.toggle()
+                                                }
+                                                print("연구실 후기 더보기 버튼 tapped")
+                                            }) {
+                                                HStack {
+                                                    Text(showMoreReviews ? "숨기기" : "연구실 후기 더보기")
+                                                        .font(Font.custom("Pretendard", size: Constants.fontSize7).weight(.regular))
+                                                        .foregroundColor(Constants.Gray900)
+                                                    
+                                                    Image(showMoreReviews ? "hide" : "More 2")
+                                                        .resizable()
+                                                        .frame(width: 12, height: 12)
+                                                }
+                                                .padding(.horizontal, 10)
+                                                .padding(10)
+                                                .cornerRadius(999)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 999)
+                                                        .inset(by: 0.5)
+                                                        .stroke(Constants.Gray300, lineWidth: 1)
+                                                )
                                             }
-                                            .padding(.horizontal, 10)
-                                            .padding(10)
-                                            .frame(alignment: .center)
-                                            .cornerRadius(999)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 999)
-                                                    .inset(by: 0.5)
-                                                    .stroke(Constants.Gray300, lineWidth: 1)
-                                            )
                                         }
+                                        .frame(maxWidth: .infinity, alignment: .center)
                                         .padding(.top, 16)
+                                        .padding(.bottom, 48)
                                     }
                                 }
                             }
