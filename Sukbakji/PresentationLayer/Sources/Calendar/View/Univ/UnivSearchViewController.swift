@@ -79,8 +79,8 @@ extension UnivSearchViewController {
             .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] keyword in
                 guard !keyword.isEmpty else { return }
-//                self?.viewModel.loadUnivSearch(keyword: keyword)
-                self?.viewModel.loadTestData()
+                self?.viewModel.loadUnivSearch(keyword: keyword)
+//                self?.viewModel.loadTestData()
             })
             .disposed(by: disposeBag)
         

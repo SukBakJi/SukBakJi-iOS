@@ -860,13 +860,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		C70243692D3161EA00D6D3C1 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		C702436A2D3161EF00D6D3C1 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,7 +881,6 @@
 			isa = PBXGroup;
 			children = (
 				C74A15BD2D5A573800A1698B /* View */,
-				C70243692D3161EA00D6D3C1 /* ViewModel */,
 				C702436A2D3161EF00D6D3C1 /* Cell */,
 			);
 			path = Chat;

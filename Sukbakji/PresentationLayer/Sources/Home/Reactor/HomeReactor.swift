@@ -36,35 +36,40 @@ final class HomeReactor: Reactor {
     }
     
     private func fetchData<T: Codable>(
-        _ type: T.Type,
+        _ type: APIResponse<T>.Type,
         url: URLConvertible,
         token: String,
         mutation: @escaping (T) -> Mutation
     ) -> Observable<Mutation> {
         return apiService.getWithToken(of: APIResponse<T>.self, url: url, accessToken: token)
             .asObservable()
-            .map { response -> Mutation in
-                return response.code == "COMMON200" ? mutation(response as! T) : .setError(response.message)
+            .map { response in
+                if response.code == "COMMON200" {
+                    return mutation(response.result)
+                } else {
+                    return .setError(response.message)
+                }
             }
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .empty()
         }
 
         switch action {
         case .getUserName:
-            return fetchData(APIResponse<MyProfile>.self, url: APIConstants.userMypage.path, token: retrievedToken) { response in
-                    .setUserName(response.result)
+            print("🟡 getUserName Action 수신됨")
+            return fetchData(APIResponse<MyProfile>.self, url: APIConstants.userMypage.path, token: token) { profile in
+                    .setUserName(profile)
             }
         case .getViewSchedule:
-            return fetchData(APIResponse<UpComing>.self, url: APIConstants.calendarSchedule.path, token: retrievedToken) { response in
-                    .setViewSchedule(response.result)
+            return fetchData(APIResponse<UpComing>.self, url: APIConstants.calendarSchedule.path, token: token) { schedule in
+                    .setViewSchedule(schedule)
             }
         case .getMemberID:
-            return fetchData(APIResponse<MemberId>.self, url: APIConstants.calendarMember.path, token: retrievedToken) { response in
-                    .setMemberID(response.result.memberId)
+            return fetchData(APIResponse<MemberId>.self, url: APIConstants.calendarMember.path, token: token) { response in
+                    .setMemberID(response.memberId)
             }
         }
     }
@@ -89,7 +94,7 @@ final class HomeReactor: Reactor {
                 default: newState.upComingTitle = content
                 }
             } else {
-                newState.upComingDate = nil
+                newState.upComingDate = ""
                 newState.upComingTitle = "다가오는 일정이 없습니다"
             }
         case .setMemberID(let id):
