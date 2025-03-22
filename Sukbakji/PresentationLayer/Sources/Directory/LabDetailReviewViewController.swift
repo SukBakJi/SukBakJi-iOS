@@ -69,9 +69,9 @@ struct LabDetailReviewViewController: View {
                 .frame(width: 390, alignment: .topLeading)
                 
                 RadarChart(triangleGraphData: triangleGraphData)
-                    .frame(width: 300, height: 270)
-                    .padding(.horizontal, 24)
-                    .padding(.top, 20)
+                    .padding(.top, 28)
+                    .padding(.horizontal, 58)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             
             // 연구실 한줄평
@@ -162,6 +162,7 @@ struct LabDetailReviewViewController: View {
     }
     
     func loadLabReviews(labId: Int) {
+        print("labId: \(labId)")
         let url = APIConstants.baseURL + "/labs/reviews/\(labId)"
         
         let headers: HTTPHeaders = [
@@ -193,10 +194,12 @@ struct LabDetailReviewViewController: View {
             ("자율성", triangleGraphData.autonomyAverage)
         ]
         
-        let maxValue = attributes.map { $0.1 }.max()
-        let highestAttributes = attributes.filter { $0.1 == maxValue }.map { $0.0 }
+        // 가장 높은 점수를 가진 단일 항목 선택 (tie가 있을 경우 배열 순서대로 첫번째가 선택됩니다)
+        guard let highestAttribute = attributes.max(by: { $0.1 < $1.1 }) else { return }
         
-        highestAttributesText = highestAttributes.joined(separator: ", ") + "이 가장 높게 나타났어요"
+        // 인건비만 "가", 나머지는 "이"를 사용
+        let marker = (highestAttribute.0 == "인건비") ? "가" : "이"
+        highestAttributesText = "\(highestAttribute.0)\(marker) 가장 높게 나탔어요"
     }
 }
 
@@ -250,16 +253,15 @@ struct LabReviewInfoView: View {
     }
 }
 
-// RadarChart and related structs remain unchanged.
-
 struct RadarChart: View {
     let triangleGraphData: TriangleGraphData
 
     var body: some View {
+        // 0~10 범위 값을 0~1 비율로 변환하여 배열 순서를 지도력, 자율성, 인건비 순으로 재배열합니다.
         let values = [
-            triangleGraphData.leadershipAverage / 10,
-            triangleGraphData.salaryAverage / 10,
-            triangleGraphData.autonomyAverage / 10
+            triangleGraphData.leadershipAverage / 10,   // index 0: 지도력 (상단)
+            triangleGraphData.autonomyAverage / 10,       // index 1: 자율성 (오른쪽)
+            triangleGraphData.salaryAverage / 10          // index 2: 인건비 (왼쪽)
         ]
         
         return GeometryReader { geometry in
@@ -268,61 +270,139 @@ struct RadarChart: View {
                 radarChartShape(geometry: geometry, values: values)
                 radarChartLabels(geometry: geometry)
             }
-            .padding()
+//            .padding()
             .frame(width: geometry.size.width, height: geometry.size.width)
         }
         .aspectRatio(1, contentMode: .fit)
     }
-
+    
+    // 정삼각형의 배경 (동심원 삼각형)
     private func radarChartBackground(geometry: GeometryProxy) -> some View {
-        let background = RadarChartBackground(categories: ["지도력", "자율성", "인건비"])
-            .stroke(Constants.Gray300, lineWidth: 1)
+        let center = CGPoint(x: geometry.size.width/2, y: geometry.size.height/2)
+        let radius = min(geometry.size.width, geometry.size.height)/2
+        let angleIncrement = 2 * Double.pi / 3
+        let angles = (0..<3).map { -Double.pi/2 + angleIncrement * Double($0) }
         
         return ZStack {
             ForEach(1..<4) { i in
-                RadarChartBackground(categories: ["지도력", "자율성", "인건비"])
-                    .stroke(Constants.Gray200, lineWidth: 0.5)
-                    .scaleEffect(CGFloat(i) / 4)
+                let scale = CGFloat(i) / 3.0
+                Path { path in
+                    for j in 0..<3 {
+                        let angle = angles[j]
+                        let point = CGPoint(
+                            x: center.x + radius * scale * CGFloat(cos(angle)),
+                            y: center.y + radius * scale * CGFloat(sin(angle))
+                        )
+                        if j == 0 {
+                            path.move(to: point)
+                        } else {
+                            path.addLine(to: point)
+                        }
+                    }
+                    path.closeSubpath()
+                }
+                .stroke(Constants.Gray200, lineWidth: 0.5)
             }
-            background
+            // 외곽선
+            Path { path in
+                for j in 0..<3 {
+                    let angle = angles[j]
+                    let point = CGPoint(
+                        x: center.x + radius * CGFloat(cos(angle)),
+                        y: center.y + radius * CGFloat(sin(angle))
+                    )
+                    if j == 0 {
+                        path.move(to: point)
+                    } else {
+                        path.addLine(to: point)
+                    }
+                }
+                path.closeSubpath()
+            }
+            .stroke(Constants.Gray300, lineWidth: 1)
         }
     }
-
+    
+    // 실제 데이터 값에 따라 채워지는 영역 그리기
     private func radarChartShape(geometry: GeometryProxy, values: [Double]) -> some View {
-        let shape = RadarChartShape(values: values)
-            .fill(LinearGradient(
-                stops: [
-                    Gradient.Stop(color: Color(red: 1, green: 0.84, blue: 0.77).opacity(0.5), location: 0.00),
-                    Gradient.Stop(color: Color(red: 1, green: 0.44, blue: 0.23).opacity(0.5), location: 1.00),
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            ))
+        let center = CGPoint(x: geometry.size.width/2, y: geometry.size.height/2)
+        let radius = min(geometry.size.width, geometry.size.height)/2
+        let angleIncrement = 2 * Double.pi / 3
+        let angles = (0..<3).map { -Double.pi/2 + angleIncrement * Double($0) }
         
-        return shape
+        // 각 점의 좌표 계산
+        let points = values.enumerated().map { (index, value) -> CGPoint in
+            let valueRadius = radius * CGFloat(value)
+            let angle = angles[index]
+            return CGPoint(
+                x: center.x + valueRadius * CGFloat(cos(angle)),
+                y: center.y + valueRadius * CGFloat(sin(angle))
+            )
+        }
+        
+        return Path { path in
+            if let first = points.first {
+                path.move(to: first)
+                for point in points.dropFirst() {
+                    path.addLine(to: point)
+                }
+                path.closeSubpath()
+            }
+        }
+        .fill(LinearGradient(
+            stops: [
+                Gradient.Stop(color: Color(red: 1, green: 0.84, blue: 0.77).opacity(0.5), location: 0.00),
+                Gradient.Stop(color: Color(red: 1, green: 0.44, blue: 0.23).opacity(0.5), location: 1.00),
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        ))
     }
-
+    
+    // 정점(레이블) 그리기: 순서대로 지도력(상단), 자율성(오른쪽), 인건비(왼쪽)
     private func radarChartLabels(geometry: GeometryProxy) -> some View {
         let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
         let radius = min(geometry.size.width, geometry.size.height) / 2
-        let angles = calculateAngles()
-
-        return ForEach(0..<3) { i in
-            let angle = angles[i]
-            let x = center.x + radius * cos(angle)
-            let y = center.y + radius * sin(angle)
-
-            Text(["지도력", "자율성", "인건비"][i])
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(Constants.Gray900)
-                .position(x: x - 14, y: y - 14)
+        let angleIncrement = 2 * Double.pi / 3
+        let angles = (0..<3).map { -Double.pi/2 + angleIncrement * Double($0) }
+        
+        // 속성 순서: index 0: 지도력, index 1: 자율성, index 2: 인건비
+        let labels = ["지도력", "자율성", "인건비"]
+        let originalValues = [triangleGraphData.leadershipAverage,
+                              triangleGraphData.autonomyAverage,
+                              triangleGraphData.salaryAverage]
+        // 최고 점수를 가진 항목의 인덱스
+        let maxIndex = originalValues.enumerated().max(by: { $0.element < $1.element })?.offset
+        
+        return ZStack {
+            ForEach(0..<3) { i in
+                let angle = angles[i]
+                let point = CGPoint(
+                    x: center.x + radius * CGFloat(cos(angle)),
+                    y: center.y + radius * CGFloat(sin(angle))
+                )
+                
+                // 인덱스에 따라 offset을 적용합니다.
+                let offset = offsetForLabel(index: i)
+                
+                Text(labels[i])
+                    .font(
+                        Font.custom("Pretendard", size: 12)
+                            .weight(.semibold)
+                    )
+                    .foregroundColor(i == maxIndex ? Color(red: 0.98, green: 0.31, blue: 0.06) : Constants.Gray900)
+                    .position(x: point.x + offset.width, y: point.y + offset.height)
+            }
         }
     }
-
-    private func calculateAngles() -> [Double] {
-        let angleIncrement = 2 * Double.pi / 3
-        return (0..<3).map { i in
-            return angleIncrement * Double(i) - Double.pi / 2
+    
+    // 인덱스에 따른 오프셋 반환 (index 0: 지도력 - 상단, index 1: 자율성 - 오른쪽, index 2: 인건비 - 왼쪽)
+    private func offsetForLabel(index: Int) -> CGSize {
+        switch index {
+        case 0: return CGSize(width: 0, height: -20)    // 지도력
+        case 1: return CGSize(width: 30, height: 0)      // 자율성
+        case 2: return CGSize(width: -30, height: 0)     // 인건비
+        default: return .zero
         }
     }
 }
