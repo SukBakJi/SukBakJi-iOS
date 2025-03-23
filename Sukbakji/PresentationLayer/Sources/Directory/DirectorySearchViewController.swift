@@ -67,105 +67,107 @@ struct DirectorySearchViewController: View {
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 8)
-
-                ScrollView {
-                    if isLoading {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .padding(.top, 50)
-                    } else if !filteredResults.isEmpty {
-                        SearchView(searchResults: filteredResults, selectedUniversity: $selectedUniversity, performSearch: performSearch)
-                    } else if hasSearched {
-                        // 검색 결과가 없을 때의 뷰
-                        VStack(alignment: .center, spacing: 8) {
-                            Image("Warning")
-                                .resizable()
-                                .frame(width: 32, height: 32)
-                                .padding(.bottom, 20)
-
-                            Text("\(searchText)")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
-                            + Text("에 대한 검색 결과가 없어요")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundColor(Constants.Gray900)
-                            Text("이렇게 검색해 보는 건 어때요?")
-                                .font(Font.custom("Pretendard", size: Constants.fontSize5)
-                                    .weight(Constants.fontWeightMedium))
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(Constants.Gray500)
-
-                            Spacer()
-
-                            SearchRecommendView()
-                                .padding(.top, 12)
-                        }
-                        .padding(.vertical, 80)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .padding(.top, 50)
+                    
+                    Spacer()
+                } else if !filteredResults.isEmpty {
+                    SearchView(searchResults: filteredResults, selectedUniversity: $selectedUniversity, performSearch: performSearch)
+                } else if hasSearched {
+                    // 검색 결과가 없을 때의 뷰
+                    VStack(alignment: .center, spacing: 8) {
+                        Image("Warning")
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                            .padding(.bottom, 20)
+                        
+                        Text("\(searchText)")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Color(red: 0.93, green: 0.29, blue: 0.03))
+                        + Text("에 대한 검색 결과가 없어요")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Constants.Gray900)
+                        Text("이렇게 검색해 보는 건 어때요?")
+                            .font(Font.custom("Pretendard", size: Constants.fontSize5)
+                                .weight(Constants.fontWeightMedium))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Constants.Gray500)
+                        
+                        Spacer()
+                        
+                        SearchRecommendView()
+                            .padding(.top, 12)
+                    }
+                    .padding(.vertical, 80)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    // 최근 검색어 뷰
+                    if recentSearches.isEmpty {
+                        NoRecentSearchView()
                     } else {
-                        // 최근 검색어 뷰
-                        if recentSearches.isEmpty {
-                            NoRecentSearchView()
-                        } else {
-                            VStack(alignment: .leading, spacing: 12) {
-                                HStack {
-                                    Text("최근 검색어")
-                                        .font(
-                                            Font.custom("Pretendard", size: Constants.fontSizeM)
-                                                .weight(Constants.fontWeightSemiBold)
-                                        )
-                                        .foregroundColor(Constants.Gray900)
-                                    Spacer()
-
-                                    Button("전체 삭제") {
-                                        recentSearches.removeAll()
-                                        saveRecentSearches()  // Save empty list when deleted
-                                    }
+                        VStack(alignment: .leading, spacing: 12) {
+                            HStack {
+                                Text("최근 검색어")
                                     .font(
-                                        Font.custom("Pretendard", size: Constants.fontSizeXxs)
-                                            .weight(Constants.fontWeightRegular)
+                                        Font.custom("Pretendard", size: Constants.fontSizeM)
+                                            .weight(Constants.fontWeightSemiBold)
                                     )
-                                    .foregroundColor(Constants.Gray500)
+                                    .foregroundColor(Constants.Gray900)
+                                Spacer()
+                                
+                                Button("전체 삭제") {
+                                    recentSearches.removeAll()
+                                    saveRecentSearches()  // Save empty list when deleted
+                                }
+                                .font(
+                                    Font.custom("Pretendard", size: Constants.fontSizeXxs)
+                                        .weight(Constants.fontWeightRegular)
+                                )
+                                .foregroundColor(Constants.Gray500)
+                            }
+                            .padding(.horizontal, 24)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 8) {
+                                    ForEach(recentSearches, id: \.self) { search in
+                                        HStack(spacing: 8) {
+                                            Button(action: {
+                                                searchText = search
+                                                performSearch()
+                                            }) {
+                                                Text(search)
+                                                    .font(Font.custom("Pretendard", size: Constants.fontSize5)
+                                                        .weight(Constants.fontWeightMedium))
+                                                    .foregroundColor(Constants.Gray500)
+                                            }
+                                            
+                                            Button(action: {
+                                                deleteSearch(search)
+                                            }) {
+                                                Image("cross")
+                                                    .resizable()
+                                                    .frame(width: 12, height: 12)
+                                                    .foregroundColor(Constants.Gray300)
+                                            }
+                                        }
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 6)
+                                        .background(Constants.Gray50)
+                                        .cornerRadius(999)
+                                    }
                                 }
                                 .padding(.horizontal, 24)
-
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 8) {
-                                        ForEach(recentSearches, id: \.self) { search in
-                                            HStack(spacing: 8) {
-                                                Button(action: {
-                                                    searchText = search
-                                                    performSearch()
-                                                }) {
-                                                    Text(search)
-                                                        .font(Font.custom("Pretendard", size: Constants.fontSize5)
-                                                            .weight(Constants.fontWeightMedium))
-                                                        .foregroundColor(Constants.Gray500)
-                                                }
-
-                                                Button(action: {
-                                                    deleteSearch(search)
-                                                }) {
-                                                    Image("cross")
-                                                        .resizable()
-                                                        .frame(width: 12, height: 12)
-                                                        .foregroundColor(Constants.Gray300)
-                                                }
-                                            }
-                                            .padding(.horizontal, 16)
-                                            .padding(.vertical, 6)
-                                            .background(Constants.Gray50)
-                                            .cornerRadius(999)
-                                        }
-                                    }
-                                    .padding(.horizontal, 24)
-                                    .padding(.vertical, 12)
-                                }
+                                .padding(.vertical, 12)
                             }
-                            .padding(.top, 20)
                         }
+                        .padding(.top, 20)
                     }
+                    
+                    Spacer()
                 }
             }
             .onAppear {
@@ -276,10 +278,10 @@ struct NoRecentSearchView: View {
                 .padding(.vertical, 80)
 
             
-//            Spacer()
-//            
-//            AdvertisementView()
-//                .padding(.vertical, 350)
+            Spacer()
+            
+            AdvertisementView()
+                .padding(.bottom, 12)
         }
     }
 }
