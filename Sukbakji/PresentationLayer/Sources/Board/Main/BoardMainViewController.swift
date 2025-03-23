@@ -345,7 +345,7 @@ struct qnaBoard: View {
                             )
                             .multilineTextAlignment(.center)
                             .foregroundColor(Constants.Gray500)
-
+                        
                         Image("More 1")
                             .resizable()
                             .frame(width: 4, height: 8)
@@ -355,7 +355,7 @@ struct qnaBoard: View {
                 .buttonStyle(PlainButtonStyle())
             }
             .padding(.top, 28)
-
+            
             VStack(alignment: .leading, spacing: 0) {
                 if qnaPosts.isEmpty {
                     Text("최신 질문글이 없습니다.")
@@ -363,38 +363,31 @@ struct qnaBoard: View {
                         .foregroundColor(Constants.Gray900)
                         .padding()
                 } else {
-                    ForEach(qnaPosts.prefix(3), id: \.title) { question in
-                        Button(action: {
-                            print("\(question.title) tapped")
-                        }) {
+                    ForEach(qnaPosts.prefix(3), id: \.postId) { question in
+                        NavigationLink(destination: DummyBoardDetail(boardName: question.menu, postId: question.postId)) {
                             HStack(alignment: .center, spacing: 12) {
                                 Text(question.menu)
-                                    .font(
-                                        Font.custom("Pretendard", size: Constants.fontSizeXs)
-                                            .weight(Constants.fontWeightMedium)
-                                    )
+                                    .font(Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                        .weight(Constants.fontWeightMedium))
                                     .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 3)
                                     .background(RoundedRectangle(cornerRadius: 4)
-                                        .fill(Color(red: 0.91, green: 0.92, blue: 1))
-                                    )
+                                        .fill(Color(red: 0.91, green: 0.92, blue: 1)))
                                     .padding(.leading, 18)
                                 
                                 Text(question.title)
-                                    .font(
-                                        Font.custom("Pretendard", size: Constants.fontSizeS)
-                                            .weight(Constants.fontWeightSemiBold)
-                                    )
+                                    .font(Font.custom("Pretendard", size: Constants.fontSizeS)
+                                        .weight(Constants.fontWeightSemiBold))
                                     .foregroundColor(Constants.Gray900)
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
                                     .padding(.leading, 12)
                                     .padding(.vertical, 18)
                             }
+                            Divider()
+                                .background(Constants.Gray50)
                         }
-
-                        Divider()
-                            .background(Constants.Gray50)
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }
