@@ -14,15 +14,19 @@ struct DirectorySearchViewController: View {
     @FocusState private var isSearchFieldFocused: Bool
     @State private var hasSearchResults: Bool = true
     @State private var filteredResults: [LabResult] = []
-    @State private var recentSearches: [String] = [] // 최근 검색어 저장 (더미데이터 삭제)
+    @State private var recentSearches: [String] = [] // 최근 검색어 저장
     @State private var selectedUniversity: String? = "전체"
     @State private var isLoading: Bool = false
     @State private var hasSearched: Bool = false // 사용자가 실제 검색을 시도했는지 여부
 
+    init(searchText: Binding<String>) {
+        self._searchText = searchText
+        loadRecentSearches()
+    }
+
     var body: some View {
         NavigationView {
             VStack {
-                // 상단 검색창 코드는 그대로 유지
                 HStack {
                     HStack {
                         Image("Search")
@@ -70,10 +74,9 @@ struct DirectorySearchViewController: View {
                             .progressViewStyle(CircularProgressViewStyle())
                             .padding(.top, 50)
                     } else if !filteredResults.isEmpty {
-                        // 검색 결과가 있을 때의 뷰
                         SearchView(searchResults: filteredResults, selectedUniversity: $selectedUniversity, performSearch: performSearch)
                     } else if hasSearched {
-                        // 검색 결과가 없을 때의 뷰 (검색 시도가 있었을 때)
+                        // 검색 결과가 없을 때의 뷰
                         VStack(alignment: .center, spacing: 8) {
                             Image("Warning")
                                 .resizable()
@@ -93,10 +96,9 @@ struct DirectorySearchViewController: View {
                                 .foregroundColor(Constants.Gray500)
 
                             Spacer()
-                                
+
                             SearchRecommendView()
                                 .padding(.top, 12)
-                                
                         }
                         .padding(.vertical, 80)
                         .multilineTextAlignment(.center)
@@ -104,7 +106,6 @@ struct DirectorySearchViewController: View {
                     } else {
                         // 최근 검색어 뷰
                         if recentSearches.isEmpty {
-                            // 최근 검색어 없을 때의 안내 및 추천 뷰 (예: Warning 이미지 포함)
                             VStack(alignment: .center, spacing: 8) {
                                 Text("최근에 검색한 결과가 없어요")
                                     .font(
@@ -118,7 +119,6 @@ struct DirectorySearchViewController: View {
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                         } else {
-                            // 최근 검색어 목록 뷰
                             VStack(alignment: .leading, spacing: 12) {
                                 HStack {
                                     Text("최근 검색어")
@@ -131,6 +131,7 @@ struct DirectorySearchViewController: View {
 
                                     Button("전체 삭제") {
                                         recentSearches.removeAll()
+                                        saveRecentSearches()  // Save empty list when deleted
                                     }
                                     .font(
                                         Font.custom("Pretendard", size: Constants.fontSizeXxs)
@@ -144,7 +145,6 @@ struct DirectorySearchViewController: View {
                                     HStack(spacing: 8) {
                                         ForEach(recentSearches, id: \.self) { search in
                                             HStack(spacing: 8) {
-                                                // 최근 검색어를 탭하면 해당 검색어를 입력하고 검색 실행
                                                 Button(action: {
                                                     searchText = search
                                                     performSearch()
@@ -154,8 +154,7 @@ struct DirectorySearchViewController: View {
                                                             .weight(Constants.fontWeightMedium))
                                                         .foregroundColor(Constants.Gray500)
                                                 }
-                                                
-                                                // 삭제 버튼은 별도 처리
+
                                                 Button(action: {
                                                     deleteSearch(search)
                                                 }) {
@@ -179,24 +178,34 @@ struct DirectorySearchViewController: View {
                         }
                     }
                 }
-                
+
                 AdvertisementView()
                     .padding(.bottom, 12)
             }
             .onAppear {
-                isSearchFieldFocused = true // 화면이 나타날 때 검색창에 자동으로 포커스를 설정
-                // 화면에 들어올 때는 검색을 수행하지 않고 최근 검색어 뷰가 보이도록 함
+                loadRecentSearches()  // 화면이 나타날 때마다 최근 검색어 로드
+                isSearchFieldFocused = true
             }
         }
         .navigationBarBackButtonHidden()
     }
 
+    // 검색어를 추가하거나 업데이트 할 때마다 UserDefaults에 저장
+    func saveRecentSearches() {
+        UserDefaults.standard.set(recentSearches, forKey: "recentSearches")
+    }
+
+    // UserDefaults에서 검색 기록을 불러오는 함수
+    func loadRecentSearches() {
+        if let savedSearches = UserDefaults.standard.array(forKey: "recentSearches") as? [String] {
+            recentSearches = savedSearches
+        }
+    }
+
     func performSearch() {
         guard !searchText.isEmpty else { return }
-        
-        // 사용자가 검색을 시도했음을 기록
-        hasSearched = true
 
+        hasSearched = true
         isLoading = true
         filteredResults = []
 
@@ -220,6 +229,7 @@ struct DirectorySearchViewController: View {
 
         if !searchText.isEmpty && !recentSearches.contains(searchText) {
             recentSearches.insert(searchText, at: 0)
+            saveRecentSearches()  // Save the updated search history
         }
     }
 
@@ -261,6 +271,7 @@ struct DirectorySearchViewController: View {
     func deleteSearch(_ search: String) {
         if let index = recentSearches.firstIndex(of: search) {
             recentSearches.remove(at: index)
+            saveRecentSearches()  // Save the updated search history after deletion
         }
     }
 }
