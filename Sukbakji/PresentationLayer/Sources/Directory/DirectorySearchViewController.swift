@@ -14,15 +14,19 @@ struct DirectorySearchViewController: View {
     @FocusState private var isSearchFieldFocused: Bool
     @State private var hasSearchResults: Bool = true
     @State private var filteredResults: [LabResult] = []
-    @State private var recentSearches: [String] = [] // 최근 검색어 저장 (더미데이터 삭제)
+    @State private var recentSearches: [String] = [] // 최근 검색어 저장
     @State private var selectedUniversity: String? = "전체"
     @State private var isLoading: Bool = false
     @State private var hasSearched: Bool = false // 사용자가 실제 검색을 시도했는지 여부
 
+    init(searchText: Binding<String>) {
+        self._searchText = searchText
+        loadRecentSearches()
+    }
+
     var body: some View {
         NavigationView {
             VStack {
-                // 상단 검색창 코드는 그대로 유지
                 HStack {
                     HStack {
                         Image("Search")
@@ -70,10 +74,9 @@ struct DirectorySearchViewController: View {
                             .progressViewStyle(CircularProgressViewStyle())
                             .padding(.top, 50)
                     } else if !filteredResults.isEmpty {
-                        // 검색 결과가 있을 때의 뷰
                         SearchView(searchResults: filteredResults, selectedUniversity: $selectedUniversity, performSearch: performSearch)
                     } else if hasSearched {
-                        // 검색 결과가 없을 때의 뷰 (검색 시도가 있었을 때)
+                        // 검색 결과가 없을 때의 뷰
                         VStack(alignment: .center, spacing: 8) {
                             Image("Warning")
                                 .resizable()
@@ -93,10 +96,9 @@ struct DirectorySearchViewController: View {
                                 .foregroundColor(Constants.Gray500)
 
                             Spacer()
-                                
+
                             SearchRecommendView()
                                 .padding(.top, 12)
-                                
                         }
                         .padding(.vertical, 80)
                         .multilineTextAlignment(.center)
@@ -104,46 +106,27 @@ struct DirectorySearchViewController: View {
                     } else {
                         // 최근 검색어 뷰
                         if recentSearches.isEmpty {
-                            // 최근 검색어 없을 때의 안내 및 추천 뷰 (예: Warning 이미지 포함)
-                            VStack(alignment: .center, spacing: 8) {
-                                Image("Warning")
-                                    .resizable()
-                                    .frame(width: 32, height: 32)
-                                    .padding(.bottom, 20)
-
-                                Text("최근에 검색한 결과가 없어요")
-                                    .font(.system(size: 18, weight: .semibold))
-                                    .foregroundColor(Constants.Gray900)
-                                Text("이렇게 검색해 보는 건 어때요?")
-                                    .font(Font.custom("Pretendard", size: Constants.fontSize5)
-                                        .weight(Constants.fontWeightMedium))
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(Constants.Gray500)
-
-                                Spacer()
-                                    
-                                SearchRecommendView()
-                                    .padding(.top, 12)
-                                    
-                            }
-                            .padding(.vertical, 80)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            NoRecentSearchView()
                         } else {
-                            // 최근 검색어 목록 뷰
                             VStack(alignment: .leading, spacing: 12) {
                                 HStack {
-                                    Text("최근 검색")
-                                        .font(.system(size: 18, weight: .semibold))
+                                    Text("최근 검색어")
+                                        .font(
+                                            Font.custom("Pretendard", size: Constants.fontSizeM)
+                                                .weight(Constants.fontWeightSemiBold)
+                                        )
                                         .foregroundColor(Constants.Gray900)
-
                                     Spacer()
 
                                     Button("전체 삭제") {
                                         recentSearches.removeAll()
+                                        saveRecentSearches()  // Save empty list when deleted
                                     }
-                                    .font(.system(size: 14, weight: .medium))
-                                    .foregroundColor(Constants.Gray800)
+                                    .font(
+                                        Font.custom("Pretendard", size: Constants.fontSizeXxs)
+                                            .weight(Constants.fontWeightRegular)
+                                    )
+                                    .foregroundColor(Constants.Gray500)
                                 }
                                 .padding(.horizontal, 24)
 
@@ -151,7 +134,6 @@ struct DirectorySearchViewController: View {
                                     HStack(spacing: 8) {
                                         ForEach(recentSearches, id: \.self) { search in
                                             HStack(spacing: 8) {
-                                                // 최근 검색어를 탭하면 해당 검색어를 입력하고 검색 실행
                                                 Button(action: {
                                                     searchText = search
                                                     performSearch()
@@ -161,8 +143,7 @@ struct DirectorySearchViewController: View {
                                                             .weight(Constants.fontWeightMedium))
                                                         .foregroundColor(Constants.Gray500)
                                                 }
-                                                
-                                                // 삭제 버튼은 별도 처리
+
                                                 Button(action: {
                                                     deleteSearch(search)
                                                 }) {
@@ -188,19 +169,29 @@ struct DirectorySearchViewController: View {
                 }
             }
             .onAppear {
-                isSearchFieldFocused = true // 화면이 나타날 때 검색창에 자동으로 포커스를 설정
-                // 화면에 들어올 때는 검색을 수행하지 않고 최근 검색어 뷰가 보이도록 함
+                loadRecentSearches()  // 화면이 나타날 때마다 최근 검색어 로드
+                isSearchFieldFocused = true
             }
         }
         .navigationBarBackButtonHidden()
     }
 
+    // 검색어를 추가하거나 업데이트 할 때마다 UserDefaults에 저장
+    func saveRecentSearches() {
+        UserDefaults.standard.set(recentSearches, forKey: "recentSearches")
+    }
+
+    // UserDefaults에서 검색 기록을 불러오는 함수
+    func loadRecentSearches() {
+        if let savedSearches = UserDefaults.standard.array(forKey: "recentSearches") as? [String] {
+            recentSearches = savedSearches
+        }
+    }
+
     func performSearch() {
         guard !searchText.isEmpty else { return }
-        
-        // 사용자가 검색을 시도했음을 기록
-        hasSearched = true
 
+        hasSearched = true
         isLoading = true
         filteredResults = []
 
@@ -224,11 +215,13 @@ struct DirectorySearchViewController: View {
 
         if !searchText.isEmpty && !recentSearches.contains(searchText) {
             recentSearches.insert(searchText, at: 0)
+            saveRecentSearches()  // Save the updated search history
         }
     }
 
-    func DirectoryLabSearchApi(keyword: String, userToken: String, completion: @escaping (Result<[LabResult], Error>) -> Void) {
-        let url = "\(APIConstants.baseURL)/labs/search?topicName=\(keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&page=0&size=6"
+    // DirectoryLabSearchApi 함수 수정
+    func DirectoryLabSearchApi(keyword: String, userToken: String, page: Int = 0, size: Int = 1000, completion: @escaping (Result<[LabResult], Error>) -> Void) {
+        let url = "\(APIConstants.baseURL)/labs/search?topicName=\(keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&page=\(page)&size=\(size)"
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -265,6 +258,28 @@ struct DirectorySearchViewController: View {
     func deleteSearch(_ search: String) {
         if let index = recentSearches.firstIndex(of: search) {
             recentSearches.remove(at: index)
+            saveRecentSearches()  // Save the updated search history after deletion
+        }
+    }
+}
+
+struct NoRecentSearchView: View {
+    var body: some View {
+        VStack {
+            Text("최근에 검색한 결과가 없어요")
+                .font(
+                    Font.custom("Pretendard", size: Constants.fontSizeS)
+                        .weight(Constants.fontWeightSemiBold)
+                )
+                .multilineTextAlignment(.center)
+                .foregroundColor(Constants.Gray500)
+                .padding(.vertical, 80)
+
+            
+//            Spacer()
+//            
+//            AdvertisementView()
+//                .padding(.vertical, 350)
         }
     }
 }
@@ -274,10 +289,9 @@ struct SearchView: View {
     @Binding var selectedUniversity: String?
     var performSearch: () -> Void
 
-    // API 응답 결과에서 중복 제거된 대학교 목록 계산
     var distinctUniversities: [String] {
         let universities = searchResults.map { $0.universityName }
-        return Array(Set(universities)).sorted() // 정렬 방식은 필요에 따라 변경 가능
+        return Array(Set(universities)).sorted()
     }
 
     var filteredResults: [LabResult] {
@@ -288,13 +302,19 @@ struct SearchView: View {
         }
     }
     
-    // 보여줄 검색 결과 개수 상태 변수
-    @State private var visibleCount: Int = 3
+    // GridItem을 사용하여 두 개의 열을 설정
+    private let columns: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+
+    // visibleCount를 6으로 초기화
+    @State private var visibleCount: Int = 6
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Text("\(filteredResults.count)건")
+                Text("\(filteredResults.count) 건")
                     .font(
                         Font.custom("Pretendard", size: Constants.fontSizeS)
                             .weight(Constants.fontWeightMedium)
@@ -303,7 +323,6 @@ struct SearchView: View {
                 
                 Spacer()
                 
-                // 동적 색상 적용된 필터 메뉴
                 let filterColor: Color = (selectedUniversity != "전체" && selectedUniversity != nil) ? Color(red: 0.93, green: 0.29, blue: 0.03) : Constants.Gray800
                 
                 Menu {
@@ -320,16 +339,15 @@ struct SearchView: View {
                     }
                 } label: {
                     HStack(spacing: 4) {
-                        // 메뉴 레이블은 선택된 대학이 있으면 해당 이름, 없으면 "대학교 정렬"
                         let labelText = (selectedUniversity == "전체" || selectedUniversity == nil) ? "대학교 정렬" : selectedUniversity!
                         Text(labelText)
                             .font(.system(size: 14, weight: .medium))
                             .foregroundColor(filterColor)
-                        (Image("More 2")
+                        Image("More 2")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(filterColor))
+                            .foregroundColor(filterColor)
                     }
                 }
             }
@@ -337,70 +355,167 @@ struct SearchView: View {
             
             Divider()
             
+            Text("검색 결과")
+                .font(
+                    Font.custom("Pretendard", size: Constants.fontSizeM)
+                        .weight(Constants.fontWeightSemiBold)
+                )
+                .foregroundColor(Constants.Gray900)
+                .padding(.horizontal, 24)
+
             ScrollView {
-                VStack(spacing: 16) {
-                    // visibleCount만큼의 검색 결과만 보여줌
+                LazyVGrid(columns: columns, spacing: 12) {
                     ForEach(filteredResults.prefix(visibleCount), id: \.labId) { result in
-                        NavigationLink(destination: LabDetailViewController(labId: result.labId)) {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(result.universityName)
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(Constants.Gray900)
-                                
-                                Text(result.professorName)
-                                    .font(.system(size: 14, weight: .medium))
-                                    .foregroundColor(Constants.Gray800)
-                                
-                                Text(result.departmentName)
-                                    .font(.system(size: 14))
-                                    .foregroundColor(Constants.Gray600)
-                                
-                                Text(result.researchTopics.joined(separator: ", "))
-                                    .font(.system(size: 14))
-                                    .foregroundColor(Constants.Gray600)
-                                    .lineLimit(2)
-                                    .multilineTextAlignment(.leading)
-                            }
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Constants.Gray50)
-                            .cornerRadius(8)
-                            .padding(.horizontal, 24)
+                        SearchedLaboratory(
+                            title: result.universityName,
+                            universityName: result.universityName,
+                            labName: result.labName,
+                            professorName: result.professorName,
+                            labId: result.labId,
+                            researchTopics: result.researchTopics
+                        )
+                    }
+                }
+                .padding(.horizontal, 24)
+
+                // "연구실 정보 더보기" 버튼은 visibleCount가 filteredResults.count 미만일 때만 보임
+                if visibleCount < filteredResults.count {
+                    Button(action: {
+                        // 6개씩 추가로 보이도록 visibleCount를 6씩 증가
+                        visibleCount = min(visibleCount + 6, filteredResults.count)
+                    }) {
+                        HStack {
+                            Text("연구실 정보 더보기")
+                                .font(.system(size: 14))
+                                .foregroundColor(Constants.Gray900)
+                            
+                            Image("More 2")
+                                .resizable()
+                                .frame(width: 12, height: 12)
                         }
+                        .padding(10)
+                        .padding(.horizontal, 10)
+                        .cornerRadius(999)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 999)
+                                .inset(by: 0.5)
+                                .stroke(Constants.Gray300, lineWidth: 1)
+                        )
                     }
+                    .padding(.top, 16)
                 }
-            }
-            
-            // "연구실 정보 더보기" 버튼은 visibleCount가 filteredResults.count 미만일 때만 보임
-            if visibleCount < filteredResults.count {
-                Button(action: {
-                    visibleCount = min(visibleCount + 3, filteredResults.count)
-                }) {
-                    HStack {
-                        Text("연구실 정보 더보기")
-                            .font(.system(size: 14))
-                            .foregroundColor(Constants.Gray900)
-                        
-                        Image("More 2")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                    }
-                    .padding(10)
-                    .padding(.horizontal, 10)
-                    .cornerRadius(999)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 999)
-                            .inset(by: 0.5)
-                            .stroke(Constants.Gray300, lineWidth: 1)
-                    )
-                }
-                .padding(.top, 16)
             }
         }
         .padding(.vertical, 16)
-        // 새로운 검색 결과가 도착하면 visibleCount를 초기화
         .onChange(of: filteredResults.count) { _ in
-            visibleCount = 3
+            // 새로운 검색 결과가 도착하면 visibleCount를 초기화
+            visibleCount = 6
+        }
+    }
+}
+
+struct SearchedLaboratory: View {
+    var title: String
+    var universityName: String
+    var labName: String
+    var professorName: String
+    var labId: Int // Add labId to the view
+    var researchTopics: [String] // researchTopics를 배열로 받음
+    
+    var body: some View {
+        NavigationLink(destination: LabDetailViewController(labId: labId)) {
+            HStack {
+                ZStack(alignment: .topLeading) {
+                    VStack(spacing: 0) {
+                        Constants.White
+                            .frame(height: 70) // 상단 흰색 배경
+                        Constants.Gray50
+                    }
+                    .cornerRadius(12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .inset(by: 0.5)
+                            .stroke(Constants.Gray100, lineWidth: 1)
+                    )
+                    
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(title)
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                    .weight(Constants.fontWeightMedium)
+                            )
+                            .foregroundColor(.black)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 16)
+                            .padding(.horizontal, 16)
+                        
+                        Text(labName)
+                            .font(
+                                Font.custom("Pretendard", size: Constants.fontSizeS)
+                                    .weight(Constants.fontWeightSemiBold)
+                            )
+                            .foregroundColor(.black)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 16)
+                        
+                        HStack(alignment: .center, spacing: 12) {
+                            Image("Profile Image")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text(professorName)
+                                        .font(
+                                            Font.custom("Pretendard", size: Constants.fontSizeS)
+                                                .weight(Constants.fontWeightSemiBold)
+                                        )
+                                        .foregroundColor(.black)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                    
+                                    Text("교수")
+                                        .font(
+                                            Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                                .weight(Constants.fontWeightMedium)
+                                        )
+                                        .foregroundColor(.black)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                }
+                                
+                                Text("\(universityName) \(labName)")
+                                    .font(
+                                        Font.custom("Pretendard", size: Constants.fontSizeXs)
+                                            .weight(Constants.fontWeightMedium)
+                                    )
+                                    .foregroundColor(.black)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                        .padding(.top, 12)
+                        .padding(.horizontal, 16)
+                        
+                        // 연구 주제들 출력
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 6) {
+                                ForEach(researchTopics, id: \.self) { topic in
+                                    KeywordView(keywordName: topic)
+                                }
+                            }
+                            .padding(.horizontal, 16)
+                        }
+                        .padding(.bottom, 16)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
         }
     }
 }
