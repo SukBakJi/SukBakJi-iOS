@@ -365,7 +365,7 @@ struct SearchView: View {
                 .foregroundColor(Constants.Gray900)
                 .padding(.horizontal, 24)
 
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: columns, spacing: 12) {
                     ForEach(filteredResults.prefix(visibleCount), id: \.labId) { result in
                         SearchedLaboratory(
@@ -384,7 +384,9 @@ struct SearchView: View {
                 if visibleCount < filteredResults.count {
                     Button(action: {
                         // 6개씩 추가로 보이도록 visibleCount를 6씩 증가
-                        visibleCount = min(visibleCount + 6, filteredResults.count)
+                        withAnimation(.easeInOut) {
+                            visibleCount = min(visibleCount + 6, filteredResults.count)
+                        }
                     }) {
                         HStack {
                             Text("연구실 정보 더보기")
