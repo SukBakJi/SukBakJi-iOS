@@ -106,18 +106,7 @@ struct DirectorySearchViewController: View {
                     } else {
                         // 최근 검색어 뷰
                         if recentSearches.isEmpty {
-                            VStack(alignment: .center, spacing: 8) {
-                                Text("최근에 검색한 결과가 없어요")
-                                    .font(
-                                        Font.custom("Pretendard", size: Constants.fontSizeS)
-                                            .weight(Constants.fontWeightSemiBold)
-                                    )
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(Constants.Gray500)
-                            }
-                            .padding(.vertical, 80)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            NoRecentSearchView()
                         } else {
                             VStack(alignment: .leading, spacing: 12) {
                                 HStack {
@@ -178,9 +167,6 @@ struct DirectorySearchViewController: View {
                         }
                     }
                 }
-
-                AdvertisementView()
-                    .padding(.bottom, 12)
             }
             .onAppear {
                 loadRecentSearches()  // 화면이 나타날 때마다 최근 검색어 로드
@@ -233,8 +219,9 @@ struct DirectorySearchViewController: View {
         }
     }
 
-    func DirectoryLabSearchApi(keyword: String, userToken: String, completion: @escaping (Result<[LabResult], Error>) -> Void) {
-        let url = "\(APIConstants.baseURL)/labs/search?topicName=\(keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&page=0&size=6"
+    // DirectoryLabSearchApi 함수 수정
+    func DirectoryLabSearchApi(keyword: String, userToken: String, page: Int = 0, size: Int = 1000, completion: @escaping (Result<[LabResult], Error>) -> Void) {
+        let url = "\(APIConstants.baseURL)/labs/search?topicName=\(keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&page=\(page)&size=\(size)"
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -272,6 +259,27 @@ struct DirectorySearchViewController: View {
         if let index = recentSearches.firstIndex(of: search) {
             recentSearches.remove(at: index)
             saveRecentSearches()  // Save the updated search history after deletion
+        }
+    }
+}
+
+struct NoRecentSearchView: View {
+    var body: some View {
+        VStack {
+            Text("최근에 검색한 결과가 없어요")
+                .font(
+                    Font.custom("Pretendard", size: Constants.fontSizeS)
+                        .weight(Constants.fontWeightSemiBold)
+                )
+                .multilineTextAlignment(.center)
+                .foregroundColor(Constants.Gray500)
+                .padding(.vertical, 80)
+
+            
+//            Spacer()
+//            
+//            AdvertisementView()
+//                .padding(.vertical, 350)
         }
     }
 }
