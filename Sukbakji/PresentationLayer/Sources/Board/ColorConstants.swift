@@ -36,4 +36,6 @@ struct Constants {
     static let fontWeightRegular: Font.Weight = .regular
     static let fontSizeXxl: CGFloat = 22
     static let fontSizeXl: CGFloat = 20
+    
+    static let ColorsBlue: Color = Color(red: 0, green: 0.48, blue: 1)
 }

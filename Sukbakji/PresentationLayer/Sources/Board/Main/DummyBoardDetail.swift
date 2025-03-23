@@ -645,10 +645,53 @@ struct BookmarkButtonView: View {
     }
 }
 
+struct MoreButtonView: View {
+    var body: some View {
+        ZStack {
+            Color(.black.opacity(0.2))
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                Text("질문 게시판")
+                
+                Divider()
+                
+                Text("수정하기")
+                    .font(.system(size: 17))
+                    .foregroundColor(Constants.ColorsBlue)
+                
+                Divider()
+                
+                Text("삭제하기")
+                    .font(.system(size: 17))
+                    .foregroundColor(Constants.ColorsBlue)
+                
+                VStack {
+                    Text("취소")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundStyle(Constants.ColorsBlue)
+                    
+                }
+                .frame(maxWidth: .infinity)
+                .background(.white)
+                .cornerRadius(14)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 21)
+            }
+            .frame(maxWidth: .infinity)
+            .background(.white)
+            .cornerRadius(14)
+            .padding(.horizontal, 8)
+            
+        }
+    }
+}
+
 struct ScrapStatusResponse: Decodable {
     let isScrapped: Bool
 }
 
 #Preview {
-    DummyBoardDetail(boardName: "질문 게시판", postId: 3, memberId: 10)
+//    DummyBoardDetail(boardName: "질문 게시판", postId: 3, memberId: 10)
+    MoreButtonView()
 }
