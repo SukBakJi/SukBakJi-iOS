@@ -406,11 +406,10 @@ struct SearchView: View {
                                 .stroke(Constants.Gray300, lineWidth: 1)
                         )
                     }
-                    .padding(.top, 16)
+                    .padding(.vertical, 16)
                 }
             }
         }
-        .padding(.vertical, 16)
         .onChange(of: filteredResults.count) { _ in
             // 새로운 검색 결과가 도착하면 visibleCount를 초기화
             visibleCount = 6
