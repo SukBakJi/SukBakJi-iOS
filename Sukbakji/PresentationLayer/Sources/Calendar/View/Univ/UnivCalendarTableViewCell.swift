@@ -31,7 +31,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let univLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
     }
     let deleteButton = UIButton().then {
@@ -42,11 +42,11 @@ class UnivCalendarTableViewCell: UITableViewCell {
         $0.image = UIImage(named: "Sukbakji_RecruitType")
     }
     let recruitLabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     let recruitTypeLabel = UILabel().then {
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = .orange700
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     let editButton = UIButton().then {

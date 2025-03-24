@@ -39,7 +39,8 @@ class EditUnivCalendarViewController: UIViewController {
         
         setUI()
         setDrop()
-//        setAPI()
+        setAPI()
+        setUnivCalendarData()
     }
 }
 
@@ -118,8 +119,10 @@ extension EditUnivCalendarViewController {
         }
         if season == editUnivView.recruitFirstLabel.text {
             editUnivView.recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
+            editUnivView.recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
             editUnivView.recruitFirstButton.isEnabled = false
         } else {
+            editUnivView.recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
             editUnivView.recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
             editUnivView.recruitSecondButton.isEnabled = false
         }

@@ -12,7 +12,7 @@ import Then
 class EditUnivView: UIView {
 
     let univLabel = UILabel().then {
-        $0.font = UIFont(name: "Pretendard-Medium", size: 22)
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 22)
         $0.textColor = .gray900
     }
     let recruitDateView = UIView().then {

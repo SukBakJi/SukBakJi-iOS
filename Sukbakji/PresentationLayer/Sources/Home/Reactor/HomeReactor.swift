@@ -93,7 +93,7 @@ final class HomeReactor: Reactor {
                 case 4: newState.upComingTitle = "카이스트 \(content)"
                 default: newState.upComingTitle = content
                 }
-            } else {
+            } else if upComing?.scheduleList.isEmpty == true {
                 newState.upComingDate = ""
                 newState.upComingTitle = "다가오는 일정이 없습니다"
             }

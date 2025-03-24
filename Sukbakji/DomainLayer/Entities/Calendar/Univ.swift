@@ -25,3 +25,8 @@ struct UnivList: Codable {
     let method: String
     let showing: Int
 }
+
+struct UnivPost: Codable {
+    let memberId: Int
+    let message: String
+}

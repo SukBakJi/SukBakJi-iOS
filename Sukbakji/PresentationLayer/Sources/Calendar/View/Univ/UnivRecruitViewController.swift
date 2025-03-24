@@ -139,7 +139,7 @@ extension UnivRecruitViewController {
             .disposed(by: disposeBag)
         
         univRecruitView.nextButton.rx.tap
-            .bind { [weak self] in self?.showLogoutAlert() }
+            .bind { [weak self] in self?.showEnrollAlert() }
             .disposed(by: disposeBag)
         
         viewModel.univEnrolled
@@ -164,7 +164,7 @@ extension UnivRecruitViewController {
         univRecruitView.nextButton.setTitleColor(isFormValid ? .white : .gray500, for: .normal)
     }
     
-    private func showLogoutAlert() {
+    private func showEnrollAlert() {
         AlertController(message: "대학교를 등록하시겠어요?", isCancel: true) { [weak self] in
             self?.viewModel.EnrollUniv(
                 memberId: self?.memberId,

@@ -43,8 +43,8 @@ extension UnivCalendarViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadTestData()
-//        viewModel.loadUnivList()
+//        viewModel.loadTestData()
+        viewModel.loadUnivList()
     }
     
     private func bindViewModel() {
