@@ -39,12 +39,11 @@ class AlarmDateCollectionViewCell: UICollectionViewCell {
                 if dayLabel.text != "" {
                     self.dayView.layer.cornerRadius = self.dayView.frame.size.width / 2
                     self.dayView.clipsToBounds = true
-                    self.dayView.backgroundColor = UIColor(named: "Coquelicot")
+                    self.dayView.backgroundColor = .orange700
                     self.dayLabel.textColor = .white
                 }
             } else {
                 self.dayView.backgroundColor = .gray50
-                self.dayView.backgroundColor = UIColor.orange50
                 self.dayLabel.textColor = .black
             }
         }

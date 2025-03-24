@@ -33,6 +33,9 @@ class MyAlarmView: UIView {
         $0.backgroundColor = .clear
         $0.register(MyAlarmTableViewCell.self, forCellReuseIdentifier: MyAlarmTableViewCell.identifier)
     }
+    let alarmCompleteImageView = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_AlarmComplete")
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,6 +57,7 @@ class MyAlarmView: UIView {
         addSubview(dateLabel)
         addSubview(dateSelectButton)
         addSubview(myAlarmTableView)
+        addSubview(alarmCompleteImageView)
     }
     
     private func setupConstraints() {
@@ -90,6 +94,14 @@ class MyAlarmView: UIView {
             $0.top.equalTo(dateLabel.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+        
+        alarmCompleteImageView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(112)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(44)
+            make.width.equalTo(215)
+        }
+        alarmCompleteImageView.alpha = 0
     }
     
     private func configureDate() {

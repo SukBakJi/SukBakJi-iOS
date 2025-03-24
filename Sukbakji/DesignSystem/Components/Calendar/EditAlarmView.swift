@@ -233,7 +233,6 @@ class EditAlarmView: UIView, dateProtocol {
             $0.trailing.equalToSuperview().inset(24)
             $0.height.width.equalTo(36)
         }
-        alarmNameDeleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
         
         warningImageView.snp.makeConstraints {
             $0.top.equalTo(alarmNameTextField.snp.bottom).offset(6)
@@ -377,10 +376,6 @@ class EditAlarmView: UIView, dateProtocol {
         UIView.animate(withDuration: 0.3) {
             dateView.alpha = 1
         }
-    }
-    
-    @objc private func textDelete_Tapped() {
-        alarmNameTextField.text = ""
     }
     
     @objc private func time_Tapped() {

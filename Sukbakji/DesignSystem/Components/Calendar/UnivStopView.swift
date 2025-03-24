@@ -66,7 +66,7 @@ final class UnivStopView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.25)
+        self.backgroundColor = UIColor(white: 0, alpha: 0.2)
         
         self.addSubview(mainView)
         self.mainView.snp.makeConstraints { make in

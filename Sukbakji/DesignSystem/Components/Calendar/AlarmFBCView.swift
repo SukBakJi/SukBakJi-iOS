@@ -47,7 +47,7 @@ final class AlarmFBCView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.25)
+        self.backgroundColor = UIColor(white: 0, alpha: 0.2)
         
         self.addSubview(alarmButton)
         alarmButton.snp.makeConstraints { make in

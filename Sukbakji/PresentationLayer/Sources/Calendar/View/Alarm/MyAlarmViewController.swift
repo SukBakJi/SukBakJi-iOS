@@ -40,13 +40,15 @@ extension MyAlarmViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         myAlarmView.navigationbarView.delegate = self
-//        myAlarmView.addAlarmButton.addTarget(self, action: #selector(addAlarm_Tapped), for: .touchUpInside)
+        myAlarmView.addAlarmButton.addTarget(self, action: #selector(addAlarm_Tapped), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(alarmSettingComplete), name: .isAlarmComplete, object: nil)
     }
     
     private func setAPI() {
         bindViewModel()
-//        viewModel.fetchMyAlarms()
-        viewModel.loadTestData()
+        viewModel.fetchMyAlarms()
+//        viewModel.loadTestData()
     }
     
     private func bindViewModel() {
@@ -76,10 +78,25 @@ extension MyAlarmViewController {
         viewModel.toggleAlarm(at: indexPath.row, isOn: isOn)
     }
     
-//    @objc private func addAlarm_Tapped() {
-//        let setAlarmVC = SetAlarmViewController()
-//        self.navigationController?.pushViewController(setAlarmVC, animated: true)
-//    }
+    @objc private func addAlarm_Tapped() {
+        let setAlarmVC = SetAlarmViewController()
+        self.navigationController?.pushViewController(setAlarmVC, animated: true)
+    }
+    
+    @objc private func alarmSettingComplete() {
+        viewModel.fetchMyAlarms()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.myAlarmView.alarmCompleteImageView.alpha = 1 // 나타나게
+        }) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.myAlarmView.alarmCompleteImageView.alpha = 0 // 투명하게
+                }) { _ in
+                    self.myAlarmView.alarmCompleteImageView.removeFromSuperview() // 뷰 제거
+                }
+            }
+        }
+    }
 }
 
 extension MyAlarmViewController: UITableViewDelegate {
