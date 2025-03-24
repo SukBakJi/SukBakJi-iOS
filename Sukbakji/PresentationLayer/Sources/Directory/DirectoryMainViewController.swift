@@ -127,6 +127,7 @@ struct DirectoryMainViewController: View {
                                             labId: lab.labId,
                                             researchTopics: lab.researchTopics
                                         )
+                                        .frame(width: 300)
                                     }
                                 }
                                 .padding(.horizontal, 24)
@@ -474,98 +475,6 @@ struct AdvertisementView: View {
                 .padding(.trailing, 38)
                 .padding(.bottom, 10), alignment: .bottomTrailing
         )
-    }
-}
-
-// MARK: -- 연구실 후기 더미 데이터
-struct LabReviewDummy: View {
-    var body: some View {
-        HStack {
-            ZStack(alignment: .topLeading) {
-                VStack(spacing: 0) {
-                    Constants.White
-                }
-                .cornerRadius(12)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .inset(by: 0.5)
-                        .stroke(Constants.Gray100, lineWidth: 1)
-                )
-                
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack {
-                        HStack(alignment: .center, spacing: 4) {
-                            Text("성신여자대학교")
-                                .font(
-                                    Font.custom("Pretendard", size: 12)
-                                        .weight(.medium)
-                                )
-                                .foregroundColor(Constants.Gray900)
-                                .frame(maxWidth: .infinity, minHeight: 14, maxHeight: 14, alignment: .leading)
-                        }
-                    }
-                    
-                    Text("화학에너지융합학부 에너지재료연구실")
-                        .font(
-                            Font.custom("Pretendard", size: Constants.fontSize5)
-                                .weight(Constants.fontWeightSemiBold)
-                        )
-                        .foregroundColor(Constants.Gray900)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    
-                    HStack(alignment: .center, spacing: 12) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            
-                            Text("모든 학생들의 연구 진행상황을 상세히 검토해 주시고 올바른 길로 나아가도록 지도해 주시는 교수님이에요")
-                                .font(
-                                    Font.custom("Pretendard", size: Constants.fontSize6)
-                                        .weight(Constants.fontWeightMedium)
-                                )
-                                .foregroundColor(Constants.Gray900)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                            
-                        }
-                        .frame(height: 35, alignment: .topLeading)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    HStack {
-                        HStack(alignment: .center, spacing: 4) {
-                            Text("label")
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(Color(red: 0.99, green: 0.91, blue: 0.9))
-                        .cornerRadius(4)
-                        
-                        HStack(alignment: .center, spacing: 4) {
-                            Text("label")
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(Color(red: 0.99, green: 0.91, blue: 0.9))
-                        .cornerRadius(4)
-                        
-                        HStack(alignment: .center, spacing: 4) {
-                            Text("label")
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(Color(red: 0.98, green: 0.31, blue: 0.06))
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(Color(red: 0.99, green: 0.91, blue: 0.9))
-                        .cornerRadius(4)
-                    }
-                }
-                .padding(.horizontal, 18)
-                .padding(.vertical, 16)
-                .frame(width: 300, alignment: .topLeading)
-            }
-        }
     }
 }
 
