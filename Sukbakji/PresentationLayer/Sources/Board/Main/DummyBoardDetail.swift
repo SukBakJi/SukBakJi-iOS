@@ -641,7 +641,11 @@ struct MoreButtonView: View {
     let reportReasons = [
         "욕설/비하",
         "유출/사칭/사기",
-        "상업적 광고 및 판매"
+        "상업적 광고 및 판매",
+        "음란물/불건전한 대화 및 만남",
+        "게시판 주제에 부적절함",
+        "정당/정치인 비하 및 선거운동",
+        "낚시/도배"
     ]
 
     var body: some View {
