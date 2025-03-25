@@ -23,6 +23,7 @@ struct DummyBoardDetail: View {
     
     @State private var boardDetail: BoardDetailResult? = nil // 게시물 데이터 상태 변수
     @State private var isLoading: Bool = true // 데이터 로딩 상태
+    @State private var showMore = false
     
     var postId: Int // 게시물 ID를 전달받는 변수
     var memberId: Int? // 사용자 ID를 전달받는 변수
@@ -40,63 +41,30 @@ struct DummyBoardDetail: View {
                 } else {
                     VStack {
                         HStack {
-                            // 뒤로가기 버튼
                             Button(action: {
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 Image("BackButton")
                                     .frame(width: Constants.nav, height: Constants.nav)
                             }
-                            
+
                             Spacer()
-                            
+
                             Text(boardName)
                                 .font(.system(size: 20, weight: .semibold))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(Constants.Gray900)
-                            
+
                             Spacer()
-                            
+
                             Button(action: {
-                                self.showingSheet = true
+                                showMore = true
                             }) {
                                 Image("MoreButton")
                                     .frame(width: Constants.nav, height: Constants.nav)
                             }
-                            .actionSheet(isPresented: $showingSheet) {
-                                if isAuthor {
-                                    return ActionSheet(
-                                        title: Text(boardName),
-                                        buttons: [
-                                            .default(Text("수정하기")),
-                                            .destructive(Text("삭제하기"), action: {
-                                                self.showAlert = true
-                                            }),
-                                            .cancel(Text("취소"))
-                                        ]
-                                    )
-                                } else {
-                                    return ActionSheet(
-                                        title: Text(boardName),
-                                        buttons: [
-                                            .default(Text("신고하기")),
-                                            .cancel(Text("취소"))
-                                        ]
-                                    )
-                                }
-                            }
-                            .alert(isPresented: $showAlert) {
-                                Alert(
-                                    title: Text("게시물 삭제하기"),
-                                    message: Text("게시물을 삭제할까요? 삭제 후 복구되지 않습니다."),
-                                    primaryButton: .destructive(Text("삭제할게요"), action: {
-                                        deletePost() // 게시물 삭제 함수 호출
-                                    }),
-                                    secondaryButton: .cancel(Text("닫기"))
-                                )
-                            }
                         }
-                        
+
                         Divider()
                         
                         if let boardDetail = boardDetail {
@@ -189,13 +157,25 @@ struct DummyBoardDetail: View {
                         }
                     }
                 }
+
+                // ✅ 여기에 MoreButtonView 추가
+                MoreButtonView(
+                    isPresented: $showMore,
+                    onEdit: {
+                        print("수정하기 선택됨")
+                        // 예: 수정 페이지로 이동할 수 있도록 구현
+                    },
+                    onDelete: {
+                        deletePost()
+                    }, boardName: boardName
+                )
             }
         }
         .navigationBarBackButtonHidden()
         .onAppear {
             DispatchQueue.main.async {
-                loadBoardDetail(postId: postId) // 게시물 상세 정보를 로드합니다.
-                loadProfileData() // 프로필 데이터 로드
+                loadBoardDetail(postId: postId)
+                loadProfileData()
             }
         }
     }
@@ -646,44 +626,83 @@ struct BookmarkButtonView: View {
 }
 
 struct MoreButtonView: View {
+    @Binding var isPresented: Bool
+    var onEdit: () -> Void
+    var onDelete: () -> Void
+    var boardName: String
+
     var body: some View {
         ZStack {
-            Color(.black.opacity(0.2))
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                Text("질문 게시판")
-                
-                Divider()
-                
-                Text("수정하기")
-                    .font(.system(size: 17))
-                    .foregroundColor(Constants.ColorsBlue)
-                
-                Divider()
-                
-                Text("삭제하기")
-                    .font(.system(size: 17))
-                    .foregroundColor(Constants.ColorsBlue)
-                
-                VStack {
-                    Text("취소")
-                        .font(.system(size: 17, weight: .semibold))
-                        .foregroundStyle(Constants.ColorsBlue)
+            if isPresented {
+                // 반투명 배경
+                Color.black.opacity(0.2)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation {
+                            isPresented = false
+                        }
+                    }
+
+                VStack(spacing: 8) {
+                    Spacer()
                     
+                    VStack(spacing: 0) {
+                        Text(boardName)
+                            .font(.system(size: 13))
+                            .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5).opacity(0.5))
+                            .padding(.vertical, 16)
+
+                        Divider()
+
+                        Button(action: {
+                            onEdit()
+                            isPresented = false
+                        }) {
+                            Text("수정하기")
+                                .font(.system(size: 17))
+                                .foregroundColor(Constants.ColorsBlue)
+                                .frame(maxWidth: .infinity)
+                                .padding(17)
+                        }
+
+                        Divider()
+
+                        Button(action: {
+                            onDelete()
+                            isPresented = false
+                        }) {
+                            Text("삭제하기")
+                                .font(.system(size: 17))
+                                .foregroundColor(Constants.ColorsBlue)
+                                .frame(maxWidth: .infinity)
+                                .padding(17)
+                        }
+                    }
+                    .background(Color.white.opacity(0.5))
+                    .cornerRadius(14)
+                    .padding(.horizontal, 8)
+
+                    // 취소 버튼
+                    Button(action: {
+                        withAnimation {
+                            isPresented = false
+                        }
+                    }) {
+                        Text("취소")
+                            .font(.system(size: 17, weight: .semibold))
+                            .foregroundColor(Constants.ColorsBlue)
+                            .frame(maxWidth: .infinity)
+                            .padding(17)
+                            .background(Color.white)
+                            .cornerRadius(14)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 20)
                 }
-                .frame(maxWidth: .infinity)
-                .background(.white)
-                .cornerRadius(14)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 21)
+                .transition(.move(edge: .bottom))
             }
-            .frame(maxWidth: .infinity)
-            .background(.white)
-            .cornerRadius(14)
-            .padding(.horizontal, 8)
-            
         }
+        .animation(.easeInOut, value: isPresented)
     }
 }
 
@@ -692,6 +711,5 @@ struct ScrapStatusResponse: Decodable {
 }
 
 #Preview {
-//    DummyBoardDetail(boardName: "질문 게시판", postId: 3, memberId: 10)
-    MoreButtonView()
+    DummyBoardDetail(boardName: "질문 게시판", postId: 3, memberId: 10)
 }
