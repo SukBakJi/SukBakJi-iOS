@@ -34,7 +34,7 @@ struct BoardWriteViewController: View {
             return ["질문 게시판", "취업후기 게시판", "대학원생활 게시판", "연구주제 게시판"]
         case "석사":
             return ["질문 게시판", "박사지원 게시판", "취업후기 게시판", "대학원생활 게시판", "박사합격 후기", "연구주제 게시판"]
-        case "입학예정":
+        case "진학예정":
             return ["질문 게시판", "석사합격 후기", "학부연구생 게시판", "석사지원 게시판", "석박사통합지원 게시판"]
         default:
             return []
@@ -230,7 +230,7 @@ import SwiftUI
 
 struct WriteBoardDetail: View {
     
-    let boardCategory: [String] = ["박사", "석사", "입학예정"]
+    let boardCategory: [String] = ["박사", "석사", "진학예정"]
     
     @Binding var selectedCategory: String? // 선택된 카테고리
     @Binding var titleText: String // 제목 텍스트 필드의 상태

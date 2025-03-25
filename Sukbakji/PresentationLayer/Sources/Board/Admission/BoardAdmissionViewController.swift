@@ -147,7 +147,7 @@ struct BoardAdmissionViewController: View {
 }
 
 // 각 게시판에 대한 뷰
-// 입학예정 탭 질문 게시판
+// 진학예정 탭 질문 게시판
 struct AdmissionQnABoard: View {
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
