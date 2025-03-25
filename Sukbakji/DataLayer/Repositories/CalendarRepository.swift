@@ -28,6 +28,12 @@ class CalendarRepository {
         return APIService.shared.getWithTokenAndParams(of: APIResponse<UnivSearch>.self, url: url, parameters: params, accessToken: token)
     }
     
+    func fetchUnivName(token: String, univId: Int) -> Single<APIResponse<UnivName>> {
+        let url = APIConstants.calendar.path
+        let params = ["univId": univId]
+        return APIService.shared.getWithTokenAndParams(of: APIResponse<UnivName>.self, url: url, parameters: params, accessToken: token)
+    }
+    
     func fetchUnivMethod(token: String, univId: Int) -> Single<APIResponse<UnivMethod>> {
         let url = APIConstants.calendarUnivMethod.path
         let params = ["univId": univId]
@@ -39,9 +45,9 @@ class CalendarRepository {
         return APIService.shared.getWithToken(of: APIResponse<Univ>.self, url: url, accessToken: token)
     }
     
-    func fetchUnivEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
+    func fetchUnivEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<UnivPost>> {
         let url = APIConstants.calendarUniv.path
-        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
+        return APIService.shared.postWithToken(of: APIResponse<UnivPost>.self, url: url, parameters: parameters, accessToken: token)
     }
     
     func fetchUnivEdit(token: String, univId: Int, parameters: [String: Any]?) -> Single<APIResponse<String>> {
@@ -87,8 +93,9 @@ class CalendarRepository {
         return APIService.shared.patchWithToken(of: APIResponse<AlarmList>.self, url: url, parameters: parameters, accessToken: token)
     }
     
-    func fetchAlarmDelete(token: String, alarmId: Int) -> Single<APIResponse<String>> {
+    func fetchAlarmDelete(token: String, alarmId: Int) -> Single<APIResponseNoResult> {
         let url = APIConstants.calendarAlarmId(alarmId).path
-        return APIService.shared.deleteWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)
+        let params = ["alarmId": alarmId]
+        return APIService.shared.deleteWithToken(of: APIResponseNoResult.self, url: url, parameters: params, accessToken: token)
     }
 }

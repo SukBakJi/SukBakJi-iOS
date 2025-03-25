@@ -61,6 +61,7 @@ extension SetAlarmViewController {
         }
         setAlarmView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
         setAlarmView.alarmNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        setAlarmView.deleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
         setAlarmView.setButton.addTarget(self, action: #selector(set_Tapped), for: .touchUpInside)
     }
     
@@ -197,11 +198,16 @@ extension SetAlarmViewController {
     }
     
     @objc private func set_Tapped() {
-        viewModel.loadAlarmEnroll(memberId: 3, univName: setAlarmView.univTextField.text, name: setAlarmView.alarmNameTextField.text, date: setAlarmView.dateValue, time: setAlarmView.timeValue)
+        viewModel.loadAlarmEnroll(memberId: memberId, univName: setAlarmView.univTextField.text, name: setAlarmView.alarmNameTextField.text, date: setAlarmView.dateValue, time: setAlarmView.timeValue)
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc private func drop_Tapped() {
         drop.show()
+    }
+    
+    @objc private func textDelete_Tapped() {
+        setAlarmView.alarmNameTextField.text = ""
+        warningAlarmName()
     }
 }

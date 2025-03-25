@@ -15,6 +15,7 @@ final class DeleteView: UIView {
     private var alarmViewModel = AlarmViewModel()
     private let viewModel = CalendarViewModel()
     private var univDelete: UnivDelete?
+    weak var delegateViewController: UIViewController?
     
     var mainView = UIView().then {
        $0.backgroundColor = .white
@@ -71,7 +72,7 @@ final class DeleteView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.25)
+        self.backgroundColor = UIColor(white: 0, alpha: 0.2)
         
         self.addSubview(mainView)
         self.mainView.snp.makeConstraints { make in
@@ -90,7 +91,7 @@ final class DeleteView: UIView {
         self.mainView.addSubview(contentLabel)
         self.contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
             make.width.equalTo(254)
             make.height.equalTo(40)
         }
@@ -115,15 +116,16 @@ final class DeleteView: UIView {
     }
     
     @objc private func delete_Tapped() {
-        if alarmViewModel.selectAlarmItem == nil {
-            viewModel.deleteUnivCalendar(memberId: univDelete?.memberId, univId: univDelete?.univId, season: univDelete?.season, method: univDelete?.method)
-        } else {
+        if alarmViewModel.selectAlarmItem != nil {
             alarmViewModel.deleteAlarm(alarmId: alarmViewModel.selectAlarmItem?.alarmId)
+        } else {
+            viewModel.deleteUnivCalendar(memberId: univDelete?.memberId, univId: univDelete?.univId, season: univDelete?.season, method: univDelete?.method)
         }
         UIView.animate(withDuration: 0.3, animations: {
-           self.alpha = 0
+            self.alpha = 0
         }) { _ in
-           self.removeFromSuperview() // 애니메이션 후 뷰에서 제거
+            self.removeFromSuperview()
+            self.delegateViewController?.dismiss(animated: true, completion: nil)
         }
     }
 }

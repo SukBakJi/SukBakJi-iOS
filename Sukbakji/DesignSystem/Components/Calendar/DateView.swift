@@ -83,13 +83,13 @@ final class DateView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.25)
+        self.backgroundColor = UIColor(white: 0, alpha: 0.2)
         
         self.addSubview(mainView)
         self.mainView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(48)
-            make.height.equalTo(431)
+            make.height.equalTo(420)
         }
         
         self.mainView.addSubview(backButton)

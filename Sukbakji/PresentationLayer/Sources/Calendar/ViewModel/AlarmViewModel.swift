@@ -27,11 +27,9 @@ final class AlarmViewModel {
         }
         
         repository.fetchAlarmList(token: token)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.alarmItems.accept(response.result.alarmList)
-            }, onFailure: { error in
-                print("오류:", error.localizedDescription)
+            .map { $0.result.alarmList }
+            .subscribe(onSuccess: { [weak self] alarmList in
+                self?.alarmItems.accept(alarmList)
             })
             .disposed(by: disposeBag)
     }
@@ -89,8 +87,10 @@ final class AlarmViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.alarmDeleted.onNext(true)
+                NotificationCenter.default.post(name: .isAlarmDeleteComplete, object: nil)
             }, onFailure: { error in
                 self.alarmDeleted.onNext(false)
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -112,7 +112,9 @@ final class AlarmViewModel {
         repository.fetchAlarmEdit(token: token, alarmId: alarmId!, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
+                NotificationCenter.default.post(name: .isAlarmEditComplete, object: nil)
             }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

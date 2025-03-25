@@ -39,12 +39,14 @@ extension UnivCalendarViewController {
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         univView.navigationbarView.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivComplete, object: nil)
     }
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadTestData()
-//        viewModel.loadUnivList()
+//        viewModel.loadTestData()
+        viewModel.loadUnivList()
     }
     
     private func bindViewModel() {
@@ -100,6 +102,10 @@ extension UnivCalendarViewController {
         let viewController = EditUnivCalendarViewController(calendarViewModel: self.viewModel)
         let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 380, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
+    }
+    
+    @objc private func univEditingComplete() {
+        viewModel.loadUnivList()
     }
 }
 

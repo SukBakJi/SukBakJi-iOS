@@ -15,3 +15,8 @@ struct UnivSearchList : Codable, Equatable {
     let id: Int
     let name: String
 }
+
+struct UnivName : Codable, Equatable {
+    let univId: Int
+    let univName: String
+}

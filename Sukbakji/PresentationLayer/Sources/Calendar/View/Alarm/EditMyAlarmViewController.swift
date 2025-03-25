@@ -58,7 +58,10 @@ extension EditMyAlarmViewController {
             self.alarmNameViewHeightConstraint = make.height.equalTo(100).constraint
         }
         editAlarmView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
+        editAlarmView.alarmNameDeleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
         editAlarmView.alarmNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        editAlarmView.saveButton.addTarget(self, action: #selector(alarmEdit_Tapped), for: .touchUpInside)
+        editAlarmView.deleteButton.addTarget(self, action: #selector(alarmDelete_Tapped), for: .touchUpInside)
     }
     
     private func initUI() {
@@ -105,7 +108,6 @@ extension EditMyAlarmViewController {
 
         drop.selectionAction = { [weak self] (index, item) in
             self?.editAlarmView.univTextField.text = "\(item)"
-            self?.updateButtonColor()
         }
     }
     
@@ -115,34 +117,20 @@ extension EditMyAlarmViewController {
         let alarmName = selectMyAlarmItem.alarmName
         let alarmDate = selectMyAlarmItem.alarmDate
         let alarmTime = selectMyAlarmItem.alarmTime
+        let formattedDate = DateUtils.formatDateString(alarmDate)
         
+        editAlarmView.dateValue = selectMyAlarmItem.alarmDate
         editAlarmView.univTextField.text = alarmUnivName
         editAlarmView.alarmNameTextField.text = alarmName
-        editAlarmView.alarmDateTextField.text = alarmDate
-        editAlarmView.dateLabel.text = alarmDate
+        editAlarmView.alarmDateTextField.text = formattedDate
+        editAlarmView.dateLabel.text = formattedDate
         editAlarmView.timeButton.setTitle("\(alarmTime)", for: .normal)
     }
 }
     
 extension EditMyAlarmViewController {
     
-    private func bindViewModel() {
-        editAlarmView.saveButton.rx.tap
-            .bind { [weak self] in self?.alarmEdit_Tapped() }
-            .disposed(by: disposeBag)
-        editAlarmView.deleteButton.rx.tap
-            .bind { [weak self] in self?.alarmDelete_Tapped() }
-            .disposed(by: disposeBag)
-    }
-    
-    private func alarmEdit_Tapped() {
-        guard let selectItem = self.viewModel.selectAlarmItem else { return }
-        viewModel.editAlarm(memberId: memberId, alarmId: selectItem.alarmId, univName: editAlarmView.univTextField.text, name: editAlarmView.alarmNameTextField.text, date: editAlarmView.dateValue, time: editAlarmView.timeValue, onoff: selectItem.onoff)
-        self.presentingViewController?.dismiss(animated: true)
-    }
-    
     @objc func textFieldEdited(_ textField: UITextField) {
-        updateButtonColor()
         if editAlarmView.alarmNameTextField.text?.isEmpty == true {
             warningAlarmName()
         } else {
@@ -178,22 +166,15 @@ extension EditMyAlarmViewController {
         }
     }
     
-    private func updateButtonColor() {
-        let isFormValid = !(editAlarmView.univTextField.text?.isEmpty ?? true && editAlarmView.alarmNameTextField.text?.isEmpty ?? true)
-        editAlarmView.saveButton.isEnabled = isFormValid
-        editAlarmView.saveButton.setBackgroundColor(isFormValid ? .orange700 : .gray200, for: .normal)
-        editAlarmView.saveButton.setTitleColor(isFormValid ? .white : .gray500, for: .normal)
+    @objc private func alarmEdit_Tapped() {
+        guard let selectItem = self.viewModel.selectAlarmItem else { return }
+        viewModel.editAlarm(memberId: memberId, alarmId: selectItem.alarmId, univName: editAlarmView.univTextField.text, name: editAlarmView.alarmNameTextField.text, date: editAlarmView.dateValue, time: editAlarmView.timeValue, onoff: selectItem.onoff)
+        self.presentingViewController?.dismiss(animated: true)
     }
     
-    private func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        DispatchQueue.main.async {
-            self.updateButtonColor()
-        }
-        return true
-    }
-    
-    @objc func alarmDelete_Tapped() {
+    @objc private func alarmDelete_Tapped() {
         let deleteView = DeleteView(title: "알람 삭제하기", content: "해당 알람을 삭제할까요? 삭제 후 복구되지 않습\n니다.", alarmViewModel: viewModel, univDelete: UnivDelete(memberId: 0, univId: 0, season: "", method: ""))
+        deleteView.delegateViewController = self
         
         self.view.addSubview(deleteView)
         deleteView.alpha = 0
@@ -208,5 +189,10 @@ extension EditMyAlarmViewController {
     
     @objc private func drop_Tapped() {
         drop.show()
+    }
+    
+    @objc private func textDelete_Tapped() {
+        editAlarmView.alarmNameTextField.text = ""
+        warningAlarmName()
     }
 }

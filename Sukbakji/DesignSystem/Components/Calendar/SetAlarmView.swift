@@ -312,7 +312,6 @@ class SetAlarmView: UIView, dateProtocol {
             $0.trailing.equalToSuperview().inset(24)
             $0.height.width.equalTo(36)
         }
-        deleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
         
         warningImageView2.snp.makeConstraints {
             $0.top.equalTo(alarmNameTextField.snp.bottom).offset(6)
@@ -381,7 +380,7 @@ class SetAlarmView: UIView, dateProtocol {
             $0.centerY.equalTo(dateLabel)
             $0.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(35)
-            $0.width.equalTo(73)
+            $0.width.equalTo(75)
         }
         timeButton.addTarget(self, action: #selector(time_Tapped), for: .touchUpInside)
         
@@ -400,7 +399,7 @@ class SetAlarmView: UIView, dateProtocol {
         alarmPickerView.dataSource = self
         
         setButton.snp.makeConstraints {
-            $0.top.equalTo(alarmTimeView.snp.bottom).offset(60)
+            $0.top.equalTo(alarmTimeView.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(48)
         }
@@ -426,6 +425,10 @@ class SetAlarmView: UIView, dateProtocol {
         
         alarmDateTextField.text = formattedDate
         dateLabel.text = formattedDate
+        
+        let replacedString = formattedDate.replacingOccurrences(of: " ", with: "")
+        let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "/", options: .regularExpression)
+        dateValue = reReplacedString.replacingOccurrences(of: "일", with: "")
     }
     
     func dateSend(data: String) {
@@ -457,10 +460,6 @@ class SetAlarmView: UIView, dateProtocol {
         UIView.animate(withDuration: 0.3) {
             self.pickerView.isHidden = false // 레이아웃 변경 애니메이션 적용
         }
-    }
-    
-    @objc private func textDelete_Tapped() {
-        alarmNameTextField.text = ""
     }
 }
 
