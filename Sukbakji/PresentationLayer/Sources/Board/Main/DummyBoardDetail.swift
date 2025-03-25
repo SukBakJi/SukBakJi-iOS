@@ -158,16 +158,20 @@ struct DummyBoardDetail: View {
                     }
                 }
 
-                // ✅ 여기에 MoreButtonView 추가
                 MoreButtonView(
                     isPresented: $showMore,
                     onEdit: {
-                        print("수정하기 선택됨")
-                        // 예: 수정 페이지로 이동할 수 있도록 구현
+                        print("수정하기 눌림")
                     },
                     onDelete: {
                         deletePost()
-                    }, boardName: boardName
+                    },
+                    onReport: {
+                        print("신고하기 눌림")
+                        // 신고 기능 구현
+                    },
+                    boardName: boardName,
+                    isAuthor: isAuthor // ← 작성자인지 여부 전달
                 )
             }
         }
@@ -495,7 +499,7 @@ struct WriteComment: View {
                             .overlay(
                                 Rectangle()
                                     .frame(height: 2)
-                                    .foregroundColor(commentText.isEmpty ? Color(Constants.Gray300) : Color.blue)
+                                    .foregroundColor(commentText.isEmpty ? Color(Constants.Gray300) : Constants.Orange700)
                                     .padding(.top, 44)
                                     .padding(.horizontal, 8),
                                 alignment: .bottom
@@ -521,7 +525,6 @@ struct WriteComment: View {
         .padding(.vertical, 8)
         .frame(alignment: .topLeading)
         .background(Constants.White)
-        .shadow(color: .black.opacity(0.15), radius: 3.5, x: 0, y: 0)
     }
 }
 
@@ -629,12 +632,13 @@ struct MoreButtonView: View {
     @Binding var isPresented: Bool
     var onEdit: () -> Void
     var onDelete: () -> Void
+    var onReport: () -> Void
     var boardName: String
+    var isAuthor: Bool
 
     var body: some View {
         ZStack {
             if isPresented {
-                // 반투명 배경
                 Color.black.opacity(0.2)
                     .ignoresSafeArea()
                     .onTapGesture {
@@ -645,40 +649,56 @@ struct MoreButtonView: View {
 
                 VStack(spacing: 8) {
                     Spacer()
-                    
+
                     VStack(spacing: 0) {
                         Text(boardName)
                             .font(.system(size: 13))
-                            .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5).opacity(0.5))
+                            .foregroundColor(Color.gray.opacity(0.5))
                             .padding(.vertical, 16)
 
                         Divider()
 
-                        Button(action: {
-                            onEdit()
-                            isPresented = false
-                        }) {
-                            Text("수정하기")
-                                .font(.system(size: 17))
-                                .foregroundColor(Constants.ColorsBlue)
-                                .frame(maxWidth: .infinity)
-                                .padding(17)
-                        }
+                        // ✅ 작성자인 경우: 수정/삭제
+                        if isAuthor {
+                            Button(action: {
+                                onEdit()
+                                isPresented = false
+                            }) {
+                                Text("수정하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(Constants.ColorsBlue)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
 
-                        Divider()
+                            Divider()
 
-                        Button(action: {
-                            onDelete()
-                            isPresented = false
-                        }) {
-                            Text("삭제하기")
-                                .font(.system(size: 17))
-                                .foregroundColor(Constants.ColorsBlue)
-                                .frame(maxWidth: .infinity)
-                                .padding(17)
+                            Button(action: {
+                                onDelete()
+                                isPresented = false
+                            }) {
+                                Text("삭제하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(Constants.ColorsBlue)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
+
+                        } else {
+                            // ✅ 작성자가 아닌 경우: 신고하기
+                            Button(action: {
+                                onReport()
+                                isPresented = false
+                            }) {
+                                Text("신고하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
                         }
                     }
-                    .background(Color.white.opacity(0.5))
+                    .background(Color.white.opacity(0.7))
                     .cornerRadius(14)
                     .padding(.horizontal, 8)
 
