@@ -43,6 +43,8 @@ extension MyAlarmViewController {
         myAlarmView.addAlarmButton.addTarget(self, action: #selector(addAlarm_Tapped), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(alarmSettingComplete), name: .isAlarmComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(alarmEditComplete), name: .isAlarmEditComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(alarmEditComplete), name: .isAlarmDeleteComplete, object: nil)
     }
     
     private func setAPI() {
@@ -96,6 +98,10 @@ extension MyAlarmViewController {
                 }
             }
         }
+    }
+    
+    @objc private func alarmEditComplete() {
+        viewModel.fetchMyAlarms()
     }
 }
 

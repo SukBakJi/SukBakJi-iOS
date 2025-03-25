@@ -78,26 +78,29 @@ final class HomeReactor: Reactor {
         var newState = state
         switch mutation {
         case .setUserName(let profile):
+            print(profile)
             newState.nameLabel = (profile.name) + "님, 반가워요!"
         case .setViewSchedule(let upComing):
-            if let upComing = upComing, let firstSchedule = upComing.scheduleList.first {
+            print(upComing)
+            if upComing?.scheduleList.isEmpty == true {
+                newState.upComingDate = "다가오는 일정이 없습니다"
+                newState.upComingTitle = ""
+            } else if let upComing = upComing, let firstSchedule = upComing.scheduleList.first {
                 let dday = firstSchedule.dday
                 let content = firstSchedule.content
                 let univId = firstSchedule.univId
                 
                 newState.upComingDate = dday < 0 ? "D+\(-dday)" : "D-\(dday)"
                 switch univId {
-                case 1: newState.upComingTitle = "서울대학교 \(content)"
-                case 2: newState.upComingTitle = "연세대학교 \(content)"
-                case 3: newState.upComingTitle = "고려대학교 \(content)"
-                case 4: newState.upComingTitle = "카이스트 \(content)"
-                default: newState.upComingTitle = content
+                case 14: newState.upComingTitle = "서울대학교 \(content)"
+                case 22: newState.upComingTitle = "연세대학교 \(content)"
+                case 5: newState.upComingTitle = "고려대학교 일반대학원 \(content)"
+                case 16: newState.upComingTitle = "성균관대학교 \(content)"
+                default: newState.upComingTitle = "한양대학교 \(content)"
                 }
-            } else if upComing?.scheduleList.isEmpty == true {
-                newState.upComingDate = ""
-                newState.upComingTitle = "다가오는 일정이 없습니다"
             }
         case .setMemberID(let id):
+            print(id)
             newState.memberID = id
             UserDefaults.standard.set(id, forKey: "memberID")
         case .setError(let message):

@@ -125,6 +125,7 @@ class CalendarViewModel {
         repository.fetchUnivEdit(token: token, univId: univId!, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
+                NotificationCenter.default.post(name: .isUnivComplete, object: nil)
             }, onFailure: { error in
             })
             .disposed(by: disposeBag)

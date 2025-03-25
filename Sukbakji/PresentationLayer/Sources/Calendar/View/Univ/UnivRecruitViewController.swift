@@ -43,6 +43,7 @@ class UnivRecruitViewController: UIViewController {
         initUI()
         setDropdown()
         setAPI()
+        print(memberId)
     }
     
     override func viewWillAppear(_ animated: Bool) {

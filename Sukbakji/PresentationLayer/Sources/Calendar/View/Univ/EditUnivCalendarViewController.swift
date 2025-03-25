@@ -104,18 +104,20 @@ extension EditUnivCalendarViewController {
     
     private func setUnivCalendarData() {
         guard let selectUnivCalendarItem = self.viewModel.selectUnivList else { return }
-        let univName = selectUnivCalendarItem.univId
+        let univId = selectUnivCalendarItem.univId
         let season = selectUnivCalendarItem.season
         let method = selectUnivCalendarItem.method
         
-        if univName == 1 {
+        if univId == 14 {
             editUnivView.univLabel.text = "서울대학교"
-        } else if univName == 2 {
+        } else if univId == 22 {
             editUnivView.univLabel.text = "연세대학교"
-        } else if univName == 3 {
-            editUnivView.univLabel.text = "고려대학교"
+        } else if univId == 5 {
+            editUnivView.univLabel.text = "고려대학교 일반대학원"
+        }else if univId == 16 {
+            editUnivView.univLabel.text = "성균관대학교"
         } else {
-            editUnivView.univLabel.text = "카이스트"
+            editUnivView.univLabel.text = "한양대학교"
         }
         if season == editUnivView.recruitFirstLabel.text {
             editUnivView.recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)

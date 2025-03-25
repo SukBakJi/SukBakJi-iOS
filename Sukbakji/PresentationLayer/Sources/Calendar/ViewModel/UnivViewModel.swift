@@ -16,6 +16,8 @@ final class UnivViewModel {
     let univSearchList = BehaviorRelay<[UnivSearchList]>(value: [])
     let selectUnivItem = BehaviorRelay<UnivSearchList?>(value: nil)
     
+    let univNameItem = BehaviorRelay<UnivName?>(value: nil)
+    
     let recruitTypes = BehaviorRelay<[String]>(value: [])
     let selectedRecruitType = BehaviorRelay<String?>(value: nil)
     
@@ -36,6 +38,19 @@ final class UnivViewModel {
     
     func selectUniversity(_ univ: UnivSearchList?) {
         selectUnivItem.accept(univ)
+    }
+    
+    func loadUnivName(univId: Int) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        repository.fetchUnivName(token: token, univId: univId)
+            .map { $0.result }
+            .subscribe(onSuccess: { [weak self] univName in
+                self?.univNameItem.accept(univName)
+            })
+            .disposed(by: disposeBag)
     }
     
     func loadUnivMethod(univId: Int) {
@@ -67,6 +82,7 @@ final class UnivViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.univEnrolled.onNext(true)
+                print("학교 등록이 완료되었습니다.")
             }, onFailure: { error in
                 self.univEnrolled.onNext(false)
             })
