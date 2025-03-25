@@ -15,7 +15,7 @@ struct DummyBoardDetail: View {
     @State private var showValidationError: Bool = false
     @State var showingSheet = false
     @State var showAlert = false
-    @State var isAuthor = true // 작성자인지 여부를 나타내는 상태 변수
+    @State var isAuthor = false // 작성자인지 여부를 나타내는 상태 변수
     var boardName: String // 게시판 이름을 전달받는 변수
     @State private var showDeletionMessage = false
     @State private var showCommentDeletionMessage = false
@@ -166,9 +166,9 @@ struct DummyBoardDetail: View {
                     onDelete: {
                         deletePost()
                     },
-                    onReport: {
-                        print("신고하기 눌림")
-                        // 신고 기능 구현
+                    onReport: { reason in
+                        print("신고 사유 선택됨: \(reason)")
+                        // 예: 서버에 신고 요청 보내기
                     },
                     boardName: boardName,
                     isAuthor: isAuthor // ← 작성자인지 여부 전달
@@ -632,9 +632,17 @@ struct MoreButtonView: View {
     @Binding var isPresented: Bool
     var onEdit: () -> Void
     var onDelete: () -> Void
-    var onReport: () -> Void
+    var onReport: (String) -> Void // 신고 사유도 전달받도록 수정
     var boardName: String
     var isAuthor: Bool
+
+    @State private var isReporting = false
+
+    let reportReasons = [
+        "욕설/비하",
+        "유출/사칭/사기",
+        "상업적 광고 및 판매"
+    ]
 
     var body: some View {
         ZStack {
@@ -644,6 +652,7 @@ struct MoreButtonView: View {
                     .onTapGesture {
                         withAnimation {
                             isPresented = false
+                            isReporting = false
                         }
                     }
 
@@ -651,15 +660,16 @@ struct MoreButtonView: View {
                     Spacer()
 
                     VStack(spacing: 0) {
-                        Text(boardName)
+                        // ✅ 타이틀: 일반모드 → 게시판 이름 / 신고모드 → 신고하기
+                        Text(isReporting ? "신고하기" : boardName)
                             .font(.system(size: 13))
                             .foregroundColor(Color.gray.opacity(0.5))
                             .padding(.vertical, 16)
 
                         Divider()
 
-                        // ✅ 작성자인 경우: 수정/삭제
                         if isAuthor {
+                            // ✅ 작성자인 경우
                             Button(action: {
                                 onEdit()
                                 isPresented = false
@@ -684,11 +694,31 @@ struct MoreButtonView: View {
                                     .padding(17)
                             }
 
+                        } else if isReporting {
+                            // ✅ 신고 사유 선택 화면
+                            ForEach(reportReasons, id: \.self) { reason in
+                                Button(action: {
+                                    onReport(reason)
+                                    isPresented = false
+                                    isReporting = false
+                                }) {
+                                    Text(reason)
+                                        .font(.system(size: 17))
+                                        .foregroundColor(Constants.ColorsBlue)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(17)
+                                }
+
+                                if reason != reportReasons.last {
+                                    Divider()
+                                }
+                            }
                         } else {
-                            // ✅ 작성자가 아닌 경우: 신고하기
+                            // ✅ 신고하기 버튼
                             Button(action: {
-                                onReport()
-                                isPresented = false
+                                withAnimation {
+                                    isReporting = true
+                                }
                             }) {
                                 Text("신고하기")
                                     .font(.system(size: 17))
@@ -705,7 +735,11 @@ struct MoreButtonView: View {
                     // 취소 버튼
                     Button(action: {
                         withAnimation {
-                            isPresented = false
+                            if isReporting {
+                                isReporting = false
+                            } else {
+                                isPresented = false
+                            }
                         }
                     }) {
                         Text("취소")

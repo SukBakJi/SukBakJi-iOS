@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BoardViewController: View {
     @State private var selectedTab: String = "메인" // 기본 선택 탭
-    private let tabs = ["메인", "박사", "석사", "입학 예정", "자유"]
+    private let tabs = ["메인", "박사", "석사", "진학 예정", "자유"]
     
     var body: some View {
         NavigationView {
@@ -45,7 +45,7 @@ struct BoardViewController: View {
                     MainView().tag("메인")
                     DoctoralView().tag("박사")
                     MasterView().tag("석사")
-                    AdmissionView().tag("입학 예정")
+                    AdmissionView().tag("진학 예정")
                     FreeView().tag("자유")
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))

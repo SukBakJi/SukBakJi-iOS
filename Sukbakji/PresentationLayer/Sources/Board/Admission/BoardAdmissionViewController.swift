@@ -118,7 +118,7 @@ struct BoardAdmissionViewController: View {
         let url = APIConstants.posts.path + "/list"
         
         let parameters: [String: Any] = [
-            "menu": "입학예정",
+            "menu": "진학예정",
             "boardName": boardName
         ]
         
