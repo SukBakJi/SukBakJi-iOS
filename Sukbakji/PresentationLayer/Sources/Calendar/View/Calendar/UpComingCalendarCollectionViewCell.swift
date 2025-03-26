@@ -17,7 +17,7 @@ class UpComingCalendarCollectionViewCell: UICollectionViewCell {
         $0.image = UIImage(named: "Sukbakji_Layer")
     }
     private let dDayLabel = UILabel().then {
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = .orange700
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
     private let univLabel = UILabel().then {

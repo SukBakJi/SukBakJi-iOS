@@ -72,6 +72,7 @@ class CalendarViewModel {
             .map { $0.result.alarmList }
             .subscribe(onSuccess: { [weak self] alarmDates in
                 self?.alarmDates.accept(alarmDates)
+                print(self?.alarmDates.value)
             })
             .disposed(by: disposeBag)
     }

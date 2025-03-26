@@ -30,7 +30,7 @@ class MentoringViewController: UIViewController {
         $0.setTitle("멘토링 신청하러 가기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.setTitleColor(.white, for: .normal)
-        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for:.normal)
+        $0.setBackgroundColor(.orange700, for:.normal)
         $0.layer.cornerRadius = 8
     }
     private let mentoringLabel = UILabel().then {

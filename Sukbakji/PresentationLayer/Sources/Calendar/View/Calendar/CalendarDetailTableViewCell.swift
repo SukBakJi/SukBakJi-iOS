@@ -21,7 +21,7 @@ class CalendarDetailTableViewCell: UITableViewCell {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
     }
     private let contentLabel = UILabel().then {
-        $0.textColor = UIColor(named: "Coquelicot")
+        $0.textColor = .orange700
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
     }
     

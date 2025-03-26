@@ -70,7 +70,7 @@ class ChattingTabViewController: TabmanViewController {
         // 버튼 글씨 커스텀
         bar.buttons.customize { (button) in
             button.tintColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1)
-            button.selectedTintColor = UIColor(named: "Coquelicot")
+            button.selectedTintColor = .orange700
             button.font = UIFont(name: "Pretendard-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
             button.selectedFont = UIFont(name: "Pretendard-SemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
         }
@@ -79,7 +79,7 @@ class ChattingTabViewController: TabmanViewController {
         
         // 밑줄 쳐지는 부분
         bar.indicator.weight = .custom(value: 2)
-        bar.indicator.tintColor = UIColor(named: "Coquelicot")
+        bar.indicator.tintColor = .orange700
         addBar(bar, dataSource: self, at: .custom(view: tabView, layout: nil))
     }
 }

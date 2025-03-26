@@ -31,14 +31,14 @@ class CalendarViewController: UIViewController {
         
         setUI()
         bindCollectionView()
-//        bindViewModel()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
 
-        //        callAPI()
+        callAPI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -122,7 +122,7 @@ extension CalendarViewController {
     
     private func setAPI() {
         viewModel.loadUnivList()
-        viewModel.loadUpComingSchedule()
+//        viewModel.loadUpComingSchedule()
         viewModel.loadAlarmList()
     }
     
@@ -189,7 +189,7 @@ extension CalendarViewController {
                 cell.updateDay(day: day)
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
+                dateFormatter.dateFormat = "yyyy/MM/dd"
                 
                 if let dayInt = Int(day), dayInt > 0 {
                     var components = self.calendarView.calendar.dateComponents([.year, .month], from: self.calendarView.calendarDate)

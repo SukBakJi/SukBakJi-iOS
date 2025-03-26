@@ -123,7 +123,7 @@ class CalendarView: UIView {
         $0.setImage(UIImage(named: "Sukbakji_Alarm"), for: .normal)
     }
     let activityIndicator = UIActivityIndicatorView(style: .medium).then {
-        $0.color = UIColor(named: "Coquelicot")
+        $0.color = .orange700
     }
     let alarmCompleteImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_AlarmComplete")
