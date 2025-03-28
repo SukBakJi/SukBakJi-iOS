@@ -40,12 +40,12 @@ extension UnivCalendarViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         univView.navigationbarView.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivDeleteComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivEditComplete, object: nil)
     }
     
     private func setAPI() {
         bindViewModel()
-//        viewModel.loadTestData()
         viewModel.loadUnivList()
     }
     

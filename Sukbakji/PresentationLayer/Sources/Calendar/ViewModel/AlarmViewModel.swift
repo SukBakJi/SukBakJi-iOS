@@ -21,7 +21,7 @@ final class AlarmViewModel {
     let alarmEnrolled = PublishSubject<Bool>()
     let alarmDeleted = PublishSubject<Bool>()
     
-    func fetchMyAlarms() {
+    func loadMyAlarms() {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
@@ -52,7 +52,7 @@ final class AlarmViewModel {
             .disposed(by: disposeBag)
     }
     
-    func loadAlarmEnroll(memberId: Int?, univName: String?, name: String?, date: String?, time: String?) {
+    func enrollAlarm(memberId: Int?, univName: String?, name: String?, date: String?, time: String?) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
@@ -78,23 +78,6 @@ final class AlarmViewModel {
             .disposed(by: disposeBag)
     }
     
-    func deleteAlarm(alarmId: Int?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-
-        repository.fetchAlarmDelete(token: token, alarmId: alarmId!)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.alarmDeleted.onNext(true)
-                NotificationCenter.default.post(name: .isAlarmDeleteComplete, object: nil)
-            }, onFailure: { error in
-                self.alarmDeleted.onNext(false)
-                print("오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
-    }
-    
     func editAlarm(memberId: Int?, alarmId: Int?, univName: String?, name: String?, date: String?, time: String?, onoff: Int?) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
@@ -114,6 +97,23 @@ final class AlarmViewModel {
             .subscribe(onSuccess: { response in
                 NotificationCenter.default.post(name: .isAlarmEditComplete, object: nil)
             }, onFailure: { error in
+                print("오류:", error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func deleteAlarm(alarmId: Int?) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+
+        repository.fetchAlarmDelete(token: token, alarmId: alarmId!)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.alarmDeleted.onNext(true)
+                NotificationCenter.default.post(name: .isAlarmDeleteComplete, object: nil)
+            }, onFailure: { error in
+                self.alarmDeleted.onNext(false)
                 print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)

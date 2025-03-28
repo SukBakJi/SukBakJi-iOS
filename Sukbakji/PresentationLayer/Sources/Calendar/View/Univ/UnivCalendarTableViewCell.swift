@@ -57,12 +57,14 @@ class UnivCalendarTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setUI()
     }
     
     required init?(coder: NSCoder) {
        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        setUI()
     }
     
     override func prepareForReuse() {
@@ -151,14 +153,18 @@ class UnivCalendarTableViewCell: UITableViewCell {
     }
     
     func prepare(univList: UnivList) {
-        if univList.univId == 1 {
+        if univList.univId == 14 {
             univLabel.text = "서울대학교"
-        } else if univList.univId == 2 {
+        } else if univList.univId == 22 {
             univLabel.text = "연세대학교"
-        } else if univList.univId == 3 {
-            univLabel.text = "고려대학교"
-        } else {
-            univLabel.text = "카이스트"
+        } else if univList.univId == 5 {
+            univLabel.text = "고려대학교 일반대학원"
+        } else if univList.univId == 28 {
+            univLabel.text = "한양대학교"
+        } else if univList.univId == 16 {
+            univLabel.text = "성균관대학교"
+        } else if univList.univId == 8 {
+            univLabel.text = "광운대학교 일반대학원"
         }
         recruitLabel.text = univList.season
         recruitTypeLabel.text = univList.method

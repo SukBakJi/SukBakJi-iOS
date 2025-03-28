@@ -30,7 +30,7 @@ class MessageViewController: UIViewController {
         $0.setTitle("게시판 바로가기", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.setTitleColor(.white, for: .normal)
-        $0.setBackgroundColor(UIColor(named: "Coquelicot")!, for:.normal)
+        $0.setBackgroundColor(.orange700, for:.normal)
         $0.layer.cornerRadius = 8
     }
     private let ChatLabel = UILabel().then {

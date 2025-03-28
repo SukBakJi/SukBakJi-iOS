@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 
 class CalendarViewModel {
+    private let calendarView = CalendarView()
     private let repository = CalendarRepository()
     private let disposeBag = DisposeBag()
     
@@ -76,6 +77,25 @@ class CalendarViewModel {
             .disposed(by: disposeBag)
     }
     
+    func editUnivCalendar(univId: Int?, season: String?, method: String?) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        let params = [
+            "season": season!,
+            "method": method!
+        ] as [String : Any]
+        
+        repository.fetchUnivEdit(token: token, univId: univId!, parameters: params)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                NotificationCenter.default.post(name: .isUnivEditComplete, object: nil)
+            }, onFailure: { error in
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func deleteUnivCalendar(memberId: Int?, univId: Int?, season: String?, method: String?) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
@@ -92,6 +112,8 @@ class CalendarViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.univDeleted.onNext(true)
+                print("대학 일정 삭제 성공!")
+                NotificationCenter.default.post(name: .isUnivDeleteComplete, object: nil)
             }, onFailure: { error in
                 self.univDeleted.onNext(false)
             })
@@ -106,26 +128,7 @@ class CalendarViewModel {
         repository.fetchUnivDeleteAll(token: token)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
-                self.loadUnivList()
-            }, onFailure: { error in
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    func editUnivCalendar(univId: Int?, season: String?, method: String?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let params = [
-            "season": season!,
-            "method": method!
-        ] as [String : Any]
-        
-        repository.fetchUnivEdit(token: token, univId: univId!, parameters: params)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                NotificationCenter.default.post(name: .isUnivComplete, object: nil)
+                NotificationCenter.default.post(name: .isUnivDeleteAllComplete, object: nil)
             }, onFailure: { error in
             })
             .disposed(by: disposeBag)

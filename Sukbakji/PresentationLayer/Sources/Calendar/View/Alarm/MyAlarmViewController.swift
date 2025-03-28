@@ -49,8 +49,7 @@ extension MyAlarmViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.fetchMyAlarms()
-//        viewModel.loadTestData()
+        viewModel.loadMyAlarms()
     }
     
     private func bindViewModel() {
@@ -86,7 +85,7 @@ extension MyAlarmViewController {
     }
     
     @objc private func alarmSettingComplete() {
-        viewModel.fetchMyAlarms()
+        viewModel.loadMyAlarms()
         UIView.animate(withDuration: 0.5, animations: {
             self.myAlarmView.alarmCompleteImageView.alpha = 1 // 나타나게
         }) { _ in
@@ -101,7 +100,7 @@ extension MyAlarmViewController {
     }
     
     @objc private func alarmEditComplete() {
-        viewModel.fetchMyAlarms()
+        viewModel.loadMyAlarms()
     }
 }
 

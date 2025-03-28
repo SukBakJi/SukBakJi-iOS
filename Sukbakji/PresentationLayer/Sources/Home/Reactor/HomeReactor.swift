@@ -59,7 +59,7 @@ final class HomeReactor: Reactor {
 
         switch action {
         case .getUserName:
-            print("🟡 getUserName Action 수신됨")
+            print("token: \(token)")
             return fetchData(APIResponse<MyProfile>.self, url: APIConstants.userMypage.path, token: token) { profile in
                     .setUserName(profile)
             }

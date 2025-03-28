@@ -198,7 +198,7 @@ extension SetAlarmViewController {
     }
     
     @objc private func set_Tapped() {
-        viewModel.loadAlarmEnroll(memberId: memberId, univName: setAlarmView.univTextField.text, name: setAlarmView.alarmNameTextField.text, date: setAlarmView.dateValue, time: setAlarmView.timeValue)
+        viewModel.enrollAlarm(memberId: memberId, univName: setAlarmView.univTextField.text, name: setAlarmView.alarmNameTextField.text, date: setAlarmView.dateValue, time: setAlarmView.timeValue)
         self.navigationController?.popViewController(animated: true)
     }
     

@@ -24,7 +24,7 @@ class CalendarView: UIView {
     }
     let contentView = UIView()
     let titleView = UIView().then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .white
     }
     let titleLabel = UILabel().then {
         $0.text = "캘린더"
@@ -119,11 +119,28 @@ class CalendarView: UIView {
         
         return cv
     }()
+    let noUnivView = UIView().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 6
+        $0.layer.masksToBounds = false
+        $0.clipsToBounds = true
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.gray100.cgColor
+    }
+    let layerImageView = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_Layer")
+    }
+    var noUnivLabel = UILabel().then {
+        $0.text = "대학교를 설정하고\n일정을 확인해 보세요!"
+        $0.numberOfLines = 2
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .gray900
+    }
     let alarmButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Alarm"), for: .normal)
     }
-    let activityIndicator = UIActivityIndicatorView(style: .medium).then {
-        $0.color = UIColor(named: "Coquelicot")
+    let activityIndicator = UIActivityIndicatorView(style: .large).then {
+        $0.color = .orange700
     }
     let alarmCompleteImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_AlarmComplete")
@@ -169,6 +186,9 @@ class CalendarView: UIView {
         contentView.addSubview(upComingView)
         upComingView.addSubview(upComingLabel)
         upComingView.addSubview(upComingImageView)
+        upComingView.addSubview(noUnivView)
+        noUnivView.addSubview(layerImageView)
+        noUnivView.addSubview(noUnivLabel)
         upComingView.addSubview(upComingCalendarCollectionView)
         
         addSubview(alarmButton)
@@ -296,6 +316,25 @@ class CalendarView: UIView {
             make.top.equalTo(upComingLabel.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(108)
+        }
+        upComingCalendarCollectionView.isHidden = true
+        
+        noUnivView.snp.makeConstraints { make in
+            make.top.equalTo(upComingLabel.snp.bottom).offset(12)
+            make.leading.equalToSuperview().offset(24)
+            make.height.equalTo(108)
+            make.width.equalTo(200)
+        }
+        
+        layerImageView.snp.makeConstraints { make in
+            make.top.bottom.leading.equalToSuperview()
+            make.width.equalTo(8)
+        }
+        
+        noUnivLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalTo(layerImageView.snp.trailing).offset(10)
+            make.height.equalTo(52)
         }
         
         alarmButton.snp.makeConstraints { make in

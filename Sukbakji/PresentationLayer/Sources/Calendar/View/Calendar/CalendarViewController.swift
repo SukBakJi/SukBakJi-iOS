@@ -31,14 +31,14 @@ class CalendarViewController: UIViewController {
         
         setUI()
         bindCollectionView()
-//        bindViewModel()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
 
-        //        callAPI()
+        callAPI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -122,7 +122,7 @@ extension CalendarViewController {
     
     private func setAPI() {
         viewModel.loadUnivList()
-        viewModel.loadUpComingSchedule()
+//        viewModel.loadUpComingSchedule()
         viewModel.loadAlarmList()
     }
     
@@ -133,13 +133,29 @@ extension CalendarViewController {
                 if !univList.isEmpty {
                     self.calendarView.univAlertView.isHidden = true
                     self.calendarView.univAlertImageView.isHidden = true
-                    self.calendarView.univSettingButton.setTitle("모든 학교  ", for: .normal)
+                    self.calendarView.univSettingButton.setTitle("⠀⠀⠀⠀⠀⠀⠀모든 학교  ", for: .normal)
+                } else {
+                    self.calendarView.univAlertView.isHidden = false
+                    self.calendarView.univAlertImageView.isHidden = false
+                    self.calendarView.univSettingButton.setTitle("대학교를 설정하세요!  ", for: .normal)
                 }
             })
             .disposed(by: disposeBag)
         
         // 일정 바인딩
         calendarView.upComingCalendarCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        viewModel.upComingSchedules
+            .subscribe(onNext: { scheduleList in
+                if scheduleList.isEmpty {
+                    self.calendarView.upComingCalendarCollectionView.isHidden = true
+                    self.calendarView.noUnivView.isHidden = false
+                } else {
+                    self.calendarView.upComingCalendarCollectionView.isHidden = false
+                    self.calendarView.noUnivView.isHidden = true
+                }
+            })
             .disposed(by: disposeBag)
         
         viewModel.upComingSchedules
@@ -189,7 +205,7 @@ extension CalendarViewController {
                 cell.updateDay(day: day)
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
+                dateFormatter.dateFormat = "yyyy/MM/dd"
                 
                 if let dayInt = Int(day), dayInt > 0 {
                     var components = self.calendarView.calendar.dateComponents([.year, .month], from: self.calendarView.calendarDate)
