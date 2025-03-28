@@ -227,7 +227,7 @@ class HomeView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        scrollView.addSubview(titleView)
+        addSubview(titleView)
         titleView.addSubview(logoImageView)
         titleView.addSubview(mypageButton)
         titleView.addSubview(notificationButton)

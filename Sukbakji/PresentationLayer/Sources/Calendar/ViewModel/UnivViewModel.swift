@@ -66,7 +66,7 @@ final class UnivViewModel {
             .disposed(by: disposeBag)
     }
     
-    func EnrollUniv(memberId: Int?, univId: Int?, season: String?, method: String?) {
+    func enrollUniv(memberId: Int?, univId: Int?, season: String?, method: String?) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
@@ -82,7 +82,6 @@ final class UnivViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.univEnrolled.onNext(true)
-                print("학교 등록이 완료되었습니다.")
             }, onFailure: { error in
                 self.univEnrolled.onNext(false)
             })

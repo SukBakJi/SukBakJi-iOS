@@ -351,13 +351,17 @@ class EditAlarmView: UIView, dateProtocol {
         
         alarmDateTextField.text = formattedDate
         dateLabel.text = formattedDate
+        
+        let replacedString = formattedDate.replacingOccurrences(of: " ", with: "")
+        let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "/", options: .regularExpression)
+        dateValue = reReplacedString.replacingOccurrences(of: "일", with: "")
     }
     
     func dateSend(data: String) {
         alarmDateTextField.text = "\(data)"
         dateLabel.text = "\(data)"
         let replacedString = data.replacingOccurrences(of: " ", with: "")
-        let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
+        let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "/", options: .regularExpression)
         dateValue = reReplacedString.replacingOccurrences(of: "일", with: "")
     }
     

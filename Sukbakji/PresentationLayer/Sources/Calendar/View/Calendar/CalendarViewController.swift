@@ -133,13 +133,29 @@ extension CalendarViewController {
                 if !univList.isEmpty {
                     self.calendarView.univAlertView.isHidden = true
                     self.calendarView.univAlertImageView.isHidden = true
-                    self.calendarView.univSettingButton.setTitle("모든 학교  ", for: .normal)
+                    self.calendarView.univSettingButton.setTitle("⠀⠀⠀⠀⠀⠀⠀모든 학교  ", for: .normal)
+                } else {
+                    self.calendarView.univAlertView.isHidden = false
+                    self.calendarView.univAlertImageView.isHidden = false
+                    self.calendarView.univSettingButton.setTitle("대학교를 설정하세요!  ", for: .normal)
                 }
             })
             .disposed(by: disposeBag)
         
         // 일정 바인딩
         calendarView.upComingCalendarCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        viewModel.upComingSchedules
+            .subscribe(onNext: { scheduleList in
+                if scheduleList.isEmpty {
+                    self.calendarView.upComingCalendarCollectionView.isHidden = true
+                    self.calendarView.noUnivView.isHidden = false
+                } else {
+                    self.calendarView.upComingCalendarCollectionView.isHidden = false
+                    self.calendarView.noUnivView.isHidden = true
+                }
+            })
             .disposed(by: disposeBag)
         
         viewModel.upComingSchedules

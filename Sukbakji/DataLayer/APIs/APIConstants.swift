@@ -8,22 +8,23 @@
 import Foundation
 
 enum APIConstants {
+    case userProfile
+    case userPasswordReset
+    case userFCMToken
+    case userEducationCertification
+    case userMypage
+    
+    
     case authSignUp
     case authRefreshToken
     case authPassword
+    case authPasswordReset
     case authOauth2Login
     case authMemberEmail
     case authLogout
     case authLogin
     case authEmail
     case authEmailCode
-    case authPasswordReset
-    
-    
-    case userProfile
-    case userPasswordReset
-    case userEducationCertification
-    case userMypage
     
     
     case smsPhone
@@ -32,6 +33,10 @@ enum APIConstants {
     
     case reportsPost
     case reportsComment
+    
+    
+    case notification
+    case notificationMulticast
     
     
     case board
@@ -86,12 +91,26 @@ extension APIConstants {
     
     var path: String {
         switch self {
+        case .userProfile:
+            return APIConstants.makeEndPoint("/user/profile")
+        case .userPasswordReset:
+            return APIConstants.makeEndPoint("/user/password-reset")
+        case .userFCMToken:
+            return APIConstants.makeEndPoint("/user/fcm-token")
+        case .userEducationCertification:
+            return APIConstants.makeEndPoint("/user/education-certification")
+        case .userMypage:
+            return APIConstants.makeEndPoint("/user/mypage")
+            
+            
         case .authSignUp:
             return APIConstants.makeEndPoint("/auth/signup")
         case .authRefreshToken:
             return APIConstants.makeEndPoint("/auth/refresh-token")
         case .authPassword:
             return APIConstants.makeEndPoint("/auth/password")
+        case .authPasswordReset:
+            return APIConstants.makeEndPoint("/auth/password-reset")
         case .authOauth2Login:
             return APIConstants.makeEndPoint("/auth/oauth2/login")
         case .authMemberEmail:
@@ -104,17 +123,7 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/auth/email")
         case .authEmailCode:
             return APIConstants.makeEndPoint("/auth/email-code")
-        case .authPasswordReset:
-            return APIConstants.makeEndPoint("/auth/password-reset")
-        
-        case .userProfile:
-            return APIConstants.makeEndPoint("/user/profile")
-        case .userPasswordReset:
-            return APIConstants.makeEndPoint("/user/password-reset")
-        case .userEducationCertification:
-            return APIConstants.makeEndPoint("/user/education-certification")
-        case .userMypage:
-            return APIConstants.makeEndPoint("/user/mypage")
+            
             
         case .smsPhone:
             return APIConstants.makeEndPoint("/sms/phone")
@@ -126,6 +135,12 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/reports/post")
         case .reportsComment:
             return APIConstants.makeEndPoint("/reports/comment")
+            
+            
+        case .notification:
+            return APIConstants.makeEndPoint("/notification")
+        case .notificationMulticast:
+            return APIConstants.makeEndPoint("/notification/multicast")
             
             
         case .board:
