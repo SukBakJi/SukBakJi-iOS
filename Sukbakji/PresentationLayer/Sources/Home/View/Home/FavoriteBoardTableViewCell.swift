@@ -14,11 +14,11 @@ class FavoriteBoardTableViewCell: UITableViewCell {
     static let identifier = String(describing: FavoriteBoardTableViewCell.self)
     
     private let labelView = UIView().then {
-        $0.backgroundColor = UIColor.blue50
+        $0.backgroundColor = .blue50
         $0.layer.cornerRadius = 4
     }
     private let labelLabel = UILabel().then {
-        $0.textColor = UIColor.blue400
+        $0.textColor = .blue400
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let contentLabel = UILabel().then {
@@ -54,15 +54,15 @@ class FavoriteBoardTableViewCell: UITableViewCell {
         self.labelView.addSubview(labelLabel)
         labelLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7)
-           make.centerY.equalToSuperview()
-           make.height.equalTo(26)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(26)
         }
         
         self.contentView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
             make.leading.equalTo(labelView.snp.trailing).offset(12)
-           make.centerY.equalToSuperview()
-           make.height.equalTo(26)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(26)
         }
         
         self.contentView.addSubview(separatorView)

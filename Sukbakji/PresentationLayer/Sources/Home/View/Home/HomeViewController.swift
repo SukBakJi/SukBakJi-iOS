@@ -33,12 +33,27 @@ class HomeViewController: UIViewController, View {
         setAPI()
         self.reactor = HomeReactor()
         bind(reactor: reactor!)
+        getFCMToken()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+    }
+}
+
+extension HomeViewController {
+    
+    private func setUI() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+        homeView.notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
+        homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
+        homeView.adCollectionView.delegate = self
+        homeView.adCollectionView.dataSource = self
+    }
+    
+    private func getFCMToken() {
         Messaging.messaging().token { token, error in
             if let error = error {
                 print("FCM 토큰 가져오기 실패: \(error.localizedDescription)")
@@ -50,26 +65,14 @@ class HomeViewController: UIViewController, View {
             }
         }
     }
-}
-
-extension HomeViewController {
-    
-    private func setUI() {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
-        homeView.adCollectionView.delegate = self
-        homeView.adCollectionView.dataSource = self
-    }
     
     private func setAPI() {
         bindFavoriteBoardViewModel()
         bindHotPostViewModel()
         bindFavoriteLabViewModel()
-//        favoriteBoardViewModel.loadFavoriteBoard()
+        favoriteBoardViewModel.loadFavoriteBoard()
 //        hotPostViewModel.loadHotPost()
 //        favoriteLabViewModel.loadFavoriteLab()
-        favoriteBoardViewModel.loadTestData()
         hotPostViewModel.loadTestData()
         favoriteLabViewModel.loadTestData()
     }
@@ -109,15 +112,13 @@ extension HomeViewController {
     private func bindFavoriteBoardViewModel() {
         self.homeView.favBoardTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
-        
-        // 데이터 변경 시 UI 자동 업데이트
+
         favoriteBoardViewModel.favoriteBoardList
             .bind(to: homeView.favBoardTableView.rx.items(cellIdentifier: FavoriteBoardTableViewCell.identifier, cellType: FavoriteBoardTableViewCell.self)) { row, board, cell in
                 cell.prepare(favoriteBoard: board)
             }
             .disposed(by: disposeBag)
-        
-        // 에러 메시지 처리
+
         favoriteBoardViewModel.errorMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { message in
@@ -130,14 +131,12 @@ extension HomeViewController {
         self.homeView.hotPostTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        // 데이터 변경 시 UI 자동 업데이트
         hotPostViewModel.hotPostList
             .bind(to: homeView.hotPostTableView.rx.items(cellIdentifier: HotPostTableViewCell.identifier, cellType: HotPostTableViewCell.self)) { row, post, cell in
                 cell.prepare(hotPost: post)
             }
             .disposed(by: disposeBag)
         
-        // 에러 메시지 처리
         hotPostViewModel.errorMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { message in
@@ -150,14 +149,12 @@ extension HomeViewController {
         self.homeView.favLabCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        // 데이터 변경 시 UI 자동 업데이트
         favoriteLabViewModel.favoriteLabList
             .bind(to: homeView.favLabCollectionView.rx.items(cellIdentifier: FavoriteLabCollectionViewCell.identifier, cellType: FavoriteLabCollectionViewCell.self)) { row, lab, cell in
                 cell.prepare(favoriteLab: lab)
             }
             .disposed(by: disposeBag)
         
-        // 에러 메시지 처리
         favoriteLabViewModel.errorMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { message in
@@ -166,8 +163,9 @@ extension HomeViewController {
             .disposed(by: disposeBag)
     }
     
-    @objc func scrollToTop() {
-        homeView.scrollView.setContentOffset(CGPoint(x: 0, y: -homeView.scrollView.contentInset.top), animated: true)
+    @objc private func notification_Tapped() {
+        let notificationViewController = NotificationViewController()
+        self.navigationController?.pushViewController(notificationViewController, animated: true)
     }
     
     @objc private func info_Tapped() {

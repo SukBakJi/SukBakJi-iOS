@@ -41,11 +41,11 @@ class UnivView: UIView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
         
-        $0.setTitleColor(.gray500, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
         $0.setTitleColor(.gray500, for: .disabled)
         $0.setTitle("선택완료", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setBackgroundColor(.gray200, for: .normal)
+        $0.setBackgroundColor(.orange700, for: .normal)
         $0.setBackgroundColor(.gray200, for: .disabled)
     }
     

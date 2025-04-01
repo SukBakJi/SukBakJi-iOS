@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class MainTabViewController: UITabBarController {
+class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
 
     let homeVC = HomeViewController()
     let calendarVC = CalendarViewController()
@@ -31,6 +31,7 @@ class MainTabViewController: UITabBarController {
     }
     
     func setup() {
+        self.delegate = self
         self.setValue(customTabBar, forKey: "tabBar")
 
         tabBar.backgroundColor = .white
@@ -147,6 +148,23 @@ class MainTabViewController: UITabBarController {
         navigationDirectory.navigationBar.scrollEdgeAppearance = appearance
         
         setViewControllers([navigationHome, navigationCalendar, navigationBoard, navigationChatting, navigationDirectory], animated: false)
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard let viewControllers = tabBarController.viewControllers,
+              let index = viewControllers.firstIndex(of: viewController) else {
+            return true
+        }
+        
+        if index == 3 {
+            let alert = UIAlertController(title: nil, message: "준비 중인 서비스입니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            tabBarController.present(alert, animated: true)
+
+            return false
+        }
+    
+        return true
     }
 }
 
