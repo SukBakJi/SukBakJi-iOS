@@ -37,7 +37,7 @@ class UnivView: UIView {
         $0.backgroundColor = .clear
         $0.register(UnivCalendarTableViewCell.self, forCellReuseIdentifier: UnivCalendarTableViewCell.identifier)
     }
-    let selectComplateButton = UIButton().then {
+    let selectCompleteButton = UIButton().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
         
@@ -72,7 +72,7 @@ class UnivView: UIView {
         
         addSubview(univCalendarTableView)
         
-        addSubview(selectComplateButton)
+        addSubview(selectCompleteButton)
     }
     
     private func setupConstraints() {
@@ -117,10 +117,11 @@ class UnivView: UIView {
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        selectComplateButton.snp.makeConstraints {
+        selectCompleteButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(100)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(48)
         }
+        selectCompleteButton.isEnabled = false
     }
 }

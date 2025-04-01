@@ -87,6 +87,22 @@ class MyProfileViewModel {
                 self.pwChanged.onNext(true)
             }, onFailure: { error in
                 self.pwChanged.onNext(false)
+                print("비밀번호 변경 실패: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func uploadFCMTokenToServer(fcmToken : String) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        FCMRepository.shared.postFCMToken(token: token, fcmToken: fcmToken)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                print("FCM 토큰 서버 업로드 성공: \(response.message)")
+            }, onFailure: { error in
+                print("FCM 토큰 서버 업로드 실패: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }

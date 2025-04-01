@@ -42,6 +42,7 @@ extension UnivCalendarViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivDeleteComplete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivEditComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivDeleteAllComplete, object: nil)
     }
     
     private func setAPI() {
@@ -53,7 +54,13 @@ extension UnivCalendarViewController {
         univView.univCalendarTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        self.viewModel.univList
+        viewModel.univList
+            .subscribe(onNext: { univList in
+                self.univView.allSelectLabel.text = "전체선택 (0/\(univList.count))"
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.univList
             .observe(on: MainScheduler.instance)
             .bind(to: univView.univCalendarTableView.rx.items(cellIdentifier: UnivCalendarTableViewCell.identifier, cellType: UnivCalendarTableViewCell.self)) { index, item, cell in
                 cell.prepare(univList: item)
@@ -64,6 +71,7 @@ extension UnivCalendarViewController {
                         let imageName = isSelected ? "Sukbakji_Check2" : "Sukbakji_Check"
                         cell.selectButton.setImage(UIImage(named: imageName), for: .normal)
                         self.univView.allSelectButton.setImage(UIImage(named: imageName), for: .normal)
+                        self.univView.selectCompleteButton.isEnabled = isSelected
                     }
                     .disposed(by: cell.disposeBag)
             }
@@ -72,6 +80,25 @@ extension UnivCalendarViewController {
         univView.allSelectButton.rx.tap
             .bind { [weak self] in
                 self?.viewModel.toggleSelectState()
+            }
+            .disposed(by: disposeBag)
+        
+        univView.selectCompleteButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else { return }
+                if self.viewModel.selectedUnivAll.value {
+                    let deleteView = AllDeleteView(univIds: [])
+                    
+                    self.view.addSubview(deleteView)
+                    deleteView.alpha = 0
+                    deleteView.snp.makeConstraints { make in
+                        make.edges.equalToSuperview()
+                    }
+                    
+                    UIView.animate(withDuration: 0.3) {
+                        deleteView.alpha = 1
+                    }
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -83,7 +110,7 @@ extension UnivCalendarViewController {
         let season = univCalendarItem.season
         let method = univCalendarItem.method
         
-        let deleteView = DeleteView(title: "대학 일정 삭제하기", content: "선택한 대학 일정을 삭제할까요? 삭제 후 복구되지 않\n습니다.", alarmViewModel: AlarmViewModel(), univDelete: UnivDelete(memberId: memberId, univId: univId, season: season, method: method))
+        let deleteView = DeleteView(title: "대학 일정 삭제하기", content: "선택한 대학 일정을 삭제할까요? 삭제 후 복구되\n지 않습니다.", alarmViewModel: AlarmViewModel(), univDelete: UnivDelete(memberId: memberId, univId: univId, season: season, method: method))
         
         self.view.addSubview(deleteView)
         deleteView.alpha = 0
@@ -106,6 +133,8 @@ extension UnivCalendarViewController {
     
     @objc private func univEditingComplete() {
         viewModel.loadUnivList()
+        univView.allSelectButton.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
+        viewModel.selectedUnivAll.accept(false)
     }
 }
 

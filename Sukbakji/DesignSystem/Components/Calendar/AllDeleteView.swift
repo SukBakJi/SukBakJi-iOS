@@ -12,6 +12,7 @@ import RxSwift
 
 final class AllDeleteView: UIView {
     
+    private let viewModel = CalendarViewModel()
     var univIds: [Int] = []
     
     var mainView = UIView().then {
@@ -87,7 +88,7 @@ final class AllDeleteView: UIView {
         self.mainView.addSubview(contentLabel)
         self.contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
             make.width.equalTo(254)
             make.height.equalTo(40)
         }
@@ -112,47 +113,11 @@ final class AllDeleteView: UIView {
     }
     
     @objc private func delete_Tapped() {
-        selectDeleteUnivAPI()
+        viewModel.deleteUnivCalendarAll()
         UIView.animate(withDuration: 0.3, animations: {
            self.alpha = 0
         }) { _ in
            self.removeFromSuperview() // 애니메이션 후 뷰에서 제거
         }
-    }
-    
-    private func selectDeleteUnivAPI() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let url = APIConstants.calendarUnivSelected.path
-        
-        let params = [
-            "univIds": univIds
-        ] as [String : [Any]]
-        
-        APIService.shared.deleteWithToken(of: APIResponse<UnivDeleteResult>.self, url: url, parameters: params, accessToken: retrievedToken)
-            .subscribe(onSuccess: { user in
-                print("✅ 사용자 등록 성공:", user)
-            }, onFailure: { error in
-                print("❌ 오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func allDeleteUnivAPI() {
-        guard let retrievedToken = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let url = APIConstants.calendarUnivAll.path
-        
-        APIService.shared.deleteWithToken(of: APIResponse<UnivDeleteResult>.self, url: url, parameters: nil, accessToken: retrievedToken)
-            .subscribe(onSuccess: { user in
-                print("✅ 사용자 등록 성공:", user)
-            }, onFailure: { error in
-                print("❌ 오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
     }
 }

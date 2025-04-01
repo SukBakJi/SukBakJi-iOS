@@ -196,6 +196,8 @@
 		C77B49722D7B66D600005ABE /* CommonTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77B496B2D7B66D600005ABE /* CommonTextFieldView.swift */; };
 		C77B49732D7B66D600005ABE /* SocialAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77B496E2D7B66D600005ABE /* SocialAuthButton.swift */; };
 		C77B49752D7B66F900005ABE /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77B49742D7B66F900005ABE /* UIStackView+.swift */; };
+		C77EFB392D9B8645000C2841 /* FCMTokenManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77EFB382D9B8645000C2841 /* FCMTokenManager+.swift */; };
+		C77EFB3B2D9B8A1E000C2841 /* FCMRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77EFB3A2D9B8A1E000C2841 /* FCMRepository.swift */; };
 		C780C5082D4143D800DC2031 /* Notification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C780C5072D4143D800DC2031 /* Notification+.swift */; };
 		C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78611C92D014B70002B67B4 /* PWAlertView.swift */; };
 		C7875A2F2D3609CF00D6FCF7 /* SukbakjiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */; };
@@ -449,6 +451,8 @@
 		C77B496D2D7B66D600005ABE /* smallTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smallTextButton.swift; sourceTree = "<group>"; };
 		C77B496E2D7B66D600005ABE /* SocialAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthButton.swift; sourceTree = "<group>"; };
 		C77B49742D7B66F900005ABE /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		C77EFB382D9B8645000C2841 /* FCMTokenManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FCMTokenManager+.swift"; sourceTree = "<group>"; };
+		C77EFB3A2D9B8A1E000C2841 /* FCMRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRepository.swift; sourceTree = "<group>"; };
 		C780C5072D4143D800DC2031 /* Notification+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+.swift"; sourceTree = "<group>"; };
 		C78611C92D014B70002B67B4 /* PWAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertView.swift; sourceTree = "<group>"; };
 		C7875A2C2D3609CF00D6FCF7 /* SukbakjiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SukbakjiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1142,6 +1146,7 @@
 				415BBC0A2C7343F8002768EE /* AuthInterceptor+.swift */,
 				415BBC0C2C73442F002768EE /* NetworkAuthManager+.swift */,
 				C78953142D636FF700E5041C /* AccessTokenManager+.swift */,
+				C77EFB382D9B8645000C2841 /* FCMTokenManager+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1228,6 +1233,7 @@
 			children = (
 				C7B407EE2D645B14009B349F /* HomeRepository.swift */,
 				C7B407F02D645B21009B349F /* CalendarRepository.swift */,
+				C77EFB3A2D9B8A1E000C2841 /* FCMRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1625,6 +1631,7 @@
 				C7FD6F432D663F6000251B7D /* MyPageView.swift in Sources */,
 				C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */,
 				C7C379D02D65877E00C224A1 /* HomeView.swift in Sources */,
+				C77EFB3B2D9B8A1E000C2841 /* FCMRepository.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7675F7A2D6981DD00F99294 /* UnivRecruitView.swift in Sources */,
 				C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */,
@@ -1712,6 +1719,7 @@
 				7BC4E7842D8AC39300963B61 /* SavedBoardResponse.swift in Sources */,
 				91D413262D82696500020CEC /* DetailTOSViewController.swift in Sources */,
 				91D413272D82696500020CEC /* TOSViewController.swift in Sources */,
+				C77EFB392D9B8645000C2841 /* FCMTokenManager+.swift in Sources */,
 				7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */,
 				7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,

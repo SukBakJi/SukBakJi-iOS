@@ -299,7 +299,7 @@ class EditAlarmView: UIView, dateProtocol {
             $0.centerY.equalTo(dateLabel)
             $0.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(35)
-            $0.width.equalTo(73)
+            $0.width.equalTo(75)
         }
         timeButton.addTarget(self, action: #selector(time_Tapped), for: .touchUpInside)
         

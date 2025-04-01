@@ -16,15 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        FirebaseApp.configure()
-//        Messaging.messaging().delegate = self
-//        UNUserNotificationCenter.current().delegate = self
-//        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//        UNUserNotificationCenter.current().requestAuthorization(
-//            options: authOptions,
-//            completionHandler: {_, _ in}
-//        )
-//        application.registerForRemoteNotifications()
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if granted {
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }
         
         KakaoSDK.initSDK(appKey: "0cf7886895af19a6dcd4ec656890f126")
         
@@ -64,7 +66,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: MessagingDelegate {
     // FCM Token 업데이트 시
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("🥳", #function, fcmToken ?? "nil")
+        print("✅ FCM 토큰: \(fcmToken ?? "없음")")
+        
+        // 서버로 토큰 전달
+        if let token = fcmToken {
+            TokenManager.shared.saveFCMToken(token)
+            // 서버에 보내는 로직 구현 가능
+        }
     }
     
     // error 발생 시
