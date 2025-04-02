@@ -196,6 +196,11 @@
 		C77B49722D7B66D600005ABE /* CommonTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77B496B2D7B66D600005ABE /* CommonTextFieldView.swift */; };
 		C77B49732D7B66D600005ABE /* SocialAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77B496E2D7B66D600005ABE /* SocialAuthButton.swift */; };
 		C77B49752D7B66F900005ABE /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77B49742D7B66F900005ABE /* UIStackView+.swift */; };
+		C77EFB392D9B8645000C2841 /* FCMTokenManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77EFB382D9B8645000C2841 /* FCMTokenManager+.swift */; };
+		C77EFB3B2D9B8A1E000C2841 /* FCMRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77EFB3A2D9B8A1E000C2841 /* FCMRepository.swift */; };
+		C77EFB3D2D9C02B3000C2841 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77EFB3C2D9C02B3000C2841 /* NotificationViewController.swift */; };
+		C77EFB3F2D9C0300000C2841 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77EFB3E2D9C0300000C2841 /* NotificationView.swift */; };
+		C77EFB412D9C03CA000C2841 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77EFB402D9C03CA000C2841 /* NotificationTableViewCell.swift */; };
 		C780C5082D4143D800DC2031 /* Notification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C780C5072D4143D800DC2031 /* Notification+.swift */; };
 		C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78611C92D014B70002B67B4 /* PWAlertView.swift */; };
 		C7875A2F2D3609CF00D6FCF7 /* SukbakjiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */; };
@@ -449,6 +454,11 @@
 		C77B496D2D7B66D600005ABE /* smallTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smallTextButton.swift; sourceTree = "<group>"; };
 		C77B496E2D7B66D600005ABE /* SocialAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthButton.swift; sourceTree = "<group>"; };
 		C77B49742D7B66F900005ABE /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		C77EFB382D9B8645000C2841 /* FCMTokenManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FCMTokenManager+.swift"; sourceTree = "<group>"; };
+		C77EFB3A2D9B8A1E000C2841 /* FCMRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRepository.swift; sourceTree = "<group>"; };
+		C77EFB3C2D9C02B3000C2841 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		C77EFB3E2D9C0300000C2841 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		C77EFB402D9C03CA000C2841 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		C780C5072D4143D800DC2031 /* Notification+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+.swift"; sourceTree = "<group>"; };
 		C78611C92D014B70002B67B4 /* PWAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertView.swift; sourceTree = "<group>"; };
 		C7875A2C2D3609CF00D6FCF7 /* SukbakjiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SukbakjiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1031,6 +1041,8 @@
 			children = (
 				C7E35A762D73670500632DE3 /* MainTabViewController.swift */,
 				C7E35A782D73672000632DE3 /* TabbarShadow.swift */,
+				C77EFB3C2D9C02B3000C2841 /* NotificationViewController.swift */,
+				C77EFB402D9C03CA000C2841 /* NotificationTableViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1142,6 +1154,7 @@
 				415BBC0A2C7343F8002768EE /* AuthInterceptor+.swift */,
 				415BBC0C2C73442F002768EE /* NetworkAuthManager+.swift */,
 				C78953142D636FF700E5041C /* AccessTokenManager+.swift */,
+				C77EFB382D9B8645000C2841 /* FCMTokenManager+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1228,6 +1241,7 @@
 			children = (
 				C7B407EE2D645B14009B349F /* HomeRepository.swift */,
 				C7B407F02D645B21009B349F /* CalendarRepository.swift */,
+				C77EFB3A2D9B8A1E000C2841 /* FCMRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1257,6 +1271,7 @@
 			children = (
 				C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */,
 				C730327B2D295BF800F717D0 /* BottomSheetView.swift */,
+				C77EFB3E2D9C0300000C2841 /* NotificationView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1625,10 +1640,12 @@
 				C7FD6F432D663F6000251B7D /* MyPageView.swift in Sources */,
 				C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */,
 				C7C379D02D65877E00C224A1 /* HomeView.swift in Sources */,
+				C77EFB3B2D9B8A1E000C2841 /* FCMRepository.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7675F7A2D6981DD00F99294 /* UnivRecruitView.swift in Sources */,
 				C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */,
 				C7FD93762D2AD58A0084DC9C /* MyAlarmViewController.swift in Sources */,
+				C77EFB3F2D9C0300000C2841 /* NotificationView.swift in Sources */,
 				C7C379D92D65A1AB00C224A1 /* AppCoordinator.swift in Sources */,
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
 				7B1CFFA82C6F788900DE07F5 /* BoardScrapApi.swift in Sources */,
@@ -1652,6 +1669,7 @@
 				C757F82B2D0A9D2000685F1A /* MyAlarmTableViewCell.swift in Sources */,
 				C7E35A772D73670500632DE3 /* MainTabViewController.swift in Sources */,
 				7B3459ED2C68870E008B711A /* BoardDetailModel.swift in Sources */,
+				C77EFB412D9C03CA000C2841 /* NotificationTableViewCell.swift in Sources */,
 				C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */,
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
 				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,
@@ -1712,6 +1730,7 @@
 				7BC4E7842D8AC39300963B61 /* SavedBoardResponse.swift in Sources */,
 				91D413262D82696500020CEC /* DetailTOSViewController.swift in Sources */,
 				91D413272D82696500020CEC /* TOSViewController.swift in Sources */,
+				C77EFB392D9B8645000C2841 /* FCMTokenManager+.swift in Sources */,
 				7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */,
 				7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
@@ -1754,6 +1773,7 @@
 				C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */,
 				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
+				C77EFB3D2D9C02B3000C2841 /* NotificationViewController.swift in Sources */,
 				415BBC0B2C7343F8002768EE /* AuthInterceptor+.swift in Sources */,
 				C7F951BE2D2A523500D07051 /* SetAlarmViewController.swift in Sources */,
 				7B1C53602C6A680000C66D0D /* BoardNewQnAModel.swift in Sources */,

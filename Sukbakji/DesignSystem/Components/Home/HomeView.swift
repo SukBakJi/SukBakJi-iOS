@@ -65,7 +65,7 @@ class HomeView: UIView {
         $0.text = "대학교를 설정하고\n일정을 확인해 보세요!"
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .orange700
+        $0.textColor = .gray900
     }
     let upComingTitle = UILabel().then {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)

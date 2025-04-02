@@ -37,15 +37,15 @@ class UnivView: UIView {
         $0.backgroundColor = .clear
         $0.register(UnivCalendarTableViewCell.self, forCellReuseIdentifier: UnivCalendarTableViewCell.identifier)
     }
-    let selectComplateButton = UIButton().then {
+    let selectCompleteButton = UIButton().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
         
-        $0.setTitleColor(.gray500, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
         $0.setTitleColor(.gray500, for: .disabled)
         $0.setTitle("선택완료", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.setBackgroundColor(.gray200, for: .normal)
+        $0.setBackgroundColor(.orange700, for: .normal)
         $0.setBackgroundColor(.gray200, for: .disabled)
     }
     
@@ -72,7 +72,7 @@ class UnivView: UIView {
         
         addSubview(univCalendarTableView)
         
-        addSubview(selectComplateButton)
+        addSubview(selectCompleteButton)
     }
     
     private func setupConstraints() {
@@ -117,10 +117,11 @@ class UnivView: UIView {
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        selectComplateButton.snp.makeConstraints {
+        selectCompleteButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(100)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(48)
         }
+        selectCompleteButton.isEnabled = false
     }
 }

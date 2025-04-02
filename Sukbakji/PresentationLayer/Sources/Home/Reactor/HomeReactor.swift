@@ -78,12 +78,10 @@ final class HomeReactor: Reactor {
         var newState = state
         switch mutation {
         case .setUserName(let profile):
-            print(profile)
             newState.nameLabel = (profile.name) + "님, 반가워요!"
         case .setViewSchedule(let upComing):
-            print(upComing)
             if upComing?.scheduleList.isEmpty == true {
-                newState.upComingDate = "다가오는 일정이 없습니다"
+                newState.upComingDate = "대학교를 설정하고\n일정을 확인해 보세요!"
                 newState.upComingTitle = ""
             } else if let upComing = upComing, let firstSchedule = upComing.scheduleList.first {
                 let dday = firstSchedule.dday
@@ -100,7 +98,6 @@ final class HomeReactor: Reactor {
                 }
             }
         case .setMemberID(let id):
-            print(id)
             newState.memberID = id
             UserDefaults.standard.set(id, forKey: "memberID")
         case .setError(let message):

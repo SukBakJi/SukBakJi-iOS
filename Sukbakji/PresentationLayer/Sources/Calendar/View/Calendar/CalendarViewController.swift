@@ -60,11 +60,17 @@ extension CalendarViewController {
             dateSelectHeightConstraint = make.height.equalTo(10).constraint
         }
 
+        calendarView.notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
         calendarView.mypageButton.addTarget(self, action: #selector(schoolCalendar_Tapped), for: .touchUpInside)
         calendarView.univSettingButton.addTarget(self, action: #selector(schoolSetting_Tapped), for: .touchUpInside)
         calendarView.alarmButton.addTarget(self, action: #selector(alarm_Tapped), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(alarmSettingComplete), name: .isAlarmComplete, object: nil)
+    }
+    
+    @objc private func notification_Tapped() {
+        let notificationViewController = NotificationViewController()
+        self.navigationController?.pushViewController(notificationViewController, animated: true)
     }
     
     @objc private func schoolCalendar_Tapped() {
