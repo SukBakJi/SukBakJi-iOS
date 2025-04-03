@@ -20,6 +20,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: UnivCalendarTableViewCell.self)
     
+    private let viewModel = UnivViewModel()
     var disposeBag = DisposeBag()
     weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
     
@@ -153,22 +154,14 @@ class UnivCalendarTableViewCell: UITableViewCell {
     }
     
     func prepare(univList: UnivList) {
-        if univList.univId == 14 {
-            univLabel.text = "서울대학교"
-        } else if univList.univId == 22 {
-            univLabel.text = "연세대학교"
-        } else if univList.univId == 5 {
-            univLabel.text = "고려대학교 일반대학원"
-        } else if univList.univId == 28 {
-            univLabel.text = "한양대학교"
-        } else if univList.univId == 16 {
-            univLabel.text = "성균관대학교"
-        } else if univList.univId == 8 {
-            univLabel.text = "광운대학교 일반대학원"
-        }
         recruitLabel.text = univList.season
         recruitTypeLabel.text = univList.method
         
-        disposeBag = DisposeBag()
+        viewModel.loadUnivName(univId: univList.univId)
+            .subscribe(onNext: { [weak self] univName in
+                // Update the UI once the name is loaded
+                self?.univLabel.text = univName
+            })
+            .disposed(by: disposeBag)
     }
 }

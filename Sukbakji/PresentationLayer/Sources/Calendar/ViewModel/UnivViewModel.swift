@@ -40,17 +40,25 @@ final class UnivViewModel {
         selectUnivItem.accept(univ)
     }
     
-    func loadUnivName(univId: Int) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
+    func loadUnivName(univId: Int) -> Observable<String> {
+        return Observable.create { observer in
+            guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            
+            self.repository.fetchUnivName(token: token, univId: univId)
+                .map { $0.result.univName }
+                .subscribe(onSuccess: { univName in
+                    observer.onNext(univName)
+                    observer.onCompleted()
+                }, onFailure: { error in
+                    observer.onError(error)
+                })
+                .disposed(by: self.disposeBag)
+            
+            return Disposables.create()
         }
-        
-        repository.fetchUnivName(token: token, univId: univId)
-            .map { $0.result }
-            .subscribe(onSuccess: { [weak self] univName in
-                self?.univNameItem.accept(univName)
-            })
-            .disposed(by: disposeBag)
     }
     
     func loadUnivMethod(univId: Int) {

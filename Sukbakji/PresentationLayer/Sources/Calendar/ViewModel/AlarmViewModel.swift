@@ -16,6 +16,8 @@ final class AlarmViewModel {
     let alarmItems = BehaviorRelay<[AlarmList]>(value: [])
     var selectAlarmItem: AlarmList?
     
+    let univItems = BehaviorRelay<[String]>(value: [])
+    
     var patchAlarmItem: AlarmPatch?
     
     let alarmEnrolled = PublishSubject<Bool>()
@@ -30,6 +32,19 @@ final class AlarmViewModel {
             .map { $0.result.alarmList }
             .subscribe(onSuccess: { [weak self] alarmList in
                 self?.alarmItems.accept(alarmList)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadAlarmUniv() {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        repository.fetchAlarmUniv(token: token)
+            .map { $0.result }
+            .subscribe(onSuccess: { [weak self] univList in
+                self?.univItems.accept(univList)
             })
             .disposed(by: disposeBag)
     }

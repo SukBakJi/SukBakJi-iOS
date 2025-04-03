@@ -15,6 +15,7 @@ class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDel
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     private let univView = UnivView()
     private let viewModel = CalendarViewModel()
+    private let univViewModel = UnivViewModel()
     private let disposeBag = DisposeBag()
     
     override func loadView() {
@@ -64,6 +65,7 @@ extension UnivCalendarViewController {
             .observe(on: MainScheduler.instance)
             .bind(to: univView.univCalendarTableView.rx.items(cellIdentifier: UnivCalendarTableViewCell.identifier, cellType: UnivCalendarTableViewCell.self)) { index, item, cell in
                 cell.prepare(univList: item)
+                cell.univLabel.text = self.univViewModel.univNameItem.value?.univName
                 cell.delegate = self
                 
                 self.viewModel.selectedUnivAll
