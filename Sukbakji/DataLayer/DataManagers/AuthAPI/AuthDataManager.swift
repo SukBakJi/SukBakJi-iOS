@@ -87,12 +87,24 @@ class AuthDataManager {
                         KeychainHelper.standard.save(password, service: "password", account: "user")
                     }
                 }
-            case .failure(let error):
-                print("❌ 로그인 요청 실패: \(error.localizedDescription)")
+            case .failure(_):
+                // 실패지만 서버에서 응답 JSON이 왔다면 수동 디코딩
+                if let data = response.data {
+                    do {
+                        let decoded = try JSONDecoder().decode(LoginResponseDTO.self, from: data)
+                        completion(decoded)
+                    } catch {
+                        print("응답 디코딩 실패: \(error.localizedDescription)")
+                        completion(nil)
+                    }
+                } else {
+                    print("서버 응답 없음")
+                    completion(nil)
+                }
             }
         }
     }
-
+    
     // Oauth2 로그인
     func oauth2LoginDataManager(_ parameters: Oauth2RequestDTO, completion: @escaping (OAuthLoginResponseDTO?) -> Void) {
         AF.request(oauth2LoginUrl,
@@ -105,7 +117,7 @@ class AuthDataManager {
             switch response.result {
             case .success(let data):
                 completion(data)
-                print("OAuth2 로그인 성공 ; \(data)")
+                print("OAuth2 로그인 성공 : \(data)")
                 if let accessToken = data.result?.accessToken,
                    let refreshToken = data.result?.refreshToken,
                    let email = data.result?.email {
