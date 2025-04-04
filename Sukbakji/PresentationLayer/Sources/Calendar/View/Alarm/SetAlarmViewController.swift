@@ -19,8 +19,6 @@ class SetAlarmViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let drop = DropDown()
     
-    private let univName = ["서울대학교", "연세대학교", "고려대학교", "카이스트"]
-    
     private var univViewHeightConstraint: Constraint?
     private var alarmNameViewHeightConstraint: Constraint?
     
@@ -33,6 +31,7 @@ class SetAlarmViewController: UIViewController {
         
         setUI()
         setDrop()
+        setAPI()
         hideKeyboardWhenTappedAround()
     }
     
@@ -77,7 +76,6 @@ extension SetAlarmViewController {
     }
     
     private func setDropdown() {
-        drop.dataSource = univName
         drop.cellHeight = 44
         drop.anchorView = self.setAlarmView.univTextField
         drop.bottomOffset = CGPoint(x: 0, y: 45.5 + setAlarmView.univTextField.bounds.height)
@@ -126,6 +124,17 @@ extension SetAlarmViewController {
 }
 
 extension SetAlarmViewController {
+    
+    private func setAPI() {
+        bindViewModel()
+        viewModel.loadAlarmUniv()
+    }
+    
+    private func bindViewModel() {
+        viewModel.univItems
+            .subscribe(onNext: { univList in self.drop.dataSource = self.viewModel.univItems.value })
+            .disposed(by: disposeBag)
+    }
     
     @objc func textFieldEdited(_ textField: UITextField) {
         updateButtonColor()

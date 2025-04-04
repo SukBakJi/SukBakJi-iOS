@@ -71,7 +71,6 @@ class CalendarRepository {
         return APIService.shared.deleteWithToken(of: APIResponseNoResult.self, url: url, parameters: params, accessToken: token)
     }
     
-    
     func fetchAlarmList(token: String) -> Single<APIResponse<Alarm>> {
         let url = APIConstants.calendarAlarm.path
         return APIService.shared.getWithToken(of: APIResponse<Alarm>.self, url: url, accessToken: token)
@@ -97,5 +96,10 @@ class CalendarRepository {
         let url = APIConstants.calendarAlarmId(alarmId).path
         let params = ["alarmId": alarmId]
         return APIService.shared.deleteWithToken(of: APIResponseNoResult.self, url: url, parameters: params, accessToken: token)
+    }
+    
+    func fetchAlarmUniv(token: String) -> Single<APIResponse<[String]>> {
+        let url = APIConstants.calendarAlarmUniv.path
+        return APIService.shared.getWithToken(of: APIResponse<[String]>.self, url: url, accessToken: token)
     }
 }
