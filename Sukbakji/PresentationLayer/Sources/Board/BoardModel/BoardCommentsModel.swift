@@ -21,7 +21,7 @@ struct CommentResponse: Decodable {
 }
 
 struct CommentResult: Decodable {
-    let memberId: Int // 추가로 만든거
+    let memberId: Int
     let commentId: Int
     let content: String
     let nickname: String
