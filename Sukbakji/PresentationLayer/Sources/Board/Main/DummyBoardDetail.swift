@@ -377,7 +377,7 @@ struct Comments: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center) {
                 // Display "글쓴이" instead of "익명1"
-                Text(comment.anonymousName == "익명1" ? "글쓴이" : comment.anonymousName)
+                Text(comment.anonymousName == "글쓴이" ? "글쓴이" : comment.anonymousName)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Constants.Gray800)
                 Divider()
