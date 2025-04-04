@@ -38,7 +38,7 @@ struct HotBoardViewController: View {
                     
                     Divider()
                     
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         // 공지사항 글
                         hotNoticeView(showAlert: $showAlert)
                         

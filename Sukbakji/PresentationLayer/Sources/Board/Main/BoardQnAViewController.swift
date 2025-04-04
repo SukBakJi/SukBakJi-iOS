@@ -81,7 +81,7 @@ struct BoardQnAViewController: View {
 
                     Divider()
 
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         // 공지사항 글
                         noticeView(showAlert: $showAlert)
                             .padding(.horizontal, 24)
