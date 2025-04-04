@@ -146,7 +146,6 @@ extension SetAlarmViewController {
     }
     
     private func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // 텍스트 필드 내용이 변경될 때 버튼 색깔 업데이트
         DispatchQueue.main.async {
             self.updateButtonColor()
         }

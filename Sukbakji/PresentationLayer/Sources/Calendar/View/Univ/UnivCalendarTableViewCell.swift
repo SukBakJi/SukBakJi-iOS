@@ -14,6 +14,7 @@ import RxCocoa
 protocol UnivCalendarTableViewCellDeleteDelegate: AnyObject {
     func univDelete_Tapped(cell: UnivCalendarTableViewCell)
     func editButton_Tapped(cell: UnivCalendarTableViewCell)
+    func select_Tapped(cell: UnivCalendarTableViewCell)
 }
 
 class UnivCalendarTableViewCell: UITableViewCell {
@@ -21,6 +22,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
     static let identifier = String(describing: UnivCalendarTableViewCell.self)
     
     private let viewModel = UnivViewModel()
+    private let calendarViewModel = CalendarViewModel()
     var disposeBag = DisposeBag()
     weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
     
@@ -70,7 +72,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        disposeBag = DisposeBag() // DisposeBag 재설정
+        disposeBag = DisposeBag()
     }
 
     func setUI() {
@@ -98,6 +100,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().offset(12)
             make.height.width.equalTo(20)
         }
+        selectButton.addTarget(self, action: #selector(select_Tapped), for: .touchUpInside)
         
         self.selectView.addSubview(univLabel)
         univLabel.snp.makeConstraints { make in
@@ -145,6 +148,10 @@ class UnivCalendarTableViewCell: UITableViewCell {
         editButton.addTarget(self, action: #selector(editButton_Tapped), for: .touchUpInside)
     }
     
+    @objc private func select_Tapped() {
+        delegate?.select_Tapped(cell: self)
+    }
+    
     @objc private func univDelete_Tapped() {
         delegate?.univDelete_Tapped(cell: self)
     }
@@ -159,7 +166,6 @@ class UnivCalendarTableViewCell: UITableViewCell {
         
         viewModel.loadUnivName(univId: univList.univId)
             .subscribe(onNext: { [weak self] univName in
-                // Update the UI once the name is loaded
                 self?.univLabel.text = univName
             })
             .disposed(by: disposeBag)

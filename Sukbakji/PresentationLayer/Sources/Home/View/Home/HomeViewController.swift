@@ -177,14 +177,10 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDe
             let contentOffsetX = scrollView.contentOffset.x
             let contentWidth = scrollView.contentSize.width
             let scrollViewWidth = scrollView.frame.size.width
-            
-            // 현재 스크롤 위치에 따라 진행도 계산
             let progress = Float(contentOffsetX / (contentWidth - scrollViewWidth))
-            
-            // ProgressView 업데이트
+
             homeView.favLabProgressView.setProgress(progress, animated: true)
-            
-            // 컬렉션 뷰 끝에 도달했는지 확인
+
             if contentOffsetX + scrollViewWidth >= contentWidth {
                 homeView.favLabProgressView.setProgress(1.0, animated: true)
             }

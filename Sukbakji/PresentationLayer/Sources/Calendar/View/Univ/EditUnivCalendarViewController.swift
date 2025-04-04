@@ -19,8 +19,6 @@ class EditUnivCalendarViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let drop = DropDown()
     
-    private var recruitType: [String] = []
-    
     init(calendarViewModel: CalendarViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = calendarViewModel
@@ -107,18 +105,12 @@ extension EditUnivCalendarViewController {
         let univId = selectUnivCalendarItem.univId
         let season = selectUnivCalendarItem.season
         let method = selectUnivCalendarItem.method
-        
-        if univId == 14 {
-            editUnivView.univLabel.text = "서울대학교"
-        } else if univId == 22 {
-            editUnivView.univLabel.text = "연세대학교"
-        } else if univId == 5 {
-            editUnivView.univLabel.text = "고려대학교 일반대학원"
-        }else if univId == 16 {
-            editUnivView.univLabel.text = "성균관대학교"
-        } else {
-            editUnivView.univLabel.text = "한양대학교"
-        }
+
+        univViewModel.loadUnivName(univId: univId)
+            .subscribe(onNext: { [weak self] univName in
+                self?.editUnivView.univLabel.text = univName
+            })
+            .disposed(by: disposeBag)
         if season == editUnivView.recruitFirstLabel.text {
             editUnivView.recruitFirstButton.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
             editUnivView.recruitSecondButton.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)

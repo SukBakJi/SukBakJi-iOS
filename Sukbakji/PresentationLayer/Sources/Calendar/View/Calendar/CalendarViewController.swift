@@ -128,12 +128,11 @@ extension CalendarViewController {
     
     private func setAPI() {
         viewModel.loadUnivList()
-//        viewModel.loadUpComingSchedule()
+        viewModel.loadUpComingSchedule()
         viewModel.loadAlarmList()
     }
     
     private func bindViewModel() {
-        // 학사 일정 바인딩
         viewModel.univList
             .subscribe(onNext: { univList in
                 if !univList.isEmpty {
@@ -148,7 +147,6 @@ extension CalendarViewController {
             })
             .disposed(by: disposeBag)
         
-        // 일정 바인딩
         calendarView.upComingCalendarCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
@@ -170,14 +168,12 @@ extension CalendarViewController {
             }
             .disposed(by: disposeBag)
         
-        // 알람 바인딩
         viewModel.alarmDates
             .subscribe(onNext: { alarmDates in
                 self.calendarView.calendarMainCollectionView.reloadData()
             })
             .disposed(by: disposeBag)
         
-        // 일정 디테일 바인딩
         calendarView.calendarDetailTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
@@ -203,7 +199,6 @@ extension CalendarViewController {
         self.calendarView.calendarMainCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        // daysRelay를 collectionView에 바인딩
         calendarView.days
             .bind(to:
                     calendarView.calendarMainCollectionView.rx.items(cellIdentifier: CalendarMainCollectionViewCell.identifier, cellType: CalendarMainCollectionViewCell.self)) { index, day, cell in
@@ -248,7 +243,6 @@ extension CalendarViewController {
             })
             .disposed(by: disposeBag)
         
-        // 선택된 indexPath 처리 (선택된 셀 스타일 업데이트용)
         calendarView.calendarMainCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self else { return }
@@ -259,7 +253,6 @@ extension CalendarViewController {
                     }
                 }
                 
-                // 새로운 셀 선택
                 self.selectedIndexPath = indexPath
                 if let cell = self.calendarView.calendarMainCollectionView.cellForItem(at: indexPath) as? CalendarMainCollectionViewCell {
                     cell.isSelected = true

@@ -133,14 +133,6 @@ final class AlarmViewModel {
             })
             .disposed(by: disposeBag)
     }
-    
-    func loadTestData() {
-        let testAlarmList: [AlarmList] = [
-            AlarmList(alarmId: 1, alarmUnivName: "서울대학교", alarmName: "ㅇㅇ", alarmDate: "2025/03/07", alarmTime: "15:00", onoff: 1),
-            AlarmList(alarmId: 1, alarmUnivName: "서울대학교", alarmName: "ㅇㅇ", alarmDate: "2025/03/07", alarmTime: "15:00", onoff: 1)
-        ]
-        alarmItems.accept(testAlarmList)
-    }
 }
 
 protocol myAlarmSwitchDelegate: AnyObject {

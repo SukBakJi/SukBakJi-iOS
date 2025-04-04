@@ -73,21 +73,17 @@ class ProfileTabViewController: TabmanViewController {
         self.dataSource = self
         
         let bar = TMBar.ButtonBar()
-        // 배경 회색으로 나옴 -> 하얀색으로 바뀜
         bar.backgroundView.style = .clear
-        // 간격 설정
         bar.layout.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
-        // 버튼 글씨 커스텀
         bar.buttons.customize { (button) in
             button.tintColor = .gray600
             button.selectedTintColor = .orange700
-            button.font = UIFont(name: "Pretendard-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
-            button.selectedFont = UIFont(name: "Pretendard-SemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
+            button.font = UIFont(name: "Pretendard-Medium", size: 16)!
+            button.selectedFont = UIFont(name: "Pretendard-SemiBold", size: 16)!
         }
 
         bar.layout.contentMode = .intrinsic
         
-        // 밑줄 쳐지는 부분
         bar.indicator.weight = .custom(value: 2)
         bar.indicator.tintColor = .orange700
         addBar(bar, dataSource: self, at: .custom(view: tabView, layout: nil))
@@ -132,7 +128,6 @@ extension ProfileTabViewController {
     }
     
     private func setProfileAPI() {
-        // 데이터 변경 시 UI 자동 업데이트
         viewModel.myProfile
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
@@ -140,7 +135,6 @@ extension ProfileTabViewController {
             })
             .disposed(by: disposeBag)
         
-        // 에러 메시지 바인딩
         viewModel.errorMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { message in

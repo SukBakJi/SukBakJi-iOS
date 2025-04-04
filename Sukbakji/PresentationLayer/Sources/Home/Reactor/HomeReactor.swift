@@ -14,6 +14,9 @@ final class HomeReactor: Reactor {
     let initialState = State()
     let apiService = APIService()
     
+    private var viewModel = UnivViewModel()
+    private let disposeBag = DisposeBag()
+    
     enum Action {
         case getUserName
         case getViewSchedule
@@ -59,7 +62,7 @@ final class HomeReactor: Reactor {
 
         switch action {
         case .getUserName:
-            print("token: \(token)")
+            print("token: ", token)
             return fetchData(APIResponse<MyProfile>.self, url: APIConstants.userMypage.path, token: token) { profile in
                     .setUserName(profile)
             }
@@ -83,19 +86,17 @@ final class HomeReactor: Reactor {
             if upComing?.scheduleList.isEmpty == true {
                 newState.upComingDate = "대학교를 설정하고\n일정을 확인해 보세요!"
                 newState.upComingTitle = ""
-            } else if let upComing = upComing, let firstSchedule = upComing.scheduleList.first {
+            } else if let firstSchedule = upComing?.scheduleList.first {
                 let dday = firstSchedule.dday
                 let content = firstSchedule.content
                 let univId = firstSchedule.univId
                 
-                newState.upComingDate = dday < 0 ? "D+\(-dday)" : "D-\(dday)"
-                switch univId {
-                case 14: newState.upComingTitle = "서울대학교 \(content)"
-                case 22: newState.upComingTitle = "연세대학교 \(content)"
-                case 5: newState.upComingTitle = "고려대학교 일반대학원 \(content)"
-                case 16: newState.upComingTitle = "성균관대학교 \(content)"
-                default: newState.upComingTitle = "한양대학교 \(content)"
-                }
+                newState.upComingDate = "D-\(dday)"
+                viewModel.loadUnivName(univId: univId)
+                    .subscribe(onNext: { univName in
+                        newState.upComingTitle = "\(univName) \(content)"
+                    })
+                    .disposed(by: disposeBag)
             }
         case .setMemberID(let id):
             newState.memberID = id

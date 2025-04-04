@@ -16,7 +16,6 @@ class CalendarViewModel {
     
     let univList = BehaviorRelay<[UnivList]>(value: [])
     var selectUnivList: UnivList?
-    let selectedUnivList = BehaviorRelay<[UnivList]>(value: [])
     let selectedUnivAll = BehaviorRelay<Bool>(value: false)
     
     let upComingSchedules = BehaviorRelay<[UpComingList]>(value: [])
@@ -112,10 +111,25 @@ class CalendarViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.univDeleted.onNext(true)
-                print("대학 일정 삭제 성공!")
                 NotificationCenter.default.post(name: .isUnivDeleteComplete, object: nil)
             }, onFailure: { error in
                 self.univDeleted.onNext(false)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func deleteUnivCalendarSelected(univIds: [Int]) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        let params = ["univIds": univIds] as [String : [Any]]
+        
+        repository.fetchUnivDeleteSelected(token: token, parameters: params)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                NotificationCenter.default.post(name: .isUnivDeleteSelectedComplete, object: nil)
+            }, onFailure: { error in
             })
             .disposed(by: disposeBag)
     }
@@ -137,13 +151,5 @@ class CalendarViewModel {
     func toggleSelectState() {
         let newState = !selectedUnivAll.value
         selectedUnivAll.accept(newState) // 상태 변경
-    }
-    
-    func loadTestData() {
-        let testUnivList: [UnivList] = [
-            UnivList(univId: 1, season: "ㅇㅇ", method: "ㅇㅇ", showing: 1),
-            UnivList(univId: 2, season: "ㅇㅇ", method: "ㅇㅇ", showing: 1)
-        ]
-        univList.accept(testUnivList)
     }
 }

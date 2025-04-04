@@ -32,7 +32,6 @@ class AdvertiseCollectionViewCell: UICollectionViewCell {
     private func setUI() {
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
-        
         layer.cornerRadius = 15
         layer.masksToBounds = false
         

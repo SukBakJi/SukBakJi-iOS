@@ -16,9 +16,6 @@ class UnivSearchViewController: UIViewController, UITextFieldDelegate {
     private let viewModel = UnivViewModel()
     private let disposeBag = DisposeBag()
     
-    private var searchTimer: Timer?
-    private var univId: Int?
-    
     override func loadView() {
         self.view = univSearchView
     }
@@ -105,7 +102,7 @@ extension UnivSearchViewController {
                 cell.selectButton.rx.tap
                     .subscribe(onNext: { [weak self] in
                         guard let self = self else { return }
-                        self.viewModel.selectUniversity(univ) // 선택 해제 기능 추가
+                        self.viewModel.selectUniversity(univ)
                     })
                     .disposed(by: cell.disposeBag)
             }

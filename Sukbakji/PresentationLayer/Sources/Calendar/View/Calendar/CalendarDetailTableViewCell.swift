@@ -8,10 +8,15 @@
 import UIKit
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class CalendarDetailTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: CalendarDetailTableViewCell.self)
+    
+    private var viewModel = UnivViewModel()
+    private let disposeBag = DisposeBag()
     
     private let mainImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_RecruitType")
@@ -76,15 +81,11 @@ class CalendarDetailTableViewCell: UITableViewCell {
     }
     
     func prepare(dateSelectList: DateSelectList) {
-        if dateSelectList.univId == 1 {
-            univLabel.text = "서울대학교"
-        } else if dateSelectList.univId == 2 {
-            univLabel.text = "연세대학교"
-        } else if dateSelectList.univId == 3 {
-            univLabel.text = "고려대학교"
-        } else {
-            univLabel.text = "카이스트"
-        }
+        viewModel.loadUnivName(univId: dateSelectList.univId)
+            .subscribe(onNext: { [weak self] univName in
+                self?.univLabel.text = univName
+            })
+            .disposed(by: disposeBag)
         self.contentLabel.text = dateSelectList.content
     }
 }
