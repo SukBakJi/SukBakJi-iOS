@@ -212,7 +212,6 @@ struct DummyBoardDetail: View {
                         degreeLevel: "익명", // DegreeLevel 설정이 필요하다면 적절히 변경하세요
                         content: data.result.content,
                         createdDate: data.result.createdAt,
-                        memberId: data.result.memberId
                     )
                     
                     comments.insert(newComment, at: 0) // 새로운 댓글을 맨 위에 추가
