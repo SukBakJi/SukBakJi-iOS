@@ -59,6 +59,8 @@
 		7B3459FB2C688C6F008B711A /* BoardCommentedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459FA2C688C6F008B711A /* BoardCommentedModel.swift */; };
 		7B3459FD2C688C9D008B711A /* BoardBookmarkedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */; };
 		7B3933EF2D9FF147009EFC55 /* CurrentUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3933EE2D9FF147009EFC55 /* CurrentUserResponse.swift */; };
+		7B3933F32D9FFB39009EFC55 /* CommentUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3933F22D9FFB39009EFC55 /* CommentUpdateModel.swift */; };
+		7B3933F72DA01681009EFC55 /* BoardUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3933F62DA01681009EFC55 /* BoardUpdateModel.swift */; };
 		7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */; };
 		7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */; };
 		7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */; };
@@ -315,6 +317,8 @@
 		7B3459FA2C688C6F008B711A /* BoardCommentedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentedModel.swift; sourceTree = "<group>"; };
 		7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardBookmarkedModel.swift; sourceTree = "<group>"; };
 		7B3933EE2D9FF147009EFC55 /* CurrentUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserResponse.swift; sourceTree = "<group>"; };
+		7B3933F22D9FFB39009EFC55 /* CommentUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUpdateModel.swift; sourceTree = "<group>"; };
+		7B3933F62DA01681009EFC55 /* BoardUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUpdateModel.swift; sourceTree = "<group>"; };
 		7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrittenBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedBoardViewController.swift; sourceTree = "<group>"; };
@@ -754,6 +758,8 @@
 				7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */,
 				7BC4E7852D8ACF3D00963B61 /* LatestQnAModel.swift */,
 				7B3933EE2D9FF147009EFC55 /* CurrentUserResponse.swift */,
+				7B3933F22D9FFB39009EFC55 /* CommentUpdateModel.swift */,
+				7B3933F62DA01681009EFC55 /* BoardUpdateModel.swift */,
 			);
 			path = BoardModel;
 			sourceTree = "<group>";
@@ -1562,6 +1568,7 @@
 				C734BD5C2D66EA9300AE81E9 /* MypageViewController.swift in Sources */,
 				C734BD5B2D66EA8800AE81E9 /* ColorConstants.swift in Sources */,
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
+				7B3933F72DA01681009EFC55 /* BoardUpdateModel.swift in Sources */,
 				C734BD5A2D66DE2000AE81E9 /* EditPWView.swift in Sources */,
 				C78953122D636AB700E5041C /* APIService.swift in Sources */,
 				C7675F7E2D6981FF00F99294 /* EditUnivView.swift in Sources */,
@@ -1648,6 +1655,7 @@
 				7B1C53582C69D80A00C66D0D /* DirectoryFavoriteCancelModel.swift in Sources */,
 				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,
 				417AADCB2C673B89002080E0 /* KeychainHelper+.swift in Sources */,
+				7B3933F32D9FFB39009EFC55 /* CommentUpdateModel.swift in Sources */,
 				C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */,
 				C7A777692D507A1800046367 /* MessageInputView.swift in Sources */,
 				C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */,

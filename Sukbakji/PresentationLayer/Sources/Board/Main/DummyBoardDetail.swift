@@ -214,6 +214,7 @@ struct DummyBoardDetail: View {
                 switch response.result {
                 case .success(let data):
                     let newComment = BoardComment(
+//                        commentId: data.result.commentId,
                         anonymousName: data.result.nickname,
                         degreeLevel: "익명", // DegreeLevel 설정이 필요하다면 적절히 변경하세요
                         content: data.result.content,
@@ -363,26 +364,26 @@ struct Comments: View {
     var comment: BoardComment
     @State private var showingCommentSheet = false
     @State private var showCommentAlert = false
-    var degreeLevel: DegreeLevel? // 추가된 변수
+    var degreeLevel: DegreeLevel?
     var isAuthor: Bool
     @Binding var showDeletionMessage: Bool
     @Binding var showCommentDeletionMessage: Bool
     var deleteComment: () -> Void
-    
-    // State to manage like status and count
+
     @State private var isLiked: Bool = false
     @State private var likeCount: Int = 0
+
+    @State private var isEditing = false
+    @State private var editedText = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center) {
-                // Display "글쓴이" instead of "익명1"
                 Text(comment.anonymousName == "글쓴이" ? "글쓴이" : comment.anonymousName)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Constants.Gray800)
                 Divider()
                 
-                // DegreeLevel에 따른 학위 상태 표시
                 if let degreeLevel = degreeLevel {
                     Text(degreeLevelText(degreeLevel))
                         .font(.system(size: 14, weight: .semibold))
@@ -392,7 +393,6 @@ struct Comments: View {
                 Spacer()
                 
                 Button(action: {
-                    print("댓글 더보기 버튼 tapped")
                     self.showingCommentSheet = true
                 }) {
                     Image("MoreButton 1")
@@ -404,7 +404,10 @@ struct Comments: View {
                         return ActionSheet(
                             title: Text("댓글"),
                             buttons: [
-                                .default(Text("수정하기")),
+                                .default(Text("수정하기"), action: {
+                                    editedText = comment.content
+                                    isEditing = true
+                                }),
                                 .destructive(Text("삭제하기"), action: {
                                     self.showCommentAlert = true
                                 }),
@@ -431,54 +434,110 @@ struct Comments: View {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                 showCommentDeletionMessage = false
                             }
-                            print("댓글 삭제됨")
                         }),
                         secondaryButton: .cancel(Text("닫기"))
                     )
                 }
             }
-            
+
             Text(formatDate(comment.createdDate))
                 .font(.system(size: 10))
                 .foregroundStyle(Constants.Gray500)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-            
-            HStack {
-                Text(comment.content)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(Constants.Gray900)
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                
-                Spacer()
-                
-                // 댓글 좋아요 버튼
-                Button(action: {
-                    isLiked.toggle()
-                    likeCount += isLiked ? 1 : -1
-                }) {
-                    Image(isLiked ? "LikeButton Fill" : "LikeButton")
-                        .resizable()
-                        .frame(width: 12, height: 12)
+
+            if isEditing {
+                VStack(spacing: 8) {
+                    TextField("댓글 수정", text: $editedText)
+                        .padding()
+                        .background(Constants.Gray100)
+                        .cornerRadius(8)
+                        .foregroundColor(Constants.Gray900)
+
+                    HStack {
+                        Button(action: {
+                            isEditing = false
+                            editedText = ""
+                        }) {
+                            Text("취소")
+                                .foregroundColor(Constants.Gray500)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(Constants.Gray200))
+                                .cornerRadius(8)
+                        }
+
+                        Button(action: {
+//                            updateComment(commentId: comment.commentId, newContent: editedText)
+                        }) {
+                            Text("수정 완료")
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Constants.Orange700)
+                                .cornerRadius(8)
+                        }
+                    }
                 }
-                
-                // 댓글 좋아요 수
-                Text("\(likeCount)")
-                    .font(
-                        Font.custom("Pretendard", size: 10)
-                            .weight(.regular)
-                    )
-                    .foregroundColor(isLiked ? Constants.Orange700 : Constants.Gray300)
+            } else {
+                HStack {
+                    Text(comment.content)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(Constants.Gray900)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        isLiked.toggle()
+                        likeCount += isLiked ? 1 : -1
+                    }) {
+                        Image(isLiked ? "LikeButton Fill" : "LikeButton")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                    }
+                    
+                    Text("\(likeCount)")
+                        .font(Font.custom("Pretendard", size: 10).weight(.regular))
+                        .foregroundColor(isLiked ? Constants.Orange700 : Constants.Gray300)
+                }
             }
-            
-            Divider() // 댓글 구분선
+
+            Divider()
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 12)
         .frame(alignment: .topLeading)
         .background(Constants.White)
     }
-    
-    // DegreeLevel에 따른 텍스트 반환 함수
+
+    func updateComment(commentId: Int, newContent: String) {
+        let url = APIConstants.baseURL + "/comments/update"
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            print("토큰 없음")
+            return
+        }
+
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(token)"
+        ]
+
+        let request = CommentUpdateRequest(commentId: commentId, content: newContent)
+
+        NetworkAuthManager.shared.request(url, method: .put, parameters: request, encoder: JSONParameterEncoder.default, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: CommentUpdateResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    print("댓글 수정 성공: \(data.message)")
+                    isEditing = false
+                    // UI 상 댓글 텍스트를 갱신하려면 상위 뷰에서 상태를 업데이트 필요
+                case .failure(let error):
+                    print("댓글 수정 실패: \(error.localizedDescription)")
+                }
+            }
+    }
+
     func degreeLevelText(_ degreeLevel: DegreeLevel) -> String {
         switch degreeLevel {
         case .bachelorsStudying:
@@ -497,8 +556,7 @@ struct Comments: View {
             return "통합과정 재학"
         }
     }
-    
-    // 날짜 형식을 'yyyy-MM-dd 작성'으로 변경하는 함수
+
     func formatDate(_ dateString: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS"
@@ -507,10 +565,9 @@ struct Comments: View {
             formatter.dateFormat = "yyyy.MM.dd 작성"
             return formatter.string(from: date)
         }
-        return dateString // 변환이 실패하면 원래 문자열 반환
+        return dateString
     }
 }
-
 
 struct WriteComment: View {
     @Binding var commentText: String
@@ -768,7 +825,7 @@ struct MoreButtonView: View {
                             }
                         }
                     }
-                    .background(Color.white.opacity(0.7))
+                    .background(Color.white.opacity(0.9))
                     .cornerRadius(14)
                     .padding(.horizontal, 8)
 

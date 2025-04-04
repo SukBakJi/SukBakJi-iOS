@@ -30,6 +30,7 @@ struct BoardDetailResult: Decodable {
 }
 
 struct BoardComment: Decodable {
+//    let commentId: Int
     let anonymousName: String
     let degreeLevel: String
     let content: String
