@@ -180,6 +180,12 @@ struct DummyBoardDetail: View {
             DispatchQueue.main.async {
                 loadBoardDetail(postId: postId)
                 loadProfileData()
+                // 작성자 판별을 위해 현재 사용자 memberId 조회
+                fetchCurrentUserMemberId { currentUserId in
+                    if let currentUserId = currentUserId, let boardAuthorId = boardDetail?.memberId {
+                        self.isAuthor = (currentUserId == boardAuthorId)
+                    }
+                }
             }
         }
     }
@@ -266,24 +272,25 @@ struct DummyBoardDetail: View {
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
-        
+
         NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: BoardDetailModel.self) { response in
                 switch response.result {
                 case .success(let data):
                     self.boardDetail = data.result
-                    self.anonymousCounter = 1 // Reset anonymous counter when loading new post details
-
                     self.comments = data.result.comments
                     self.isLoading = false
-                case .failure(let error):
-                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
-                        print("Server Error Message: \(errorMessage)")
-                    } else {
-                        print("Error: \(error.localizedDescription)")
+                    
+                    // 작성자 판별
+                    fetchCurrentUserMemberId { currentUserId in
+                        if let currentUserId = currentUserId {
+                            self.isAuthor = (currentUserId == data.result.memberId)
+                        }
                     }
+                case .failure(let error):
                     self.isLoading = false
+                    print("게시물 로드 실패: \(error.localizedDescription)")
                 }
             }
     }
@@ -320,6 +327,36 @@ struct DummyBoardDetail: View {
             }
     }
 
+    func fetchCurrentUserMemberId(completion: @escaping (Int?) -> Void) {
+        let token = KeychainHelper.standard.read(service: "access-token", account: "user") ?? ""
+        let url = APIConstants.calendarMember.path
+        let headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Authorization": "Bearer \(token)"
+        ]
+
+        print("요청 URL: \(url)") // 디버깅용 로그
+
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: CurrentUserResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        completion(data.result.memberId)
+                    } else {
+                        print("사용자 정보 응답 실패: \(data.message)")
+                        completion(nil)
+                    }
+                case .failure(let error):
+                    print("사용자 정보 조회 에러: \(error.localizedDescription)")
+                    if let data = response.data, let body = String(data: data, encoding: .utf8) {
+                        print("응답 body: \(body)")
+                    }
+                    completion(nil)
+                }
+            }
+    }
 }
 
 struct Comments: View {
