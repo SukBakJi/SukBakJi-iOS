@@ -151,7 +151,7 @@ extension EditInfoViewController {
         guard let retrievedEmail = KeychainHelper.standard.read(service: "email", account: "user") else {
             return
         }
-        // 데이터 변경 시 UI 자동 업데이트
+        
         viewModel.myProfile
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
@@ -163,7 +163,6 @@ extension EditInfoViewController {
             })
             .disposed(by: disposeBag)
         
-        // 에러 메시지 바인딩
         viewModel.errorMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { message in
@@ -171,7 +170,6 @@ extension EditInfoViewController {
             })
             .disposed(by: disposeBag)
         
-        // 프로필 업데이트 성공 시 알림 표시 후 화면 닫기
         viewModel.profileUpdated
             .subscribe(onNext: { [weak self] success in
                 if success {
@@ -182,15 +180,13 @@ extension EditInfoViewController {
             })
             .disposed(by: disposeBag)
         
-        // 에러 발생 시 Alert 표시
         viewModel.errorMessage
             .subscribe(onNext: { message in
                 AlertController(message: message).show()
             })
             .disposed(by: disposeBag)
     }
-        
-    // 프로필 업데이트 실행
+    
     @objc private func updateProfile() {
         viewModel.loadEditProfile(degree: degree, topics: topics)
     }

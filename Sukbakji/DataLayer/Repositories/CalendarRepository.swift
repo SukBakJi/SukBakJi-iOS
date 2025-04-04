@@ -65,10 +65,9 @@ class CalendarRepository {
         return APIService.shared.deleteWithToken(of: APIResponseNoResult.self, url: url, parameters: nil, accessToken: token)
     }
     
-    func fetchUnivDeleteSelected(token: String, univIds: [Int]) -> Single<APIResponseNoResult> {
+    func fetchUnivDeleteSelected(token: String, parameters: [String: [Any]]?) -> Single<APIResponseNoResult> {
         let url = APIConstants.calendarUnivSelected.path
-        let params = ["univIds": [univIds]]
-        return APIService.shared.deleteWithToken(of: APIResponseNoResult.self, url: url, parameters: params, accessToken: token)
+        return APIService.shared.deleteWithToken(of: APIResponseNoResult.self, url: url, parameters: parameters, accessToken: token)
     }
     
     func fetchAlarmList(token: String) -> Single<APIResponse<Alarm>> {

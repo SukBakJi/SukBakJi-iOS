@@ -83,50 +83,50 @@ class HotPostTableViewCell: UITableViewCell {
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
-           make.leading.equalToSuperview().offset(18)
-           make.height.equalTo(20)
+            make.leading.equalToSuperview().offset(18)
+            make.height.equalTo(20)
         }
         
         self.labelView.addSubview(labelLabel)
         labelLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7)
-           make.centerY.equalToSuperview()
-           make.height.equalTo(26)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(26)
         }
         
         self.contentView.addSubview(labelView2)
         labelView2.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.leading.equalTo(labelView.snp.trailing).offset(6)
-           make.height.equalTo(20)
+            make.height.equalTo(20)
         }
         
         self.labelView2.addSubview(labelLabel2)
         labelLabel2.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7)
-           make.centerY.equalToSuperview()
-           make.height.equalTo(26)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(26)
         }
         
         self.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(labelView.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(18)
-           make.height.equalTo(17)
+            make.height.equalTo(17)
         }
         
         self.contentView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(1)
             make.leading.trailing.equalToSuperview().inset(18)
-           make.height.equalTo(36)
+            make.height.equalTo(36)
         }
         
         self.contentView.addSubview(viewLabel)
         viewLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(16)
             make.trailing.equalToSuperview().inset(18)
-           make.height.equalTo(14)
+            make.height.equalTo(14)
         }
         
         self.contentView.addSubview(viewImageView)
@@ -140,7 +140,7 @@ class HotPostTableViewCell: UITableViewCell {
         commentLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(16)
             make.trailing.equalTo(viewImageView.snp.leading).offset(-12)
-           make.height.equalTo(14)
+            make.height.equalTo(14)
         }
         
         self.contentView.addSubview(commentImageView)

@@ -8,10 +8,15 @@
 import UIKit
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class UpComingCalendarCollectionViewCell: UICollectionViewCell {
     
     static let identifier = String(describing: UpComingCalendarCollectionViewCell.self)
+    
+    private var viewModel = UnivViewModel()
+    private let disposeBag = DisposeBag()
     
     private let layerImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Layer")
@@ -77,15 +82,11 @@ class UpComingCalendarCollectionViewCell: UICollectionViewCell {
     
     func prepare(upComingList: UpComingList) {
         dDayLabel.text = String(upComingList.dday)
-        if upComingList.univId == 1 {
-            univLabel.text = "서울대학교"
-        } else if upComingList.univId == 2 {
-            univLabel.text = "연세대학교"
-        } else if upComingList.univId == 3 {
-            univLabel.text = "고려대학교"
-        } else {
-            univLabel.text = "카이스트"
-        }
+        viewModel.loadUnivName(univId: upComingList.univId)
+            .subscribe(onNext: { [weak self] univName in
+                self?.univLabel.text = univName
+            })
+            .disposed(by: disposeBag)
         contentLabel.text = upComingList.content
     }
 }

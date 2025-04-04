@@ -18,6 +18,8 @@ class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDel
     private let univViewModel = UnivViewModel()
     private let disposeBag = DisposeBag()
     
+    private var univIds: [Int] = []
+    
     override func loadView() {
         self.view = univView
     }
@@ -44,6 +46,7 @@ extension UnivCalendarViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivDeleteComplete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivEditComplete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivDeleteAllComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(univEditingComplete), name: .isUnivDeleteSelectedComplete, object: nil)
     }
     
     private func setAPI() {
@@ -65,7 +68,6 @@ extension UnivCalendarViewController {
             .observe(on: MainScheduler.instance)
             .bind(to: univView.univCalendarTableView.rx.items(cellIdentifier: UnivCalendarTableViewCell.identifier, cellType: UnivCalendarTableViewCell.self)) { index, item, cell in
                 cell.prepare(univList: item)
-                cell.univLabel.text = self.univViewModel.univNameItem.value?.univName
                 cell.delegate = self
                 
                 self.viewModel.selectedUnivAll
@@ -103,6 +105,30 @@ extension UnivCalendarViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        univView.selectDeleteButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else { return }
+                let univIds = self.univIds
+                self.viewModel.deleteUnivCalendarSelected(univIds: univIds)
+                self.univIds.removeAll()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func select_Tapped(cell: UnivCalendarTableViewCell) {
+        guard let indexPath = univView.univCalendarTableView.indexPath(for: cell) else { return }
+        let univId = viewModel.univList.value[indexPath.row].univId
+        
+        if univIds.contains(univId) {
+            univIds.removeAll { $0 == univId }
+            print(univIds)
+        } else {
+            univIds.append(univId)
+            print(univIds)
+        }
+        
+        updateUIForSelectedCells()
     }
     
     func univDelete_Tapped(cell: UnivCalendarTableViewCell) {
@@ -131,6 +157,22 @@ extension UnivCalendarViewController {
         let viewController = EditUnivCalendarViewController(calendarViewModel: self.viewModel)
         let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 380, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
+    }
+    
+    private func updateUIForSelectedCells() {
+        for (index, univ) in viewModel.univList.value.enumerated() {
+            guard let cell = univView.univCalendarTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? UnivCalendarTableViewCell else { continue }
+            let univId = univ.univId
+            
+            // 셀의 selectButton 상태 업데이트
+            if univIds.contains(univId) {
+                // 선택된 상태
+                cell.selectButton.setImage(UIImage(named: "Sukbakji_Check2"), for: .normal)
+            } else {
+                // 선택되지 않은 상태
+                cell.selectButton.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
+            }
+        }
     }
     
     @objc private func univEditingComplete() {

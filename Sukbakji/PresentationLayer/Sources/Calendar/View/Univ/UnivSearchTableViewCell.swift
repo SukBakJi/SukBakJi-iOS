@@ -22,7 +22,7 @@ class UnivSearchTableViewCell: UITableViewCell {
         $0.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
         $0.contentMode = .scaleAspectFill
     }
-    private let univLabel = UILabel().then {
+    let univLabel = UILabel().then {
         $0.textColor = .black
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
@@ -43,7 +43,7 @@ class UnivSearchTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        disposeBag = DisposeBag() // DisposeBag 재설정
+        disposeBag = DisposeBag()
     }
     
     private func setUI() {

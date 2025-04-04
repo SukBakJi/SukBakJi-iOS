@@ -55,7 +55,7 @@ class UnivRecruitView: UIView {
         $0.textColor = .gray900
     }
     var recruitLabel = UILabel().then {
-        $0.text = "  모집전형을 선택해 주세요"
+        $0.text = "모집전형을 선택해 주세요"
         $0.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.textColor = .gray500
     }
@@ -237,7 +237,7 @@ class UnivRecruitView: UIView {
         
         recruitLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(recruitTitleLabel.snp.trailing)
+            $0.leading.equalTo(recruitTitleLabel.snp.trailing).offset(8)
             $0.height.equalTo(19)
         }
         

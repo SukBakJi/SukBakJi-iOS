@@ -52,14 +52,12 @@ extension MypageViewController {
     }
     
     private func bindViewModel() {
-        // 로그아웃 버튼 클릭 이벤트 처리
         mypageView.logOutButton.rx.tap
             .bind { [weak self] in
                 self?.showLogoutAlert()
             }
             .disposed(by: disposeBag)
         
-        // 로그아웃 결과 처리
         viewModel.logoutResult
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSuccess in
@@ -71,7 +69,6 @@ extension MypageViewController {
             })
             .disposed(by: disposeBag)
         
-        // 데이터 변경 시 UI 자동 업데이트
         viewModel.myProfile
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
@@ -86,7 +83,6 @@ extension MypageViewController {
             })
             .disposed(by: disposeBag)
         
-        // 에러 메시지 바인딩
         viewModel.errorMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { message in
@@ -95,14 +91,12 @@ extension MypageViewController {
             .disposed(by: disposeBag)
     }
     
-    // 로그아웃 확인 Alert 띄우기
     private func showLogoutAlert() {
         AlertController(message: "로그아웃 하시겠어요?", isCancel: true) { [weak self] in
             self?.viewModel.loadLogOut()  // ✅ 로그아웃 API 호출
         }.show()
     }
     
-    // 로그인 화면으로 이동
     private func navigateToLogin() {
         let loginVC = UINavigationController(rootViewController: LoginViewController())
         SceneDelegate().setRootViewController(loginVC)

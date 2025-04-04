@@ -156,14 +156,12 @@ extension EditPWViewController {
             .bind(to: viewModel.confirmPWInput)
             .disposed(by: disposeBag)
         
-        // 로그아웃 버튼 클릭 이벤트 처리
         editPWView.changeButton.rx.tap
             .bind { [weak self] in
                 self?.showLogoutAlert()
             }
             .disposed(by: disposeBag)
         
-        // 로그아웃 결과 처리
         viewModel.pwChanged
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSuccess in
@@ -176,7 +174,6 @@ extension EditPWViewController {
             .disposed(by: disposeBag)
     }
     
-    // 로그아웃 확인 Alert 띄우기
     private func showLogoutAlert() {
         AlertController(message: "비밀번호를 변경하시겠어요?", isCancel: true) { [weak self] in
             self?.viewModel.loadChangePW()
@@ -184,7 +181,6 @@ extension EditPWViewController {
         }.show()
     }
     
-    // 로그인 화면으로 이동
     private func navigateToLogin() {
         let loginVC = UINavigationController(rootViewController: LoginViewController())
         SceneDelegate().setRootViewController(loginVC)

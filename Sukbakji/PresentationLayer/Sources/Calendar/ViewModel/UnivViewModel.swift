@@ -16,10 +16,7 @@ final class UnivViewModel {
     let univSearchList = BehaviorRelay<[UnivSearchList]>(value: [])
     let selectUnivItem = BehaviorRelay<UnivSearchList?>(value: nil)
     
-    let univNameItem = BehaviorRelay<UnivName?>(value: nil)
-    
     let recruitTypes = BehaviorRelay<[String]>(value: [])
-    let selectedRecruitType = BehaviorRelay<String?>(value: nil)
     
     let univEnrolled = PublishSubject<Bool>()
     
@@ -94,13 +91,5 @@ final class UnivViewModel {
                 self.univEnrolled.onNext(false)
             })
             .disposed(by: disposeBag)
-    }
-    
-    func loadTestData() {
-        let testUnivList: [UnivSearchList] = [
-            UnivSearchList(id: 1, name: "서울대학교"),
-            UnivSearchList(id: 1, name: "서경대학교")
-        ]
-        univSearchList.accept(testUnivList)
     }
 }
