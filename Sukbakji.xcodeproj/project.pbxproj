@@ -58,6 +58,7 @@
 		7B3459F92C688C2D008B711A /* BoardWrittenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459F82C688C2D008B711A /* BoardWrittenModel.swift */; };
 		7B3459FB2C688C6F008B711A /* BoardCommentedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459FA2C688C6F008B711A /* BoardCommentedModel.swift */; };
 		7B3459FD2C688C9D008B711A /* BoardBookmarkedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */; };
+		7B3933EF2D9FF147009EFC55 /* CurrentUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3933EE2D9FF147009EFC55 /* CurrentUserResponse.swift */; };
 		7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */; };
 		7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */; };
 		7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */; };
@@ -313,6 +314,7 @@
 		7B3459F82C688C2D008B711A /* BoardWrittenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardWrittenModel.swift; sourceTree = "<group>"; };
 		7B3459FA2C688C6F008B711A /* BoardCommentedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentedModel.swift; sourceTree = "<group>"; };
 		7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardBookmarkedModel.swift; sourceTree = "<group>"; };
+		7B3933EE2D9FF147009EFC55 /* CurrentUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserResponse.swift; sourceTree = "<group>"; };
 		7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrittenBoardViewController.swift; sourceTree = "<group>"; };
 		7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedBoardViewController.swift; sourceTree = "<group>"; };
@@ -751,6 +753,7 @@
 				7B3459FA2C688C6F008B711A /* BoardCommentedModel.swift */,
 				7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */,
 				7BC4E7852D8ACF3D00963B61 /* LatestQnAModel.swift */,
+				7B3933EE2D9FF147009EFC55 /* CurrentUserResponse.swift */,
 			);
 			path = BoardModel;
 			sourceTree = "<group>";
@@ -1525,9 +1528,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sukbakji/Pods-Sukbakji-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sukbakji/Pods-Sukbakji-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1563,6 +1570,7 @@
 				C77B49702D7B66D600005ABE /* OrangeButton.swift in Sources */,
 				C77B49712D7B66D600005ABE /* smallTextButton.swift in Sources */,
 				C77B49722D7B66D600005ABE /* CommonTextFieldView.swift in Sources */,
+				7B3933EF2D9FF147009EFC55 /* CurrentUserResponse.swift in Sources */,
 				91D4133D2D826B2000020CEC /* CompleteView.swift in Sources */,
 				C77B49732D7B66D600005ABE /* SocialAuthButton.swift in Sources */,
 				7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */,
