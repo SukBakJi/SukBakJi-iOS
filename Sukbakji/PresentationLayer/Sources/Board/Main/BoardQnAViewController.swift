@@ -81,7 +81,7 @@ struct BoardQnAViewController: View {
 
                     Divider()
 
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         // 공지사항 글
                         noticeView(showAlert: $showAlert)
                             .padding(.horizontal, 24)
@@ -310,8 +310,8 @@ struct BoardQnAViewController: View {
 
         let group = DispatchGroup()
 
-        // '석사', '박사' 뿐만 아니라 '입학예정'도 포함
-        let menus = ["석사", "박사", "입학예정"]
+        // '석사', '박사' 뿐만 아니라 '진학예정'도 포함
+        let menus = ["석사", "박사", "진학예정"]
         for menu in menus {
             group.enter()
             loadPosts(menu) {

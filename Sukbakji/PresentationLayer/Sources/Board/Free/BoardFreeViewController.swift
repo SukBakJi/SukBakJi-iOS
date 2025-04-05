@@ -96,6 +96,7 @@ struct SavedBoardsView: View {
                 .padding(.bottom, 8)
             }
             
+            /*
             if boards.isEmpty {
                 VStack {
                     Text("아직 즐겨찾기한 게시판이 없어요")
@@ -142,6 +143,10 @@ struct SavedBoardsView: View {
                     .padding(.vertical, 8)
                 }
             }
+             */
+            
+            UnreadyBookmarkBoard()
+                .padding(.vertical, 48)
         }
     }
 }
@@ -220,14 +225,14 @@ struct MakeBoardsView: View {
                 Text("게시판 만들러 가기")
                     .font(
                         Font.custom("Pretendard", size: Constants.fontSizeM)
-                            .weight(Constants.fontWeightSemiBold)
+                            .weight(Constants.fontWeightMedium)
                     )
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
+                    .foregroundColor(Constants.Gray500)
                     .padding(.vertical, 14)
             }
             .frame(maxWidth: .infinity)
-            .background(Color(red: 0.93, green: 0.29, blue: 0.03))
+            .background(Constants.Gray200)
             .cornerRadius(8)
             .padding(.horizontal, 24)
             .padding(.bottom, 24)

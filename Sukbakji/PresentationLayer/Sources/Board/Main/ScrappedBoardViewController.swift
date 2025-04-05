@@ -45,7 +45,7 @@ struct ScrappedBoardViewController: View {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
                 } else if hasScrappedPosts {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         ForEach(scrappedPosts, id: \.postID) { post in
                             ContainerDummyBoard(
                                 boardName: post.boardName,

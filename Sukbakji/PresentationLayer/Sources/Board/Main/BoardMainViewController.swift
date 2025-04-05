@@ -68,7 +68,7 @@ struct BoardMainViewController: View {
                 qnaBoard()
                 
                 // MARK: -- 즐겨찾기한 게시판
-                
+                /*
                 if hasBookmarkedBoard {
                     HStack(alignment: .center) {
                         Text("즐겨찾기한 게시판")
@@ -108,7 +108,7 @@ struct BoardMainViewController: View {
                     .background(Constants.White)
                     .buttonStyle(PlainButtonStyle())  // 기본 버튼 스타일
                     bookmarkedBoard()
-                } else {
+                } else if !hasBookmarkedBoard {
                     VStack {
                         Spacer()
                         
@@ -136,8 +136,36 @@ struct BoardMainViewController: View {
                         
                         Spacer()
                     }
-                }
-                
+                } else { */
+                    VStack {
+                        Spacer()
+                        
+                        HStack(alignment: .center) {
+                            Text("즐겨찾기한 게시판")
+                                .font(
+                                    Font.custom("Pretendard", size: Constants.fontSizeL)
+                                        .weight(Constants.fontWeightSemiBold)
+                                )
+                                .foregroundColor(Constants.Gray900)
+                            
+                            Image("Star 1")
+                                .resizable()
+                                .frame(width: 20, height: 20, alignment: .center)
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.top, 28)
+                        .padding(.bottom, 12)
+                        .frame(alignment: .center)
+                        .background(Constants.White)
+                        
+                        UnreadyBookmarkBoard()
+                            .padding(.vertical, 48)
+                        
+                        Spacer()
+                    }
+//                }
             }
         }
         .navigationBarHidden(true)
@@ -155,35 +183,37 @@ struct tapMenu: View {
             HStack(spacing: 8) {
                 // HOT 게시판 버튼
                 Button(action: {
-                    // HOT 게시판 버튼 클릭 시 동작할 코드
-                    print("HOT 게시판 tapped")
+                    let view = HotBoardViewController()
+                    let vc = UIHostingController(rootView: view)
+                    vc.hidesBottomBarWhenPushed = true
+
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let rootVC = windowScene.windows.first?.rootViewController,
+                       let nav = findNavigationController(from: rootVC) {
+                        nav.pushViewController(vc, animated: true)
+                    }
                 }) {
-                    NavigationLink(destination: HotBoardViewController()) {
-                        ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Constants.Gray50)
-                            
-                            HStack {
-                                Text("HOT 게시판")
-                                    .font(
-                                        Font.custom("Pretendard", size: 14)
-                                            .weight(.semibold)
-                                    )
-                                    .foregroundColor(Constants.Gray900)
-                                    .padding(.top, 16) // 위쪽 여백
-                                    .padding(.leading, 12) // 왼쪽 여백
-                                    .padding(.bottom, 47)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading) // 왼쪽 위 정렬
-                                
-                                
-                                
-                                Image("Magnifier") // 이미지 추가
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
-                                    .padding(.top, 20)
-                                
-                            }
+                    ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Constants.Gray50)
+
+                        HStack {
+                            Text("HOT 게시판")
+                                .font(
+                                    Font.custom("Pretendard", size: 14)
+                                        .weight(.semibold)
+                                )
+                                .foregroundColor(Constants.Gray900)
+                                .padding(.top, 16) // 위쪽 여백
+                                .padding(.leading, 12) // 왼쪽 여백
+                                .padding(.bottom, 47)
+                                .frame(maxWidth: .infinity, alignment: .topLeading) // 왼쪽 위 정렬
+
+                            Image("Magnifier") // 이미지 추가
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                                .padding(.top, 20)
                         }
                     }
                 }
@@ -191,39 +221,39 @@ struct tapMenu: View {
                 
                 // 내가 쓴 글 버튼
                 Button(action: {
-                    // 내가 쓴 글 버튼 클릭 시 동작할 코드
-                    print("내가 쓴 글 tapped")
-                }) {
-                    NavigationLink(destination: WrittenBoardViewController()) {
-                        ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Constants.Gray50)
+                    let view = WrittenBoardViewController()
+                    let vc = UIHostingController(rootView: view)
+                    vc.hidesBottomBarWhenPushed = true
 
-                            HStack {
-                                Text("내가 쓴 글")
-                                    .font(
-                                        Font.custom("Pretendard", size: 14)
-                                            .weight(.semibold)
-                                    )
-                                    .foregroundColor(Constants.Gray900)
-                                    .padding(.top, 16) // 위쪽 여백
-                                    .padding(.leading, 12) // 왼쪽 여백
-                                    .padding(.bottom, 47)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading) // 왼쪽 위 정렬
-                                
-                                
-                                
-                                Image("Pencil") // 이미지 추가
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
-                                    .padding(.top, 20)
-                                
-                            }
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let rootVC = windowScene.windows.first?.rootViewController,
+                       let nav = findNavigationController(from: rootVC) {
+                        nav.pushViewController(vc, animated: true)
+                    }
+                }) {
+                    ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Constants.Gray50)
+
+                        HStack {
+                            Text("내가 쓴 글")
+                                .font(
+                                    Font.custom("Pretendard", size: 14)
+                                        .weight(.semibold)
+                                )
+                                .foregroundColor(Constants.Gray900)
+                                .padding(.top, 16) // 위쪽 여백
+                                .padding(.leading, 12) // 왼쪽 여백
+                                .padding(.bottom, 47)
+                                .frame(maxWidth: .infinity, alignment: .topLeading) // 왼쪽 위 정렬
+
+                            Image("Pencil") // 이미지 추가
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                                .padding(.top, 20)
                         }
                     }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(Constants.Gray900)
                 }
                 .buttonStyle(PlainButtonStyle()) // 기본 버튼 스타일
             }
@@ -231,77 +261,77 @@ struct tapMenu: View {
             HStack(spacing: 8) {
                 // 스크랩 버튼
                 Button(action: {
-                    // 스크랩 버튼 클릭 시 동작할 코드
-                    print("스크랩 tapped")
-                }) {
-                    NavigationLink(destination: ScrappedBoardViewController()) {
-                        ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Constants.Gray50)
+                    let view = ScrappedBoardViewController()
+                    let vc = UIHostingController(rootView: view)
+                    vc.hidesBottomBarWhenPushed = true
 
-                            HStack {
-                                Text("스크랩")
-                                    .font(
-                                        Font.custom("Pretendard", size: 14)
-                                            .weight(.semibold)
-                                    )
-                                    .foregroundColor(Constants.Gray900)
-                                    .padding(.top, 16) // 위쪽 여백
-                                    .padding(.leading, 12) // 왼쪽 여백
-                                    .padding(.bottom, 47)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading) // 왼쪽 위 정렬
-                                
-                                
-                                
-                                Image("Folder") // 이미지 추가
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
-                                    .padding(.top, 20)
-                                
-                            }
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let rootVC = windowScene.windows.first?.rootViewController,
+                       let nav = findNavigationController(from: rootVC) {
+                        nav.pushViewController(vc, animated: true)
+                    }
+                }) {
+                    ZStack(alignment: .topLeading) {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Constants.Gray50)
+
+                        HStack {
+                            Text("스크랩")
+                                .font(
+                                    Font.custom("Pretendard", size: 14)
+                                        .weight(.semibold)
+                                )
+                                .foregroundColor(Constants.Gray900)
+                                .padding(.top, 16)
+                                .padding(.leading, 12)
+                                .padding(.bottom, 47)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+
+                            Image("Folder")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                                .padding(.top, 20)
                         }
                     }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(Constants.Gray900)
                 }
                 .buttonStyle(PlainButtonStyle()) // 기본 버튼 스타일
-                
+
                 // 댓글 단 글 버튼
                 Button(action: {
-                    // 댓글 단 글 버튼 클릭 시 동작할 코드
-                    print("댓글 단 글 tapped")
-                }) {
-                    NavigationLink(destination: CommentedBoardViewController()) {
-                        ZStack(alignment: .topLeading) { // 텍스트를 상자의 좌측 상단에 정렬
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Constants.Gray50)
+                    let view = CommentedBoardViewController()
+                    let vc = UIHostingController(rootView: view)
+                    vc.hidesBottomBarWhenPushed = true
 
-                            HStack {
-                                Text("댓글 단 글")
-                                    .font(
-                                        Font.custom("Pretendard", size: 14)
-                                            .weight(.semibold)
-                                    )
-                                    .foregroundColor(Constants.Gray900)
-                                    .padding(.top, 16) // 위쪽 여백
-                                    .padding(.leading, 12) // 왼쪽 여백
-                                    .padding(.bottom, 47)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading) // 왼쪽 위 정렬
-                                
-                                
-                                
-                                Image("Chat") // 이미지 추가
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
-                                    .padding(.top, 20)
-                                
-                            }
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let rootVC = windowScene.windows.first?.rootViewController,
+                       let nav = findNavigationController(from: rootVC) {
+                        nav.pushViewController(vc, animated: true)
+                    }
+                }) {
+                    ZStack(alignment: .topLeading) {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Constants.Gray50)
+
+                        HStack {
+                            Text("댓글 단 글")
+                                .font(
+                                    Font.custom("Pretendard", size: 14)
+                                        .weight(.semibold)
+                                )
+                                .foregroundColor(Constants.Gray900)
+                                .padding(.top, 16)
+                                .padding(.leading, 12)
+                                .padding(.bottom, 47)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+
+                            Image("Chat")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                                .padding(.top, 20)
                         }
                     }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(Constants.Gray900)
                 }
                 .buttonStyle(PlainButtonStyle()) // 기본 버튼 스타일
             }
@@ -309,13 +339,26 @@ struct tapMenu: View {
         .padding(.horizontal, 24) // 좌우 여백 추가
         .padding(.top, 30) // 추가적인 여백
     }
+    
+    // 네비게이션 컨트롤러 찾기 함수
+    func findNavigationController(from vc: UIViewController) -> UINavigationController? {
+        if let nav = vc as? UINavigationController {
+            return nav
+        }
+        for child in vc.children {
+            if let found = findNavigationController(from: child) {
+                return found
+            }
+        }
+        return nil
+    }
 }
 
 // MARK: -- 최신 질문 게시판
 struct qnaBoard: View {
     @State private var qnaPosts: [LatestQnAModelResult] = []
     @State private var isLoading: Bool = false
-
+    
     var body: some View {
         VStack(spacing: 12) {
             HStack(spacing: 4) {
@@ -333,29 +376,33 @@ struct qnaBoard: View {
                     .frame(width: 15.41667, height: 15.79834)
                 
                 Spacer()
-
+                
                 Button(action: {
-                    print("최신 질문글 tapped")
-                }) {
-                    NavigationLink(destination: BoardQnAViewController()) {
-                        Text("더보기")
-                            .font(
-                                Font.custom("Pretendard", size: Constants.fontSizeXs)
-                                    .weight(Constants.fontWeightMedium)
-                            )
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(Constants.Gray500)
-
-                        Image("More 1")
-                            .resizable()
-                            .frame(width: 4, height: 8)
+                    let detailView = BoardQnAViewController()
+                    let vc = UIHostingController(rootView: detailView)
+                    vc.hidesBottomBarWhenPushed = true
+                    
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let rootVC = windowScene.windows.first?.rootViewController,
+                       let nav = findNavigationController(from: rootVC) {
+                        nav.pushViewController(vc, animated: true)
                     }
+                }) {
+                    Text("더보기")
+                        .font(Font.custom("Pretendard", size: Constants.fontSizeXs)
+                            .weight(Constants.fontWeightMedium))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Constants.Gray500)
+                    
+                    Image("More 1")
+                        .resizable()
+                        .frame(width: 4, height: 8)
                 }
                 .padding(.horizontal, 24)
                 .buttonStyle(PlainButtonStyle())
             }
             .padding(.top, 28)
-
+            
             VStack(alignment: .leading, spacing: 0) {
                 if qnaPosts.isEmpty {
                     Text("최신 질문글이 없습니다.")
@@ -363,38 +410,41 @@ struct qnaBoard: View {
                         .foregroundColor(Constants.Gray900)
                         .padding()
                 } else {
-                    ForEach(qnaPosts.prefix(3), id: \.title) { question in
-                        Button(action: {
-                            print("\(question.title) tapped")
-                        }) {
-                            HStack(alignment: .center, spacing: 12) {
-                                Text(question.menu)
-                                    .font(
-                                        Font.custom("Pretendard", size: Constants.fontSizeXs)
-                                            .weight(Constants.fontWeightMedium)
-                                    )
-                                    .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 3)
-                                    .background(RoundedRectangle(cornerRadius: 4)
-                                        .fill(Color(red: 0.91, green: 0.92, blue: 1))
-                                    )
-                                    .padding(.leading, 18)
+                    ForEach(qnaPosts.prefix(3), id: \.postId) { question in
+                        HStack(alignment: .center, spacing: 12) {
+                            Button(action: {
+                                let detailView = DummyBoardDetail(boardName: question.menu, postId: question.postId, memberId: nil)
+                                let vc = UIHostingController(rootView: detailView)
+                                vc.hidesBottomBarWhenPushed = true
                                 
-                                Text(question.title)
-                                    .font(
-                                        Font.custom("Pretendard", size: Constants.fontSizeS)
-                                            .weight(Constants.fontWeightSemiBold)
-                                    )
-                                    .foregroundColor(Constants.Gray900)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                                    .padding(.leading, 12)
-                                    .padding(.vertical, 18)
+                                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                                   let rootVC = windowScene.windows.first?.rootViewController,
+                                   let nav = findNavigationController(from: rootVC) {
+                                    nav.pushViewController(vc, animated: true)
+                                }
+                            }) {
+                                HStack {
+                                    Text(question.menu)
+                                        .font(Font.custom("Pretendard", size: Constants.fontSizeXs) .weight(Constants.fontWeightMedium))
+                                        .foregroundStyle(Color(red: 0.29, green: 0.45, blue: 1))
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 3)
+                                        .background(RoundedRectangle(cornerRadius: 4)
+                                            .fill(Color(red: 0.91, green: 0.92, blue: 1)))
+                                        .padding(.leading, 18)
+                                    
+                                    Text(question.title)
+                                        .font(Font.custom("Pretendard", size: Constants.fontSizeS) .weight(Constants.fontWeightSemiBold))
+                                        .foregroundStyle(Constants.Gray900)
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 18)
+                                }
+                                .contentShape(Rectangle())
                             }
+                            .buttonStyle(PlainButtonStyle())
                         }
-
                         Divider()
-                            .background(Constants.Gray50)
                     }
                 }
             }
@@ -407,7 +457,7 @@ struct qnaBoard: View {
                     .stroke(Constants.Gray100, lineWidth: 1)
             )
             .padding(.horizontal, 24)
-
+            
             Spacer(minLength: 16)
         }
         .background(Constants.Gray50)
@@ -415,6 +465,18 @@ struct qnaBoard: View {
         .onAppear {
             loadQnAPosts()
         }
+    }
+    
+    func findNavigationController(from vc: UIViewController) -> UINavigationController? {
+        if let nav = vc as? UINavigationController {
+            return nav
+        }
+        for child in vc.children {
+            if let found = findNavigationController(from: child) {
+                return found
+            }
+        }
+        return nil
     }
 
     /// 최신 질문글을 가져오는 함수
@@ -590,6 +652,25 @@ struct EmptyBookmarkBoard: View {
                 .padding(.bottom, 8)
             
             Text("게시판을 탐색하고 즐겨찾기를 등록해 보세요!")
+                .font(.system(size: 11))
+                .multilineTextAlignment(.center)
+                .foregroundColor(Constants.Gray500)
+            
+        }
+    }
+}
+
+// MARK: -- 즐겨찾기한 게시판 준비중인 서비스
+struct UnreadyBookmarkBoard: View {
+    var body: some View {
+        VStack {
+            Text("준비중인 서비스입니다.")
+                .font(.system(size: 14, weight: .semibold))
+                .multilineTextAlignment(.center)
+                .foregroundStyle(Constants.Gray500)
+                .padding(.bottom, 8)
+            
+            Text("추후에 게시판을 탐색하고 즐겨찾기를 등록해 보세요!")
                 .font(.system(size: 11))
                 .multilineTextAlignment(.center)
                 .foregroundColor(Constants.Gray500)

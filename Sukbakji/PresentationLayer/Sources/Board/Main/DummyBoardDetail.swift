@@ -15,88 +15,78 @@ struct DummyBoardDetail: View {
     @State private var showValidationError: Bool = false
     @State var showingSheet = false
     @State var showAlert = false
-    @State var isAuthor = true // 작성자인지 여부를 나타내는 상태 변수
-    var boardName: String // 게시판 이름을 전달받는 변수
+    @State var isAuthor = false
+    var boardName: String
     @State private var showDeletionMessage = false
     @State private var showCommentDeletionMessage = false
-    @State private var degreeLevel: DegreeLevel? = nil // 사용자의 학위 상태를 저장할 변수
+    @State private var degreeLevel: DegreeLevel? = nil
+    @State private var boardDetail: BoardDetailResult? = nil
+    @State private var isLoading: Bool = true
+    @State private var showMore = false
+    @State private var isShowingEditView = false
     
-    @State private var boardDetail: BoardDetailResult? = nil // 게시물 데이터 상태 변수
-    @State private var isLoading: Bool = true // 데이터 로딩 상태
+    var postId: Int
+    var memberId: Int?
     
-    var postId: Int // 게시물 ID를 전달받는 변수
-    var memberId: Int? // 사용자 ID를 전달받는 변수
-    
-    // 댓글 데이터 상태 변수
     @State private var comments: [BoardComment] = []
-    @State private var anonymousCounter: Int = 1 // 익명 댓글 번호를 위한 카운터
+    @State private var anonymousCounter: Int = 1
+    @State private var currentUserId: Int? = nil
+    @State private var shouldReloadDetail: Bool = false
+    
+    @State private var isEditingCommentMode = false
+    @State private var editingCommentId: Int? = nil
 
     var body: some View {
         NavigationView {
             ZStack {
+                NavigationLink(destination: BoardEditViewController(
+                    postId: postId,
+                    originalTitle: boardDetail?.title ?? "",
+                    originalContent: boardDetail?.content ?? "",
+                    memberId: boardDetail?.memberId ?? 0,
+                    currentUserId: currentUserId ?? 0,
+                    boardName: boardDetail?.menu ?? "",
+                    shouldReload: $shouldReloadDetail
+                ), isActive: $isShowingEditView) {
+                    EmptyView()
+                }
+                .onChange(of: shouldReloadDetail) { newValue in
+                    if newValue {
+                        loadBoardDetail(postId: postId)
+                        shouldReloadDetail = false
+                    }
+                }
+                
                 if isLoading {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
                 } else {
                     VStack {
                         HStack {
-                            // 뒤로가기 버튼
                             Button(action: {
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 Image("BackButton")
                                     .frame(width: Constants.nav, height: Constants.nav)
                             }
-                            
+
                             Spacer()
-                            
+
                             Text(boardName)
                                 .font(.system(size: 20, weight: .semibold))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(Constants.Gray900)
-                            
+
                             Spacer()
-                            
+
                             Button(action: {
-                                self.showingSheet = true
+                                showMore = true
                             }) {
                                 Image("MoreButton")
                                     .frame(width: Constants.nav, height: Constants.nav)
                             }
-                            .actionSheet(isPresented: $showingSheet) {
-                                if isAuthor {
-                                    return ActionSheet(
-                                        title: Text(boardName),
-                                        buttons: [
-                                            .default(Text("수정하기")),
-                                            .destructive(Text("삭제하기"), action: {
-                                                self.showAlert = true
-                                            }),
-                                            .cancel(Text("취소"))
-                                        ]
-                                    )
-                                } else {
-                                    return ActionSheet(
-                                        title: Text(boardName),
-                                        buttons: [
-                                            .default(Text("신고하기")),
-                                            .cancel(Text("취소"))
-                                        ]
-                                    )
-                                }
-                            }
-                            .alert(isPresented: $showAlert) {
-                                Alert(
-                                    title: Text("게시물 삭제하기"),
-                                    message: Text("게시물을 삭제할까요? 삭제 후 복구되지 않습니다."),
-                                    primaryButton: .destructive(Text("삭제할게요"), action: {
-                                        deletePost() // 게시물 삭제 함수 호출
-                                    }),
-                                    secondaryButton: .cancel(Text("닫기"))
-                                )
-                            }
                         }
-                        
+
                         Divider()
                         
                         if let boardDetail = boardDetail {
@@ -177,34 +167,71 @@ struct DummyBoardDetail: View {
                                 ScrollView {
                                     VStack(alignment: .leading, spacing: 16) {
                                         ForEach(comments.indices, id: \.self) { index in
-                                            Comments(comment: comments[index], degreeLevel: degreeLevel, isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage, deleteComment: {
-                                                deleteComment(at: index)
-                                            })
+                                            Comments(
+                                                comment: comments[index],
+                                                degreeLevel: degreeLevel,
+                                                isAuthor: isAuthor,
+                                                showDeletionMessage: $showDeletionMessage,
+                                                showCommentDeletionMessage: $showCommentDeletionMessage,
+                                                updateCommentCallback: { updatedContent in
+                                                    comments[index].content = updatedContent
+                                                },
+                                                deleteComment: {
+                                                    deleteComment(at: index)
+                                                },
+                                                currentUserId: currentUserId,
+                                                onEditComment: { comment in
+                                                    self.commentText = comment.content
+                                                    self.editingCommentId = comment.commentId
+                                                    self.isEditingCommentMode = true
+                                                }
+                                            )
                                         }
                                     }
                                 }
                             }
                             
-                            WriteComment(commentText: $commentText, showValidationError: $showValidationError, addComment: addComment)
+                            WriteComment(
+                                commentText: $commentText,
+                                showValidationError: $showValidationError,
+                                addComment: addComment,
+                                isEditing: isEditingCommentMode,
+                                originalCommentText: comments.first(where: { $0.commentId == editingCommentId })?.content ?? ""
+                            )
                         }
                     }
                 }
+
+                MoreButtonView(
+                    isPresented: $showMore,
+                    onEdit: {
+                        print("수정하기 눌림")
+                        isShowingEditView = true
+                    },
+                    onDelete: {
+                        deletePost()
+                    },
+                    onReport: { reason in
+                        print("신고 사유 선택됨: \(reason)")
+                        // 예: 서버에 신고 요청 보내기
+                    },
+                    boardName: boardName,
+                    isAuthor: isAuthor // ← 작성자인지 여부 전달
+                )
             }
         }
         .navigationBarBackButtonHidden()
         .onAppear {
             DispatchQueue.main.async {
-                loadBoardDetail(postId: postId) // 게시물 상세 정보를 로드합니다.
-                loadProfileData() // 프로필 데이터 로드
+                loadBoardDetail(postId: postId)
+                loadProfileData()
+                // 작성자 판별을 위해 현재 사용자 memberId 조회
+                fetchCurrentUserMemberId { currentUserId in
+                    if let currentUserId = currentUserId, let boardAuthorId = boardDetail?.memberId {
+                        self.isAuthor = (currentUserId == boardAuthorId)
+                    }
+                }
             }
-        }
-    }
-    
-    func addComment() {
-        if commentText.isEmpty {
-            showValidationError = true
-        } else {
-            postComment(content: commentText)
         }
     }
 
@@ -224,11 +251,12 @@ struct DummyBoardDetail: View {
                 switch response.result {
                 case .success(let data):
                     let newComment = BoardComment(
+                        commentId: data.result.commentId,
                         anonymousName: data.result.nickname,
-                        degreeLevel: "익명", // DegreeLevel 설정이 필요하다면 적절히 변경하세요
+                        degreeLevel: "익명",
                         content: data.result.content,
                         createdDate: data.result.createdAt,
-                        memberId: data.result.memberId
+                        memberId: data.result.memberId // 댓글 수정은 해당 댓글 작성자만 가능하도록 memberId 추가
                     )
                     
                     comments.insert(newComment, at: 0) // 새로운 댓글을 맨 위에 추가
@@ -283,24 +311,29 @@ struct DummyBoardDetail: View {
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
-        
+
         NetworkAuthManager.shared.request(url, method: .get, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: BoardDetailModel.self) { response in
                 switch response.result {
                 case .success(let data):
                     self.boardDetail = data.result
-                    self.anonymousCounter = 1 // Reset anonymous counter when loading new post details
-
                     self.comments = data.result.comments
                     self.isLoading = false
-                case .failure(let error):
-                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
-                        print("Server Error Message: \(errorMessage)")
-                    } else {
-                        print("Error: \(error.localizedDescription)")
+                    
+                    // 작성자 판별
+                    fetchCurrentUserMemberId { currentUserId in
+                        if let currentUserId = currentUserId {
+                            self.currentUserId = currentUserId // ← 반드시 필요!
+                            if let boardAuthorId = boardDetail?.memberId {
+                                self.isAuthor = (currentUserId == boardAuthorId)
+                            }
+                        }
                     }
+
+                case .failure(let error):
                     self.isLoading = false
+                    print("게시물 로드 실패: \(error.localizedDescription)")
                 }
             }
     }
@@ -337,32 +370,116 @@ struct DummyBoardDetail: View {
             }
     }
 
+    func fetchCurrentUserMemberId(completion: @escaping (Int?) -> Void) {
+        let token = KeychainHelper.standard.read(service: "access-token", account: "user") ?? ""
+        let url = APIConstants.calendarMember.path
+        let headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Authorization": "Bearer \(token)"
+        ]
+
+        print("요청 URL: \(url)") // 디버깅용 로그
+
+        NetworkAuthManager.shared.request(url, method: .get, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: CurrentUserResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    if data.isSuccess {
+                        completion(data.result.memberId)
+                    } else {
+                        print("사용자 정보 응답 실패: \(data.message)")
+                        completion(nil)
+                    }
+                case .failure(let error):
+                    print("사용자 정보 조회 에러: \(error.localizedDescription)")
+                    if let data = response.data, let body = String(data: data, encoding: .utf8) {
+                        print("응답 body: \(body)")
+                    }
+                    completion(nil)
+                }
+            }
+    }
+    
+    func updateComment(commentId: Int, newContent: String) {
+        let url = APIConstants.baseURL + "/comments/update"
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            print("토큰 없음")
+            return
+        }
+
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(token)"
+        ]
+
+        let request = CommentUpdateRequest(commentId: commentId, content: newContent)
+
+        NetworkAuthManager.shared.request(url, method: .put, parameters: request, encoder: JSONParameterEncoder.default, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: CommentUpdateResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    print("댓글 수정 성공: \(data.message)")
+                    if let index = comments.firstIndex(where: { $0.commentId == commentId }) {
+                        comments[index].content = newContent
+                    }
+                    commentText = ""
+                    editingCommentId = nil
+                    isEditingCommentMode = false
+                    showValidationError = false
+                case .failure(let error):
+                    print("댓글 수정 실패: \(error.localizedDescription)")
+                }
+            }
+    }
+    
+    func addComment() {
+        if commentText.isEmpty {
+            showValidationError = true
+            return
+        }
+
+        if isEditingCommentMode, let commentId = editingCommentId {
+            updateComment(commentId: commentId, newContent: commentText)
+        } else {
+            postComment(content: commentText)
+        }
+    }
 }
 
 struct Comments: View {
+    
     var comment: BoardComment
-    @State private var showingCommentSheet = false
-    @State private var showCommentAlert = false
-    var degreeLevel: DegreeLevel? // 추가된 변수
+    var degreeLevel: DegreeLevel?
     var isAuthor: Bool
     @Binding var showDeletionMessage: Bool
     @Binding var showCommentDeletionMessage: Bool
+    var updateCommentCallback: (String) -> Void
     var deleteComment: () -> Void
+
+    var currentUserId: Int? // 현재 로그인한 사용자 ID
+    var onEditComment: ((BoardComment) -> Void)?
     
-    // State to manage like status and count
+    var isCommentAuthor: Bool {
+        return currentUserId == comment.memberId
+    }
+    
+    @State private var showingCommentSheet = false
+    @State private var showCommentAlert = false
+
     @State private var isLiked: Bool = false
     @State private var likeCount: Int = 0
+
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center) {
-                // Display "글쓴이" instead of "익명1"
-                Text(comment.anonymousName == "익명1" ? "글쓴이" : comment.anonymousName)
+                Text(comment.anonymousName == "글쓴이" ? "글쓴이" : comment.anonymousName)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Constants.Gray800)
                 Divider()
                 
-                // DegreeLevel에 따른 학위 상태 표시
                 if let degreeLevel = degreeLevel {
                     Text(degreeLevelText(degreeLevel))
                         .font(.system(size: 14, weight: .semibold))
@@ -372,7 +489,6 @@ struct Comments: View {
                 Spacer()
                 
                 Button(action: {
-                    print("댓글 더보기 버튼 tapped")
                     self.showingCommentSheet = true
                 }) {
                     Image("MoreButton 1")
@@ -380,14 +496,16 @@ struct Comments: View {
                         .frame(width: 12, height: 12)
                 }
                 .actionSheet(isPresented: $showingCommentSheet) {
-                    if isAuthor {
+                    if isCommentAuthor {
                         return ActionSheet(
                             title: Text("댓글"),
                             buttons: [
-                                .default(Text("수정하기")),
-                                .destructive(Text("삭제하기"), action: {
-                                    self.showCommentAlert = true
+                                .default(Text("수정하기"), action: {
+                                    onEditComment?(comment)
                                 }),
+//                                .destructive(Text("삭제하기"), action: {
+//                                    self.showCommentAlert = true
+//                                }),
                                 .cancel(Text("취소"))
                             ]
                         )
@@ -411,18 +529,17 @@ struct Comments: View {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                 showCommentDeletionMessage = false
                             }
-                            print("댓글 삭제됨")
                         }),
                         secondaryButton: .cancel(Text("닫기"))
                     )
                 }
             }
-            
+
             Text(formatDate(comment.createdDate))
                 .font(.system(size: 10))
                 .foregroundStyle(Constants.Gray500)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-            
+
             HStack {
                 Text(comment.content)
                     .font(.system(size: 12, weight: .medium))
@@ -431,7 +548,6 @@ struct Comments: View {
                 
                 Spacer()
                 
-                // 댓글 좋아요 버튼
                 Button(action: {
                     isLiked.toggle()
                     likeCount += isLiked ? 1 : -1
@@ -441,24 +557,51 @@ struct Comments: View {
                         .frame(width: 12, height: 12)
                 }
                 
-                // 댓글 좋아요 수
                 Text("\(likeCount)")
-                    .font(
-                        Font.custom("Pretendard", size: 10)
-                            .weight(.regular)
-                    )
+                    .font(Font.custom("Pretendard", size: 10).weight(.regular))
                     .foregroundColor(isLiked ? Constants.Orange700 : Constants.Gray300)
             }
-            
-            Divider() // 댓글 구분선
+
+            Divider()
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 12)
         .frame(alignment: .topLeading)
         .background(Constants.White)
     }
-    
-    // DegreeLevel에 따른 텍스트 반환 함수
+
+    func updateComment(commentId: Int, newContent: String) {
+        let url = APIConstants.baseURL + "/comments/update"
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            print("토큰 없음")
+            return
+        }
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(token)"
+        ]
+        
+        let request = CommentUpdateRequest(commentId: commentId, content: newContent)
+        
+        NetworkAuthManager.shared.request(url, method: .put, parameters: request, encoder: JSONParameterEncoder.default, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: CommentUpdateResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    print("댓글 수정 성공: \(data.message)")
+                    updateCommentCallback(data.result.content) // ← 상위 뷰에 전달
+                case .failure(let error):
+                    if let data = response.data,
+                       let errorMessage = String(data: data, encoding: .utf8) {
+                        print("서버 응답: \(errorMessage)")
+                    } else {
+                        print("댓글 수정 실패: \(error.localizedDescription)")
+                    }
+                }
+            }
+    }
+
     func degreeLevelText(_ degreeLevel: DegreeLevel) -> String {
         switch degreeLevel {
         case .bachelorsStudying:
@@ -477,8 +620,7 @@ struct Comments: View {
             return "통합과정 재학"
         }
     }
-    
-    // 날짜 형식을 'yyyy-MM-dd 작성'으로 변경하는 함수
+
     func formatDate(_ dateString: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS"
@@ -487,61 +629,86 @@ struct Comments: View {
             formatter.dateFormat = "yyyy.MM.dd 작성"
             return formatter.string(from: date)
         }
-        return dateString // 변환이 실패하면 원래 문자열 반환
+        return dateString
     }
 }
-
 
 struct WriteComment: View {
     @Binding var commentText: String
     @Binding var showValidationError: Bool
     var addComment: () -> Void
-    
+    var isEditing: Bool
+    var originalCommentText: String
+
+    @FocusState private var isTextFieldFocused: Bool
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    ZStack(alignment: .leading) {
-                        if commentText.isEmpty {
-                            Text("댓글을 남겨보세요!")
-                                .foregroundColor(Color(Constants.Gray500))
-                                .padding(.horizontal, 8)
-                        }
-                        TextField("댓글을 남겨보세요!", text: $commentText)
-                            .padding()
-                            .frame(height: 44)
-                            .background(showValidationError && commentText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
-                            .cornerRadius(8, corners: [.topLeft, .topRight])
-                            .overlay(
-                                Rectangle()
-                                    .frame(height: 2)
-                                    .foregroundColor(commentText.isEmpty ? Color(Constants.Gray300) : Color.blue)
-                                    .padding(.top, 44)
-                                    .padding(.horizontal, 8),
-                                alignment: .bottom
-                            )
-                            .foregroundColor(showValidationError && commentText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
-                    }
-                    Button(action: {
-                        addComment()
-                    }) {
-                        Text("등록")
-                            .font(.system(size: 16, weight: .semibold))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(commentText.isEmpty ? Constants.Gray500 : Constants.White)
-                            .frame(width: 70, height: 44)
-                            .background(commentText.isEmpty ? Color(Constants.Gray200) : Color(red: 0.93, green: 0.29, blue: 0.03))
-                            .cornerRadius(8)
-                    }
-                }
+            if isEditing {
+                Text("댓글 수정 중")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(Constants.Orange700)
+                    .padding(.bottom, 4)
+                    .padding(.horizontal, 4)
             }
-            .frame(alignment: .topLeading)
+
+            HStack {
+                ZStack(alignment: .leading) {
+                    if commentText.isEmpty {
+                        Text("댓글을 남겨보세요!")
+                            .foregroundColor(Color(Constants.Gray500))
+                            .padding(.horizontal, 8)
+                    }
+
+                    TextField("댓글을 남겨보세요!", text: $commentText)
+                        .focused($isTextFieldFocused)
+                        .padding()
+                        .frame(height: 44)
+                        .background(showValidationError && commentText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
+                        .cornerRadius(8, corners: [.topLeft, .topRight])
+                        .overlay(
+                            Rectangle()
+                                .frame(height: 2)
+                                .foregroundColor(commentText.isEmpty ? Color(Constants.Gray300) : Constants.Orange700)
+                                .padding(.top, 44)
+                                .padding(.horizontal, 8),
+                            alignment: .bottom
+                        )
+                        .foregroundColor(showValidationError && commentText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
+                }
+
+                Button(action: {
+                    addComment()
+                }) {
+                    Text(isEditing ? "수정" : "등록")
+                        .font(.system(size: 16, weight: .semibold))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(
+                            commentText.isEmpty || (isEditing && commentText == originalCommentText)
+                            ? Constants.Gray500
+                            : Constants.White
+                        )
+                        .frame(width: 70, height: 44)
+                        .background(
+                            commentText.isEmpty || (isEditing && commentText == originalCommentText)
+                            ? Color(Constants.Gray200)
+                            : Color(red: 0.93, green: 0.29, blue: 0.03)
+                        )
+                        .cornerRadius(8)
+                }
+                .disabled(commentText.isEmpty || (isEditing && commentText == originalCommentText))
+            }
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 8)
-        .frame(alignment: .topLeading)
         .background(Constants.White)
-        .shadow(color: .black.opacity(0.15), radius: 3.5, x: 0, y: 0)
+        .onChange(of: isEditing) { newValue in
+            if newValue {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isTextFieldFocused = true
+                }
+            }
+        }
     }
 }
 
@@ -642,6 +809,142 @@ struct BookmarkButtonView: View {
                     print("Error checking scrap status: \(error.localizedDescription)")
                 }
             }
+    }
+}
+
+struct MoreButtonView: View {
+    @Binding var isPresented: Bool
+    var onEdit: () -> Void
+    var onDelete: () -> Void
+    var onReport: (String) -> Void // 신고 사유도 전달받도록 수정
+    var boardName: String
+    var isAuthor: Bool
+
+    @State private var isReporting = false
+
+    let reportReasons = [
+        "욕설/비하",
+        "유출/사칭/사기",
+        "상업적 광고 및 판매",
+        "음란물/불건전한 대화 및 만남",
+        "게시판 주제에 부적절함",
+        "정당/정치인 비하 및 선거운동",
+        "낚시/도배"
+    ]
+
+    var body: some View {
+        ZStack {
+            if isPresented {
+                Color.black.opacity(0.2)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation {
+                            isPresented = false
+                            isReporting = false
+                        }
+                    }
+
+                VStack(spacing: 8) {
+                    Spacer()
+
+                    VStack(spacing: 0) {
+                        // ✅ 타이틀: 일반모드 → 게시판 이름 / 신고모드 → 신고하기
+                        Text(isReporting ? "신고하기" : boardName)
+                            .font(.system(size: 13))
+                            .foregroundColor(Color.gray.opacity(0.5))
+                            .padding(.vertical, 16)
+
+                        Divider()
+
+                        if isAuthor {
+                            // ✅ 작성자인 경우
+                            Button(action: {
+                                onEdit()
+                                isPresented = false
+                            }) {
+                                Text("수정하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(Constants.ColorsBlue)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
+
+                            Divider()
+
+//                            Button(action: {
+//                                onDelete()
+//                                isPresented = false
+//                            }) {
+//                                Text("삭제하기")
+//                                    .font(.system(size: 17))
+//                                    .foregroundColor(Constants.ColorsBlue)
+//                                    .frame(maxWidth: .infinity)
+//                                    .padding(17)
+//                            }
+
+                        } else if isReporting {
+                            // ✅ 신고 사유 선택 화면
+                            ForEach(reportReasons, id: \.self) { reason in
+                                Button(action: {
+                                    onReport(reason)
+                                    isPresented = false
+                                    isReporting = false
+                                }) {
+                                    Text(reason)
+                                        .font(.system(size: 17))
+                                        .foregroundColor(Constants.ColorsBlue)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(17)
+                                }
+
+                                if reason != reportReasons.last {
+                                    Divider()
+                                }
+                            }
+                        } else {
+                            // ✅ 신고하기 버튼
+                            Button(action: {
+                                withAnimation {
+                                    isReporting = true
+                                }
+                            }) {
+                                Text("신고하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
+                        }
+                    }
+                    .background(Color.white.opacity(0.9))
+                    .cornerRadius(14)
+                    .padding(.horizontal, 8)
+
+                    // 취소 버튼
+                    Button(action: {
+                        withAnimation {
+                            if isReporting {
+                                isReporting = false
+                            } else {
+                                isPresented = false
+                            }
+                        }
+                    }) {
+                        Text("취소")
+                            .font(.system(size: 17, weight: .semibold))
+                            .foregroundColor(Constants.ColorsBlue)
+                            .frame(maxWidth: .infinity)
+                            .padding(17)
+                            .background(Color.white)
+                            .cornerRadius(14)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 20)
+                }
+                .transition(.move(edge: .bottom))
+            }
+        }
+        .animation(.easeInOut, value: isPresented)
     }
 }
 
