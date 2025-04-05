@@ -625,7 +625,7 @@ struct EmptyBookmarkBoard: View {
 struct UnreadyBookmarkBoard: View {
     var body: some View {
         VStack {
-            Text("아직 준비중인 서비스입니다.")
+            Text("준비중인 서비스입니다.")
                 .font(.system(size: 14, weight: .semibold))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Constants.Gray500)
