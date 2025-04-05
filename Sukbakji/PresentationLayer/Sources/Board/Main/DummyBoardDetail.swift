@@ -32,6 +32,9 @@ struct DummyBoardDetail: View {
     @State private var anonymousCounter: Int = 1
     @State private var currentUserId: Int? = nil
     @State private var shouldReloadDetail: Bool = false
+    
+    @State private var isEditingCommentMode = false
+    @State private var editingCommentId: Int? = nil
 
     var body: some View {
         NavigationView {
@@ -176,14 +179,25 @@ struct DummyBoardDetail: View {
                                                 deleteComment: {
                                                     deleteComment(at: index)
                                                 },
-                                                currentUserId: currentUserId
+                                                currentUserId: currentUserId,
+                                                onEditComment: { comment in
+                                                    self.commentText = comment.content
+                                                    self.editingCommentId = comment.commentId
+                                                    self.isEditingCommentMode = true
+                                                }
                                             )
                                         }
                                     }
                                 }
                             }
                             
-                            WriteComment(commentText: $commentText, showValidationError: $showValidationError, addComment: addComment)
+                            WriteComment(
+                                commentText: $commentText,
+                                showValidationError: $showValidationError,
+                                addComment: addComment,
+                                isEditing: isEditingCommentMode,
+                                originalCommentText: comments.first(where: { $0.commentId == editingCommentId })?.content ?? ""
+                            )
                         }
                     }
                 }
@@ -218,14 +232,6 @@ struct DummyBoardDetail: View {
                     }
                 }
             }
-        }
-    }
-    
-    func addComment() {
-        if commentText.isEmpty {
-            showValidationError = true
-        } else {
-            postComment(content: commentText)
         }
     }
 
@@ -394,6 +400,52 @@ struct DummyBoardDetail: View {
                 }
             }
     }
+    
+    func updateComment(commentId: Int, newContent: String) {
+        let url = APIConstants.baseURL + "/comments/update"
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            print("토큰 없음")
+            return
+        }
+
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(token)"
+        ]
+
+        let request = CommentUpdateRequest(commentId: commentId, content: newContent)
+
+        NetworkAuthManager.shared.request(url, method: .put, parameters: request, encoder: JSONParameterEncoder.default, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: CommentUpdateResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    print("댓글 수정 성공: \(data.message)")
+                    if let index = comments.firstIndex(where: { $0.commentId == commentId }) {
+                        comments[index].content = newContent
+                    }
+                    commentText = ""
+                    editingCommentId = nil
+                    isEditingCommentMode = false
+                    showValidationError = false
+                case .failure(let error):
+                    print("댓글 수정 실패: \(error.localizedDescription)")
+                }
+            }
+    }
+    
+    func addComment() {
+        if commentText.isEmpty {
+            showValidationError = true
+            return
+        }
+
+        if isEditingCommentMode, let commentId = editingCommentId {
+            updateComment(commentId: commentId, newContent: commentText)
+        } else {
+            postComment(content: commentText)
+        }
+    }
 }
 
 struct Comments: View {
@@ -407,6 +459,7 @@ struct Comments: View {
     var deleteComment: () -> Void
 
     var currentUserId: Int? // 현재 로그인한 사용자 ID
+    var onEditComment: ((BoardComment) -> Void)?
     
     var isCommentAuthor: Bool {
         return currentUserId == comment.memberId
@@ -417,9 +470,6 @@ struct Comments: View {
 
     @State private var isLiked: Bool = false
     @State private var likeCount: Int = 0
-
-    @State private var isEditing = false
-    @State private var editedText = ""
 
 
     var body: some View {
@@ -451,8 +501,7 @@ struct Comments: View {
                             title: Text("댓글"),
                             buttons: [
                                 .default(Text("수정하기"), action: {
-                                    editedText = comment.content
-                                    isEditing = true
+                                    onEditComment?(comment)
                                 }),
                                 .destructive(Text("삭제하기"), action: {
                                     self.showCommentAlert = true
@@ -491,61 +540,26 @@ struct Comments: View {
                 .foregroundStyle(Constants.Gray500)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
 
-            if isEditing {
-                VStack(spacing: 8) {
-                    TextField("댓글 수정", text: $editedText)
-                        .padding()
-                        .background(Constants.Gray100)
-                        .cornerRadius(8)
-                        .foregroundColor(Constants.Gray900)
-
-                    HStack {
-                        Button(action: {
-                            isEditing = false
-                            editedText = ""
-                        }) {
-                            Text("취소")
-                                .foregroundColor(Constants.Gray500)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color(Constants.Gray200))
-                                .cornerRadius(8)
-                        }
-
-                        Button(action: {
-                            updateComment(commentId: comment.commentId, newContent: editedText)
-                        }) {
-                            Text("수정 완료")
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Constants.Orange700)
-                                .cornerRadius(8)
-                        }
-                    }
+            HStack {
+                Text(comment.content)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(Constants.Gray900)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                
+                Spacer()
+                
+                Button(action: {
+                    isLiked.toggle()
+                    likeCount += isLiked ? 1 : -1
+                }) {
+                    Image(isLiked ? "LikeButton Fill" : "LikeButton")
+                        .resizable()
+                        .frame(width: 12, height: 12)
                 }
-            } else {
-                HStack {
-                    Text(comment.content)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(Constants.Gray900)
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        isLiked.toggle()
-                        likeCount += isLiked ? 1 : -1
-                    }) {
-                        Image(isLiked ? "LikeButton Fill" : "LikeButton")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                    }
-                    
-                    Text("\(likeCount)")
-                        .font(Font.custom("Pretendard", size: 10).weight(.regular))
-                        .foregroundColor(isLiked ? Constants.Orange700 : Constants.Gray300)
-                }
+                
+                Text("\(likeCount)")
+                    .font(Font.custom("Pretendard", size: 10).weight(.regular))
+                    .foregroundColor(isLiked ? Constants.Orange700 : Constants.Gray300)
             }
 
             Divider()
@@ -576,7 +590,6 @@ struct Comments: View {
                 switch response.result {
                 case .success(let data):
                     print("댓글 수정 성공: \(data.message)")
-                    isEditing = false
                     updateCommentCallback(data.result.content) // ← 상위 뷰에 전달
                 case .failure(let error):
                     if let data = response.data,
@@ -624,51 +637,78 @@ struct WriteComment: View {
     @Binding var commentText: String
     @Binding var showValidationError: Bool
     var addComment: () -> Void
-    
+    var isEditing: Bool
+    var originalCommentText: String
+
+    @FocusState private var isTextFieldFocused: Bool
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    ZStack(alignment: .leading) {
-                        if commentText.isEmpty {
-                            Text("댓글을 남겨보세요!")
-                                .foregroundColor(Color(Constants.Gray500))
-                                .padding(.horizontal, 8)
-                        }
-                        TextField("댓글을 남겨보세요!", text: $commentText)
-                            .padding()
-                            .frame(height: 44)
-                            .background(showValidationError && commentText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
-                            .cornerRadius(8, corners: [.topLeft, .topRight])
-                            .overlay(
-                                Rectangle()
-                                    .frame(height: 2)
-                                    .foregroundColor(commentText.isEmpty ? Color(Constants.Gray300) : Constants.Orange700)
-                                    .padding(.top, 44)
-                                    .padding(.horizontal, 8),
-                                alignment: .bottom
-                            )
-                            .foregroundColor(showValidationError && commentText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
-                    }
-                    Button(action: {
-                        addComment()
-                    }) {
-                        Text("등록")
-                            .font(.system(size: 16, weight: .semibold))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(commentText.isEmpty ? Constants.Gray500 : Constants.White)
-                            .frame(width: 70, height: 44)
-                            .background(commentText.isEmpty ? Color(Constants.Gray200) : Color(red: 0.93, green: 0.29, blue: 0.03))
-                            .cornerRadius(8)
-                    }
-                }
+            if isEditing {
+                Text("댓글 수정 중")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(Constants.Orange700)
+                    .padding(.bottom, 4)
+                    .padding(.horizontal, 4)
             }
-            .frame(alignment: .topLeading)
+
+            HStack {
+                ZStack(alignment: .leading) {
+                    if commentText.isEmpty {
+                        Text("댓글을 남겨보세요!")
+                            .foregroundColor(Color(Constants.Gray500))
+                            .padding(.horizontal, 8)
+                    }
+
+                    TextField("댓글을 남겨보세요!", text: $commentText)
+                        .focused($isTextFieldFocused)
+                        .padding()
+                        .frame(height: 44)
+                        .background(showValidationError && commentText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
+                        .cornerRadius(8, corners: [.topLeft, .topRight])
+                        .overlay(
+                            Rectangle()
+                                .frame(height: 2)
+                                .foregroundColor(commentText.isEmpty ? Color(Constants.Gray300) : Constants.Orange700)
+                                .padding(.top, 44)
+                                .padding(.horizontal, 8),
+                            alignment: .bottom
+                        )
+                        .foregroundColor(showValidationError && commentText.isEmpty ? Color(red: 1, green: 0.29, blue: 0.29) : Color(Constants.Gray900))
+                }
+
+                Button(action: {
+                    addComment()
+                }) {
+                    Text(isEditing ? "수정" : "등록")
+                        .font(.system(size: 16, weight: .semibold))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(
+                            commentText.isEmpty || (isEditing && commentText == originalCommentText)
+                            ? Constants.Gray500
+                            : Constants.White
+                        )
+                        .frame(width: 70, height: 44)
+                        .background(
+                            commentText.isEmpty || (isEditing && commentText == originalCommentText)
+                            ? Color(Constants.Gray200)
+                            : Color(red: 0.93, green: 0.29, blue: 0.03)
+                        )
+                        .cornerRadius(8)
+                }
+                .disabled(commentText.isEmpty || (isEditing && commentText == originalCommentText))
+            }
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 8)
-        .frame(alignment: .topLeading)
         .background(Constants.White)
+        .onChange(of: isEditing) { newValue in
+            if newValue {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isTextFieldFocused = true
+                }
+            }
+        }
     }
 }
 
