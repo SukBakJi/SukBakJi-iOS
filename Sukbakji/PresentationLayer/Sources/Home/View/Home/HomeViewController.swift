@@ -97,6 +97,18 @@ extension HomeViewController {
     private func bindFavoriteBoardViewModel() {
         self.homeView.favBoardTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
+        
+        favoriteBoardViewModel.favoriteBoardList
+            .subscribe(onNext: { favoriteBoardList in
+                if !favoriteBoardList.isEmpty {
+                    self.homeView.noFavBoard.isHidden = true
+                    self.homeView.noFavBoardLabel.isHidden = true
+                } else {
+                    self.homeView.noFavBoard.isHidden = false
+                    self.homeView.noFavBoardLabel.isHidden = false
+                }
+            })
+            .disposed(by: disposeBag)
 
         favoriteBoardViewModel.favoriteBoardList
             .bind(to: homeView.favBoardTableView.rx.items(cellIdentifier: FavoriteBoardTableViewCell.identifier, cellType: FavoriteBoardTableViewCell.self)) { row, board, cell in
@@ -132,6 +144,18 @@ extension HomeViewController {
     
     private func bindFavoriteLabViewModel() {
         self.homeView.favLabCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        favoriteLabViewModel.favoriteLabList
+            .subscribe(onNext: { favoriteLabList in
+                if !favoriteLabList.isEmpty {
+                    self.homeView.noFavLab.isHidden = true
+                    self.homeView.noFavLabLabel.isHidden = true
+                } else {
+                    self.homeView.noFavLab.isHidden = false
+                    self.homeView.noFavLabLabel.isHidden = false
+                }
+            })
             .disposed(by: disposeBag)
         
         favoriteLabViewModel.favoriteLabList
