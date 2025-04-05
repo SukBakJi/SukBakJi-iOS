@@ -35,5 +35,5 @@ struct BoardComment: Decodable {
     let degreeLevel: String
     var content: String
     let createdDate: String
-//    let memberId: Int? // Added memberId to identify the commenter, and made it Optional
+    let memberId: Int
 }

@@ -31,6 +31,8 @@ struct DummyBoardDetail: View {
     // 댓글 데이터 상태 변수
     @State private var comments: [BoardComment] = []
     @State private var anonymousCounter: Int = 1 // 익명 댓글 번호를 위한 카운터
+    
+    @State private var currentUserId: Int? = nil
 
     var body: some View {
         NavigationView {
@@ -153,10 +155,12 @@ struct DummyBoardDetail: View {
                                                 showCommentDeletionMessage: $showCommentDeletionMessage,
                                                 updateCommentCallback: { updatedContent in
                                                     comments[index].content = updatedContent
-                                                }
-                                            ) {
-                                                deleteComment(at: index)
-                                            }
+                                                },
+                                                deleteComment: {
+                                                    deleteComment(at: index)
+                                                },
+                                                currentUserId: currentUserId
+                                            )
                                         }
                                     }
                                 }
@@ -225,9 +229,10 @@ struct DummyBoardDetail: View {
                     let newComment = BoardComment(
                         commentId: data.result.commentId,
                         anonymousName: data.result.nickname,
-                        degreeLevel: "익명", // DegreeLevel 설정이 필요하다면 적절히 변경하세요
+                        degreeLevel: "익명",
                         content: data.result.content,
                         createdDate: data.result.createdAt,
+                        memberId: data.result.memberId // 댓글 수정은 해당 댓글 작성자만 가능하도록 memberId 추가
                     )
                     
                     comments.insert(newComment, at: 0) // 새로운 댓글을 맨 위에 추가
@@ -295,9 +300,13 @@ struct DummyBoardDetail: View {
                     // 작성자 판별
                     fetchCurrentUserMemberId { currentUserId in
                         if let currentUserId = currentUserId {
-                            self.isAuthor = (currentUserId == data.result.memberId)
+                            self.currentUserId = currentUserId // ← 반드시 필요!
+                            if let boardAuthorId = boardDetail?.memberId {
+                                self.isAuthor = (currentUserId == boardAuthorId)
+                            }
                         }
                     }
+
                 case .failure(let error):
                     self.isLoading = false
                     print("게시물 로드 실패: \(error.localizedDescription)")
@@ -379,6 +388,11 @@ struct Comments: View {
     var updateCommentCallback: (String) -> Void
     var deleteComment: () -> Void
 
+    var currentUserId: Int? // 현재 로그인한 사용자 ID
+    
+    var isCommentAuthor: Bool {
+        return currentUserId == comment.memberId
+    }
     
     @State private var showingCommentSheet = false
     @State private var showCommentAlert = false
@@ -414,7 +428,7 @@ struct Comments: View {
                         .frame(width: 12, height: 12)
                 }
                 .actionSheet(isPresented: $showingCommentSheet) {
-                    if isAuthor {
+                    if isCommentAuthor {
                         return ActionSheet(
                             title: Text("댓글"),
                             buttons: [

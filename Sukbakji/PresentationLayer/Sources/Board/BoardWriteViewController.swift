@@ -226,8 +226,6 @@ struct SeokBakji: View {
     }
 }
 
-import SwiftUI
-
 struct WriteBoardDetail: View {
     
     let boardCategory: [String] = ["박사", "석사", "진학예정"]

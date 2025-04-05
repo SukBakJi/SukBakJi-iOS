@@ -68,6 +68,7 @@
 		7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */; };
 		7BC4E7842D8AC39300963B61 /* SavedBoardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC4E7832D8AC39300963B61 /* SavedBoardResponse.swift */; };
 		7BC4E7862D8ACF3D00963B61 /* LatestQnAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC4E7852D8ACF3D00963B61 /* LatestQnAModel.swift */; };
+		7BD758A12DA11E0100E107B2 /* BoardEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD758A02DA11E0100E107B2 /* BoardEditViewController.swift */; };
 		7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C992C62778D00A31B70 /* SearchViewController.swift */; };
 		7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */; };
 		7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */; };
@@ -326,6 +327,7 @@
 		7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentReviewWriteBoardViewController.swift; sourceTree = "<group>"; };
 		7BC4E7832D8AC39300963B61 /* SavedBoardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBoardResponse.swift; sourceTree = "<group>"; };
 		7BC4E7852D8ACF3D00963B61 /* LatestQnAModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestQnAModel.swift; sourceTree = "<group>"; };
+		7BD758A02DA11E0100E107B2 /* BoardEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEditViewController.swift; sourceTree = "<group>"; };
 		7BFB8C992C62778D00A31B70 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyBoards.swift; sourceTree = "<group>"; };
 		7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMainViewController.swift; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 				7B969F5F2C541E6600F34A18 /* Admission */,
 				7B3E3D252C541F35002D6A43 /* Free */,
 				7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */,
+				7BD758A02DA11E0100E107B2 /* BoardEditViewController.swift */,
 				7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */,
 				7BFB8C992C62778D00A31B70 /* SearchViewController.swift */,
 				7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */,
@@ -1574,6 +1577,7 @@
 				C7675F7E2D6981FF00F99294 /* EditUnivView.swift in Sources */,
 				C74A159A2D5A47F600A1698B /* MyProfile.swift in Sources */,
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift in Sources */,
+				7BD758A12DA11E0100E107B2 /* BoardEditViewController.swift in Sources */,
 				C77B49702D7B66D600005ABE /* OrangeButton.swift in Sources */,
 				C77B49712D7B66D600005ABE /* smallTextButton.swift in Sources */,
 				C77B49722D7B66D600005ABE /* CommonTextFieldView.swift in Sources */,
