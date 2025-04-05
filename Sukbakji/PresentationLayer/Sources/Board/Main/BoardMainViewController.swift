@@ -68,7 +68,7 @@ struct BoardMainViewController: View {
                 qnaBoard()
                 
                 // MARK: -- 즐겨찾기한 게시판
-                
+                /*
                 if hasBookmarkedBoard {
                     HStack(alignment: .center) {
                         Text("즐겨찾기한 게시판")
@@ -108,7 +108,7 @@ struct BoardMainViewController: View {
                     .background(Constants.White)
                     .buttonStyle(PlainButtonStyle())  // 기본 버튼 스타일
                     bookmarkedBoard()
-                } else {
+                } else if !hasBookmarkedBoard {
                     VStack {
                         Spacer()
                         
@@ -136,8 +136,36 @@ struct BoardMainViewController: View {
                         
                         Spacer()
                     }
-                }
-                
+                } else { */
+                    VStack {
+                        Spacer()
+                        
+                        HStack(alignment: .center) {
+                            Text("즐겨찾기한 게시판")
+                                .font(
+                                    Font.custom("Pretendard", size: Constants.fontSizeL)
+                                        .weight(Constants.fontWeightSemiBold)
+                                )
+                                .foregroundColor(Constants.Gray900)
+                            
+                            Image("Star 1")
+                                .resizable()
+                                .frame(width: 20, height: 20, alignment: .center)
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.top, 28)
+                        .padding(.bottom, 12)
+                        .frame(alignment: .center)
+                        .background(Constants.White)
+                        
+                        UnreadyBookmarkBoard()
+                            .padding(.vertical, 48)
+                        
+                        Spacer()
+                    }
+//                }
             }
         }
         .navigationBarHidden(true)
@@ -585,6 +613,25 @@ struct EmptyBookmarkBoard: View {
                 .padding(.bottom, 8)
             
             Text("게시판을 탐색하고 즐겨찾기를 등록해 보세요!")
+                .font(.system(size: 11))
+                .multilineTextAlignment(.center)
+                .foregroundColor(Constants.Gray500)
+            
+        }
+    }
+}
+
+// MARK: -- 즐겨찾기한 게시판 준비중인 서비스
+struct UnreadyBookmarkBoard: View {
+    var body: some View {
+        VStack {
+            Text("아직 준비중인 서비스입니다.")
+                .font(.system(size: 14, weight: .semibold))
+                .multilineTextAlignment(.center)
+                .foregroundStyle(Constants.Gray500)
+                .padding(.bottom, 8)
+            
+            Text("추후에 게시판을 탐색하고 즐겨찾기를 등록해 보세요!")
                 .font(.system(size: 11))
                 .multilineTextAlignment(.center)
                 .foregroundColor(Constants.Gray500)
