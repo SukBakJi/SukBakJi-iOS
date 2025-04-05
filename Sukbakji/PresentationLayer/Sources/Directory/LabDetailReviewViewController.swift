@@ -469,27 +469,46 @@ struct DirectoryOverlayButton: View {
 
     var body: some View {
         Button(action: {
-            print("글쓰기 버튼 tapped!")
-        }) {
-            NavigationLink(destination: LabReviewWriteViewController(
-                labId: labId, universityName: universityName,
+            let swiftUIView = LabReviewWriteViewController(
+                labId: labId,
+                universityName: universityName,
                 departmentName: departmentName,
                 professorName: professorName
-            )) {
-                ZStack {
-                    Circle()
-                        .frame(width: 60, height: 60)
-                        .background(.clear)
-                        .foregroundStyle(Color(Constants.Orange700))
-                        .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 0)
-                    
-                    Image("Write")
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                }
-                .buttonStyle(PlainButtonStyle())
+            )
+            let hostingVC = UIHostingController(rootView: swiftUIView)
+            hostingVC.hidesBottomBarWhenPushed = true
+
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let rootVC = windowScene.windows.first?.rootViewController,
+               let nav = findNavigationController(from: rootVC) {
+                nav.pushViewController(hostingVC, animated: true)
+            }
+        }) {
+            ZStack {
+                Circle()
+                    .frame(width: 60, height: 60)
+                    .foregroundStyle(Color(Constants.Orange700))
+                    .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 0)
+                
+                Image("Write")
+                    .resizable()
+                    .frame(width: 32, height: 32)
             }
         }
+        .buttonStyle(PlainButtonStyle())
+    }
+
+    // 네비게이션 컨트롤러 찾는 재귀 함수
+    func findNavigationController(from vc: UIViewController) -> UINavigationController? {
+        if let nav = vc as? UINavigationController {
+            return nav
+        }
+        for child in vc.children {
+            if let found = findNavigationController(from: child) {
+                return found
+            }
+        }
+        return nil
     }
 }
 
