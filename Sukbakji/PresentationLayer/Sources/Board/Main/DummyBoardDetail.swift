@@ -15,28 +15,45 @@ struct DummyBoardDetail: View {
     @State private var showValidationError: Bool = false
     @State var showingSheet = false
     @State var showAlert = false
-    @State var isAuthor = false // 작성자인지 여부를 나타내는 상태 변수
-    var boardName: String // 게시판 이름을 전달받는 변수
+    @State var isAuthor = false
+    var boardName: String
     @State private var showDeletionMessage = false
     @State private var showCommentDeletionMessage = false
-    @State private var degreeLevel: DegreeLevel? = nil // 사용자의 학위 상태를 저장할 변수
-    
-    @State private var boardDetail: BoardDetailResult? = nil // 게시물 데이터 상태 변수
-    @State private var isLoading: Bool = true // 데이터 로딩 상태
+    @State private var degreeLevel: DegreeLevel? = nil
+    @State private var boardDetail: BoardDetailResult? = nil
+    @State private var isLoading: Bool = true
     @State private var showMore = false
+    @State private var isShowingEditView = false
     
-    var postId: Int // 게시물 ID를 전달받는 변수
-    var memberId: Int? // 사용자 ID를 전달받는 변수
+    var postId: Int
+    var memberId: Int?
     
-    // 댓글 데이터 상태 변수
     @State private var comments: [BoardComment] = []
-    @State private var anonymousCounter: Int = 1 // 익명 댓글 번호를 위한 카운터
-    
+    @State private var anonymousCounter: Int = 1
     @State private var currentUserId: Int? = nil
+    @State private var shouldReloadDetail: Bool = false
 
     var body: some View {
         NavigationView {
             ZStack {
+                NavigationLink(destination: BoardEditViewController(
+                    postId: postId,
+                    originalTitle: boardDetail?.title ?? "",
+                    originalContent: boardDetail?.content ?? "",
+                    memberId: boardDetail?.memberId ?? 0,
+                    currentUserId: currentUserId ?? 0,
+                    boardName: boardDetail?.menu ?? "",
+                    shouldReload: $shouldReloadDetail
+                ), isActive: $isShowingEditView) {
+                    EmptyView()
+                }
+                .onChange(of: shouldReloadDetail) { newValue in
+                    if newValue {
+                        loadBoardDetail(postId: postId)
+                        shouldReloadDetail = false
+                    }
+                }
+                
                 if isLoading {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
@@ -175,6 +192,7 @@ struct DummyBoardDetail: View {
                     isPresented: $showMore,
                     onEdit: {
                         print("수정하기 눌림")
+                        isShowingEditView = true
                     },
                     onDelete: {
                         deletePost()
