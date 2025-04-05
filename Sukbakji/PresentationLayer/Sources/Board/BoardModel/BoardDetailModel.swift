@@ -30,10 +30,10 @@ struct BoardDetailResult: Decodable {
 }
 
 struct BoardComment: Decodable {
-//    let commentId: Int
+    let commentId: Int
     let anonymousName: String
     let degreeLevel: String
-    let content: String
+    var content: String
     let createdDate: String
 //    let memberId: Int? // Added memberId to identify the commenter, and made it Optional
 }

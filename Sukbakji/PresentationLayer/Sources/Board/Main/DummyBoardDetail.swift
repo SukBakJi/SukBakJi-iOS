@@ -145,9 +145,18 @@ struct DummyBoardDetail: View {
                                 ScrollView {
                                     VStack(alignment: .leading, spacing: 16) {
                                         ForEach(comments.indices, id: \.self) { index in
-                                            Comments(comment: comments[index], degreeLevel: degreeLevel, isAuthor: isAuthor, showDeletionMessage: $showDeletionMessage, showCommentDeletionMessage: $showCommentDeletionMessage, deleteComment: {
+                                            Comments(
+                                                comment: comments[index],
+                                                degreeLevel: degreeLevel,
+                                                isAuthor: isAuthor,
+                                                showDeletionMessage: $showDeletionMessage,
+                                                showCommentDeletionMessage: $showCommentDeletionMessage,
+                                                updateCommentCallback: { updatedContent in
+                                                    comments[index].content = updatedContent
+                                                }
+                                            ) {
                                                 deleteComment(at: index)
-                                            })
+                                            }
                                         }
                                     }
                                 }
@@ -214,7 +223,7 @@ struct DummyBoardDetail: View {
                 switch response.result {
                 case .success(let data):
                     let newComment = BoardComment(
-//                        commentId: data.result.commentId,
+                        commentId: data.result.commentId,
                         anonymousName: data.result.nickname,
                         degreeLevel: "익명", // DegreeLevel 설정이 필요하다면 적절히 변경하세요
                         content: data.result.content,
@@ -361,20 +370,25 @@ struct DummyBoardDetail: View {
 }
 
 struct Comments: View {
+    
     var comment: BoardComment
-    @State private var showingCommentSheet = false
-    @State private var showCommentAlert = false
     var degreeLevel: DegreeLevel?
     var isAuthor: Bool
     @Binding var showDeletionMessage: Bool
     @Binding var showCommentDeletionMessage: Bool
+    var updateCommentCallback: (String) -> Void
     var deleteComment: () -> Void
+
+    
+    @State private var showingCommentSheet = false
+    @State private var showCommentAlert = false
 
     @State private var isLiked: Bool = false
     @State private var likeCount: Int = 0
 
     @State private var isEditing = false
     @State private var editedText = ""
+
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -467,7 +481,7 @@ struct Comments: View {
                         }
 
                         Button(action: {
-//                            updateComment(commentId: comment.commentId, newContent: editedText)
+                            updateComment(commentId: comment.commentId, newContent: editedText)
                         }) {
                             Text("수정 완료")
                                 .foregroundColor(.white)
@@ -516,14 +530,14 @@ struct Comments: View {
             print("토큰 없음")
             return
         }
-
+        
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Authorization": "Bearer \(token)"
         ]
-
+        
         let request = CommentUpdateRequest(commentId: commentId, content: newContent)
-
+        
         NetworkAuthManager.shared.request(url, method: .put, parameters: request, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: CommentUpdateResponse.self) { response in
@@ -531,9 +545,14 @@ struct Comments: View {
                 case .success(let data):
                     print("댓글 수정 성공: \(data.message)")
                     isEditing = false
-                    // UI 상 댓글 텍스트를 갱신하려면 상위 뷰에서 상태를 업데이트 필요
+                    updateCommentCallback(data.result.content) // ← 상위 뷰에 전달
                 case .failure(let error):
-                    print("댓글 수정 실패: \(error.localizedDescription)")
+                    if let data = response.data,
+                       let errorMessage = String(data: data, encoding: .utf8) {
+                        print("서버 응답: \(errorMessage)")
+                    } else {
+                        print("댓글 수정 실패: \(error.localizedDescription)")
+                    }
                 }
             }
     }
