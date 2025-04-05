@@ -40,7 +40,7 @@ struct WrittenBoardViewController: View {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
                 } else if hasWrittenPosts && !writtenPosts.isEmpty {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         // Display the list of written posts
                         ForEach(writtenPosts, id: \.postId) { post in
                             NavigationLink(destination: DummyBoardDetail(boardName: post.boardName, postId: post.postId, memberId: nil)) {

@@ -39,7 +39,7 @@ struct CommentedBoardViewController: View {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
                 } else if hasCommentedPosts && !commentedPosts.isEmpty {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         // 댓글 단 글 목록 표시
                         ForEach(commentedPosts, id: \.postId) { post in
                             NavigationLink(destination: DummyBoardDetail(boardName: post.boardName, postId: post.postId, memberId: nil)) {

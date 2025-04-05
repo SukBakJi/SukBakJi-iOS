@@ -118,7 +118,7 @@ struct BoardAdmissionViewController: View {
         let url = APIConstants.posts.path + "/list"
         
         let parameters: [String: Any] = [
-            "menu": "입학예정",
+            "menu": "진학예정",
             "boardName": boardName
         ]
         
@@ -147,7 +147,7 @@ struct BoardAdmissionViewController: View {
 }
 
 // 각 게시판에 대한 뷰
-// 입학예정 탭 질문 게시판
+// 진학예정 탭 질문 게시판
 struct AdmissionQnABoard: View {
     var body: some View {
         VStack(alignment: .center, spacing: 8) {

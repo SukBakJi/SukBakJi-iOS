@@ -15,6 +15,7 @@ struct LatestQnAModel: Decodable {
 }
 
 struct LatestQnAModelResult: Decodable {
+    let postId: Int
     let menu: String
     let title: String
 }
