@@ -156,28 +156,45 @@ struct BoardMasterViewController: View {
 
 // MARK: -- 글쓰기 버튼
 struct overlayButton: View {
-    var selectedButton: String? // Add this property to capture the selectedButton state
-    
+    var selectedButton: String? // 선택된 버튼 상태
+
     var body: some View {
         Button(action: {
-            // 버튼 클릭 시 동작할 코드를 여기에 작성합니다.
-            print("글쓰기 버튼 tapped!")
+            let view = BoardWriteViewController()
+            let vc = UIHostingController(rootView: view)
+            vc.hidesBottomBarWhenPushed = true
+
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let rootVC = windowScene.windows.first?.rootViewController,
+               let nav = findNavigationController(from: rootVC) {
+                nav.pushViewController(vc, animated: true)
+            }
         }) {
-            NavigationLink(destination: BoardWriteViewController()) {
-                ZStack {
-                    Circle()
-                        .frame(width: 60, height: 60)
-                        .background(.clear)
-                        .foregroundStyle(Color(Constants.Orange700))
-                        .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 0)
-                    
-                    Image("edit 1")
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                }
-                .buttonStyle(PlainButtonStyle()) // 버튼의 기본 스타일을 제거합니다.
+            ZStack {
+                Circle()
+                    .frame(width: 60, height: 60)
+                    .background(.clear)
+                    .foregroundStyle(Color(Constants.Orange700))
+                    .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 0)
+
+                Image("edit 1")
+                    .resizable()
+                    .frame(width: 32, height: 32)
             }
         }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    func findNavigationController(from vc: UIViewController) -> UINavigationController? {
+        if let nav = vc as? UINavigationController {
+            return nav
+        }
+        for child in vc.children {
+            if let found = findNavigationController(from: child) {
+                return found
+            }
+        }
+        return nil
     }
 }
 

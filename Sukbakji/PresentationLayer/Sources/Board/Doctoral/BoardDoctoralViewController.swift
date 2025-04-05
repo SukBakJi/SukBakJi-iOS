@@ -73,7 +73,7 @@ struct BoardDoctoralViewController: View {
                         }
                     }
                 }
-
+                
                 .padding(.top, 20)
             }
             .padding(.horizontal, 24)
@@ -98,17 +98,17 @@ struct BoardDoctoralViewController: View {
     func loadPosts() {
         isLoading = true
         
-//        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-//              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
-//            print("토큰이 없습니다.")
-//            self.isLoading = false
-//            return
-//        }
-//        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
-//            print("토큰이 없습니다.")
-//            self.isLoading = false
-//            return
-//        }
+        //        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
+        //              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
+        //            print("토큰이 없습니다.")
+        //            self.isLoading = false
+        //            return
+        //        }
+        //        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self), !accessToken.isEmpty else {
+        //            print("토큰이 없습니다.")
+        //            self.isLoading = false
+        //            return
+        //        }
         
         let boardName = selectedButton ?? "질문 게시판"
         let url = APIConstants.posts.path + "/list"
@@ -119,7 +119,7 @@ struct BoardDoctoralViewController: View {
         ]
         
         let headers: HTTPHeaders = [
-//            "Authorization": "Bearer \(accessToken)"
+            //            "Authorization": "Bearer \(accessToken)"
         ]
         
         NetworkAuthManager.shared.request(url, method: .get, parameters: parameters, headers: headers)
@@ -148,75 +148,97 @@ struct BoardItem: View {
     
     var body: some View {
         Button(action: {
-            print("\(post.title) 게시글 tapped")
+            pushToDetail()
         }) {
-            NavigationLink(destination: DummyBoardDetail(boardName: selectedButton, postId: post.postId, memberId: 10)) {
-                VStack(alignment: .leading, spacing: 12) {
-                    
-                    // 취업후기 게시판일 경우에만 채용형태와 지원분야 라벨 표시
-                    if selectedButton == "취업후기 게시판" {
-                        HStack {
-                            if let hiringType = post.hiringType {
-                                Text(hiringType)
-                                    .font(.system(size: 12, weight: .bold))
-                                    .padding(4)
-                                    .background(Color(red: 1, green: 0.97, blue: 0.87))
-                                    .foregroundColor(Color(red: 1, green: 0.75, blue: 0))
-                                    .cornerRadius(4)
-                            }
-                            
-                            if let supportField = post.supportField {
-                                Text(supportField)
-                                    .font(.system(size: 12, weight: .bold))
-                                    .padding(4)
-                                    .background(Constants.Gray50)
-                                    .foregroundColor(Constants.Gray500)
-                                    .cornerRadius(4)
-                            }
+            VStack(alignment: .leading, spacing: 12) {
+                
+                // 취업후기 게시판일 경우에만 채용형태와 지원분야 라벨 표시
+                if selectedButton == "취업후기 게시판" {
+                    HStack {
+                        if let hiringType = post.hiringType {
+                            Text(hiringType)
+                                .font(.system(size: 12, weight: .bold))
+                                .padding(4)
+                                .background(Color(red: 1, green: 0.97, blue: 0.87))
+                                .foregroundColor(Color(red: 1, green: 0.75, blue: 0))
+                                .cornerRadius(4)
+                        }
+                        
+                        if let supportField = post.supportField {
+                            Text(supportField)
+                                .font(.system(size: 12, weight: .bold))
+                                .padding(4)
+                                .background(Constants.Gray50)
+                                .foregroundColor(Constants.Gray500)
+                                .cornerRadius(4)
                         }
                     }
-
-                    // 제목과 미리보기 내용은 모든 게시판에서 표시
-                    Text(post.title)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(Constants.Gray900)
-                    
-                    Text(post.previewContent)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(Constants.Gray900)
-                        .lineLimit(2)
-
-                    // 댓글 수와 조회수는 모든 게시판에서 표시
-                    HStack(alignment: .top, spacing: 12) {
-                        Image("chat 1")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                        
-                        Text("\(post.commentCount)")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
-                        
-                        Image("eye")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                        
-                        Text("\(post.views)")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
-                    }
-                    .frame(maxWidth: .infinity, alignment: .topTrailing)
                 }
-                .padding(.horizontal, 18)
-                .padding(.vertical, 16)
-                .background(Constants.White)
-                .cornerRadius(12)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .inset(by: 0.5)
-                        .stroke(Constants.Gray100, lineWidth: 1)
-                )
+                
+                // 제목과 미리보기 내용은 모든 게시판에서 표시
+                Text(post.title)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Constants.Gray900)
+                
+                Text(post.previewContent)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(Constants.Gray900)
+                    .lineLimit(2)
+                
+                // 댓글 수와 조회수는 모든 게시판에서 표시
+                HStack(alignment: .top, spacing: 12) {
+                    Image("chat 1")
+                        .resizable()
+                        .frame(width: 12, height: 12)
+                    
+                    Text("\(post.commentCount)")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(Color(red: 0.29, green: 0.45, blue: 1))
+                    
+                    Image("eye")
+                        .resizable()
+                        .frame(width: 12, height: 12)
+                    
+                    Text("\(post.views)")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(Color(red: 1, green: 0.29, blue: 0.29))
+                }
+                .frame(maxWidth: .infinity, alignment: .topTrailing)
             }
         }
+        .padding(.horizontal, 18)
+        .padding(.vertical, 16)
+        .background(Constants.White)
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .inset(by: 0.5)
+                .stroke(Constants.Gray100, lineWidth: 1)
+        )
+    }
+    
+    func pushToDetail() {
+        let detailView = DummyBoardDetail(boardName: selectedButton, postId: post.postId, memberId: 10)
+        let vc = UIHostingController(rootView: detailView)
+        vc.hidesBottomBarWhenPushed = true
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootVC = windowScene.windows.first?.rootViewController,
+           let nav = findNavigationController(from: rootVC) {
+            nav.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func findNavigationController(from vc: UIViewController) -> UINavigationController? {
+        if let nav = vc as? UINavigationController {
+            return nav
+        }
+        for child in vc.children {
+            if let found = findNavigationController(from: child) {
+                return found
+            }
+        }
+        return nil
     }
 }
 
