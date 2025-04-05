@@ -503,9 +503,9 @@ struct Comments: View {
                                 .default(Text("수정하기"), action: {
                                     onEditComment?(comment)
                                 }),
-                                .destructive(Text("삭제하기"), action: {
-                                    self.showCommentAlert = true
-                                }),
+//                                .destructive(Text("삭제하기"), action: {
+//                                    self.showCommentAlert = true
+//                                }),
                                 .cancel(Text("취소"))
                             ]
                         )
@@ -871,16 +871,16 @@ struct MoreButtonView: View {
 
                             Divider()
 
-                            Button(action: {
-                                onDelete()
-                                isPresented = false
-                            }) {
-                                Text("삭제하기")
-                                    .font(.system(size: 17))
-                                    .foregroundColor(Constants.ColorsBlue)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(17)
-                            }
+//                            Button(action: {
+//                                onDelete()
+//                                isPresented = false
+//                            }) {
+//                                Text("삭제하기")
+//                                    .font(.system(size: 17))
+//                                    .foregroundColor(Constants.ColorsBlue)
+//                                    .frame(maxWidth: .infinity)
+//                                    .padding(17)
+//                            }
 
                         } else if isReporting {
                             // ✅ 신고 사유 선택 화면
