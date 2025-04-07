@@ -111,6 +111,12 @@ class AuthInterceptor: RequestInterceptor {
             }
         }
     }
-
 }
+
+extension AuthInterceptor {
+    func performInitialTokenRefresh(completion: @escaping (Bool) -> Void) {
+        self.refreshToken(completion: completion)
+    }
+}
+
 
