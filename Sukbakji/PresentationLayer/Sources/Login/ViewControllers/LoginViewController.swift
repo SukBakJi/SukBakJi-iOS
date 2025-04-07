@@ -167,6 +167,9 @@ class LoginViewController: UIViewController {
                 checkIsSignUp()
             } else {
                 print("OAuth2 로그인 실패")
+                let alert = UIAlertController(title: nil, message: "소셜 로그인에 실패하였습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self.present(alert, animated: true)
             }
         }
     }
