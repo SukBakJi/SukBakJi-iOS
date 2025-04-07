@@ -131,6 +131,7 @@ class AuthDataManager {
                 
             case .failure(let error):
                 print("요청 실패: \(error.localizedDescription)")
+                completion(nil)
             }
         }
     }

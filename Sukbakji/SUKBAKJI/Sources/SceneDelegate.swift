@@ -13,51 +13,38 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var LoginVC = UINavigationController(rootViewController: MainTabViewController())
-    // SiwftUI로 BoardViewController 실행하기
-
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        window = UIWindow(windowScene: windowScene)
-//        
-//        let mainViewController = UINavigationController(rootViewController: LoginViewController())
-//        //let mainViewController = UINavigationController(rootViewController: TOSViewController())
-//        
-//        window?.rootViewController = mainViewController
-//        window?.makeKeyAndVisible()
-//    }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
         window = UIWindow(windowScene: windowScene)
-        let navController = UINavigationController(rootViewController: LoginViewController())
-        window?.rootViewController = navController
-        window?.makeKeyAndVisible()
-    }
-    
-    
-    //        let isAutoLoginEnabled = UserDefaults.standard.bool(forKey: "isAutoLogin")
-//
-//        if isAutoLoginEnabled, let accessToken = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) {
-//            print("자동 로그인 활성화: \(accessToken)")
-//            let mainViewController = UINavigationController(rootViewController: LoginViewController())
-//            window?.rootViewController = mainViewController
-//        } else {
-//        }
-    
-    
-    // SiwftUI로 BoardViewController 실행하기
+        
+        let isAutoLoginEnabled = UserDefaults.standard.bool(forKey: "isAutoLogin")
+        
+        if isAutoLoginEnabled {
+            print("자동 로그인 활성화됨")
 
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        window = UIWindow(windowScene: windowScene)
-//
-//        let mainViewController = UINavigationController(rootViewController: LoginViewController())
-//        //let mainViewController = UINavigationController(rootViewController: TOSViewController())
-//
-//        window?.rootViewController = mainViewController
-//        window?.makeKeyAndVisible()
-//    }
+            // Step 1: accessToken 유효성 확인은 서버 요청으로도 가능하지만
+            // 여기선 그냥 refreshToken으로 무조건 갱신 시도
+            AuthInterceptor().performInitialTokenRefresh { [weak self] success in
+                guard let self = self else { return }
+
+                if success {
+                    print("✅ 초기 토큰 갱신 성공 → 메인 화면 진입")
+                    self.window?.rootViewController = UINavigationController(rootViewController: MainTabViewController())
+                } else {
+                    print("❌ 초기 토큰 갱신 실패 → 로그인 화면 이동")
+                    self.disableAutoLoginAndReturnToLoginScreen()
+                }
+
+                self.window?.makeKeyAndVisible()
+            }
+        } else {
+            print("🚪 자동 로그인 꺼져 있음 → 로그인 화면 진입")
+            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+            window?.makeKeyAndVisible()
+        }
+    }
+
     func disableAutoLoginAndReturnToLoginScreen() {
         // 자동 로그인 비활성화
         UserDefaults.standard.set(false, forKey: "isAutoLogin")
@@ -85,23 +72,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.windows.first?.rootViewController = viewController
         window.windows.first?.makeKeyAndVisible()
     }
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//      if let windowScene = scene as? UIWindowScene {
-//        let window = UIWindow(windowScene: windowScene)
-//        window.rootViewController = UIHostingController(
-//          rootView: BoardViewController()
-//        )
-//        self.window = window
-//        window.makeKeyAndVisible()
-//      }
-//    }
-    
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-//        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-//        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-//        guard let _ = (scene as? UIWindowScene) else { return }
-//    }
     
     // MARK: - 카카오 연결
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
