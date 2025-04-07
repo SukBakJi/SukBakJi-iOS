@@ -23,6 +23,7 @@ class EdifInfoView: UIView {
         $0.backgroundColor = .gray50
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .gray300
+        $0.isEnabled = false
     }
     let logingImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Email")
@@ -44,6 +45,7 @@ class EdifInfoView: UIView {
         $0.backgroundColor = .gray50
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .gray300
+        $0.isEnabled = false
     }
     let belongView = UIView().then {
         $0.backgroundColor = .white
@@ -90,7 +92,8 @@ class EdifInfoView: UIView {
     var researchTopicCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 8
-        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 6
+        layout.scrollDirection = .vertical
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(ResearchTopicCollectionViewCell.self, forCellWithReuseIdentifier: ResearchTopicCollectionViewCell.identifier)
@@ -270,20 +273,20 @@ class EdifInfoView: UIView {
         researchLabel.addImageAboveLabel(referenceView: certificateView, spacing: 20)
         
         plusButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(53)
+            $0.top.equalTo(researchLabel.snp.bottom).offset(8)
             $0.trailing.equalToSuperview().inset(22)
             $0.height.width.equalTo(44)
         }
         
         researchTopicCollectionView.snp.makeConstraints {
-            $0.centerY.equalTo(plusButton)
+            $0.top.equalTo(researchLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalTo(plusButton.snp.leading).inset(8)
-            $0.height.equalTo(45)
+            $0.height.equalTo(37)
         }
         
         backgroundLabel.snp.makeConstraints {
-            $0.top.equalTo(plusButton.snp.bottom)
+            $0.top.equalTo(researchTopicCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(1.2)
         }

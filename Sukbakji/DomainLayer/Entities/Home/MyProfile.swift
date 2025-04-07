@@ -16,7 +16,7 @@ struct MyProfile : Codable {
 
 struct EditProfile : Codable {
     let name: String
-    let provider: String
+    let provider: String?
     let degreeLevel: String
     let researchTopics: [String]
 }

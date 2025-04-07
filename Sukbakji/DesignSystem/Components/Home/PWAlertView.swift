@@ -23,7 +23,6 @@ final class PWAlertView: UIView {
     var alertLabel = UILabel().then {
         $0.textColor = .gray900
         $0.numberOfLines = 2
-        $0.textAlignment = .left
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
     }
     var okButton = UIButton().then {

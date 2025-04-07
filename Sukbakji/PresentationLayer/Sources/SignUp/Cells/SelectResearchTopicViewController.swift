@@ -146,7 +146,12 @@ class SelectResearchTopicViewController: UIViewController {
     // 완료버튼
     @objc func topicSaveButtonTapped() {
         completionHandler?(selectedTags)
-        self.navigationController?.popViewController(animated: true)
+        if let viewControllers = self.navigationController?.viewControllers,
+           viewControllers.dropLast().last == ResearchTopicViewController() {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true)
+        }
     }
     
     // MARK: - functional

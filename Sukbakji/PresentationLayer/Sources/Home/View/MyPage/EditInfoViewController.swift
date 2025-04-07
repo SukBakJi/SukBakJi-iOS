@@ -56,6 +56,7 @@ extension EditInfoViewController {
  
         editInfoView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
         editInfoView.editButton.addTarget(self, action: #selector(updateProfile), for: .touchUpInside)
+        editInfoView.plusButton.addTarget(self, action: #selector(plusButton_Tapped), for: .touchUpInside)
     }
     
     private func setDrop() {
@@ -156,6 +157,15 @@ extension EditInfoViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
                 self?.researchTopicViewModel.ResearchTopicItems.accept(profile.researchTopics)
+                self?.topics = profile.researchTopics
+                self?.degree = profile.degreeLevel
+                if profile.provider == "APPLE" {
+                    self?.editInfoView.logingImageView.image = UIImage(named: "Sukbakji_Apple")
+                    self?.editInfoView.logingLabel.text = "애플 로그인으로 사용 중이에요"
+                } else if profile.provider == "KAKAO" {
+                    self?.editInfoView.logingImageView.image = UIImage(named: "Sukbakji_Kakao")
+                    self?.editInfoView.logingLabel.text = "카카오 로그인으로 사용 중이에요"
+                }
                 self?.editInfoView.idTextField.text = retrievedEmail
                 self?.editInfoView.nameTextField.text = profile.name
                 self?.editInfoView.belongTextField.text = DegreeLevel.from(profile.degreeLevel)?.korean ?? "학위 정보 없음"
@@ -187,8 +197,43 @@ extension EditInfoViewController {
             .disposed(by: disposeBag)
     }
     
+    func calculateCollectionViewHeight() -> CGFloat {
+        editInfoView.researchTopicCollectionView.layoutIfNeeded()
+        let contentHeight = editInfoView.researchTopicCollectionView.collectionViewLayout.collectionViewContentSize.height
+        return contentHeight + 3
+    }
+    
+    func updateCollectionViewHeight() {
+        let height = calculateCollectionViewHeight()
+        editInfoView.researchTopicCollectionView.snp.updateConstraints { make in
+            make.height.equalTo(height)
+        }
+    }
+    
+    @objc private func plusButton_Tapped() {
+        let selectResearchTopicVC = SelectResearchTopicViewController()
+        
+        selectResearchTopicVC.selectedTags = topics
+        selectResearchTopicVC.completionHandler = { [weak self] data in
+            self?.researchTopicViewModel.ResearchTopicItems.accept(data)
+            self?.topics = data
+            self?.editInfoView.researchTopicCollectionView.reloadData()
+            self?.updateCollectionViewHeight()
+            print("받은 데이터 : \(data)")
+        }
+
+        let navController = UINavigationController(rootViewController: selectResearchTopicVC)
+        navController.modalPresentationStyle = .fullScreen
+        self.present(navController, animated: true)
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+    }
+    
     @objc private func updateProfile() {
         viewModel.loadEditProfile(degree: degree, topics: topics)
+        print(degree)
+        print(topics)
     }
     
     @objc private func drop_Tapped() {

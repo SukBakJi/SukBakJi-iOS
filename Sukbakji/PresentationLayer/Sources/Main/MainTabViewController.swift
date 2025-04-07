@@ -86,27 +86,27 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         directoryVC.tabBarItem.image = resizedDirectoryImage
         directoryVC.tabBarItem.selectedImage = resizedDirectoryImage
         
-        homeVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .normal)
+        homeVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
         homeVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
         homeVC.tabBarItem.image = resizedHomeImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
         homeVC.tabBarItem.selectedImage = resizedHomeImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
         
-        calendarVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .normal)
+        calendarVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
         calendarVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
         calendarVC.tabBarItem.image = resizedCalendarImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
         calendarVC.tabBarItem.selectedImage = resizedCalendarImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
         
-        boardVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .normal)
+        boardVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
         boardVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
         boardVC.tabBarItem.image = resizedBoardImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
         boardVC.tabBarItem.selectedImage = resizedBoardImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
         
-        chattingVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .normal)
+        chattingVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
         chattingVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
         chattingVC.tabBarItem.image = resizedChatImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
         chattingVC.tabBarItem.selectedImage = resizedChatImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
         
-        directoryVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .normal)
+        directoryVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
         directoryVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
         directoryVC.tabBarItem.image = resizedDirectoryImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
         directoryVC.tabBarItem.selectedImage = resizedDirectoryImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
