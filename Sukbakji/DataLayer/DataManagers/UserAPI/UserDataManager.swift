@@ -86,24 +86,4 @@ class UserDataManager {
             }
         }
     }
-    
-    // 애플 이메일 설정
-    func PostAppleEmailDataManager(_ email: String, completion: @escaping (AppleEmailResponseDTO?) -> Void) {
-        NetworkAuthManager.shared.request(profileUrl,
-                                          method: .post,
-                                          parameters: email,
-                                          encoder: JSONParameterEncoder.default,
-                                          headers: headers)
-        .validate(statusCode: 200..<300)
-        .responseDecodable(of: AppleEmailResponseDTO.self) { response in
-            switch response.result {
-            case .success(let data):
-                completion(data)
-                print("성공. \(data)")
-                
-            case .failure(let error):
-                print("에러 : \(error.localizedDescription)")
-            }
-        }
-    }
 }
