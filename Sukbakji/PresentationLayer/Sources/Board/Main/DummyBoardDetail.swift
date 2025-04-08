@@ -28,6 +28,8 @@ struct DummyBoardDetail: View {
     var postId: Int
     var memberId: Int?
     
+    @State private let reportViewModel = ReportViewModel()
+    
     @State private var comments: [BoardComment] = []
     @State private var anonymousCounter: Int = 1
     @State private var currentUserId: Int? = nil
@@ -222,6 +224,7 @@ struct DummyBoardDetail: View {
                     onReport: { reason in
                         print("신고 사유 선택됨: \(reason)")
                         // 예: 서버에 신고 요청 보내기
+                        reportViewModel.loadReportPost(postId: postId, reason: reason)
                     },
                     boardName: boardName,
                     isAuthor: isAuthor // ← 작성자인지 여부 전달
@@ -244,6 +247,9 @@ struct DummyBoardDetail: View {
                         onReport: { reason in
                             print("댓글 신고 사유 선택됨: \(reason)")
                             // 서버로 신고 요청 전송 처리 가능
+                            if let index = comments.firstIndex(where: { $0.commentId == selectedComment.commentId }) {
+                                reportViewModel.loadReportComment(commentId: index, reason: reason)
+                            }
                         },
                         boardName: boardName,
                         isAuthor: selectedComment.memberId == currentUserId
