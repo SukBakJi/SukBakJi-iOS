@@ -173,19 +173,6 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
-    private func postAppleEmail(email: String) {
-        let userDatamanager = UserDataManager()
-    
-        userDatamanager.PostAppleEmailDataManager(email) {
-            [weak self] data in
-            guard let self = self else { return }
-            
-            if let model = data, model.code == "COMMON200" {
-                print("애플 이메일 설정 성공")
-            }
-        }
-    }
 }
 
 // MARK: - extension
@@ -224,10 +211,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             // 여기에 로그인 성공 후 수행할 작업을 추가하세요.
             print("Apple ID 로그인에 성공하였습니다.")
             postOAuth2Login(provider: "APPLE", accessToken: authorizationCodeString)
-
-            if let userAppleEmail = userAppleEmail {
-                postAppleEmail(email: userAppleEmail)
-            }
             
         default: break
             
