@@ -156,6 +156,8 @@
 		C734BD5C2D66EA9300AE81E9 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434E92C5DF14200BFB2D2 /* MypageViewController.swift */; };
 		C73555052D4BCD86005BDB38 /* MessageRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */; };
 		C73555072D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */; };
+		C73673652DA4D94000F88C63 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73673642DA4D94000F88C63 /* ReportRepository.swift */; };
+		C73673682DA4E7A000F88C63 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73673672DA4E7A000F88C63 /* ReportViewModel.swift */; };
 		C73828D32D6220F4007A21A0 /* AllDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73828D22D6220F4007A21A0 /* AllDeleteView.swift */; };
 		C73C5C462D5917C500091C5C /* MemberId.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C5C452D5917C500091C5C /* MemberId.swift */; };
 		C74680752D91352B00A6091E /* DateUtils+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74680742D91352B00A6091E /* DateUtils+.swift */; };
@@ -408,6 +410,8 @@
 		C734BD592D66DE2000AE81E9 /* EditPWView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWView.swift; sourceTree = "<group>"; };
 		C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomTableViewCell.swift; sourceTree = "<group>"; };
 		C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringRoomTableViewCell.swift; sourceTree = "<group>"; };
+		C73673642DA4D94000F88C63 /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
+		C73673672DA4E7A000F88C63 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
 		C73828D22D6220F4007A21A0 /* AllDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDeleteView.swift; sourceTree = "<group>"; };
 		C73C5C452D5917C500091C5C /* MemberId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberId.swift; sourceTree = "<group>"; };
 		C74680742D91352B00A6091E /* DateUtils+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateUtils+.swift"; sourceTree = "<group>"; };
@@ -739,6 +743,7 @@
 				7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */,
 				7BFB8C992C62778D00A31B70 /* SearchViewController.swift */,
 				7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */,
+				C73673662DA4E77600F88C63 /* ViewModel */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -953,6 +958,14 @@
 				C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */,
 			);
 			path = Alarm;
+			sourceTree = "<group>";
+		};
+		C73673662DA4E77600F88C63 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C73673672DA4E7A000F88C63 /* ReportViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C74A159B2D5A4A6700A1698B /* View */ = {
@@ -1243,6 +1256,7 @@
 				C7B407EE2D645B14009B349F /* HomeRepository.swift */,
 				C7B407F02D645B21009B349F /* CalendarRepository.swift */,
 				C77EFB3A2D9B8A1E000C2841 /* FCMRepository.swift */,
+				C73673642DA4D94000F88C63 /* ReportRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1591,6 +1605,7 @@
 				91D413592D841EC300020CEC /* ResetPwView.swift in Sources */,
 				C73C5C462D5917C500091C5C /* MemberId.swift in Sources */,
 				C7A777672D5079F700046367 /* ChatNavigaionBarView.swift in Sources */,
+				C73673682DA4E7A000F88C63 /* ReportViewModel.swift in Sources */,
 				C74BC6EC2D677ABA00103D04 /* CalendarView.swift in Sources */,
 				41EE13472C54ECCD0037EDD6 /* ResearchTopicViewController.swift in Sources */,
 				C74A15962D5A477800A1698B /* HotPost.swift in Sources */,
@@ -1651,6 +1666,7 @@
 				C77EFB3B2D9B8A1E000C2841 /* FCMRepository.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7675F7A2D6981DD00F99294 /* UnivRecruitView.swift in Sources */,
+				C73673652DA4D94000F88C63 /* ReportRepository.swift in Sources */,
 				C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */,
 				C7FD93762D2AD58A0084DC9C /* MyAlarmViewController.swift in Sources */,
 				C77EFB3F2D9C0300000C2841 /* NotificationView.swift in Sources */,

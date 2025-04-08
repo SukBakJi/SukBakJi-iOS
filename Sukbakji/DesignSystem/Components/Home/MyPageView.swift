@@ -66,41 +66,6 @@ class MyPageView: UIView {
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
         $0.textColor = .orange700
     }
-    let pointView = UIView().then {
-        $0.backgroundColor = .gray50
-    }
-    let pointLabel = UILabel().then {
-        $0.text = "내 포인트"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .gray900
-    }
-    let pointImageView = UIImageView().then {
-        $0.image = UIImage(named: "Sukbakji_Point")
-    }
-    let myPointLabel = UILabel().then {
-        $0.text = "현재 모인 포인트"
-        $0.font = UIFont(name: "Pretendard-Medium", size: 16)
-        $0.textColor = .gray600
-    }
-    let pointNumberLabel = UILabel().then {
-        $0.text = "1,000"
-        $0.font = UIFont(name: "Pretendard-Bold", size: 26)
-        $0.textColor = .orange700
-    }
-    let pLabel = UILabel().then {
-        $0.text = "P"
-        $0.font = UIFont(name: "Pretendard-Bold", size: 26)
-        $0.textColor = .gray900
-    }
-    let chargeButton = UIButton().then {
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 8
-        
-        $0.setTitleColor(.white, for: .normal)
-        $0.setTitle("충전하기", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.setBackgroundColor(.orange700, for: .normal)
-    }
     let logOutButton = UIButton().then {
         $0.setTitle("로그아웃", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
@@ -139,14 +104,6 @@ class MyPageView: UIView {
         certificateView.addSubview(certificateLabel)
         myInfoView.addSubview(warningImageView)
         myInfoView.addSubview(warningLabel)
-        
-        addSubview(pointView)
-        pointView.addSubview(pointLabel)
-        pointView.addSubview(pointImageView)
-        pointView.addSubview(myPointLabel)
-        pointView.addSubview(pointNumberLabel)
-        pointView.addSubview(pLabel)
-        pointView.addSubview(chargeButton)
         
         addSubview(resignButton)
         addSubview(logOutButton)
@@ -231,49 +188,6 @@ class MyPageView: UIView {
             $0.height.equalTo(12)
         }
         warningLabel.isHidden = true
-        
-        pointView.snp.makeConstraints {
-            $0.top.equalTo(myInfoView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(164)
-        }
-        
-        pointLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(28)
-            $0.leading.equalToSuperview().offset(24)
-            $0.height.equalTo(21)
-        }
-        
-        pointImageView.snp.makeConstraints {
-            $0.centerY.equalTo(pointLabel)
-            $0.leading.equalTo(pointLabel.snp.trailing).offset(4)
-            $0.height.width.equalTo(20)
-        }
-        
-        myPointLabel.snp.makeConstraints {
-            $0.top.equalTo(pointLabel.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().offset(24)
-            $0.height.equalTo(19)
-        }
-        
-        pointNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(myPointLabel.snp.bottom).offset(8)
-            $0.leading.equalToSuperview().offset(24)
-            $0.height.equalTo(40)
-        }
-        
-        pLabel.snp.makeConstraints {
-            $0.centerY.equalTo(pointNumberLabel)
-            $0.leading.equalTo(pointNumberLabel.snp.trailing).offset(5)
-            $0.height.equalTo(40)
-        }
-        
-        chargeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(92)
-            $0.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(48)
-            $0.width.equalTo(120)
-        }
         
         resignButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(80)

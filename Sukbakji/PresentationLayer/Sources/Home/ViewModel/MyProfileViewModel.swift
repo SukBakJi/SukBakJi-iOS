@@ -67,7 +67,6 @@ class MyProfileViewModel {
                 self.profileUpdated.onNext(true)
             }, onFailure: { error in
                 self.profileUpdated.onNext(false)
-                print("비밀번호 변경 실패: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }
