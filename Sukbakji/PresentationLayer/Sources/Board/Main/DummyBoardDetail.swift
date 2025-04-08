@@ -35,6 +35,10 @@ struct DummyBoardDetail: View {
     
     @State private var isEditingCommentMode = false
     @State private var editingCommentId: Int? = nil
+    
+    @State private var selectedComment: BoardComment? = nil
+    @State private var showCommentMoreView = false
+    @State private var isReportingComment = false
 
     var body: some View {
         NavigationView {
@@ -184,6 +188,10 @@ struct DummyBoardDetail: View {
                                                     self.commentText = comment.content
                                                     self.editingCommentId = comment.commentId
                                                     self.isEditingCommentMode = true
+                                                },
+                                                onShowMore: { comment in
+                                                    self.selectedComment = comment
+                                                    self.showCommentMoreView = true
                                                 }
                                             )
                                         }
@@ -218,6 +226,29 @@ struct DummyBoardDetail: View {
                     boardName: boardName,
                     isAuthor: isAuthor // ← 작성자인지 여부 전달
                 )
+                
+                // CommentButtonView 구현
+                if let selectedComment = selectedComment {
+                    CommentMoreButtonView(
+                        isPresented: $showCommentMoreView,
+                        onEdit: {
+                            commentText = selectedComment.content
+                            editingCommentId = selectedComment.commentId
+                            isEditingCommentMode = true
+                        },
+                        onDelete: {
+                            if let index = comments.firstIndex(where: { $0.commentId == selectedComment.commentId }) {
+                                deleteComment(at: index)
+                            }
+                        },
+                        onReport: { reason in
+                            print("댓글 신고 사유 선택됨: \(reason)")
+                            // 서버로 신고 요청 전송 처리 가능
+                        },
+                        boardName: boardName,
+                        isAuthor: selectedComment.memberId == currentUserId
+                    )
+                }
             }
         }
         .navigationBarBackButtonHidden()
@@ -449,7 +480,6 @@ struct DummyBoardDetail: View {
 }
 
 struct Comments: View {
-    
     var comment: BoardComment
     var degreeLevel: DegreeLevel?
     var isAuthor: Bool
@@ -460,17 +490,14 @@ struct Comments: View {
 
     var currentUserId: Int? // 현재 로그인한 사용자 ID
     var onEditComment: ((BoardComment) -> Void)?
-    
+    var onShowMore: (BoardComment) -> Void
+
     var isCommentAuthor: Bool {
         return currentUserId == comment.memberId
     }
-    
-    @State private var showingCommentSheet = false
-    @State private var showCommentAlert = false
 
     @State private var isLiked: Bool = false
     @State private var likeCount: Int = 0
-
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -489,49 +516,11 @@ struct Comments: View {
                 Spacer()
                 
                 Button(action: {
-                    self.showingCommentSheet = true
+                    onShowMore(comment)
                 }) {
                     Image("MoreButton 1")
                         .resizable()
                         .frame(width: 12, height: 12)
-                }
-                .actionSheet(isPresented: $showingCommentSheet) {
-                    if isCommentAuthor {
-                        return ActionSheet(
-                            title: Text("댓글"),
-                            buttons: [
-                                .default(Text("수정하기"), action: {
-                                    onEditComment?(comment)
-                                }),
-//                                .destructive(Text("삭제하기"), action: {
-//                                    self.showCommentAlert = true
-//                                }),
-                                .cancel(Text("취소"))
-                            ]
-                        )
-                    } else {
-                        return ActionSheet(
-                            title: Text("댓글"),
-                            buttons: [
-                                .default(Text("신고하기")),
-                                .cancel(Text("취소"))
-                            ]
-                        )
-                    }
-                }
-                .alert(isPresented: $showCommentAlert) {
-                    Alert(
-                        title: Text("댓글 삭제하기"),
-                        message: Text("댓글을 삭제할까요? 삭제 후 복구되지 않습니다."),
-                        primaryButton: .destructive(Text("삭제할게요"), action: {
-                            deleteComment()
-                            showCommentDeletionMessage = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                showCommentDeletionMessage = false
-                            }
-                        }),
-                        secondaryButton: .cancel(Text("닫기"))
-                    )
                 }
             }
 
@@ -590,7 +579,7 @@ struct Comments: View {
                 switch response.result {
                 case .success(let data):
                     print("댓글 수정 성공: \(data.message)")
-                    updateCommentCallback(data.result.content) // ← 상위 뷰에 전달
+                    updateCommentCallback(data.result.content)
                 case .failure(let error):
                     if let data = response.data,
                        let errorMessage = String(data: data, encoding: .utf8) {
@@ -813,6 +802,142 @@ struct BookmarkButtonView: View {
 }
 
 struct MoreButtonView: View {
+    @Binding var isPresented: Bool
+    var onEdit: () -> Void
+    var onDelete: () -> Void
+    var onReport: (String) -> Void // 신고 사유도 전달받도록 수정
+    var boardName: String
+    var isAuthor: Bool
+
+    @State private var isReporting = false
+
+    let reportReasons = [
+        "욕설/비하",
+        "유출/사칭/사기",
+        "상업적 광고 및 판매",
+        "음란물/불건전한 대화 및 만남",
+        "게시판 주제에 부적절함",
+        "정당/정치인 비하 및 선거운동",
+        "낚시/도배"
+    ]
+
+    var body: some View {
+        ZStack {
+            if isPresented {
+                Color.black.opacity(0.2)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation {
+                            isPresented = false
+                            isReporting = false
+                        }
+                    }
+
+                VStack(spacing: 8) {
+                    Spacer()
+
+                    VStack(spacing: 0) {
+                        // ✅ 타이틀: 일반모드 → 게시판 이름 / 신고모드 → 신고하기
+                        Text(isReporting ? "신고하기" : boardName)
+                            .font(.system(size: 13))
+                            .foregroundColor(Color.gray.opacity(0.5))
+                            .padding(.vertical, 16)
+
+                        Divider()
+
+                        if isAuthor {
+                            // ✅ 작성자인 경우
+                            Button(action: {
+                                onEdit()
+                                isPresented = false
+                            }) {
+                                Text("수정하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(Constants.ColorsBlue)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
+
+                            Divider()
+
+//                            Button(action: {
+//                                onDelete()
+//                                isPresented = false
+//                            }) {
+//                                Text("삭제하기")
+//                                    .font(.system(size: 17))
+//                                    .foregroundColor(Constants.ColorsBlue)
+//                                    .frame(maxWidth: .infinity)
+//                                    .padding(17)
+//                            }
+
+                        } else if isReporting {
+                            // ✅ 신고 사유 선택 화면
+                            ForEach(reportReasons, id: \.self) { reason in
+                                Button(action: {
+                                    onReport(reason)
+                                    isPresented = false
+                                    isReporting = false
+                                }) {
+                                    Text(reason)
+                                        .font(.system(size: 17))
+                                        .foregroundColor(Constants.ColorsBlue)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(17)
+                                }
+
+                                if reason != reportReasons.last {
+                                    Divider()
+                                }
+                            }
+                        } else {
+                            // ✅ 신고하기 버튼
+                            Button(action: {
+                                withAnimation {
+                                    isReporting = true
+                                }
+                            }) {
+                                Text("신고하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
+                        }
+                    }
+                    .background(Color.white.opacity(0.9))
+                    .cornerRadius(14)
+                    .padding(.horizontal, 8)
+
+                    // 취소 버튼
+                    Button(action: {
+                        withAnimation {
+                            if isReporting {
+                                isReporting = false
+                            } else {
+                                isPresented = false
+                            }
+                        }
+                    }) {
+                        Text("취소")
+                            .font(.system(size: 17, weight: .semibold))
+                            .foregroundColor(Constants.ColorsBlue)
+                            .frame(maxWidth: .infinity)
+                            .padding(17)
+                            .background(Color.white)
+                            .cornerRadius(14)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 20)
+                }
+                .transition(.move(edge: .bottom))
+            }
+        }
+        .animation(.easeInOut, value: isPresented)
+    }
+}
+
+struct CommentMoreButtonView: View {
     @Binding var isPresented: Bool
     var onEdit: () -> Void
     var onDelete: () -> Void
