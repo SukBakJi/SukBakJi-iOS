@@ -28,7 +28,7 @@ struct DummyBoardDetail: View {
     var postId: Int
     var memberId: Int?
     
-    @State private let reportViewModel = ReportViewModel()
+    @State private var reportViewModel = ReportViewModel()
     
     @State private var comments: [BoardComment] = []
     @State private var anonymousCounter: Int = 1

@@ -41,6 +41,7 @@ extension MypageViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         mypageView.navigationbarView.delegate = self
         mypageView.myInfoEditButton.addTarget(self, action: #selector(edit_Tapped), for: .touchUpInside)
+        mypageView.resignButton.addTarget(self, action: #selector(resign_Tapped), for: .touchUpInside)
         mypageView.myInfoView.snp.makeConstraints { make in
             myInfoViewheightConstraint = make.height.equalTo(180).constraint
         }
@@ -114,5 +115,11 @@ extension MypageViewController {
     @objc private func edit_Tapped() {
         let editProfileViewController = EditProfileViewController()
         self.navigationController?.pushViewController(editProfileViewController, animated: true)
+    }
+    
+    @objc private func resign_Tapped() {
+        let alert = UIAlertController(title: nil, message: "준비 중인 서비스입니다.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
     }
 }
