@@ -18,6 +18,7 @@ class HomeViewController: UIViewController, View {
     private let favoriteBoardViewModel = FavoriteBoardViewModel()
     private let hotPostViewModel = HotPostViewModel()
     private let favoriteLabViewModel = FavoriteLabViewModel()
+    private let myProfileViewModel = MyProfileViewModel()
     var disposeBag = DisposeBag()
     var reactor: HomeReactor?
     
@@ -32,6 +33,7 @@ class HomeViewController: UIViewController, View {
         setAPI()
         self.reactor = HomeReactor()
         bind(reactor: reactor!)
+        getFCMToken()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +62,19 @@ extension HomeViewController {
 //        favoriteLabViewModel.loadFavoriteLab()
         hotPostViewModel.loadTestData()
         favoriteLabViewModel.loadTestData()
+    }
+    
+    private func getFCMToken() {
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("FCM 토큰 가져오기 실패: \(error.localizedDescription)")
+            } else if let token = token {
+                print("현재 FCM 토큰: \(token)")
+                // 서버에 토큰 업로드
+                TokenManager.shared.saveFCMToken(token)
+                self.myProfileViewModel.uploadFCMTokenToServer(fcmToken: token)
+            }
+        }
     }
     
     func bind(reactor: HomeReactor) {
