@@ -10,6 +10,7 @@ import UIKit
 class TOSViewController: UIViewController, TOSCellDelegate {
     // MARK: - Properties
     public var isOAuth2: Bool = false
+    public var appleName: String? // Apple 로그인일 경우 이름
     private var allChecked: Bool {
         return tosView.tableView.visibleCells
             .compactMap { $0 as? TOSTableViewCell }
@@ -74,7 +75,9 @@ class TOSViewController: UIViewController, TOSCellDelegate {
     @objc
     private func nextButtonTapped() {
         if isOAuth2 {
-            pushToNextVC(AcademicVerificationViewController())
+            let vc = AcademicVerificationViewController()
+            vc.preFilledName = appleName // ← 전달
+            pushToNextVC(vc)
         } else {
             pushToNextVC(SMSAuthViewController())
         }

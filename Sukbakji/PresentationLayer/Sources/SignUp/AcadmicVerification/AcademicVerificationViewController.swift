@@ -10,7 +10,8 @@ import DropDown
 import SnapKit
 
 class AcademicVerificationViewController: UIViewController {
-    
+    public var preFilledName: String?
+
     // MARK: - ErrorState
     private var belongLabelTopConstraint: Constraint?
     private var VerificationLabelTopConstraint: Constraint?
@@ -169,6 +170,13 @@ class AcademicVerificationViewController: UIViewController {
         setupLayout()
         setTextFieldDelegate()
         validateFieldForButtonUpdate()
+
+        if let preFilledName = preFilledName {
+            nameTextField.text = preFilledName
+            nameTextField.setUnableState()
+            validateFieldForButtonUpdate() // 버튼 상태도 갱신
+        }
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

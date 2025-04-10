@@ -117,7 +117,6 @@ class AuthDataManager {
             switch response.result {
             case .success(let data):
                 completion(data)
-                print("OAuth2 로그인 성공 : \(data)")
                 if let accessToken = data.result?.accessToken,
                    let refreshToken = data.result?.refreshToken,
                    let email = data.result?.email {
