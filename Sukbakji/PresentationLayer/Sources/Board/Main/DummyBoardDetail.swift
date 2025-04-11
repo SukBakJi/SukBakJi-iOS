@@ -219,7 +219,11 @@ struct DummyBoardDetail: View {
                         isShowingEditView = true
                     },
                     onDelete: {
-                        deletePost()
+                        if let token = KeychainHelper.standard.read(service: "access-token", account: "user") {
+                            deletePost(postId: postId, token: token)
+                        } else {
+                            print("토큰이 없습니다.")
+                        }
                     },
                     onReport: { reason in
                         print("신고 사유 선택됨: \(reason)")
@@ -315,18 +319,19 @@ struct DummyBoardDetail: View {
     }
     
     // 게시물 삭제 함수
-    func deletePost() {
-        let url = APIConstants.posts.path + "/\(postId)"
+    func deletePost(postId: Int, token: String) {
+        let url = APIConstants.posts.path + "/\(postId)/delete"
         let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
             "Content-Type": "application/json"
         ]
         
         NetworkAuthManager.shared.request(url, method: .delete, headers: headers)
             .validate(statusCode: 200..<300)
-            .response { response in
+            .responseDecodable(of: BoardDeletePostResponseModel.self) { response in
                 switch response.result {
-                case .success:
-                    print("게시물이 삭제되었습니다.")
+                case .success(let result):
+                    print(result.message) // ex. "게시글 삭제에 성공했습니다."
                     self.presentationMode.wrappedValue.dismiss()
                 case .failure(let error):
                     if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
@@ -867,16 +872,16 @@ struct MoreButtonView: View {
 
                             Divider()
 
-//                            Button(action: {
-//                                onDelete()
-//                                isPresented = false
-//                            }) {
-//                                Text("삭제하기")
-//                                    .font(.system(size: 17))
-//                                    .foregroundColor(Constants.ColorsBlue)
-//                                    .frame(maxWidth: .infinity)
-//                                    .padding(17)
-//                            }
+                            Button(action: {
+                                onDelete()
+                                isPresented = false
+                            }) {
+                                Text("삭제하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(Constants.ColorsBlue)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
 
                         } else if isReporting {
                             // ✅ 신고 사유 선택 화면
