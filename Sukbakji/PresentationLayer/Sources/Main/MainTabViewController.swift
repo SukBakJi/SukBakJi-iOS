@@ -8,20 +8,71 @@
 import UIKit
 import SwiftUI
 
-class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
+class CustomTabBarItemView: UIView {
 
-    let homeVC = HomeViewController()
-    let calendarVC = CalendarViewController()
-    let swiftUIBoardView = BoardViewController()
-    let chattingVC = ChattingViewController()
-    let swiftUIDirectoryView = DirectoryMainViewController()
+    let imageView = UIImageView()
+    let titleLabel = UILabel()
+
+    init(image: UIImage?, title: String) {
+        super.init(frame: .zero)
+        setupUI(image: image, title: title)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupUI(image: UIImage?, title: String) {
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .orange700
+
+        titleLabel.text = title
+        titleLabel.font = UIFont(name: "Pretendard-Medium", size: 10)
+        titleLabel.textColor = .gray400
+        titleLabel.textAlignment = .center
+
+        let stackView = UIStackView(arrangedSubviews: [imageView, titleLabel])
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 4
+
+        addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 35),
+            imageView.heightAnchor.constraint(equalToConstant: 35)
+        ])
+    }
+
+    func setSelected(_ selected: Bool) {
+        imageView.tintColor = selected ? .orange700 : .gray400
+        titleLabel.textColor = selected ? .gray900 : .gray400
+    }
+}
+
+class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
     
-    let customTabBar = CustomTabBar()
+    private let customTabBarView = UIView()
+    
+    private let items: [CustomTabBarItemView] = [
+        CustomTabBarItemView(image: UIImage(named: "Sukbakji_Home")?.withRenderingMode(.alwaysTemplate), title: "홈"),
+        CustomTabBarItemView(image: UIImage(named: "Sukbakji_Calendar")?.withRenderingMode(.alwaysTemplate), title: "캘린더"),
+        CustomTabBarItemView(image: UIImage(named: "Sukbakji_Board")?.withRenderingMode(.alwaysTemplate), title: "게시판"),
+        CustomTabBarItemView(image: UIImage(named: "Sukbakji_Chatting")?.withRenderingMode(.alwaysTemplate), title: "채팅"),
+        CustomTabBarItemView(image: UIImage(named: "Sukbakji_Book")?.withRenderingMode(.alwaysTemplate), title: "디렉토리")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
+        setupViewControllers()
+        setupCustomTabBar()
+        selectedIndex = 0
+        updateSelectedState(index: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,150 +81,82 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    func setup() {
-        self.delegate = self
-        self.setValue(customTabBar, forKey: "tabBar")
-
-        tabBar.backgroundColor = .white
-        UITabBar.clearShadow()
-        tabBar.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
-
+    private func setupCustomTabBar() {
+        tabBar.isHidden = true
+        customTabBarView.backgroundColor = .white
+        
+        customTabBarView.layer.shadowColor = UIColor.black.cgColor
+        customTabBarView.layer.shadowOpacity = 0.1
+        customTabBarView.layer.shadowOffset = CGSize(width: 0, height: -4)
+        customTabBarView.layer.shadowRadius = 8
+        customTabBarView.layer.masksToBounds = false
+        
+        view.addSubview(customTabBarView)
+        customTabBarView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            customTabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            customTabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            customTabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            customTabBarView.heightAnchor.constraint(equalToConstant: 92)
+        ])
+        
+        let stackView = UIStackView(arrangedSubviews: items)
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        
+        customTabBarView.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: customTabBarView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: customTabBarView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: customTabBarView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: customTabBarView.trailingAnchor)
+        ])
+        
+        for (index, item) in items.enumerated() {
+            item.tag = index
+            item.isUserInteractionEnabled = true
+            item.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tabItemTapped(_:))))
+        }
+    }
+    
+    @objc private func tabItemTapped(_ sender: UITapGestureRecognizer) {
+        guard let index = sender.view?.tag else { return }
+        
+        // 4번째(인덱스 3) 탭은 알림만 표시
+        if index == 3 {
+            let alert = UIAlertController(title: nil, message: "서비스 준비 중입니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            self.present(alert, animated: true)
+            return
+        }
+        
+        selectedIndex = index
+        updateSelectedState(index: index)
+    }
+    
+    private func updateSelectedState(index: Int) {
+        for (i, item) in items.enumerated() {
+            item.setSelected(i == index)
+        }
+    }
+    
+    private func setupViewControllers() {
+        let homeVC = HomeViewController()
+        let calendarVC = CalendarViewController()
+        let swiftUIBoardView = BoardViewController()
+        let chattingVC = ChattingViewController()
+        let swiftUIDirectoryView = DirectoryMainViewController()
+        
         let boardVC = UIHostingController(rootView: swiftUIBoardView)
         let directoryVC = UIHostingController(rootView: swiftUIDirectoryView)
-        
-        homeVC.title = "홈"
-        calendarVC.title = "캘린더"
-        boardVC.title = "게시판"
-        chattingVC.title = "채팅"
-        directoryVC.title = "디렉토리"
-        
-        homeVC.navigationItem.title = ""
-        calendarVC.navigationItem.title = ""
-        boardVC.navigationItem.title = ""
-        chattingVC.navigationItem.title = ""
-        directoryVC.navigationItem.title = ""
-        
-        let homeImage = UIImage(named: "Sukbakji_Home")?.withRenderingMode(.alwaysOriginal)
-        let calendarImage = UIImage(named: "Sukbakji_Calendar")?.withRenderingMode(.alwaysOriginal)
-        let boardImage = UIImage(named: "Sukbakji_Board")?.withRenderingMode(.alwaysOriginal)
-        let chatImage = UIImage(named: "Sukbakji_Chatting")?.withRenderingMode(.alwaysOriginal)
-        let directoryImage = UIImage(named: "Sukbakji_Book")?.withRenderingMode(.alwaysOriginal)
-        
-        let resizedHomeImage = UIGraphicsImageRenderer(size: CGSize(width: 32, height: 32)).image { _ in
-            homeImage?.draw(in: CGRect(origin: .zero, size: CGSize(width: 32, height: 32)))
-        }
-        let resizedCalendarImage = UIGraphicsImageRenderer(size: CGSize(width: 32, height: 32)).image { _ in
-            calendarImage?.draw(in: CGRect(origin: .zero, size: CGSize(width: 32, height: 32)))
-        }
-        let resizedBoardImage = UIGraphicsImageRenderer(size: CGSize(width: 32, height: 32)).image { _ in
-            boardImage?.draw(in: CGRect(origin: .zero, size: CGSize(width: 32, height: 32)))
-        }
-        let resizedChatImage = UIGraphicsImageRenderer(size: CGSize(width: 32, height: 32)).image { _ in
-            chatImage?.draw(in: CGRect(origin: .zero, size: CGSize(width: 32, height: 32)))
-        }
-        let resizedDirectoryImage = UIGraphicsImageRenderer(size: CGSize(width: 32, height: 32)).image { _ in
-            directoryImage?.draw(in: CGRect(origin: .zero, size: CGSize(width: 32, height: 32)))
-        }
-        
-        homeVC.tabBarItem.image = resizedHomeImage
-        homeVC.tabBarItem.selectedImage = resizedHomeImage
-        calendarVC.tabBarItem.image = resizedCalendarImage
-        calendarVC.tabBarItem.selectedImage = resizedCalendarImage
-        boardVC.tabBarItem.image = resizedBoardImage
-        boardVC.tabBarItem.selectedImage = resizedBoardImage
-        chattingVC.tabBarItem.image = resizedChatImage
-        chattingVC.tabBarItem.selectedImage = resizedChatImage
-        directoryVC.tabBarItem.image = resizedDirectoryImage
-        directoryVC.tabBarItem.selectedImage = resizedDirectoryImage
-        
-        homeVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
-        homeVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
-        homeVC.tabBarItem.image = resizedHomeImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
-        homeVC.tabBarItem.selectedImage = resizedHomeImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
-        
-        calendarVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
-        calendarVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
-        calendarVC.tabBarItem.image = resizedCalendarImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
-        calendarVC.tabBarItem.selectedImage = resizedCalendarImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
-        
-        boardVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
-        boardVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
-        boardVC.tabBarItem.image = resizedBoardImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
-        boardVC.tabBarItem.selectedImage = resizedBoardImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
-        
-        chattingVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
-        chattingVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
-        chattingVC.tabBarItem.image = resizedChatImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
-        chattingVC.tabBarItem.selectedImage = resizedChatImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
-        
-        directoryVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray400], for: .normal)
-        directoryVC.tabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.gray900], for: .selected)
-        directoryVC.tabBarItem.image = resizedDirectoryImage.withTintColor(.gray400, renderingMode: .alwaysOriginal)
-        directoryVC.tabBarItem.selectedImage = resizedDirectoryImage.withTintColor(UIColor.orange700, renderingMode: .alwaysOriginal)
-        
-        homeVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
-        calendarVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
-        boardVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
-        chattingVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
-        directoryVC.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
-        
-        homeVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
-        calendarVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
-        boardVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
-        chattingVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
-        directoryVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -10, right: 0)
         
         let navigationHome = UINavigationController(rootViewController: homeVC)
         let navigationCalendar = UINavigationController(rootViewController: calendarVC)
         let navigationBoard = UINavigationController(rootViewController: boardVC)
         let navigationChatting = UINavigationController(rootViewController: chattingVC)
         let navigationDirectory = UINavigationController(rootViewController: directoryVC)
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        
-        navigationHome.navigationBar.standardAppearance = appearance
-        navigationHome.navigationBar.scrollEdgeAppearance = appearance
-        
-        navigationCalendar.navigationBar.standardAppearance = appearance
-        navigationCalendar.navigationBar.scrollEdgeAppearance = appearance
-        
-        navigationBoard.navigationBar.standardAppearance = appearance
-        navigationBoard.navigationBar.scrollEdgeAppearance = appearance
-        
-        navigationChatting.navigationBar.standardAppearance = appearance
-        navigationChatting.navigationBar.scrollEdgeAppearance = appearance
-        
-        navigationDirectory.navigationBar.standardAppearance = appearance
-        navigationDirectory.navigationBar.scrollEdgeAppearance = appearance
-        
-        setViewControllers([navigationHome, navigationCalendar, navigationBoard, navigationChatting, navigationDirectory], animated: false)
-    }
-    
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        guard let viewControllers = tabBarController.viewControllers,
-              let index = viewControllers.firstIndex(of: viewController) else {
-            return true
-        }
-        
-        if index == 3 {
-            let alert = UIAlertController(title: nil, message: "준비 중인 서비스입니다.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default))
-            tabBarController.present(alert, animated: true)
 
-            return false
-        }
-    
-        return true
-    }
-}
-
-class CustomTabBar: UITabBar {
-    private var customHeight: CGFloat = 90 // 원하는 높이 설정
-    
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        var sizeThatFits = super.sizeThatFits(size)
-        sizeThatFits.height = customHeight
-        return sizeThatFits
+        self.viewControllers = [navigationHome, navigationCalendar, navigationBoard, navigationChatting, navigationDirectory]
     }
 }

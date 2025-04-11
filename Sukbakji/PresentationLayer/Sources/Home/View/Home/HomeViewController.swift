@@ -11,8 +11,9 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 import FirebaseMessaging
+import SwiftUI
 
-class HomeViewController: UIViewController, View {
+class HomeViewController: UIViewController {
     
     private let homeView = HomeView()
     private let favoriteBoardViewModel = FavoriteBoardViewModel()
@@ -195,6 +196,14 @@ extension HomeViewController {
     @objc private func info_Tapped() {
         let mypageViewController = MypageViewController()
         self.navigationController?.pushViewController(mypageViewController, animated: true)
+    }
+    
+    @objc private func hot_Tapped() {
+        let hotBoardView = HotBoardViewController()
+        let hostingController = UIHostingController(rootView: hotBoardView)
+        hostingController.modalPresentationStyle = .fullScreen
+        
+        self.present(hostingController, animated: true)
     }
 }
 

@@ -235,7 +235,6 @@
 		C7DA37542CFCD4E900B26549 /* FavoriteBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */; };
 		C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E3C2C611CE10092F342 /* APIConstants.swift */; };
 		C7E35A772D73670500632DE3 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E35A762D73670500632DE3 /* MainTabViewController.swift */; };
-		C7E35A792D73672000632DE3 /* TabbarShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E35A782D73672000632DE3 /* TabbarShadow.swift */; };
 		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
 		C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */; };
 		C7EA8CB12D689AB600B25FBC /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EA8CB02D689AB600B25FBC /* CalendarViewModel.swift */; };
@@ -500,7 +499,6 @@
 		C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardViewModel.swift; sourceTree = "<group>"; };
 		C7DA4E3C2C611CE10092F342 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		C7E35A762D73670500632DE3 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
-		C7E35A782D73672000632DE3 /* TabbarShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarShadow.swift; sourceTree = "<group>"; };
 		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivRecruitViewController.swift; sourceTree = "<group>"; };
 		C7EA8CB02D689AB600B25FBC /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
@@ -1054,7 +1052,6 @@
 			isa = PBXGroup;
 			children = (
 				C7E35A762D73670500632DE3 /* MainTabViewController.swift */,
-				C7E35A782D73672000632DE3 /* TabbarShadow.swift */,
 				C77EFB3C2D9C02B3000C2841 /* NotificationViewController.swift */,
 				C77EFB402D9C03CA000C2841 /* NotificationTableViewCell.swift */,
 			);
@@ -1774,7 +1771,6 @@
 				C74A15BC2D5A571900A1698B /* MentoringPost.swift in Sources */,
 				7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */,
 				7B3459FD2C688C9D008B711A /* BoardBookmarkedModel.swift in Sources */,
-				C7E35A792D73672000632DE3 /* TabbarShadow.swift in Sources */,
 				C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */,
 				7B1C53502C69D53C00C66D0D /* DirectoryLabReviewListModel.swift in Sources */,
 				7B3459F32C688AEE008B711A /* BoardSearchModel.swift in Sources */,

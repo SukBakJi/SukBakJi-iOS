@@ -232,8 +232,6 @@ extension EditInfoViewController {
     
     @objc private func updateProfile() {
         viewModel.loadEditProfile(degree: degree, topics: topics)
-        print(degree)
-        print(topics)
     }
     
     @objc private func drop_Tapped() {
@@ -247,9 +245,13 @@ extension EditInfoViewController: UICollectionViewDelegateFlowLayout {
         guard indexPath.item < items.count else {
             return CGSize(width: 40, height: 29) // 기본 사이즈 반환
         }
-            
-        let str = items[indexPath.item]
-        let width = 40 + str.count * 12
-        return CGSize(width: CGFloat(width), height: 29)
+        
+        let label = UILabel().then {
+            $0.text = "#\(items[indexPath.item])"
+            $0.sizeToFit()
+        }
+        let size = label.frame.size
+        
+        return CGSize(width: size.width + 22 , height: 29)
     }
 }

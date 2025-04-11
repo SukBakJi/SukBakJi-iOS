@@ -13,7 +13,7 @@ class FCMRepository {
     
     func postFCMToken(token: String, fcmToken: String) -> Single<APIResponse<String>> {
         let url = APIConstants.userFCMToken.path
-        let params = ["fcmToken": fcmToken]
+        let params = ["deviceToken": fcmToken]
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
     }
 }
