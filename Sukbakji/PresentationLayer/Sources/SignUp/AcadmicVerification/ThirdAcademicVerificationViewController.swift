@@ -481,6 +481,11 @@ extension ThirdAcademicVerificationViewController: UIDocumentPickerDelegate {
 // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate Extension
 extension ThirdAcademicVerificationViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            self.selectedImage = image // 선택한 이미지 저장
+            DidUploadSetUp()
+        }
+        
         if let imageURL = info[.imageURL] as? URL {
             // 파일명 가져오기
             let fileName = imageURL.lastPathComponent

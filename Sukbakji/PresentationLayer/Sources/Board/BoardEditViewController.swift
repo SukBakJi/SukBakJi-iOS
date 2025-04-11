@@ -93,6 +93,7 @@ struct BoardEditViewController: View {
             titleText = originalTitle
             postText = originalContent
         }
+        .onAppear(perform: UIApplication.shared.hideKeyboard)
     }
 
     func updatePost() {
