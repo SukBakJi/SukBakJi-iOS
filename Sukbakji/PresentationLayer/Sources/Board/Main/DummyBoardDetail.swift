@@ -270,6 +270,7 @@ struct DummyBoardDetail: View {
                 }
             }
         }
+        .onAppear(perform: UIApplication.shared.hideKeyboard)
     }
 
     // 댓글 작성 함수

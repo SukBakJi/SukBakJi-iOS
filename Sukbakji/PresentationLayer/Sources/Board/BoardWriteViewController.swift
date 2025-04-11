@@ -119,18 +119,10 @@ struct BoardWriteViewController: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .onAppear(perform: UIApplication.shared.hideKeyboard)
     }
 
     func BoardWriteApi() {
-//        guard let accessTokenData = KeychainHelper.standard.read(service: "access-token", account: "user"),
-//              let accessToken = String(data: accessTokenData, encoding: .utf8) else {
-//            print("토큰이 없습니다.")
-//            return
-//        }
-//        guard let accessToken: String = KeychainHelper.standard.read(service: "access-token", account: "user", type: String.self) else {
-//            print("토큰이 없습니다.")
-//            return
-//        }
         
         let menu = selectedCategory ?? "박사"
         let boardName = selectedOptionIndex ?? "질문 게시판"
