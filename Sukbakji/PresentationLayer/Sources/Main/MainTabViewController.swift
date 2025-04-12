@@ -56,7 +56,7 @@ class CustomTabBarItemView: UIView {
 
 class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
     
-    private let customTabBarView = UIView()
+    let customTabBarView = UIView()
     
     private let items: [CustomTabBarItemView] = [
         CustomTabBarItemView(image: UIImage(named: "Sukbakji_Home")?.withRenderingMode(.alwaysTemplate), title: "홈"),

@@ -48,7 +48,10 @@ class UnivRecruitViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
+        
+        if let tabBarVC = self.tabBarController as? MainTabViewController {
+            tabBarVC.customTabBarView.isHidden = true
+        }
     }
 }
     
