@@ -154,6 +154,11 @@ class HomeView: UIView {
     let hotPostImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Fire")
     }
+    let noHotPost = UILabel().then {
+        $0.text = "아직 실시간 인기글이 없어요"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.textColor = .gray500
+    }
     let hotPostTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
@@ -261,6 +266,7 @@ class HomeView: UIView {
         contentView.addSubview(hotPostView)
         hotPostView.addSubview(hotPostLabel)
         hotPostView.addSubview(hotPostImageView)
+        hotPostView.addSubview(noHotPost)
         hotPostView.addSubview(hotPostTableView)
         
         contentView.addSubview(layerView)
@@ -395,7 +401,7 @@ class HomeView: UIView {
         favBoardView.snp.makeConstraints {
             $0.top.equalTo(adView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(209)
+            $0.height.equalTo(200)
         }
         
         favBoardLabel.snp.makeConstraints {
@@ -432,7 +438,6 @@ class HomeView: UIView {
         favBoardContainerView.snp.makeConstraints {
             $0.top.equalTo(favBoardLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.bottom.equalToSuperview().inset(36)
         }
         
         favBoardTableView.snp.makeConstraints {
@@ -455,6 +460,12 @@ class HomeView: UIView {
             $0.centerY.equalTo(hotPostLabel)
             $0.leading.equalTo(hotPostLabel.snp.trailing).offset(4)
             $0.height.width.equalTo(21)
+        }
+        
+        noHotPost.snp.makeConstraints {
+            $0.top.equalTo(hotPostLabel.snp.bottom).offset(150)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(19)
         }
         
         hotPostTableView.snp.makeConstraints {

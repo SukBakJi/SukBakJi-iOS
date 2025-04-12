@@ -29,12 +29,4 @@ class HotPostViewModel {
             })
             .disposed(by: disposeBag)
     }
-    
-    func loadTestData() {
-        let testHotPostList: [HotPost] = [
-            HotPost(postId: 0, menu: "1", boardName: "취업 정보", title: "궁금한 점이 있습니다. 답변 부탁드려요", content: "가고 싶은 연구실이 있는데 어떻게 컨택을 하면 좋을까요? 처음이라 어떻게 하면 좋을지 조언 부탁드립니다.", commentCount: 125, views: 1285),
-            HotPost(postId: 0, menu: "1", boardName: "취업 정보", title: "궁금한 점이 있습니다. 답변 부탁드려요", content: "가고 싶은 연구실이 있는데 어떻게 컨택을 하면 좋을까요? 처음이라 어떻게 하면 좋을지 조언 부탁드립니다.", commentCount: 125, views: 1285)
-        ]
-        hotPostList.accept(testHotPostList)
-    }
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 struct MyProfile : Codable {
-    let name: String
+    let name: String?
     let provider: String
-    let degreeLevel: String
+    let degreeLevel: String?
     let researchTopics: [String]
 }
 

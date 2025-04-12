@@ -90,9 +90,9 @@ class EdifInfoView: UIView {
         $0.textColor = .gray900
     }
     var researchTopicCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = LeftAlignedCollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 8
-        layout.minimumLineSpacing = 6
+        layout.minimumLineSpacing = 14
         layout.scrollDirection = .vertical
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -282,17 +282,17 @@ class EdifInfoView: UIView {
             $0.top.equalTo(researchLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalTo(plusButton.snp.leading).inset(8)
-            $0.height.equalTo(37)
+            $0.height.equalTo(29)
         }
         
         backgroundLabel.snp.makeConstraints {
-            $0.top.equalTo(researchTopicCollectionView.snp.bottom)
+            $0.top.equalTo(researchTopicCollectionView.snp.bottom).offset(6)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(1.2)
         }
         
         editButton.snp.makeConstraints {
-            $0.top.equalTo(researchView.snp.bottom)
+            $0.top.equalTo(researchView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(48)
         }

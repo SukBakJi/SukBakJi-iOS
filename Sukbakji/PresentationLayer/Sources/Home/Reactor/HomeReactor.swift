@@ -81,7 +81,7 @@ final class HomeReactor: Reactor {
         var newState = state
         switch mutation {
         case .setUserName(let profile):
-            newState.nameLabel = (profile.name) + "님, 반가워요!"
+            newState.nameLabel = (profile.name ?? "석박지") + "님, 반가워요!"
         case .setViewSchedule(let upComing):
             if upComing?.scheduleList.isEmpty == true {
                 newState.upComingDate = "대학교를 설정하고\n일정을 확인해 보세요!"

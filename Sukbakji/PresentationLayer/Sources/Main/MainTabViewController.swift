@@ -28,7 +28,7 @@ class CustomTabBarItemView: UIView {
         imageView.tintColor = .orange700
 
         titleLabel.text = title
-        titleLabel.font = UIFont(name: "Pretendard-Medium", size: 10)
+        titleLabel.font = UIFont(name: "Pretendard-Regular", size: 11)
         titleLabel.textColor = .gray400
         titleLabel.textAlignment = .center
 

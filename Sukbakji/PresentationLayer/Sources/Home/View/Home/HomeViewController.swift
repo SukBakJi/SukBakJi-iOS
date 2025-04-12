@@ -23,6 +23,8 @@ class HomeViewController: UIViewController {
     var disposeBag = DisposeBag()
     var reactor: HomeReactor?
     
+    private var favBoardHeightConstraint: Constraint?
+    
     override func loadView() {
         self.view = homeView
     }
@@ -51,6 +53,10 @@ extension HomeViewController {
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+        homeView.favBoardContainerView.snp.makeConstraints { make in
+            favBoardHeightConstraint = make.height.equalTo(112).constraint
+        }
+        
         homeView.notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
         homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
         homeView.adCollectionView.delegate = self
@@ -62,9 +68,8 @@ extension HomeViewController {
         bindHotPostViewModel()
         bindFavoriteLabViewModel()
         favoriteBoardViewModel.loadFavoriteBoard()
-//        hotPostViewModel.loadHotPost()
+        hotPostViewModel.loadHotPost()
 //        favoriteLabViewModel.loadFavoriteLab()
-        hotPostViewModel.loadTestData()
         favoriteLabViewModel.loadTestData()
     }
     
@@ -126,6 +131,12 @@ extension HomeViewController {
                     self.homeView.noFavBoard.isHidden = false
                     self.homeView.noFavBoardLabel.isHidden = false
                 }
+                
+                if favoriteBoardList.count == 1 {
+                    self.favBoardHeightConstraint?.update(offset: 56)
+                } else {
+                    self.favBoardHeightConstraint?.update(offset: 112)
+                }
             })
             .disposed(by: disposeBag)
 
@@ -145,6 +156,16 @@ extension HomeViewController {
     
     private func bindHotPostViewModel() {
         self.homeView.hotPostTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        hotPostViewModel.hotPostList
+            .subscribe(onNext: { hotPostList in
+                if !hotPostList.isEmpty {
+                    self.homeView.noHotPost.isHidden = true
+                } else {
+                    self.homeView.noHotPost.isHidden = false
+                }
+            })
             .disposed(by: disposeBag)
         
         hotPostViewModel.hotPostList
@@ -212,7 +233,7 @@ extension HomeViewController {
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

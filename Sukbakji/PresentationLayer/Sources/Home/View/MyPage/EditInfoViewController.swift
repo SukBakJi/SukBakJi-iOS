@@ -28,7 +28,8 @@ class EditInfoViewController: UIViewController {
         "석사 재학 중": "MASTERS_STUDYING",
         "석사 졸업": "MASTERS_GRADUATED",
         "박사 재학 중": "DOCTORAL_STUDYING",
-        "박사 졸업": "DOCTORAL_GRADUATED"
+        "박사 졸업": "DOCTORAL_GRADUATED",
+        "석박사 통합 재학": "INTEGRATED_STUDYING"
     ]
     
     override func loadView() {
@@ -161,7 +162,7 @@ extension EditInfoViewController {
             .subscribe(onNext: { [weak self] profile in
                 self?.researchTopicViewModel.ResearchTopicItems.accept(profile.researchTopics)
                 self?.topics = profile.researchTopics
-                self?.degree = profile.degreeLevel
+                self?.degree = profile.degreeLevel ?? ""
                 if profile.provider == "APPLE" {
                     self?.editInfoView.logingImageView.image = UIImage(named: "Sukbakji_Apple")
                     self?.editInfoView.logingLabel.text = "애플 로그인으로 사용 중이에요"
