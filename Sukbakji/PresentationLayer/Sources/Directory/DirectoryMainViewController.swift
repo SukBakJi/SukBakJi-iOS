@@ -24,7 +24,11 @@ struct DirectoryMainViewController: View {
                         Spacer()
                         
                         Button(action: {
-                            print("알림 버튼 클릭됨")
+                            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                               let rootVC = windowScene.windows.first?.rootViewController as? UINavigationController {
+                                let notificationVC = NotificationViewController()
+                                rootVC.pushViewController(notificationVC, animated: true)
+                            }
                         }) {
                             Image("Bell")
                                 .resizable()
@@ -32,7 +36,11 @@ struct DirectoryMainViewController: View {
                         }
                         
                         Button(action: {
-                            print("마이페이지 버튼 클릭됨")
+                            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                               let rootVC = windowScene.windows.first?.rootViewController as? UINavigationController {
+                                let mypageVC = MypageViewController()
+                                rootVC.pushViewController(mypageVC, animated: true)
+                            }
                         }) {
                             Image("MyPage")
                                 .resizable()
