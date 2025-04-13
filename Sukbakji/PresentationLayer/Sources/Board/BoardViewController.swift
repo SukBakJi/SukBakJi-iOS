@@ -25,7 +25,11 @@ struct BoardViewController: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Button(action: {
-                        print("알림 버튼 클릭됨")
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let rootVC = windowScene.windows.first?.rootViewController as? UINavigationController {
+                            let notificationVC = NotificationViewController()
+                            rootVC.pushViewController(notificationVC, animated: true)
+                        }
                     }) {
                         Image("Bell")
                             .resizable()
