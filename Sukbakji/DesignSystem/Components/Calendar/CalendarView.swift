@@ -290,7 +290,7 @@ class CalendarView: UIView {
         }
         
         calendarDetailTableView.snp.makeConstraints { make in
-            make.top.equalTo(calendarBackgroundView.snp.bottom)
+            make.top.equalTo(calendarBackgroundView.snp.bottom).offset(8)
             make.trailing.leading.equalToSuperview()
         }
         
