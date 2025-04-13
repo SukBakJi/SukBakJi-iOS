@@ -10,99 +10,69 @@ import RxCocoa
 
 class MyProfileViewModel {
     private let disposeBag = DisposeBag()
+    private let useCase: MyProfileUseCase
     
     let myProfile = PublishSubject<MyProfile>()
     let errorMessage = PublishSubject<String>()
-    
     let logoutResult = PublishSubject<Bool>()
     let profileUpdated = PublishSubject<Bool>()
     let pwChanged = PublishSubject<Bool>()
-    
+
     let newPWInput = BehaviorRelay<String>(value: "")
     let confirmPWInput = BehaviorRelay<String>(value: "")
     
+    init(useCase: MyProfileUseCase = MyProfileUseCase()) {
+        self.useCase = useCase
+    }
+    
     func loadMyProfile() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        HomeRepository.shared.fetchMyProfile(token: token)
-            .observe(on: MainScheduler.instance) // ✅ UI 업데이트를 위해 Main 스레드에서 실행
-            .subscribe(onSuccess: { response in
-                self.myProfile.onNext(response.result)
-            }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+        useCase.fetchMyProfile()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] profile in
+                self?.myProfile.onNext(profile)
+            }, onFailure: { [weak self] error in
+                self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }
     
     func loadLogOut() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        HomeRepository.shared.fetchLogOut(token: token)
+        useCase.logOut()
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.logoutResult.onNext(true)
-            }, onFailure: { error in
-                self.logoutResult.onNext(false)
+            .subscribe(onSuccess: { [weak self] success in
+                self?.logoutResult.onNext(success)
             })
             .disposed(by: disposeBag)
     }
     
     func loadEditProfile(degree: String, topics: [String]) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let params = [
-            "degreeLevel": degree,
-            "researchTopics": topics
-        ] as [String : Any]
-        
-        HomeRepository.shared.fetchEditProfile(token: token, parameters: params)
+        useCase.editProfile(degree: degree, topics: topics)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.profileUpdated.onNext(true)
-            }, onFailure: { error in
-                self.profileUpdated.onNext(false)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.profileUpdated.onNext(isSuccess)
             })
             .disposed(by: disposeBag)
     }
     
     func loadChangePW() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let params = [
-            "newPassword": newPWInput.value,
-            "confirmPassword": confirmPWInput.value
-        ] as [String : Any]
-        
-        HomeRepository.shared.fetchChangePW(token: token, parameters: params)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.pwChanged.onNext(true)
-            }, onFailure: { error in
-                self.pwChanged.onNext(false)
-                print("비밀번호 변경 실패: \(error.localizedDescription)")
-            })
-            .disposed(by: disposeBag)
+        useCase.changePassword(newPassword: newPWInput.value, confirmPassword: confirmPWInput.value)
+        .observe(on: MainScheduler.instance)
+        .subscribe(onSuccess: { [weak self] isSuccess in
+            self?.pwChanged.onNext(isSuccess)
+            if !isSuccess {
+                self?.errorMessage.onNext("비밀번호 변경 실패")
+            }
+        })
+        .disposed(by: disposeBag)
     }
     
     func uploadFCMTokenToServer(fcmToken : String) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        FCMRepository.shared.postFCMToken(token: token, fcmToken: fcmToken)
+        useCase.uploadFCMToken(fcmToken: fcmToken)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                print("FCM 토큰 서버 업로드 성공: \(response.message)")
+            .subscribe(onSuccess: { message in
+                print("\(message)")
             }, onFailure: { error in
-                print("FCM 토큰 서버 업로드 실패: \(error.localizedDescription)")
+                print("FCM 토큰 업로드 실패: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }

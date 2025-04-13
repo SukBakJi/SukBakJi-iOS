@@ -102,14 +102,8 @@ extension MypageViewController {
     }
     
     private func navigateToLogin() {
-        // 🔒 자동 로그인 OFF
+        //  자동 로그인 OFF
         UserDefaults.standard.set(false, forKey: "isAutoLogin")
-        
-        // 🗑️ Keychain 정보 삭제
-        KeychainHelper.standard.delete(service: "access-token", account: "user")
-        KeychainHelper.standard.delete(service: "refresh-token", account: "user")
-        KeychainHelper.standard.delete(service: "email", account: "user")
-        KeychainHelper.standard.delete(service: "password", account: "user")
         
         let loginVC = UINavigationController(rootViewController: LoginViewController())
         SceneDelegate().setRootViewController(loginVC)

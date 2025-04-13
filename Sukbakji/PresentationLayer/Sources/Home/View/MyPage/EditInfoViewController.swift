@@ -148,6 +148,7 @@ extension EditInfoViewController {
             .observe(on: MainScheduler.instance)
             .bind(to: editInfoView.researchTopicCollectionView.rx.items(cellIdentifier: ResearchTopicCollectionViewCell.identifier, cellType: ResearchTopicCollectionViewCell.self)) { index, item, cell in
                 cell.prepare(topics: item)
+                self.updateCollectionViewHeight()
             }
             .disposed(by: disposeBag)
     }

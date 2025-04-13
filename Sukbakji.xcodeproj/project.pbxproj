@@ -130,6 +130,7 @@
 		C71AE9BA2CFB60340098FD2A /* FavoriteBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */; };
 		C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */; };
 		C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */; };
+		C71B4E802DAC0C2B006EACF1 /* MyProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B4E7F2DAC0C2B006EACF1 /* MyProfileUseCase.swift */; };
 		C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */; };
 		C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */; };
 		C7277D332D5D0C7100E9D14B /* SUITE-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C74C65D92D43970C00526D23 /* SUITE-SemiBold.otf */; };
@@ -395,6 +396,7 @@
 		C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardTableViewCell.swift; sourceTree = "<group>"; };
 		C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPostTableViewCell.swift; sourceTree = "<group>"; };
 		C71AE9BD2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLabCollectionViewCell.swift; sourceTree = "<group>"; };
+		C71B4E7F2DAC0C2B006EACF1 /* MyProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileUseCase.swift; sourceTree = "<group>"; };
 		C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		C72CEED52D258CB500EED814 /* UnivStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivStopView.swift; sourceTree = "<group>"; };
@@ -912,6 +914,14 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		C71B4E7E2DAC0C0A006EACF1 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				C71B4E7F2DAC0C2B006EACF1 /* MyProfileUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		C71E14842C44CE44003AFCB7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1202,6 +1212,7 @@
 		C7AB973D2D63A1DB00D2DBCA /* DomainLayer */ = {
 			isa = PBXGroup;
 			children = (
+				C71B4E7E2DAC0C0A006EACF1 /* UseCases */,
 				C7AB973E2D63A34200D2DBCA /* Entities */,
 			);
 			path = DomainLayer;
@@ -1595,6 +1606,7 @@
 				C734BD5A2D66DE2000AE81E9 /* EditPWView.swift in Sources */,
 				C78953122D636AB700E5041C /* APIService.swift in Sources */,
 				C7675F7E2D6981FF00F99294 /* EditUnivView.swift in Sources */,
+				C71B4E802DAC0C2B006EACF1 /* MyProfileUseCase.swift in Sources */,
 				C74A159A2D5A47F600A1698B /* MyProfile.swift in Sources */,
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift in Sources */,
 				7BD758A12DA11E0100E107B2 /* BoardEditViewController.swift in Sources */,
