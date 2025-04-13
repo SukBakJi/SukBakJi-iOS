@@ -209,7 +209,7 @@ extension CalendarViewController {
                 cell.updateDay(day: day)
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy/MM/dd"
+                dateFormatter.dateFormat = "yyyy-MM-dd"
                 
                 if let dayInt = Int(day), dayInt > 0 {
                     var components = self.calendarView.calendar.dateComponents([.year, .month], from: self.calendarView.calendarDate)
@@ -239,9 +239,11 @@ extension CalendarViewController {
                 let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
                 
                 if dayNum <= 9 {
-                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
+//                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
+                    viewModel.loadTestData()
                 } else {
-                    viewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
+//                    viewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
+                    viewModel.loadTestData2()
                 }
             })
             .disposed(by: disposeBag)

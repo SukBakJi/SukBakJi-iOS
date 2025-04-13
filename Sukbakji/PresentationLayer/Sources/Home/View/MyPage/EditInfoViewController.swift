@@ -21,7 +21,7 @@ class EditInfoViewController: UIViewController {
     
     private var degree: String = ""
     private var topics: [String] = []
-    private let belongType = ["학사 재학 중", "학사 졸업", "석사 재학 중", "석사 졸업", "박사 재학 중", "박사 졸업"]
+    private let belongType = ["학사 재학 중", "학사 졸업", "석사 재학 중", "석사 졸업", "박사 재학 중", "박사 졸업", "석박사 통합 재학"]
     private let degreeMapping: [String: String] = [
         "학사 재학 중": "BACHELORS_STUDYING",
         "학사 졸업": "BACHELORS_GRADUATED",

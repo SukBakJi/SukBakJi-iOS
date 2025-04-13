@@ -152,4 +152,16 @@ class CalendarViewModel {
         let newState = !selectedUnivAll.value
         selectedUnivAll.accept(newState) // 상태 변경
     }
+    
+    func loadTestData() {
+        let dateSelectList: [DateSelectList] = [
+            DateSelectList(univId: 22, content: "원서 접수")
+        ]
+        dateSelectSchedules.accept(dateSelectList)
+    }
+    
+    func loadTestData2() {
+        let dateSelectList: [DateSelectList] = []
+        dateSelectSchedules.accept(dateSelectList)
+    }
 }
