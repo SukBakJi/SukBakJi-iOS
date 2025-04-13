@@ -138,7 +138,8 @@ class MyAlarmTableViewCell: UITableViewCell {
         let formattedDate = DateUtils.formatDateString(alarmList.alarmDate)
         self.univLabel.text = alarmList.alarmUnivName
         self.alarmNameLabel.text = alarmList.alarmName
-        self.alarmDateLabel.text = "\(formattedDate ?? "") \(alarmList.alarmTime)"
+        let formattedTime = TimeHelper.convertTimeToAMPM(time: alarmList.alarmTime)
+        self.alarmDateLabel.text = "\(formattedDate ?? "")  \(formattedTime)"
         if alarmList.onoff == 1 {
             self.onOffSwitch.isOn = true
         } else {

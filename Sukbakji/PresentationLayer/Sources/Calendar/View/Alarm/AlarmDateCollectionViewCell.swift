@@ -43,7 +43,7 @@ class AlarmDateCollectionViewCell: UICollectionViewCell {
                     self.dayLabel.textColor = .white
                 }
             } else {
-                self.dayView.backgroundColor = .gray50
+                self.dayView.backgroundColor = .clear
                 self.dayLabel.textColor = .black
             }
         }
@@ -52,7 +52,7 @@ class AlarmDateCollectionViewCell: UICollectionViewCell {
     private func setUI() {
         self.contentView.addSubview(dayView)
         dayView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.top.bottom.equalToSuperview().inset(5)
         }
         self.dayView.addSubview(dayLabel)
         dayLabel.snp.makeConstraints { make in

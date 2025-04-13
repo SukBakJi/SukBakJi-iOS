@@ -122,7 +122,8 @@ extension EditMyAlarmViewController {
         editAlarmView.alarmNameTextField.text = alarmName
         editAlarmView.alarmDateTextField.text = formattedDate
         editAlarmView.dateLabel.text = formattedDate
-        editAlarmView.timeButton.setTitle("\(alarmTime)", for: .normal)
+        let formattedTime = TimeHelper.convertTimeToAMPM(time: alarmTime)
+        editAlarmView.timeButton.setTitle("\(formattedTime)", for: .normal)
     }
 }
     

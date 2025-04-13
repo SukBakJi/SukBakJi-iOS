@@ -114,6 +114,7 @@
 		91FEEB8C2D71A03B00D0502D /* SmsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB8B2D71A03B00D0502D /* SmsResponse.swift */; };
 		91FEEB8E2D71A04400D0502D /* SmsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FEEB8D2D71A04400D0502D /* SmsDataManager.swift */; };
 		B5F4C4872C27B0EABD4F9B57 /* Pods_Sukbakji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */; };
+		C70055282DABC40D00520D76 /* TimeHelper+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70055272DABC40D00520D76 /* TimeHelper+.swift */; };
 		C704BD882D2BBE9700954EAD /* EditMyAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */; };
 		C70523F12D775442009AED8C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70523F02D775442009AED8C /* UIView+.swift */; };
 		C70523FE2D7757BA009AED8C /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7548F292D147CFF00BA687A /* UITextField+.swift */; };
@@ -379,6 +380,7 @@
 		91FEEB8D2D71A04400D0502D /* SmsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmsDataManager.swift; sourceTree = "<group>"; };
 		AD673DD6C380765DA0B7288E /* Pods-Sukbakji.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sukbakji.debug.xcconfig"; path = "Target Support Files/Pods-Sukbakji/Pods-Sukbakji.debug.xcconfig"; sourceTree = "<group>"; };
 		AD80D50E1E55F2DC48EFE1CF /* Pods_Sukbakji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sukbakji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C70055272DABC40D00520D76 /* TimeHelper+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeHelper+.swift"; sourceTree = "<group>"; };
 		C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyAlarmViewController.swift; sourceTree = "<group>"; };
 		C70523F02D775442009AED8C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		C70ADA942D8D011D00BF9C10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -581,6 +583,7 @@
 				C70523F02D775442009AED8C /* UIView+.swift */,
 				C74680742D91352B00A6091E /* DateUtils+.swift */,
 				7B962D4A2DA902F9004175E0 /* UIApplication+.swift */,
+				C70055272DABC40D00520D76 /* TimeHelper+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1715,6 +1718,7 @@
 				C7DA37542CFCD4E900B26549 /* FavoriteBoardViewModel.swift in Sources */,
 				4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */,
 				7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */,
+				C70055282DABC40D00520D76 /* TimeHelper+.swift in Sources */,
 				91F849112D65AF3C0048B41A /* TOSData.swift in Sources */,
 				C74680752D91352B00A6091E /* DateUtils+.swift in Sources */,
 				C77B49682D7B66A500005ABE /* EmailView.swift in Sources */,

@@ -155,8 +155,7 @@ class CalendarViewModel {
     
     func loadTestData() {
         let dateSelectList: [DateSelectList] = [
-            DateSelectList(univId: 22, content: "원서 접수"),
-            DateSelectList(univId: 22, content: "원서 접수"),
+            DateSelectList(univId: 22, content: "원서 접수")
         ]
         dateSelectSchedules.accept(dateSelectList)
     }

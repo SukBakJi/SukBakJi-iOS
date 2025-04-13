@@ -209,7 +209,7 @@ extension CalendarViewController {
                 cell.updateDay(day: day)
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy/MM/dd"
+                dateFormatter.dateFormat = "yyyy-MM-dd"
                 
                 if let dayInt = Int(day), dayInt > 0 {
                     var components = self.calendarView.calendar.dateComponents([.year, .month], from: self.calendarView.calendarDate)
