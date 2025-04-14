@@ -157,8 +157,7 @@ struct LabDetailReviewViewController: View {
                 departmentName: departmentName,
                 professorName: professorName
             )
-            .padding(.trailing, 24)
-            .padding(.bottom, 48),
+            .padding(.trailing, 24),
             alignment: .bottomTrailing
         )
     }

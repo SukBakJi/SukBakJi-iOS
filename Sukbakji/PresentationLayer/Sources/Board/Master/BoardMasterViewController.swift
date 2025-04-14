@@ -96,7 +96,6 @@ struct BoardMasterViewController: View {
         .overlay(
             overlayButton(selectedButton: selectedButton)
                 .padding(.trailing, 24)
-                .padding(.bottom, 48)
             ,alignment: .bottomTrailing
         )
         .navigationBarHidden(true)

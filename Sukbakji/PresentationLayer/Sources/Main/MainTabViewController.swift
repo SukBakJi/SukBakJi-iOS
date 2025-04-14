@@ -149,7 +149,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         let swiftUIDirectoryView = DirectoryMainViewController()
         
         let boardVC = UIHostingController(rootView: swiftUIBoardView)
+        boardVC.additionalSafeAreaInsets.bottom = 92
         let directoryVC = UIHostingController(rootView: swiftUIDirectoryView)
+        directoryVC.additionalSafeAreaInsets.bottom = 92
         
         let navigationHome = UINavigationController(rootViewController: homeVC)
         let navigationCalendar = UINavigationController(rootViewController: calendarVC)
