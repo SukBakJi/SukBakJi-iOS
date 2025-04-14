@@ -87,6 +87,7 @@
 		7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */; };
 		7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */; };
 		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
+		91C53C4A2DAC9ABA00B8795D /* RefreshTokenManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C53C492DAC9ABA00B8795D /* RefreshTokenManager+.swift */; };
 		91D413262D82696500020CEC /* DetailTOSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413242D82696500020CEC /* DetailTOSViewController.swift */; };
 		91D413272D82696500020CEC /* TOSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413252D82696500020CEC /* TOSViewController.swift */; };
 		91D4132A2D82696500020CEC /* DetailTOSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413282D82696500020CEC /* DetailTOSView.swift */; };
@@ -353,6 +354,7 @@
 		7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabDetailViewController.swift; sourceTree = "<group>"; };
 		7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListGetModel.swift; sourceTree = "<group>"; };
 		910CC1BE2D76C55500E6B58E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		91C53C492DAC9ABA00B8795D /* RefreshTokenManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RefreshTokenManager+.swift"; sourceTree = "<group>"; };
 		91D413242D82696500020CEC /* DetailTOSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTOSViewController.swift; sourceTree = "<group>"; };
 		91D413252D82696500020CEC /* TOSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSViewController.swift; sourceTree = "<group>"; };
 		91D413282D82696500020CEC /* DetailTOSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTOSView.swift; sourceTree = "<group>"; };
@@ -1185,6 +1187,7 @@
 				415BBC0C2C73442F002768EE /* NetworkAuthManager+.swift */,
 				C78953142D636FF700E5041C /* AccessTokenManager+.swift */,
 				C77EFB382D9B8645000C2841 /* FCMTokenManager+.swift */,
+				91C53C492DAC9ABA00B8795D /* RefreshTokenManager+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1681,6 +1684,7 @@
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				C74A15AC2D5A4FE200A1698B /* UnivDelete.swift in Sources */,
 				C7FD6F432D663F6000251B7D /* MyPageView.swift in Sources */,
+				91C53C4A2DAC9ABA00B8795D /* RefreshTokenManager+.swift in Sources */,
 				C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */,
 				C7C379D02D65877E00C224A1 /* HomeView.swift in Sources */,
 				C77EFB3B2D9B8A1E000C2841 /* FCMRepository.swift in Sources */,
