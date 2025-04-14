@@ -102,6 +102,7 @@ struct LabDetailViewController: View {
                     .padding()
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden()
         .onAppear {
             fetchLabDetail()
