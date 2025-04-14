@@ -55,7 +55,7 @@ class AuthInterceptor: RequestInterceptor {
 
     // 리프레시 토큰을 사용하여 액세스 토큰 갱신
     private func refreshToken(completion: @escaping (Bool) -> Void) {
-        guard let refreshToken = KeychainHelper.standard.read(service: "refresh-token", account: "user") else {
+        guard let refreshToken = RefreshTokenManager.shared.getToken() else {
             print("❌ 리프레시 토큰 없음")
             completion(false)
             return
@@ -83,23 +83,23 @@ class AuthInterceptor: RequestInterceptor {
             case .success(let data):
                 if let newAccessToken = data.result?.accessToken,
                    let newRefreshToken = data.result?.refreshToken {
-
+                    
                     print("✅ 새로운 액세스 토큰 저장 전: \(newAccessToken)")
                     print("✅ 새로운 리프레시 토큰 저장 전: \(newRefreshToken)")
-
+                    
                     // 액세스 토큰과 리프레시 토큰을 비교해서 저장 오류 확인
                     if newAccessToken == newRefreshToken {
                         print("❌ [경고] 액세스 토큰과 리프레시 토큰이 동일함! 저장 오류 가능성 있음!")
                     }
-
+                    
                     // 올바른 값 저장
                     KeychainHelper.standard.save(newAccessToken, service: "access-token", account: "user")
                     KeychainHelper.standard.save(newRefreshToken, service: "refresh-token", account: "user")
-
-
+                    
+                    
                     print("🔍 저장된 액세스 토큰: \(KeychainHelper.standard.read(service: "access-token", account: "user") ?? "없음")")
                     print("🔍 저장된 리프레시 토큰: \(KeychainHelper.standard.read(service: "refresh-token", account: "user") ?? "없음")")
-
+                    
                     completion(true)
                 } else {
                     print("❌ 토큰 갱신 실패: 서버 응답에 새로운 토큰이 없음")
@@ -107,6 +107,14 @@ class AuthInterceptor: RequestInterceptor {
                 }
             case .failure(let error):
                 print("❌ 리프레시 토큰 요청 실패: \(error.localizedDescription)")
+                
+                // 토큰 초기화
+                AccessTokenManager.shared.clearToken()
+                RefreshTokenManager.shared.clearToken()
+                
+                // 로그인 화면으로 보내는 트리거
+                NotificationCenter.default.post(name: .forceLogout, object: nil)
+                
                 completion(false)
             }
         }
