@@ -233,6 +233,9 @@ struct DummyBoardDetail: View {
                         // 예: 서버에 신고 요청 보내기
                         reportViewModel.loadReportPost(postId: postId, reason: reason)
                     },
+                    onBlock: {
+                        reportViewModel.loadBlockMemberId(targetMemberId: boardDetail!.memberId)
+                    },
                     boardName: boardName,
                     isAuthor: isAuthor // ← 작성자인지 여부 전달
                 )
@@ -255,6 +258,9 @@ struct DummyBoardDetail: View {
                             print("댓글 신고 사유 선택됨: \(reason)")
                             // 서버로 신고 요청 전송 처리 가능
                             reportViewModel.loadReportComment(commentId: selectedComment.commentId, reason: reason)
+                        },
+                        onBlock: {
+                            reportViewModel.loadBlockMemberId(targetMemberId: selectedComment.memberId)
                         },
                         boardName: boardName,
                         isAuthor: selectedComment.memberId == currentUserId
@@ -282,7 +288,14 @@ struct DummyBoardDetail: View {
             reportViewModel.reportResult
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { isSuccess in
-                    reportAlertMessage = isSuccess ? "신고가 접수되었습니다.\n검토까지는 최대 24시간\n소요됩니다." : "신고에 실패했습니다. 다시 시도해주세요."
+                    reportAlertMessage = isSuccess ? "신고가 접수되었습니다.\n검토까지는 최대 24시간\n소요됩니다." : "신고에 실패했습니다.\n다시 시도해주세요."
+                    showReportAlert = true
+                })
+                .disposed(by: reportViewModel.disposeBag)
+            reportViewModel.blockResult
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { isSuccess in
+                    reportAlertMessage = isSuccess ? "차단이 성공적으로\n처리되었습니다." : "차단에 실패했습니다.\n다시 시도해주세요."
                     showReportAlert = true
                 })
                 .disposed(by: reportViewModel.disposeBag)
@@ -831,6 +844,7 @@ struct MoreButtonView: View {
     var onEdit: () -> Void
     var onDelete: () -> Void
     var onReport: (String) -> Void // 신고 사유도 전달받도록 수정
+    var onBlock: () -> Void
     var boardName: String
     var isAuthor: Bool
 
@@ -928,6 +942,19 @@ struct MoreButtonView: View {
                                     .frame(maxWidth: .infinity)
                                     .padding(17)
                             }
+                            
+                            Divider()
+
+                            Button(action: {
+                                onBlock()
+                                isPresented = false
+                            }) {
+                                Text("차단하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
                         }
                     }
                     .background(Color.white.opacity(0.9))
@@ -967,6 +994,7 @@ struct CommentMoreButtonView: View {
     var onEdit: () -> Void
     var onDelete: () -> Void
     var onReport: (String) -> Void // 신고 사유도 전달받도록 수정
+    var onBlock: () -> Void
     var boardName: String
     var isAuthor: Bool
 
@@ -1059,6 +1087,19 @@ struct CommentMoreButtonView: View {
                                 }
                             }) {
                                 Text("신고하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
+                            
+                            Divider()
+
+                            Button(action: {
+                                onBlock()
+                                isPresented = false
+                            }) {
+                                Text("차단하기")
                                     .font(.system(size: 17))
                                     .foregroundColor(.red)
                                     .frame(maxWidth: .infinity)
