@@ -66,6 +66,11 @@ class MyPageView: UIView {
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
         $0.textColor = .orange700
     }
+    let inquiryButton = UIButton().then {
+        $0.setTitle("문의하기", for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.setTitleColor(.gray500, for: .normal)
+    }
     let logOutButton = UIButton().then {
         $0.setTitle("로그아웃", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
@@ -107,6 +112,7 @@ class MyPageView: UIView {
         
         addSubview(resignButton)
         addSubview(logOutButton)
+        addSubview(inquiryButton)
     }
     
     private func setupConstraints() {
@@ -198,6 +204,13 @@ class MyPageView: UIView {
         
         logOutButton.snp.makeConstraints {
             $0.bottom.equalTo(resignButton.snp.top)
+            $0.leading.equalToSuperview().offset(12)
+            $0.height.equalTo(48)
+            $0.width.equalTo(72)
+        }
+        
+        inquiryButton.snp.makeConstraints {
+            $0.bottom.equalTo(logOutButton.snp.top)
             $0.leading.equalToSuperview().offset(12)
             $0.height.equalTo(48)
             $0.width.equalTo(72)

@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     var reactor: HomeReactor?
     
     private var favBoardHeightConstraint: Constraint?
+    private var hotPostHeightConstraint: Constraint?
     
     override func loadView() {
         self.view = homeView
@@ -54,7 +55,10 @@ extension HomeViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         homeView.favBoardContainerView.snp.makeConstraints { make in
-            favBoardHeightConstraint = make.height.equalTo(112).constraint
+            favBoardHeightConstraint = make.height.equalTo(56).constraint
+        }
+        homeView.hotPostView.snp.makeConstraints { make in
+            hotPostHeightConstraint = make.height.equalTo(228).constraint
         }
         
         homeView.notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
@@ -132,9 +136,7 @@ extension HomeViewController {
                     self.homeView.noFavBoardLabel.isHidden = false
                 }
                 
-                if favoriteBoardList.count == 1 {
-                    self.favBoardHeightConstraint?.update(offset: 56)
-                } else {
+                if favoriteBoardList.count >= 2 {
                     self.favBoardHeightConstraint?.update(offset: 112)
                 }
             })
@@ -164,6 +166,10 @@ extension HomeViewController {
                     self.homeView.noHotPost.isHidden = true
                 } else {
                     self.homeView.noHotPost.isHidden = false
+                }
+                
+                if hotPostList.count >= 2 {
+                    self.hotPostHeightConstraint?.update(offset: 383)
                 }
             })
             .disposed(by: disposeBag)
