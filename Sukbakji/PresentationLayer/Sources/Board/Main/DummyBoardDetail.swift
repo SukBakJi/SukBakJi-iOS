@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Alamofire
+import RxSwift
 
 struct DummyBoardDetail: View {
     
@@ -29,6 +30,8 @@ struct DummyBoardDetail: View {
     var memberId: Int?
     
     @State private var reportViewModel = ReportViewModel()
+    @State private var showReportAlert = false
+    @State private var reportAlertMessage = ""
     
     @State private var comments: [BoardComment] = []
     @State private var anonymousCounter: Int = 1
@@ -251,14 +254,17 @@ struct DummyBoardDetail: View {
                         onReport: { reason in
                             print("댓글 신고 사유 선택됨: \(reason)")
                             // 서버로 신고 요청 전송 처리 가능
-                            if let index = comments.firstIndex(where: { $0.commentId == selectedComment.commentId }) {
-                                reportViewModel.loadReportComment(commentId: index, reason: reason)
-                            }
+                            reportViewModel.loadReportComment(commentId: selectedComment.commentId, reason: reason)
                         },
                         boardName: boardName,
                         isAuthor: selectedComment.memberId == currentUserId
                     )
                 }
+            }
+            .alert(isPresented: $showReportAlert) {
+                Alert(title: Text(reportAlertMessage),
+                      message: Text(""),
+                      dismissButton: .default(Text("확인")))
             }
         }
         .navigationBarBackButtonHidden()
@@ -273,6 +279,13 @@ struct DummyBoardDetail: View {
                     }
                 }
             }
+            reportViewModel.reportResult
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { isSuccess in
+                    reportAlertMessage = isSuccess ? "신고가 접수되었습니다.\n검토까지는 최대 24시간\n소요됩니다." : "신고에 실패했습니다. 다시 시도해주세요."
+                    showReportAlert = true
+                })
+                .disposed(by: reportViewModel.disposeBag)
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
     }

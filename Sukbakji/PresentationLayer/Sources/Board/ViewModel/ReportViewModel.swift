@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 
 class ReportViewModel {
-    private let disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     
     let reportResult = PublishSubject<Bool>()
     
@@ -25,10 +25,10 @@ class ReportViewModel {
         
         ReportRepository.shared.fetchReportPost(token: token, parameters: params)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.reportResult.onNext(true)
-            }, onFailure: { error in
-                self.reportResult.onNext(false)
+            .subscribe(onSuccess: { [weak self] _ in
+                self?.reportResult.onNext(true)
+            }, onFailure: { [weak self] error in
+                self?.reportResult.onNext(false)
             })
             .disposed(by: disposeBag)
     }
@@ -45,10 +45,10 @@ class ReportViewModel {
         
         ReportRepository.shared.fetchReportComment(token: token, parameters: params)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.reportResult.onNext(true)
-            }, onFailure: { error in
-                self.reportResult.onNext(false)
+            .subscribe(onSuccess: { [weak self] _ in
+                self?.reportResult.onNext(true)
+            }, onFailure: { [weak self] error in
+                self?.reportResult.onNext(false)
             })
             .disposed(by: disposeBag)
     }

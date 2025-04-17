@@ -448,7 +448,6 @@ class HomeView: UIView {
         hotPostView.snp.makeConstraints {
             $0.top.equalTo(favBoardView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(383)
         }
         
         hotPostLabel.snp.makeConstraints {
