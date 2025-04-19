@@ -877,10 +877,16 @@ struct MoreButtonView: View {
 
                     VStack(spacing: 0) {
                         // ✅ 타이틀: 일반모드 → 게시판 이름 / 신고모드 → 신고하기
-                        Text(isReporting ? "신고하기" : boardName)
-                            .font(.system(size: 13))
+                        Text(isReporting ? "신고 사유를 선택해주세요." : boardName)
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundColor(Color.gray.opacity(0.5))
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 4)
+                        if isReporting == true {
+                            Text("누적 신고횟수가 3회 이상인 유저는 게시글 작성을 할 수 없게 됩니다.")
+                                .font(.system(size: 11, weight: .regular))
+                                .foregroundColor(Color.gray.opacity(0.5))
+                                .padding(.vertical, 6)
+                        }
 
                         Divider()
 
@@ -1027,10 +1033,16 @@ struct CommentMoreButtonView: View {
 
                     VStack(spacing: 0) {
                         // ✅ 타이틀: 일반모드 → 게시판 이름 / 신고모드 → 신고하기
-                        Text(isReporting ? "신고하기" : boardName)
-                            .font(.system(size: 13))
+                        Text(isReporting ? "신고 사유를 선택해주세요." : boardName)
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundColor(Color.gray.opacity(0.5))
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 4)
+                        if isReporting == true {
+                            Text("누적 신고횟수가 3회 이상인 유저는 게시글 작성을 할 수 없게 됩니다.")
+                                .font(.system(size: 11, weight: .regular))
+                                .foregroundColor(Color.gray.opacity(0.5))
+                                .padding(.vertical, 6)
+                        }
 
                         Divider()
 

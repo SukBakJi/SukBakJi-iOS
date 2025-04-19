@@ -63,6 +63,7 @@ extension HomeViewController {
         
         homeView.notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
         homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
+        homeView.favBoardButton.addTarget(self, action: #selector(moveToBoard), for: .touchUpInside)
         homeView.adCollectionView.delegate = self
         homeView.adCollectionView.dataSource = self
     }
@@ -129,9 +130,11 @@ extension HomeViewController {
         favoriteBoardViewModel.favoriteBoardList
             .subscribe(onNext: { favoriteBoardList in
                 if !favoriteBoardList.isEmpty {
+                    self.homeView.favBoardContainerView.isHidden = false
                     self.homeView.noFavBoard.isHidden = true
                     self.homeView.noFavBoardLabel.isHidden = true
                 } else {
+                    self.homeView.favBoardContainerView.isHidden = true
                     self.homeView.noFavBoard.isHidden = false
                     self.homeView.noFavBoardLabel.isHidden = false
                 }
@@ -234,6 +237,12 @@ extension HomeViewController {
         hostingController.modalPresentationStyle = .fullScreen
         
         self.present(hostingController, animated: true)
+    }
+    
+    @objc func moveToBoard() {
+        if let tabBarVC = self.tabBarController as? MainTabViewController {
+            tabBarVC.switchToTab(index: 2)
+        }
     }
 }
 
