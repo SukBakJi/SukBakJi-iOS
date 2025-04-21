@@ -63,7 +63,7 @@ class LoginView: UIView {
     public var emailButton = SocialAuthButton(type: .email, title: "이메일로 로그인")
     
     public var signUpButton = smallTextButton(title: "회원가입")
-    public var findAccountButton = smallTextButton(title: "계정찾기")
+    public var findAccountButton = smallTextButton(title: "이메일 찾기")
     
     //MARK: - init
     override init(frame: CGRect) {
