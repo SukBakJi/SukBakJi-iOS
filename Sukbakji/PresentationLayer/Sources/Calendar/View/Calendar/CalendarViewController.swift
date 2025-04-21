@@ -236,7 +236,7 @@ extension CalendarViewController {
                 let dayNum = Int(selectedDay) ?? 0
                 let date = calendarView.dateLabel.text ?? ""
                 let replacedString = date.replacingOccurrences(of: " ", with: "")
-                let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
+//                let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
                 
                 if dayNum <= 9 {
 //                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")

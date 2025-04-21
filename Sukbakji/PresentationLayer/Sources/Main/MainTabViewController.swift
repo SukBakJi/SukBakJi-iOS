@@ -43,8 +43,8 @@ class CustomTabBarItemView: UIView {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 35),
-            imageView.heightAnchor.constraint(equalToConstant: 35)
+            imageView.widthAnchor.constraint(equalToConstant: 32),
+            imageView.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
 
@@ -149,7 +149,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         let swiftUIDirectoryView = DirectoryMainViewController()
         
         let boardVC = UIHostingController(rootView: swiftUIBoardView)
+        boardVC.additionalSafeAreaInsets.bottom = 92
         let directoryVC = UIHostingController(rootView: swiftUIDirectoryView)
+        directoryVC.additionalSafeAreaInsets.bottom = 92
         
         let navigationHome = UINavigationController(rootViewController: homeVC)
         let navigationCalendar = UINavigationController(rootViewController: calendarVC)
@@ -158,5 +160,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         let navigationDirectory = UINavigationController(rootViewController: directoryVC)
 
         self.viewControllers = [navigationHome, navigationCalendar, navigationBoard, navigationChatting, navigationDirectory]
+    }
+    
+    func switchToTab(index: Int) {
+        guard index < items.count else { return }
+        selectedIndex = index
+        updateSelectedState(index: index)
     }
 }

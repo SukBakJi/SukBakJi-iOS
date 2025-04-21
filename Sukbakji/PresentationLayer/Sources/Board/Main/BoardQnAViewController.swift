@@ -104,7 +104,6 @@ struct BoardQnAViewController: View {
                     .overlay(
                         overlayButton(selectedButton: "질문 게시판")
                             .padding(.trailing, 24) // 오른쪽 여백
-                            .padding(.bottom, 48) // 아래 여백
                         , alignment: .bottomTrailing // 오른쪽 아래에 위치
                     )
                 }
@@ -177,18 +176,21 @@ struct BoardQnAViewController: View {
                 if showAnonymousMessage {
                     VStack {
                         Spacer()
-                        Text("익명으로 함께 소통해 보세요!")
-                            .font(.system(size: 12, weight: .medium))
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 11)
-                            .background(Color(red: 1, green: 0.34, blue: 0.08))
-                            .foregroundColor(Constants.White)
-                            .cornerRadius(6)
+                        HStack {
+                            Spacer()
+                            
+                            Text("익명으로 함께 소통해 보세요!")
+                                .font(.system(size: 12, weight: .medium))
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 11)
+                                .background(Color(red: 1, green: 0.34, blue: 0.08))
+                                .foregroundColor(Constants.White)
+                                .cornerRadius(6)
+                        }
+                        .padding(.trailing, 24)
 
-                        Spacer().frame(height: 59)
+                        Spacer().frame(height: 65)
                     }
-                    .padding(.bottom, 55)
-                    .padding(.leading, 180)
                     .transition(.opacity)
                 }
             }

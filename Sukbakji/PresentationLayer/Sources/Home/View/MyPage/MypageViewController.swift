@@ -45,6 +45,7 @@ extension MypageViewController {
         mypageView.navigationbarView.delegate = self
         mypageView.myInfoEditButton.addTarget(self, action: #selector(edit_Tapped), for: .touchUpInside)
         mypageView.resignButton.addTarget(self, action: #selector(resign_Tapped), for: .touchUpInside)
+        mypageView.inquiryButton.addTarget(self, action: #selector(inquiry_Tapped), for: .touchUpInside)
         mypageView.myInfoView.snp.makeConstraints { make in
             myInfoViewheightConstraint = make.height.equalTo(180).constraint
         }
@@ -117,6 +118,16 @@ extension MypageViewController {
     @objc private func resign_Tapped() {
         let alert = UIAlertController(title: nil, message: "준비 중인 서비스입니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
+    }
+    
+    @objc private func inquiry_Tapped() {
+        let title = "아래 이메일로 문의해주세요."
+        let email = "sukbakji240705@gmail.com"
+
+        let alert = UIAlertController(title: title, message: email, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(confirmAction)
         self.present(alert, animated: true)
     }
 }

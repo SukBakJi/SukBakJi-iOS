@@ -20,4 +20,10 @@ class ReportRepository {
         let url = APIConstants.reportsComment.path
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
     }
+    
+    func fetchBlockMember(token: String, targetMemberId: Int) -> Single<APIResponse<BlockMemberId>> {
+        let url = APIConstants.blockMemberId(targetMemberId).path
+        let params = ["targetMemberId": targetMemberId]
+        return APIService.shared.postWithToken(of: APIResponse<BlockMemberId>.self, url: url, parameters: params, accessToken: token)
+    }
 }

@@ -239,6 +239,7 @@
 		C7DA37522CFCD33A00B26549 /* HotPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */; };
 		C7DA37542CFCD4E900B26549 /* FavoriteBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */; };
 		C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4E3C2C611CE10092F342 /* APIConstants.swift */; };
+		C7DF5E2F2DB09AF600274B4D /* blockMemberId.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF5E2E2DB09AF600274B4D /* blockMemberId.swift */; };
 		C7E35A772D73670500632DE3 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E35A762D73670500632DE3 /* MainTabViewController.swift */; };
 		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
 		C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */; };
@@ -508,6 +509,7 @@
 		C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPostViewModel.swift; sourceTree = "<group>"; };
 		C7DA37532CFCD4E900B26549 /* FavoriteBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardViewModel.swift; sourceTree = "<group>"; };
 		C7DA4E3C2C611CE10092F342 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		C7DF5E2E2DB09AF600274B4D /* blockMemberId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blockMemberId.swift; sourceTree = "<group>"; };
 		C7E35A762D73670500632DE3 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivRecruitViewController.swift; sourceTree = "<group>"; };
@@ -1227,6 +1229,7 @@
 				C7AB97402D63A6A000D2DBCA /* Home */,
 				C7AB97412D63A6B600D2DBCA /* Calendar */,
 				C7AB97422D63A6BB00D2DBCA /* Chat */,
+				C7DF5E2D2DB09ADB00274B4D /* Block */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1353,6 +1356,14 @@
 				C7C379D82D65A1AB00C224A1 /* AppCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		C7DF5E2D2DB09ADB00274B4D /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				C7DF5E2E2DB09AF600274B4D /* blockMemberId.swift */,
+			);
+			path = Block;
 			sourceTree = "<group>";
 		};
 		C7E35A752D7365B900632DE3 /* Recovered References */ = {
@@ -1664,6 +1675,7 @@
 				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,
+				C7DF5E2F2DB09AF600274B4D /* blockMemberId.swift in Sources */,
 				91FEEB8C2D71A03B00D0502D /* SmsResponse.swift in Sources */,
 				C74A15982D5A477F00A1698B /* FavoriteLab.swift in Sources */,
 				C780C5082D4143D800DC2031 /* Notification+.swift in Sources */,
@@ -2015,7 +2027,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Sukbakji/Sukbakji.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = R8ZX684WX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sukbakji/SUKBAKJI/Resources/Info.plist;
@@ -2050,7 +2062,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Sukbakji/Sukbakji.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = R8ZX684WX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sukbakji/SUKBAKJI/Resources/Info.plist;

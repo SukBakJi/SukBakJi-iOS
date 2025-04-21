@@ -53,6 +53,7 @@ struct BoardViewController: View {
                     FreeView().tag("자유")
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .edgesIgnoringSafeArea(.bottom)
             }
         }
         .navigationBarHidden(true)

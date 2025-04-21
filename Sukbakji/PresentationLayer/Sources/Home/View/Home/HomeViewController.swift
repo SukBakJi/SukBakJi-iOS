@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     var reactor: HomeReactor?
     
     private var favBoardHeightConstraint: Constraint?
+    private var hotPostHeightConstraint: Constraint?
     
     override func loadView() {
         self.view = homeView
@@ -54,11 +55,15 @@ extension HomeViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         homeView.favBoardContainerView.snp.makeConstraints { make in
-            favBoardHeightConstraint = make.height.equalTo(112).constraint
+            favBoardHeightConstraint = make.height.equalTo(56).constraint
+        }
+        homeView.hotPostView.snp.makeConstraints { make in
+            hotPostHeightConstraint = make.height.equalTo(228).constraint
         }
         
         homeView.notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
         homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
+        homeView.favBoardButton.addTarget(self, action: #selector(moveToBoard), for: .touchUpInside)
         homeView.adCollectionView.delegate = self
         homeView.adCollectionView.dataSource = self
     }
@@ -125,16 +130,16 @@ extension HomeViewController {
         favoriteBoardViewModel.favoriteBoardList
             .subscribe(onNext: { favoriteBoardList in
                 if !favoriteBoardList.isEmpty {
+                    self.homeView.favBoardContainerView.isHidden = false
                     self.homeView.noFavBoard.isHidden = true
                     self.homeView.noFavBoardLabel.isHidden = true
                 } else {
+                    self.homeView.favBoardContainerView.isHidden = true
                     self.homeView.noFavBoard.isHidden = false
                     self.homeView.noFavBoardLabel.isHidden = false
                 }
                 
-                if favoriteBoardList.count == 1 {
-                    self.favBoardHeightConstraint?.update(offset: 56)
-                } else {
+                if favoriteBoardList.count >= 2 {
                     self.favBoardHeightConstraint?.update(offset: 112)
                 }
             })
@@ -164,6 +169,10 @@ extension HomeViewController {
                     self.homeView.noHotPost.isHidden = true
                 } else {
                     self.homeView.noHotPost.isHidden = false
+                }
+                
+                if hotPostList.count >= 2 {
+                    self.hotPostHeightConstraint?.update(offset: 383)
                 }
             })
             .disposed(by: disposeBag)
@@ -228,6 +237,12 @@ extension HomeViewController {
         hostingController.modalPresentationStyle = .fullScreen
         
         self.present(hostingController, animated: true)
+    }
+    
+    @objc func moveToBoard() {
+        if let tabBarVC = self.tabBarController as? MainTabViewController {
+            tabBarVC.switchToTab(index: 2)
+        }
     }
 }
 

@@ -112,10 +112,6 @@ class CalendarView: UIView {
         cv.register(UpComingCalendarCollectionViewCell.self, forCellWithReuseIdentifier: UpComingCalendarCollectionViewCell.identifier)
         cv.allowsSelection = false
         cv.backgroundColor = .clear
-        cv.layer.masksToBounds = false// any value you want
-        cv.layer.shadowOpacity = 0.2// any value you want
-        cv.layer.shadowRadius = 1 // any value you want
-        cv.layer.shadowOffset = .init(width: 0, height: 0.2)
         
         return cv
     }()

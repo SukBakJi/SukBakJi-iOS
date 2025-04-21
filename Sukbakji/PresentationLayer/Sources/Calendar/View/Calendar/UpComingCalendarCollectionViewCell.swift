@@ -48,7 +48,13 @@ class UpComingCalendarCollectionViewCell: UICollectionViewCell {
     
     private func setUI() {
         contentView.layer.cornerRadius = 8
-        contentView.layer.masksToBounds = true
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.gray100.cgColor
+        contentView.clipsToBounds = false
+        contentView.backgroundColor = .gray50
+        
+        layer.cornerRadius = 8
+        layer.masksToBounds = false
         
         self.contentView.addSubview(layerImageView)
         layerImageView.snp.makeConstraints { make in

@@ -44,6 +44,9 @@ enum APIConstants {
     case boardsMenu(String)
     
     
+    case blockMemberId(Int)
+    
+    
     case posts
     
     
@@ -151,6 +154,9 @@ extension APIConstants {
         case .boardsMenu(let menu):
             return APIConstants.makeEndPoint("/boards/\(menu)")
             
+            
+        case .blockMemberId(let targetMemberId):
+            return APIConstants.makeEndPoint("/block/\(targetMemberId)")
             
             
         case .posts:

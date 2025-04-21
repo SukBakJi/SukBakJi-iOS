@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Alamofire
+import RxSwift
 
 struct DummyBoardDetail: View {
     
@@ -29,6 +30,8 @@ struct DummyBoardDetail: View {
     var memberId: Int?
     
     @State private var reportViewModel = ReportViewModel()
+    @State private var showReportAlert = false
+    @State private var reportAlertMessage = ""
     
     @State private var comments: [BoardComment] = []
     @State private var anonymousCounter: Int = 1
@@ -230,6 +233,9 @@ struct DummyBoardDetail: View {
                         // 예: 서버에 신고 요청 보내기
                         reportViewModel.loadReportPost(postId: postId, reason: reason)
                     },
+                    onBlock: {
+                        reportViewModel.loadBlockMemberId(targetMemberId: boardDetail!.memberId)
+                    },
                     boardName: boardName,
                     isAuthor: isAuthor // ← 작성자인지 여부 전달
                 )
@@ -251,14 +257,20 @@ struct DummyBoardDetail: View {
                         onReport: { reason in
                             print("댓글 신고 사유 선택됨: \(reason)")
                             // 서버로 신고 요청 전송 처리 가능
-                            if let index = comments.firstIndex(where: { $0.commentId == selectedComment.commentId }) {
-                                reportViewModel.loadReportComment(commentId: index, reason: reason)
-                            }
+                            reportViewModel.loadReportComment(commentId: selectedComment.commentId, reason: reason)
+                        },
+                        onBlock: {
+                            reportViewModel.loadBlockMemberId(targetMemberId: selectedComment.memberId)
                         },
                         boardName: boardName,
                         isAuthor: selectedComment.memberId == currentUserId
                     )
                 }
+            }
+            .alert(isPresented: $showReportAlert) {
+                Alert(title: Text(reportAlertMessage),
+                      message: Text(""),
+                      dismissButton: .default(Text("확인")))
             }
         }
         .navigationBarBackButtonHidden()
@@ -273,6 +285,20 @@ struct DummyBoardDetail: View {
                     }
                 }
             }
+            reportViewModel.reportResult
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { isSuccess in
+                    reportAlertMessage = isSuccess ? "신고가 접수되었습니다.\n검토까지는 최대 24시간\n소요됩니다." : "신고에 실패했습니다.\n다시 시도해주세요."
+                    showReportAlert = true
+                })
+                .disposed(by: reportViewModel.disposeBag)
+            reportViewModel.blockResult
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { isSuccess in
+                    reportAlertMessage = isSuccess ? "차단이 성공적으로\n처리되었습니다." : "차단에 실패했습니다.\n다시 시도해주세요."
+                    showReportAlert = true
+                })
+                .disposed(by: reportViewModel.disposeBag)
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
     }
@@ -818,6 +844,7 @@ struct MoreButtonView: View {
     var onEdit: () -> Void
     var onDelete: () -> Void
     var onReport: (String) -> Void // 신고 사유도 전달받도록 수정
+    var onBlock: () -> Void
     var boardName: String
     var isAuthor: Bool
 
@@ -850,10 +877,16 @@ struct MoreButtonView: View {
 
                     VStack(spacing: 0) {
                         // ✅ 타이틀: 일반모드 → 게시판 이름 / 신고모드 → 신고하기
-                        Text(isReporting ? "신고하기" : boardName)
-                            .font(.system(size: 13))
+                        Text(isReporting ? "신고 사유를 선택해주세요." : boardName)
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundColor(Color.gray.opacity(0.5))
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 4)
+                        if isReporting == true {
+                            Text("누적 신고횟수가 3회 이상인 유저는 게시글 작성을 할 수 없게 됩니다.")
+                                .font(.system(size: 11, weight: .regular))
+                                .foregroundColor(Color.gray.opacity(0.5))
+                                .padding(.vertical, 6)
+                        }
 
                         Divider()
 
@@ -915,6 +948,19 @@ struct MoreButtonView: View {
                                     .frame(maxWidth: .infinity)
                                     .padding(17)
                             }
+                            
+                            Divider()
+
+                            Button(action: {
+                                onBlock()
+                                isPresented = false
+                            }) {
+                                Text("차단하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
                         }
                     }
                     .background(Color.white.opacity(0.9))
@@ -954,6 +1000,7 @@ struct CommentMoreButtonView: View {
     var onEdit: () -> Void
     var onDelete: () -> Void
     var onReport: (String) -> Void // 신고 사유도 전달받도록 수정
+    var onBlock: () -> Void
     var boardName: String
     var isAuthor: Bool
 
@@ -986,10 +1033,16 @@ struct CommentMoreButtonView: View {
 
                     VStack(spacing: 0) {
                         // ✅ 타이틀: 일반모드 → 게시판 이름 / 신고모드 → 신고하기
-                        Text(isReporting ? "신고하기" : boardName)
-                            .font(.system(size: 13))
+                        Text(isReporting ? "신고 사유를 선택해주세요." : boardName)
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundColor(Color.gray.opacity(0.5))
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 4)
+                        if isReporting == true {
+                            Text("누적 신고횟수가 3회 이상인 유저는 게시글 작성을 할 수 없게 됩니다.")
+                                .font(.system(size: 11, weight: .regular))
+                                .foregroundColor(Color.gray.opacity(0.5))
+                                .padding(.vertical, 6)
+                        }
 
                         Divider()
 
@@ -1046,6 +1099,19 @@ struct CommentMoreButtonView: View {
                                 }
                             }) {
                                 Text("신고하기")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(17)
+                            }
+                            
+                            Divider()
+
+                            Button(action: {
+                                onBlock()
+                                isPresented = false
+                            }) {
+                                Text("차단하기")
                                     .font(.system(size: 17))
                                     .foregroundColor(.red)
                                     .frame(maxWidth: .infinity)
