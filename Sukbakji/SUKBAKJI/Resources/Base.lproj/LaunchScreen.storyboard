@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -66,10 +66,10 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sukbakji_SplashText" translatesAutoresizingMaskIntoConstraints="NO" id="nhc-Ep-h8k">
-                                <rect key="frame" x="32" y="291" width="221" height="80"/>
+                                <rect key="frame" x="32" y="291" width="221" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="221" id="9kQ-RL-B9d"/>
-                                    <constraint firstAttribute="height" constant="80" id="D8c-uP-M3x"/>
+                                    <constraint firstAttribute="height" constant="40" id="LfF-Ol-vAO"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -78,7 +78,6 @@
                         <constraints>
                             <constraint firstItem="qqR-NQ-Vft" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="1pX-zR-qJF"/>
                             <constraint firstItem="lWL-Pe-6hX" firstAttribute="top" secondItem="LG2-HJ-izO" secondAttribute="bottom" constant="21" id="A2o-2d-DNL"/>
-                            <constraint firstItem="4hP-UT-TCX" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="121" id="EdW-TI-YvM"/>
                             <constraint firstItem="lWL-Pe-6hX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="G1s-aO-be6"/>
                             <constraint firstItem="4hP-UT-TCX" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="38" id="JRH-A7-ugX"/>
                             <constraint firstItem="X5S-ez-uc7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="LVJ-Ov-ruf"/>
@@ -87,10 +86,11 @@
                             <constraint firstItem="LG2-HJ-izO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="W9b-QD-AsF"/>
                             <constraint firstItem="4aX-y9-NZx" firstAttribute="top" secondItem="Ag3-sV-qiM" secondAttribute="bottom" constant="54" id="WPI-GR-AMh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ag3-sV-qiM" secondAttribute="trailing" constant="-7" id="XiU-yV-Bja"/>
-                            <constraint firstItem="Ag3-sV-qiM" firstAttribute="top" secondItem="nhc-Ep-h8k" secondAttribute="bottom" constant="94" id="Xlx-P1-gfC"/>
                             <constraint firstItem="LG2-HJ-izO" firstAttribute="top" secondItem="4hP-UT-TCX" secondAttribute="bottom" constant="4" id="a4V-Gc-UkE"/>
                             <constraint firstItem="nhc-Ep-h8k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="bG3-UX-in8"/>
                             <constraint firstItem="nhc-Ep-h8k" firstAttribute="top" secondItem="qqR-NQ-Vft" secondAttribute="bottom" constant="4" id="caa-Z6-tXm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4aX-y9-NZx" secondAttribute="bottom" constant="53" id="hTG-qb-mRQ"/>
+                            <constraint firstItem="4hP-UT-TCX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="62" id="sZE-OB-DVY"/>
                             <constraint firstItem="qqR-NQ-Vft" firstAttribute="top" secondItem="X5S-ez-uc7" secondAttribute="bottom" constant="21" id="tUx-8C-5cR"/>
                         </constraints>
                     </view>
@@ -104,7 +104,7 @@
         <image name="Launch_Logo" width="84" height="40"/>
         <image name="Launch_Mainlogo" width="272" height="207"/>
         <image name="Sukbakji_Baksa" width="43" height="23.5"/>
-        <image name="Sukbakji_SplashText" width="219.5" height="63.5"/>
+        <image name="Sukbakji_SplashText" width="218" height="23.5"/>
         <image name="Sukbakji_Suksa" width="43.5" height="23.5"/>
         <image name="Sukbakji_Vector" width="12" height="12"/>
         <systemColor name="systemBackgroundColor">

@@ -98,20 +98,21 @@ class LoginView: UIView {
             $0.height.equalTo(80)
         }
         
-        buttonStackView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(24)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(215)
+        signUpStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(211)
+            $0.height.equalTo(30)
+            $0.bottom.equalToSuperview().inset(79)
         }
         
         findAccountButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(buttonStackView.snp.bottom).offset(24)
+            $0.bottom.equalTo(signUpStackView.snp.top).offset(-16)
         }
         
-        signUpStackView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(211)
-            $0.top.equalTo(findAccountButton.snp.bottom).offset(16)
+        buttonStackView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(24)
+            $0.bottom.equalTo(findAccountButton.snp.top).offset(-24)
         }
     }
 }

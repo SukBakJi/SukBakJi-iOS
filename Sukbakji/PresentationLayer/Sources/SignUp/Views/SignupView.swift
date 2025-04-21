@@ -77,14 +77,14 @@ class SignupView: UIView {
             $0.top.equalTo(symbolImageView.snp.bottom).offset(12)
         }
         
-        buttonStackView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(24)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(135)
-        }
-        
         findAccountButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(buttonStackView.snp.bottom).offset(24)
+            $0.bottom.equalToSuperview().inset(77)
+        }
+        
+        buttonStackView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(24)
+            $0.bottom.equalTo(findAccountButton.snp.top).offset(-24)
         }
     }
 }
