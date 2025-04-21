@@ -93,7 +93,6 @@
 		91D4132A2D82696500020CEC /* DetailTOSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413282D82696500020CEC /* DetailTOSView.swift */; };
 		91D4132B2D82696500020CEC /* TOSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413292D82696500020CEC /* TOSView.swift */; };
 		91D413342D826A0000020CEC /* TOSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413322D826A0000020CEC /* TOSTableViewCell.swift */; };
-		91D4133A2D826A3C00020CEC /* TosProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413382D826A3C00020CEC /* TosProtocol.swift */; };
 		91D4133D2D826B2000020CEC /* CompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D4133C2D826B2000020CEC /* CompleteView.swift */; };
 		91D4133F2D826D3000020CEC /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D4133E2D826D3000020CEC /* CompleteViewController.swift */; };
 		91D413412D8270B100020CEC /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413402D8270B100020CEC /* SignupView.swift */; };
@@ -361,7 +360,6 @@
 		91D413282D82696500020CEC /* DetailTOSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTOSView.swift; sourceTree = "<group>"; };
 		91D413292D82696500020CEC /* TOSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSView.swift; sourceTree = "<group>"; };
 		91D413322D826A0000020CEC /* TOSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSTableViewCell.swift; sourceTree = "<group>"; };
-		91D413382D826A3C00020CEC /* TosProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TosProtocol.swift; sourceTree = "<group>"; };
 		91D4133C2D826B2000020CEC /* CompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteView.swift; sourceTree = "<group>"; };
 		91D4133E2D826D3000020CEC /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		91D413402D8270B100020CEC /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
@@ -564,7 +562,6 @@
 				41EE13452C54EC8A0037EDD6 /* AcadmicVerification */,
 				91D413352D826A0D00020CEC /* Models */,
 				91D413362D826A2700020CEC /* Cells */,
-				91D4133B2D826A4C00020CEC /* Protocols */,
 				91EB93112D8154E300A6BBB0 /* ViewControllers */,
 				91EB93132D8154E300A6BBB0 /* Views */,
 			);
@@ -813,14 +810,6 @@
 				417AADB22C606132002080E0 /* SearchTableViewCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		91D4133B2D826A4C00020CEC /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				91D413382D826A3C00020CEC /* TosProtocol.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		91EB93112D8154E300A6BBB0 /* ViewControllers */ = {
@@ -1733,7 +1722,6 @@
 				C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */,
 				7BFDEC352C52251F007280F8 /* BoardFreeViewController.swift in Sources */,
 				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,
-				91D4133A2D826A3C00020CEC /* TosProtocol.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				91D4135B2D841ECE00020CEC /* ResetPwViewController.swift in Sources */,
 				91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */,

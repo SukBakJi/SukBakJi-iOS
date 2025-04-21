@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TOSCellDelegate: AnyObject {
+    func didTapReadMore(in cell: TOSTableViewCell)
+}
+
 class TOSViewController: UIViewController, TOSCellDelegate {
     // MARK: - Properties
     public var isOAuth2: Bool = false
