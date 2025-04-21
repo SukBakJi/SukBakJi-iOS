@@ -54,11 +54,7 @@ class LoginViewController: UIViewController {
         let TOSVC = TOSViewController()
         TOSVC.isOAuth2 = isOAuth2
         TOSVC.appleName = appleName
-        self.navigationController?.pushViewController(TOSVC, animated: true)
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
-            $0.tintColor = .black
-        }
+        pushToNextVC(TOSVC)
     }
     
     private func checkIsSignUp() {
@@ -80,6 +76,14 @@ class LoginViewController: UIViewController {
             else {
                 print("프로필 불러오기 실패")
             }
+        }
+    }
+    
+    private func pushToNextVC(_ nextVC: UIViewController) {
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
+            $0.tintColor = .black
         }
     }
     
@@ -150,25 +154,15 @@ class LoginViewController: UIViewController {
     }
     
     @objc func didTapEmailLogin() {
-        let EmailLoginVC = EmailLoginViewController()
-        self.navigationController?.pushViewController(EmailLoginVC, animated: true)
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
-            $0.tintColor = .black
-        }
+        pushToNextVC(EmailLoginViewController())
     }
     
     @objc func didTapSignUp() {
-        let SignUpVC = SignupViewController()
-        self.navigationController?.pushViewController(SignUpVC, animated: true)
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
-            $0.tintColor = .black
-        }
+        pushToNextVC(SignupViewController())
     }
     
     @objc func didTapfindAccount() {
-        
+        pushToNextVC(FindEmailViewController())
     }
     
     // MARK: - Network

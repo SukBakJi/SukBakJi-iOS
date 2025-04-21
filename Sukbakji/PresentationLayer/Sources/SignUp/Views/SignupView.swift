@@ -46,7 +46,7 @@ class SignupView: UIView {
     public var kakaoButton = SocialAuthButton(type: .kakao, title: "카카오톡으로 회원가입")
     public var appleButton = SocialAuthButton(type: .apple, title: "Apple로 회원가입")
     public var emailButton = SocialAuthButton(type: .email, title: "이메일로 회원가입")
-    public var findAccountButton = smallTextButton(title: "계정찾기")
+    public var findAccountButton = smallTextButton(title: "이메일 찾기")
     
     //MARK: - init
     override init(frame: CGRect) {

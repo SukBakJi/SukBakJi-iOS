@@ -93,6 +93,14 @@ class SignupViewController: UIViewController {
         }
     }
     
+    private func pushToNextVC(_ nextVC: UIViewController) {
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil).then {
+            $0.tintColor = .black
+        }
+    }
+    
     //MARK: Event
     @objc
     func didTapKakao() {
@@ -145,7 +153,7 @@ class SignupViewController: UIViewController {
     
     @objc
     func didTapfindAccount() {
-        
+        pushToNextVC(FindEmailViewController())
     }
 }
 
