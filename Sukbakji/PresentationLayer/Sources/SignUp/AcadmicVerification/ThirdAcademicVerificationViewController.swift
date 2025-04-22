@@ -481,52 +481,60 @@ extension ThirdAcademicVerificationViewController: UIDocumentPickerDelegate {
 // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate Extension
 extension ThirdAcademicVerificationViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[.originalImage] as? UIImage {
-            self.selectedImage = image // 선택한 이미지 저장
-            DidUploadSetUp()
+        // ✅ 이미지 가져오기
+        guard let image = info[.originalImage] as? UIImage else {
+            print("이미지 없음")
+            picker.dismiss(animated: true, completion: nil)
+            return
         }
-        
-        if let imageURL = info[.imageURL] as? URL {
-            // 파일명 가져오기
-            let fileName = imageURL.lastPathComponent
+
+        // ✅ 압축
+        let compressionQuality: CGFloat = 0.5
+        guard let compressedData = image.jpegData(compressionQuality: compressionQuality) else {
+            print("압축 실패")
+            picker.dismiss(animated: true, completion: nil)
+            return
+        }
+
+        // ✅ 파일명 + 저장
+        let fileName = UUID().uuidString + ".jpg"
+        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+
+        do {
+            try compressedData.write(to: tempURL)
+
+            // 파일명 표시
             let maxLength = 18
-            let truncatedFileName: String
-            if fileName.count > maxLength {
-                let fileExtension = fileName.split(separator: ".").last ?? ""
-                let namePart = fileName.prefix(fileName.count - fileExtension.count - 1)
-                let shortenedNamePart = namePart.prefix(maxLength - fileExtension.count - 3) // 공간을 위해 3자를 예약
-                truncatedFileName = "\(shortenedNamePart)...\(fileExtension)"
-            } else {
-                truncatedFileName = fileName
+            let fileExtension = "jpg"
+            let namePart = fileName.prefix(fileName.count - fileExtension.count - 1)
+            let shortened = namePart.prefix(maxLength - fileExtension.count - 3)
+            let displayName = fileName.count > maxLength ? "\(shortened)...\(fileExtension)" : fileName
+            fileNameLabel.text = displayName
+            print("업로드 파일명: \(displayName)")
+
+            // 파일 크기 표시
+            let attr = try FileManager.default.attributesOfItem(atPath: tempURL.path)
+            if let fileSize = attr[.size] as? NSNumber {
+                let sizeKB = Double(fileSize.intValue) / 1024.0
+                fileSizeLabel.text = String(format: "%.0f KB", sizeKB)
+                print(String(format: "압축 후 파일 크기: %.0f KB", sizeKB))
             }
-            fileNameLabel.text = truncatedFileName
-            print("업로드 파일명 : \(truncatedFileName)")
-            
-            // 파일 크기 가져오기
-            do {
-                let fileAttributes = try FileManager.default.attributesOfItem(atPath: imageURL.path)
-                if let fileSize = fileAttributes[FileAttributeKey.size] as? NSNumber {
-                    let sizeInBytes = fileSize.intValue
-                    let sizeInKB = Double(sizeInBytes) / 1024.0
-                    
-                    isUpload = true
-                    
-                    if isUpload {
-                        fileSizeLabel.text = (String(format:"%.0f KB", sizeInKB))
-                        print(String(format: "업로드 파일 크기: %.0f KB", sizeInKB))
-                        DidUploadSetUp()
-                    }
-                    
-                }
-            } catch {
-                print("Error getting file size: \(error)")
-            }
-            picker.dismiss(animated: true, completion: nil)
-            
+
+            // Base64 인코딩 (서버 전송용)
+            let base64String = compressedData.base64EncodedString()
+            print("Base64 길이: \(base64String.count)")
+
+            self.selectedImage = image // 필요시 저장
+            self.DidUploadSetUp()      // UI 상태 변경
+
+        } catch {
+            print("이미지 저장 실패: \(error)")
         }
-        
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            picker.dismiss(animated: true, completion: nil)
-        }
+
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }
