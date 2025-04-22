@@ -17,6 +17,7 @@ class FirstAcademicVerificationViewController: UIViewController {
     var degreeLevel: DegreeLevel?
     private var selectedImage: UIImage?
     private var selectedCertificateType: String = "재학증명서"
+    private var compressedImageData: Data?
     
     // MARK: - imageView
     private let noticeImageView = UIImageView().then {
@@ -238,19 +239,17 @@ class FirstAcademicVerificationViewController: UIViewController {
     // MARK: - Screen transition
     @objc private func nextButtonTapped() {
         openPopUp()
-        
-        // 이미지 업로드 여부 검사
-        guard let imageData = selectedImage?.pngData() else { return }
-        
-        // 이미지 변환
+
+        guard let imageData = compressedImageData else { return }
+
         let imageBase64 = imageData.base64EncodedString()
         if imageBase64.isEmpty { return }
-        
+
         let requestBody = PostEduImageRequestDTO(
             certificationPicture: imageBase64,
             educationCertificateType: selectedCertificateType
         )
-        
+
         UserDataManager().PostEduImageDataManager(requestBody) { response in
             if let response = response, response.isSuccess == true {
                 self.openPopUp()
@@ -599,6 +598,7 @@ extension FirstAcademicVerificationViewController: UIImagePickerControllerDelega
 
             self.selectedImage = image // 필요시 저장
             self.DidUploadSetUp()      // UI 상태 변경
+            self.compressedImageData = compressedData
 
         } catch {
             print("이미지 저장 실패: \(error)")
