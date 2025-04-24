@@ -162,6 +162,10 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         professorNameLabel.text = favoriteLab.professorName
         professorLabLabel.text = favoriteLab.departmentName
         labLabel2.text = "#\(favoriteLab.researchTopics[0])"
-        labLabel3.text = "#\(favoriteLab.researchTopics[1])"
+        if favoriteLab.researchTopics.count == 1 {
+            labView3.isHidden = true
+        } else {
+            labLabel3.text = "#\(favoriteLab.researchTopics[1])"
+        }
     }
 }

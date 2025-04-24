@@ -95,11 +95,11 @@ class MyAlarmView: UIView {
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        alarmCompleteImageView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(112)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(44)
-            make.width.equalTo(215)
+        alarmCompleteImageView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(112)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(44)
+            $0.width.equalTo(215)
         }
         alarmCompleteImageView.alpha = 0
     }

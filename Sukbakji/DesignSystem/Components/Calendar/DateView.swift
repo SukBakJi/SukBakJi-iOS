@@ -83,64 +83,64 @@ final class DateView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        backgroundColor = UIColor(white: 0, alpha: 0.2)
         
-        self.addSubview(mainView)
-        self.mainView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(48)
-            make.height.equalTo(420)
+        addSubview(mainView)
+        mainView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(48)
+            $0.height.equalTo(420)
         }
         
-        self.mainView.addSubview(backButton)
-        self.backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview().inset(8)
-            make.height.width.equalTo(32)
+        mainView.addSubview(backButton)
+        backButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(8)
+            $0.trailing.equalToSuperview().inset(8)
+            $0.height.width.equalTo(32)
         }
-        self.backButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         
-        self.mainView.addSubview(yearLabel)
-        self.yearLabel.snp.makeConstraints { make in
-            make.top.equalTo(backButton.snp.bottom).offset(18)
-            make.leading.equalToSuperview().offset(20)
-            make.height.equalTo(21)
-        }
-        
-        self.mainView.addSubview(nextButton)
-        self.nextButton.snp.makeConstraints { make in
-            make.top.equalTo(backButton.snp.bottom).offset(18)
-            make.trailing.equalToSuperview().inset(19.5)
-            make.height.width.equalTo(20.5)
+        mainView.addSubview(yearLabel)
+        yearLabel.snp.makeConstraints {
+            $0.top.equalTo(backButton.snp.bottom).offset(18)
+            $0.leading.equalToSuperview().offset(20)
+            $0.height.equalTo(21)
         }
         
-        self.mainView.addSubview(monthLabel)
-        self.monthLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(nextButton)
-            make.trailing.equalTo(nextButton.snp.leading).offset(-6)
-            make.height.equalTo(21)
+        mainView.addSubview(nextButton)
+        nextButton.snp.makeConstraints {
+            $0.top.equalTo(backButton.snp.bottom).offset(18)
+            $0.trailing.equalToSuperview().inset(19.5)
+            $0.height.width.equalTo(20.5)
         }
         
-        self.mainView.addSubview(previousButton)
-        self.previousButton.snp.makeConstraints { make in
-            make.centerY.equalTo(nextButton)
-            make.trailing.equalTo(monthLabel.snp.leading).offset(-6)
-            make.height.width.equalTo(20.5)
+        mainView.addSubview(monthLabel)
+        monthLabel.snp.makeConstraints {
+            $0.centerY.equalTo(nextButton)
+            $0.trailing.equalTo(nextButton.snp.leading).offset(-6)
+            $0.height.equalTo(21)
         }
         
-        self.mainView.addSubview(weekStackView)
-        self.weekStackView.distribution = .fillEqually
-        self.weekStackView.snp.makeConstraints { make in
-            make.top.equalTo(yearLabel.snp.bottom).offset(17)
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.height.equalTo(40)
+        mainView.addSubview(previousButton)
+        previousButton.snp.makeConstraints {
+            $0.centerY.equalTo(nextButton)
+            $0.trailing.equalTo(monthLabel.snp.leading).offset(-6)
+            $0.height.width.equalTo(20.5)
         }
         
-        self.mainView.addSubview(alarmDateCollectionView)
-        self.alarmDateCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(weekStackView.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.bottom.equalToSuperview().inset(5)
+        mainView.addSubview(weekStackView)
+        weekStackView.distribution = .fillEqually
+        weekStackView.snp.makeConstraints {
+            $0.top.equalTo(yearLabel.snp.bottom).offset(17)
+            $0.leading.trailing.equalToSuperview().inset(7)
+            $0.height.equalTo(40)
+        }
+        
+        mainView.addSubview(alarmDateCollectionView)
+        alarmDateCollectionView.snp.makeConstraints {
+            $0.top.equalTo(weekStackView.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(7)
+            $0.bottom.equalToSuperview().inset(5)
         }
     }
     

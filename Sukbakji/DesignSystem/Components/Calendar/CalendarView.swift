@@ -193,161 +193,161 @@ class CalendarView: UIView {
     }
     
     private func setupConstraints() {
-        scrollView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
+        scrollView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        contentView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView.contentLayoutGuide)
-            make.width.equalTo(scrollView.frameLayoutGuide)
-            make.height.equalTo(955)
+        contentView.snp.makeConstraints {
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+            $0.bottom.equalTo(noUnivView.snp.bottom).offset(120)
         }
         
-        titleView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(95)
+        titleView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(95)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(11)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(26)
+        titleLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(11)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(26)
         }
         
-        mypageButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(8)
-            make.centerY.equalTo(titleLabel)
-            make.height.width.equalTo(48)
+        mypageButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(8)
+            $0.centerY.equalTo(titleLabel)
+            $0.height.width.equalTo(48)
         }
         
-        notificationButton.snp.makeConstraints { make in
-            make.trailing.equalTo(mypageButton.snp.leading)
-            make.centerY.equalTo(titleLabel)
-            make.height.width.equalTo(48)
+        notificationButton.snp.makeConstraints {
+            $0.trailing.equalTo(mypageButton.snp.leading)
+            $0.centerY.equalTo(titleLabel)
+            $0.height.width.equalTo(48)
         }
         
-        backgroundLabel.snp.makeConstraints { make in
-            make.bottom.leading.trailing.equalToSuperview()
-            make.height.equalTo(1)
+        backgroundLabel.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
-        dateView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(95)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(61)
+        dateView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(95)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(61)
         }
         
-        dateLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(21)
+        dateLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(21)
         }
         
-        univSettingButton.snp.makeConstraints { make in
-            make.centerY.equalTo(dateLabel)
-            make.trailing.equalToSuperview().inset(24)
-            make.width.equalTo(158)
-            make.height.equalTo(30)
+        univSettingButton.snp.makeConstraints {
+            $0.centerY.equalTo(dateLabel)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.width.equalTo(158)
+            $0.height.equalTo(30)
         }
         
-        calendarBackgroundView.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(24)
+        calendarBackgroundView.snp.makeConstraints {
+            $0.top.equalTo(dateLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(24)
         }
         
-        self.weekStackView.distribution = .fillEqually
-        weekStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(5)
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.height.equalTo(40)
+        weekStackView.distribution = .fillEqually
+        weekStackView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(5)
+            $0.leading.trailing.equalToSuperview().inset(7)
+            $0.height.equalTo(40)
         }
 
-        calendarMainCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(weekStackView.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.bottom.equalToSuperview().inset(5)
+        calendarMainCollectionView.snp.makeConstraints {
+            $0.top.equalTo(weekStackView.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(7)
+            $0.bottom.equalToSuperview().inset(5)
         }
         
-        univAlertImageView.snp.makeConstraints { make in
-            make.top.equalTo(univSettingButton.snp.bottom).offset(5.5)
-            make.trailing.equalToSuperview().inset(20)
+        univAlertImageView.snp.makeConstraints {
+            $0.top.equalTo(univSettingButton.snp.bottom).offset(5.5)
+            $0.trailing.equalToSuperview().inset(20)
         }
         
-        univAlertView.snp.makeConstraints { make in
-            make.top.equalTo(univAlertImageView.snp.bottom)
-            make.trailing.equalToSuperview().inset(8)
-            make.height.equalTo(36)
+        univAlertView.snp.makeConstraints {
+            $0.top.equalTo(univAlertImageView.snp.bottom)
+            $0.trailing.equalToSuperview().inset(8)
+            $0.height.equalTo(36)
         }
         
-        univAlertLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.trailing.leading.equalToSuperview().inset(12)
-            make.height.equalTo(14)
+        univAlertLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.leading.equalToSuperview().inset(12)
+            $0.height.equalTo(14)
         }
         
-        calendarDetailTableView.snp.makeConstraints { make in
-            make.top.equalTo(calendarBackgroundView.snp.bottom).offset(8)
-            make.trailing.leading.equalToSuperview()
+        calendarDetailTableView.snp.makeConstraints {
+            $0.top.equalTo(calendarBackgroundView.snp.bottom).offset(8)
+            $0.trailing.leading.equalToSuperview()
         }
         
-        upComingView.snp.makeConstraints { make in
-            make.top.equalTo(calendarDetailTableView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(169)
+        upComingView.snp.makeConstraints {
+            $0.top.equalTo(calendarDetailTableView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(169)
         }
         
-        upComingLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(28)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(21)
+        upComingLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(28)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(21)
         }
         
-        upComingImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(upComingLabel)
-            make.leading.equalTo(upComingLabel.snp.trailing).offset(4)
-            make.height.width.equalTo(20)
+        upComingImageView.snp.makeConstraints {
+            $0.centerY.equalTo(upComingLabel)
+            $0.leading.equalTo(upComingLabel.snp.trailing).offset(4)
+            $0.height.width.equalTo(20)
         }
         
-        upComingCalendarCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(upComingLabel.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(108)
+        upComingCalendarCollectionView.snp.makeConstraints {
+            $0.top.equalTo(upComingLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(108)
         }
         upComingCalendarCollectionView.isHidden = true
         
-        noUnivView.snp.makeConstraints { make in
-            make.top.equalTo(upComingLabel.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(24)
-            make.height.equalTo(108)
-            make.width.equalTo(200)
+        noUnivView.snp.makeConstraints {
+            $0.top.equalTo(upComingLabel.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(108)
+            $0.width.equalTo(200)
         }
         
-        layerImageView.snp.makeConstraints { make in
-            make.top.bottom.leading.equalToSuperview()
-            make.width.equalTo(8)
+        layerImageView.snp.makeConstraints {
+            $0.top.bottom.leading.equalToSuperview()
+            $0.width.equalTo(8)
         }
         
-        noUnivLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalTo(layerImageView.snp.trailing).offset(10)
-            make.height.equalTo(52)
+        noUnivLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.leading.equalTo(layerImageView.snp.trailing).offset(10)
+            $0.height.equalTo(52)
         }
         
-        alarmButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(112)
-            make.trailing.equalToSuperview().inset(24)
-            make.height.width.equalTo(60)
+        alarmButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(112)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.width.equalTo(60)
         }
         
-        activityIndicator.snp.makeConstraints { make in
-            make.centerY.centerX.equalToSuperview()
+        activityIndicator.snp.makeConstraints {
+            $0.centerY.centerX.equalToSuperview()
         }
         
-        alarmCompleteImageView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(112)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(44)
-            make.width.equalTo(215)
+        alarmCompleteImageView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(112)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(44)
+            $0.width.equalTo(215)
         }
         alarmCompleteImageView.alpha = 0
     }

@@ -291,7 +291,7 @@ class HomeView: UIView {
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(1570)
+            $0.bottom.equalTo(personalInfoButton.snp.bottom).offset(120)
         }
         
         titleView.snp.makeConstraints {
@@ -401,7 +401,7 @@ class HomeView: UIView {
         favBoardView.snp.makeConstraints {
             $0.top.equalTo(adView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(200)
+//            $0.height.equalTo(200)
         }
         
         favBoardLabel.snp.makeConstraints {
@@ -438,6 +438,7 @@ class HomeView: UIView {
         favBoardContainerView.snp.makeConstraints {
             $0.top.equalTo(favBoardLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalToSuperview().inset(36)
         }
         
         favBoardTableView.snp.makeConstraints {

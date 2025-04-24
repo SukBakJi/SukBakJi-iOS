@@ -72,39 +72,39 @@ final class DeleteView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        backgroundColor = UIColor(white: 0, alpha: 0.2)
         
-        self.addSubview(mainView)
-        self.mainView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(48)
-            make.height.equalTo(203)
+        addSubview(mainView)
+        mainView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(48)
+            $0.height.equalTo(203)
         }
         
-        self.mainView.addSubview(titleLabel)
-        self.titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(21)
+        mainView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(24)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(21)
         }
         
-        self.mainView.addSubview(contentLabel)
-        self.contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.width.equalTo(254)
-            make.height.equalTo(40)
+        mainView.addSubview(contentLabel)
+        contentLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.width.equalTo(254)
+            $0.height.equalTo(40)
         }
         
-        self.mainView.addSubview(buttonStackView)
-        self.buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(contentLabel.snp.bottom).offset(26)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(48)
+        mainView.addSubview(buttonStackView)
+        buttonStackView.snp.makeConstraints {
+            $0.top.equalTo(contentLabel.snp.bottom).offset(26)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(48)
         }
         
-        self.okButton.addTarget(self, action: #selector(delete_Tapped), for: .touchUpInside)
-        self.cancelButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        okButton.addTarget(self, action: #selector(delete_Tapped), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
     }
     
     @objc private func dismissView() {

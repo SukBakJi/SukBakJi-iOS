@@ -29,14 +29,4 @@ class FavoriteLabViewModel {
             })
             .disposed(by: disposeBag)
     }
-    
-    func loadTestData() {
-        let testFavoriteLabList: [FavoriteLab] = [
-            FavoriteLab(labId: 0, labName: "화학에너지융합학부 에너지재료연구실", universityName: "성신여자대학교", departmentName: "성신여자대학교 화학에너지융합학부", professorName: "구본재", researchTopics: ["인공지능", "AI"]),
-            FavoriteLab(labId: 0, labName: "화학에너지융합학부 에너지재료연구실", universityName: "성신여자대학교", departmentName: "성신여자대학교 화학에너지융합학부", professorName: "구본재", researchTopics: ["인공지능", "AI"]),
-            FavoriteLab(labId: 0, labName: "화학에너지융합학부 에너지재료연구실", universityName: "성신여자대학교", departmentName: "성신여자대학교 화학에너지융합학부", professorName: "구본재", researchTopics: ["인공지능", "AI"]),
-            FavoriteLab(labId: 0, labName: "화학에너지융합학부 에너지재료연구실", universityName: "성신여자대학교", departmentName: "성신여자대학교 화학에너지융합학부", professorName: "구본재", researchTopics: ["인공지능", "AI"])
-        ]
-        favoriteLabList.accept(testFavoriteLabList)
-    }
 }

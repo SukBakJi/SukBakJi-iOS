@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
-        setAPI()
+        setBind()
         self.reactor = HomeReactor()
         bind(reactor: reactor!)
         getFCMToken()
@@ -46,6 +46,7 @@ class HomeViewController: UIViewController {
         if let tabBarVC = self.tabBarController as? MainTabViewController {
             tabBarVC.customTabBarView.isHidden = false
         }
+        setAPI()
     }
 }
 
@@ -68,14 +69,16 @@ extension HomeViewController {
         homeView.adCollectionView.dataSource = self
     }
     
-    private func setAPI() {
+    private func setBind() {
         bindFavoriteBoardViewModel()
         bindHotPostViewModel()
         bindFavoriteLabViewModel()
+    }
+    
+    private func setAPI() {
         favoriteBoardViewModel.loadFavoriteBoard()
         hotPostViewModel.loadHotPost()
-//        favoriteLabViewModel.loadFavoriteLab()
-        favoriteLabViewModel.loadTestData()
+        favoriteLabViewModel.loadFavoriteLab()
     }
     
     private func getFCMToken() {

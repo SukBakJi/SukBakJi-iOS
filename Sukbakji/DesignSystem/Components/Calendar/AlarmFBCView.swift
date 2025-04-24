@@ -47,44 +47,44 @@ final class AlarmFBCView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        backgroundColor = UIColor(white: 0, alpha: 0.2)
         
-        self.addSubview(alarmButton)
-        alarmButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(112)
-            make.trailing.equalToSuperview().inset(24)
-            make.height.width.equalTo(60)
+        addSubview(alarmButton)
+        alarmButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(112)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.width.equalTo(60)
         }
-        self.alarmButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        alarmButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         
-        self.addSubview(alarmSettingButton)
-        alarmSettingButton.snp.makeConstraints { make in
-            make.bottom.equalTo(alarmButton.snp.top).offset(-10)
-            make.centerX.equalTo(alarmButton)
-            make.height.width.equalTo(60)
+        addSubview(alarmSettingButton)
+        alarmSettingButton.snp.makeConstraints {
+            $0.bottom.equalTo(alarmButton.snp.top).offset(-10)
+            $0.centerX.equalTo(alarmButton)
+            $0.height.width.equalTo(60)
         }
-        self.alarmSettingButton.addTarget(self, action: #selector(alarmSetting_Tapped), for: .touchUpInside)
+        alarmSettingButton.addTarget(self, action: #selector(alarmSetting_Tapped), for: .touchUpInside)
         
-        self.addSubview(myAlarmButton)
-        myAlarmButton.snp.makeConstraints { make in
-            make.bottom.equalTo(alarmSettingButton.snp.top).offset(-10)
-            make.centerX.equalTo(alarmButton)
-            make.height.width.equalTo(60)
+        addSubview(myAlarmButton)
+        myAlarmButton.snp.makeConstraints {
+            $0.bottom.equalTo(alarmSettingButton.snp.top).offset(-10)
+            $0.centerX.equalTo(alarmButton)
+            $0.height.width.equalTo(60)
         }
-        self.myAlarmButton.addTarget(self, action: #selector(myAlarm_Tapped), for: .touchUpInside)
+        myAlarmButton.addTarget(self, action: #selector(myAlarm_Tapped), for: .touchUpInside)
         
-        self.addSubview(alarmSettingLabel)
-        alarmSettingLabel.snp.makeConstraints { make in
-            make.trailing.equalTo(alarmSettingButton.snp.leading).offset(-10)
-            make.centerY.equalTo(alarmSettingButton)
-            make.height.equalTo(19)
+        addSubview(alarmSettingLabel)
+        alarmSettingLabel.snp.makeConstraints {
+            $0.trailing.equalTo(alarmSettingButton.snp.leading).offset(-10)
+            $0.centerY.equalTo(alarmSettingButton)
+            $0.height.equalTo(19)
         }
         
-        self.addSubview(myAlarmLabel)
-        myAlarmLabel.snp.makeConstraints { make in
-            make.trailing.equalTo(myAlarmButton.snp.leading).offset(-10)
-            make.centerY.equalTo(myAlarmButton)
-            make.height.equalTo(19)
+        addSubview(myAlarmLabel)
+        myAlarmLabel.snp.makeConstraints {
+            $0.trailing.equalTo(myAlarmButton.snp.leading).offset(-10)
+            $0.centerY.equalTo(myAlarmButton)
+            $0.height.equalTo(19)
         }
     }
     
