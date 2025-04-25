@@ -35,27 +35,27 @@ final class ChatNavigaionBarView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = .white
+        backgroundColor = .white
         
-        self.addSubview(backButton)
-        self.backButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(8)
-            make.bottom.equalToSuperview()
-            make.width.height.equalTo(48)
+        addSubview(backButton)
+        backButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(8)
+            $0.bottom.equalToSuperview()
+            $0.width.height.equalTo(48)
         }
         
-        self.addSubview(titleLabel)
-        self.titleLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(backButton)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(24)
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalTo(backButton)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(24)
         }
         
-        self.addSubview(optionButton)
-        self.optionButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(8)
-            make.bottom.equalToSuperview()
-            make.width.height.equalTo(48)
+        addSubview(optionButton)
+        optionButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(8)
+            $0.bottom.equalToSuperview()
+            $0.width.height.equalTo(48)
         }
         
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
