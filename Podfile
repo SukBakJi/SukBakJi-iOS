@@ -7,18 +7,23 @@ target 'Sukbakji' do
 
   # Pods for Sukbakji
 
-  pod 'Then'
-  pod 'SnapKit', '~> 5.7.0'
-  pod 'DropDown', '2.3.13'
-  pod 'Alamofire'
-  pod 'Tabman', '~> 3.0'
-  pod 'MaterialComponents/BottomSheet'
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
-  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
+
+  pod 'Then'
+  pod 'SnapKit', '~> 5.7.0'
+  pod 'DropDown', '2.3.13'
+  pod 'Tabman', '~> 3.0'
+
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Core'
+  pod 'Alamofire'
+
   pod 'RxSwift', '6.8.0'
-  pod 'RxCocoa', '6.8.0'	
+  pod 'RxCocoa', '6.8.0'
+  pod 'ReactorKit'
+
 end
 post_install do |installer|
     installer.generated_projects.each do |project|
