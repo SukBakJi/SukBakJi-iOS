@@ -35,21 +35,21 @@ final class MessageInputView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = .white
+        backgroundColor = .white
         
-        self.addSubview(sendButton)
-        self.sendButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview().inset(24)
-            make.height.width.equalTo(44)
+        addSubview(sendButton)
+        sendButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(8)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.width.equalTo(44)
         }
         
-        self.addSubview(inputTextField)
-        self.inputTextField.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalTo(sendButton.snp.leading).inset(6)
-            make.height.equalTo(44)
+        addSubview(inputTextField)
+        inputTextField.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(8)
+            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalTo(sendButton.snp.leading).inset(6)
+            $0.height.equalTo(44)
         }
         inputTextField.addTFUnderline()
         inputTextField.setLeftPadding(15)

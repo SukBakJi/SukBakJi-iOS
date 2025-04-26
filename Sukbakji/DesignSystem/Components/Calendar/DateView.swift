@@ -60,6 +60,7 @@ final class DateView: UIView {
     private let calendar = Calendar.current
     private let dateYearFormatter = DateFormatter()
     private let dateMonthFormatter = DateFormatter()
+    private let now = Date()
     private var calendarYear = Date()
     private var calendarMonth = Date()
     private var calendarDate = Date()
@@ -113,6 +114,7 @@ final class DateView: UIView {
             $0.trailing.equalToSuperview().inset(19.5)
             $0.height.width.equalTo(20.5)
         }
+        nextButton.addTarget(self, action: #selector(goToNextMonth), for: .touchUpInside)
         
         mainView.addSubview(monthLabel)
         monthLabel.snp.makeConstraints {
@@ -127,6 +129,7 @@ final class DateView: UIView {
             $0.trailing.equalTo(monthLabel.snp.leading).offset(-6)
             $0.height.width.equalTo(20.5)
         }
+        previousButton.addTarget(self, action: #selector(goToPreviousMonth), for: .touchUpInside)
         
         mainView.addSubview(weekStackView)
         weekStackView.distribution = .fillEqually
@@ -148,6 +151,7 @@ final class DateView: UIView {
         self.configureWeekLabel()
         self.bindCollectionView()
         self.configureDate()
+        self.updateButtonStates()
     }
     
     private func configureWeekLabel() {
@@ -211,7 +215,6 @@ final class DateView: UIView {
         self.alarmDateCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        // daysRelay를 collectionView에 바인딩
         days
             .bind(to: alarmDateCollectionView.rx.items(cellIdentifier: AlarmDateCollectionViewCell.identifier, cellType: AlarmDateCollectionViewCell.self)) { index, day, cell in
                 cell.updateDay(day: day)
@@ -237,12 +240,11 @@ final class DateView: UIView {
                 UIView.animate(withDuration: 0.3, animations: {
                     self.alpha = 0
                 }) { _ in
-                    self.removeFromSuperview() // 애니메이션 후 뷰에서 제거
+                    self.removeFromSuperview()
                 }
             })
             .disposed(by: disposeBag)
         
-        // 선택된 indexPath 처리 (선택된 셀 스타일 업데이트용)
         alarmDateCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self else { return }
@@ -251,12 +253,49 @@ final class DateView: UIView {
             .disposed(by: disposeBag)
     }
     
+    private func updateButtonStates() {
+        let isPrevDisabled = calendar.component(.year, from: calendarDate) == calendar.component(.year, from: now)
+            && calendar.component(.month, from: calendarDate) <= calendar.component(.month, from: now)
+        previousButton.isEnabled = !isPrevDisabled
+
+        let isNextDisabled = calendar.component(.year, from: calendarDate) >= calendar.component(.year, from: now)
+            && calendar.component(.month, from: calendarDate) >= 12
+        nextButton.isEnabled = !isNextDisabled
+    }
+    
     @objc private func dismissView() {
        UIView.animate(withDuration: 0.3, animations: {
           self.alpha = 0
        }) { _ in
-          self.removeFromSuperview() // 애니메이션 후 뷰에서 제거
+          self.removeFromSuperview()
        }
+    }
+    
+    @objc private func goToPreviousMonth() {
+        guard let newDate = calendar.date(byAdding: .month, value: -1, to: calendarDate) else { return }
+
+        if calendar.isDate(newDate, equalTo: now, toGranularity: .year),
+           calendar.component(.month, from: newDate) < calendar.component(.month, from: now) {
+            return
+        }
+
+        calendarDate = newDate
+        calendarMonth = newDate
+        updateCalendar()
+        updateButtonStates()
+    }
+    
+    @objc private func goToNextMonth() {
+        guard let newDate = calendar.date(byAdding: .month, value: 1, to: calendarDate) else { return }
+
+        if calendar.component(.year, from: newDate) > calendar.component(.year, from: now) {
+            return
+        }
+
+        calendarDate = newDate
+        calendarMonth = newDate
+        updateCalendar()
+        updateButtonStates()
     }
 }
 

@@ -121,7 +121,7 @@ extension CalendarViewController {
     private func callAPI() {
         calendarView.activityIndicator.startAnimating()
         DispatchQueue.global().async {
-            sleep(1)
+            sleep(UInt32(0.5))
             self.setAPI()
             DispatchQueue.main.async {
                 self.calendarView.activityIndicator.stopAnimating()
@@ -206,7 +206,17 @@ extension CalendarViewController {
             .bind(to:
                     calendarView.calendarMainCollectionView.rx.items(cellIdentifier: CalendarMainCollectionViewCell.identifier, cellType: CalendarMainCollectionViewCell.self)) { index, day, cell in
                 
-                cell.updateDay(day: day)
+                let isToday: Bool = {
+                    if let dayInt = Int(day), dayInt > 0 {
+                        var components = self.calendarView.calendar.dateComponents([.year, .month], from: self.calendarView.calendarDate)
+                        components.day = dayInt
+                        if let date = self.calendarView.calendar.date(from: components) {
+                            return Calendar.current.isDateInToday(date)
+                        }
+                    }
+                    return false
+                }()
+                cell.updateDay(day: day, isToday: isToday)
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -236,14 +246,12 @@ extension CalendarViewController {
                 let dayNum = Int(selectedDay) ?? 0
                 let date = calendarView.dateLabel.text ?? ""
                 let replacedString = date.replacingOccurrences(of: " ", with: "")
-//                let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
+                let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
                 
                 if dayNum <= 9 {
-//                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
-                    viewModel.loadTestData()
+                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
                 } else {
-//                    viewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
-                    viewModel.loadTestData2()
+                    viewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
                 }
             })
             .disposed(by: disposeBag)
