@@ -15,6 +15,7 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
     
     private let dayView = UIView().then {
         $0.backgroundColor = .clear
+        $0.clipsToBounds = true
     }
     private let dayLabel = UILabel().then {
         $0.textColor = .gray900
@@ -26,6 +27,7 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        setUI()
     }
     
     required init?(coder: NSCoder) {
@@ -33,21 +35,20 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-        setUI()
+        super.layoutSubviews()
+        dayView.layer.cornerRadius = dayView.frame.size.width / 2
     }
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
                 if dayLabel.text != "" {
-                    self.dayView.layer.cornerRadius = self.dayView.frame.size.width / 2
-                    self.dayView.clipsToBounds = true
                     self.dayView.backgroundColor = .orange700
                     self.dayLabel.textColor = .white
                 }
             } else {
                 self.dayView.backgroundColor = .clear
-                self.dayLabel.textColor = .black
+                self.dayLabel.textColor = .gray900
             }
         }
     }
@@ -63,13 +64,21 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
         }
         self.dayView.addSubview(dotImageView)
         dotImageView.snp.makeConstraints { make in
-            make.top.equalTo(dayLabel.snp.bottom).offset(2)
+            make.top.equalTo(dayLabel.snp.bottom).offset(1)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(4)
         }
     }
     
-    func updateDay(day: String) {
+    func updateDay(day: String, isToday: Bool = false) {
         self.dayLabel.text = day
+        
+        if isToday {
+            dayView.backgroundColor = .orange50
+            dayLabel.textColor = .gray900
+        } else {
+            dayView.backgroundColor = .clear
+            dayLabel.textColor = .gray900
+        }
     }
 }
