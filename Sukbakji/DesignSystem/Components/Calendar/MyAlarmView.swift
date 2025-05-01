@@ -25,9 +25,6 @@ class MyAlarmView: UIView {
     let dateLabel = UILabel().then {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
-    let dateSelectButton = UIButton().then {
-        $0.setImage(UIImage(named: "More 2"), for: .normal)
-    }
     var myAlarmTableView = UITableView(frame: .zero, style: .plain).then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
@@ -55,7 +52,6 @@ class MyAlarmView: UIView {
         addSubview(addAlarmButton)
         addSubview(backgroundLabel)
         addSubview(dateLabel)
-        addSubview(dateSelectButton)
         addSubview(myAlarmTableView)
         addSubview(alarmCompleteImageView)
     }
@@ -82,12 +78,6 @@ class MyAlarmView: UIView {
             $0.top.equalTo(backgroundLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(24)
             $0.height.equalTo(21)
-        }
-        
-        dateSelectButton.snp.makeConstraints {
-            $0.centerY.equalTo(dateLabel)
-            $0.leading.equalTo(dateLabel.snp.trailing).offset(2)
-            $0.height.equalTo(32)
         }
         
         myAlarmTableView.snp.makeConstraints {

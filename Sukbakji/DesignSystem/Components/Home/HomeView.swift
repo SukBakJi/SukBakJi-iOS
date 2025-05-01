@@ -484,7 +484,6 @@ class HomeView: UIView {
         favLabView.snp.makeConstraints {
             $0.top.equalTo(layerView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(275)
         }
         
         favLabLabel.snp.makeConstraints {
@@ -522,7 +521,7 @@ class HomeView: UIView {
         }
         
         personalInfoButton.snp.makeConstraints {
-            $0.top.equalTo(favLabView.snp.bottom).offset(10)
+            $0.top.equalTo(favLabView.snp.bottom).offset(6)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(35)
         }

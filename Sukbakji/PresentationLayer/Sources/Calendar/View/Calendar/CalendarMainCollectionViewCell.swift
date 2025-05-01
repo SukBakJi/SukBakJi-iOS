@@ -24,10 +24,12 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
     let dotImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_Dot")
     }
+    private let circleImageView = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_Circle")
+    }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        setUI()
     }
     
     required init?(coder: NSCoder) {
@@ -36,13 +38,15 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        dayView.layer.cornerRadius = dayView.frame.size.width / 2
+        
+        setUI()
     }
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
                 if dayLabel.text != "" {
+                    self.dayView.layer.cornerRadius = self.dayView.frame.size.width / 2
                     self.dayView.backgroundColor = .orange700
                     self.dayLabel.textColor = .white
                 }
@@ -58,10 +62,17 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
         dayView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview().inset(5)
         }
+        
+        self.dayView.addSubview(circleImageView)
+        circleImageView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalToSuperview()
+        }
+        
         self.dayView.addSubview(dayLabel)
         dayLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
+        
         self.dayView.addSubview(dotImageView)
         dotImageView.snp.makeConstraints { make in
             make.top.equalTo(dayLabel.snp.bottom).offset(1)
@@ -70,15 +81,14 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func updateDay(day: String, isToday: Bool = false) {
+    func updateDay(day: String, isToday: Bool = false, isCurrentMonth: Bool = true) {
         self.dayLabel.text = day
+        self.dayLabel.textColor = isCurrentMonth ? .gray900 : .gray300
         
         if isToday {
-            dayView.backgroundColor = .orange50
-            dayLabel.textColor = .gray900
+            circleImageView.isHidden = false
         } else {
-            dayView.backgroundColor = .clear
-            dayLabel.textColor = .gray900
+            circleImageView.isHidden = true
         }
     }
 }

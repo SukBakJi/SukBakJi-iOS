@@ -47,26 +47,26 @@ class UpComingCalendarCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUI() {
-        contentView.layer.cornerRadius = 8
+        contentView.layer.cornerRadius = 6
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.gray100.cgColor
         contentView.clipsToBounds = false
-        contentView.backgroundColor = .gray50
+        contentView.backgroundColor = .white
         
-        layer.cornerRadius = 8
+        layer.cornerRadius = 6
         layer.masksToBounds = false
         
         self.contentView.addSubview(layerImageView)
         layerImageView.snp.makeConstraints { make in
             make.top.bottom.leading.equalToSuperview()
-            make.width.equalTo(6)
+            make.width.equalTo(8)
         }
         
         self.contentView.addSubview(dDayLabel)
         dDayLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.leading.equalTo(layerImageView.snp.trailing).offset(10)
-            make.height.equalTo(15)
+            make.height.equalTo(21)
         }
         
         self.contentView.addSubview(univLabel)
@@ -74,20 +74,20 @@ class UpComingCalendarCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(dDayLabel.snp.bottom).offset(4)
             make.leading.equalTo(layerImageView.snp.trailing).offset(10)
             make.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(21)
+            make.height.equalTo(26)
         }
         
         self.contentView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(univLabel.snp.bottom).offset(4)
+            make.top.equalTo(univLabel.snp.bottom)
             make.leading.equalTo(layerImageView.snp.trailing).offset(10)
             make.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(21)
+            make.height.equalTo(26)
         }
     }
     
     func prepare(upComingList: UpComingList) {
-        dDayLabel.text = String(upComingList.dday)
+        dDayLabel.text = "D-" + String(upComingList.dday)
         viewModel.loadUnivName(univId: upComingList.univId)
             .subscribe(onNext: { [weak self] univName in
                 self?.univLabel.text = univName

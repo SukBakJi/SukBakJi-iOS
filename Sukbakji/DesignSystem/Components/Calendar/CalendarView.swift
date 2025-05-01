@@ -297,7 +297,7 @@ class CalendarView: UIView {
         }
         
         upComingLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(28)
+            $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(24)
             $0.height.equalTo(21)
         }
@@ -382,11 +382,11 @@ class CalendarView: UIView {
         self.updateDays()
     }
     
-    private func startDayOfTheWeek() -> Int {
+    func startDayOfTheWeek() -> Int {
         return self.calendar.component(.weekday, from: self.calendarDate) - 1
     }
     
-    private func endDate() -> Int {
+    func endDate() -> Int {
         return self.calendar.range(of: .day, in: .month, for: self.calendarDate)?.count ?? Int()
     }
     
@@ -395,16 +395,33 @@ class CalendarView: UIView {
         self.dateLabel.text = date
     }
     
-    private func updateDays(){
-        days.accept([])
+    private func updateDays() {
         let startDayOfTheWeek = self.startDayOfTheWeek()
-        let totalDays = startDayOfTheWeek + self.endDate()
-        
-        let day = (0..<totalDays).map { day -> String in
-            return day < startDayOfTheWeek ? "" : "\(day - startDayOfTheWeek + 1)"
-        }
-        days.accept(day)
-        
+        let numberOfDaysInMonth = self.endDate()
+
+        // 이전 달 계산
+        let prevMonthDate = calendar.date(byAdding: .month, value: -1, to: calendarDate)!
+        let daysInPrevMonth = calendar.range(of: .day, in: .month, for: prevMonthDate)?.count ?? 30
+        let leadingDays = (daysInPrevMonth - startDayOfTheWeek + 1)...daysInPrevMonth
+
+        // 이번 달 날짜
+        let currentMonthDays = (1...numberOfDaysInMonth)
+
+        // 다음 달 채워야 하는 개수
+        let totalGridCount = ((startDayOfTheWeek + numberOfDaysInMonth) % 7 == 0)
+            ? startDayOfTheWeek + numberOfDaysInMonth
+            : ((startDayOfTheWeek + numberOfDaysInMonth) / 7 + 1) * 7
+        let trailingDaysCount = totalGridCount - (startDayOfTheWeek + numberOfDaysInMonth)
+        let trailingDays: [Int] = trailingDaysCount > 0 ? Array(1...trailingDaysCount) : []
+
+        var fullDays: [(day: String, isCurrentMonth: Bool)] = []
+
+        leadingDays.forEach { fullDays.append(("\($0)", false)) }
+        currentMonthDays.forEach { fullDays.append(("\($0)", true)) }
+        trailingDays.forEach { fullDays.append(("\($0)", false)) }
+
+        self.days.accept(fullDays.map { $0.day })
+
         self.calendarMainCollectionView.reloadData()
     }
 }

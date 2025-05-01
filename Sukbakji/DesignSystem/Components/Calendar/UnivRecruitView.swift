@@ -50,7 +50,7 @@ class UnivRecruitView: UIView {
         $0.image = UIImage(named: "Sukbakji_RecruitType")
     }
     let recruitTitleLabel = UILabel().then {
-        $0.text = "2025년 전기"
+        $0.text = "2025학년도 전기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
     }
@@ -73,7 +73,7 @@ class UnivRecruitView: UIView {
         $0.isEnabled = false
     }
     let recruitFirstLabel = UILabel().then {
-        $0.text = "2025년 전기"
+        $0.text = "2025학년도 전기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
     }
@@ -82,7 +82,7 @@ class UnivRecruitView: UIView {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
     let recruitSecondLabel = UILabel().then {
-        $0.text = "2025년 후기"
+        $0.text = "2025학년도 후기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
     }
@@ -337,7 +337,7 @@ class UnivRecruitView: UIView {
         
         recruitFirstButton.isEnabled = false
         recruitSecondButton.isEnabled = true
-        recruitTitleLabel.text = "2025년 전기"
+        recruitTitleLabel.text = "2025학년도 전기"
     }
     
     @objc func secondButtonTapped() {
@@ -346,6 +346,6 @@ class UnivRecruitView: UIView {
         
         recruitFirstButton.isEnabled = true
         recruitSecondButton.isEnabled = false
-        recruitTitleLabel.text = "2025년 후기"
+        recruitTitleLabel.text = "2025학년도 후기"
     }
 }

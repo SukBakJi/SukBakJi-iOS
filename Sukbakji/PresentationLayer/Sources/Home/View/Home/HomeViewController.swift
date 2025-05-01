@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
     
     private var favBoardHeightConstraint: Constraint?
     private var hotPostHeightConstraint: Constraint?
+    private var favLabHeightConstraint: Constraint?
     
     override func loadView() {
         self.view = homeView
@@ -56,10 +57,13 @@ extension HomeViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         homeView.favBoardContainerView.snp.makeConstraints { make in
-            favBoardHeightConstraint = make.height.equalTo(56).constraint
+            favBoardHeightConstraint = make.height.equalTo(112).constraint
         }
         homeView.hotPostView.snp.makeConstraints { make in
             hotPostHeightConstraint = make.height.equalTo(228).constraint
+        }
+        homeView.favLabView.snp.makeConstraints { make in
+            favLabHeightConstraint = make.height.equalTo(200).constraint
         }
         
         homeView.notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
@@ -142,8 +146,8 @@ extension HomeViewController {
                     self.homeView.noFavBoardLabel.isHidden = false
                 }
                 
-                if favoriteBoardList.count >= 2 {
-                    self.favBoardHeightConstraint?.update(offset: 112)
+                if favoriteBoardList.count == 1 {
+                    self.favBoardHeightConstraint?.update(offset: 56)
                 }
             })
             .disposed(by: disposeBag)
@@ -203,9 +207,12 @@ extension HomeViewController {
                 if !favoriteLabList.isEmpty {
                     self.homeView.noFavLab.isHidden = true
                     self.homeView.noFavLabLabel.isHidden = true
+                    self.homeView.favLabProgressView.isHidden = false
+                    self.favLabHeightConstraint?.update(offset: 275)
                 } else {
                     self.homeView.noFavLab.isHidden = false
                     self.homeView.noFavLabLabel.isHidden = false
+                    self.homeView.favLabProgressView.isHidden = true
                 }
             })
             .disposed(by: disposeBag)
