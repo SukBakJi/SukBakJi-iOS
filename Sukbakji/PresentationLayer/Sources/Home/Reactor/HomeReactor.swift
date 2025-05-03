@@ -13,9 +13,7 @@ import Alamofire
 final class HomeReactor: Reactor {
     let initialState = State()
     let apiService = APIService()
-    
     private var viewModel = UnivViewModel()
-    private let disposeBag = DisposeBag()
     
     enum Action {
         case getUserName
@@ -26,6 +24,7 @@ final class HomeReactor: Reactor {
     enum Mutation {
         case setUserName(MyProfile)
         case setViewSchedule(UpComing?)
+        case setUnivName(String)
         case setMemberID(Int)
         case setError(String)
     }
@@ -62,13 +61,27 @@ final class HomeReactor: Reactor {
 
         switch action {
         case .getUserName:
-            print("token: ", token)
             return fetchData(APIResponse<MyProfile>.self, url: APIConstants.userMypage.path, token: token) { profile in
                     .setUserName(profile)
             }
         case .getViewSchedule:
             return fetchData(APIResponse<UpComing>.self, url: APIConstants.calendarSchedule.path, token: token) { schedule in
-                    .setViewSchedule(schedule)
+                return .setViewSchedule(schedule)
+            }
+            .flatMap { mutation -> Observable<Mutation> in
+                switch mutation {
+                case .setViewSchedule(let upComing):
+                    guard let first = upComing?.scheduleList.first else {
+                        return Observable.just(mutation)
+                    }
+                    return Observable.concat([
+                        Observable.just(mutation),
+                        self.viewModel.loadUnivName(univId: first.univId)
+                            .map { .setUnivName($0) }
+                    ])
+                default:
+                    return Observable.just(mutation)
+                }
             }
         case .getMemberID:
             return fetchData(APIResponse<MemberId>.self, url: APIConstants.calendarMember.path, token: token) { response in
@@ -83,20 +96,17 @@ final class HomeReactor: Reactor {
         case .setUserName(let profile):
             newState.nameLabel = (profile.name ?? "석박지") + "님, 반가워요!"
         case .setViewSchedule(let upComing):
-            if upComing?.scheduleList.isEmpty == true {
+            guard let first = upComing?.scheduleList.first else {
                 newState.upComingDate = "대학교를 설정하고\n일정을 확인해 보세요!"
                 newState.upComingTitle = ""
-            } else if let firstSchedule = upComing?.scheduleList.first {
-                let dday = firstSchedule.dday
-                let content = firstSchedule.content
-                let univId = firstSchedule.univId
-                
-                newState.upComingDate = "D-\(dday)"
-                viewModel.loadUnivName(univId: univId)
-                    .subscribe(onNext: { univName in
-                        newState.upComingTitle = "\(univName) \(content)"
-                    })
-                    .disposed(by: disposeBag)
+                return newState
+            }
+            newState.upComingDate = "D-\(first.dday)"
+            newState.upComingTitle = first.content
+            
+        case .setUnivName(let univName):
+            if let title = state.upComingTitle {
+                newState.upComingTitle = "\(univName) \(title)"
             }
         case .setMemberID(let id):
             newState.memberID = id

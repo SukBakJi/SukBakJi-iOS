@@ -27,7 +27,7 @@ class EditUnivView: UIView {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
     let recruitFirstLabel = UILabel().then {
-        $0.text = "2025년 전기"
+        $0.text = "2025학년도 전기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
     }
@@ -35,7 +35,7 @@ class EditUnivView: UIView {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
     let recruitSecondLabel = UILabel().then {
-        $0.text = "2025년 후기"
+        $0.text = "2025학년도 후기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
     }

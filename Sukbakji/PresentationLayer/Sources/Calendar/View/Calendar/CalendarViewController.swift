@@ -40,7 +40,6 @@ class CalendarViewController: UIViewController {
         if let tabBarVC = self.tabBarController as? MainTabViewController {
             tabBarVC.customTabBarView.isHidden = false
         }
-
         callAPI()
     }
     
@@ -60,7 +59,7 @@ extension CalendarViewController {
             calendarHeightConstraint = make.height.equalTo(300).constraint
         }
         calendarView.calendarDetailTableView.snp.makeConstraints { make in
-            dateSelectHeightConstraint = make.height.equalTo(10).constraint
+            dateSelectHeightConstraint = make.height.equalTo(8).constraint
         }
 
         calendarView.notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
@@ -109,7 +108,7 @@ extension CalendarViewController {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.calendarView.alarmCompleteImageView.alpha = 0 // 투명하게
                 }) { _ in
-                    self.calendarView.alarmCompleteImageView.removeFromSuperview() // 뷰 제거
+                    self.calendarView.alarmCompleteImageView.removeFromSuperview()
                 }
             }
         }
@@ -121,9 +120,9 @@ extension CalendarViewController {
     private func callAPI() {
         calendarView.activityIndicator.startAnimating()
         DispatchQueue.global().async {
-            sleep(UInt32(0.5))
-            self.setAPI()
+            sleep(1)
             DispatchQueue.main.async {
+                self.setAPI()
                 self.calendarView.activityIndicator.stopAnimating()
             }
         }
@@ -206,17 +205,17 @@ extension CalendarViewController {
             .bind(to:
                     calendarView.calendarMainCollectionView.rx.items(cellIdentifier: CalendarMainCollectionViewCell.identifier, cellType: CalendarMainCollectionViewCell.self)) { index, day, cell in
                 
-                let isToday: Bool = {
-                    if let dayInt = Int(day), dayInt > 0 {
-                        var components = self.calendarView.calendar.dateComponents([.year, .month], from: self.calendarView.calendarDate)
-                        components.day = dayInt
-                        if let date = self.calendarView.calendar.date(from: components) {
-                            return Calendar.current.isDateInToday(date)
-                        }
-                    }
-                    return false
-                }()
-                cell.updateDay(day: day, isToday: isToday)
+                let currentMonthStartIndex = self.calendarView.startDayOfTheWeek()
+                let isCurrentMonth = index >= currentMonthStartIndex &&
+                index < currentMonthStartIndex + self.calendarView.endDate()
+                
+                let today = Date()
+                let todayComponents = Calendar.current.dateComponents([.day, .month, .year], from: today)
+                let calendarComponents = Calendar.current.dateComponents([.month, .year], from: self.calendarView.calendarDate)
+                let isToday = day == "\(todayComponents.day!)" &&
+                todayComponents.month == calendarComponents.month &&
+                todayComponents.year == calendarComponents.year
+                cell.updateDay(day: day, isToday: isToday, isCurrentMonth: isCurrentMonth)
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -249,9 +248,11 @@ extension CalendarViewController {
                 let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
                 
                 if dayNum <= 9 {
-                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
+//                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
+                    viewModel.loadTestData()
                 } else {
-                    viewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
+//                    viewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
+                    viewModel.loadTestData2()
                 }
             })
             .disposed(by: disposeBag)
