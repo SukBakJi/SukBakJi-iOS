@@ -164,12 +164,4 @@ class CalendarViewModel {
         let dateSelectList: [DateSelectList] = []
         dateSelectSchedules.accept(dateSelectList)
     }
-    
-    func loadTestData3() {
-        let upComingList: [UpComingList] = [
-            UpComingList(univId: 31, content: "원서접수", dday: 10),
-            UpComingList(univId: 31, content: "원서접수", dday: 10),
-            UpComingList(univId: 31, content: "원서접수", dday: 10)]
-        upComingSchedules.accept(upComingList)
-    }
 }

@@ -65,7 +65,7 @@ class HomeView: UIView {
         $0.text = "대학교를 설정하고\n일정을 확인해 보세요!"
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .gray900
+        $0.textColor = .orange700
     }
     let upComingTitle = UILabel().then {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
@@ -361,12 +361,14 @@ class HomeView: UIView {
         upComingDate.snp.makeConstraints {
             $0.top.equalTo(upComingLabel.snp.bottom).offset(5)
             $0.leading.equalTo(layerImageView.snp.trailing).offset(14)
+            $0.height.equalTo(21)
         }
         
         upComingTitle.snp.makeConstraints {
             $0.top.equalTo(upComingDate.snp.bottom).offset(5)
             $0.leading.equalTo(layerImageView.snp.trailing).offset(14)
             $0.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(21)
         }
         
         adView.snp.makeConstraints {

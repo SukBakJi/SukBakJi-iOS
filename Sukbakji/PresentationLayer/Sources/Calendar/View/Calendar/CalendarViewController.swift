@@ -130,8 +130,7 @@ extension CalendarViewController {
     
     private func setAPI() {
         viewModel.loadUnivList()
-//        viewModel.loadUpComingSchedule()
-        viewModel.loadTestData3()
+        viewModel.loadUpComingSchedule()
         viewModel.loadAlarmList()
     }
     
