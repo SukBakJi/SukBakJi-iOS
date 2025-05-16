@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // MARK: - 화면 이동
     func moveToLogin() {
-        window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+        window?.rootViewController = UINavigationController(rootViewController: PostListViewController())
     }
     
     func moveToHome() {

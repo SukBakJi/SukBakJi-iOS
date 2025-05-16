@@ -15,7 +15,7 @@ protocol dateProtocol:AnyObject {
     func dateSend(data: String)
 }
 
-final class DateView: UIView {
+class DateView: UIView {
     
     var mainView = UIView().then {
        $0.backgroundColor = .white

@@ -40,7 +40,7 @@ class HomeView: UIView {
         $0.textColor = .orange800
     }
     let titleLabel = UILabel().then {
-        $0.text = "석박지와 함께\n오늘의 일정을 확인해 보세요!🏃"
+        $0.text = "석박지와 함께\n오늘의 일정을 확인해 보세요! 🏃"
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = .gray900
@@ -339,8 +339,17 @@ class HomeView: UIView {
             $0.top.equalTo(nameLabel.snp.bottom).offset(6)
             $0.leading.equalToSuperview().offset(24)
             $0.height.equalTo(52)
-            $0.width.equalTo(230)
+            $0.width.equalTo(240)
         }
+        let fullText = titleLabel.text ?? ""
+        let changeText = "석박지"
+        let attributedString = NSMutableAttributedString(string: fullText)
+        
+        if let range = fullText.range(of: changeText) {
+            let nsRange = NSRange(range, in: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
+        }
+        titleLabel.attributedText = attributedString
         
         upComingView.snp.makeConstraints {
             $0.top.equalTo(helloView.snp.bottom)

@@ -10,7 +10,7 @@ import Then
 import SnapKit
 import RxSwift
 
-final class DeleteView: UIView {
+class DeleteView: UIView {
     
     private var alarmViewModel = AlarmViewModel()
     private let viewModel = CalendarViewModel()

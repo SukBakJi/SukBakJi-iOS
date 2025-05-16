@@ -1,5 +1,5 @@
 //
-//  ChatNavigaionBarView.swift
+//  OptionNavigationBarView.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 2/3/25.
@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class ChatNavigaionBarView: UIView {
+class OptionNavigationBarView: UIView {
     
     var backButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Back"), for: .normal)
