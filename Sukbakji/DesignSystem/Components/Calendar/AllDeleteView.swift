@@ -10,7 +10,7 @@ import Then
 import SnapKit
 import RxSwift
 
-final class AllDeleteView: UIView {
+class AllDeleteView: UIView {
     
     private let viewModel = CalendarViewModel()
     var univIds: [Int] = []

@@ -39,15 +39,16 @@ enum APIConstants {
     case notificationMulticast
     
     
-    case board
     case boardFavoriteAdd(Int)
+    case boardFavoriteRemove(Int)
+    case boardCreate
     case boardsMenu(String)
     
     
     case blockMemberId(Int)
     
     
-    case posts
+    case postsList
     
     
     case communitySearch
@@ -147,10 +148,12 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/notification/multicast")
             
             
-        case .board:
-            return APIConstants.makeEndPoint("/board")
         case .boardFavoriteAdd(let boardId):
             return APIConstants.makeEndPoint("/boards/\(boardId)/favorite/add")
+        case .boardFavoriteRemove(let boardId):
+            return APIConstants.makeEndPoint("/boards/\(boardId)/favorite/remove")
+        case .boardCreate:
+            return APIConstants.makeEndPoint("/boards/create")
         case .boardsMenu(let menu):
             return APIConstants.makeEndPoint("/boards/\(menu)")
             
@@ -159,8 +162,8 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/block/\(targetMemberId)")
             
             
-        case .posts:
-            return APIConstants.makeEndPoint("/posts")
+        case .postsList:
+            return APIConstants.makeEndPoint("/posts/list")
             
             
         case .communitySearch:

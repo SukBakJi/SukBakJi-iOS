@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class AlarmFBCView: UIView {
+class AlarmFBCView: UIView {
     
     private weak var targetViewController: UIViewController?
     

@@ -248,11 +248,9 @@ extension CalendarViewController {
                 let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
                 
                 if dayNum <= 9 {
-//                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
-                    viewModel.loadTestData()
+                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
                 } else {
-//                    viewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
-                    viewModel.loadTestData2()
+                    viewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
                 }
             })
             .disposed(by: disposeBag)

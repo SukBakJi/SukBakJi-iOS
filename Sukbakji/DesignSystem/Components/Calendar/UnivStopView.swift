@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class UnivStopView: UIView {
+class UnivStopView: UIView {
     private var num: Int = 1
     private weak var targetViewController: UIViewController?
     

@@ -251,6 +251,15 @@ class EdifInfoView: UIView {
             $0.centerY.equalToSuperview()
             $0.height.equalTo(44)
         }
+        let fullText = certificateLabel.text ?? ""
+        let changeText = "학사 재학"
+        let attributedString = NSMutableAttributedString(string: fullText)
+        
+        if let range = fullText.range(of: changeText) {
+            let nsRange = NSRange(range, in: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
+        }
+        certificateLabel.attributedText = attributedString
         
         certificateButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(24)

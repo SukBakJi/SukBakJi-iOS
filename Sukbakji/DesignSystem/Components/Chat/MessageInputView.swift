@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class MessageInputView: UIView {
+class MessageInputView: UIView {
     
     var inputTextField = UITextField().then {
         $0.backgroundColor = .gray50
