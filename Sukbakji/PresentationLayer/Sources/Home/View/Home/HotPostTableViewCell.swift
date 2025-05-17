@@ -14,12 +14,12 @@ class HotPostTableViewCell: UITableViewCell {
     static let identifier = String(describing: HotPostTableViewCell.self)
 
     private let labelView = UIView().then {
-        $0.backgroundColor = UIColor.orange50
+        $0.backgroundColor = .orange50
         $0.layer.cornerRadius = 4
     }
     private let labelLabel = UILabel().then {
         $0.text = "조회수 TOP"
-        $0.textColor = UIColor.orange600
+        $0.textColor = .orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let labelView2 = UIView().then {

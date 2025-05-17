@@ -13,7 +13,27 @@ final class BoardViewModel {
     private let repository = BoardRepository()
     private let disposeBag = DisposeBag()
     
-    var selectPostItem: PostList?
+    let latestQnAList = BehaviorRelay<[QnA]>(value: [])
+    
+    var selectPostItem: Post?
+    
+    let errorMessage = PublishSubject<String>()
+    
+    func loadLatestQnA() {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        BoardRepository.shared.fetchLatestQnA(token: token)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.latestQnAList.accept(response.result)
+            
+            }, onFailure: { error in
+                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
     
     func favoriteBoard(isFavorite: Bool) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {

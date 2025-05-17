@@ -42,19 +42,19 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let labView2 = UIView().then {
-        $0.backgroundColor = UIColor.orange50
+        $0.backgroundColor = .orange50
         $0.layer.cornerRadius = 4
     }
     private let labLabel2 = UILabel().then {
-        $0.textColor = UIColor.orange600
+        $0.textColor = .orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let labView3 = UIView().then {
-        $0.backgroundColor = UIColor.orange50
+        $0.backgroundColor = .orange50
         $0.layer.cornerRadius = 4
     }
     private let labLabel3 = UILabel().then {
-        $0.textColor = UIColor.orange600
+        $0.textColor = .orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     

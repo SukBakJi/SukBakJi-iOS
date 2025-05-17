@@ -101,11 +101,11 @@ struct BoardQnAViewController: View {
                             }
                         }
                     }
-                    .overlay(
-                        overlayButton(selectedButton: "질문 게시판")
-                            .padding(.trailing, 24) // 오른쪽 여백
-                        , alignment: .bottomTrailing // 오른쪽 아래에 위치
-                    )
+//                    .overlay(
+//                        overlayButton(selectedButton: "질문 게시판")
+//                            .padding(.trailing, 24) // 오른쪽 여백
+//                        , alignment: .bottomTrailing // 오른쪽 아래에 위치
+//                    )
                 }
 
                 if showAlert {
@@ -274,7 +274,7 @@ struct BoardQnAViewController: View {
             return
         }
 
-        let url = APIConstants.posts.path + "/list"
+        let url = APIConstants.postsList.path
 
         let parameters: [String: Any] = [
             "menu": menu,

@@ -13,7 +13,7 @@ final class PostViewModel {
     private let repository = BoardRepository()
     private let disposeBag = DisposeBag()
     
-    let postList = BehaviorRelay<[PostList]>(value: [])
+    let postList = BehaviorRelay<[Post]>(value: [])
     
     func loadPostList(menu: String, boardName: String) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {

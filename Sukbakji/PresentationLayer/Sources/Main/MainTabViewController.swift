@@ -144,12 +144,10 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
     private func setupViewControllers() {
         let homeVC = HomeViewController()
         let calendarVC = CalendarViewController()
-        let swiftUIBoardView = BoardViewController()
+        let boardVC = BoardViewController()
         let chattingVC = ChattingViewController()
         let swiftUIDirectoryView = DirectoryMainViewController()
         
-        let boardVC = UIHostingController(rootView: swiftUIBoardView)
-        boardVC.additionalSafeAreaInsets.bottom = 92
         let directoryVC = UIHostingController(rootView: swiftUIDirectoryView)
         directoryVC.additionalSafeAreaInsets.bottom = 92
         

@@ -19,7 +19,7 @@ class PostListView: UIView {
     let postListTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
-        $0.register(PostListTableViewCell.self, forCellReuseIdentifier: PostListTableViewCell.identifier)
+    $0.register(QnAListTableViewCell.self, forCellReuseIdentifier: QnAListTableViewCell.identifier)
         $0.allowsSelection = false
     }
     

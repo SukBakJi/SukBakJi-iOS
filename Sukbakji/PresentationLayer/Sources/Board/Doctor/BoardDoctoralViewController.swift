@@ -37,22 +37,22 @@ struct BoardDoctoralViewController: View {
                 // 가로 스크롤 뷰
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
-                        BoardButton(text: "질문 게시판", isSelected: selectedButton == "질문 게시판") {
-                            selectedButton = "질문 게시판"
-                            loadPosts()
-                        }
-                        BoardButton(text: "취업후기 게시판", isSelected: selectedButton == "취업후기 게시판") {
-                            selectedButton = "취업후기 게시판"
-                            loadPosts()
-                        }
-                        BoardButton(text: "대학원생활 게시판", isSelected: selectedButton == "대학원생활 게시판") {
-                            selectedButton = "대학원생활 게시판"
-                            loadPosts()
-                        }
-                        BoardButton(text: "연구주제 게시판", isSelected: selectedButton == "연구주제 게시판") {
-                            selectedButton = "연구주제 게시판"
-                            loadPosts()
-                        }
+//                        BoardButton(text: "질문 게시판", isSelected: selectedButton == "질문 게시판") {
+//                            selectedButton = "질문 게시판"
+//                            loadPosts()
+//                        }
+//                        BoardButton(text: "취업후기 게시판", isSelected: selectedButton == "취업후기 게시판") {
+//                            selectedButton = "취업후기 게시판"
+//                            loadPosts()
+//                        }
+//                        BoardButton(text: "대학원생활 게시판", isSelected: selectedButton == "대학원생활 게시판") {
+//                            selectedButton = "대학원생활 게시판"
+//                            loadPosts()
+//                        }
+//                        BoardButton(text: "연구주제 게시판", isSelected: selectedButton == "연구주제 게시판") {
+//                            selectedButton = "연구주제 게시판"
+//                            loadPosts()
+//                        }
                     }
                     .font(.system(size: 12, weight: .medium))
                     .padding(.top, 8)
@@ -79,11 +79,11 @@ struct BoardDoctoralViewController: View {
             .padding(.horizontal, 24)
             .padding(.top, 20)
         }
-        .overlay(
-            overlayButton(selectedButton: selectedButton)
-                .padding(.trailing, 24)
-            ,alignment: .bottomTrailing
-        )
+//        .overlay(
+//            overlayButton(selectedButton: selectedButton)
+//                .padding(.trailing, 24)
+//            ,alignment: .bottomTrailing
+//        )
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $isSearchActive) {
             SearchViewController(boardName: selectedButton ?? "게시판")
@@ -110,7 +110,7 @@ struct BoardDoctoralViewController: View {
         //        }
         
         let boardName = selectedButton ?? "질문 게시판"
-        let url = APIConstants.posts.path + "/list"
+        let url = APIConstants.postsList.path
         
         let parameters: [String: Any] = [
             "menu": "박사",

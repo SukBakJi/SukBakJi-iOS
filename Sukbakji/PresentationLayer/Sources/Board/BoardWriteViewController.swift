@@ -138,7 +138,7 @@ struct BoardWriteViewController: View {
         ]
         
         if boardName == "취업후기 게시판" {
-            let url = APIConstants.posts.path + "/createJobPost"
+            let url = APIConstants.postsCreateJobPost.path
             
             let postParameters = BoardWritePostModelForJobPost(
                 menu: menu,
@@ -161,7 +161,7 @@ struct BoardWriteViewController: View {
                     handleResponse(response)
                 }
         } else {
-            let url = APIConstants.posts.path + "/create"
+            let url = APIConstants.postsCreate.path
             
             let postParameters = BoardWritePostModelForGeneralPost(
                 menu: menu,

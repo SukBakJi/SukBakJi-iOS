@@ -1,20 +1,36 @@
 //
-//  QnAListTableViewCell.swift
+//  FavoriteBoardCollectionViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 5/15/25.
+//  Created by jaegu park on 5/17/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-class QnAListTableViewCell: UITableViewCell {
+class FavoriteBoardCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = String(describing: QnAListTableViewCell.self)
+    static let identifier = String(describing: FavoriteBoardCollectionViewCell.self)
     
+    private let labelView = UIView().then {
+        $0.backgroundColor = .orange50
+        $0.layer.cornerRadius = 4
+    }
+    private let labelLabel = UILabel().then {
+        $0.textColor = UIColor.orange600
+        $0.font = UIFont(name: "Pretendard-Medium", size: 12)
+    }
+    private let labelView2 = UIView().then {
+        $0.backgroundColor = .gray50
+        $0.layer.cornerRadius = 4
+    }
+    private let labelLabel2 = UILabel().then {
+        $0.textColor = .gray500
+        $0.font = UIFont(name: "Pretendard-Medium", size: 12)
+    }
     private let titleLabel = UILabel().then {
-        $0.textColor = .gray900
+       $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     private let contentLabel = UILabel().then {
@@ -37,8 +53,8 @@ class QnAListTableViewCell: UITableViewCell {
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
     }
     
     required init?(coder: NSCoder) {
@@ -50,23 +66,47 @@ class QnAListTableViewCell: UITableViewCell {
     }
     
     private func setUI() {
-        self.contentView.layer.cornerRadius = 12
-        self.contentView.layer.borderWidth = 1
-        self.contentView.layer.borderColor = UIColor.gray100.cgColor
-        self.contentView.clipsToBounds = false
-        self.contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 15
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.gray100.cgColor
+        contentView.clipsToBounds = false
+        contentView.backgroundColor = .gray50
         
-        self.contentView.snp.makeConstraints { make in
+        layer.cornerRadius = 15
+        layer.masksToBounds = false
+        
+        self.contentView.addSubview(labelView)
+        labelView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().inset(24)
-            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(18)
+            make.height.equalTo(20)
+        }
+        
+        self.labelView.addSubview(labelLabel)
+        labelLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(7)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(14)
+        }
+        
+        self.contentView.addSubview(labelView2)
+        labelView2.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalTo(labelView.snp.trailing).offset(6)
+            make.height.equalTo(20)
+        }
+        
+        self.labelView2.addSubview(labelLabel2)
+        labelLabel2.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(7)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(14)
         }
         
         self.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.trailing.equalToSuperview().inset(18)
+            make.top.equalTo(labelView.snp.bottom).offset(12)
+            make.leading.equalToSuperview().offset(18)
             make.height.equalTo(17)
         }
         
@@ -106,10 +146,12 @@ class QnAListTableViewCell: UITableViewCell {
         }
     }
     
-    func prepare(post: Post) {
-        titleLabel.text = post.title
-        contentLabel.text = post.previewContent
-        commentLabel.text = String(post.commentCount)
-        viewLabel.text = String(post.views)
+    func prepare(favoriteBoard: FavoriteBoard) {
+        self.labelLabel.text = favoriteBoard.menu
+        self.labelLabel2.text = favoriteBoard.boardName
+        self.titleLabel.text = favoriteBoard.title
+        self.contentLabel.text = favoriteBoard.content
+        self.commentLabel.text = String(favoriteBoard.commentCount)
+        self.viewLabel.text = String(favoriteBoard.views)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostList : Codable {
+struct Post : Codable {
     let postId: Int
     var title: String
     var previewContent: String
