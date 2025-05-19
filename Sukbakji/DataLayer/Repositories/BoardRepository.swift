@@ -11,11 +11,21 @@ import RxSwift
 class BoardRepository {
     static let shared = BoardRepository()
     
-    func fetchPostList(token: String, menu: String, boardName: String) -> Single<APIResponse<[PostList]>> {
+    func fetchLatestQnA(token: String) -> Single<APIResponse<[QnA]>> {
+        let url = APIConstants.communityLastestQuestions.path
+        return APIService.shared.getWithToken(of: APIResponse<[QnA]>.self, url: url, accessToken: token)
+    }
+    
+    func fetchBoardsMenu(token: String, menu: String) -> Single<[String]> {
+        let url = APIConstants.boardsMenu(menu).path
+        return APIService.shared.getWithToken(of: [String].self, url: url, accessToken: token)
+    }
+    
+    func fetchPostList(token: String, menu: String, boardName: String) -> Single<APIResponse<[Post]>> {
         let url = APIConstants.postsList.path
         let params = ["menu": menu,
                       "boardName": boardName]
-        return APIService.shared.getWithTokenAndParams(of: APIResponse<[PostList]>.self, url: url, parameters: params, accessToken: token)
+        return APIService.shared.getWithTokenAndParams(of: APIResponse<[Post]>.self, url: url, parameters: params, accessToken: token)
     }
     
     func favoriteBoardAddRemove(token: String, boardId: Int, isFavorite: Bool) -> Single<APIResponse<String>> {

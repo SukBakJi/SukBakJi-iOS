@@ -66,7 +66,7 @@ class ProfileTabViewController: TabmanViewController {
         }
     }
     
-    private func setupTabMan(){
+    private func setupTabMan() {
         let vc1 = EditInfoViewController()
         let vc2 = EditPWViewController()
         

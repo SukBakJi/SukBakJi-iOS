@@ -95,17 +95,17 @@ struct BoardQnAViewController: View {
                             Spacer()
                         } else {
                             // 게시판 글 목록
-                            ForEach(posts, id: \.postId) { post in
-                                BoardItem(post: post, selectedButton: "질문 게시판")
-                                    .padding(.horizontal, 24)
-                            }
+//                            ForEach(posts, id: \.postId) { post in
+//                                BoardItem(post: post, selectedButton: "질문 게시판")
+//                                    .padding(.horizontal, 24)
+//                            }
                         }
                     }
-                    .overlay(
-                        overlayButton(selectedButton: "질문 게시판")
-                            .padding(.trailing, 24) // 오른쪽 여백
-                        , alignment: .bottomTrailing // 오른쪽 아래에 위치
-                    )
+//                    .overlay(
+//                        overlayButton(selectedButton: "질문 게시판")
+//                            .padding(.trailing, 24) // 오른쪽 여백
+//                        , alignment: .bottomTrailing // 오른쪽 아래에 위치
+//                    )
                 }
 
                 if showAlert {
@@ -274,7 +274,7 @@ struct BoardQnAViewController: View {
             return
         }
 
-        let url = APIConstants.posts.path + "/list"
+        let url = APIConstants.postsList.path
 
         let parameters: [String: Any] = [
             "menu": menu,

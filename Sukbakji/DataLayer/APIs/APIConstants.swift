@@ -48,7 +48,12 @@ enum APIConstants {
     case blockMemberId(Int)
     
     
+    case postsUpdate(Int)
+    case postsCreate
+    case postsCreateJobPost
+    case postsId(Int)
     case postsList
+    case postsDelete(Int)
     
     
     case communitySearch
@@ -162,8 +167,18 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/block/\(targetMemberId)")
             
             
+        case .postsUpdate(let postId):
+            return APIConstants.makeEndPoint("/posts/\(postId)/update")
+        case .postsCreate:
+            return APIConstants.makeEndPoint("/posts/create")
+        case .postsCreateJobPost:
+            return APIConstants.makeEndPoint("/posts/createJobPost")
+        case .postsId(let postId):
+            return APIConstants.makeEndPoint("/posts/\(postId)")
         case .postsList:
             return APIConstants.makeEndPoint("/posts/list")
+        case .postsDelete(let postId):
+            return APIConstants.makeEndPoint("/posts/\(postId)/delete")
             
             
         case .communitySearch:

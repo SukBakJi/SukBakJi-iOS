@@ -346,7 +346,7 @@ struct DummyBoardDetail: View {
     
     // 게시물 삭제 함수
     func deletePost(postId: Int, token: String) {
-        let url = APIConstants.posts.path + "/\(postId)/delete"
+        let url = APIConstants.postsDelete(postId).path
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(token)",
             "Content-Type": "application/json"
@@ -376,7 +376,7 @@ struct DummyBoardDetail: View {
 
     // 게시글 상세 정보를 불러오는 함수
     func loadBoardDetail(postId: Int) {
-        let url = APIConstants.posts.path + "/\(postId)"
+        let url = APIConstants.postsId(postId).path
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]

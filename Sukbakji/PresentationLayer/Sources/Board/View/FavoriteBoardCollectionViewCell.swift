@@ -1,25 +1,24 @@
 //
-//  HotPostTableViewCell.swift
+//  FavoriteBoardCollectionViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 12/1/24.
+//  Created by jaegu park on 5/17/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-class HotPostTableViewCell: UITableViewCell {
+class FavoriteBoardCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = String(describing: HotPostTableViewCell.self)
-
+    static let identifier = String(describing: FavoriteBoardCollectionViewCell.self)
+    
     private let labelView = UIView().then {
         $0.backgroundColor = .orange50
         $0.layer.cornerRadius = 4
     }
     private let labelLabel = UILabel().then {
-        $0.text = "조회수 TOP"
-        $0.textColor = .orange600
+        $0.textColor = UIColor.orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let labelView2 = UIView().then {
@@ -35,7 +34,7 @@ class HotPostTableViewCell: UITableViewCell {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     private let contentLabel = UILabel().then {
-       $0.textColor = .gray900
+        $0.textColor = .gray900
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
@@ -54,31 +53,27 @@ class HotPostTableViewCell: UITableViewCell {
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-       super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
     }
     
     required init?(coder: NSCoder) {
-       fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
-       setUI()
+        setUI()
     }
     
     private func setUI() {
-        self.contentView.layer.cornerRadius = 12
-        self.contentView.layer.borderWidth = 1
-        self.contentView.layer.borderColor = UIColor.gray100.cgColor
-        self.contentView.clipsToBounds = false
-        self.contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 15
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.gray100.cgColor
+        contentView.clipsToBounds = false
+        contentView.backgroundColor = .white
         
-        self.contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().inset(24)
-            make.bottom.equalToSuperview()
-        }
+        layer.cornerRadius = 15
+        layer.masksToBounds = false
         
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints { make in
@@ -91,7 +86,7 @@ class HotPostTableViewCell: UITableViewCell {
         labelLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7)
             make.centerY.equalToSuperview()
-            make.height.equalTo(26)
+            make.height.equalTo(14)
         }
         
         self.contentView.addSubview(labelView2)
@@ -105,7 +100,7 @@ class HotPostTableViewCell: UITableViewCell {
         labelLabel2.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7)
             make.centerY.equalToSuperview()
-            make.height.equalTo(26)
+            make.height.equalTo(14)
         }
         
         self.contentView.addSubview(titleLabel)
@@ -117,7 +112,7 @@ class HotPostTableViewCell: UITableViewCell {
         
         self.contentView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(1)
+            make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(18)
             make.height.equalTo(36)
         }
@@ -150,12 +145,13 @@ class HotPostTableViewCell: UITableViewCell {
             make.width.height.equalTo(12)
         }
     }
-
-    func prepare(hotPost: HotPost) {
-        labelLabel2.text = hotPost.boardName
-        titleLabel.text = hotPost.title
-        contentLabel.text = hotPost.content
-        commentLabel.text = String(hotPost.commentCount)
-        viewLabel.text = String(hotPost.views)
+    
+    func prepare(favoriteBoard: FavoriteBoard) {
+        self.labelLabel.text = favoriteBoard.menu
+        self.labelLabel2.text = favoriteBoard.boardName
+        self.titleLabel.text = favoriteBoard.title
+        self.contentLabel.text = favoriteBoard.content
+        self.commentLabel.text = String(favoriteBoard.commentCount)
+        self.viewLabel.text = String(favoriteBoard.views)
     }
 }
