@@ -13,11 +13,17 @@ import RxCocoa
 
 class BoardMasterView: UIView {
     
-    let scrollView = UIScrollView().then {
-        $0.contentInsetAdjustmentBehavior = .never
-        $0.showsVerticalScrollIndicator = false
+    let boardSearchTextField = UITextField().then {
+        $0.backgroundColor = .gray50
+        $0.placeholder = "게시판에서 궁금한 내용을 검색해 보세요!"
+        $0.setPlaceholderColor(.gray300)
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = .gray900
+        $0.layer.cornerRadius = 12
     }
-    let contentView = UIView()
+    let searchImageView = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_SearchImage")
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,19 +38,23 @@ class BoardMasterView: UIView {
     private func setupUI() {
         backgroundColor = .white
         
-        addSubview(scrollView)
-        scrollView.addSubview(contentView)
+        addSubview(boardSearchTextField)
+        addSubview(searchImageView)
     }
     
     private func setupConstraints() {
-        scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        boardSearchTextField.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(55)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(48)
         }
+        boardSearchTextField.setLeftPadding(52)
+        boardSearchTextField.errorfix()
         
-        contentView.snp.makeConstraints {
-            $0.edges.equalTo(scrollView.contentLayoutGuide)
-            $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.bottom.equalTo(contentView.snp.bottom).offset(120)
+        searchImageView.snp.makeConstraints {
+            $0.centerY.equalTo(boardSearchTextField)
+            $0.leading.equalToSuperview().offset(40)
+            $0.height.width.equalTo(24)
         }
     }
 }

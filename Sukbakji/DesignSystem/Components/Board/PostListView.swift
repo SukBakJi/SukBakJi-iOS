@@ -61,7 +61,7 @@ class PostListView: UIView {
         }
         
         postListTableView.snp.makeConstraints {
-            $0.top.equalTo(noticeButton.snp.bottom)
+            $0.top.equalTo(noticeButton.snp.bottom).offset(8)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }

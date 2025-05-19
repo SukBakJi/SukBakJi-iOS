@@ -70,7 +70,7 @@ class FavoriteBoardCollectionViewCell: UICollectionViewCell {
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.gray100.cgColor
         contentView.clipsToBounds = false
-        contentView.backgroundColor = .gray50
+        contentView.backgroundColor = .white
         
         layer.cornerRadius = 15
         layer.masksToBounds = false

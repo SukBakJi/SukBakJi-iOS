@@ -480,7 +480,7 @@ class HomeView: UIView {
         }
         
         hotPostTableView.snp.makeConstraints {
-            $0.top.equalTo(hotPostLabel.snp.bottom)
+            $0.top.equalTo(hotPostLabel.snp.bottom).offset(4)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(8)
         }

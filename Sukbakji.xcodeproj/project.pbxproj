@@ -74,8 +74,6 @@
 		7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C992C62778D00A31B70 /* SearchViewController.swift */; };
 		7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */; };
 		7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */; };
-		7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */; };
-		7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC322C522517007280F8 /* BoardAdmissionViewController.swift */; };
 		7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */; };
 		7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */; };
 		7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */; };
@@ -235,6 +233,8 @@
 		C7B407F12D645B21009B349F /* CalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B407F02D645B21009B349F /* CalendarRepository.swift */; };
 		C7B7A1682D001D8200D5CE14 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */; };
 		C7B7A16A2D00360500D5CE14 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7A1692D00360500D5CE14 /* UIButton+.swift */; };
+		C7BA9BBE2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA9BBD2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift */; };
+		C7BA9BC02DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA9BBF2DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift */; };
 		C7BDEA8D2D1338E000001927 /* UnivViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDEA8C2D1338E000001927 /* UnivViewModel.swift */; };
 		C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */; };
 		C7C379D02D65877E00C224A1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C379CF2D65877E00C224A1 /* HomeView.swift */; };
@@ -360,8 +360,6 @@
 		7BFB8C992C62778D00A31B70 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyBoards.swift; sourceTree = "<group>"; };
 		7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMainViewController.swift; sourceTree = "<group>"; };
-		7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDoctoralViewController.swift; sourceTree = "<group>"; };
-		7BFDEC322C522517007280F8 /* BoardAdmissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAdmissionViewController.swift; sourceTree = "<group>"; };
 		7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardQnAViewController.swift; sourceTree = "<group>"; };
 		7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardWriteViewController.swift; sourceTree = "<group>"; };
 		7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
@@ -524,6 +522,8 @@
 		C7B407F02D645B21009B349F /* CalendarRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRepository.swift; sourceTree = "<group>"; };
 		C7B7A1672D001D8200D5CE14 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		C7B7A1692D00360500D5CE14 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		C7BA9BBD2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorMenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7BA9BBF2DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorPostTableViewCell.swift; sourceTree = "<group>"; };
 		C7BDEA8C2D1338E000001927 /* UnivViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivViewModel.swift; sourceTree = "<group>"; };
 		C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarViewController.swift; sourceTree = "<group>"; };
 		C7C379CF2D65877E00C224A1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -730,22 +730,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		7B969F5F2C541E6600F34A18 /* Admission */ = {
-			isa = PBXGroup;
-			children = (
-				7BFDEC322C522517007280F8 /* BoardAdmissionViewController.swift */,
-			);
-			path = Admission;
-			sourceTree = "<group>";
-		};
-		7B969F612C541E7F00F34A18 /* Doctor */ = {
-			isa = PBXGroup;
-			children = (
-				7BFDEC2E2C522503007280F8 /* BoardDoctoralViewController.swift */,
-			);
-			path = Doctor;
-			sourceTree = "<group>";
-		};
 		7BFB8C9D2C63458300A31B70 /* Directory */ = {
 			isa = PBXGroup;
 			children = (
@@ -769,8 +753,6 @@
 				7BFE5D3A2C68819600EF16FB /* BoardModel */,
 				7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */,
 				7B969F5E2C541E6000F34A18 /* Main */,
-				7B969F612C541E7F00F34A18 /* Doctor */,
-				7B969F5F2C541E6600F34A18 /* Admission */,
 				7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */,
 				7BD758A02DA11E0100E107B2 /* BoardEditViewController.swift */,
 				7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */,
@@ -1153,6 +1135,8 @@
 				C73948B12DD8820A00612461 /* BoardQnATableViewCell.swift */,
 				C73948B32DD8833E00612461 /* FavoriteBoardCollectionViewCell.swift */,
 				C7D64B462DD79C2100DD34A0 /* BoardDoctorViewController.swift */,
+				C7BA9BBD2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift */,
+				C7BA9BBF2DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift */,
 				C7D64B482DD79C3200DD34A0 /* BoardMasterViewController.swift */,
 				C7D64B4A2DD79C4100DD34A0 /* BoardEnterViewController.swift */,
 				C7D64B4C2DD79C4E00DD34A0 /* BoardFreeViewController.swift */,
@@ -1739,7 +1723,6 @@
 				C7AA038D2DD50B1100BBE115 /* BoardViewModel.swift in Sources */,
 				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
 				C73828D32D6220F4007A21A0 /* AllDeleteView.swift in Sources */,
-				7BFDEC332C522517007280F8 /* BoardAdmissionViewController.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,
 				C7DF5E2F2DB09AF600274B4D /* blockMemberId.swift in Sources */,
@@ -1804,6 +1787,7 @@
 				C77EFB412D9C03CA000C2841 /* NotificationTableViewCell.swift in Sources */,
 				C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */,
 				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,
+				C7BA9BC02DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				91D4135B2D841ECE00020CEC /* ResetPwViewController.swift in Sources */,
 				91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */,
@@ -1818,6 +1802,7 @@
 				4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */,
 				7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */,
 				C70055282DABC40D00520D76 /* TimeHelper+.swift in Sources */,
+				C7BA9BBE2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift in Sources */,
 				91F849112D65AF3C0048B41A /* TOSData.swift in Sources */,
 				C74680752D91352B00A6091E /* DateUtils+.swift in Sources */,
 				C77B49682D7B66A500005ABE /* EmailView.swift in Sources */,
@@ -1911,7 +1896,6 @@
 				4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */,
 				C70C313C2D5CC2DC00F17D72 /* HomeReactor.swift in Sources */,
 				C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */,
-				7BFDEC2F2C522503007280F8 /* BoardDoctoralViewController.swift in Sources */,
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
 				C77EFB3D2D9C02B3000C2841 /* NotificationViewController.swift in Sources */,
 				415BBC0B2C7343F8002768EE /* AuthInterceptor+.swift in Sources */,

@@ -95,10 +95,10 @@ struct BoardQnAViewController: View {
                             Spacer()
                         } else {
                             // 게시판 글 목록
-                            ForEach(posts, id: \.postId) { post in
-                                BoardItem(post: post, selectedButton: "질문 게시판")
-                                    .padding(.horizontal, 24)
-                            }
+//                            ForEach(posts, id: \.postId) { post in
+//                                BoardItem(post: post, selectedButton: "질문 게시판")
+//                                    .padding(.horizontal, 24)
+//                            }
                         }
                     }
 //                    .overlay(

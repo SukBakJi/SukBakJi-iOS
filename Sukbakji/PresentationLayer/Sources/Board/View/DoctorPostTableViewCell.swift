@@ -1,17 +1,17 @@
 //
-//  QnAListTableViewCell.swift
+//  DoctorPostTableViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 5/15/25.
+//  Created by jaegu park on 5/19/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-class QnAListTableViewCell: UITableViewCell {
+class DoctorPostTableViewCell: UITableViewCell {
     
-    static let identifier = String(describing: QnAListTableViewCell.self)
+    static let identifier = String(describing: DoctorPostTableViewCell.self)
     
     private let titleLabel = UILabel().then {
         $0.textColor = .gray900
@@ -19,7 +19,6 @@ class QnAListTableViewCell: UITableViewCell {
     }
     private let contentLabel = UILabel().then {
         $0.textColor = .gray900
-        $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let commentImageView = UIImageView().then {
@@ -57,7 +56,7 @@ class QnAListTableViewCell: UITableViewCell {
         self.contentView.backgroundColor = .white
         
         self.contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
+            make.top.equalToSuperview().offset(4)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().inset(24)
             make.bottom.equalToSuperview()
@@ -74,7 +73,7 @@ class QnAListTableViewCell: UITableViewCell {
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(18)
-            make.height.equalTo(36)
+            make.height.equalTo(18)
         }
         
         self.contentView.addSubview(viewLabel)

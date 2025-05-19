@@ -8,6 +8,8 @@
 import UIKit
 import Tabman
 import Pageboy
+import Then
+import SnapKit
 
 class BoardTabViewController: TabmanViewController {
     
@@ -15,6 +17,9 @@ class BoardTabViewController: TabmanViewController {
     
     private let tabView = UIView().then {
         $0.backgroundColor = .white
+    }
+    private let backgroundLabel = UILabel().then {
+        $0.backgroundColor = .gray100
     }
 
     override func viewDidLoad() {
@@ -40,6 +45,12 @@ class BoardTabViewController: TabmanViewController {
         tabView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(40)
+        }
+        
+        self.tabView.addSubview(backgroundLabel)
+        backgroundLabel.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1.5)
         }
     }
     

@@ -15,6 +15,9 @@ final class BoardViewModel {
     
     let latestQnAList = BehaviorRelay<[QnA]>(value: [])
     
+    let boardsMenuList = BehaviorRelay<[String]>(value: [])
+    let selectMenuItem = BehaviorRelay<String?>(value: nil)
+    
     var selectPostItem: Post?
     
     let errorMessage = PublishSubject<String>()
@@ -28,11 +31,29 @@ final class BoardViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.latestQnAList.accept(response.result)
-            
             }, onFailure: { error in
                 self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
+    }
+    
+    func loadBoardsMenu(menu: String) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        BoardRepository.shared.fetchBoardsMenu(token: token, menu: menu)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.boardsMenuList.accept(response)
+            }, onFailure: { error in
+                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func selectMenu(_ menu: String?) {
+        selectMenuItem.accept(menu)
     }
     
     func favoriteBoard(isFavorite: Bool) {

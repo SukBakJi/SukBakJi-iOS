@@ -193,7 +193,7 @@ class BoardMainView: UIView {
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.bottom.equalTo(favBoardView.snp.bottom).offset(120)
+            $0.bottom.equalTo(favBoardView.snp.bottom).offset(130)
         }
         
         titleView.snp.makeConstraints {

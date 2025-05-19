@@ -74,7 +74,7 @@ class HotPostTableViewCell: UITableViewCell {
         self.contentView.backgroundColor = .white
         
         self.contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().inset(24)
             make.bottom.equalToSuperview()
