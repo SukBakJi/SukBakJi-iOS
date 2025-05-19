@@ -219,6 +219,8 @@
 		C78953152D636FF700E5041C /* AccessTokenManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78953142D636FF700E5041C /* AccessTokenManager+.swift */; };
 		C7980A862CEF838C00475D94 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A852CEF838C00475D94 /* UIViewController+.swift */; };
 		C7980A882CEF841E00475D94 /* APIAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7980A872CEF841E00475D94 /* APIAlertView.swift */; };
+		C79A76222DDB7DCD00EABA15 /* EnterPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A76212DDB7DCD00EABA15 /* EnterPostTableViewCell.swift */; };
+		C79A76242DDB7DF000EABA15 /* EnterMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A76232DDB7DF000EABA15 /* EnterMenuCollectionViewCell.swift */; };
 		C7A23D8E2D0C1087008657B0 /* AlarmFBCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */; };
 		C7A777672D5079F700046367 /* OptionNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A777662D5079F700046367 /* OptionNavigationBarView.swift */; };
 		C7A777692D507A1800046367 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A777682D507A1800046367 /* MessageInputView.swift */; };
@@ -235,6 +237,8 @@
 		C7B7A16A2D00360500D5CE14 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7A1692D00360500D5CE14 /* UIButton+.swift */; };
 		C7BA9BBE2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA9BBD2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift */; };
 		C7BA9BC02DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA9BBF2DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift */; };
+		C7BA9BC22DDB58FC00AF9A43 /* MasterMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA9BC12DDB58FC00AF9A43 /* MasterMenuCollectionViewCell.swift */; };
+		C7BA9BC42DDB591200AF9A43 /* MasterPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA9BC32DDB591200AF9A43 /* MasterPostTableViewCell.swift */; };
 		C7BDEA8D2D1338E000001927 /* UnivViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDEA8C2D1338E000001927 /* UnivViewModel.swift */; };
 		C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */; };
 		C7C379D02D65877E00C224A1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C379CF2D65877E00C224A1 /* HomeView.swift */; };
@@ -508,6 +512,8 @@
 		C78953142D636FF700E5041C /* AccessTokenManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccessTokenManager+.swift"; sourceTree = "<group>"; };
 		C7980A852CEF838C00475D94 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		C7980A872CEF841E00475D94 /* APIAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAlertView.swift; sourceTree = "<group>"; };
+		C79A76212DDB7DCD00EABA15 /* EnterPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPostTableViewCell.swift; sourceTree = "<group>"; };
+		C79A76232DDB7DF000EABA15 /* EnterMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmFBCView.swift; sourceTree = "<group>"; };
 		C7A777662D5079F700046367 /* OptionNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionNavigationBarView.swift; sourceTree = "<group>"; };
 		C7A777682D507A1800046367 /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
@@ -524,6 +530,8 @@
 		C7B7A1692D00360500D5CE14 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		C7BA9BBD2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7BA9BBF2DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorPostTableViewCell.swift; sourceTree = "<group>"; };
+		C7BA9BC12DDB58FC00AF9A43 /* MasterMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterMenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7BA9BC32DDB591200AF9A43 /* MasterPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterPostTableViewCell.swift; sourceTree = "<group>"; };
 		C7BDEA8C2D1338E000001927 /* UnivViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivViewModel.swift; sourceTree = "<group>"; };
 		C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarViewController.swift; sourceTree = "<group>"; };
 		C7C379CF2D65877E00C224A1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -748,6 +756,11 @@
 		7BFDEC292C5224CD007280F8 /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				C7BA9BC52DDB597B00AF9A43 /* MainView */,
+				C7BA9BC62DDB598400AF9A43 /* DoctorView */,
+				C7BA9BC72DDB598F00AF9A43 /* MasterView */,
+				C7BA9BC82DDB599D00AF9A43 /* EnterView */,
+				C7BA9BC92DDB59BB00AF9A43 /* FreeView */,
 				C7845D002DD4B3BF004955A2 /* View */,
 				C73673662DA4E77600F88C63 /* ViewModel */,
 				7BFE5D3A2C68819600EF16FB /* BoardModel */,
@@ -1129,17 +1142,6 @@
 		C7845D002DD4B3BF004955A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C7D64B382DD7878B00DD34A0 /* BoardViewController.swift */,
-				C7D64B3A2DD787C800DD34A0 /* BoardTabViewController.swift */,
-				C7D64B442DD79C0E00DD34A0 /* BoardMainViewController.swift */,
-				C73948B12DD8820A00612461 /* BoardQnATableViewCell.swift */,
-				C73948B32DD8833E00612461 /* FavoriteBoardCollectionViewCell.swift */,
-				C7D64B462DD79C2100DD34A0 /* BoardDoctorViewController.swift */,
-				C7BA9BBD2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift */,
-				C7BA9BBF2DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift */,
-				C7D64B482DD79C3200DD34A0 /* BoardMasterViewController.swift */,
-				C7D64B4A2DD79C4100DD34A0 /* BoardEnterViewController.swift */,
-				C7D64B4C2DD79C4E00DD34A0 /* BoardFreeViewController.swift */,
 				C7845CFE2DD4B3B3004955A2 /* PostListViewController.swift */,
 				C7AA03832DD500C100BBE115 /* PostListTableViewCell.swift */,
 				C7AA038E2DD50D9100BBE115 /* PostDetailViewController.swift */,
@@ -1324,6 +1326,56 @@
 				C73673642DA4D94000F88C63 /* ReportRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		C7BA9BC52DDB597B00AF9A43 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				C7D64B382DD7878B00DD34A0 /* BoardViewController.swift */,
+				C7D64B3A2DD787C800DD34A0 /* BoardTabViewController.swift */,
+				C7D64B442DD79C0E00DD34A0 /* BoardMainViewController.swift */,
+				C73948B12DD8820A00612461 /* BoardQnATableViewCell.swift */,
+				C73948B32DD8833E00612461 /* FavoriteBoardCollectionViewCell.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		C7BA9BC62DDB598400AF9A43 /* DoctorView */ = {
+			isa = PBXGroup;
+			children = (
+				C7D64B462DD79C2100DD34A0 /* BoardDoctorViewController.swift */,
+				C7BA9BBD2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift */,
+				C7BA9BBF2DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift */,
+			);
+			path = DoctorView;
+			sourceTree = "<group>";
+		};
+		C7BA9BC72DDB598F00AF9A43 /* MasterView */ = {
+			isa = PBXGroup;
+			children = (
+				C7D64B482DD79C3200DD34A0 /* BoardMasterViewController.swift */,
+				C7BA9BC12DDB58FC00AF9A43 /* MasterMenuCollectionViewCell.swift */,
+				C7BA9BC32DDB591200AF9A43 /* MasterPostTableViewCell.swift */,
+			);
+			path = MasterView;
+			sourceTree = "<group>";
+		};
+		C7BA9BC82DDB599D00AF9A43 /* EnterView */ = {
+			isa = PBXGroup;
+			children = (
+				C7D64B4A2DD79C4100DD34A0 /* BoardEnterViewController.swift */,
+				C79A76232DDB7DF000EABA15 /* EnterMenuCollectionViewCell.swift */,
+				C79A76212DDB7DCD00EABA15 /* EnterPostTableViewCell.swift */,
+			);
+			path = EnterView;
+			sourceTree = "<group>";
+		};
+		C7BA9BC92DDB59BB00AF9A43 /* FreeView */ = {
+			isa = PBXGroup;
+			children = (
+				C7D64B4C2DD79C4E00DD34A0 /* BoardFreeViewController.swift */,
+			);
+			path = FreeView;
 			sourceTree = "<group>";
 		};
 		C7C379CB2D6586B600C224A1 /* Calendar */ = {
@@ -1664,6 +1716,7 @@
 				7B3933F72DA01681009EFC55 /* BoardUpdateModel.swift in Sources */,
 				C734BD5A2D66DE2000AE81E9 /* EditPWView.swift in Sources */,
 				C78953122D636AB700E5041C /* APIService.swift in Sources */,
+				C7BA9BC22DDB58FC00AF9A43 /* MasterMenuCollectionViewCell.swift in Sources */,
 				C7675F7E2D6981FF00F99294 /* EditUnivView.swift in Sources */,
 				C71B4E802DAC0C2B006EACF1 /* MyProfileUseCase.swift in Sources */,
 				C74A159A2D5A47F600A1698B /* MyProfile.swift in Sources */,
@@ -1685,6 +1738,7 @@
 				C7AA038B2DD506EC00BBE115 /* PostViewModel.swift in Sources */,
 				C73C5C462D5917C500091C5C /* MemberId.swift in Sources */,
 				C7A777672D5079F700046367 /* OptionNavigationBarView.swift in Sources */,
+				C79A76222DDB7DCD00EABA15 /* EnterPostTableViewCell.swift in Sources */,
 				C73673682DA4E7A000F88C63 /* ReportViewModel.swift in Sources */,
 				C7AA03892DD5063500BBE115 /* BoardRepository.swift in Sources */,
 				C74BC6EC2D677ABA00103D04 /* CalendarView.swift in Sources */,
@@ -1747,6 +1801,7 @@
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				C74A15AC2D5A4FE200A1698B /* UnivDelete.swift in Sources */,
 				C7FD6F432D663F6000251B7D /* MyPageView.swift in Sources */,
+				C7BA9BC42DDB591200AF9A43 /* MasterPostTableViewCell.swift in Sources */,
 				91C53C4A2DAC9ABA00B8795D /* RefreshTokenManager+.swift in Sources */,
 				C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */,
 				C7C379D02D65877E00C224A1 /* HomeView.swift in Sources */,
@@ -1896,6 +1951,7 @@
 				4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */,
 				C70C313C2D5CC2DC00F17D72 /* HomeReactor.swift in Sources */,
 				C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */,
+				C79A76242DDB7DF000EABA15 /* EnterMenuCollectionViewCell.swift in Sources */,
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
 				C77EFB3D2D9C02B3000C2841 /* NotificationViewController.swift in Sources */,
 				415BBC0B2C7343F8002768EE /* AuthInterceptor+.swift in Sources */,

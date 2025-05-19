@@ -17,6 +17,8 @@ class BoardDoctorViewController: UIViewController {
     private let postViewModel = PostViewModel()
     var disposeBag = DisposeBag()
     
+    private var isModelBound = false
+    
     override func loadView() {
         self.view = boardDoctorView
     }
@@ -26,6 +28,7 @@ class BoardDoctorViewController: UIViewController {
 
         setUI()
         setBind()
+        setAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +37,6 @@ class BoardDoctorViewController: UIViewController {
         if let tabBarVC = self.tabBarController as? MainTabViewController {
             tabBarVC.customTabBarView.isHidden = false
         }
-        setAPI()
     }
     
     private func setUI() {
@@ -47,24 +49,24 @@ class BoardDoctorViewController: UIViewController {
     }
     
     private func setAPI() {
-        boardViewModel.loadBoardsMenu(menu: "박사")
-        postViewModel.loadPostList(menu: "박사", boardName: "질문 게시판")
+        boardViewModel.loadDoctorMenu()
+        postViewModel.loadDoctorPostList(boardName: "질문 게시판")
     }
 
     private func bindBoardsMenuModel() {
         self.boardDoctorView.doctorMenuCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        boardViewModel.boardsMenuList
+        boardViewModel.doctorMenuList
             .do(onNext: { [weak self] menus in
                 if let first = menus.first {
-                    self?.boardViewModel.selectMenu(first)
+                    self?.boardViewModel.selectDoctorMenu(first)
                 }
             })
             .bind(to: boardDoctorView.doctorMenuCollectionView.rx.items(cellIdentifier: DoctorMenuCollectionViewCell.identifier, cellType: DoctorMenuCollectionViewCell.self)) { row, menu, cell in
                 cell.prepare(text: menu)
                 
-                self.boardViewModel.selectMenuItem
+                self.boardViewModel.selectDoctorMenuItem
                     .map { $0 == menu }
                     .bind(to: cell.isSelectedCell)
                     .disposed(by: cell.disposeBag)
@@ -72,9 +74,9 @@ class BoardDoctorViewController: UIViewController {
                 cell.labelButton.rx.tap
                     .subscribe(onNext: { [weak self] in
                         guard let self = self else { return }
-                        boardViewModel.selectMenu(menu)
+                        self.boardViewModel.selectDoctorMenu(menu)
                         boardDoctorView.changeColor(menu)
-                        postViewModel.loadPostList(menu: "박사", boardName: menu)
+                        postViewModel.loadDoctorPostList(boardName: menu)
                     })
                     .disposed(by: cell.disposeBag)
             }
@@ -85,7 +87,7 @@ class BoardDoctorViewController: UIViewController {
         self.boardDoctorView.doctorPostTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        postViewModel.postList
+        postViewModel.postDocterList
             .bind(to: boardDoctorView.doctorPostTableView.rx.items(cellIdentifier: DoctorPostTableViewCell.identifier, cellType: DoctorPostTableViewCell.self)) { row, post, cell in
                 cell.prepare(post: post)
             }
@@ -96,7 +98,7 @@ class BoardDoctorViewController: UIViewController {
 extension BoardDoctorViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let items = boardViewModel.boardsMenuList.value
+        let items = boardViewModel.doctorMenuList.value
         let leng = items[indexPath.item].count
         
         return CGSize(width: 10 + leng * 10, height: 52)

@@ -15,8 +15,14 @@ final class BoardViewModel {
     
     let latestQnAList = BehaviorRelay<[QnA]>(value: [])
     
-    let boardsMenuList = BehaviorRelay<[String]>(value: [])
-    let selectMenuItem = BehaviorRelay<String?>(value: nil)
+    let doctorMenuList = BehaviorRelay<[String]>(value: [])
+    let selectDoctorMenuItem = BehaviorRelay<String?>(value: nil)
+    
+    let masterMenuList = BehaviorRelay<[String]>(value: [])
+    let selectMasterMenuItem = BehaviorRelay<String?>(value: nil)
+    
+    let enterMenuList = BehaviorRelay<[String]>(value: [])
+    let selectEnterMenuItem = BehaviorRelay<String?>(value: nil)
     
     var selectPostItem: Post?
     
@@ -37,23 +43,61 @@ final class BoardViewModel {
             .disposed(by: disposeBag)
     }
     
-    func loadBoardsMenu(menu: String) {
+    func loadDoctorMenu() {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
-        BoardRepository.shared.fetchBoardsMenu(token: token, menu: menu)
+        BoardRepository.shared.fetchBoardsMenu(token: token, menu: "박사")
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
-                self.boardsMenuList.accept(response)
+                self.doctorMenuList.accept(response)
             }, onFailure: { error in
                 self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }
     
-    func selectMenu(_ menu: String?) {
-        selectMenuItem.accept(menu)
+    func selectDoctorMenu(_ menu: String?) {
+        selectDoctorMenuItem.accept(menu)
+    }
+    
+    func loadMasterMenu() {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        BoardRepository.shared.fetchBoardsMenu(token: token, menu: "석사")
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.masterMenuList.accept(response)
+            }, onFailure: { error in
+                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func selectMasterMenu(_ menu: String?) {
+        selectMasterMenuItem.accept(menu)
+    }
+    
+    func loadEnterMenu() {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        BoardRepository.shared.fetchBoardsMenu(token: token, menu: "진학예정")
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                self.enterMenuList.accept(response)
+            }, onFailure: { error in
+                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func selectEnterMenu(_ menu: String?) {
+        selectEnterMenuItem.accept(menu)
     }
     
     func favoriteBoard(isFavorite: Bool) {

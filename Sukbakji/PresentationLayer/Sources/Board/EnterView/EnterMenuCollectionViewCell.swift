@@ -1,5 +1,5 @@
 //
-//  DoctorMenuCollectionViewCell.swift
+//  EnterMenuCollectionViewCell.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 5/19/25.
@@ -11,9 +11,9 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class DoctorMenuCollectionViewCell: UICollectionViewCell {
+class EnterMenuCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = String(describing: DoctorMenuCollectionViewCell.self)
+    static let identifier = String(describing: MasterMenuCollectionViewCell.self)
     
     var disposeBag = DisposeBag()
     var isSelectedCell = BehaviorRelay<Bool>(value: false)
@@ -26,12 +26,15 @@ class DoctorMenuCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        setUI()
-        bindUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        setUI()
+        bindUI()
     }
     
     override func prepareForReuse() {

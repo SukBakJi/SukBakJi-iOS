@@ -13,17 +13,45 @@ final class PostViewModel {
     private let repository = BoardRepository()
     private let disposeBag = DisposeBag()
     
-    let postList = BehaviorRelay<[Post]>(value: [])
+    let postDocterList = BehaviorRelay<[Post]>(value: [])
+    let postMasterList = BehaviorRelay<[Post]>(value: [])
+    let postEnterList = BehaviorRelay<[Post]>(value: [])
     
-    func loadPostList(menu: String, boardName: String) {
+    func loadDoctorPostList(boardName: String) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
-        repository.fetchPostList(token: token, menu: menu, boardName: boardName)
+        repository.fetchPostList(token: token, menu: "박사", boardName: boardName)
             .map { $0.result }
             .subscribe(onSuccess: { [weak self] posts in
-                self?.postList.accept(posts)
+                self?.postDocterList.accept(posts)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadMasterPostList(boardName: String) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        repository.fetchPostList(token: token, menu: "석사", boardName: boardName)
+            .map { $0.result }
+            .subscribe(onSuccess: { [weak self] posts in
+                self?.postMasterList.accept(posts)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadEnterPostList(boardName: String) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        repository.fetchPostList(token: token, menu: "진학예정", boardName: boardName)
+            .map { $0.result }
+            .subscribe(onSuccess: { [weak self] posts in
+                self?.postEnterList.accept(posts)
             })
             .disposed(by: disposeBag)
     }
