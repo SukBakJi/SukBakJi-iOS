@@ -36,7 +36,6 @@ class UnivSearchTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        
         setUI()
         bindUI()
     }

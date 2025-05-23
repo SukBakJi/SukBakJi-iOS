@@ -257,6 +257,6 @@ extension EditInfoViewController: UICollectionViewDelegateFlowLayout {
         }
         let size = label.frame.size
         
-        return CGSize(width: size.width + 22 , height: 29)
+        return CGSize(width: size.width + 22, height: 29)
     }
 }

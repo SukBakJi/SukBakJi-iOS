@@ -16,3 +16,13 @@ struct Post : Codable {
     var commentCount: Int
     var views: Int
 }
+
+struct MyPost : Codable {
+    let postId: Int
+    var title: String
+    var content: String
+    var views: Int
+    var boardName: String
+    var menu: String
+    var commentCount: Int
+}

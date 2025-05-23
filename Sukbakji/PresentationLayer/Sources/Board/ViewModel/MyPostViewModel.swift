@@ -1,57 +1,57 @@
 //
-//  PostViewModel.swift
+//  MyPostViewModel.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 5/15/25.
+//  Created by jaegu park on 5/23/25.
 //
 
 import Foundation
 import RxSwift
 import RxCocoa
 
-final class PostViewModel {
+final class MyPostViewModel {
     private let repository = BoardRepository()
     private let disposeBag = DisposeBag()
     
-    let postDocterList = BehaviorRelay<[Post]>(value: [])
-    let postMasterList = BehaviorRelay<[Post]>(value: [])
-    let postEnterList = BehaviorRelay<[Post]>(value: [])
+    let myPostList = BehaviorRelay<[MyPost]>(value: [])
+    let scrapList = BehaviorRelay<[MyPost]>(value: [])
+    let myCommentList = BehaviorRelay<[MyPost]>(value: [])
     
-    func loadDoctorPostList(boardName: String) {
+    func loadmyPostList() {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
-        repository.fetchPostList(token: token, menu: "박사", boardName: boardName)
+        repository.fetchMyPostList(token: token)
             .map { $0.result }
             .subscribe(onSuccess: { [weak self] posts in
-                self?.postDocterList.accept(posts)
+                self?.myPostList.accept(posts)
             })
             .disposed(by: disposeBag)
     }
     
-    func loadMasterPostList(boardName: String) {
+    func loadScrapList() {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
-        repository.fetchPostList(token: token, menu: "석사", boardName: boardName)
+        repository.fetchScrapList(token: token)
             .map { $0.result }
             .subscribe(onSuccess: { [weak self] posts in
-                self?.postMasterList.accept(posts)
+                self?.scrapList.accept(posts)
             })
             .disposed(by: disposeBag)
     }
     
-    func loadEnterPostList(boardName: String) {
+    func loadMyCommentList() {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
-        repository.fetchPostList(token: token, menu: "진학예정", boardName: boardName)
+        repository.fetchMyCommentList(token: token)
             .map { $0.result }
             .subscribe(onSuccess: { [weak self] posts in
-                self?.postEnterList.accept(posts)
+                self?.myCommentList.accept(posts)
             })
             .disposed(by: disposeBag)
     }

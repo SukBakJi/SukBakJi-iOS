@@ -1,41 +1,24 @@
 //
-//  HotPostTableViewCell.swift
+//  PostListTableViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 12/1/24.
+//  Created by jaegu park on 5/15/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-class HotPostTableViewCell: UITableViewCell {
+class PostListTableViewCell: UITableViewCell {
     
-    static let identifier = String(describing: HotPostTableViewCell.self)
-
-    private let labelView = UIView().then {
-        $0.backgroundColor = .orange50
-        $0.layer.cornerRadius = 4
-    }
-    private let labelLabel = UILabel().then {
-        $0.text = "조회수 TOP"
-        $0.textColor = .orange600
-        $0.font = UIFont(name: "Pretendard-Medium", size: 12)
-    }
-    private let labelView2 = UIView().then {
-        $0.backgroundColor = .gray50
-        $0.layer.cornerRadius = 4
-    }
-    private let labelLabel2 = UILabel().then {
-        $0.textColor = .gray500
-        $0.font = UIFont(name: "Pretendard-Medium", size: 12)
-    }
+    static let identifier = String(describing: PostListTableViewCell.self)
+    
     private let titleLabel = UILabel().then {
-       $0.textColor = .gray900
+        $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     private let contentLabel = UILabel().then {
-       $0.textColor = .gray900
+        $0.textColor = .gray900
         $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
@@ -55,15 +38,15 @@ class HotPostTableViewCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-       super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder: NSCoder) {
-       fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
-       setUI()
+        setUI()
     }
     
     private func setUI() {
@@ -80,44 +63,16 @@ class HotPostTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview()
         }
         
-        self.contentView.addSubview(labelView)
-        labelView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(18)
-            make.height.equalTo(20)
-        }
-        
-        self.labelView.addSubview(labelLabel)
-        labelLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(14)
-        }
-        
-        self.contentView.addSubview(labelView2)
-        labelView2.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalTo(labelView.snp.trailing).offset(6)
-            make.height.equalTo(20)
-        }
-        
-        self.labelView2.addSubview(labelLabel2)
-        labelLabel2.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(14)
-        }
-        
         self.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(labelView.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(18)
+            make.top.equalToSuperview().offset(16)
+            make.leading.trailing.equalToSuperview().inset(18)
             make.height.equalTo(17)
         }
         
         self.contentView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(1)
+            make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(18)
             make.height.equalTo(36)
         }
@@ -150,9 +105,15 @@ class HotPostTableViewCell: UITableViewCell {
             make.width.height.equalTo(12)
         }
     }
-
-    func prepare(hotPost: HotPost) {
-        labelLabel2.text = hotPost.boardName
+    
+    func postPrepare(post: Post) {
+        titleLabel.text = post.title
+        contentLabel.text = post.previewContent
+        commentLabel.text = String(post.commentCount)
+        viewLabel.text = String(post.views)
+    }
+    
+    func hotPrepare(hotPost: HotPost) {
         titleLabel.text = hotPost.title
         contentLabel.text = hotPost.content
         commentLabel.text = String(hotPost.commentCount)

@@ -9,6 +9,10 @@ import UIKit
 import Then
 import SnapKit
 
+protocol OptionNavigationBarViewDelegate: AnyObject {
+    func didBackButton()
+}
+
 class OptionNavigationBarView: UIView {
     
     var backButton = UIButton().then {
@@ -22,11 +26,12 @@ class OptionNavigationBarView: UIView {
         $0.setImage(UIImage(named: "Sukbakji_Menu"), for: .normal)
     }
     
-    weak var delegate: NavigationBarViewDelegate?
+    weak var delegate: OptionNavigationBarViewDelegate?
     
-    init(title: String) {
+    init(title: String, buttonHidden: Bool) {
         super.init(frame: .zero)
         titleLabel.text = title
+        optionButton.isHidden = buttonHidden
         setUI()
     }
     
@@ -62,6 +67,12 @@ class OptionNavigationBarView: UIView {
     }
     
     @objc private func backButtonTapped() {
-        delegate?.didTapBackButton()
+        delegate?.didBackButton()
+    }
+}
+
+extension UIViewController: OptionNavigationBarViewDelegate {
+    func didBackButton() {
+        navigationController?.popViewController(animated: true)
     }
 }

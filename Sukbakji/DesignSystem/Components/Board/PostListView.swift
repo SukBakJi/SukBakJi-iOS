@@ -11,29 +11,31 @@ import SnapKit
 
 class PostListView: UIView {
     
-    var optionNavigationbarView = OptionNavigationBarView(title: "질문 게시판")
+    var optionNavigationbarView = OptionNavigationBarView(title: "", buttonHidden: true)
     let backgroundLabel = UILabel().then {
         $0.backgroundColor = .gray100
     }
-    let noticeButton = NoticeButton()
+    var noticeButton = NoticeButton(title: "")
     let postListTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
-    $0.register(QnAListTableViewCell.self, forCellReuseIdentifier: QnAListTableViewCell.identifier)
+        $0.register(PostListTableViewCell.self, forCellReuseIdentifier: PostListTableViewCell.identifier)
         $0.allowsSelection = false
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+    init(title: String, buttonTitle: String, buttonHidden: Bool) {
+        super.init(frame: .zero)
+        self.optionNavigationbarView = OptionNavigationBarView(title: title, buttonHidden: buttonHidden)
+        self.noticeButton = NoticeButton(title: buttonTitle)
+        setUI()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
 
         addSubview(optionNavigationbarView)
@@ -42,7 +44,7 @@ class PostListView: UIView {
         addSubview(postListTableView)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         optionNavigationbarView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(95)
