@@ -56,13 +56,6 @@ class BoardMainView: UIView {
         $0.spacing = 8
         $0.distribution = .fillEqually
     }
-    lazy var mainStackView = UIStackView().then {
-        $0.addArrangedSubview(firstRow)
-        $0.addArrangedSubview(secondRow)
-        $0.axis = .vertical
-        $0.spacing = 8
-        $0.distribution = .fillEqually
-    }
     let qnaView = UIView().then {
         $0.backgroundColor = .gray50
     }
@@ -146,15 +139,15 @@ class BoardMainView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
         
         addSubview(scrollView)
@@ -165,7 +158,8 @@ class BoardMainView: UIView {
         
         contentView.addSubview(boardSearchTextField)
         contentView.addSubview(searchImageView)
-        contentView.addSubview(mainStackView)
+        contentView.addSubview(firstRow)
+        contentView.addSubview(secondRow)
         
         contentView.addSubview(qnaView)
         qnaView.addSubview(qnaLabel)
@@ -185,7 +179,7 @@ class BoardMainView: UIView {
         favBoardView.addSubview(favBoardProgressView)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -222,14 +216,20 @@ class BoardMainView: UIView {
             $0.height.width.equalTo(24)
         }
         
-        mainStackView.snp.makeConstraints {
+        firstRow.snp.makeConstraints {
             $0.top.equalTo(boardSearchTextField.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(168)
+            $0.height.equalTo(80)
+        }
+        
+        secondRow.snp.makeConstraints {
+            $0.top.equalTo(firstRow.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(80)
         }
         
         qnaView.snp.makeConstraints {
-            $0.top.equalTo(mainStackView.snp.bottom).offset(20)
+            $0.top.equalTo(secondRow.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(245)
         }

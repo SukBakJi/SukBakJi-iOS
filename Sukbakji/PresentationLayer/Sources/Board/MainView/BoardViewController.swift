@@ -77,5 +77,12 @@ class BoardViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         childVC.didMove(toParent: self)
+        
+        notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
+    }
+    
+    @objc private func notification_Tapped() {
+        let notificationViewController = NotificationViewController()
+        self.navigationController?.pushViewController(notificationViewController, animated: true)
     }
 }

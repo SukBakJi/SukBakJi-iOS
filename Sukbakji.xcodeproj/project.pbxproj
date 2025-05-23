@@ -120,6 +120,8 @@
 		C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */; };
 		C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2842C633F7B00D6014B /* MessageViewController.swift */; };
 		C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2862C633F8600D6014B /* MentoringViewController.swift */; };
+		C71038AB2DDF7DE90087A968 /* MyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71038AA2DDF7DE90087A968 /* MyPostView.swift */; };
+		C71038AD2DDF815A0087A968 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71038AC2DDF815A0087A968 /* MyPostViewController.swift */; };
 		C71AE9B82CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9B72CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift */; };
 		C71AE9BA2CFB60340098FD2A /* FavoriteBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */; };
 		C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */; };
@@ -268,11 +270,15 @@
 		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
 		C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */; };
 		C7EA8CB12D689AB600B25FBC /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EA8CB02D689AB600B25FBC /* CalendarViewModel.swift */; };
+		C7EF6A0D2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EF6A0C2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift */; };
 		C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */; };
 		C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */; };
 		C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4552E2C39B8EE00A4D0EE /* SceneDelegate.swift */; };
 		C7F455362C39B8F000A4D0EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F455352C39B8F000A4D0EE /* Assets.xcassets */; };
 		C7F455392C39B8F000A4D0EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F455372C39B8F000A4D0EE /* LaunchScreen.storyboard */; };
+		C7F61D172DE0424F00B5C3B4 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F61D162DE0424F00B5C3B4 /* NoticeView.swift */; };
+		C7F61D192DE04EA100B5C3B4 /* MyPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F61D182DE04EA000B5C3B4 /* MyPostTableViewCell.swift */; };
+		C7F61D1B2DE05BD200B5C3B4 /* MyPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F61D1A2DE05BD200B5C3B4 /* MyPostViewModel.swift */; };
 		C7F951BE2D2A523500D07051 /* SetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951BD2D2A523500D07051 /* SetAlarmViewController.swift */; };
 		C7F951C02D2A738700D07051 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951BF2D2A738700D07051 /* DateView.swift */; };
 		C7F951C22D2A775000D07051 /* AlarmDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */; };
@@ -411,6 +417,8 @@
 		C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTabViewController.swift; sourceTree = "<group>"; };
 		C70DB2842C633F7B00D6014B /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		C70DB2862C633F8600D6014B /* MentoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringViewController.swift; sourceTree = "<group>"; };
+		C71038AA2DDF7DE90087A968 /* MyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostView.swift; sourceTree = "<group>"; };
+		C71038AC2DDF815A0087A968 /* MyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewController.swift; sourceTree = "<group>"; };
 		C71269142D7F377A00228EF3 /* Sukbakji.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sukbakji.entitlements; sourceTree = "<group>"; };
 		C71AE9B72CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiseCollectionViewCell.swift; sourceTree = "<group>"; };
 		C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardTableViewCell.swift; sourceTree = "<group>"; };
@@ -562,6 +570,7 @@
 		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivRecruitViewController.swift; sourceTree = "<group>"; };
 		C7EA8CB02D689AB600B25FBC /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		C7EF6A0C2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFavBoardTableViewCell.swift; sourceTree = "<group>"; };
 		C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		C7F455292C39B8EE00A4D0EE /* Sukbakji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sukbakji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F4552C2C39B8EE00A4D0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -569,6 +578,9 @@
 		C7F455352C39B8F000A4D0EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7F455382C39B8F000A4D0EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7F4553A2C39B8F000A4D0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7F61D162DE0424F00B5C3B4 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
+		C7F61D182DE04EA000B5C3B4 /* MyPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostTableViewCell.swift; sourceTree = "<group>"; };
+		C7F61D1A2DE05BD200B5C3B4 /* MyPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewModel.swift; sourceTree = "<group>"; };
 		C7F951BD2D2A523500D07051 /* SetAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmViewController.swift; sourceTree = "<group>"; };
 		C7F951BF2D2A738700D07051 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		C7F951C12D2A775000D07051 /* AlarmDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDateCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -761,7 +773,7 @@
 				C7BA9BC72DDB598F00AF9A43 /* MasterView */,
 				C7BA9BC82DDB599D00AF9A43 /* EnterView */,
 				C7BA9BC92DDB59BB00AF9A43 /* FreeView */,
-				C7845D002DD4B3BF004955A2 /* View */,
+				C7845D002DD4B3BF004955A2 /* PostView */,
 				C73673662DA4E77600F88C63 /* ViewModel */,
 				7BFE5D3A2C68819600EF16FB /* BoardModel */,
 				7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */,
@@ -992,6 +1004,7 @@
 			isa = PBXGroup;
 			children = (
 				C7AA038A2DD506EC00BBE115 /* PostViewModel.swift */,
+				C7F61D1A2DE05BD200B5C3B4 /* MyPostViewModel.swift */,
 				C7AA038C2DD50B1100BBE115 /* BoardViewModel.swift */,
 				C73673672DA4E7A000F88C63 /* ReportViewModel.swift */,
 			);
@@ -1135,18 +1148,22 @@
 				C7D64B402DD79B7F00DD34A0 /* BoardEnterView.swift */,
 				C7D64B422DD79B8900DD34A0 /* BoardFreeView.swift */,
 				C7845CFC2DD4A988004955A2 /* PostListView.swift */,
+				C71038AA2DDF7DE90087A968 /* MyPostView.swift */,
+				C7F61D162DE0424F00B5C3B4 /* NoticeView.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
 		};
-		C7845D002DD4B3BF004955A2 /* View */ = {
+		C7845D002DD4B3BF004955A2 /* PostView */ = {
 			isa = PBXGroup;
 			children = (
 				C7845CFE2DD4B3B3004955A2 /* PostListViewController.swift */,
 				C7AA03832DD500C100BBE115 /* PostListTableViewCell.swift */,
+				C71038AC2DDF815A0087A968 /* MyPostViewController.swift */,
+				C7F61D182DE04EA000B5C3B4 /* MyPostTableViewCell.swift */,
 				C7AA038E2DD50D9100BBE115 /* PostDetailViewController.swift */,
 			);
-			path = View;
+			path = PostView;
 			sourceTree = "<group>";
 		};
 		C7875A2D2D3609CF00D6FCF7 /* SukbakjiUITests */ = {
@@ -1374,6 +1391,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D64B4C2DD79C4E00DD34A0 /* BoardFreeViewController.swift */,
+				C7EF6A0C2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift */,
 			);
 			path = FreeView;
 			sourceTree = "<group>";
@@ -1727,6 +1745,7 @@
 				C77B49712D7B66D600005ABE /* smallTextButton.swift in Sources */,
 				C77B49722D7B66D600005ABE /* CommonTextFieldView.swift in Sources */,
 				7B3933EF2D9FF147009EFC55 /* CurrentUserResponse.swift in Sources */,
+				C7EF6A0D2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift in Sources */,
 				C7D64B372DD7851F00DD34A0 /* BoardMainView.swift in Sources */,
 				91D4133D2D826B2000020CEC /* CompleteView.swift in Sources */,
 				C77B49732D7B66D600005ABE /* SocialAuthButton.swift in Sources */,
@@ -1775,6 +1794,7 @@
 				7B1C534E2C69D4E800C66D0D /* DirectoryLabReviewWriteModel.swift in Sources */,
 				7B259B002C75EB5700D3DFE5 /* LabReviewWriteViewController.swift in Sources */,
 				C7AA038D2DD50B1100BBE115 /* BoardViewModel.swift in Sources */,
+				C7F61D192DE04EA100B5C3B4 /* MyPostTableViewCell.swift in Sources */,
 				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
 				C73828D32D6220F4007A21A0 /* AllDeleteView.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
@@ -1800,6 +1820,7 @@
 				C77B496A2D7B66B700005ABE /* LoginView.swift in Sources */,
 				7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */,
 				C74A15AC2D5A4FE200A1698B /* UnivDelete.swift in Sources */,
+				C71038AB2DDF7DE90087A968 /* MyPostView.swift in Sources */,
 				C7FD6F432D663F6000251B7D /* MyPageView.swift in Sources */,
 				C7BA9BC42DDB591200AF9A43 /* MasterPostTableViewCell.swift in Sources */,
 				91C53C4A2DAC9ABA00B8795D /* RefreshTokenManager+.swift in Sources */,
@@ -1808,6 +1829,7 @@
 				C77EFB3B2D9B8A1E000C2841 /* FCMRepository.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
 				C7675F7A2D6981DD00F99294 /* UnivRecruitView.swift in Sources */,
+				C7F61D1B2DE05BD200B5C3B4 /* MyPostViewModel.swift in Sources */,
 				C73948B62DD88D8900612461 /* QnA.swift in Sources */,
 				C73673652DA4D94000F88C63 /* ReportRepository.swift in Sources */,
 				C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */,
@@ -1845,6 +1867,7 @@
 				C7BA9BC02DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				91D4135B2D841ECE00020CEC /* ResetPwViewController.swift in Sources */,
+				C7F61D172DE0424F00B5C3B4 /* NoticeView.swift in Sources */,
 				91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */,
 				C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */,
 				7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */,
@@ -1886,6 +1909,7 @@
 				C7D64B392DD7878B00DD34A0 /* BoardViewController.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
 				415BBC0D2C73442F002768EE /* NetworkAuthManager+.swift in Sources */,
+				C71038AD2DDF815A0087A968 /* MyPostViewController.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
 				C74A15AA2D5A4FC500A1698B /* Univ.swift in Sources */,
 				7B1C534C2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift in Sources */,

@@ -1,24 +1,25 @@
 //
-//  EnterPostTableViewCell.swift
+//  PostListTableViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 5/19/25.
+//  Created by jaegu park on 5/15/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-class EnterPostTableViewCell: UITableViewCell {
+class PostListTableViewCell: UITableViewCell {
     
-    static let identifier = String(describing: EnterPostTableViewCell.self)
-
+    static let identifier = String(describing: PostListTableViewCell.self)
+    
     private let titleLabel = UILabel().then {
         $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     private let contentLabel = UILabel().then {
         $0.textColor = .gray900
+        $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let commentImageView = UIImageView().then {
@@ -56,7 +57,7 @@ class EnterPostTableViewCell: UITableViewCell {
         self.contentView.backgroundColor = .white
         
         self.contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(4)
+            make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().inset(24)
             make.bottom.equalToSuperview()
@@ -73,7 +74,7 @@ class EnterPostTableViewCell: UITableViewCell {
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(18)
-            make.height.equalTo(18)
+            make.height.equalTo(36)
         }
         
         self.contentView.addSubview(viewLabel)
@@ -105,10 +106,17 @@ class EnterPostTableViewCell: UITableViewCell {
         }
     }
     
-    func prepare(post: Post) {
+    func postPrepare(post: Post) {
         titleLabel.text = post.title
         contentLabel.text = post.previewContent
         commentLabel.text = String(post.commentCount)
         viewLabel.text = String(post.views)
+    }
+    
+    func hotPrepare(hotPost: HotPost) {
+        titleLabel.text = hotPost.title
+        contentLabel.text = hotPost.content
+        commentLabel.text = String(hotPost.commentCount)
+        viewLabel.text = String(hotPost.views)
     }
 }

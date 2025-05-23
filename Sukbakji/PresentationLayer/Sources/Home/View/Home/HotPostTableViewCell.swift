@@ -91,7 +91,7 @@ class HotPostTableViewCell: UITableViewCell {
         labelLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7)
             make.centerY.equalToSuperview()
-            make.height.equalTo(26)
+            make.height.equalTo(14)
         }
         
         self.contentView.addSubview(labelView2)
@@ -105,7 +105,7 @@ class HotPostTableViewCell: UITableViewCell {
         labelLabel2.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7)
             make.centerY.equalToSuperview()
-            make.height.equalTo(26)
+            make.height.equalTo(14)
         }
         
         self.contentView.addSubview(titleLabel)

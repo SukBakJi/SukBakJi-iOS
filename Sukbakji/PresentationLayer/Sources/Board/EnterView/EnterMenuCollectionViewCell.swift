@@ -13,7 +13,7 @@ import RxCocoa
 
 class EnterMenuCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = String(describing: MasterMenuCollectionViewCell.self)
+    static let identifier = String(describing: EnterMenuCollectionViewCell.self)
     
     var disposeBag = DisposeBag()
     var isSelectedCell = BehaviorRelay<Bool>(value: false)

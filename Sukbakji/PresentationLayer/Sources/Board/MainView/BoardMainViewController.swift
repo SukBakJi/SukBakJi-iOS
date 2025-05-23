@@ -45,6 +45,11 @@ class BoardMainViewController: UIViewController {
         boardMainView.qnaContainerView.snp.makeConstraints { make in
             latestQnAHeightConstraint = make.height.equalTo(168).constraint
         }
+        
+        boardMainView.hotBoardButton.addTarget(self, action: #selector(hotPost_Tapped), for: .touchUpInside)
+        boardMainView.myPostButton.addTarget(self, action: #selector(myPost_Tapped), for: .touchUpInside)
+        boardMainView.scrapButton.addTarget(self, action: #selector(scrap_Tapped), for: .touchUpInside)
+        boardMainView.myCommentButton.addTarget(self, action: #selector(myComment_Tapped), for: .touchUpInside)
     }
     
     private func setBind() {
@@ -111,6 +116,26 @@ class BoardMainViewController: UIViewController {
                 cell.prepare(favoriteBoard: board)
             }
             .disposed(by: disposeBag)
+    }
+    
+    @objc private func hotPost_Tapped() {
+        let postListVC = PostListViewController(title: "HOT 게시판", buttonTitle: "HOT 게시판 선정 기준 안내드립니다", isPost: 0, isHidden: true)
+        self.navigationController?.pushViewController(postListVC, animated: true)
+    }
+    
+    @objc private func myPost_Tapped() {
+        let myPostVC = MyPostViewController(title: "내가 쓴 글", isPost: 0)
+        self.navigationController?.pushViewController(myPostVC, animated: true)
+    }
+    
+    @objc private func scrap_Tapped() {
+        let myPostVC = MyPostViewController(title: "스크랩", isPost: 1)
+        self.navigationController?.pushViewController(myPostVC, animated: true)
+    }
+    
+    @objc private func myComment_Tapped() {
+        let myPostVC = MyPostViewController(title: "댓글 단 글", isPost: 2)
+        self.navigationController?.pushViewController(myPostVC, animated: true)
     }
 }
 

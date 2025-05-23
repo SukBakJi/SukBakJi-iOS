@@ -52,8 +52,8 @@ class BoardMasterView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
         changeColor("질문 게시판")
     }
     
@@ -61,7 +61,7 @@ class BoardMasterView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
         
         addSubview(boardSearchTextField)
@@ -71,7 +71,7 @@ class BoardMasterView: UIView {
         addSubview(masterPostTableView)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         boardSearchTextField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(55)
             $0.leading.trailing.equalToSuperview().inset(24)

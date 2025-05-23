@@ -1,25 +1,40 @@
 //
-//  QnAListTableViewCell.swift
+//  MyPostTableViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 5/15/25.
+//  Created by jaegu park on 5/23/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-class QnAListTableViewCell: UITableViewCell {
+class MyPostTableViewCell: UITableViewCell {
     
-    static let identifier = String(describing: QnAListTableViewCell.self)
-    
+    static let identifier = String(describing: MyPostTableViewCell.self)
+
+    private let labelView = UIView().then {
+        $0.backgroundColor = .blue50
+        $0.layer.cornerRadius = 4
+    }
+    private let labelLabel = UILabel().then {
+        $0.textColor = .blue400
+        $0.font = UIFont(name: "Pretendard-Medium", size: 12)
+    }
+    private let labelView2 = UIView().then {
+        $0.backgroundColor = .gray50
+        $0.layer.cornerRadius = 4
+    }
+    private let labelLabel2 = UILabel().then {
+        $0.textColor = .gray400
+        $0.font = UIFont(name: "Pretendard-Medium", size: 12)
+    }
     private let titleLabel = UILabel().then {
         $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 14)
     }
     private let contentLabel = UILabel().then {
         $0.textColor = .gray900
-        $0.numberOfLines = 2
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
     private let commentImageView = UIImageView().then {
@@ -63,10 +78,38 @@ class QnAListTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview()
         }
         
+        self.contentView.addSubview(labelView)
+        labelView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(18)
+            make.height.equalTo(20)
+        }
+        
+        self.labelView.addSubview(labelLabel)
+        labelLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(7)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(14)
+        }
+        
+        self.contentView.addSubview(labelView2)
+        labelView2.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalTo(labelView.snp.trailing).offset(6)
+            make.height.equalTo(20)
+        }
+        
+        self.labelView2.addSubview(labelLabel2)
+        labelLabel2.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(7)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(14)
+        }
+        
         self.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.trailing.equalToSuperview().inset(18)
+            make.top.equalTo(labelView.snp.bottom).offset(12)
+            make.leading.equalToSuperview().offset(18)
             make.height.equalTo(17)
         }
         
@@ -74,7 +117,7 @@ class QnAListTableViewCell: UITableViewCell {
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(18)
-            make.height.equalTo(36)
+            make.height.equalTo(18)
         }
         
         self.contentView.addSubview(viewLabel)
@@ -106,10 +149,12 @@ class QnAListTableViewCell: UITableViewCell {
         }
     }
     
-    func prepare(post: Post) {
-        titleLabel.text = post.title
-        contentLabel.text = post.previewContent
-        commentLabel.text = String(post.commentCount)
-        viewLabel.text = String(post.views)
+    func prepare(myPost: MyPost) {
+        labelLabel.text = "\(myPost.menu) 게시판"
+        labelLabel2.text = String(myPost.boardName)
+        titleLabel.text = myPost.title
+        contentLabel.text = myPost.content
+        commentLabel.text = String(myPost.commentCount)
+        viewLabel.text = String(myPost.views)
     }
 }
