@@ -17,6 +17,8 @@ final class PostViewModel {
     let postMasterList = BehaviorRelay<[Post]>(value: [])
     let postEnterList = BehaviorRelay<[Post]>(value: [])
     
+    let mergedQnAList = BehaviorRelay<[Post]>(value: [])
+    
     func loadDoctorPostList(boardName: String) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
@@ -53,6 +55,17 @@ final class PostViewModel {
             .subscribe(onSuccess: { [weak self] posts in
                 self?.postEnterList.accept(posts)
             })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadAllPosts() {
+        loadDoctorPostList(boardName: "질문 게시판")
+        loadMasterPostList(boardName: "질문 게시판")
+        loadEnterPostList(boardName: "질문 게시판")
+        
+        Observable.zip(postDocterList, postMasterList, postEnterList)
+            .map { $0 + $1 + $2 }
+            .bind(to: mergedQnAList)
             .disposed(by: disposeBag)
     }
 }
