@@ -74,7 +74,7 @@ class PostListTableViewCell: UITableViewCell {
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(18)
-            make.height.equalTo(36)
+            make.height.equalTo(18)
         }
         
         self.contentView.addSubview(viewLabel)

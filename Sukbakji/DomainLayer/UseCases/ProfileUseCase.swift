@@ -1,5 +1,5 @@
 //
-//  MyProfileUseCase.swift
+//  ProfileUseCase.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 4/14/25.
@@ -7,7 +7,7 @@
 
 import RxSwift
 
-class MyProfileUseCase {
+class ProfileUseCase {
     private let homeRepository: HomeRepository
     
     init(homeRepository: HomeRepository = HomeRepository.shared) {

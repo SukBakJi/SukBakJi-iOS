@@ -113,6 +113,6 @@ extension MyPostViewController {
 
 extension MyPostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 129
+        return 137
     }
 }

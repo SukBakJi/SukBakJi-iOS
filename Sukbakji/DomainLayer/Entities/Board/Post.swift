@@ -26,3 +26,24 @@ struct MyPost : Codable {
     var menu: String
     var commentCount: Int
 }
+
+struct PostDetail : Codable {
+    var menu: String
+    var title: String
+    var content: String
+    var comments: [Comment]
+    var supportField: String?
+    var hiringType: String?
+    var commentCount: Int
+    var memberId: Int
+    var views: Int
+}
+
+struct Comment : Codable {
+    let commentId: Int
+    var anonymousName: String
+    var degreeLevel: String
+    var content: String
+    var createdDate: String
+    var memberId: Int
+}

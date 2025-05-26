@@ -20,7 +20,7 @@ class PostListView: UIView {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
         $0.register(PostListTableViewCell.self, forCellReuseIdentifier: PostListTableViewCell.identifier)
-        $0.allowsSelection = false
+        $0.allowsSelection = true
     }
     
     init(title: String, buttonTitle: String, buttonHidden: Bool) {

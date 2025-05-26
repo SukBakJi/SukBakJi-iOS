@@ -1,28 +1,31 @@
 //
-//  MessageInputView.swift
+//  CommentInputView.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 2/3/25.
+//  Created by jaegu park on 5/24/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-class MessageInputView: UIView {
+class CommentInputView: UIView {
     
     var inputTextField = UITextField().then {
         $0.backgroundColor = .gray50
-        $0.placeholder = "상대방과 대화를 나눠 보세요!"
+        $0.placeholder = "댓글을 남겨 보세요!"
         $0.setPlaceholderColor(UIColor(hexCode: "9F9F9F"))
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .black
     }
     var sendButton = UIButton().then {
+        $0.tintColor = .clear
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
-        $0.setBackgroundColor(.gray500, for: .normal)
-        $0.setImage(UIImage(named: "Sukbakji_Send"), for: .normal)
+        $0.setTitle("등록", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.setBackgroundColor(.orange600, for: .normal)
     }
     
     init() {
@@ -41,7 +44,8 @@ class MessageInputView: UIView {
         sendButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(8)
             $0.trailing.equalToSuperview().inset(24)
-            $0.height.width.equalTo(44)
+            $0.height.equalTo(45)
+            $0.width.equalTo(70)
         }
         
         addSubview(inputTextField)

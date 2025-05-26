@@ -50,6 +50,7 @@ class BoardMainViewController: UIViewController {
         boardMainView.myPostButton.addTarget(self, action: #selector(myPost_Tapped), for: .touchUpInside)
         boardMainView.scrapButton.addTarget(self, action: #selector(scrap_Tapped), for: .touchUpInside)
         boardMainView.myCommentButton.addTarget(self, action: #selector(myComment_Tapped), for: .touchUpInside)
+        boardMainView.qnaButton.addTarget(self, action: #selector(qnaList_Tapped), for: .touchUpInside)
     }
     
     private func setBind() {
@@ -136,6 +137,11 @@ class BoardMainViewController: UIViewController {
     @objc private func myComment_Tapped() {
         let myPostVC = MyPostViewController(title: "댓글 단 글", isPost: 2)
         self.navigationController?.pushViewController(myPostVC, animated: true)
+    }
+    
+    @objc private func qnaList_Tapped() {
+        let postListVC = PostListViewController(title: "질문 게시판", buttonTitle: "게시판 내 개인정보 유추 금지와 관련하여 안내드립니다", isPost: 1, isHidden: false)
+        self.navigationController?.pushViewController(postListVC, animated: true)
     }
 }
 

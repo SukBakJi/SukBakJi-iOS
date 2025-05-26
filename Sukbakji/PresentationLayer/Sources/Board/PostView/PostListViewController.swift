@@ -14,6 +14,7 @@ class PostListViewController: UIViewController {
     
     private var postListView = PostListView(title: "", buttonTitle: "", buttonHidden: true)
     private let hotPostViewModel = HotPostViewModel()
+    private let postViewModel = PostViewModel()
     var disposeBag = DisposeBag()
     
     private var isPost: Int = 0
@@ -55,6 +56,8 @@ class PostListViewController: UIViewController {
         
         if isPost == 0 {
             postListView.noticeButton.addTarget(self, action: #selector(clickNoticeButton), for: .touchUpInside)
+        } else if isPost == 1{
+            postListView.noticeButton.addTarget(self, action: #selector(clickNoticeButton2), for: .touchUpInside)
         }
     }
 }
@@ -64,12 +67,16 @@ extension PostListViewController {
     private func setBind() {
         if isPost == 0 {
             bindHotPostViewModel()
+        } else if isPost == 1{
+            bindQnAPostViewModel()
         }
     }
     
     private func setAPI() {
         if isPost == 0 {
             hotPostViewModel.loadHotPost()
+        } else if isPost == 1{
+            postViewModel.loadAllPosts()
         }
     }
     
@@ -77,15 +84,51 @@ extension PostListViewController {
         self.postListView.postListTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        hotPostViewModel.hotPostList
+        self.hotPostViewModel.hotPostList
+            .observe(on: MainScheduler.instance)
             .bind(to: postListView.postListTableView.rx.items(cellIdentifier: PostListTableViewCell.identifier, cellType: PostListTableViewCell.self)) { row, post, cell in
                 cell.hotPrepare(hotPost: post)
             }
             .disposed(by: disposeBag)
+        
+        self.postListView.postListTableView.rx.modelSelected(HotPost.self)
+            .subscribe(onNext: { [weak self] postItem in
+                guard let self = self else { return }
+                let postDetailVC = PostDetailViewController(title: postItem.boardName, postId: postItem.postId)
+                self.navigationController?.pushViewController(postDetailVC, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindQnAPostViewModel() {
+        self.postListView.postListTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        postViewModel.mergedQnAList
+            .observe(on: MainScheduler.instance)
+            .bind(to: postListView.postListTableView.rx.items(cellIdentifier: PostListTableViewCell.identifier, cellType: PostListTableViewCell.self)) { row, post, cell in
+                cell.postPrepare(post: post)
+            }
+            .disposed(by: disposeBag)
+        
+        self.postListView.postListTableView.rx.modelSelected(Post.self)
+            .subscribe(onNext: { [weak self] postItem in
+                let postDetailVC = PostDetailViewController(title: "질문 게시판", postId: postItem.postId)
+                self?.navigationController?.pushViewController(postDetailVC, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc private func clickNoticeButton() {
-        let noticeView = NoticeView(title: "스크랩 20개 이상 또는 조회수 100회 이상인 게시글의 경우 HOT 게시판에 선정되어 게시됩니다")
+        let noticeView = NoticeView(title: "스크랩 20개 이상 또는 조회수 100회 이상인 게\n시글의 경우 HOT 게시판에 선정되어 게시됩니다")
+        self.view.addSubview(noticeView)
+        noticeView.alpha = 0
+        noticeView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        UIView.animate(withDuration: 0.3) { noticeView.alpha = 1 }
+    }
+    
+    @objc private func clickNoticeButton2() {
+        let noticeView = NoticeView(title: "게시판 내 개인정보 유추 금지와 관련하여 안내드\n립니다")
         self.view.addSubview(noticeView)
         noticeView.alpha = 0
         noticeView.snp.makeConstraints { $0.edges.equalToSuperview() }
@@ -95,6 +138,6 @@ extension PostListViewController {
 
 extension PostListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 97
+        return 105
     }
 }

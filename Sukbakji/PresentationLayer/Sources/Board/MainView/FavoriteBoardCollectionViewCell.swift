@@ -76,73 +76,73 @@ class FavoriteBoardCollectionViewCell: UICollectionViewCell {
         layer.masksToBounds = false
         
         self.contentView.addSubview(labelView)
-        labelView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(18)
-            make.height.equalTo(20)
+        labelView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(18)
+            $0.height.equalTo(20)
         }
         
         self.labelView.addSubview(labelLabel)
-        labelLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(14)
+        labelLabel.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
+            $0.height.equalTo(14)
         }
         
         self.contentView.addSubview(labelView2)
-        labelView2.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalTo(labelView.snp.trailing).offset(6)
-            make.height.equalTo(20)
+        labelView2.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.leading.equalTo(labelView.snp.trailing).offset(6)
+            $0.height.equalTo(20)
         }
         
         self.labelView2.addSubview(labelLabel2)
-        labelLabel2.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(14)
+        labelLabel2.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
+            $0.height.equalTo(14)
         }
         
         self.contentView.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(labelView.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(18)
-            make.height.equalTo(17)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(labelView.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().offset(18)
+            $0.height.equalTo(17)
         }
         
         self.contentView.addSubview(contentLabel)
-        contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(18)
-            make.height.equalTo(36)
+        contentLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
+            $0.leading.trailing.equalToSuperview().inset(18)
+            $0.height.equalTo(36)
         }
         
         self.contentView.addSubview(viewLabel)
-        viewLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(16)
-            make.trailing.equalToSuperview().inset(18)
-            make.height.equalTo(14)
+        viewLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(16)
+            $0.trailing.equalToSuperview().inset(18)
+            $0.height.equalTo(14)
         }
         
         self.contentView.addSubview(viewImageView)
-        viewImageView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(17)
-            make.trailing.equalTo(viewLabel.snp.leading).offset(-3)
-            make.width.height.equalTo(12)
+        viewImageView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(17)
+            $0.trailing.equalTo(viewLabel.snp.leading).offset(-3)
+            $0.width.height.equalTo(12)
         }
         
         self.contentView.addSubview(commentLabel)
-        commentLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(16)
-            make.trailing.equalTo(viewImageView.snp.leading).offset(-12)
-            make.height.equalTo(14)
+        commentLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(16)
+            $0.trailing.equalTo(viewImageView.snp.leading).offset(-12)
+            $0.height.equalTo(14)
         }
         
         self.contentView.addSubview(commentImageView)
-        commentImageView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(17)
-            make.trailing.equalTo(commentLabel.snp.leading).offset(-3)
-            make.width.height.equalTo(12)
+        commentImageView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(17)
+            $0.trailing.equalTo(commentLabel.snp.leading).offset(-3)
+            $0.width.height.equalTo(12)
         }
     }
     
