@@ -10,7 +10,7 @@ import RxCocoa
 
 class MyProfileViewModel {
     private let disposeBag = DisposeBag()
-    private let useCase: MyProfileUseCase
+    private let useCase: ProfileUseCase
     
     let myProfile = PublishSubject<MyProfile>()
     let errorMessage = PublishSubject<String>()
@@ -21,7 +21,7 @@ class MyProfileViewModel {
     let newPWInput = BehaviorRelay<String>(value: "")
     let confirmPWInput = BehaviorRelay<String>(value: "")
     
-    init(useCase: MyProfileUseCase = MyProfileUseCase()) {
+    init(useCase: ProfileUseCase = ProfileUseCase()) {
         self.useCase = useCase
     }
     

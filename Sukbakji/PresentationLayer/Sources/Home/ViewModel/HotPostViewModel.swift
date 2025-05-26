@@ -13,6 +13,8 @@ class HotPostViewModel {
     private let disposeBag = DisposeBag()
     
     let hotPostList = BehaviorRelay<[HotPost]>(value: [])
+    var selectPostItem: HotPost?
+    
     let errorMessage = PublishSubject<String>()
     
     func loadHotPost() {

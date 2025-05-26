@@ -48,7 +48,7 @@ class MessageInputView: UIView {
         inputTextField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(8)
             $0.leading.equalToSuperview().offset(24)
-            $0.trailing.equalTo(sendButton.snp.leading).inset(6)
+            $0.trailing.equalTo(sendButton.snp.leading).inset(-6)
             $0.height.equalTo(44)
         }
         inputTextField.addTFUnderline()

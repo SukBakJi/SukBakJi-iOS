@@ -12,7 +12,7 @@ import SnapKit
 class FavoriteLabCollectionViewCell: UICollectionViewCell {
     
     static let identifier = String(describing: FavoriteLabCollectionViewCell.self)
-
+    
     private let labView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -81,78 +81,78 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         layer.masksToBounds = false
         
         self.contentView.addSubview(labView)
-        labView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-           make.height.equalTo(70)
+        labView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(70)
         }
         
         self.labView.addSubview(univLabel)
-        univLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().offset(16)
-           make.height.equalTo(14)
+        univLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(16)
+            $0.height.equalTo(14)
         }
         
         self.labView.addSubview(labLabel)
-        labLabel.snp.makeConstraints { make in
-            make.top.equalTo(univLabel.snp.bottom).offset(6)
-            make.leading.equalToSuperview().offset(16)
-           make.height.equalTo(18)
+        labLabel.snp.makeConstraints {
+            $0.top.equalTo(univLabel.snp.bottom).offset(6)
+            $0.leading.equalToSuperview().offset(16)
+            $0.height.equalTo(18)
         }
         
         self.contentView.addSubview(professorImageView)
-        professorImageView.snp.makeConstraints { make in
-            make.top.equalTo(labView.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(16)
-            make.height.width.equalTo(40)
+        professorImageView.snp.makeConstraints {
+            $0.top.equalTo(labView.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().offset(16)
+            $0.height.width.equalTo(40)
         }
         
         self.contentView.addSubview(professorNameLabel)
-        professorNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(labView.snp.bottom).offset(14.5)
-            make.leading.equalTo(professorImageView.snp.trailing).offset(12)
-            make.height.equalTo(17)
+        professorNameLabel.snp.makeConstraints {
+            $0.top.equalTo(labView.snp.bottom).offset(14.5)
+            $0.leading.equalTo(professorImageView.snp.trailing).offset(12)
+            $0.height.equalTo(17)
         }
         
         self.contentView.addSubview(professorLabel)
-        professorLabel.snp.makeConstraints { make in
-            make.top.equalTo(labView.snp.bottom).offset(16)
-            make.leading.equalTo(professorNameLabel.snp.trailing).offset(4)
-            make.height.equalTo(14)
+        professorLabel.snp.makeConstraints {
+            $0.top.equalTo(labView.snp.bottom).offset(16)
+            $0.leading.equalTo(professorNameLabel.snp.trailing).offset(4)
+            $0.height.equalTo(14)
         }
         
         self.contentView.addSubview(professorLabLabel)
-        professorLabLabel.snp.makeConstraints { make in
-            make.top.equalTo(professorNameLabel.snp.bottom).offset(4)
-            make.leading.equalTo(professorImageView.snp.trailing).offset(12)
-            make.height.equalTo(14)
+        professorLabLabel.snp.makeConstraints {
+            $0.top.equalTo(professorNameLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(professorImageView.snp.trailing).offset(12)
+            $0.height.equalTo(14)
         }
         
         self.contentView.addSubview(labView2)
-        labView2.snp.makeConstraints { make in
-            make.top.equalTo(professorImageView.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(16)
-            make.height.equalTo(20)
+        labView2.snp.makeConstraints {
+            $0.top.equalTo(professorImageView.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().offset(16)
+            $0.height.equalTo(20)
         }
         
         self.labView2.addSubview(labLabel2)
-        labLabel2.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.height.equalTo(26)
+        labLabel2.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(8)
+            $0.height.equalTo(26)
         }
         
         self.contentView.addSubview(labView3)
-        labView3.snp.makeConstraints { make in
-            make.top.equalTo(professorImageView.snp.bottom).offset(12)
-            make.leading.equalTo(labView2.snp.trailing).offset(6)
-            make.height.equalTo(20)
+        labView3.snp.makeConstraints {
+            $0.top.equalTo(professorImageView.snp.bottom).offset(12)
+            $0.leading.equalTo(labView2.snp.trailing).offset(6)
+            $0.height.equalTo(20)
         }
         
         self.labView3.addSubview(labLabel3)
-        labLabel3.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.height.equalTo(26)
+        labLabel3.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(8)
+            $0.height.equalTo(26)
         }
     }
     

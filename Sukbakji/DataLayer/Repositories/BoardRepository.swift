@@ -28,6 +28,12 @@ class BoardRepository {
         return APIService.shared.getWithTokenAndParams(of: APIResponse<[Post]>.self, url: url, parameters: params, accessToken: token)
     }
     
+    func fetchPostDetail(token: String, postId: Int) -> Single<APIResponse<PostDetail>> {
+        let url = APIConstants.postsId(postId).path
+        let params = ["postId": postId]
+        return APIService.shared.getWithTokenAndParams(of: APIResponse<PostDetail>.self, url: url, parameters: params, accessToken: token)
+    }
+    
     func fetchMyPostList(token: String) -> Single<APIResponse<[MyPost]>> {
         let url = APIConstants.communityPostList.path
         return APIService.shared.getWithToken(of: APIResponse<[MyPost]>.self, url: url, accessToken: token)

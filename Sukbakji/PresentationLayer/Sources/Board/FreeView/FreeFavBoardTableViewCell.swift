@@ -44,31 +44,31 @@ class FreeFavBoardTableViewCell: UITableViewCell {
     
     private func setUI() {
         self.contentView.addSubview(favButton)
-        favButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(40)
-            make.centerY.equalToSuperview()
-            make.height.width.equalTo(24)
+        favButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(40)
+            $0.centerY.equalToSuperview()
+            $0.height.width.equalTo(24)
         }
         
         self.contentView.addSubview(labelView)
-        labelView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalTo(favButton.snp.trailing).offset(16)
-            make.height.equalTo(20)
+        labelView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(favButton.snp.trailing).offset(16)
+            $0.height.equalTo(20)
         }
         
         self.labelView.addSubview(labelLabel)
-        labelLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(14)
+        labelLabel.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
+            $0.height.equalTo(14)
         }
         
         self.contentView.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalTo(labelView.snp.trailing).offset(10)
-            make.height.equalTo(21)
+        nameLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(labelView.snp.trailing).offset(10)
+            $0.height.equalTo(21)
         }
     }
 }

@@ -84,10 +84,19 @@ extension PostListViewController {
         self.postListView.postListTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        hotPostViewModel.hotPostList
+        self.hotPostViewModel.hotPostList
+            .observe(on: MainScheduler.instance)
             .bind(to: postListView.postListTableView.rx.items(cellIdentifier: PostListTableViewCell.identifier, cellType: PostListTableViewCell.self)) { row, post, cell in
                 cell.hotPrepare(hotPost: post)
             }
+            .disposed(by: disposeBag)
+        
+        self.postListView.postListTableView.rx.modelSelected(HotPost.self)
+            .subscribe(onNext: { [weak self] postItem in
+                guard let self = self else { return }
+                let postDetailVC = PostDetailViewController(title: postItem.boardName, postId: postItem.postId)
+                self.navigationController?.pushViewController(postDetailVC, animated: true)
+            })
             .disposed(by: disposeBag)
     }
     
@@ -96,14 +105,22 @@ extension PostListViewController {
             .disposed(by: disposeBag)
         
         postViewModel.mergedQnAList
+            .observe(on: MainScheduler.instance)
             .bind(to: postListView.postListTableView.rx.items(cellIdentifier: PostListTableViewCell.identifier, cellType: PostListTableViewCell.self)) { row, post, cell in
                 cell.postPrepare(post: post)
             }
             .disposed(by: disposeBag)
+        
+        self.postListView.postListTableView.rx.modelSelected(Post.self)
+            .subscribe(onNext: { [weak self] postItem in
+                let postDetailVC = PostDetailViewController(title: "질문 게시판", postId: postItem.postId)
+                self?.navigationController?.pushViewController(postDetailVC, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc private func clickNoticeButton() {
-        let noticeView = NoticeView(title: "스크랩 20개 이상 또는 조회수 100회 이상인 게시글의 경우 HOT 게시판에 선정되어 게시됩니다")
+        let noticeView = NoticeView(title: "스크랩 20개 이상 또는 조회수 100회 이상인 게\n시글의 경우 HOT 게시판에 선정되어 게시됩니다")
         self.view.addSubview(noticeView)
         noticeView.alpha = 0
         noticeView.snp.makeConstraints { $0.edges.equalToSuperview() }
@@ -111,7 +128,7 @@ extension PostListViewController {
     }
     
     @objc private func clickNoticeButton2() {
-        let noticeView = NoticeView(title: "게시판 내 개인정보 유추 금지와 관련하여 안내드립니다")
+        let noticeView = NoticeView(title: "게시판 내 개인정보 유추 금지와 관련하여 안내드\n립니다")
         self.view.addSubview(noticeView)
         noticeView.alpha = 0
         noticeView.snp.makeConstraints { $0.edges.equalToSuperview() }

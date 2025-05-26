@@ -11,6 +11,7 @@ import RxCocoa
 
 final class PostViewModel {
     private let repository = BoardRepository()
+    private let useCase: PostUseCase
     private let disposeBag = DisposeBag()
     
     let postDocterList = BehaviorRelay<[Post]>(value: [])
@@ -18,6 +19,14 @@ final class PostViewModel {
     let postEnterList = BehaviorRelay<[Post]>(value: [])
     
     let mergedQnAList = BehaviorRelay<[Post]>(value: [])
+    
+    let postDetail = PublishSubject<PostDetail>()
+    let errorMessage = PublishSubject<String>()
+    var postCommentList = BehaviorRelay<[Comment]>(value: [])
+    
+    init(useCase: PostUseCase = PostUseCase()) {
+        self.useCase = useCase
+    }
     
     func loadDoctorPostList(boardName: String) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
@@ -66,6 +75,17 @@ final class PostViewModel {
         Observable.zip(postDocterList, postMasterList, postEnterList)
             .map { $0 + $1 + $2 }
             .bind(to: mergedQnAList)
+            .disposed(by: disposeBag)
+    }
+    
+    func loadPostDatil(postId: Int) {
+        useCase.fetchPostDetail(postId: postId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] detail in
+                self?.postDetail.onNext(detail)
+            }, onFailure: { [weak self] error in
+                self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
+            })
             .disposed(by: disposeBag)
     }
 }
