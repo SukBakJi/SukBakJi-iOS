@@ -10,7 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class UnivCalendarViewController: UIViewController, UnivCalendarTableViewCellDeleteDelegate {
+class UnivCalendarViewController: UIViewController, UnivCalendarCellDelegate {
     
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     private let univView = UnivView()

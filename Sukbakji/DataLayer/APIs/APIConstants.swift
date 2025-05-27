@@ -39,6 +39,10 @@ enum APIConstants {
     case notificationMulticast
     
     
+    case commentsUpdate
+    case commentsCreate
+    
+    
     case boardFavoriteAdd(Int)
     case boardFavoriteRemove(Int)
     case boardCreate
@@ -46,6 +50,9 @@ enum APIConstants {
     
     
     case blockMemberId(Int)
+    
+    
+    case scrapsToggle(Int)
     
     
     case postsUpdate(Int)
@@ -153,6 +160,12 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/notification/multicast")
             
             
+        case .commentsUpdate:
+            return APIConstants.makeEndPoint("/comments/update")
+        case .commentsCreate:
+            return APIConstants.makeEndPoint("/comments/create")
+            
+            
         case .boardFavoriteAdd(let boardId):
             return APIConstants.makeEndPoint("/boards/\(boardId)/favorite/add")
         case .boardFavoriteRemove(let boardId):
@@ -165,6 +178,10 @@ extension APIConstants {
             
         case .blockMemberId(let targetMemberId):
             return APIConstants.makeEndPoint("/block/\(targetMemberId)")
+            
+            
+        case .scrapsToggle(let postId):
+            return APIConstants.makeEndPoint("/scraps/\(postId)/toggle")
             
             
         case .postsUpdate(let postId):

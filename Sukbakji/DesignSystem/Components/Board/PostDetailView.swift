@@ -173,6 +173,7 @@ class PostDetailView: UIView {
         
         commentListTableView.snp.makeConstraints {
             $0.top.equalTo(layerView.snp.bottom).offset(12)
+            $0.bottom.equalToSuperview().inset(80)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         

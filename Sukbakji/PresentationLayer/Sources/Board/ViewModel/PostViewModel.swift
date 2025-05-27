@@ -21,8 +21,10 @@ final class PostViewModel {
     let mergedQnAList = BehaviorRelay<[Post]>(value: [])
     
     let postDetail = PublishSubject<PostDetail>()
-    let errorMessage = PublishSubject<String>()
     var postCommentList = BehaviorRelay<[Comment]>(value: [])
+    var selectCommentItem: Comment?
+    
+    let errorMessage = PublishSubject<String>()
     
     init(useCase: PostUseCase = PostUseCase()) {
         self.useCase = useCase
@@ -78,13 +80,33 @@ final class PostViewModel {
             .disposed(by: disposeBag)
     }
     
-    func loadPostDatil(postId: Int) {
+    func loadPostDetail(postId: Int) {
         useCase.fetchPostDetail(postId: postId)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] detail in
                 self?.postDetail.onNext(detail)
             }, onFailure: { [weak self] error in
                 self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func enrollComment(postId: Int?, content: String?) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        let params = [
+            "postId": postId!,
+            "content": content!,
+        ] as [String : Any]
+        
+        repository.fetchCommentEnroll(token: token, parameters: params)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                NotificationCenter.default.post(name: .isCommentComplete, object: nil)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

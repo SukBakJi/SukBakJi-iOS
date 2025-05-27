@@ -49,6 +49,11 @@ class BoardRepository {
         return APIService.shared.getWithToken(of: APIResponse<[MyPost]>.self, url: url, accessToken: token)
     }
     
+    func fetchCommentEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<CommentPost>> {
+        let url = APIConstants.commentsCreate.path
+        return APIService.shared.postWithToken(of: APIResponse<CommentPost>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
     func favoriteBoardAddRemove(token: String, boardId: Int, isFavorite: Bool) -> Single<APIResponse<String>> {
         let url = isFavorite ? APIConstants.boardFavoriteAdd(boardId).path : APIConstants.boardFavoriteAdd(boardId).path
         return APIService.shared.patchWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)
