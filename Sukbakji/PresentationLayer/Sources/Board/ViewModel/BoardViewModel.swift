@@ -99,20 +99,4 @@ final class BoardViewModel {
     func selectEnterMenu(_ menu: String?) {
         selectEnterMenuItem.accept(menu)
     }
-    
-    func favoriteBoard(isFavorite: Bool) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let boardId = selectPostItem
-        repository.favoriteBoardAddRemove(token: token, boardId: boardId?.postId ?? 0, isFavorite: isFavorite)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                
-            }, onFailure: { error in
-                print("오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
-    }
 }

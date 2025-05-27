@@ -16,6 +16,7 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
     
     private var postDetailView = PostDetailView(title: "")
     private let postViewModel = PostViewModel()
+    private let favScrapViewModel = FavScrapViewModel()
     private let reportViewModel = ReportViewModel()
     var disposeBag = DisposeBag()
     
@@ -56,9 +57,12 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         postDetailView.optionNavigationbarView.delegate = self
         
+        postDetailView.scrapButton.addTarget(self, action: #selector(scrapButton), for: .touchUpInside)
         postDetailView.commentInputView.sendButton.addTarget(self, action: #selector(clickSendButton), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(commentSettingComplete), name: .isCommentComplete, object: nil)
+        
+        favScrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
     }
 }
 
@@ -102,6 +106,13 @@ extension PostDetailViewController {
     private func setAPI() {
         setBind()
         postViewModel.loadPostDetail(postId: postId)
+    }
+    
+    @objc private func scrapButton() {
+        let isCurrentlyScrapped = postDetailView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
+        let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
+        postDetailView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
+        favScrapViewModel.scrapPost(postId: postId)
     }
     
     @objc private func clickSendButton() {
