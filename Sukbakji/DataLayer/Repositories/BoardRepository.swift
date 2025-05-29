@@ -21,6 +21,11 @@ class BoardRepository {
         return APIService.shared.getWithToken(of: [String].self, url: url, accessToken: token)
     }
     
+    func fetchPostEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<Post>> {
+        let url = APIConstants.postsCreate.path
+        return APIService.shared.postWithToken(of: APIResponse<Post>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
     func fetchPostList(token: String, menu: String, boardName: String) -> Single<APIResponse<[Post]>> {
         let url = APIConstants.postsList.path
         let params = ["menu": menu,
@@ -49,8 +54,20 @@ class BoardRepository {
         return APIService.shared.getWithToken(of: APIResponse<[MyPost]>.self, url: url, accessToken: token)
     }
     
-    func favoriteBoardAddRemove(token: String, boardId: Int, isFavorite: Bool) -> Single<APIResponse<String>> {
-        let url = isFavorite ? APIConstants.boardFavoriteAdd(boardId).path : APIConstants.boardFavoriteAdd(boardId).path
-        return APIService.shared.patchWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)
+    func fetchCommentEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<CommentPost>> {
+        let url = APIConstants.commentsCreate.path
+        return APIService.shared.postWithToken(of: APIResponse<CommentPost>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
+    func favoriteBoardToggle(token: String, boardId: Int, isFav: Bool) -> Single<APIResponse<String>> {
+        let url = isFav ? APIConstants.boardFavoriteAdd(boardId).path : APIConstants.boardFavoriteAdd(boardId).path
+        let params = ["boardId": boardId]
+        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
+    }
+    
+    func fetchScrapToggle(token: String, postId: Int) -> Single<APIResponse<String>> {
+        let url = APIConstants.scrapsToggle(postId).path
+        let params = ["postId": postId]
+        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
     }
 }

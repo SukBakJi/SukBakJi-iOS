@@ -49,6 +49,9 @@ class BoardDoctorView: UIView {
         $0.register(DoctorPostTableViewCell.self, forCellReuseIdentifier: DoctorPostTableViewCell.identifier)
         $0.allowsSelection = false
     }
+    let writingButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Write"), for: .normal)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,6 +72,7 @@ class BoardDoctorView: UIView {
         addSubview(doctorMenuCollectionView)
         addSubview(titleLabel)
         addSubview(doctorPostTableView)
+        addSubview(writingButton)
     }
     
     private func setConstraints() {
@@ -103,6 +107,12 @@ class BoardDoctorView: UIView {
             $0.top.equalTo(titleLabel.snp.bottom).offset(12)
             $0.leading.trailing.bottom.equalToSuperview()
             $0.bottom.equalToSuperview().offset(92)
+        }
+        
+        writingButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(120)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.width.equalTo(60)
         }
     }
     

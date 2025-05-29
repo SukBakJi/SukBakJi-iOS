@@ -84,6 +84,9 @@ class BoardFreeView: UIView {
         $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         $0.setBackgroundColor(.orange600, for: .normal)
     }
+    let writingButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Write"), for: .normal)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -118,6 +121,8 @@ class BoardFreeView: UIView {
         makeBoardView.addSubview(makeBoardLabel)
         makeBoardView.addSubview(makeBoardImageView)
         makeBoardView.addSubview(makeBoardButton)
+        
+        addSubview(writingButton)
     }
     
     private func setConstraints() {
@@ -213,6 +218,12 @@ class BoardFreeView: UIView {
             $0.top.equalTo(makeBoardImageView.snp.bottom).offset(30)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(48)
+        }
+        
+        writingButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(120)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.width.equalTo(60)
         }
     }
 }

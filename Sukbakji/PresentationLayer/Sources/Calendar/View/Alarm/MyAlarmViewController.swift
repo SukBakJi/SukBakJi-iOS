@@ -11,7 +11,7 @@ import Alamofire
 import RxSwift
 import RxCocoa
 
-class MyAlarmViewController: UIViewController, MyAlarmTableViewCellDelegate {
+class MyAlarmViewController: UIViewController, MyAlarmCellDelegate {
     
     private let myAlarmView = MyAlarmView()
     private let viewModel = AlarmViewModel()

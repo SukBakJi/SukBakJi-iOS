@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-protocol UnivCalendarTableViewCellDeleteDelegate: AnyObject {
+protocol UnivCalendarCellDelegate: AnyObject {
     func univDelete_Tapped(cell: UnivCalendarTableViewCell)
     func editButton_Tapped(cell: UnivCalendarTableViewCell)
     func select_Tapped(cell: UnivCalendarTableViewCell)
@@ -24,7 +24,7 @@ class UnivCalendarTableViewCell: UITableViewCell {
     private let viewModel = UnivViewModel()
     private let calendarViewModel = CalendarViewModel()
     var disposeBag = DisposeBag()
-    weak var delegate: UnivCalendarTableViewCellDeleteDelegate?
+    weak var delegate: UnivCalendarCellDelegate?
     
     let selectView = UIView().then {
         $0.backgroundColor = .gray50

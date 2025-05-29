@@ -9,9 +9,15 @@ import UIKit
 import Then
 import SnapKit
 
+protocol CommentCellDelegate: AnyObject {
+    func didTapMoreButton(cell: CommentListTableViewCell)
+}
+
 class CommentListTableViewCell: UITableViewCell {
     
     static let identifier = String(describing: CommentListTableViewCell.self)
+    
+    weak var delegate: CommentCellDelegate?
     
     private let nameLabel = UILabel().then {
         $0.textColor = .gray900
@@ -91,6 +97,7 @@ class CommentListTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().inset(18)
             $0.height.width.equalTo(24)
         }
+        optionButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
         
         self.contentView.addSubview(dateLabel)
         dateLabel.snp.makeConstraints {
@@ -126,6 +133,10 @@ class CommentListTableViewCell: UITableViewCell {
             $0.trailing.equalTo(likeLabel.snp.leading)
             $0.height.width.equalTo(20)
         }
+    }
+    
+    @objc private func moreButtonTapped() {
+        delegate?.didTapMoreButton(cell: self)
     }
     
     func prepare(comment: Comment, isLast: Bool) {

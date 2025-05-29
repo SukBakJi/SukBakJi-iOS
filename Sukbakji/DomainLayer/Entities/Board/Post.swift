@@ -47,3 +47,13 @@ struct Comment : Codable {
     var createdDate: String
     var memberId: Int
 }
+
+struct CommentPost : Codable {
+    let commentId: Int
+    var content: String
+    var nickname: String
+    var memberId: Int
+    var postId: Int
+    var createdAt: String
+    var updatedAt: String
+}
