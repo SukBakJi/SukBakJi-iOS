@@ -139,7 +139,7 @@ extension UnivRecruitViewController {
     
     private func bindViewModel() {
         viewModel.recruitTypes
-            .subscribe(onNext: { univList in self.drop.dataSource = self.viewModel.recruitTypes.value })
+            .subscribe(onNext: { typeList in self.drop.dataSource = self.viewModel.recruitTypes.value })
             .disposed(by: disposeBag)
         
         univRecruitView.nextButton.rx.tap

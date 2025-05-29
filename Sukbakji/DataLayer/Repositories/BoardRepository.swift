@@ -21,6 +21,11 @@ class BoardRepository {
         return APIService.shared.getWithToken(of: [String].self, url: url, accessToken: token)
     }
     
+    func fetchPostEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<Post>> {
+        let url = APIConstants.postsCreate.path
+        return APIService.shared.postWithToken(of: APIResponse<Post>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
     func fetchPostList(token: String, menu: String, boardName: String) -> Single<APIResponse<[Post]>> {
         let url = APIConstants.postsList.path
         let params = ["menu": menu,

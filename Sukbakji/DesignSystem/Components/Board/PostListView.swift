@@ -22,6 +22,10 @@ class PostListView: UIView {
         $0.register(PostListTableViewCell.self, forCellReuseIdentifier: PostListTableViewCell.identifier)
         $0.allowsSelection = true
     }
+    let writingButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Write"), for: .normal)
+    }
+    
     
     init(title: String, buttonTitle: String, buttonHidden: Bool) {
         super.init(frame: .zero)
@@ -42,6 +46,7 @@ class PostListView: UIView {
         addSubview(backgroundLabel)
         addSubview(noticeButton)
         addSubview(postListTableView)
+        addSubview(writingButton)
     }
     
     private func setConstraints() {
@@ -65,6 +70,12 @@ class PostListView: UIView {
         postListTableView.snp.makeConstraints {
             $0.top.equalTo(noticeButton.snp.bottom).offset(8)
             $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        writingButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(48)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.width.equalTo(60)
         }
     }
 }

@@ -110,4 +110,26 @@ final class PostViewModel {
             })
             .disposed(by: disposeBag)
     }
+    
+    func enrollPost(menu: String, boardName: String, title: String, content: String) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        let params = [
+            "menu": menu,
+            "boardName": boardName,
+            "title": title,
+            "content": content
+        ] as [String : Any]
+        
+        repository.fetchPostEnroll(token: token, parameters: params)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { response in
+                
+            }, onFailure: { error in
+                
+            })
+            .disposed(by: disposeBag)
+    }
 }
