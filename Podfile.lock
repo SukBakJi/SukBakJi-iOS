@@ -47,6 +47,8 @@ PODS:
     - GoogleUtilities/Reachability (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - nanopb (~> 3.30910.0)
+  - FlexLayout (2.2.0):
+    - Yoga (= 3.2.1)
   - GoogleAppMeasurement (11.7.0):
     - GoogleAppMeasurement/AdIdSupport (= 11.7.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
@@ -114,6 +116,7 @@ PODS:
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
   - Pageboy (4.2.0)
+  - PinLayout (1.10.5)
   - PromisesObjC (2.4.0)
   - ReactorKit (3.2.0):
     - RxSwift (~> 6.0)
@@ -129,15 +132,18 @@ PODS:
     - Pageboy (~> 4.2.0)
   - Then (3.0.0)
   - WeakMapTable (1.2.0)
+  - Yoga (3.2.1)
 
 DEPENDENCIES:
   - Alamofire
   - DropDown (= 2.3.13)
   - Firebase/Core
   - Firebase/Messaging
+  - FlexLayout
   - KakaoSDKAuth
   - KakaoSDKCommon
   - KakaoSDKUser
+  - PinLayout
   - ReactorKit
   - RxCocoa (= 6.8.0)
   - RxSwift (= 6.8.0)
@@ -155,6 +161,7 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseInstallations
     - FirebaseMessaging
+    - FlexLayout
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -163,6 +170,7 @@ SPEC REPOS:
     - KakaoSDKUser
     - nanopb
     - Pageboy
+    - PinLayout
     - PromisesObjC
     - ReactorKit
     - RxCocoa
@@ -172,6 +180,7 @@ SPEC REPOS:
     - Tabman
     - Then
     - WeakMapTable
+    - Yoga
 
 SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
@@ -182,6 +191,7 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: d6c17dafc8dc33614733a8b52df78fcb4394c881
   FirebaseInstallations: 9347e719c3d52d8d7b9074b2c32407dd027305e9
   FirebaseMessaging: 00ece041b71ddb52a2862ffdee73fb6e9824bd0c
+  FlexLayout: a8947ca2446760b5203ba5a3d862023c92a82fce
   GoogleAppMeasurement: 0471a5b5bff51f3a91b1e76df22c952d04c63967
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
@@ -190,6 +200,7 @@ SPEC CHECKSUMS:
   KakaoSDKUser: 4c9cf1da78710d19d0b2c2dd32d1a44c544cdfa4
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   Pageboy: 7f7886f61c76633df635861bf7839caf2cabdb3e
+  PinLayout: f6c2b63a5a5b24864064e1d15c67de41b4e74748
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   ReactorKit: e8b11d6b9c415405f381669b095c154a05b59eca
   RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
@@ -199,7 +210,8 @@ SPEC CHECKSUMS:
   Tabman: 49f9181a2bfe5c29d002864dac2de8e0b7ea9180
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
+  Yoga: 636ce73bd247407928a7df089f3bc3675916b3ff
 
-PODFILE CHECKSUM: 08f7aa1bb32aeabe5774f703da7a3e2e42cf8105
+PODFILE CHECKSUM: 935be5b348d67180b24baca87ce91dc163de5369
 
 COCOAPODS: 1.16.2

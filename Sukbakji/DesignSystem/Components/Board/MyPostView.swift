@@ -6,52 +6,49 @@
 //
 
 import UIKit
-import Then
-import SnapKit
+import FlexLayout
+import PinLayout
 
 class MyPostView: UIView {
     
+    private let rootFlexContainer = UIView()
+    
     var navigationbarView = NavigationBarView(title: "")
-    let backgroundLabel = UILabel().then {
-        $0.backgroundColor = .gray100
-    }
-    let myPostTableView = UITableView().then {
-        $0.separatorStyle = .none
-        $0.backgroundColor = .clear
-        $0.register(MyPostTableViewCell.self, forCellReuseIdentifier: MyPostTableViewCell.identifier)
-        $0.allowsSelection = false
-    }
+    let backgroundLabel = UILabel()
+    let myPostTableView = UITableView()
     
     init(title: String) {
         super.init(frame: .zero)
         self.navigationbarView = NavigationBarView(title: title)
-        setupUI()
+        setUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
         
-        addSubview(navigationbarView)
-        navigationbarView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(95)
-        }
+        backgroundLabel.backgroundColor = .gray100
         
-        addSubview(backgroundLabel)
-        backgroundLabel.snp.makeConstraints {
-            $0.top.equalTo(navigationbarView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(1)
-        }
+        myPostTableView.separatorStyle = .none
+        myPostTableView.backgroundColor = .clear
+        myPostTableView.register(MyPostTableViewCell.self, forCellReuseIdentifier: MyPostTableViewCell.identifier)
+        myPostTableView.allowsSelection = true
         
-        addSubview(myPostTableView)
-        myPostTableView.snp.makeConstraints {
-            $0.top.equalTo(backgroundLabel.snp.bottom).offset(8)
-            $0.leading.trailing.bottom.equalToSuperview()
+        addSubview(rootFlexContainer)
+        rootFlexContainer.flex.direction(.column).define { flex in
+            flex.addItem(navigationbarView).height(95)
+            flex.addItem(backgroundLabel).height(1)
+            flex.addItem(myPostTableView).grow(1).marginTop(8)
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        rootFlexContainer.pin.all()
+        rootFlexContainer.flex.layout()
     }
 }
