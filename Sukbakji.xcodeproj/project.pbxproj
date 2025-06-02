@@ -125,6 +125,9 @@
 		C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2862C633F8600D6014B /* MentoringViewController.swift */; };
 		C71038AB2DDF7DE90087A968 /* MyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71038AA2DDF7DE90087A968 /* MyPostView.swift */; };
 		C71038AD2DDF815A0087A968 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71038AC2DDF815A0087A968 /* MyPostViewController.swift */; };
+		C71223CB2DED5BE000238E4E /* BoardSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71223CA2DED5BE000238E4E /* BoardSearchView.swift */; };
+		C71223CD2DED6E8F00238E4E /* BoardSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71223CC2DED6E8F00238E4E /* BoardSearchViewController.swift */; };
+		C71223CF2DED6EA100238E4E /* BoardSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71223CE2DED6EA100238E4E /* BoardSearchTableViewCell.swift */; };
 		C71AE9B82CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9B72CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift */; };
 		C71AE9BA2CFB60340098FD2A /* FavoriteBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */; };
 		C71AE9BC2CFB604A0098FD2A /* HotPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71AE9BB2CFB604A0098FD2A /* HotPostTableViewCell.swift */; };
@@ -430,6 +433,9 @@
 		C70DB2862C633F8600D6014B /* MentoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringViewController.swift; sourceTree = "<group>"; };
 		C71038AA2DDF7DE90087A968 /* MyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostView.swift; sourceTree = "<group>"; };
 		C71038AC2DDF815A0087A968 /* MyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewController.swift; sourceTree = "<group>"; };
+		C71223CA2DED5BE000238E4E /* BoardSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSearchView.swift; sourceTree = "<group>"; };
+		C71223CC2DED6E8F00238E4E /* BoardSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSearchViewController.swift; sourceTree = "<group>"; };
+		C71223CE2DED6EA100238E4E /* BoardSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSearchTableViewCell.swift; sourceTree = "<group>"; };
 		C71269142D7F377A00228EF3 /* Sukbakji.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sukbakji.entitlements; sourceTree = "<group>"; };
 		C71AE9B72CFB601F0098FD2A /* AdvertiseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiseCollectionViewCell.swift; sourceTree = "<group>"; };
 		C71AE9B92CFB60340098FD2A /* FavoriteBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardTableViewCell.swift; sourceTree = "<group>"; };
@@ -1166,6 +1172,7 @@
 				C7D64B3E2DD79B5C00DD34A0 /* BoardMasterView.swift */,
 				C7D64B402DD79B7F00DD34A0 /* BoardEnterView.swift */,
 				C7D64B422DD79B8900DD34A0 /* BoardFreeView.swift */,
+				C71223CA2DED5BE000238E4E /* BoardSearchView.swift */,
 				C71038AA2DDF7DE90087A968 /* MyPostView.swift */,
 				C7845CFC2DD4A988004955A2 /* PostListView.swift */,
 				C729F0F72DE1B0CF00AAABB6 /* PostDetailView.swift */,
@@ -1377,6 +1384,8 @@
 				C7D64B442DD79C0E00DD34A0 /* BoardMainViewController.swift */,
 				C73948B12DD8820A00612461 /* BoardQnATableViewCell.swift */,
 				C73948B32DD8833E00612461 /* FavoriteBoardCollectionViewCell.swift */,
+				C71223CC2DED6E8F00238E4E /* BoardSearchViewController.swift */,
+				C71223CE2DED6EA100238E4E /* BoardSearchTableViewCell.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -1877,6 +1886,7 @@
 				C74A15A62D5A4F4200A1698B /* UnivMethod.swift in Sources */,
 				C750C3922D70C56600BE14EF /* MyAlarmView.swift in Sources */,
 				41EE13442C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift in Sources */,
+				C71223CB2DED5BE000238E4E /* BoardSearchView.swift in Sources */,
 				C7D64B4D2DD79C4E00DD34A0 /* BoardFreeViewController.swift in Sources */,
 				7B1C53562C69D79200C66D0D /* DirectoryFavoriteModel.swift in Sources */,
 				C750C3962D70C58300BE14EF /* EditAlarmView.swift in Sources */,
@@ -1915,6 +1925,7 @@
 				7B3459F12C688AB1008B711A /* BoardScrapModel.swift in Sources */,
 				C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */,
 				C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */,
+				C71223CF2DED6EA100238E4E /* BoardSearchTableViewCell.swift in Sources */,
 				C757F8232D0A9B5400685F1A /* UpComingCalendarCollectionViewCell.swift in Sources */,
 				C7845CFD2DD4A988004955A2 /* PostListView.swift in Sources */,
 				91EB930B2D81546500A6BBB0 /* DoubleButtonPopup.swift in Sources */,
@@ -1923,6 +1934,7 @@
 				C73555052D4BCD86005BDB38 /* MessageRoomTableViewCell.swift in Sources */,
 				91EB930F2D81547D00A6BBB0 /* UIFont+.swift in Sources */,
 				41EE133C2C54A94B0037EDD6 /* PopUpViewController.swift in Sources */,
+				C71223CD2DED6E8F00238E4E /* BoardSearchViewController.swift in Sources */,
 				91D413552D83F3D900020CEC /* FindPwView.swift in Sources */,
 				C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */,
 				C75C0BE12D2D2A05000145F3 /* DeleteView.swift in Sources */,

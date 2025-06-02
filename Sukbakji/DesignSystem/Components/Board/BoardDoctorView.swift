@@ -14,6 +14,7 @@ class BoardDoctorView: UIView {
     private let rootFlexContainer = UIView()
     
     let boardSearchTextField = UITextField()
+    let tapOverlayButton = UIButton()
     let searchImageView = UIImageView()
     let doctorMenuCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,8 +52,12 @@ class BoardDoctorView: UIView {
         boardSearchTextField.font = UIFont(name: "Pretendard-Medium", size: 14)
         boardSearchTextField.textColor = .gray900
         boardSearchTextField.layer.cornerRadius = 12
+        boardSearchTextField.isUserInteractionEnabled = false
         boardSearchTextField.setLeftPadding(52)
         boardSearchTextField.errorfix()
+        
+        tapOverlayButton.backgroundColor = .clear
+        tapOverlayButton.setTitle("", for: .normal)
         
         searchImageView.image = UIImage(named: "Sukbakji_SearchImage")
         
@@ -72,6 +77,7 @@ class BoardDoctorView: UIView {
             flex.addItem().marginHorizontal(24).height(48).define { inputContainer in
                 inputContainer.addItem(boardSearchTextField).width(100%).height(48)
                 inputContainer.addItem(searchImageView).position(.absolute).left(16).top(12).size(24)
+                inputContainer.addItem(tapOverlayButton).position(.absolute).top(0).left(0).right(0).bottom(0)
             }
             flex.addItem(doctorMenuCollectionView).height(52).marginTop(0)
             flex.addItem(titleLabel).marginTop(4).marginHorizontal(24).height(52)
@@ -79,6 +85,8 @@ class BoardDoctorView: UIView {
         }
         
         addSubview(writingButton)
+        
+        tapOverlayButton.addTarget(self, action: #selector(textFieldTapped), for: .touchUpInside)
     }
     
     override func layoutSubviews() {
@@ -105,5 +113,11 @@ class BoardDoctorView: UIView {
             attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
         }
         titleLabel.attributedText = attributedString
+    }
+    
+    @objc private func textFieldTapped() {
+        let nextVC = BoardSearchViewController(title: "박사 게시판", menu: "박사")
+        nextVC.modalPresentationStyle = .fullScreen
+        parentVC?.present(nextVC, animated: true, completion: nil)
     }
 }

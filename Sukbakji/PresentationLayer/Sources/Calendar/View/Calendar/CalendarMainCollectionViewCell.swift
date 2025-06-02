@@ -84,11 +84,6 @@ class CalendarMainCollectionViewCell: UICollectionViewCell {
     func updateDay(day: String, isToday: Bool = false, isCurrentMonth: Bool = true) {
         self.dayLabel.text = day
         self.dayLabel.textColor = isCurrentMonth ? .gray900 : .gray300
-        
-        if isToday {
-            circleImageView.isHidden = false
-        } else {
-            circleImageView.isHidden = true
-        }
+        self.circleImageView.isHidden = !(isToday && isCurrentMonth)
     }
 }

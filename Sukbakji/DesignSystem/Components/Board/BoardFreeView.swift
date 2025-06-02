@@ -143,6 +143,7 @@ class BoardFreeView: UIView {
         }
         boardSearchTextField.setLeftPadding(52)
         boardSearchTextField.errorfix()
+        boardSearchTextField.isUserInteractionEnabled = false
         
         searchImageView.snp.makeConstraints {
             $0.centerY.equalTo(boardSearchTextField)

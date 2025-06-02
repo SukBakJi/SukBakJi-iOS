@@ -25,4 +25,15 @@ extension UIView {
         }
         return nil
     }
+    
+    var parentVC: UIViewController? {
+            var parentResponder: UIResponder? = self
+            while let next = parentResponder?.next {
+                if let vc = next as? UIViewController {
+                    return vc
+                }
+                parentResponder = next
+            }
+            return nil
+        }
 }
