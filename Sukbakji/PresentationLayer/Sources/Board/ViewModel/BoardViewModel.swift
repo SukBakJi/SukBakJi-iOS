@@ -11,9 +11,12 @@ import RxCocoa
 
 final class BoardViewModel {
     private let repository = BoardRepository()
+    private let useCase: BoardUseCase
     private let disposeBag = DisposeBag()
     
     let latestQnAList = BehaviorRelay<[QnA]>(value: [])
+    
+    let boardSearchList = PublishSubject<[MyPost]>()
     
     let categoryList = BehaviorRelay<[String]>(value: [])
     
@@ -30,6 +33,10 @@ final class BoardViewModel {
     
     let errorMessage = PublishSubject<String>()
     
+    init(useCase: BoardUseCase = BoardUseCase()) {
+        self.useCase = useCase
+    }
+    
     func loadLatestQnA() {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
@@ -41,6 +48,17 @@ final class BoardViewModel {
                 self.latestQnAList.accept(response.result)
             }, onFailure: { error in
                 self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadBoardSearch(keyword: String, menu: String, boardName: String) {
+        useCase.fetchBoardSearch(keyword: keyword, menu: menu, boardName: boardName)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] detail in
+                self?.boardSearchList.onNext(detail)
+            }, onFailure: { [weak self] error in
+                self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }
