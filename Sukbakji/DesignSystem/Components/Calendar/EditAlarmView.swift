@@ -196,7 +196,7 @@ class EditAlarmView: UIView, dateProtocol {
         }
         univTextField.errorfix()
         univTextField.addTFUnderline()
-        univTextField.setLeftPadding(15)
+        univTextField.setLeftPadding(16)
         univTextField.isEnabled = false
         
         dropButton.snp.makeConstraints {
@@ -224,7 +224,7 @@ class EditAlarmView: UIView, dateProtocol {
         }
         alarmNameTextField.errorfix()
         alarmNameTextField.addTFUnderline()
-        alarmNameTextField.setLeftPadding(15)
+        alarmNameTextField.setLeftPadding(16)
         
         alarmNameDeleteButton.snp.makeConstraints {
             $0.centerY.equalTo(alarmNameTextField)
@@ -266,7 +266,7 @@ class EditAlarmView: UIView, dateProtocol {
         }
         alarmDateTextField.errorfix()
         alarmDateTextField.addTFUnderline()
-        alarmDateTextField.setLeftPadding(15)
+        alarmDateTextField.setLeftPadding(16)
         alarmDateTextField.isEnabled = false
         
         dateButton.snp.makeConstraints {

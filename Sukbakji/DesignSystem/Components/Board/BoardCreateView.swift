@@ -134,7 +134,7 @@ class BoardCreateView: UIView {
         }
         nameTextField.errorfix()
         nameTextField.addTFUnderline()
-        nameTextField.setLeftPadding(15)
+        nameTextField.setLeftPadding(16)
         
         deleteButton.snp.makeConstraints {
             $0.centerY.equalTo(nameTextField)

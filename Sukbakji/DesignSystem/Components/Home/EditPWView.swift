@@ -195,7 +195,7 @@ class EditPWView: UIView {
         }
         currentPWTextField.isSecureTextEntry = true
         currentPWTextField.addTFUnderline()
-        currentPWTextField.setLeftPadding(15)
+        currentPWTextField.setLeftPadding(16)
         currentPWTextField.errorfix()
         
         deleteButton.snp.makeConstraints {
@@ -247,7 +247,7 @@ class EditPWView: UIView {
         }
         newPWTextField.isSecureTextEntry = true
         newPWTextField.addTFUnderline()
-        newPWTextField.setLeftPadding(15)
+        newPWTextField.setLeftPadding(16)
         newPWTextField.errorfix()
         
         deleteButton2.snp.makeConstraints {
@@ -299,7 +299,7 @@ class EditPWView: UIView {
         }
         newPWAgainTextField.isSecureTextEntry = true
         newPWAgainTextField.addTFUnderline()
-        newPWAgainTextField.setLeftPadding(15)
+        newPWAgainTextField.setLeftPadding(16)
         newPWAgainTextField.errorfix()
         
         deleteButton3.snp.makeConstraints {

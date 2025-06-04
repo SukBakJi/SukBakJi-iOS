@@ -300,7 +300,7 @@ class UnivRecruitView: UIView {
         }
         recruitTypeTextField.errorfix()
         recruitTypeTextField.addTFUnderline()
-        recruitTypeTextField.setLeftPadding(15)
+        recruitTypeTextField.setLeftPadding(16)
         recruitTypeTextField.isEnabled = false
         
         dropButton.snp.makeConstraints {
