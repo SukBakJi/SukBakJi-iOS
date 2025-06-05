@@ -62,6 +62,7 @@ class PostDetailView: UIView {
         $0.allowsSelection = false
     }
     let commentInputView = CommentInputView()
+    let commentEditView = CommentEditView()
     
     init(title: String) {
         super.init(frame: .zero)
@@ -94,6 +95,7 @@ class PostDetailView: UIView {
         addSubview(layerView)
         addSubview(commentListTableView)
         addSubview(commentInputView)
+        addSubview(commentEditView)
     }
     
     private func setConstraints() {
@@ -181,5 +183,11 @@ class PostDetailView: UIView {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(80)
         }
+        
+        commentEditView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(124)
+        }
+        commentEditView.isHidden = true
     }
 }

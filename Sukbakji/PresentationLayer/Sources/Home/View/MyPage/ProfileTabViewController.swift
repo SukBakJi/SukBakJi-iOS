@@ -46,6 +46,10 @@ class ProfileTabViewController: TabmanViewController {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func setUI() {
         self.view.backgroundColor = .white
         self.navigationController?.setNavigationBarHidden(true, animated: false)

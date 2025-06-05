@@ -46,6 +46,10 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
             tabBarVC.customTabBarView.isHidden = true
         }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension PostWritingViewController {

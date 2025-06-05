@@ -24,6 +24,8 @@ final class PostViewModel {
     var postCommentList = BehaviorRelay<[Comment]>(value: [])
     var selectCommentItem: Comment?
     
+    let commentUpdated = PublishSubject<Bool>()
+    let postDeleted = PublishSubject<Bool>()
     let errorMessage = PublishSubject<String>()
     
     init(useCase: PostUseCase = PostUseCase()) {
@@ -111,6 +113,16 @@ final class PostViewModel {
             .disposed(by: disposeBag)
     }
     
+    func loadEditComment(commentId: Int, content: String) {
+        useCase.editComment(commentId: commentId, content: content)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.commentUpdated.onNext(isSuccess)
+                NotificationCenter.default.post(name: .isCommentComplete, object: nil)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func enrollPost(menu: String, boardName: String, title: String, content: String) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
@@ -129,6 +141,18 @@ final class PostViewModel {
                 
             }, onFailure: { error in
                 
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func deletePost(postId: Int) {
+        useCase.deletePost(postId: postId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.postDeleted.onNext(isSuccess)
+                print("성공")
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

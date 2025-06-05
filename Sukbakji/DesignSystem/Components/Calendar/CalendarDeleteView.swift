@@ -1,5 +1,5 @@
 //
-//  DeleteView.swift
+//  CalendarDeleteView.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 1/7/25.
@@ -10,7 +10,7 @@ import Then
 import SnapKit
 import RxSwift
 
-class DeleteView: UIView {
+class CalendarDeleteView: UIView {
     
     private var alarmViewModel = AlarmViewModel()
     private let viewModel = CalendarViewModel()

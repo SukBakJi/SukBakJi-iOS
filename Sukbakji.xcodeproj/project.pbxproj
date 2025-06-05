@@ -204,7 +204,7 @@
 		C757F8272D0A9C8B00685F1A /* UnivSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F8262D0A9C8B00685F1A /* UnivSearchTableViewCell.swift */; };
 		C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */; };
 		C757F82B2D0A9D2000685F1A /* MyAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */; };
-		C75C0BE12D2D2A05000145F3 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C0BE02D2D2A05000145F3 /* DeleteView.swift */; };
+		C75C0BE12D2D2A05000145F3 /* CalendarDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C0BE02D2D2A05000145F3 /* CalendarDeleteView.swift */; };
 		C7675F782D6981BD00F99294 /* UnivSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F772D6981BD00F99294 /* UnivSearchView.swift */; };
 		C7675F7A2D6981DD00F99294 /* UnivRecruitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F792D6981DD00F99294 /* UnivRecruitView.swift */; };
 		C7675F7C2D6981ED00F99294 /* UnivView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F7B2D6981ED00F99294 /* UnivView.swift */; };
@@ -226,6 +226,7 @@
 		C7845CFD2DD4A988004955A2 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7845CFC2DD4A988004955A2 /* PostListView.swift */; };
 		C7845CFF2DD4B3B3004955A2 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7845CFE2DD4B3B3004955A2 /* PostListViewController.swift */; };
 		C7845D022DD4BA0C004955A2 /* NoticeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7845D012DD4BA0C004955A2 /* NoticeButton.swift */; };
+		C78479402DF1F9DD00326CC4 /* PostDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C784793F2DF1F9DD00326CC4 /* PostDeleteView.swift */; };
 		C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78611C92D014B70002B67B4 /* PWAlertView.swift */; };
 		C7875A2F2D3609CF00D6FCF7 /* SukbakjiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */; };
 		C7875A312D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7875A302D3609CF00D6FCF7 /* SukbakjiUITestsLaunchTests.swift */; };
@@ -517,7 +518,7 @@
 		C757F8262D0A9C8B00685F1A /* UnivSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchTableViewCell.swift; sourceTree = "<group>"; };
 		C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmTableViewCell.swift; sourceTree = "<group>"; };
-		C75C0BE02D2D2A05000145F3 /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
+		C75C0BE02D2D2A05000145F3 /* CalendarDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDeleteView.swift; sourceTree = "<group>"; };
 		C7675F772D6981BD00F99294 /* UnivSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchView.swift; sourceTree = "<group>"; };
 		C7675F792D6981DD00F99294 /* UnivRecruitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivRecruitView.swift; sourceTree = "<group>"; };
 		C7675F7B2D6981ED00F99294 /* UnivView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivView.swift; sourceTree = "<group>"; };
@@ -539,6 +540,7 @@
 		C7845CFC2DD4A988004955A2 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 		C7845CFE2DD4B3B3004955A2 /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
 		C7845D012DD4BA0C004955A2 /* NoticeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeButton.swift; sourceTree = "<group>"; };
+		C784793F2DF1F9DD00326CC4 /* PostDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDeleteView.swift; sourceTree = "<group>"; };
 		C78611C92D014B70002B67B4 /* PWAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAlertView.swift; sourceTree = "<group>"; };
 		C7875A2C2D3609CF00D6FCF7 /* SukbakjiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SukbakjiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7875A2E2D3609CF00D6FCF7 /* SukbakjiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SukbakjiUITests.swift; sourceTree = "<group>"; };
@@ -1186,6 +1188,7 @@
 				C71038AA2DDF7DE90087A968 /* MyPostView.swift */,
 				C7845CFC2DD4A988004955A2 /* PostListView.swift */,
 				C729F0F72DE1B0CF00AAABB6 /* PostDetailView.swift */,
+				C784793F2DF1F9DD00326CC4 /* PostDeleteView.swift */,
 				C70105E32DE76A8100042072 /* PostWritingView.swift */,
 				C7F61D162DE0424F00B5C3B4 /* NoticeView.swift */,
 				C729F0FB2DE1B3F800AAABB6 /* CommentInputView.swift */,
@@ -1454,7 +1457,7 @@
 				C750C3952D70C58300BE14EF /* EditAlarmView.swift */,
 				C7A23D8D2D0C1087008657B0 /* AlarmFBCView.swift */,
 				C72CEED52D258CB500EED814 /* UnivStopView.swift */,
-				C75C0BE02D2D2A05000145F3 /* DeleteView.swift */,
+				C75C0BE02D2D2A05000145F3 /* CalendarDeleteView.swift */,
 				C73828D22D6220F4007A21A0 /* AllDeleteView.swift */,
 				C7F951BF2D2A738700D07051 /* DateView.swift */,
 			);
@@ -1858,6 +1861,7 @@
 				91D413432D827A4900020CEC /* EmailSignupView.swift in Sources */,
 				C7DA37522CFCD33A00B26549 /* HotPostViewModel.swift in Sources */,
 				C73948B02DD86F1800612461 /* BoardMainButton.swift in Sources */,
+				C78479402DF1F9DD00326CC4 /* PostDeleteView.swift in Sources */,
 				C7A78E162DEEDBC3000A890B /* BoardCreateView.swift in Sources */,
 				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
 				C757F8212D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift in Sources */,
@@ -1952,7 +1956,7 @@
 				C71223CD2DED6E8F00238E4E /* BoardSearchViewController.swift in Sources */,
 				91D413552D83F3D900020CEC /* FindPwView.swift in Sources */,
 				C7DA4E3D2C611CE10092F342 /* APIConstants.swift in Sources */,
-				C75C0BE12D2D2A05000145F3 /* DeleteView.swift in Sources */,
+				C75C0BE12D2D2A05000145F3 /* CalendarDeleteView.swift in Sources */,
 				C70DB2852C633F7B00D6014B /* MessageViewController.swift in Sources */,
 				91FEEB762D71782C00D0502D /* FindEmailView.swift in Sources */,
 				7B1C53482C69D10800C66D0D /* DirectoryLabSearchModel.swift in Sources */,

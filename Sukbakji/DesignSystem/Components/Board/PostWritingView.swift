@@ -149,6 +149,22 @@ class PostWritingView: UIView {
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
         $0.textColor = .warning400
     }
+    let warningView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    let warningImage = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_NoResults")
+    }
+    let warningLabel = UILabel().then {
+        $0.text = "질문 게시판 유의사항"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.textColor = .gray900
+    }
+    let warningSubLabel = UILabel().then {
+        $0.text = "답변 등록시 수정 및 삭제가 불가능하니 유의해 주세요."
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = .gray600
+    }
     let buttonView = ButtonView()
     
     lazy var radioButtons: [UIButton: String] = [
@@ -211,6 +227,11 @@ class PostWritingView: UIView {
         contentView.addSubview(warningContentImage)
         contentView.addSubview(warningContentLabel)
         
+        contentsView.addSubview(warningView)
+        warningView.addSubview(warningImage)
+        warningView.addSubview(warningLabel)
+        warningView.addSubview(warningSubLabel)
+        
         addSubview(buttonView)
     }
     
@@ -222,7 +243,7 @@ class PostWritingView: UIView {
         contentsView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.bottom.equalTo(contentView.snp.bottom).offset(200)
+            $0.bottom.equalTo(warningView.snp.bottom).offset(160)
         }
         
         navigationbarView.snp.makeConstraints {
@@ -433,6 +454,30 @@ class PostWritingView: UIView {
             $0.height.equalTo(12)
         }
         warningContentLabel.isHidden = true
+        
+        warningView.snp.makeConstraints {
+            $0.top.equalTo(contentView.snp.bottom).offset(40)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(47)
+        }
+        
+        warningImage.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.width.equalTo(20)
+        }
+        
+        warningLabel.snp.makeConstraints {
+            $0.centerY.equalTo(warningImage)
+            $0.leading.equalTo(warningImage.snp.trailing).offset(8)
+            $0.height.equalTo(19)
+        }
+        
+        warningSubLabel.snp.makeConstraints {
+            $0.top.equalTo(warningLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(17)
+        }
         
         buttonView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()

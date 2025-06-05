@@ -18,6 +18,7 @@ extension Notification.Name {
     static let isUnivDeleteAllComplete = Notification.Name("isUnivDeleteAllComplete")
     static let isUnivDeleteSelectedComplete = Notification.Name("isUnivDeleteSelectedComplete")
     
+    static let isPostDeleteComplete = Notification.Name("isPostDeleteComplete")
     static let isCommentComplete = Notification.Name("isCommentComplete")
     
     static let textFieldDidClear = Notification.Name("textFieldDidClear")
