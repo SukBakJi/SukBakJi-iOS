@@ -22,4 +22,19 @@ class PostUseCase {
         return boardRepository.fetchPostDetail(token: token, postId: postId)
                     .map { $0.result }
     }
+    
+    func editComment(commentId: Int, content: String) -> Single<Bool> {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return .just(false)
+        }
+        
+        let params: [String: Any] = [
+            "commentId": commentId,
+            "content": content
+        ]
+        
+        return boardRepository.fetchEditComment(token: token, parameters: params)
+            .map { _ in true }
+            .catchAndReturn(false)
+    }
 }

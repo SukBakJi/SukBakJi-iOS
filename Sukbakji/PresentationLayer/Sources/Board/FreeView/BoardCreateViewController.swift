@@ -36,6 +36,10 @@ class BoardCreateViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         boardCreateView.noticeTextView.delegate = self

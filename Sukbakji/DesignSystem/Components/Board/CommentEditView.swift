@@ -48,7 +48,7 @@ class CommentEditView: UIView {
         addSubview(editLabel)
         editLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(12)
-            $0.trailing.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(24)
             $0.height.equalTo(17)
         }
         

@@ -24,6 +24,7 @@ final class PostViewModel {
     var postCommentList = BehaviorRelay<[Comment]>(value: [])
     var selectCommentItem: Comment?
     
+    let commentUpdated = PublishSubject<Bool>()
     let errorMessage = PublishSubject<String>()
     
     init(useCase: PostUseCase = PostUseCase()) {
@@ -107,6 +108,15 @@ final class PostViewModel {
                 NotificationCenter.default.post(name: .isCommentComplete, object: nil)
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadEditComment(commentId: Int, content: String) {
+        useCase.editComment(commentId: commentId, content: content)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.commentUpdated.onNext(isSuccess)
             })
             .disposed(by: disposeBag)
     }

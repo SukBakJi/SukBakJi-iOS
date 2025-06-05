@@ -21,6 +21,8 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
     var disposeBag = DisposeBag()
     var postId: Int = 0
     
+    private weak var currentResponderView: UIView?
+    
     init(title: String, postId: Int) {
         super.init(nibName: nil, bundle: nil)
         
@@ -40,6 +42,7 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
         super.viewDidLoad()
         
         setUI()
+        hideKeyboardWhenTappedAround()
         setDelegate()
         setAPI()
     }
@@ -52,23 +55,52 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         postDetailView.optionNavigationbarView.delegate = self
+        postDetailView.commentInputView.inputTextField.delegate = self
         
         postDetailView.scrapButton.addTarget(self, action: #selector(scrapButton), for: .touchUpInside)
-        postDetailView.commentInputView.inputTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        postDetailView.commentEditView.editButton.addTarget(self, action: #selector(updateComment), for: .touchUpInside)
         postDetailView.commentInputView.sendButton.addTarget(self, action: #selector(clickSendButton), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(commentSettingComplete), name: .isCommentComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func textFieldEdited(_ textField: UITextField) {
-        postDetailView.commentInputView.inputTextField.updateUnderlineColor(to: .blue400)
+    @objc private func handleKeyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+              let targetView = currentResponderView else { return }
+        
+        UIView.animate(withDuration: duration) {
+            targetView.transform = CGAffineTransform(translationX: 0, y: -keyboardFrame.height)
+        }
+    }
+
+    @objc private func handleKeyboardWillHide(_ notification: Notification) {
+        guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+              let targetView = currentResponderView else { return }
+        
+        UIView.animate(withDuration: duration) {
+            targetView.transform = .identity
+        }
     }
 }
 
 extension PostDetailViewController {
+    
+    private func setAPI() {
+        setBind()
+        postViewModel.loadPostDetail(postId: postId)
+        favScrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
+    }
     
     private func setDelegate() {
         postDetailView.commentListTableView.rx.setDelegate(self)
@@ -105,28 +137,6 @@ extension PostDetailViewController {
             .disposed(by: disposeBag)
     }
     
-    private func setAPI() {
-        setBind()
-        postViewModel.loadPostDetail(postId: postId)
-        favScrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
-    }
-    
-    @objc private func scrapButton() {
-        let isCurrentlyScrapped = postDetailView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
-        let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
-        postDetailView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
-        favScrapViewModel.scrapPost(postId: postId)
-    }
-    
-    @objc private func clickSendButton() {
-        postViewModel.enrollComment(postId: postId, content: postDetailView.commentInputView.inputTextField.text)
-        postDetailView.commentInputView.inputTextField.text = ""
-    }
-    
-    @objc private func commentSettingComplete() {
-        postViewModel.loadPostDetail(postId: postId)
-    }
-    
     func didTapMoreButton(cell: CommentListTableViewCell) {
         guard let indexPath = postDetailView.commentListTableView.indexPath(for: cell) else { return }
         self.postViewModel.selectCommentItem = postViewModel.postCommentList.value[indexPath.row]
@@ -136,7 +146,10 @@ extension PostDetailViewController {
                                           preferredStyle: .actionSheet)
         
         let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
-            
+            self.postDetailView.commentEditView.isHidden = false
+            self.postDetailView.commentEditView.inputTextView.text = self.postViewModel.selectCommentItem?.content
+            self.currentResponderView = self.postDetailView.commentEditView
+            self.postDetailView.commentEditView.inputTextView.becomeFirstResponder()
         }
         let report = UIAlertAction(title: "신고하기", style: .default) { _ in
             let reasonAlert = UIAlertController(title: "신고하기", message: nil, preferredStyle: .actionSheet)
@@ -184,6 +197,36 @@ extension PostDetailViewController {
         }
 
         present(alert, animated: true)
+    }
+    
+    @objc private func scrapButton() {
+        let isCurrentlyScrapped = postDetailView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
+        let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
+        postDetailView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
+        favScrapViewModel.scrapPost(postId: postId)
+    }
+    
+    @objc private func clickSendButton() {
+        postViewModel.enrollComment(postId: postId, content: postDetailView.commentInputView.inputTextField.text)
+        postDetailView.commentInputView.inputTextField.text = ""
+    }
+    
+    @objc private func commentSettingComplete() {
+        postViewModel.loadPostDetail(postId: postId)
+    }
+    
+    @objc private func updateComment() {
+        postViewModel.loadEditComment(commentId: postViewModel.selectCommentItem!.commentId, content: postDetailView.commentEditView.inputTextView.text)
+    }
+}
+
+extension PostDetailViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == postDetailView.commentInputView.inputTextField {
+            currentResponderView = postDetailView.commentInputView
+        }
+        postDetailView.commentInputView.inputTextField.updateUnderlineColor(to: .blue400)
+        postDetailView.commentInputView.inputTextField.becomeFirstResponder()
     }
 }
 
