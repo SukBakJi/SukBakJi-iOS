@@ -39,11 +39,17 @@ class BoardFreeViewController: UIViewController {
             favBoardHeightConstraint = make.height.equalTo(121).constraint
         }
         boardFreeView.makeBoardButton.addTarget(self, action: #selector(create_Tapped), for: .touchUpInside)
+        boardFreeView.writingButton.addTarget(self, action: #selector(writing_Tapped), for: .touchUpInside)
     }
     
     @objc private func create_Tapped() {
         let viewController = BoardCreateViewController()
         let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 520, bottomSheetPanMinTopConstant: 230, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
+    }
+    
+    @objc private func writing_Tapped() {
+        let postWritingViewController = PostWritingViewController()
+        self.navigationController?.pushViewController(postWritingViewController, animated: true)
     }
 }

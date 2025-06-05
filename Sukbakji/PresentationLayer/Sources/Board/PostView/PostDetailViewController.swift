@@ -71,6 +71,7 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
         postDetailView.commentInputView.sendButton.addTarget(self, action: #selector(send_Tapped), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(commentSettingComplete), name: .isCommentComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(postDeleteComplete), name: .isPostDeleteComplete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -150,7 +151,6 @@ extension PostDetailViewController {
         
         let report = UIAlertAction(title: "신고하기", style: .default) { _ in
             let reasonAlert = UIAlertController(title: "신고하기", message: nil, preferredStyle: .actionSheet)
-            
             let reasons = [
                 "욕설/비하",
                 "유출/사칭/사기",
@@ -166,14 +166,7 @@ extension PostDetailViewController {
                     self.reportViewModel.loadReportComment(commentId: self.postViewModel.selectCommentItem!.commentId, reason: reason)
                 })
             }
-            
             reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
-            
-            if let popover = reasonAlert.popoverPresentationController {
-                popover.sourceView = cell
-                popover.sourceRect = cell.bounds
-            }
-            
             self.present(reasonAlert, animated: true)
         }
         let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
@@ -182,7 +175,11 @@ extension PostDetailViewController {
             self.currentResponderView = self.postDetailView.commentEditView
             self.postDetailView.commentEditView.inputTextView.becomeFirstResponder()
         }
-        let delete = UIAlertAction(title: "삭제하기", style: .default)
+        let delete = UIAlertAction(title: "삭제하기", style: .default) { _ in
+            let alert = UIAlertController(title: nil, message: "서비스 준비 중입니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            self.present(alert, animated: true)
+        }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         
         if self.postViewModel.selectCommentItem?.memberId == memberId {
@@ -203,7 +200,6 @@ extension PostDetailViewController {
         
         let report = UIAlertAction(title: "신고하기", style: .default) { _ in
             let reasonAlert = UIAlertController(title: "신고하기", message: nil, preferredStyle: .actionSheet)
-            
             let reasons = [
                 "욕설/비하",
                 "유출/사칭/사기",
@@ -219,16 +215,26 @@ extension PostDetailViewController {
                     self.reportViewModel.loadReportPost(postId: self.postId, reason: reason)
                 })
             }
-            
             reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
-            
             self.present(reasonAlert, animated: true)
         }
         let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
+            let alert = UIAlertController(title: nil, message: "서비스 준비 중입니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            self.present(alert, animated: true)
         }
         let delete = UIAlertAction(title: "삭제하기", style: .default) { _ in
-            self.postViewModel.deletePost(postId: self.postId)
-            self.navigationController?.popViewController(animated: true)
+            let deleteView = BoardDeleteView(title: "게시물 삭제하기", content: "게시물을 삭제할까요? 삭제 후 복구되지 않습니다", viewModel: self.postViewModel, postId: self.postId)
+            
+            self.view.addSubview(deleteView)
+            deleteView.alpha = 0
+            deleteView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            
+            UIView.animate(withDuration: 0.3) {
+                deleteView.alpha = 1
+            }
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         
@@ -257,6 +263,10 @@ extension PostDetailViewController {
     
     @objc private func commentSettingComplete() {
         postViewModel.loadPostDetail(postId: postId)
+    }
+    
+    @objc private func postDeleteComplete() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc private func updateComment() {

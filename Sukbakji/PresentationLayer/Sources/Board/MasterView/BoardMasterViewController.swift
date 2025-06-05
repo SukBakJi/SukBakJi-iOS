@@ -41,6 +41,8 @@ class BoardMasterViewController: UIViewController {
     
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        boardMasterView.writingButton.addTarget(self, action: #selector(writing_Tapped), for: .touchUpInside)
     }
     
     private func setBind() {
@@ -92,6 +94,11 @@ class BoardMasterViewController: UIViewController {
                 cell.prepare(post: post)
             }
             .disposed(by: disposeBag)
+    }
+    
+    @objc private func writing_Tapped() {
+        let postWritingViewController = PostWritingViewController()
+        self.navigationController?.pushViewController(postWritingViewController, animated: true)
     }
 }
 
