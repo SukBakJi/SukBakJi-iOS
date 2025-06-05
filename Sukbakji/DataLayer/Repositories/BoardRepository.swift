@@ -39,6 +39,11 @@ class BoardRepository {
         return APIService.shared.postWithToken(of: APIResponse<Post>.self, url: url, parameters: parameters, accessToken: token)
     }
     
+    func fetchPostDelete(token: String, postId: Int, parameters: [String: Any]?) -> Single<APIResponse<Post>> {
+        let url = APIConstants.postsDelete(postId).path
+        return APIService.shared.deleteWithToken(of: APIResponse<Post>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
     func fetchPostList(token: String, menu: String, boardName: String) -> Single<APIResponse<[Post]>> {
         let url = APIConstants.postsList.path
         let params = ["menu": menu,

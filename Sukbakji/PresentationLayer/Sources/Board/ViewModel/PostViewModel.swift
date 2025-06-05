@@ -25,6 +25,7 @@ final class PostViewModel {
     var selectCommentItem: Comment?
     
     let commentUpdated = PublishSubject<Bool>()
+    let postDeleted = PublishSubject<Bool>()
     let errorMessage = PublishSubject<String>()
     
     init(useCase: PostUseCase = PostUseCase()) {
@@ -117,6 +118,7 @@ final class PostViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] isSuccess in
                 self?.commentUpdated.onNext(isSuccess)
+                NotificationCenter.default.post(name: .isCommentComplete, object: nil)
             })
             .disposed(by: disposeBag)
     }
@@ -139,6 +141,18 @@ final class PostViewModel {
                 
             }, onFailure: { error in
                 
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func deletePost(postId: Int) {
+        useCase.deletePost(postId: postId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.postDeleted.onNext(isSuccess)
+                print("성공")
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

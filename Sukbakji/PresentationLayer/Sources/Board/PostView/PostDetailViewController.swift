@@ -20,6 +20,7 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
     private let reportViewModel = ReportViewModel()
     var disposeBag = DisposeBag()
     var postId: Int = 0
+    var writerId: Int = 0
     
     private weak var currentResponderView: UIView?
     
@@ -64,9 +65,10 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
         postDetailView.optionNavigationbarView.delegate = self
         postDetailView.commentInputView.inputTextField.delegate = self
         
-        postDetailView.scrapButton.addTarget(self, action: #selector(scrapButton), for: .touchUpInside)
+        postDetailView.optionNavigationbarView.optionButton.addTarget(self, action: #selector(option_Tapped), for: .touchUpInside)
+        postDetailView.scrapButton.addTarget(self, action: #selector(scrap_Tapped), for: .touchUpInside)
         postDetailView.commentEditView.editButton.addTarget(self, action: #selector(updateComment), for: .touchUpInside)
-        postDetailView.commentInputView.sendButton.addTarget(self, action: #selector(clickSendButton), for: .touchUpInside)
+        postDetailView.commentInputView.sendButton.addTarget(self, action: #selector(send_Tapped), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(commentSettingComplete), name: .isCommentComplete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -121,6 +123,7 @@ extension PostDetailViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] detail in
                 self?.postViewModel.postCommentList.accept(detail.comments)
+                self?.writerId = detail.memberId
                 self?.postDetailView.labelLabel.text = detail.menu
                 self?.postDetailView.titleLabel.text = detail.title
                 self?.postDetailView.contentLabel.text = detail.content
@@ -145,12 +148,6 @@ extension PostDetailViewController {
                                           message: nil,
                                           preferredStyle: .actionSheet)
         
-        let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
-            self.postDetailView.commentEditView.isHidden = false
-            self.postDetailView.commentEditView.inputTextView.text = self.postViewModel.selectCommentItem?.content
-            self.currentResponderView = self.postDetailView.commentEditView
-            self.postDetailView.commentEditView.inputTextView.becomeFirstResponder()
-        }
         let report = UIAlertAction(title: "신고하기", style: .default) { _ in
             let reasonAlert = UIAlertController(title: "신고하기", message: nil, preferredStyle: .actionSheet)
             
@@ -179,7 +176,13 @@ extension PostDetailViewController {
             
             self.present(reasonAlert, animated: true)
         }
-        let delete = UIAlertAction(title: "삭제하기", style: .destructive)
+        let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
+            self.postDetailView.commentEditView.isHidden = false
+            self.postDetailView.commentEditView.inputTextView.text = self.postViewModel.selectCommentItem?.content
+            self.currentResponderView = self.postDetailView.commentEditView
+            self.postDetailView.commentEditView.inputTextView.becomeFirstResponder()
+        }
+        let delete = UIAlertAction(title: "삭제하기", style: .default)
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         
         if self.postViewModel.selectCommentItem?.memberId == memberId {
@@ -188,25 +191,66 @@ extension PostDetailViewController {
         } else {
             alert.addAction(report)
         }
-        
         alert.addAction(cancel)
-
-        if let popover = alert.popoverPresentationController {
-            popover.sourceView = cell
-            popover.sourceRect = cell.bounds
-        }
 
         present(alert, animated: true)
     }
     
-    @objc private func scrapButton() {
+    @objc private func option_Tapped() {
+        let alert = UIAlertController(title: postDetailView.optionNavigationbarView.titleLabel.text,
+                                          message: nil,
+                                          preferredStyle: .actionSheet)
+        
+        let report = UIAlertAction(title: "신고하기", style: .default) { _ in
+            let reasonAlert = UIAlertController(title: "신고하기", message: nil, preferredStyle: .actionSheet)
+            
+            let reasons = [
+                "욕설/비하",
+                "유출/사칭/사기",
+                "상업적 광고 및 판매",
+                "음란물/불건전한 대화 및 만남",
+                "게시판 주제에 부적절함",
+                "정당/정치인 비하 및 선거운동",
+                "낚시/도배"
+            ]
+            
+            for reason in reasons {
+                reasonAlert.addAction(UIAlertAction(title: reason, style: .default) { _ in
+                    self.reportViewModel.loadReportPost(postId: self.postId, reason: reason)
+                })
+            }
+            
+            reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
+            
+            self.present(reasonAlert, animated: true)
+        }
+        let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
+        }
+        let delete = UIAlertAction(title: "삭제하기", style: .default) { _ in
+            self.postViewModel.deletePost(postId: self.postId)
+            self.navigationController?.popViewController(animated: true)
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        if self.writerId == memberId {
+            alert.addAction(edit)
+            alert.addAction(delete)
+        } else {
+            alert.addAction(report)
+        }
+        alert.addAction(cancel)
+
+        present(alert, animated: true)
+    }
+    
+    @objc private func scrap_Tapped() {
         let isCurrentlyScrapped = postDetailView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
         let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
         postDetailView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
         favScrapViewModel.scrapPost(postId: postId)
     }
     
-    @objc private func clickSendButton() {
+    @objc private func send_Tapped() {
         postViewModel.enrollComment(postId: postId, content: postDetailView.commentInputView.inputTextField.text)
         postDetailView.commentInputView.inputTextField.text = ""
     }

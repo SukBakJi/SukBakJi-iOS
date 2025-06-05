@@ -37,4 +37,18 @@ class PostUseCase {
             .map { _ in true }
             .catchAndReturn(false)
     }
+    
+    func deletePost(postId: Int) -> Single<Bool> {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return .just(false)
+        }
+        
+        let params: [String: Any] = [
+            "postId": postId
+        ]
+        
+        return boardRepository.fetchPostDelete(token: token, postId: postId, parameters: params)
+            .map { _ in true }
+            .catchAndReturn(false)
+    }
 }
