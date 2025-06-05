@@ -19,7 +19,6 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
     private let favScrapViewModel = FavScrapViewModel()
     private let reportViewModel = ReportViewModel()
     var disposeBag = DisposeBag()
-    
     var postId: Int = 0
     
     init(title: String, postId: Int) {
@@ -58,11 +57,14 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
         postDetailView.optionNavigationbarView.delegate = self
         
         postDetailView.scrapButton.addTarget(self, action: #selector(scrapButton), for: .touchUpInside)
+        postDetailView.commentInputView.inputTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         postDetailView.commentInputView.sendButton.addTarget(self, action: #selector(clickSendButton), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(commentSettingComplete), name: .isCommentComplete, object: nil)
-        
-        favScrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
+    }
+    
+    @objc func textFieldEdited(_ textField: UITextField) {
+        postDetailView.commentInputView.inputTextField.updateUnderlineColor(to: .blue400)
     }
 }
 
@@ -106,6 +108,7 @@ extension PostDetailViewController {
     private func setAPI() {
         setBind()
         postViewModel.loadPostDetail(postId: postId)
+        favScrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
     }
     
     @objc private func scrapButton() {
@@ -122,7 +125,6 @@ extension PostDetailViewController {
     
     @objc private func commentSettingComplete() {
         postViewModel.loadPostDetail(postId: postId)
-        
     }
     
     func didTapMoreButton(cell: CommentListTableViewCell) {
@@ -133,7 +135,9 @@ extension PostDetailViewController {
                                           message: nil,
                                           preferredStyle: .actionSheet)
         
-        let edit = UIAlertAction(title: "수정하기", style: .default)
+        let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
+            
+        }
         let report = UIAlertAction(title: "신고하기", style: .default) { _ in
             let reasonAlert = UIAlertController(title: "신고하기", message: nil, preferredStyle: .actionSheet)
             
@@ -175,7 +179,7 @@ extension PostDetailViewController {
         alert.addAction(cancel)
 
         if let popover = alert.popoverPresentationController {
-            popover.sourceView = cell // iPad 대응용
+            popover.sourceView = cell
             popover.sourceRect = cell.bounds
         }
 

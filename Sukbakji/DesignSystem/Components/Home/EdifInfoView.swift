@@ -178,7 +178,7 @@ class EdifInfoView: UIView {
             $0.height.equalTo(44)
         }
         idTextField.addTFUnderline()
-        idTextField.setLeftPadding(15)
+        idTextField.setLeftPadding(16)
         
         logingImageView.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom).offset(6)
@@ -210,7 +210,7 @@ class EdifInfoView: UIView {
             $0.height.equalTo(44)
         }
         nameTextField.addTFUnderline()
-        nameTextField.setLeftPadding(15)
+        nameTextField.setLeftPadding(16)
         
         belongView.snp.makeConstraints {
             $0.top.equalTo(nameView.snp.bottom)
@@ -231,7 +231,7 @@ class EdifInfoView: UIView {
             $0.height.equalTo(44)
         }
         belongTextField.addTFUnderline()
-        belongTextField.setLeftPadding(15)
+        belongTextField.setLeftPadding(16)
         belongTextField.isEnabled = false
         
         dropButton.snp.makeConstraints {

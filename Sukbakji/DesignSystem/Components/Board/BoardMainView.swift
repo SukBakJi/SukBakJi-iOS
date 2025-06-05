@@ -35,6 +35,10 @@ class BoardMainView: UIView {
         $0.textColor = .gray900
         $0.layer.cornerRadius = 12
     }
+    let tapOverlayButton = UIButton().then {
+        $0.backgroundColor = .clear
+        $0.setTitle("", for: .normal)
+    }
     let searchImageView = UIImageView().then {
         $0.image = UIImage(named: "Sukbakji_SearchImage")
     }
@@ -157,6 +161,7 @@ class BoardMainView: UIView {
         titleView.addSubview(titleLabel)
         
         contentView.addSubview(boardSearchTextField)
+        contentView.addSubview(tapOverlayButton)
         contentView.addSubview(searchImageView)
         contentView.addSubview(firstRow)
         contentView.addSubview(secondRow)
@@ -209,6 +214,14 @@ class BoardMainView: UIView {
         }
         boardSearchTextField.setLeftPadding(52)
         boardSearchTextField.errorfix()
+        boardSearchTextField.isUserInteractionEnabled = false
+        
+        tapOverlayButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(133)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(48)
+        }
+        tapOverlayButton.addTarget(self, action: #selector(textFieldTapped), for: .touchUpInside)
         
         searchImageView.snp.makeConstraints {
             $0.centerY.equalTo(boardSearchTextField)
@@ -316,5 +329,11 @@ class BoardMainView: UIView {
             $0.leading.trailing.equalToSuperview().inset(35)
             $0.height.equalTo(2)
         }
+    }
+    
+    @objc private func textFieldTapped() {
+        let nextVC = BoardSearchViewController(title: "게시판", menu: "")
+        nextVC.modalPresentationStyle = .fullScreen
+        parentVC?.present(nextVC, animated: true, completion: nil)
     }
 }

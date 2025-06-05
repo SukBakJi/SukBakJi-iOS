@@ -336,7 +336,7 @@ class PostWritingView: UIView {
         }
         categoryTextField.errorfix()
         categoryTextField.addTFUnderline()
-        categoryTextField.setLeftPadding(15)
+        categoryTextField.setLeftPadding(16)
         categoryTextField.isEnabled = false
         
         dropButton.snp.makeConstraints {
@@ -378,7 +378,7 @@ class PostWritingView: UIView {
         }
         titleTextField.errorfix()
         titleTextField.addTFUnderline()
-        titleTextField.setLeftPadding(15)
+        titleTextField.setLeftPadding(16)
         
         deleteButton.snp.makeConstraints {
             $0.centerY.equalTo(titleTextField)

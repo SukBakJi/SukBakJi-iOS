@@ -398,30 +398,55 @@ class CalendarView: UIView {
     private func updateDays() {
         let startDayOfTheWeek = self.startDayOfTheWeek()
         let numberOfDaysInMonth = self.endDate()
-
-        // 이전 달 계산
+        
+        // 이전 달 날짜 계산
         let prevMonthDate = calendar.date(byAdding: .month, value: -1, to: calendarDate)!
         let daysInPrevMonth = calendar.range(of: .day, in: .month, for: prevMonthDate)?.count ?? 30
-        let leadingDays = (daysInPrevMonth - startDayOfTheWeek + 1)...daysInPrevMonth
-
-        // 이번 달 날짜
-        let currentMonthDays = (1...numberOfDaysInMonth)
-
-        // 다음 달 채워야 하는 개수
+        
+        let leadingStart = daysInPrevMonth - startDayOfTheWeek + 1
+        let leadingDays: [Int] = (leadingStart <= daysInPrevMonth && leadingStart >= 1)
+        ? Array(leadingStart...daysInPrevMonth)
+        : []
+        
+        let currentMonthDays = Array(1...numberOfDaysInMonth)
+        
+        // 전체 셀 수를 맞춰서 다음 달 날짜 생성
         let totalGridCount = ((startDayOfTheWeek + numberOfDaysInMonth) % 7 == 0)
-            ? startDayOfTheWeek + numberOfDaysInMonth
-            : ((startDayOfTheWeek + numberOfDaysInMonth) / 7 + 1) * 7
+        ? startDayOfTheWeek + numberOfDaysInMonth
+        : ((startDayOfTheWeek + numberOfDaysInMonth) / 7 + 1) * 7
         let trailingDaysCount = totalGridCount - (startDayOfTheWeek + numberOfDaysInMonth)
-        let trailingDays: [Int] = trailingDaysCount > 0 ? Array(1...trailingDaysCount) : []
-
-        var fullDays: [(day: String, isCurrentMonth: Bool)] = []
-
-        leadingDays.forEach { fullDays.append(("\($0)", false)) }
-        currentMonthDays.forEach { fullDays.append(("\($0)", true)) }
-        trailingDays.forEach { fullDays.append(("\($0)", false)) }
-
+        let trailingDays = Array(1...trailingDaysCount)
+        
+        // 오늘 날짜 구성
+        let todayComponents = calendar.dateComponents([.year, .month, .day], from: Date())
+        let calendarComponents = calendar.dateComponents([.year, .month], from: calendarDate)
+        
+        var fullDays: [CalendarDay] = []
+        
+        leadingDays.forEach {
+            fullDays.append(CalendarDay(day: "\($0)", isToday: false, isCurrentMonth: false))
+        }
+        
+        currentMonthDays.forEach {
+            let isToday = (
+                todayComponents.year == calendarComponents.year &&
+                todayComponents.month == calendarComponents.month &&
+                todayComponents.day == $0
+            )
+            fullDays.append(CalendarDay(day: "\($0)", isToday: isToday, isCurrentMonth: true))
+        }
+        
+        trailingDays.forEach {
+            fullDays.append(CalendarDay(day: "\($0)", isToday: false, isCurrentMonth: false))
+        }
+        
         self.days.accept(fullDays.map { $0.day })
-
         self.calendarMainCollectionView.reloadData()
     }
+}
+
+struct CalendarDay {
+    let day: String
+    let isToday: Bool
+    let isCurrentMonth: Bool
 }
