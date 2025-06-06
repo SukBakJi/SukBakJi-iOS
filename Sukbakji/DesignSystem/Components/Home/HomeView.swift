@@ -370,7 +370,7 @@ class HomeView: UIView {
         upComingDate.snp.makeConstraints {
             $0.top.equalTo(upComingLabel.snp.bottom).offset(5)
             $0.leading.equalTo(layerImageView.snp.trailing).offset(14)
-            $0.height.equalTo(21)
+            $0.height.equalTo(52)
         }
         
         upComingTitle.snp.makeConstraints {
