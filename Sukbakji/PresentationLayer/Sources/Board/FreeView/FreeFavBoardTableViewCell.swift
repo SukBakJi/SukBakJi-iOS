@@ -71,4 +71,9 @@ class FreeFavBoardTableViewCell: UITableViewCell {
             $0.height.equalTo(21)
         }
     }
+    
+    func prepare(favorite: Favorite) {
+        labelLabel.text = favorite.label
+        nameLabel.text = favorite.boardName
+    }
 }

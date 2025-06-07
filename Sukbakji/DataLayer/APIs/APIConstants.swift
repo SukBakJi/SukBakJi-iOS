@@ -43,10 +43,11 @@ enum APIConstants {
     case commentsCreate
     
     
-    case boardFavoriteAdd(Int)
-    case boardFavoriteRemove(Int)
-    case boardCreate
+    case boardsFavoriteAdd(Int)
+    case boardsFavoriteRemove(Int)
+    case boardsCreate
     case boardsMenu(String)
+    case boardsFavorite
     
     
     case blockMemberId(Int)
@@ -166,14 +167,16 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/comments/create")
             
             
-        case .boardFavoriteAdd(let boardId):
+        case .boardsFavoriteAdd(let boardId):
             return APIConstants.makeEndPoint("/boards/\(boardId)/favorite/add")
-        case .boardFavoriteRemove(let boardId):
+        case .boardsFavoriteRemove(let boardId):
             return APIConstants.makeEndPoint("/boards/\(boardId)/favorite/remove")
-        case .boardCreate:
+        case .boardsCreate:
             return APIConstants.makeEndPoint("/boards/create")
         case .boardsMenu(let menu):
             return APIConstants.makeEndPoint("/boards/\(menu)")
+        case .boardsFavorite:
+            return APIConstants.makeEndPoint("/boards/favorite")
             
             
         case .blockMemberId(let targetMemberId):

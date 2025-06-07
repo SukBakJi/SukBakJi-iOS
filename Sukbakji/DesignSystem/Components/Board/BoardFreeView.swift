@@ -181,7 +181,7 @@ class BoardFreeView: UIView {
         }
         
         freeFavoriteBoardTableView.snp.makeConstraints {
-            $0.top.equalTo(boardSearchTextField.snp.bottom).offset(12)
+            $0.top.equalTo(favBoardLabel.snp.bottom).offset(12)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
