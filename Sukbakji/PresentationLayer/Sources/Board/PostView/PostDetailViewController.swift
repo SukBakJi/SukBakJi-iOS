@@ -139,6 +139,38 @@ extension PostDetailViewController {
                 AlertController(message: message).show()
             })
             .disposed(by: disposeBag)
+        
+        reportViewModel.reportResult
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] success in
+                guard let self = self else { return }
+                if success {
+                    let alert = UIAlertController(title: "신고 완료", message: "신고가 정상적으로 접수되었습니다.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default))
+                    self.present(alert, animated: true)
+                } else {
+                    let alert = UIAlertController(title: "오류", message: "신고 처리에 실패했습니다. 다시 시도해 주세요.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default))
+                    self.present(alert, animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        reportViewModel.blockResult
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] success in
+                guard let self = self else { return }
+                if success {
+                    let alert = UIAlertController(title: "차단 완료", message: "차단이 정상적으로 처리되었습니다.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default))
+                    self.present(alert, animated: true)
+                } else {
+                    let alert = UIAlertController(title: "오류", message: "차단에 실패했습니다. 다시 시도해 주세요.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default))
+                    self.present(alert, animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     func didTapMoreButton(cell: CommentListTableViewCell) {
@@ -149,8 +181,8 @@ extension PostDetailViewController {
                                           message: nil,
                                           preferredStyle: .actionSheet)
         
-        let report = UIAlertAction(title: "신고하기", style: .default) { _ in
-            let reasonAlert = UIAlertController(title: "신고하기", message: nil, preferredStyle: .actionSheet)
+        let report = UIAlertAction(title: "댓글 신고하기", style: .default) { _ in
+            let reasonAlert = UIAlertController(title: "댓글 신고하기", message: nil, preferredStyle: .actionSheet)
             let reasons = [
                 "욕설/비하",
                 "유출/사칭/사기",
@@ -164,6 +196,26 @@ extension PostDetailViewController {
             for reason in reasons {
                 reasonAlert.addAction(UIAlertAction(title: reason, style: .default) { _ in
                     self.reportViewModel.loadReportComment(commentId: self.postViewModel.selectCommentItem!.commentId, reason: reason)
+                })
+            }
+            reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
+            self.present(reasonAlert, animated: true)
+        }
+        let block = UIAlertAction(title: "유저 차단하기", style: .default) { _ in
+            let reasonAlert = UIAlertController(title: "유저 차단하기", message: nil, preferredStyle: .actionSheet)
+            let reasons = [
+                "욕설/비하",
+                "유출/사칭/사기",
+                "상업적 광고 및 판매",
+                "음란물/불건전한 대화 및 만남",
+                "게시판 주제에 부적절함",
+                "정당/정치인 비하 및 선거운동",
+                "낚시/도배"
+            ]
+            
+            for reason in reasons {
+                reasonAlert.addAction(UIAlertAction(title: reason, style: .default) { _ in
+                    self.reportViewModel.loadBlockMemberId(targetMemberId: self.postViewModel.selectCommentItem!.memberId)
                 })
             }
             reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
@@ -187,6 +239,7 @@ extension PostDetailViewController {
             alert.addAction(delete)
         } else {
             alert.addAction(report)
+            alert.addAction(block)
         }
         alert.addAction(cancel)
 
