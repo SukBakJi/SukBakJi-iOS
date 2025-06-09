@@ -260,7 +260,6 @@ struct LabReviewWriteViewController: View {
                             .frame(height: 100, alignment: .topLeading)
                             .padding()
                             .background(showValidationError && postText.isEmpty ? Color(red: 1, green: 0.92, blue: 0.93) : Color(Constants.Gray100))
-                            .cornerRadius(8, corners: [.topLeft, .topRight])
                             .overlay(
                                 Rectangle()
                                     .frame(height: 2)

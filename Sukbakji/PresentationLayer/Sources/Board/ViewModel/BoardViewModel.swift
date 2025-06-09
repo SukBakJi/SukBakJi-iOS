@@ -16,7 +16,7 @@ final class BoardViewModel {
     
     let latestQnAList = BehaviorRelay<[QnA]>(value: [])
     
-    let boardSearchList = PublishSubject<[MyPost]>()
+    let boardSearchList = BehaviorRelay<[MyPost]>(value: [])
     
     let categoryList = BehaviorRelay<[String]>(value: [])
     
@@ -56,7 +56,7 @@ final class BoardViewModel {
         useCase.fetchBoardSearch(keyword: keyword, menu: menu, boardName: boardName)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] detail in
-                self?.boardSearchList.onNext(detail)
+                self?.boardSearchList.accept(detail)
             }, onFailure: { [weak self] error in
                 self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
             })

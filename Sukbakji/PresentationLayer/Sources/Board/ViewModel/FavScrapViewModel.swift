@@ -11,7 +11,16 @@ import RxCocoa
 
 final class FavScrapViewModel {
     private let repository = BoardRepository()
+    private let useCase: BoardUseCase
     private let disposeBag = DisposeBag()
+    
+    let boardsFavoriteList = BehaviorRelay<[Favorite]>(value: [])
+    
+    let errorMessage = PublishSubject<String>()
+    
+    init(useCase: BoardUseCase = BoardUseCase()) {
+        self.useCase = useCase
+    }
     
     func favoriteBoard(boardId: Int, isFav: Bool) {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
@@ -21,9 +30,20 @@ final class FavScrapViewModel {
         repository.favoriteBoardToggle(token: token, boardId: boardId, isFav: isFav)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
-                
+                self.loadBoardsFavorite()
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadBoardsFavorite() {
+        useCase.fetchBoardsFavorite()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] detail in
+                self?.boardsFavoriteList.accept(detail)
+            }, onFailure: { [weak self] error in
+                self?.errorMessage.onNext("즐겨찾기 로딩 실패: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }

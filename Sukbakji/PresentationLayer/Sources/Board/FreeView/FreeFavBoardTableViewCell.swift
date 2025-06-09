@@ -9,9 +9,15 @@ import UIKit
 import Then
 import SnapKit
 
+protocol FavBoardCellDelegate: AnyObject {
+    func fav_Tapped(cell: FreeFavBoardTableViewCell)
+}
+
 class FreeFavBoardTableViewCell: UITableViewCell {
     
     static let identifier = String(describing: FreeFavBoardTableViewCell.self)
+    
+    weak var delegate: FavBoardCellDelegate?
     
     let favButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_FavButton"), for: .normal)
@@ -29,6 +35,10 @@ class FreeFavBoardTableViewCell: UITableViewCell {
         $0.textColor = .gray900
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
     }
+    let goButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_More"), for: .normal)
+        $0.contentMode = .scaleAspectFit
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,10 +55,11 @@ class FreeFavBoardTableViewCell: UITableViewCell {
     private func setUI() {
         self.contentView.addSubview(favButton)
         favButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(40)
+            $0.leading.equalToSuperview().offset(24)
             $0.centerY.equalToSuperview()
-            $0.height.width.equalTo(24)
+            $0.height.width.equalTo(40)
         }
+        favButton.addTarget(self, action: #selector(fav_Tapped), for: .touchUpInside)
         
         self.contentView.addSubview(labelView)
         labelView.snp.makeConstraints {
@@ -70,5 +81,21 @@ class FreeFavBoardTableViewCell: UITableViewCell {
             $0.leading.equalTo(labelView.snp.trailing).offset(10)
             $0.height.equalTo(21)
         }
+        
+        self.contentView.addSubview(goButton)
+        goButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.width.equalTo(40)
+        }
+    }
+    
+    @objc private func fav_Tapped() {
+        delegate?.fav_Tapped(cell: self)
+    }
+    
+    func prepare(favorite: Favorite) {
+        labelLabel.text = favorite.label
+        nameLabel.text = favorite.boardName
     }
 }

@@ -30,7 +30,7 @@ class BoardRepository {
     }
     
     func fetchBoardEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
-        let url = APIConstants.boardCreate.path
+        let url = APIConstants.boardsCreate.path
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
     }
     
@@ -83,9 +83,14 @@ class BoardRepository {
     }
     
     func favoriteBoardToggle(token: String, boardId: Int, isFav: Bool) -> Single<APIResponse<String>> {
-        let url = isFav ? APIConstants.boardFavoriteAdd(boardId).path : APIConstants.boardFavoriteAdd(boardId).path
+        let url = isFav ? APIConstants.boardsFavoriteAdd(boardId).path : APIConstants.boardsFavoriteRemove(boardId).path
         let params = ["boardId": boardId]
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
+    }
+    
+    func fetchBoardsFavorite(token: String) -> Single<APIResponse<[Favorite]>> {
+        let url = APIConstants.boardsFavorite.path
+        return APIService.shared.getWithToken(of: APIResponse<[Favorite]>.self, url: url, accessToken: token)
     }
     
     func fetchScrapToggle(token: String, postId: Int) -> Single<APIResponse<String>> {

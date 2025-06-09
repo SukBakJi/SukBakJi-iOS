@@ -37,7 +37,7 @@ class PostWritingView: UIView {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = .gray900
     }
-    let selectFirstButton = UIButton().then {
+    let menuFirstButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
         $0.isEnabled = false
@@ -47,7 +47,7 @@ class PostWritingView: UIView {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
     }
-    let selectSecondButton = UIButton().then {
+    let menuSecondButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
@@ -56,7 +56,7 @@ class PostWritingView: UIView {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
     }
-    let selectThirdButton = UIButton().then {
+    let menuThirdButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
@@ -65,7 +65,7 @@ class PostWritingView: UIView {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
     }
-    let selectFourthButton = UIButton().then {
+    let menuFourthButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
@@ -100,6 +100,109 @@ class PostWritingView: UIView {
         $0.font = UIFont(name: "Pretendard-Regular", size: 10)
         $0.textColor = .warning400
     }
+    let supportFieldView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    let supportFieldLabel = UILabel().then {
+        $0.text = "지원분야"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .gray900
+    }
+    let supportFieldTextField = UITextField().then {
+        $0.backgroundColor = .gray100
+        $0.placeholder = "지원분야를 선택해 주세요"
+        $0.setPlaceholderColor(.gray500)
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = .gray900
+    }
+    let dropButton2 = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Down2"), for: .normal)
+    }
+    let warningSupportFieldImage = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_Warning")
+    }
+    let warningSupportFieldLabel = UILabel().then {
+        $0.text = "지원분야는 필수 선택입니다"
+        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
+        $0.textColor = .warning400
+    }
+    let jobView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    let jobLabel = UILabel().then {
+        $0.text = "직무"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .gray900
+    }
+    let jobTextField = UITextField().then {
+        $0.backgroundColor = .gray100
+        $0.placeholder = "직무를 입력해 주세요"
+        $0.setPlaceholderColor(.gray500)
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = .gray900
+    }
+    let deleteButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Delete"), for: .normal)
+    }
+    let warningJobImage = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_Warning")
+    }
+    let warningJobLabel = UILabel().then {
+        $0.text = "직무는 필수 입력입니다"
+        $0.font = UIFont(name: "Pretendard-Regular", size: 10)
+        $0.textColor = .warning400
+    }
+    let infoView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    let hiringTypeLabel = UILabel().then {
+        $0.text = "채용형태"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .gray900
+    }
+    let hiringTypeFirstButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
+        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
+        $0.isEnabled = false
+    }
+    let hiringTypeFirstLabel = UILabel().then {
+        $0.text = "신입"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.textColor = .gray900
+    }
+    let hiringTypeSecondButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
+        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
+    }
+    let hiringTypeSecondLabel = UILabel().then {
+        $0.text = "경력"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.textColor = .gray900
+    }
+    let finalEducationLabel = UILabel().then {
+        $0.text = "최종학력"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
+        $0.textColor = .gray900
+    }
+    let finalEducationFirstButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
+        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
+        $0.isEnabled = false
+    }
+    let finalEducationFirstLabel = UILabel().then {
+        $0.text = "박사"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.textColor = .gray900
+    }
+    let finalEducationSecondButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
+        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
+    }
+    let finalEducationSecondLabel = UILabel().then {
+        $0.text = "석사"
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.textColor = .gray900
+    }
     let titleView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -115,7 +218,7 @@ class PostWritingView: UIView {
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .gray900
     }
-    let deleteButton = UIButton().then {
+    let deleteButton2 = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Delete"), for: .normal)
     }
     let warningTitleImage = UIImageView().then {
@@ -167,11 +270,19 @@ class PostWritingView: UIView {
     }
     let buttonView = ButtonView()
     
-    lazy var radioButtons: [UIButton: String] = [
-        selectFirstButton: "박사",
-        selectSecondButton: "석사",
-        selectThirdButton: "진학예정",
-        selectFourthButton: "자유"
+    lazy var menuButtons: [UIButton: String] = [
+        menuFirstButton: "박사",
+        menuSecondButton: "석사",
+        menuThirdButton: "진학예정",
+        menuFourthButton: "자유"
+    ]
+    lazy var hiringTypeButtons: [UIButton: String] = [
+        hiringTypeFirstButton: "신입",
+        hiringTypeSecondButton: "경력"
+    ]
+    lazy var finalEduButtons: [UIButton: String] = [
+        finalEducationFirstButton: "박사",
+        finalEducationSecondButton: "석사"
     ]
     
     override init(frame: CGRect) {
@@ -198,13 +309,13 @@ class PostWritingView: UIView {
         
         contentsView.addSubview(selectView)
         selectView.addSubview(selectLabel)
-        selectView.addSubview(selectFirstButton)
+        selectView.addSubview(menuFirstButton)
         selectView.addSubview(selectFirstLabel)
-        selectView.addSubview(selectSecondButton)
+        selectView.addSubview(menuSecondButton)
         selectView.addSubview(selectSecondLabel)
-        selectView.addSubview(selectThirdButton)
+        selectView.addSubview(menuThirdButton)
         selectView.addSubview(selectThirdLabel)
-        selectView.addSubview(selectFourthButton)
+        selectView.addSubview(menuFourthButton)
         selectView.addSubview(selectFourthLabel)
         
         contentsView.addSubview(categoryView)
@@ -214,10 +325,36 @@ class PostWritingView: UIView {
         categoryView.addSubview(warningCategoryImage)
         categoryView.addSubview(warningCategoryLabel)
         
+        contentsView.addSubview(supportFieldView)
+        supportFieldView.addSubview(supportFieldLabel)
+        supportFieldView.addSubview(supportFieldTextField)
+        supportFieldView.addSubview(dropButton2)
+        supportFieldView.addSubview(warningSupportFieldImage)
+        supportFieldView.addSubview(warningSupportFieldLabel)
+        
+        contentsView.addSubview(jobView)
+        jobView.addSubview(jobLabel)
+        jobView.addSubview(jobTextField)
+        jobView.addSubview(deleteButton)
+        jobView.addSubview(warningJobImage)
+        jobView.addSubview(warningJobLabel)
+        
+        contentsView.addSubview(infoView)
+        infoView.addSubview(hiringTypeLabel)
+        infoView.addSubview(hiringTypeFirstButton)
+        infoView.addSubview(hiringTypeFirstLabel)
+        infoView.addSubview(hiringTypeSecondButton)
+        infoView.addSubview(hiringTypeSecondLabel)
+        infoView.addSubview(finalEducationLabel)
+        infoView.addSubview(finalEducationFirstButton)
+        infoView.addSubview(finalEducationFirstLabel)
+        infoView.addSubview(finalEducationSecondButton)
+        infoView.addSubview(finalEducationSecondLabel)
+        
         contentsView.addSubview(titleView)
         titleView.addSubview(titleLabel)
         titleView.addSubview(titleTextField)
-        titleView.addSubview(deleteButton)
+        titleView.addSubview(deleteButton2)
         titleView.addSubview(warningTitleImage)
         titleView.addSubview(warningTitleLabel)
         
@@ -290,51 +427,51 @@ class PostWritingView: UIView {
         }
         selectLabel.addImageAboveLabel(referenceView: mainView, spacing: 20)
         
-        selectFirstButton.snp.makeConstraints {
-            $0.top.equalTo(selectLabel.snp.bottom).offset(12)
+        menuFirstButton.snp.makeConstraints {
+            $0.top.equalTo(selectLabel.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(22)
             $0.height.width.equalTo(24)
         }
         
         selectFirstLabel.snp.makeConstraints {
-            $0.centerY.equalTo(selectFirstButton)
-            $0.leading.equalTo(selectFirstButton.snp.trailing).offset(6)
+            $0.centerY.equalTo(menuFirstButton)
+            $0.leading.equalTo(menuFirstButton.snp.trailing).offset(6)
             $0.height.equalTo(19)
         }
         
-        selectSecondButton.snp.makeConstraints {
-            $0.centerY.equalTo(selectFirstButton)
+        menuSecondButton.snp.makeConstraints {
+            $0.centerY.equalTo(menuFirstButton)
             $0.leading.equalTo(selectFirstLabel.snp.trailing).offset(18)
             $0.height.width.equalTo(24)
         }
         
         selectSecondLabel.snp.makeConstraints {
-            $0.centerY.equalTo(selectFirstButton)
-            $0.leading.equalTo(selectSecondButton.snp.trailing).offset(6)
+            $0.centerY.equalTo(menuFirstButton)
+            $0.leading.equalTo(menuSecondButton.snp.trailing).offset(6)
             $0.height.equalTo(19)
         }
         
-        selectThirdButton.snp.makeConstraints {
-            $0.centerY.equalTo(selectFirstButton)
+        menuThirdButton.snp.makeConstraints {
+            $0.centerY.equalTo(menuFirstButton)
             $0.leading.equalTo(selectSecondLabel.snp.trailing).offset(18)
             $0.height.width.equalTo(24)
         }
         
         selectThirdLabel.snp.makeConstraints {
-            $0.centerY.equalTo(selectFirstButton)
-            $0.leading.equalTo(selectThirdButton.snp.trailing).offset(6)
+            $0.centerY.equalTo(menuFirstButton)
+            $0.leading.equalTo(menuThirdButton.snp.trailing).offset(6)
             $0.height.equalTo(19)
         }
         
-        selectFourthButton.snp.makeConstraints {
-            $0.centerY.equalTo(selectFirstButton)
+        menuFourthButton.snp.makeConstraints {
+            $0.centerY.equalTo(menuFirstButton)
             $0.leading.equalTo(selectThirdLabel.snp.trailing).offset(18)
             $0.height.width.equalTo(24)
         }
         
         selectFourthLabel.snp.makeConstraints {
-            $0.centerY.equalTo(selectFirstButton)
-            $0.leading.equalTo(selectFourthButton.snp.trailing).offset(6)
+            $0.centerY.equalTo(menuFirstButton)
+            $0.leading.equalTo(menuFourthButton.snp.trailing).offset(6)
             $0.height.equalTo(19)
         }
         
@@ -380,8 +517,158 @@ class PostWritingView: UIView {
         }
         warningCategoryLabel.isHidden = true
         
-        titleView.snp.makeConstraints {
+        supportFieldView.snp.makeConstraints {
             $0.top.equalTo(categoryView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        supportFieldLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(21)
+        }
+        supportFieldLabel.addImageAboveLabel(referenceView: categoryView, spacing: 20)
+        
+        supportFieldTextField.snp.makeConstraints {
+            $0.top.equalTo(supportFieldLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(44)
+        }
+        supportFieldTextField.errorfix()
+        supportFieldTextField.addTFUnderline()
+        supportFieldTextField.setLeftPadding(16)
+        supportFieldTextField.isEnabled = false
+        
+        dropButton2.snp.makeConstraints {
+            $0.centerY.equalTo(supportFieldTextField)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.width.equalTo(36)
+        }
+        
+        warningSupportFieldImage.snp.makeConstraints {
+            $0.top.equalTo(supportFieldTextField.snp.bottom).offset(6)
+            $0.leading.equalToSuperview().offset(28)
+            $0.height.width.equalTo(12)
+        }
+        warningSupportFieldImage.isHidden = true
+        
+        warningSupportFieldLabel.snp.makeConstraints {
+            $0.centerY.equalTo(warningSupportFieldImage)
+            $0.leading.equalTo(warningSupportFieldImage.snp.trailing).offset(4)
+            $0.height.equalTo(12)
+        }
+        warningSupportFieldLabel.isHidden = true
+        
+        jobView.snp.makeConstraints {
+            $0.top.equalTo(supportFieldView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        jobLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(21)
+        }
+        jobLabel.addImageAboveLabel(referenceView: supportFieldView, spacing: 20)
+        
+        jobTextField.snp.makeConstraints {
+            $0.top.equalTo(jobLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(44)
+        }
+        jobTextField.errorfix()
+        jobTextField.addTFUnderline()
+        jobTextField.setLeftPadding(16)
+        
+        deleteButton.snp.makeConstraints {
+            $0.centerY.equalTo(jobTextField)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.width.equalTo(36)
+        }
+        
+        warningJobImage.snp.makeConstraints {
+            $0.top.equalTo(jobTextField.snp.bottom).offset(6)
+            $0.leading.equalToSuperview().offset(28)
+            $0.height.width.equalTo(12)
+        }
+        warningJobImage.isHidden = true
+        
+        warningJobLabel.snp.makeConstraints {
+            $0.centerY.equalTo(warningJobImage)
+            $0.leading.equalTo(warningJobImage.snp.trailing).offset(4)
+            $0.height.equalTo(12)
+        }
+        warningJobLabel.isHidden = true
+        
+        infoView.snp.makeConstraints {
+            $0.top.equalTo(jobView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        hiringTypeLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(21)
+        }
+        hiringTypeLabel.addImageAboveLabel(referenceView: jobView, spacing: 20)
+        
+        hiringTypeFirstButton.snp.makeConstraints {
+            $0.top.equalTo(hiringTypeLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(22)
+            $0.height.width.equalTo(24)
+        }
+        
+        hiringTypeFirstLabel.snp.makeConstraints {
+            $0.centerY.equalTo(hiringTypeFirstButton)
+            $0.leading.equalTo(hiringTypeFirstButton.snp.trailing).offset(6)
+            $0.height.equalTo(19)
+        }
+        
+        hiringTypeSecondButton.snp.makeConstraints {
+            $0.centerY.equalTo(hiringTypeFirstButton)
+            $0.leading.equalTo(hiringTypeFirstLabel.snp.trailing).offset(18)
+            $0.height.width.equalTo(24)
+        }
+        
+        hiringTypeSecondLabel.snp.makeConstraints {
+            $0.centerY.equalTo(hiringTypeFirstButton)
+            $0.leading.equalTo(hiringTypeSecondButton.snp.trailing).offset(6)
+            $0.height.equalTo(19)
+        }
+        
+        finalEducationLabel.snp.makeConstraints {
+            $0.top.equalTo(hiringTypeFirstButton.snp.bottom).offset(30)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(21)
+        }
+        finalEducationLabel.addImageAboveLabel(referenceView: hiringTypeFirstButton, spacing: 30)
+        
+        finalEducationFirstButton.snp.makeConstraints {
+            $0.top.equalTo(finalEducationLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(22)
+            $0.height.width.equalTo(24)
+        }
+        
+        finalEducationFirstLabel.snp.makeConstraints {
+            $0.centerY.equalTo(finalEducationFirstButton)
+            $0.leading.equalTo(finalEducationFirstButton.snp.trailing).offset(6)
+            $0.height.equalTo(19)
+        }
+        
+        finalEducationSecondButton.snp.makeConstraints {
+            $0.centerY.equalTo(finalEducationFirstButton)
+            $0.leading.equalTo(finalEducationFirstLabel.snp.trailing).offset(18)
+            $0.height.width.equalTo(24)
+        }
+        
+        finalEducationSecondLabel.snp.makeConstraints {
+            $0.centerY.equalTo(finalEducationFirstButton)
+            $0.leading.equalTo(finalEducationSecondButton.snp.trailing).offset(6)
+            $0.height.equalTo(19)
+        }
+        
+        titleView.snp.makeConstraints {
+            $0.top.equalTo(infoView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -390,7 +677,7 @@ class PostWritingView: UIView {
             $0.leading.equalToSuperview().offset(24)
             $0.height.equalTo(21)
         }
-        titleLabel.addImageAboveLabel(referenceView: categoryView, spacing: 20)
+        titleLabel.addImageAboveLabel(referenceView: infoView, spacing: 20)
         
         titleTextField.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(12)
@@ -401,7 +688,7 @@ class PostWritingView: UIView {
         titleTextField.addTFUnderline()
         titleTextField.setLeftPadding(16)
         
-        deleteButton.snp.makeConstraints {
+        deleteButton2.snp.makeConstraints {
             $0.centerY.equalTo(titleTextField)
             $0.trailing.equalToSuperview().inset(24)
             $0.height.width.equalTo(36)

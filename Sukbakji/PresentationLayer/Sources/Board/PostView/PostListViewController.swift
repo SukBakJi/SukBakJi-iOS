@@ -56,7 +56,7 @@ class PostListViewController: UIViewController {
         
         if isPost == 0 {
             postListView.noticeButton.addTarget(self, action: #selector(clickNoticeButton), for: .touchUpInside)
-        } else if isPost == 1{
+        } else if isPost == 1 {
             postListView.noticeButton.addTarget(self, action: #selector(clickNoticeButton2), for: .touchUpInside)
         }
     }
@@ -67,7 +67,7 @@ extension PostListViewController {
     private func setBind() {
         if isPost == 0 {
             bindHotPostViewModel()
-        } else if isPost == 1{
+        } else if isPost == 1 {
             bindQnAPostViewModel()
         }
     }
@@ -75,7 +75,7 @@ extension PostListViewController {
     private func setAPI() {
         if isPost == 0 {
             hotPostViewModel.loadHotPost()
-        } else if isPost == 1{
+        } else if isPost == 1 {
             postViewModel.loadAllPosts()
         }
     }

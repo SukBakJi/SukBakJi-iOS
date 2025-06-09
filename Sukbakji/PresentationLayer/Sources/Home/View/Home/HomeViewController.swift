@@ -242,11 +242,8 @@ extension HomeViewController {
     }
     
     @objc private func hot_Tapped() {
-        let hotBoardView = HotBoardViewController()
-        let hostingController = UIHostingController(rootView: hotBoardView)
-        hostingController.modalPresentationStyle = .fullScreen
-        
-        self.present(hostingController, animated: true)
+        let postListVC = PostListViewController(title: "HOT 게시판", buttonTitle: "HOT 게시판 선정 기준 안내드립니다", isPost: 0, isHidden: true)
+        self.navigationController?.pushViewController(postListVC, animated: true)
     }
     
     @objc func moveToBoard() {
