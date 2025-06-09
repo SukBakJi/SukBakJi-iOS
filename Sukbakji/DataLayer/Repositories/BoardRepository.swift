@@ -83,7 +83,7 @@ class BoardRepository {
     }
     
     func favoriteBoardToggle(token: String, boardId: Int, isFav: Bool) -> Single<APIResponse<String>> {
-        let url = isFav ? APIConstants.boardsFavoriteAdd(boardId).path : APIConstants.boardsFavoriteAdd(boardId).path
+        let url = isFav ? APIConstants.boardsFavoriteAdd(boardId).path : APIConstants.boardsFavoriteRemove(boardId).path
         let params = ["boardId": boardId]
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
     }

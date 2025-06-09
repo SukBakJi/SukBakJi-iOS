@@ -30,7 +30,7 @@ final class FavScrapViewModel {
         repository.favoriteBoardToggle(token: token, boardId: boardId, isFav: isFav)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
-                
+                self.loadBoardsFavorite()
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
             })
@@ -43,7 +43,7 @@ final class FavScrapViewModel {
             .subscribe(onSuccess: { [weak self] detail in
                 self?.boardsFavoriteList.accept(detail)
             }, onFailure: { [weak self] error in
-                self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
+                self?.errorMessage.onNext("즐겨찾기 로딩 실패: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }

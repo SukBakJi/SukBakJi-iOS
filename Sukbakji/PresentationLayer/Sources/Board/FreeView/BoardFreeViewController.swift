@@ -10,7 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class BoardFreeViewController: UIViewController {
+class BoardFreeViewController: UIViewController, FavBoardCellDelegate {
     
     private let boardFreeView = BoardFreeView()
     private let favScrapViewModel = FavScrapViewModel()
@@ -46,7 +46,6 @@ class BoardFreeViewController: UIViewController {
         }
 
         boardFreeView.makeBoardButton.addTarget(self, action: #selector(create_Tapped), for: .touchUpInside)
-        boardFreeView.writingButton.addTarget(self, action: #selector(writing_Tapped), for: .touchUpInside)
     }
     
     private func setAPI() {
@@ -65,9 +64,14 @@ class BoardFreeViewController: UIViewController {
                     self.favBoardHeightConstraint?.update(offset: (CGFloat(list.count) * 60) + 61)
                     boardFreeView.noFavBoard.isHidden = true
                     boardFreeView.noFavBoardLabel.isHidden = true
+                    boardFreeView.favBoardLabel.isHidden = false
+                    boardFreeView.favBoardImageView.isHidden = false
                 } else {
+                    self.favBoardHeightConstraint?.update(offset: 150)
                     boardFreeView.noFavBoard.isHidden = false
                     boardFreeView.noFavBoardLabel.isHidden = false
+                    boardFreeView.favBoardLabel.isHidden = true
+                    boardFreeView.favBoardImageView.isHidden = true
                 }
             })
             .disposed(by: disposeBag)
@@ -75,19 +79,21 @@ class BoardFreeViewController: UIViewController {
         favScrapViewModel.boardsFavoriteList
             .bind(to: boardFreeView.freeFavoriteBoardTableView.rx.items(cellIdentifier: FreeFavBoardTableViewCell.identifier, cellType: FreeFavBoardTableViewCell.self)) { row, favorite, cell in
                 cell.prepare(favorite: favorite)
+                cell.delegate = self
             }
             .disposed(by: disposeBag)
+    }
+    
+    func fav_Tapped(cell: FreeFavBoardTableViewCell) {
+        guard let indexPath = boardFreeView.freeFavoriteBoardTableView.indexPath(for: cell) else { return }
+        let boardId = favScrapViewModel.boardsFavoriteList.value[indexPath.row].boardId
+        favScrapViewModel.favoriteBoard(boardId: boardId, isFav: false)
     }
     
     @objc private func create_Tapped() {
         let viewController = BoardCreateViewController()
         let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 520, bottomSheetPanMinTopConstant: 230, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
-    }
-    
-    @objc private func writing_Tapped() {
-        let postWritingViewController = PostWritingViewController()
-        self.navigationController?.pushViewController(postWritingViewController, animated: true)
     }
 }
 

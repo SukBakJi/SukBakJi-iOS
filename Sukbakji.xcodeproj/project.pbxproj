@@ -33,8 +33,6 @@
 		41EE134A2C5510A80037EDD6 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE13492C5510A80037EDD6 /* TagCell.swift */; };
 		41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift */; };
 		41EE134E2C5529B20037EDD6 /* SelectResearchTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE134D2C5529B20037EDD6 /* SelectResearchTopicViewController.swift */; };
-		7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E5D232C57A5BA00C7479F /* DummyBoardDetail.swift */; };
-		7B0E5D262C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E5D252C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift */; };
 		7B1C53482C69D10800C66D0D /* DirectoryLabSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C53472C69D10800C66D0D /* DirectoryLabSearchModel.swift */; };
 		7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C53492C69D16500C66D0D /* DirectoryLabInfoModel.swift */; };
 		7B1C534C2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C534B2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift */; };
@@ -45,42 +43,14 @@
 		7B1C53562C69D79200C66D0D /* DirectoryFavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C53552C69D79200C66D0D /* DirectoryFavoriteModel.swift */; };
 		7B1C53582C69D80A00C66D0D /* DirectoryFavoriteCancelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C53572C69D80A00C66D0D /* DirectoryFavoriteCancelModel.swift */; };
 		7B1C535A2C69D85800C66D0D /* DirectoryFavoriteLabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C53592C69D85800C66D0D /* DirectoryFavoriteLabModel.swift */; };
-		7B1C53602C6A680000C66D0D /* BoardNewQnAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1C535F2C6A680000C66D0D /* BoardNewQnAModel.swift */; };
 		7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B259AFD2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift */; };
 		7B259B002C75EB5700D3DFE5 /* LabReviewWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B259AFF2C75EB5700D3DFE5 /* LabReviewWriteViewController.swift */; };
-		7B3459EB2C68858E008B711A /* BoardWritePostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459EA2C68858E008B711A /* BoardWritePostModel.swift */; };
-		7B3459ED2C68870E008B711A /* BoardDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459EC2C68870E008B711A /* BoardDetailModel.swift */; };
-		7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459EE2C688A28008B711A /* BoardCommentsModel.swift */; };
-		7B3459F12C688AB1008B711A /* BoardScrapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459F02C688AB1008B711A /* BoardScrapModel.swift */; };
-		7B3459F32C688AEE008B711A /* BoardSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459F22C688AEE008B711A /* BoardSearchModel.swift */; };
-		7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459F42C688B29008B711A /* BoardHotModel.swift */; };
-		7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459F62C688B4E008B711A /* BoardScrappedModel.swift */; };
-		7B3459F92C688C2D008B711A /* BoardWrittenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459F82C688C2D008B711A /* BoardWrittenModel.swift */; };
-		7B3459FB2C688C6F008B711A /* BoardCommentedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459FA2C688C6F008B711A /* BoardCommentedModel.swift */; };
-		7B3459FD2C688C9D008B711A /* BoardBookmarkedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */; };
-		7B3933EF2D9FF147009EFC55 /* CurrentUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3933EE2D9FF147009EFC55 /* CurrentUserResponse.swift */; };
-		7B3933F32D9FFB39009EFC55 /* CommentUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3933F22D9FFB39009EFC55 /* CommentUpdateModel.swift */; };
-		7B3933F72DA01681009EFC55 /* BoardUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3933F62DA01681009EFC55 /* BoardUpdateModel.swift */; };
-		7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */; };
-		7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */; };
-		7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */; };
-		7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */; };
-		7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */; };
 		7B962D4B2DA902F9004175E0 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B962D4A2DA902F9004175E0 /* UIApplication+.swift */; };
-		7B962D4D2DA90AD7004175E0 /* BoardDeleteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B962D4C2DA90AD7004175E0 /* BoardDeleteModel.swift */; };
-		7BC4E7842D8AC39300963B61 /* SavedBoardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC4E7832D8AC39300963B61 /* SavedBoardResponse.swift */; };
-		7BC4E7862D8ACF3D00963B61 /* LatestQnAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC4E7852D8ACF3D00963B61 /* LatestQnAModel.swift */; };
-		7BD758A12DA11E0100E107B2 /* BoardEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD758A02DA11E0100E107B2 /* BoardEditViewController.swift */; };
-		7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C992C62778D00A31B70 /* SearchViewController.swift */; };
-		7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */; };
 		7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */; };
-		7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */; };
-		7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */; };
 		7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */; };
 		7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D342C6613FD00EF16FB /* LabReviewViewController.swift */; };
 		7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */; };
 		7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */; };
-		7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */; };
 		91C53C4A2DAC9ABA00B8795D /* RefreshTokenManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C53C492DAC9ABA00B8795D /* RefreshTokenManager+.swift */; };
 		91D413262D82696500020CEC /* DetailTOSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413242D82696500020CEC /* DetailTOSViewController.swift */; };
 		91D413272D82696500020CEC /* TOSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D413252D82696500020CEC /* TOSViewController.swift */; };
@@ -347,8 +317,6 @@
 		41EE13492C5510A80037EDD6 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		41EE134B2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LeftAlignedCollectionViewFlowLayout+.swift"; sourceTree = "<group>"; };
 		41EE134D2C5529B20037EDD6 /* SelectResearchTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectResearchTopicViewController.swift; sourceTree = "<group>"; };
-		7B0E5D232C57A5BA00C7479F /* DummyBoardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyBoardDetail.swift; sourceTree = "<group>"; };
-		7B0E5D252C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentDummyBoardDetail.swift; sourceTree = "<group>"; };
 		7B1C53472C69D10800C66D0D /* DirectoryLabSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryLabSearchModel.swift; sourceTree = "<group>"; };
 		7B1C53492C69D16500C66D0D /* DirectoryLabInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryLabInfoModel.swift; sourceTree = "<group>"; };
 		7B1C534B2C69D44D00C66D0D /* DirectoryReviewInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryReviewInfoModel.swift; sourceTree = "<group>"; };
@@ -359,43 +327,15 @@
 		7B1C53552C69D79200C66D0D /* DirectoryFavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryFavoriteModel.swift; sourceTree = "<group>"; };
 		7B1C53572C69D80A00C66D0D /* DirectoryFavoriteCancelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryFavoriteCancelModel.swift; sourceTree = "<group>"; };
 		7B1C53592C69D85800C66D0D /* DirectoryFavoriteLabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryFavoriteLabModel.swift; sourceTree = "<group>"; };
-		7B1C535F2C6A680000C66D0D /* BoardNewQnAModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardNewQnAModel.swift; sourceTree = "<group>"; };
 		7B259AFD2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabDetailReviewViewController.swift; sourceTree = "<group>"; };
 		7B259AFF2C75EB5700D3DFE5 /* LabReviewWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewWriteViewController.swift; sourceTree = "<group>"; };
-		7B3459EA2C68858E008B711A /* BoardWritePostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardWritePostModel.swift; sourceTree = "<group>"; };
-		7B3459EC2C68870E008B711A /* BoardDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailModel.swift; sourceTree = "<group>"; };
-		7B3459EE2C688A28008B711A /* BoardCommentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentsModel.swift; sourceTree = "<group>"; };
-		7B3459F02C688AB1008B711A /* BoardScrapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardScrapModel.swift; sourceTree = "<group>"; };
-		7B3459F22C688AEE008B711A /* BoardSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSearchModel.swift; sourceTree = "<group>"; };
-		7B3459F42C688B29008B711A /* BoardHotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardHotModel.swift; sourceTree = "<group>"; };
-		7B3459F62C688B4E008B711A /* BoardScrappedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardScrappedModel.swift; sourceTree = "<group>"; };
-		7B3459F82C688C2D008B711A /* BoardWrittenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardWrittenModel.swift; sourceTree = "<group>"; };
-		7B3459FA2C688C6F008B711A /* BoardCommentedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentedModel.swift; sourceTree = "<group>"; };
-		7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardBookmarkedModel.swift; sourceTree = "<group>"; };
-		7B3933EE2D9FF147009EFC55 /* CurrentUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserResponse.swift; sourceTree = "<group>"; };
-		7B3933F22D9FFB39009EFC55 /* CommentUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUpdateModel.swift; sourceTree = "<group>"; };
-		7B3933F62DA01681009EFC55 /* BoardUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUpdateModel.swift; sourceTree = "<group>"; };
-		7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotBoardViewController.swift; sourceTree = "<group>"; };
-		7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrittenBoardViewController.swift; sourceTree = "<group>"; };
-		7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedBoardViewController.swift; sourceTree = "<group>"; };
-		7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentedBoardViewController.swift; sourceTree = "<group>"; };
-		7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentReviewWriteBoardViewController.swift; sourceTree = "<group>"; };
 		7B962D4A2DA902F9004175E0 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
-		7B962D4C2DA90AD7004175E0 /* BoardDeleteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDeleteModel.swift; sourceTree = "<group>"; };
-		7BC4E7832D8AC39300963B61 /* SavedBoardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBoardResponse.swift; sourceTree = "<group>"; };
-		7BC4E7852D8ACF3D00963B61 /* LatestQnAModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestQnAModel.swift; sourceTree = "<group>"; };
-		7BD758A02DA11E0100E107B2 /* BoardEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEditViewController.swift; sourceTree = "<group>"; };
-		7BFB8C992C62778D00A31B70 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyBoards.swift; sourceTree = "<group>"; };
 		7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMainViewController.swift; sourceTree = "<group>"; };
-		7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardQnAViewController.swift; sourceTree = "<group>"; };
-		7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardWriteViewController.swift; sourceTree = "<group>"; };
 		7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedLabDetailViewController.swift; sourceTree = "<group>"; };
 		7BFE5D342C6613FD00EF16FB /* LabReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewViewController.swift; sourceTree = "<group>"; };
 		7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectorySearchViewController.swift; sourceTree = "<group>"; };
 		7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabDetailViewController.swift; sourceTree = "<group>"; };
-		7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListGetModel.swift; sourceTree = "<group>"; };
 		910CC1BE2D76C55500E6B58E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		91C53C492DAC9ABA00B8795D /* RefreshTokenManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RefreshTokenManager+.swift"; sourceTree = "<group>"; };
 		91D413242D82696500020CEC /* DetailTOSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTOSViewController.swift; sourceTree = "<group>"; };
@@ -771,20 +711,6 @@
 			path = DirectoryModel;
 			sourceTree = "<group>";
 		};
-		7B969F5E2C541E6000F34A18 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				7BFDEC362C522533007280F8 /* BoardQnAViewController.swift */,
-				7B3E3D262C541F8A002D6A43 /* HotBoardViewController.swift */,
-				7B3E3D282C5423A6002D6A43 /* WrittenBoardViewController.swift */,
-				7B3E3D2A2C5423B3002D6A43 /* ScrappedBoardViewController.swift */,
-				7B3E3D2C2C5423D6002D6A43 /* CommentedBoardViewController.swift */,
-				7B0E5D232C57A5BA00C7479F /* DummyBoardDetail.swift */,
-				7B0E5D252C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		7BFB8C9D2C63458300A31B70 /* Directory */ = {
 			isa = PBXGroup;
 			children = (
@@ -810,41 +736,9 @@
 				C7BA9BC92DDB59BB00AF9A43 /* FreeView */,
 				C7845D002DD4B3BF004955A2 /* PostView */,
 				C73673662DA4E77600F88C63 /* ViewModel */,
-				7BFE5D3A2C68819600EF16FB /* BoardModel */,
 				7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */,
-				7B969F5E2C541E6000F34A18 /* Main */,
-				7BFDEC382C52253B007280F8 /* BoardWriteViewController.swift */,
-				7BD758A02DA11E0100E107B2 /* BoardEditViewController.swift */,
-				7B3E3D2E2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift */,
-				7BFB8C992C62778D00A31B70 /* SearchViewController.swift */,
-				7BFB8C9B2C62846500A31B70 /* DummyBoards.swift */,
 			);
 			path = Board;
-			sourceTree = "<group>";
-		};
-		7BFE5D3A2C68819600EF16FB /* BoardModel */ = {
-			isa = PBXGroup;
-			children = (
-				7BFE5D3D2C6881BC00EF16FB /* BoardListGetModel.swift */,
-				7B3459EA2C68858E008B711A /* BoardWritePostModel.swift */,
-				7BC4E7832D8AC39300963B61 /* SavedBoardResponse.swift */,
-				7B3459EC2C68870E008B711A /* BoardDetailModel.swift */,
-				7B3459EE2C688A28008B711A /* BoardCommentsModel.swift */,
-				7B3459F02C688AB1008B711A /* BoardScrapModel.swift */,
-				7B3459F22C688AEE008B711A /* BoardSearchModel.swift */,
-				7B1C535F2C6A680000C66D0D /* BoardNewQnAModel.swift */,
-				7B3459F42C688B29008B711A /* BoardHotModel.swift */,
-				7B3459F62C688B4E008B711A /* BoardScrappedModel.swift */,
-				7B3459F82C688C2D008B711A /* BoardWrittenModel.swift */,
-				7B3459FA2C688C6F008B711A /* BoardCommentedModel.swift */,
-				7B3459FC2C688C9D008B711A /* BoardBookmarkedModel.swift */,
-				7BC4E7852D8ACF3D00963B61 /* LatestQnAModel.swift */,
-				7B3933EE2D9FF147009EFC55 /* CurrentUserResponse.swift */,
-				7B3933F22D9FFB39009EFC55 /* CommentUpdateModel.swift */,
-				7B3933F62DA01681009EFC55 /* BoardUpdateModel.swift */,
-				7B962D4C2DA90AD7004175E0 /* BoardDeleteModel.swift */,
-			);
-			path = BoardModel;
 			sourceTree = "<group>";
 		};
 		91D4132C2D8269CC00020CEC /* DataManagers */ = {
@@ -1779,7 +1673,6 @@
 				C734BD5C2D66EA9300AE81E9 /* MypageViewController.swift in Sources */,
 				C734BD5B2D66EA8800AE81E9 /* ColorConstants.swift in Sources */,
 				412BFBD62C5225010099E442 /* LoginViewController.swift in Sources */,
-				7B3933F72DA01681009EFC55 /* BoardUpdateModel.swift in Sources */,
 				C734BD5A2D66DE2000AE81E9 /* EditPWView.swift in Sources */,
 				C78953122D636AB700E5041C /* APIService.swift in Sources */,
 				C7BA9BC22DDB58FC00AF9A43 /* MasterMenuCollectionViewCell.swift in Sources */,
@@ -1787,22 +1680,18 @@
 				C71B4E802DAC0C2B006EACF1 /* ProfileUseCase.swift in Sources */,
 				C74A159A2D5A47F600A1698B /* MyProfile.swift in Sources */,
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift in Sources */,
-				7BD758A12DA11E0100E107B2 /* BoardEditViewController.swift in Sources */,
 				C77B49702D7B66D600005ABE /* OrangeButton.swift in Sources */,
 				C73948B42DD8833E00612461 /* FavoriteBoardCollectionViewCell.swift in Sources */,
 				C77B49712D7B66D600005ABE /* smallTextButton.swift in Sources */,
 				C77B49722D7B66D600005ABE /* CommonTextFieldView.swift in Sources */,
-				7B3933EF2D9FF147009EFC55 /* CurrentUserResponse.swift in Sources */,
 				C7EF6A0D2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift in Sources */,
 				C70105E42DE76A8100042072 /* PostWritingView.swift in Sources */,
 				C7D64B372DD7851F00DD34A0 /* BoardMainView.swift in Sources */,
 				C7259CEF2DEE106A00904E97 /* BoardUseCase.swift in Sources */,
 				91D4133D2D826B2000020CEC /* CompleteView.swift in Sources */,
 				C77B49732D7B66D600005ABE /* SocialAuthButton.swift in Sources */,
-				7BFDEC372C522533007280F8 /* BoardQnAViewController.swift in Sources */,
 				C73032802D2974D100F717D0 /* EditUnivCalendarViewController.swift in Sources */,
 				C750C3942D70C57000BE14EF /* SetAlarmView.swift in Sources */,
-				7BFB8C9A2C62778D00A31B70 /* SearchViewController.swift in Sources */,
 				91D413592D841EC300020CEC /* ResetPwView.swift in Sources */,
 				C7AA038B2DD506EC00BBE115 /* PostViewModel.swift in Sources */,
 				C73C5C462D5917C500091C5C /* MemberId.swift in Sources */,
@@ -1820,19 +1709,15 @@
 				C71AE9BE2CFB60590098FD2A /* FavoriteLabCollectionViewCell.swift in Sources */,
 				91FEEB892D71A02800D0502D /* SmsRequest.swift in Sources */,
 				C7C434EC2C5DF14E00BFB2D2 /* EditProfileViewController.swift in Sources */,
-				7B962D4D2DA90AD7004175E0 /* BoardDeleteModel.swift in Sources */,
 				C7B7A16A2D00360500D5CE14 /* UIButton+.swift in Sources */,
 				417AADCD2C673E28002080E0 /* AuthRequest.swift in Sources */,
 				C7EA8CB12D689AB600B25FBC /* CalendarViewModel.swift in Sources */,
 				4168E8512C690BAC00A0F292 /* UserRequest.swift in Sources */,
 				C70BBC192D64EAA7002C26E6 /* MyProfileViewModel.swift in Sources */,
-				7B3459F92C688C2D008B711A /* BoardWrittenModel.swift in Sources */,
 				C74A15A02D5A4C7B00A1698B /* DateSelect.swift in Sources */,
-				7B0E5D262C5A1FD600C7479F /* EmploymentDummyBoardDetail.swift in Sources */,
 				C7845CFF2DD4B3B3004955A2 /* PostListViewController.swift in Sources */,
 				C74A15B02D5A508200A1698B /* Alarm.swift in Sources */,
 				C7980A862CEF838C00475D94 /* UIViewController+.swift in Sources */,
-				7BFB8C9C2C62846500A31B70 /* DummyBoards.swift in Sources */,
 				C7B7A1682D001D8200D5CE14 /* NavigationBarView.swift in Sources */,
 				C7675F7C2D6981ED00F99294 /* UnivView.swift in Sources */,
 				91FEEB8E2D71A04400D0502D /* SmsDataManager.swift in Sources */,
@@ -1846,7 +1731,6 @@
 				7B259B002C75EB5700D3DFE5 /* LabReviewWriteViewController.swift in Sources */,
 				C7AA038D2DD50B1100BBE115 /* BoardViewModel.swift in Sources */,
 				C7F61D192DE04EA100B5C3B4 /* MyPostTableViewCell.swift in Sources */,
-				7B3459F72C688B4E008B711A /* BoardScrappedModel.swift in Sources */,
 				C73828D32D6220F4007A21A0 /* AllDeleteView.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,
@@ -1854,7 +1738,6 @@
 				91FEEB8C2D71A03B00D0502D /* SmsResponse.swift in Sources */,
 				C74A15982D5A477F00A1698B /* FavoriteLab.swift in Sources */,
 				C780C5082D4143D800DC2031 /* Notification+.swift in Sources */,
-				7B3E3D2B2C5423B3002D6A43 /* ScrappedBoardViewController.swift in Sources */,
 				C734BD582D66DE1700AE81E9 /* EdifInfoView.swift in Sources */,
 				7B1C535A2C69D85800C66D0D /* DirectoryFavoriteLabModel.swift in Sources */,
 				7B962D4B2DA902F9004175E0 /* UIApplication+.swift in Sources */,
@@ -1867,7 +1750,6 @@
 				C78E36362DF3E67B0090A6B3 /* Favorite.swift in Sources */,
 				C78479402DF1F9DD00326CC4 /* PostDeleteView.swift in Sources */,
 				C7A78E162DEEDBC3000A890B /* BoardCreateView.swift in Sources */,
-				7B3E3D272C541F8A002D6A43 /* HotBoardViewController.swift in Sources */,
 				C757F8212D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift in Sources */,
 				C74A15B82D5A56EC00A1698B /* MentorList.swift in Sources */,
 				91D413412D8270B100020CEC /* SignupView.swift in Sources */,
@@ -1895,16 +1777,13 @@
 				C729F0FA2DE1B22600AAABB6 /* CommentListTableViewCell.swift in Sources */,
 				C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */,
 				7B1C53582C69D80A00C66D0D /* DirectoryFavoriteCancelModel.swift in Sources */,
-				7BFDEC392C52253B007280F8 /* BoardWriteViewController.swift in Sources */,
 				417AADCB2C673B89002080E0 /* KeychainHelper+.swift in Sources */,
-				7B3933F32D9FFB39009EFC55 /* CommentUpdateModel.swift in Sources */,
 				C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */,
 				C7A777692D507A1800046367 /* MessageInputView.swift in Sources */,
 				C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */,
 				C70105E72DE7786B00042072 /* PostWritingViewController.swift in Sources */,
 				C724B69B2DE6179D00C25C4A /* FavScrapViewModel.swift in Sources */,
 				41EE13402C54ABD70037EDD6 /* SignupViewController.swift in Sources */,
-				7B3459FB2C688C6F008B711A /* BoardCommentedModel.swift in Sources */,
 				C74A15A62D5A4F4200A1698B /* UnivMethod.swift in Sources */,
 				C750C3922D70C56600BE14EF /* MyAlarmView.swift in Sources */,
 				C723A0AC2DF091B300F43A1C /* CommentEditView.swift in Sources */,
@@ -1913,7 +1792,6 @@
 				C7D64B4D2DD79C4E00DD34A0 /* BoardFreeViewController.swift in Sources */,
 				7B1C53562C69D79200C66D0D /* DirectoryFavoriteModel.swift in Sources */,
 				C750C3962D70C58300BE14EF /* EditAlarmView.swift in Sources */,
-				7B3E3D2D2C5423D6002D6A43 /* CommentedBoardViewController.swift in Sources */,
 				C7675F782D6981BD00F99294 /* UnivSearchView.swift in Sources */,
 				C7D64B432DD79B8900DD34A0 /* BoardFreeView.swift in Sources */,
 				412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */,
@@ -1921,10 +1799,8 @@
 				C757F82B2D0A9D2000685F1A /* MyAlarmTableViewCell.swift in Sources */,
 				C7AA038F2DD50D9100BBE115 /* PostDetailViewController.swift in Sources */,
 				C7E35A772D73670500632DE3 /* MainTabViewController.swift in Sources */,
-				7B3459ED2C68870E008B711A /* BoardDetailModel.swift in Sources */,
 				C77EFB412D9C03CA000C2841 /* NotificationTableViewCell.swift in Sources */,
 				C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */,
-				7B3459EF2C688A28008B711A /* BoardCommentsModel.swift in Sources */,
 				C7BA9BC02DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
 				91D4135B2D841ECE00020CEC /* ResetPwViewController.swift in Sources */,
@@ -1945,7 +1821,6 @@
 				91F849112D65AF3C0048B41A /* TOSData.swift in Sources */,
 				C74680752D91352B00A6091E /* DateUtils+.swift in Sources */,
 				C77B49682D7B66A500005ABE /* EmailView.swift in Sources */,
-				7B3459F12C688AB1008B711A /* BoardScrapModel.swift in Sources */,
 				C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */,
 				C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */,
 				C71223CF2DED6EA100238E4E /* BoardSearchTableViewCell.swift in Sources */,
@@ -1987,15 +1862,12 @@
 				C7BDEA8D2D1338E000001927 /* UnivViewModel.swift in Sources */,
 				C7A23D8E2D0C1087008657B0 /* AlarmFBCView.swift in Sources */,
 				C7845D022DD4BA0C004955A2 /* NoticeButton.swift in Sources */,
-				7BC4E7862D8ACF3D00963B61 /* LatestQnAModel.swift in Sources */,
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
-				7BC4E7842D8AC39300963B61 /* SavedBoardResponse.swift in Sources */,
 				91D413262D82696500020CEC /* DetailTOSViewController.swift in Sources */,
 				91D413272D82696500020CEC /* TOSViewController.swift in Sources */,
 				C73948B22DD8820A00612461 /* BoardQnATableViewCell.swift in Sources */,
 				C77EFB392D9B8645000C2841 /* FCMTokenManager+.swift in Sources */,
-				7BFE5D3E2C6881BC00EF16FB /* BoardListGetModel.swift in Sources */,
 				7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
 				91D413342D826A0000020CEC /* TOSTableViewCell.swift in Sources */,
@@ -2010,25 +1882,18 @@
 				C7F951C22D2A775000D07051 /* AlarmDateCollectionViewCell.swift in Sources */,
 				C74A15AE2D5A506D00A1698B /* AlarmPost.swift in Sources */,
 				C74A15A42D5A4E9100A1698B /* UnivSearch.swift in Sources */,
-				7B3E3D2F2C542862002D6A43 /* EmploymentReviewWriteBoardViewController.swift in Sources */,
 				C7D64B4B2DD79C4100DD34A0 /* BoardEnterViewController.swift in Sources */,
 				412F92342C5C9E510042B834 /* ThirdAcademicVerificationViewController.swift in Sources */,
 				C74A15BC2D5A571900A1698B /* MentoringPost.swift in Sources */,
 				C7D64B3B2DD787C800DD34A0 /* BoardTabViewController.swift in Sources */,
 				7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */,
-				7B3459FD2C688C9D008B711A /* BoardBookmarkedModel.swift in Sources */,
 				C7A78E182DEEDE8B000A890B /* BoardCreateViewController.swift in Sources */,
 				C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */,
 				7B1C53502C69D53C00C66D0D /* DirectoryLabReviewListModel.swift in Sources */,
-				7B3459F32C688AEE008B711A /* BoardSearchModel.swift in Sources */,
-				7B3459EB2C68858E008B711A /* BoardWritePostModel.swift in Sources */,
 				C79C594A2DE3343400762FC9 /* PostUseCase.swift in Sources */,
-				7B0E5D242C57A5BA00C7479F /* DummyBoardDetail.swift in Sources */,
-				7B3459F52C688B29008B711A /* BoardHotModel.swift in Sources */,
 				C7AB97442D63AA1B00D2DBCA /* PWWarning.swift in Sources */,
 				C757F8252D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift in Sources */,
 				C73483652D02A727004B6FA1 /* UILabel+.swift in Sources */,
-				7B3E3D292C5423A6002D6A43 /* WrittenBoardViewController.swift in Sources */,
 				7B1C534A2C69D16500C66D0D /* DirectoryLabInfoModel.swift in Sources */,
 				91D413572D83FEA000020CEC /* FindPwViewController.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
@@ -2046,7 +1911,6 @@
 				C77EFB3D2D9C02B3000C2841 /* NotificationViewController.swift in Sources */,
 				415BBC0B2C7343F8002768EE /* AuthInterceptor+.swift in Sources */,
 				C7F951BE2D2A523500D07051 /* SetAlarmViewController.swift in Sources */,
-				7B1C53602C6A680000C66D0D /* BoardNewQnAModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
