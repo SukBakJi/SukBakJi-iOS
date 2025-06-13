@@ -21,11 +21,6 @@ class HomeRepository {
         return APIService.shared.getWithToken(of: APIResponse<[HotPost]>.self, url: url, accessToken: token)
     }
     
-    func fetchFavoriteLab(token: String) -> Single<APIResponse<[FavoriteLab]>> {
-        let url = APIConstants.labsFavoriteLab.path
-        return APIService.shared.getWithToken(of: APIResponse<[FavoriteLab]>.self, url: url, accessToken: token)
-    }
-    
     func fetchLogOut(token: String) -> Single<APIResponse<String>> {
         let url = APIConstants.authLogout.path
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)

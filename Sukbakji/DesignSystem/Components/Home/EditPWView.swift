@@ -130,15 +130,15 @@ class EditPWView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
         
         addSubview(currentPWView)
@@ -170,7 +170,7 @@ class EditPWView: UIView {
         addSubview(changeButton)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         currentPWView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(46)
             $0.leading.trailing.equalToSuperview()

@@ -96,7 +96,8 @@ extension PostWritingViewController {
         }
         postWritingView.dropButton.addTarget(self, action: #selector(categoryDrop_Tapped), for: .touchUpInside)
         postWritingView.dropButton2.addTarget(self, action: #selector(jobDrop_Tapped), for: .touchUpInside)
-        postWritingView.titleTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        postWritingView.titleTextField.addTarget(self, action: #selector(titleTextFieldEdited), for: .editingChanged)
+        postWritingView.jobTextField.addTarget(self, action: #selector(jobTextFieldEdited), for: .editingChanged)
         postWritingView.deleteButton.addTarget(self, action: #selector(jobDelete_Tapped), for: .touchUpInside)
         postWritingView.deleteButton2.addTarget(self, action: #selector(titleDelete_Tapped), for: .touchUpInside)
         postWritingView.buttonView.enrollButton.addTarget(self, action: #selector(enroll_Tapped), for: .touchUpInside)
@@ -118,13 +119,11 @@ extension PostWritingViewController {
         categoryDrop.cellHeight = 44
         categoryDrop.anchorView = self.postWritingView.categoryTextField
         categoryDrop.bottomOffset = CGPoint(x: 0, y: 45.5 + postWritingView.categoryTextField.bounds.height)
-        categoryDrop.shadowColor = .clear
         
         fieldDrop.cellHeight = 44
         fieldDrop.anchorView = self.postWritingView.supportFieldTextField
         fieldDrop.bottomOffset = CGPoint(x: 0, y: 45.5 + postWritingView.supportFieldTextField.bounds.height)
         fieldDrop.dataSource = fieldMenu
-        fieldDrop.shadowColor = .clear
         
         categoryDrop.cellConfiguration = { (index, item) in
             return "  \(item)" // 앞에 4칸 공백 추가
@@ -135,7 +134,6 @@ extension PostWritingViewController {
         
         categoryDrop.customCellConfiguration = { [weak self] (index: Index, item: String, cell: DropDownCell) in
             cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
-            
             cell.subviews.forEach {
                 if $0.tag == 9999 { $0.removeFromSuperview() }
             }
@@ -159,7 +157,6 @@ extension PostWritingViewController {
         
         fieldDrop.customCellConfiguration = { [weak self] (index: Index, item: String, cell: DropDownCell) in
             cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
-            
             cell.subviews.forEach {
                 if $0.tag == 9999 { $0.removeFromSuperview() }
             }
@@ -205,25 +202,6 @@ extension PostWritingViewController {
             self?.postWritingView.supportFieldTextField.setPlaceholderColor(.gray500)
             self?.postWritingView.supportFieldTextField.updateUnderlineColor(to: .gray300)
             self?.deleteWarningSupport()
-        }
-        
-        categoryDrop.cancelAction = { [weak self] in
-            self?.postWritingView.categoryTextField.text = ""
-            self?.postWritingView.categoryTextField.backgroundColor = .warning50
-            self?.postWritingView.categoryTextField.setPlaceholderColor(.warning400)
-            self?.postWritingView.categoryTextField.updateUnderlineColor(to: .warning400)
-            self?.warningCategory()
-            self?.supportFieldHeightConstraint?.update(offset: 1)
-            self?.jobHeightConstraint?.update(offset: 1)
-            self?.infoHeightConstraint?.update(offset: 1)
-        }
-        
-        fieldDrop.cancelAction = { [weak self] in
-            self?.postWritingView.supportFieldTextField.text = ""
-            self?.postWritingView.supportFieldTextField.backgroundColor = .warning50
-            self?.postWritingView.supportFieldTextField.setPlaceholderColor(.warning400)
-            self?.postWritingView.supportFieldTextField.updateUnderlineColor(to: .warning400)
-            self?.warningSupport()
         }
     }
 }
@@ -412,13 +390,16 @@ extension PostWritingViewController {
         }
     }
     
-    @objc func textFieldEdited(_ textField: UITextField) {
+    @objc func titleTextFieldEdited(_ textField: UITextField) {
         updateButtonColor()
         if postWritingView.titleTextField.text?.isEmpty == true {
             warningTitle()
         } else {
             deleteWarningTitle()
         }
+    }
+    
+    @objc func jobTextFieldEdited(_ textField: UITextField) {
         if postWritingView.jobTextField.text?.isEmpty == true {
             warningJob()
         } else {

@@ -1,5 +1,5 @@
 //
-//  BoardMainView.swift
+//  BoardView.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 5/16/25.
@@ -11,7 +11,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-class BoardMainView: UIView {
+class BoardView: UIView {
     
     let scrollView = UIScrollView().then {
         $0.contentInsetAdjustmentBehavior = .never
@@ -29,7 +29,7 @@ class BoardMainView: UIView {
     }
     let boardSearchTextField = UITextField().then {
         $0.backgroundColor = .gray50
-        $0.placeholder = "게시판에서 궁금한 내용을 검색해 보세요!"
+        $0.placeholder = "게시판에서 궁금한 내용을 검색해 보세요"
         $0.setPlaceholderColor(.gray300)
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .gray900

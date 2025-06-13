@@ -69,15 +69,15 @@ class EditUnivView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
         
         addSubview(univLabel)
@@ -97,7 +97,7 @@ class EditUnivView: UIView {
         addSubview(editButton)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         univLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(58)
             $0.centerX.equalToSuperview()

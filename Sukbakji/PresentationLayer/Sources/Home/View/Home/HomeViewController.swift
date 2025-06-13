@@ -16,9 +16,9 @@ import SwiftUI
 class HomeViewController: UIViewController {
     
     private let homeView = HomeView()
-    private let favoriteBoardViewModel = FavoriteBoardViewModel()
+    private let favBoardViewModel = FavBoardViewModel()
     private let hotPostViewModel = HotPostViewModel()
-    private let favoriteLabViewModel = FavoriteLabViewModel()
+    private let favLabViewModel = FavLabViewModel()
     private let myProfileViewModel = MyProfileViewModel()
     var disposeBag = DisposeBag()
     var reactor: HomeReactor?
@@ -80,9 +80,9 @@ extension HomeViewController {
     }
     
     private func setAPI() {
-        favoriteBoardViewModel.loadFavoriteBoard()
+        favBoardViewModel.loadFavoriteBoard()
         hotPostViewModel.loadHotPost()
-        favoriteLabViewModel.loadFavoriteLab()
+        favLabViewModel.loadFavoriteLab()
     }
     
     private func getFCMToken() {
@@ -134,9 +134,9 @@ extension HomeViewController {
         self.homeView.favBoardTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        favoriteBoardViewModel.favoriteBoardList
-            .subscribe(onNext: { favoriteBoardList in
-                if !favoriteBoardList.isEmpty {
+        favBoardViewModel.favBoardList
+            .subscribe(onNext: { favBoardList in
+                if !favBoardList.isEmpty {
                     self.homeView.favBoardContainerView.isHidden = false
                     self.homeView.noFavBoard.isHidden = true
                     self.homeView.noFavBoardLabel.isHidden = true
@@ -146,19 +146,19 @@ extension HomeViewController {
                     self.homeView.noFavBoardLabel.isHidden = false
                 }
                 
-                if favoriteBoardList.count == 1 {
+                if favBoardList.count == 1 {
                     self.favBoardHeightConstraint?.update(offset: 56)
                 }
             })
             .disposed(by: disposeBag)
 
-        favoriteBoardViewModel.favoriteBoardList
+        favBoardViewModel.favBoardList
             .bind(to: homeView.favBoardTableView.rx.items(cellIdentifier: FavoriteBoardTableViewCell.identifier, cellType: FavoriteBoardTableViewCell.self)) { row, board, cell in
                 cell.prepare(favoriteBoard: board)
             }
             .disposed(by: disposeBag)
 
-        favoriteBoardViewModel.errorMessage
+        favBoardViewModel.errorMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { message in
                 AlertController(message: message).show()
@@ -199,12 +199,12 @@ extension HomeViewController {
     }
     
     private func bindFavoriteLabViewModel() {
-        self.homeView.favLabCollectionView.rx.setDelegate(self)
+        homeView.favLabCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        favoriteLabViewModel.favoriteLabList
-            .subscribe(onNext: { favoriteLabList in
-                if !favoriteLabList.isEmpty {
+        favLabViewModel.favLabList
+            .subscribe(onNext: { favLabList in
+                if !favLabList.isEmpty {
                     self.homeView.noFavLab.isHidden = true
                     self.homeView.noFavLabLabel.isHidden = true
                     self.homeView.favLabProgressView.isHidden = false
@@ -217,13 +217,13 @@ extension HomeViewController {
             })
             .disposed(by: disposeBag)
         
-        favoriteLabViewModel.favoriteLabList
+        favLabViewModel.favLabList
             .bind(to: homeView.favLabCollectionView.rx.items(cellIdentifier: FavoriteLabCollectionViewCell.identifier, cellType: FavoriteLabCollectionViewCell.self)) { row, lab, cell in
                 cell.prepare(favoriteLab: lab)
             }
             .disposed(by: disposeBag)
         
-        favoriteLabViewModel.errorMessage
+        favLabViewModel.errorMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { message in
                 AlertController(message: message).show()

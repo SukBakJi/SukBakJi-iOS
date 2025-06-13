@@ -152,8 +152,8 @@ class SetAlarmView: UIView, dateProtocol {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
         displayCurrentDate()
         appendMinute()
     }
@@ -162,7 +162,7 @@ class SetAlarmView: UIView, dateProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
 
         addSubview(scrollView)
@@ -204,7 +204,7 @@ class SetAlarmView: UIView, dateProtocol {
         contentView.addSubview(setButton)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         scrollView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }

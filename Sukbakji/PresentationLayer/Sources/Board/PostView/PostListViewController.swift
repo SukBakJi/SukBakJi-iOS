@@ -56,7 +56,7 @@ class PostListViewController: UIViewController {
         
         if isPost == 0 {
             postListView.noticeButton.addTarget(self, action: #selector(clickNoticeButton), for: .touchUpInside)
-        } else if isPost == 1 {
+        } else {
             postListView.noticeButton.addTarget(self, action: #selector(clickNoticeButton2), for: .touchUpInside)
         }
     }
@@ -69,6 +69,8 @@ extension PostListViewController {
             bindHotPostViewModel()
         } else if isPost == 1 {
             bindQnAPostViewModel()
+        } else if isPost == 2 {
+            bindPostViewModel()
         }
     }
     
@@ -77,6 +79,8 @@ extension PostListViewController {
             hotPostViewModel.loadHotPost()
         } else if isPost == 1 {
             postViewModel.loadAllPosts()
+        } else if isPost == 2 {
+            postViewModel.loadPostList(boardName: postListView.optionNavigationbarView.titleLabel.text!)
         }
     }
     
@@ -114,6 +118,25 @@ extension PostListViewController {
         self.postListView.postListTableView.rx.modelSelected(Post.self)
             .subscribe(onNext: { [weak self] postItem in
                 let postDetailVC = PostDetailViewController(title: "질문 게시판", postId: postItem.postId)
+                self?.navigationController?.pushViewController(postDetailVC, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindPostViewModel() {
+        self.postListView.postListTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        postViewModel.postList
+            .observe(on: MainScheduler.instance)
+            .bind(to: postListView.postListTableView.rx.items(cellIdentifier: PostListTableViewCell.identifier, cellType: PostListTableViewCell.self)) { row, post, cell in
+                cell.postPrepare(post: post)
+            }
+            .disposed(by: disposeBag)
+        
+        self.postListView.postListTableView.rx.modelSelected(Post.self)
+            .subscribe(onNext: { [weak self] postItem in
+                let postDetailVC = PostDetailViewController(title: (self?.postListView.optionNavigationbarView.titleLabel.text)!, postId: postItem.postId)
                 self?.navigationController?.pushViewController(postDetailVC, animated: true)
             })
             .disposed(by: disposeBag)

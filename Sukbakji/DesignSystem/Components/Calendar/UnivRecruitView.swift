@@ -126,15 +126,15 @@ class UnivRecruitView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
         
         addSubview(titleView)
@@ -169,7 +169,7 @@ class UnivRecruitView: UIView {
         addSubview(nextButton)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         titleView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(95)

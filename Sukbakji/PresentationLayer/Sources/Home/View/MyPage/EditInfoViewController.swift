@@ -104,10 +104,6 @@ extension EditInfoViewController {
         drop.selectionAction = { [weak self] _, item in
             self?.handleSelection(for: item)
         }
-        
-        drop.cancelAction = { [weak self] in
-            self?.editInfoView.belongTextField.text = "학사 졸업 또는 재학"
-        }
     }
 
     private func handleSelection(for item: String) {

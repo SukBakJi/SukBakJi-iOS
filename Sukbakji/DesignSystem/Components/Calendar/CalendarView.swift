@@ -144,8 +144,8 @@ class CalendarView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
         configureCalendar()
     }
     
@@ -153,7 +153,7 @@ class CalendarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
         
         addSubview(scrollView)
@@ -192,7 +192,7 @@ class CalendarView: UIView {
         addSubview(alarmCompleteImageView)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         scrollView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }

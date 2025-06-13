@@ -1,5 +1,5 @@
 //
-//  FavoriteBoardViewModel.swift
+//  FavLabViewModel.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 12/2/24.
@@ -8,22 +8,22 @@
 import RxSwift
 import RxCocoa
 
-class FavoriteBoardViewModel {
+class FavLabViewModel {
     
     private let disposeBag = DisposeBag()
     
-    let favoriteBoardList = BehaviorRelay<[FavoriteBoard]>(value: [])
+    let favLabList = BehaviorRelay<[FavoriteLab]>(value: [])
     let errorMessage = PublishSubject<String>()
     
-    func loadFavoriteBoard() {
+    func loadFavoriteLab() {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return
         }
         
-        HomeRepository.shared.fetchFavoriteBoard(token: token)
-            .observe(on: MainScheduler.instance) // ✅ UI 업데이트를 위해 Main 스레드에서 실행
+        DirectoryRepository.shared.fetchFavoriteLabs(token: token)
+            .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
-                self.favoriteBoardList.accept(response.result)
+                self.favLabList.accept(response.result)
             }, onFailure: { error in
                 self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
             })

@@ -126,8 +126,8 @@ class EditAlarmView: UIView, dateProtocol {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
         appendMinute()
         displayCurrentDate()
     }
@@ -136,7 +136,7 @@ class EditAlarmView: UIView, dateProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
 
         addSubview(titleLabel)
@@ -169,7 +169,7 @@ class EditAlarmView: UIView, dateProtocol {
         addSubview(deleteButton)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(58)
             $0.centerX.equalToSuperview()

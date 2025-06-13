@@ -1,5 +1,5 @@
 //
-//  BoardMainViewController.swift
+//  BoardMainController.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 5/17/25.
@@ -12,15 +12,15 @@ import RxCocoa
 
 class BoardMainViewController: UIViewController {
     
-    private let boardMainView = BoardMainView()
-    private let favoriteBoardViewModel = FavoriteBoardViewModel()
+    private let boardView = BoardView()
+    private let favBoardViewModel = FavBoardViewModel()
     private let boardViewModel = BoardViewModel()
     var disposeBag = DisposeBag()
     
     private var latestQnAHeightConstraint: Constraint?
     
     override func loadView() {
-        self.view = boardMainView
+        self.view = boardView
     }
 
     override func viewDidLoad() {
@@ -42,15 +42,15 @@ class BoardMainViewController: UIViewController {
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        boardMainView.qnaContainerView.snp.makeConstraints { make in
+        boardView.qnaContainerView.snp.makeConstraints { make in
             latestQnAHeightConstraint = make.height.equalTo(168).constraint
         }
         
-        boardMainView.hotBoardButton.addTarget(self, action: #selector(hotPost_Tapped), for: .touchUpInside)
-        boardMainView.myPostButton.addTarget(self, action: #selector(myPost_Tapped), for: .touchUpInside)
-        boardMainView.scrapButton.addTarget(self, action: #selector(scrap_Tapped), for: .touchUpInside)
-        boardMainView.myCommentButton.addTarget(self, action: #selector(myComment_Tapped), for: .touchUpInside)
-        boardMainView.qnaButton.addTarget(self, action: #selector(qnaList_Tapped), for: .touchUpInside)
+        boardView.hotBoardButton.addTarget(self, action: #selector(hotPost_Tapped), for: .touchUpInside)
+        boardView.myPostButton.addTarget(self, action: #selector(myPost_Tapped), for: .touchUpInside)
+        boardView.scrapButton.addTarget(self, action: #selector(scrap_Tapped), for: .touchUpInside)
+        boardView.myCommentButton.addTarget(self, action: #selector(myComment_Tapped), for: .touchUpInside)
+        boardView.qnaButton.addTarget(self, action: #selector(qnaList_Tapped), for: .touchUpInside)
     }
     
     private func setBind() {
@@ -60,23 +60,23 @@ class BoardMainViewController: UIViewController {
     
     private func setAPI() {
         boardViewModel.loadLatestQnA()
-        favoriteBoardViewModel.loadFavoriteBoard()
+        favBoardViewModel.loadFavoriteBoard()
     }
     
     private func bindLatestQnAViewModel() {
-        self.boardMainView.qnaTableView.rx.setDelegate(self)
+        self.boardView.qnaTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
         boardViewModel.latestQnAList
             .subscribe(onNext: { latestQnAList in
                 if !latestQnAList.isEmpty {
-                    self.boardMainView.qnaContainerView.isHidden = false
-                    self.boardMainView.noQnA.isHidden = true
-                    self.boardMainView.noQnALabel.isHidden = true
+                    self.boardView.qnaContainerView.isHidden = false
+                    self.boardView.noQnA.isHidden = true
+                    self.boardView.noQnALabel.isHidden = true
                 } else {
-                    self.boardMainView.qnaContainerView.isHidden = true
-                    self.boardMainView.noQnA.isHidden = false
-                    self.boardMainView.noQnALabel.isHidden = false
+                    self.boardView.qnaContainerView.isHidden = true
+                    self.boardView.noQnA.isHidden = false
+                    self.boardView.noQnALabel.isHidden = false
                 }
                 
                 if latestQnAList.count == 1 {
@@ -88,32 +88,32 @@ class BoardMainViewController: UIViewController {
             .disposed(by: disposeBag)
 
         boardViewModel.latestQnAList
-            .bind(to: boardMainView.qnaTableView.rx.items(cellIdentifier: BoardQnATableViewCell.identifier, cellType: BoardQnATableViewCell.self)) { row, qna, cell in
+            .bind(to: boardView.qnaTableView.rx.items(cellIdentifier: BoardQnATableViewCell.identifier, cellType: BoardQnATableViewCell.self)) { row, qna, cell in
                 cell.prepare(qna: qna)
             }
             .disposed(by: disposeBag)
     }
     
     private func bindFavoriteBoardViewModel() {
-        self.boardMainView.favBoardCollectionView.rx.setDelegate(self)
+        self.boardView.favBoardCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        favoriteBoardViewModel.favoriteBoardList
+        favBoardViewModel.favBoardList
             .subscribe(onNext: { favoriteLabList in
                 if !favoriteLabList.isEmpty {
-                    self.boardMainView.noFavBoard.isHidden = true
-                    self.boardMainView.noFavBoardLabel.isHidden = true
-                    self.boardMainView.favBoardProgressView.isHidden = false
+                    self.boardView.noFavBoard.isHidden = true
+                    self.boardView.noFavBoardLabel.isHidden = true
+                    self.boardView.favBoardProgressView.isHidden = false
                 } else {
-                    self.boardMainView.noFavBoard.isHidden = false
-                    self.boardMainView.noFavBoardLabel.isHidden = false
-                    self.boardMainView.favBoardProgressView.isHidden = true
+                    self.boardView.noFavBoard.isHidden = false
+                    self.boardView.noFavBoardLabel.isHidden = false
+                    self.boardView.favBoardProgressView.isHidden = true
                 }
             })
             .disposed(by: disposeBag)
         
-        favoriteBoardViewModel.favoriteBoardList
-            .bind(to: boardMainView.favBoardCollectionView.rx.items(cellIdentifier: FavoriteBoardCollectionViewCell.identifier, cellType: FavoriteBoardCollectionViewCell.self)) { row, board, cell in
+        favBoardViewModel.favBoardList
+            .bind(to: boardView.favBoardCollectionView.rx.items(cellIdentifier: FavoriteBoardCollectionViewCell.identifier, cellType: FavoriteBoardCollectionViewCell.self)) { row, board, cell in
                 cell.prepare(favoriteBoard: board)
             }
             .disposed(by: disposeBag)
@@ -155,10 +155,10 @@ extension BoardMainViewController: UICollectionViewDelegateFlowLayout, UIScrollV
         let scrollViewWidth = scrollView.frame.size.width
         let progress = Float(contentOffsetX / (contentWidth - scrollViewWidth))
         
-        boardMainView.favBoardProgressView.setProgress(progress, animated: true)
+        boardView.favBoardProgressView.setProgress(progress, animated: true)
         
         if contentOffsetX + scrollViewWidth >= contentWidth {
-            boardMainView.favBoardProgressView.setProgress(1.0, animated: true)
+            boardView.favBoardProgressView.setProgress(1.0, animated: true)
         }
     }
     

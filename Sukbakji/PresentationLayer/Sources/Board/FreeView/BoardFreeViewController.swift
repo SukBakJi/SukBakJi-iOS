@@ -44,7 +44,7 @@ class BoardFreeViewController: UIViewController, FavBoardCellDelegate {
         boardFreeView.favBoardView.snp.makeConstraints { make in
             favBoardHeightConstraint = make.height.equalTo(121).constraint
         }
-
+        
         boardFreeView.makeBoardButton.addTarget(self, action: #selector(create_Tapped), for: .touchUpInside)
     }
     
@@ -88,6 +88,13 @@ class BoardFreeViewController: UIViewController, FavBoardCellDelegate {
         guard let indexPath = boardFreeView.freeFavoriteBoardTableView.indexPath(for: cell) else { return }
         let boardId = favScrapViewModel.boardsFavoriteList.value[indexPath.row].boardId
         favScrapViewModel.favoriteBoard(boardId: boardId, isFav: false)
+    }
+    
+    func more_Tapped(cell: FreeFavBoardTableViewCell) {
+        guard let indexPath = boardFreeView.freeFavoriteBoardTableView.indexPath(for: cell) else { return }
+        let boardName = favScrapViewModel.boardsFavoriteList.value[indexPath.row].boardName
+        let postListVC = PostListViewController(title: boardName, buttonTitle: "게시판 공지", isPost: 2, isHidden: true)
+        self.navigationController?.pushViewController(postListVC, animated: true)
     }
     
     @objc private func create_Tapped() {

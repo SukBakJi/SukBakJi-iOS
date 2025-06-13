@@ -9,7 +9,8 @@ import RxSwift
 import RxCocoa
 
 class ReportViewModel {
-    let disposeBag = DisposeBag()
+    private let repository = ReportRepository()
+    private let disposeBag = DisposeBag()
     
     let reportResult = PublishSubject<Bool>()
     let blockResult = PublishSubject<Bool>()
@@ -24,7 +25,7 @@ class ReportViewModel {
             "reason": reason
         ] as [String : Any]
         
-        ReportRepository.shared.fetchReportPost(token: token, parameters: params)
+        repository.fetchReportPost(token: token, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] _ in
                 self?.reportResult.onNext(true)
@@ -44,7 +45,7 @@ class ReportViewModel {
             "reason": reason
         ] as [String : Any]
         
-        ReportRepository.shared.fetchReportComment(token: token, parameters: params)
+        repository.fetchReportComment(token: token, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] _ in
                 self?.reportResult.onNext(true)
