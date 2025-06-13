@@ -218,15 +218,15 @@ class HomeView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
         
         addSubview(scrollView)
@@ -283,7 +283,7 @@ class HomeView: UIView {
         addSubview(topButton)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

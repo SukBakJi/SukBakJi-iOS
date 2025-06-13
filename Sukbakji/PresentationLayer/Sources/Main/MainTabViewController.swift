@@ -15,14 +15,14 @@ class CustomTabBarItemView: UIView {
 
     init(image: UIImage?, title: String) {
         super.init(frame: .zero)
-        setupUI(image: image, title: title)
+        setUI(image: image, title: title)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupUI(image: UIImage?, title: String) {
+    private func setUI(image: UIImage?, title: String) {
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .orange700
@@ -146,10 +146,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         let calendarVC = CalendarViewController()
         let boardVC = BoardViewController()
         let chattingVC = ChattingViewController()
-        let swiftUIDirectoryView = DirectoryMainViewController()
-        
-        let directoryVC = UIHostingController(rootView: swiftUIDirectoryView)
-        directoryVC.additionalSafeAreaInsets.bottom = 92
+        let directoryVC = DirectoryViewController()
         
         let navigationHome = UINavigationController(rootViewController: homeVC)
         let navigationCalendar = UINavigationController(rootViewController: calendarVC)

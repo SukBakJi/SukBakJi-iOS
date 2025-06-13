@@ -11,6 +11,7 @@ import SnapKit
 
 protocol FavBoardCellDelegate: AnyObject {
     func fav_Tapped(cell: FreeFavBoardTableViewCell)
+    func more_Tapped(cell: FreeFavBoardTableViewCell)
 }
 
 class FreeFavBoardTableViewCell: UITableViewCell {
@@ -88,10 +89,15 @@ class FreeFavBoardTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().inset(24)
             $0.height.width.equalTo(40)
         }
+        goButton.addTarget(self, action: #selector(more_Tapped), for: .touchUpInside)
     }
     
     @objc private func fav_Tapped() {
         delegate?.fav_Tapped(cell: self)
+    }
+    
+    @objc private func more_Tapped() {
+        delegate?.more_Tapped(cell: self)
     }
     
     func prepare(favorite: Favorite) {

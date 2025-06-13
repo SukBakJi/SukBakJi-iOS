@@ -120,15 +120,15 @@ class EdifInfoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
         
         addSubview(idView)
@@ -159,7 +159,7 @@ class EdifInfoView: UIView {
         addSubview(editButton)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         idView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(46)
             $0.leading.trailing.equalToSuperview()

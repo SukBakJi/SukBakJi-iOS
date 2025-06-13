@@ -116,13 +116,6 @@ extension SetAlarmViewController {
             self?.setAlarmView.univTextField.updateUnderlineColor(to: .gray300)
             self?.deleteWarningUnivName()
         }
-
-        drop.cancelAction = { [weak self] in
-            self?.setAlarmView.univTextField.backgroundColor = .warning50
-            self?.setAlarmView.univTextField.setPlaceholderColor(.warning400)
-            self?.setAlarmView.univTextField.updateUnderlineColor(to: .warning400)
-            self?.warningUnivName()
-        }
     }
 }
 

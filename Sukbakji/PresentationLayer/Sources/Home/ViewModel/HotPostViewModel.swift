@@ -23,7 +23,7 @@ class HotPostViewModel {
         }
         
         HomeRepository.shared.fetchHotPost(token: token)
-            .observe(on: MainScheduler.instance) // ✅ UI 업데이트를 위해 Main 스레드에서 실행
+            .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.hotPostList.accept(response.result)
             }, onFailure: { error in

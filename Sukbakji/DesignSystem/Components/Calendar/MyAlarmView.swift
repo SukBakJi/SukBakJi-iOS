@@ -36,8 +36,8 @@ class MyAlarmView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
-        setupConstraints()
+        setUI()
+        setConstraints()
         configureDate()
     }
     
@@ -45,7 +45,7 @@ class MyAlarmView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setUI() {
         backgroundColor = .white
 
         addSubview(navigationbarView)
@@ -56,7 +56,7 @@ class MyAlarmView: UIView {
         addSubview(alarmCompleteImageView)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
         navigationbarView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(95)

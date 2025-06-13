@@ -17,6 +17,7 @@ final class PostViewModel {
     let postDocterList = BehaviorRelay<[Post]>(value: [])
     let postMasterList = BehaviorRelay<[Post]>(value: [])
     let postEnterList = BehaviorRelay<[Post]>(value: [])
+    let postList = BehaviorRelay<[Post]>(value: [])
     
     let mergedQnAList = BehaviorRelay<[Post]>(value: [])
     
@@ -67,6 +68,19 @@ final class PostViewModel {
             .map { $0.result }
             .subscribe(onSuccess: { [weak self] posts in
                 self?.postEnterList.accept(posts)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadPostList(boardName: String) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        repository.fetchPostList(token: token, menu: "자유", boardName: boardName)
+            .map { $0.result }
+            .subscribe(onSuccess: { [weak self] posts in
+                self?.postList.accept(posts)
             })
             .disposed(by: disposeBag)
     }
@@ -140,7 +154,7 @@ final class PostViewModel {
             .subscribe(onSuccess: { response in
                 
             }, onFailure: { error in
-                
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -150,7 +164,6 @@ final class PostViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] isSuccess in
                 self?.postDeleted.onNext(isSuccess)
-                print("성공")
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
             })

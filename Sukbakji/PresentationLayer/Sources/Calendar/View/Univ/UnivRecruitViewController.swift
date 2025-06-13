@@ -117,16 +117,6 @@ extension UnivRecruitViewController {
             self?.univRecruitView.recruitLabel.text = "\(item)"
             self?.univRecruitView.recruitLabel.textColor = .orange700
         }
-        
-        drop.cancelAction = { [weak self] in
-            self?.univRecruitView.warningTypeLabel.isHidden = false
-            self?.univRecruitView.warningImageView.isHidden = false
-            self?.univRecruitView.recruitTypeTextField.backgroundColor = .warning50
-            self?.univRecruitView.recruitTypeTextField.setPlaceholderColor(.warning400)
-            self?.univRecruitView.recruitTypeTextField.updateUnderlineColor(to: .warning400)
-            self?.univRecruitView.recruitLabel.text = "모집전형을 선택해 주세요"
-            self?.univRecruitView.recruitLabel.textColor = .gray500
-        }
     }
 }
     
