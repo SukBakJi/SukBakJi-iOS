@@ -45,6 +45,8 @@ class DirectoryViewController: UIViewController {
         directoryView.favLabView.snp.makeConstraints { make in
             favLabHeightConstraint = make.height.equalTo(187).constraint
         }
+        
+        directoryView.reviewButton.addTarget(self, action: #selector(review_Tapped), for: .touchUpInside)
     }
 }
 
@@ -103,6 +105,11 @@ extension DirectoryViewController {
                 cell.prepare(topics: topic)
             }
             .disposed(by: disposeBag)
+    }
+    
+    @objc private func review_Tapped() {
+        let labReviewVC = LabReviewViewController()
+        self.navigationController?.pushViewController(labReviewVC, animated: true)
     }
 }
 

@@ -97,8 +97,8 @@ class BoardDoctorViewController: UIViewController {
     }
     
     @objc private func writing_Tapped() {
-        let postWritingViewController = PostWritingViewController()
-        self.navigationController?.pushViewController(postWritingViewController, animated: true)
+        let postWritingVC = PostWritingViewController()
+        self.navigationController?.pushViewController(postWritingVC, animated: true)
     }
 }
 

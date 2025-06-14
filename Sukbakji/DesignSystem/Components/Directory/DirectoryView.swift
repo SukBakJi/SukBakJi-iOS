@@ -8,8 +8,6 @@
 import UIKit
 import SnapKit
 import Then
-import RxSwift
-import RxCocoa
 
 class DirectoryView: UIView {
     
@@ -37,7 +35,7 @@ class DirectoryView: UIView {
     let backgroundLabel = UILabel().then {
         $0.backgroundColor = .gray100
     }
-    let boardSearchTextField = UITextField().then {
+    let labSearchTextField = UITextField().then {
         $0.backgroundColor = .gray50
         $0.placeholder = "학과와 연구 주제로 검색해 보세요"
         $0.setPlaceholderColor(.gray300)
@@ -172,7 +170,7 @@ class DirectoryView: UIView {
         titleView.addSubview(notificationButton)
         titleView.addSubview(backgroundLabel)
         
-        contentView.addSubview(boardSearchTextField)
+        contentView.addSubview(labSearchTextField)
         contentView.addSubview(tapOverlayButton)
         contentView.addSubview(searchImageView)
         
@@ -235,14 +233,14 @@ class DirectoryView: UIView {
             $0.height.equalTo(1)
         }
         
-        boardSearchTextField.snp.makeConstraints {
+        labSearchTextField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(115)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(48)
         }
-        boardSearchTextField.setLeftPadding(52)
-        boardSearchTextField.errorfix()
-        boardSearchTextField.isUserInteractionEnabled = false
+        labSearchTextField.setLeftPadding(52)
+        labSearchTextField.errorfix()
+        labSearchTextField.isUserInteractionEnabled = false
         
         tapOverlayButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(133)
@@ -252,13 +250,13 @@ class DirectoryView: UIView {
         tapOverlayButton.addTarget(self, action: #selector(textFieldTapped), for: .touchUpInside)
         
         searchImageView.snp.makeConstraints {
-            $0.centerY.equalTo(boardSearchTextField)
+            $0.centerY.equalTo(labSearchTextField)
             $0.leading.equalToSuperview().offset(40)
             $0.height.width.equalTo(24)
         }
         
         favLabView.snp.makeConstraints {
-            $0.top.equalTo(boardSearchTextField.snp.bottom)
+            $0.top.equalTo(labSearchTextField.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         

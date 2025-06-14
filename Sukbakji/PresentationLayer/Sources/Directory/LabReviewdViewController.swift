@@ -1,7 +1,7 @@
 import SwiftUI
 import Alamofire
 
-struct LabReviewViewController: View {
+struct LabReviewdViewController: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isSearchActive: Bool = false // 검색 바 클릭 상태 변수
     @State private var reviews: [LabReviewListInfo] = [] // 초기 리뷰 목록
@@ -132,7 +132,7 @@ struct LabReviewViewController: View {
                                     .padding(.horizontal, 24)
 
                                     ForEach(reviews.prefix(showMoreReviews ? reviews.count : 3), id: \.content) { review in
-                                        LabReviewView(review: review)
+                                        LabReviewView2(review: review)
                                     }
                                     .padding(.horizontal, 24)
 
@@ -242,7 +242,7 @@ struct LabReviewViewController: View {
     }
 }
 
-struct LabReviewView: View {
+struct LabReviewView2: View {
     var review: LabReviewListInfo
     
     var body: some View {
@@ -341,5 +341,5 @@ struct KeywordView: View {
 }
 
 #Preview {
-    LabReviewViewController()
+    LabReviewdViewController()
 }

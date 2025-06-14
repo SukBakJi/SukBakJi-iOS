@@ -48,7 +48,7 @@
 		7B962D4B2DA902F9004175E0 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B962D4A2DA902F9004175E0 /* UIApplication+.swift */; };
 		7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */; };
 		7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */; };
-		7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D342C6613FD00EF16FB /* LabReviewViewController.swift */; };
+		7BFE5D352C6613FD00EF16FB /* LabReviewdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D342C6613FD00EF16FB /* LabReviewdViewController.swift */; };
 		7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */; };
 		7BFE5D392C6867A300EF16FB /* LabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */; };
 		91C53C4A2DAC9ABA00B8795D /* RefreshTokenManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C53C492DAC9ABA00B8795D /* RefreshTokenManager+.swift */; };
@@ -86,6 +86,8 @@
 		C70523F12D775442009AED8C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70523F02D775442009AED8C /* UIView+.swift */; };
 		C70523FE2D7757BA009AED8C /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7548F292D147CFF00BA687A /* UITextField+.swift */; };
 		C70523FF2D7757D4009AED8C /* AuthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD02C673E42002080E0 /* AuthDataManager.swift */; };
+		C709CC762DFD4D2400F09780 /* LabReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709CC752DFD4D2400F09780 /* LabReviewViewController.swift */; };
+		C709CC782DFD724600F09780 /* LabReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709CC772DFD724600F09780 /* LabReviewTableViewCell.swift */; };
 		C70ADA952D8D011D00BF9C10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C70ADA942D8D011D00BF9C10 /* GoogleService-Info.plist */; };
 		C70BBC192D64EAA7002C26E6 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70BBC182D64EAA7002C26E6 /* MyProfileViewModel.swift */; };
 		C70C313C2D5CC2DC00F17D72 /* HomeReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C313B2D5CC2DC00F17D72 /* HomeReactor.swift */; };
@@ -343,7 +345,7 @@
 		7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMainViewController.swift; sourceTree = "<group>"; };
 		7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedLabDetailViewController.swift; sourceTree = "<group>"; };
-		7BFE5D342C6613FD00EF16FB /* LabReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewViewController.swift; sourceTree = "<group>"; };
+		7BFE5D342C6613FD00EF16FB /* LabReviewdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewdViewController.swift; sourceTree = "<group>"; };
 		7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectorySearchViewController.swift; sourceTree = "<group>"; };
 		7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabDetailViewController.swift; sourceTree = "<group>"; };
 		910CC1BE2D76C55500E6B58E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -380,6 +382,8 @@
 		C70105E62DE7786B00042072 /* PostWritingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWritingViewController.swift; sourceTree = "<group>"; };
 		C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyAlarmViewController.swift; sourceTree = "<group>"; };
 		C70523F02D775442009AED8C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		C709CC752DFD4D2400F09780 /* LabReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewViewController.swift; sourceTree = "<group>"; };
+		C709CC772DFD724600F09780 /* LabReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewTableViewCell.swift; sourceTree = "<group>"; };
 		C70ADA942D8D011D00BF9C10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C70BBC182D64EAA7002C26E6 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
 		C70C313B2D5CC2DC00F17D72 /* HomeReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReactor.swift; sourceTree = "<group>"; };
@@ -739,7 +743,7 @@
 				7B1C53462C69D0F100C66D0D /* DirectoryModel */,
 				7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */,
 				7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */,
-				7BFE5D342C6613FD00EF16FB /* LabReviewViewController.swift */,
+				7BFE5D342C6613FD00EF16FB /* LabReviewdViewController.swift */,
 				7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */,
 				7BFE5D382C6867A300EF16FB /* LabDetailViewController.swift */,
 				7B259AFD2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift */,
@@ -1459,6 +1463,8 @@
 				C7D18E502DFB2E860076A4DE /* DirectoryViewController.swift */,
 				C7D18E542DFB33E30076A4DE /* TopicCollectionViewCell.swift */,
 				C7D18E522DFB311A0076A4DE /* LabReviewCollectionViewCell.swift */,
+				C709CC752DFD4D2400F09780 /* LabReviewViewController.swift */,
+				C709CC772DFD724600F09780 /* LabReviewTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1848,6 +1854,7 @@
 				C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */,
 				C7A777692D507A1800046367 /* MessageInputView.swift in Sources */,
 				C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */,
+				C709CC762DFD4D2400F09780 /* LabReviewViewController.swift in Sources */,
 				C70105E72DE7786B00042072 /* PostWritingViewController.swift in Sources */,
 				C724B69B2DE6179D00C25C4A /* FavScrapViewModel.swift in Sources */,
 				41EE13402C54ABD70037EDD6 /* SignupViewController.swift in Sources */,
@@ -1885,7 +1892,7 @@
 				412F92322C5C9E280042B834 /* SecondAcademicVerificationViewController.swift in Sources */,
 				C7DA37542CFCD4E900B26549 /* FavBoardViewModel.swift in Sources */,
 				4168E84E2C68ACCC00A0F292 /* ResearchTopicModel.swift in Sources */,
-				7BFE5D352C6613FD00EF16FB /* LabReviewViewController.swift in Sources */,
+				7BFE5D352C6613FD00EF16FB /* LabReviewdViewController.swift in Sources */,
 				C76A86532DFC964F00E2322F /* FavLabView.swift in Sources */,
 				C70055282DABC40D00520D76 /* TimeHelper+.swift in Sources */,
 				C7BA9BBE2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift in Sources */,
@@ -1979,6 +1986,7 @@
 				C70C313C2D5CC2DC00F17D72 /* HomeReactor.swift in Sources */,
 				C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */,
 				C79A76242DDB7DF000EABA15 /* EnterMenuCollectionViewCell.swift in Sources */,
+				C709CC782DFD724600F09780 /* LabReviewTableViewCell.swift in Sources */,
 				7B1C53542C69D74500C66D0D /* DirectoryInterestTopicModel.swift in Sources */,
 				C77EFB3D2D9C02B3000C2841 /* NotificationViewController.swift in Sources */,
 				415BBC0B2C7343F8002768EE /* AuthInterceptor+.swift in Sources */,
