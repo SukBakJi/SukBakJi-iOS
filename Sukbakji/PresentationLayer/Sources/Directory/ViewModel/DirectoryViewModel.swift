@@ -10,6 +10,7 @@ import RxCocoa
 
 class DirectoryViewModel {
     private let repository = DirectoryRepository()
+    private let labReviewView = LabReviewView()
     private let disposeBag = DisposeBag()
     
     let topicList = PublishSubject<Topic>()
@@ -39,8 +40,13 @@ class DirectoryViewModel {
         
         repository.fetchLabsReviews(token: token, offset: offset, limit: limit)
             .map { $0.result }
-            .subscribe(onSuccess: { reviews in
-                self.reviewList.accept(reviews)
+            .subscribe(onSuccess: { [weak self] reviews in
+                guard let self = self else { return }
+                if reviews.isEmpty {
+                } else {
+                    let current = self.reviewList.value
+                    self.reviewList.accept(current + reviews)
+                }
             }, onFailure: { error in
                 self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
             })

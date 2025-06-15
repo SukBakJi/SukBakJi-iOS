@@ -243,6 +243,8 @@
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
 		C7C657DD2CFD6891009FFA8E /* FavLabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */; };
+		C7D03C362DFED3C300FC5636 /* FavLabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D03C352DFED3C300FC5636 /* FavLabViewController.swift */; };
+		C7D03C382DFED3D600FC5636 /* FavLabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D03C372DFED3D600FC5636 /* FavLabTableViewCell.swift */; };
 		C7D18E512DFB2E860076A4DE /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D18E502DFB2E860076A4DE /* DirectoryViewController.swift */; };
 		C7D18E532DFB311A0076A4DE /* LabReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D18E522DFB311A0076A4DE /* LabReviewCollectionViewCell.swift */; };
 		C7D18E552DFB33E30076A4DE /* TopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D18E542DFB33E30076A4DE /* TopicCollectionViewCell.swift */; };
@@ -542,6 +544,8 @@
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
 		C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavLabViewModel.swift; sourceTree = "<group>"; };
+		C7D03C352DFED3C300FC5636 /* FavLabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavLabViewController.swift; sourceTree = "<group>"; };
+		C7D03C372DFED3D600FC5636 /* FavLabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavLabTableViewCell.swift; sourceTree = "<group>"; };
 		C7D18E502DFB2E860076A4DE /* DirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
 		C7D18E522DFB311A0076A4DE /* LabReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7D18E542DFB33E30076A4DE /* TopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1463,6 +1467,8 @@
 				C7D18E502DFB2E860076A4DE /* DirectoryViewController.swift */,
 				C7D18E542DFB33E30076A4DE /* TopicCollectionViewCell.swift */,
 				C7D18E522DFB311A0076A4DE /* LabReviewCollectionViewCell.swift */,
+				C7D03C352DFED3C300FC5636 /* FavLabViewController.swift */,
+				C7D03C372DFED3D600FC5636 /* FavLabTableViewCell.swift */,
 				C709CC752DFD4D2400F09780 /* LabReviewViewController.swift */,
 				C709CC772DFD724600F09780 /* LabReviewTableViewCell.swift */,
 			);
@@ -1749,6 +1755,7 @@
 				C71B4E802DAC0C2B006EACF1 /* ProfileUseCase.swift in Sources */,
 				C74A159A2D5A47F600A1698B /* MyProfile.swift in Sources */,
 				41EE134C2C5520060037EDD6 /* LeftAlignedCollectionViewFlowLayout+.swift in Sources */,
+				C7D03C362DFED3C300FC5636 /* FavLabViewController.swift in Sources */,
 				C7D18E552DFB33E30076A4DE /* TopicCollectionViewCell.swift in Sources */,
 				C77B49702D7B66D600005ABE /* OrangeButton.swift in Sources */,
 				C73948B42DD8833E00612461 /* FavoriteBoardCollectionViewCell.swift in Sources */,
@@ -1941,6 +1948,7 @@
 				C7A23D8E2D0C1087008657B0 /* AlarmFBCView.swift in Sources */,
 				C7845D022DD4BA0C004955A2 /* NoticeButton.swift in Sources */,
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
+				C7D03C382DFED3D600FC5636 /* FavLabTableViewCell.swift in Sources */,
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
 				91D413262D82696500020CEC /* DetailTOSViewController.swift in Sources */,
 				91D413272D82696500020CEC /* TOSViewController.swift in Sources */,
