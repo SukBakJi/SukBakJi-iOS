@@ -203,7 +203,7 @@ struct DirectoryMainViewController: View {
                                 Button(action: {
                                     print("연구실 후기 더보기 tapped!")
                                 }) {
-                                    NavigationLink(destination: LabReviewViewController()) {
+                                    NavigationLink(destination: LabReviewdViewController()) {
                                         Text("더보기")
                                             .font(.system(size: 12, weight: .medium))
                                             .multilineTextAlignment(.center)
@@ -220,7 +220,7 @@ struct DirectoryMainViewController: View {
                             .frame(alignment: .center)
                             .background(Constants.White)
                             
-                            LabReviewView(review: latestReview)
+                            LabReviewView2(review: latestReview)
                                 .padding(.horizontal, 24)
                                 .padding(.bottom, 48)
                         } else if let errorMessage = errorMessage {

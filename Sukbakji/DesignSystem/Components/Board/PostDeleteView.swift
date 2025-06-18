@@ -8,7 +8,6 @@
 import UIKit
 import Then
 import SnapKit
-import RxSwift
 
 class BoardDeleteView: UIView {
     
@@ -52,7 +51,6 @@ class BoardDeleteView: UIView {
         $0.spacing = 12
         $0.distribution = .fillEqually
     }
-    let disposeBag = DisposeBag()
     
     init(title: String, content: String, viewModel: PostViewModel, postId: Int) {
         super.init(frame: .zero)

@@ -1,19 +1,30 @@
 //
-//  FavoriteLabCollectionViewCell.swift
+//  FavLabTableViewCell.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 12/1/24.
+//  Created by jaegu park on 6/15/25.
 //
 
 import UIKit
 import Then
 import SnapKit
 
-class FavoriteLabCollectionViewCell: UICollectionViewCell {
+class FavLabTableViewCell: UITableViewCell {
     
-    static let identifier = String(describing: FavoriteLabCollectionViewCell.self)
+    static let identifier = String(describing: FavLabTableViewCell.self)
     
+    private let selectButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
+    }
     private let labView = UIView().then {
+        $0.backgroundColor = .gray50
+        $0.layer.cornerRadius = 12
+        $0.layer.masksToBounds = false
+        $0.clipsToBounds = true
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.gray100.cgColor
+    }
+    private let univView = UIView().then {
         $0.backgroundColor = .white
     }
     private let univLabel = UILabel().then {
@@ -56,9 +67,9 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         $0.textColor = .orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder: NSCoder) {
@@ -70,92 +81,104 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUI() {
-        contentView.layer.cornerRadius = 15
-        contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.gray100.cgColor
-        contentView.clipsToBounds = false
-        contentView.backgroundColor = .gray50
+        contentView.addSubview(selectButton)
+        selectButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.width.equalTo(20)
+        }
         
-        layer.cornerRadius = 15
-        layer.masksToBounds = false
-        
-        self.contentView.addSubview(labView)
+        contentView.addSubview(labView)
         labView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(4)
+            $0.leading.equalTo(selectButton.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(172)
+        }
+        
+        labView.addSubview(univView)
+        univView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(70)
         }
         
-        self.labView.addSubview(univLabel)
+        univView.addSubview(univLabel)
         univLabel.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().offset(16)
+            $0.top.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(16)
             $0.height.equalTo(14)
         }
         
-        self.labView.addSubview(labLabel)
+        univView.addSubview(labLabel)
         labLabel.snp.makeConstraints {
             $0.top.equalTo(univLabel.snp.bottom).offset(6)
             $0.leading.equalToSuperview().offset(16)
             $0.height.equalTo(18)
         }
         
-        self.contentView.addSubview(professorImageView)
+        labView.addSubview(professorImageView)
         professorImageView.snp.makeConstraints {
-            $0.top.equalTo(labView.snp.bottom).offset(12)
+            $0.top.equalTo(univView.snp.bottom).offset(12)
             $0.leading.equalToSuperview().offset(16)
             $0.height.width.equalTo(40)
         }
         
-        self.contentView.addSubview(professorNameLabel)
+        labView.addSubview(professorNameLabel)
         professorNameLabel.snp.makeConstraints {
-            $0.top.equalTo(labView.snp.bottom).offset(14.5)
+            $0.top.equalTo(univView.snp.bottom).offset(14.5)
             $0.leading.equalTo(professorImageView.snp.trailing).offset(12)
             $0.height.equalTo(17)
         }
         
-        self.contentView.addSubview(professorLabel)
+        labView.addSubview(professorLabel)
         professorLabel.snp.makeConstraints {
-            $0.top.equalTo(labView.snp.bottom).offset(16)
+            $0.centerY.equalTo(professorNameLabel)
             $0.leading.equalTo(professorNameLabel.snp.trailing).offset(4)
             $0.height.equalTo(14)
         }
         
-        self.contentView.addSubview(professorLabLabel)
+        labView.addSubview(professorLabLabel)
         professorLabLabel.snp.makeConstraints {
             $0.top.equalTo(professorNameLabel.snp.bottom).offset(4)
             $0.leading.equalTo(professorImageView.snp.trailing).offset(12)
             $0.height.equalTo(14)
         }
         
-        self.contentView.addSubview(labView2)
+        labView.addSubview(labView2)
         labView2.snp.makeConstraints {
             $0.top.equalTo(professorImageView.snp.bottom).offset(12)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
             $0.height.equalTo(20)
         }
         
-        self.labView2.addSubview(labLabel2)
+        labView2.addSubview(labLabel2)
         labLabel2.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(8)
-            $0.height.equalTo(26)
+            $0.height.equalTo(14)
         }
         
-        self.contentView.addSubview(labView3)
+        labView.addSubview(labView3)
         labView3.snp.makeConstraints {
             $0.top.equalTo(professorImageView.snp.bottom).offset(12)
             $0.leading.equalTo(labView2.snp.trailing).offset(6)
             $0.height.equalTo(20)
         }
         
-        self.labView3.addSubview(labLabel3)
+        labView3.addSubview(labLabel3)
         labLabel3.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(8)
-            $0.height.equalTo(26)
+            $0.height.equalTo(14)
         }
     }
-    
-    func prepare(favoriteLab: FavoriteLab) {
+
+    func prepare(favoriteLab: FavoriteLab, showButton: Bool) {
+        selectButton.isHidden = !showButton
+        selectButton.snp.remakeConstraints {
+            $0.height.width.equalTo(showButton ? 20 : 1)
+        }
+        
         univLabel.text = favoriteLab.universityName
         labLabel.text = favoriteLab.labName
         professorNameLabel.text = favoriteLab.professorName
@@ -166,5 +189,7 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         } else {
             labLabel3.text = "#\(favoriteLab.researchTopics[1])"
         }
+        
+        layoutIfNeeded()
     }
 }
