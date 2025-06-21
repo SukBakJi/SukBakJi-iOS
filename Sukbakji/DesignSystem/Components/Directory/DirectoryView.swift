@@ -354,8 +354,7 @@ class DirectoryView: UIView {
     }
     
     @objc private func textFieldTapped() {
-        let nextVC = BoardSearchViewController(title: "게시판", menu: "")
-        nextVC.modalPresentationStyle = .fullScreen
-        parentVC?.present(nextVC, animated: true, completion: nil)
+        let nextVC = LabSearchViewController()
+        parentVC?.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

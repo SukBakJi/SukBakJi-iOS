@@ -5,7 +5,6 @@
 //  Created by jaegu park on 6/14/25.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 import Then

@@ -46,7 +46,6 @@
 		7B259AFE2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B259AFD2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift */; };
 		7B259B002C75EB5700D3DFE5 /* LabReviewWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B259AFF2C75EB5700D3DFE5 /* LabReviewWriteViewController.swift */; };
 		7B962D4B2DA902F9004175E0 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B962D4A2DA902F9004175E0 /* UIApplication+.swift */; };
-		7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */; };
 		7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */; };
 		7BFE5D352C6613FD00EF16FB /* LabReviewdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D342C6613FD00EF16FB /* LabReviewdViewController.swift */; };
 		7BFE5D372C67E28500EF16FB /* DirectorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */; };
@@ -243,6 +242,10 @@
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
 		C7C657DD2CFD6891009FFA8E /* FavLabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */; };
+		C7C97B1B2E02D2D300347F5C /* LabSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C97B1A2E02D2D300347F5C /* LabSearchViewController.swift */; };
+		C7C97B1D2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C97B1C2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift */; };
+		C7C97B1F2E02D31100347F5C /* LabSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C97B1E2E02D31100347F5C /* LabSearchView.swift */; };
+		C7C97B212E02DC3900347F5C /* LabRecentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C97B202E02DC3900347F5C /* LabRecentCollectionViewCell.swift */; };
 		C7D03C362DFED3C300FC5636 /* FavLabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D03C352DFED3C300FC5636 /* FavLabViewController.swift */; };
 		C7D03C382DFED3D600FC5636 /* FavLabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D03C372DFED3D600FC5636 /* FavLabTableViewCell.swift */; };
 		C7D18E512DFB2E860076A4DE /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D18E502DFB2E860076A4DE /* DirectoryViewController.swift */; };
@@ -344,7 +347,6 @@
 		7B259AFD2C74FDDB00D3DFE5 /* LabDetailReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabDetailReviewViewController.swift; sourceTree = "<group>"; };
 		7B259AFF2C75EB5700D3DFE5 /* LabReviewWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewWriteViewController.swift; sourceTree = "<group>"; };
 		7B962D4A2DA902F9004175E0 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
-		7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMainViewController.swift; sourceTree = "<group>"; };
 		7BFDEC3A2C5225E7007280F8 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedLabDetailViewController.swift; sourceTree = "<group>"; };
 		7BFE5D342C6613FD00EF16FB /* LabReviewdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewdViewController.swift; sourceTree = "<group>"; };
@@ -544,6 +546,10 @@
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
 		C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavLabViewModel.swift; sourceTree = "<group>"; };
+		C7C97B1A2E02D2D300347F5C /* LabSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSearchViewController.swift; sourceTree = "<group>"; };
+		C7C97B1C2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7C97B1E2E02D31100347F5C /* LabSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSearchView.swift; sourceTree = "<group>"; };
+		C7C97B202E02DC3900347F5C /* LabRecentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRecentCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7D03C352DFED3C300FC5636 /* FavLabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavLabViewController.swift; sourceTree = "<group>"; };
 		C7D03C372DFED3D600FC5636 /* FavLabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavLabTableViewCell.swift; sourceTree = "<group>"; };
 		C7D18E502DFB2E860076A4DE /* DirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
@@ -745,7 +751,6 @@
 				C7D18E4F2DFB2E6D0076A4DE /* View */,
 				C7EAC17C2DFC012E008B7F30 /* ViewModel */,
 				7B1C53462C69D0F100C66D0D /* DirectoryModel */,
-				7BFB8C9E2C6345CB00A31B70 /* DirectoryMainViewController.swift */,
 				7BFE5D322C66115E00EF16FB /* ScrappedLabDetailViewController.swift */,
 				7BFE5D342C6613FD00EF16FB /* LabReviewdViewController.swift */,
 				7BFE5D362C67E28500EF16FB /* DirectorySearchViewController.swift */,
@@ -940,11 +945,11 @@
 			isa = PBXGroup;
 			children = (
 				C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */,
+				C757F8262D0A9C8B00685F1A /* UnivSearchTableViewCell.swift */,
 				C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */,
 				C7BF18992D266A1400E48F77 /* UnivCalendarViewController.swift */,
-				C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */,
-				C757F8262D0A9C8B00685F1A /* UnivSearchTableViewCell.swift */,
 				C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */,
+				C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */,
 			);
 			path = Univ;
 			sourceTree = "<group>";
@@ -1222,6 +1227,7 @@
 				C78A259B2DF852A10062BBF1 /* DirectoryView.swift */,
 				C76A86522DFC964F00E2322F /* FavLabView.swift */,
 				C76A86542DFC966B00E2322F /* LabReviewView.swift */,
+				C7C97B1E2E02D31100347F5C /* LabSearchView.swift */,
 			);
 			path = Directory;
 			sourceTree = "<group>";
@@ -1471,6 +1477,9 @@
 				C7D03C372DFED3D600FC5636 /* FavLabTableViewCell.swift */,
 				C709CC752DFD4D2400F09780 /* LabReviewViewController.swift */,
 				C709CC772DFD724600F09780 /* LabReviewTableViewCell.swift */,
+				C7C97B1A2E02D2D300347F5C /* LabSearchViewController.swift */,
+				C7C97B202E02DC3900347F5C /* LabRecentCollectionViewCell.swift */,
+				C7C97B1C2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1751,6 +1760,7 @@
 				C734BD5A2D66DE2000AE81E9 /* EditPWView.swift in Sources */,
 				C78953122D636AB700E5041C /* APIService.swift in Sources */,
 				C7BA9BC22DDB58FC00AF9A43 /* MasterMenuCollectionViewCell.swift in Sources */,
+				C7C97B1D2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift in Sources */,
 				C7675F7E2D6981FF00F99294 /* EditUnivView.swift in Sources */,
 				C71B4E802DAC0C2B006EACF1 /* ProfileUseCase.swift in Sources */,
 				C74A159A2D5A47F600A1698B /* MyProfile.swift in Sources */,
@@ -1799,6 +1809,7 @@
 				C7B7A1682D001D8200D5CE14 /* NavigationBarView.swift in Sources */,
 				C7675F7C2D6981ED00F99294 /* UnivView.swift in Sources */,
 				91FEEB8E2D71A04400D0502D /* SmsDataManager.swift in Sources */,
+				C7C97B1B2E02D2D300347F5C /* LabSearchViewController.swift in Sources */,
 				412BFBD82C5225250099E442 /* EmailLoginViewController.swift in Sources */,
 				C7D18E512DFB2E860076A4DE /* DirectoryViewController.swift in Sources */,
 				417AADCF2C673E32002080E0 /* AuthResponse.swift in Sources */,
@@ -1892,7 +1903,6 @@
 				91FEEB842D718DA600D0502D /* FindEmailViewController.swift in Sources */,
 				C73483672D02E500004B6FA1 /* ResearchTopicViewModel.swift in Sources */,
 				7BFE5D332C66115E00EF16FB /* ScrappedLabDetailViewController.swift in Sources */,
-				7BFB8C9F2C6345CB00A31B70 /* DirectoryMainViewController.swift in Sources */,
 				C7980A882CEF841E00475D94 /* APIAlertView.swift in Sources */,
 				C7AA03872DD5035700BBE115 /* Post.swift in Sources */,
 				41EE133E2C54ABB70037EDD6 /* EmailSignUpViewController.swift in Sources */,
@@ -1909,6 +1919,7 @@
 				C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */,
 				C78611CA2D014B70002B67B4 /* PWAlertView.swift in Sources */,
 				C71223CF2DED6EA100238E4E /* BoardSearchTableViewCell.swift in Sources */,
+				C7C97B212E02DC3900347F5C /* LabRecentCollectionViewCell.swift in Sources */,
 				C757F8232D0A9B5400685F1A /* UpComingCalendarCollectionViewCell.swift in Sources */,
 				C7845CFD2DD4A988004955A2 /* PostListView.swift in Sources */,
 				91EB930B2D81546500A6BBB0 /* DoubleButtonPopup.swift in Sources */,
@@ -1978,6 +1989,7 @@
 				C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */,
 				7B1C53502C69D53C00C66D0D /* DirectoryLabReviewListModel.swift in Sources */,
 				C79C594A2DE3343400762FC9 /* PostUseCase.swift in Sources */,
+				C7C97B1F2E02D31100347F5C /* LabSearchView.swift in Sources */,
 				C7AB97442D63AA1B00D2DBCA /* PWWarning.swift in Sources */,
 				C757F8252D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift in Sources */,
 				C73483652D02A727004B6FA1 /* UILabel+.swift in Sources */,

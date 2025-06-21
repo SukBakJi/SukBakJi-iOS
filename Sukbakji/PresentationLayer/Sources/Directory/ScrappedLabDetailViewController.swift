@@ -106,16 +106,16 @@ struct ScrappedLabDetailViewController: View {
                                     }
                                     
                                     // ScrappedLaboratory를 눌러도 정보 화면으로 넘어가지 않음
-                                    ScrappedLaboratory(
-                                        title: lab.universityName,
-                                        universityName: lab.universityName,
-                                        labName: lab.labName,
-                                        professorName: lab.professorName,
-                                        labId: lab.labId,
-                                        researchTopics: lab.researchTopics
-                                    )
-                                    .padding(.leading, isEditing ? 10 : 24)
-                                    .padding(.trailing, 24)
+//                                    ScrappedLaboratory(
+//                                        title: lab.universityName,
+//                                        universityName: lab.universityName,
+//                                        labName: lab.labName,
+//                                        professorName: lab.professorName,
+//                                        labId: lab.labId,
+//                                        researchTopics: lab.researchTopics
+//                                    )
+//                                    .padding(.leading, isEditing ? 10 : 24)
+//                                    .padding(.trailing, 24)
                                 }
                             }
                             .padding(.top, 12)
