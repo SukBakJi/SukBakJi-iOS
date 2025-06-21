@@ -8,12 +8,21 @@
 import UIKit
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
+
+protocol FavLabCellDelegate: AnyObject {
+    func select_Tapped(cell: FavLabTableViewCell)
+}
 
 class FavLabTableViewCell: UITableViewCell {
     
     static let identifier = String(describing: FavLabTableViewCell.self)
     
-    private let selectButton = UIButton().then {
+    weak var delegate: FavLabCellDelegate?
+    var disposeBag = DisposeBag()
+    
+    let selectButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
     }
     private let labView = UIView().then {
@@ -87,6 +96,7 @@ class FavLabTableViewCell: UITableViewCell {
             $0.leading.equalToSuperview().offset(24)
             $0.height.width.equalTo(20)
         }
+        selectButton.addTarget(self, action: #selector(select_Tapped), for: .touchUpInside)
         
         contentView.addSubview(labView)
         labView.snp.makeConstraints {
@@ -171,6 +181,10 @@ class FavLabTableViewCell: UITableViewCell {
             $0.leading.trailing.equalToSuperview().inset(8)
             $0.height.equalTo(14)
         }
+    }
+    
+    @objc private func select_Tapped() {
+        delegate?.select_Tapped(cell: self)
     }
 
     func prepare(favoriteLab: FavoriteLab, showButton: Bool) {

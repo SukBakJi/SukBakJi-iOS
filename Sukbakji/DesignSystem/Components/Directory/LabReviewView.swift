@@ -5,7 +5,6 @@
 //  Created by jaegu park on 6/14/25.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 import Then
@@ -209,7 +208,7 @@ class LabReviewView: UIView {
     }
     
     @objc private func textFieldTapped() {
-        let nextVC = BoardSearchViewController(title: "게시판", menu: "")
+        let nextVC = LabSearchViewController()
         nextVC.modalPresentationStyle = .fullScreen
         parentVC?.present(nextVC, animated: true, completion: nil)
     }

@@ -10,12 +10,13 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class FavLabViewController: UIViewController {
-    
+class FavLabViewController: UIViewController, FavLabCellDelegate {
+
     private let favLabView = FavLabView()
     private let viewModel = FavLabViewModel()
     private let disposeBag = DisposeBag()
     
+    private var labIds: [Int] = []
     var isGrouped: Bool = false
 
     override func loadView() {
@@ -64,8 +65,50 @@ extension FavLabViewController {
         viewModel.favLabList
             .bind(to: favLabView.favLabTableView.rx.items(cellIdentifier: FavLabTableViewCell.identifier, cellType: FavLabTableViewCell.self)) { row, lab, cell in
                 cell.prepare(favoriteLab: lab, showButton: self.isGrouped)
+                cell.delegate = self
+                
+                self.viewModel.selectedLabAll
+                    .bind { isSelected in
+                        let imageName = isSelected ? "Sukbakji_Check2" : "Sukbakji_Check"
+                        cell.selectButton.setImage(UIImage(named: imageName), for: .normal)
+                        self.favLabView.allSelectButton.setImage(UIImage(named: imageName), for: .normal)
+                    }
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
+        
+        favLabView.allSelectButton.rx.tap
+            .bind { [weak self] in
+                self?.viewModel.toggleSelectState()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func select_Tapped(cell: FavLabTableViewCell) {
+        guard let indexPath = favLabView.favLabTableView.indexPath(for: cell) else { return }
+        let labId = viewModel.favLabList.value[indexPath.row].labId
+        
+        if labIds.contains(labId) {
+            labIds.removeAll { $0 == labId }
+        } else {
+            labIds.append(labId)
+        }
+        
+        updateUIForSelectedCells()
+    }
+    
+    private func updateUIForSelectedCells() {
+        for (index, lab) in viewModel.favLabList.value.enumerated() {
+            guard let cell = favLabView.favLabTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? FavLabTableViewCell else { continue }
+            let labId = lab.labId
+            
+            // 셀의 selectButton 상태 업데이트
+            if labIds.contains(labId) {
+                cell.selectButton.setImage(UIImage(named: "Sukbakji_Check2"), for: .normal)
+            } else {
+                cell.selectButton.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
+            }
+        }
     }
     
     @objc private func toggle_Tapped() {

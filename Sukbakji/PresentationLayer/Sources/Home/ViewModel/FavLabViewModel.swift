@@ -13,6 +13,8 @@ class FavLabViewModel {
     private let disposeBag = DisposeBag()
     
     let favLabList = BehaviorRelay<[FavoriteLab]>(value: [])
+    let selectedLabAll = BehaviorRelay<Bool>(value: false)
+    
     let errorMessage = PublishSubject<String>()
     
     func loadFavoriteLab() {
@@ -28,5 +30,10 @@ class FavLabViewModel {
                 self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
+    }
+    
+    func toggleSelectState() {
+        let newState = !selectedLabAll.value
+        selectedLabAll.accept(newState) // 상태 변경
     }
 }

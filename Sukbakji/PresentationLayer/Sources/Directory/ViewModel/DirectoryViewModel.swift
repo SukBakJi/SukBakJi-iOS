@@ -10,7 +10,6 @@ import RxCocoa
 
 class DirectoryViewModel {
     private let repository = DirectoryRepository()
-    private let labReviewView = LabReviewView()
     private let disposeBag = DisposeBag()
     
     let topicList = PublishSubject<Topic>()

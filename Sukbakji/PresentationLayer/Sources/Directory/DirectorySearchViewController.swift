@@ -280,8 +280,8 @@ struct NoRecentSearchView: View {
             
             Spacer()
             
-            AdvertisementView()
-                .padding(.bottom, 12)
+//            AdvertisementView()
+//                .padding(.bottom, 12)
         }
     }
 }
