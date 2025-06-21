@@ -11,6 +11,11 @@ import Then
 
 class LabSearchView: UIView {
     
+    let scrollView = UIScrollView().then {
+        $0.contentInsetAdjustmentBehavior = .never
+        $0.showsVerticalScrollIndicator = false
+    }
+    let contentView = UIView()
     let searchView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -66,7 +71,7 @@ class LabSearchView: UIView {
     }
     let countLabel = UILabel().then {
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
-        $0.textColor = .gray500
+        $0.textColor = .gray900
     }
     let backgroundLabel = UILabel().then {
         $0.backgroundColor = .gray100
@@ -74,7 +79,7 @@ class LabSearchView: UIView {
     let resultLabel = UILabel().then {
         $0.text = "검색 결과"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        $0.textColor = .gray500
+        $0.textColor = .gray900
     }
     let labSearchCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -150,30 +155,33 @@ class LabSearchView: UIView {
     private func setUI() {
         backgroundColor = .white
         
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
         addSubview(searchView)
         searchView.addSubview(labSearchTextField)
         searchView.addSubview(searchImageView)
         searchView.addSubview(deleteButton)
         searchView.addSubview(cancelButton)
         
-        addSubview(recentView)
+        contentView.addSubview(recentView)
         recentView.addSubview(noResultLabel)
         recentView.addSubview(recentLabel)
         recentView.addSubview(labRecentCollectionView)
         
-        addSubview(resultView)
+        contentView.addSubview(resultView)
         resultView.addSubview(countLabel)
         resultView.addSubview(backgroundLabel)
         resultView.addSubview(resultLabel)
         resultView.addSubview(labSearchCollectionView)
-        resultView.addSubview(moreButton)
+        contentView.addSubview(moreButton)
         
         items.forEach { item in
             let itemView = createItemView(icon: item.icon, title: item.title, subtitle: item.subtitle)
             stackView.addArrangedSubview(itemView)
         }
         
-        addSubview(noResultView)
+        contentView.addSubview(noResultView)
         noResultView.addSubview(searchWarningImageView)
         noResultView.addSubview(searchWarningLabel)
         noResultView.addSubview(searchLabel)
@@ -184,6 +192,16 @@ class LabSearchView: UIView {
     }
     
     private func setConstraints() {
+        scrollView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+            $0.bottom.equalTo(moreButton.snp.bottom).offset(120)
+        }
+        
         searchView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(115)
@@ -218,7 +236,7 @@ class LabSearchView: UIView {
         }
         
         recentView.snp.makeConstraints {
-            $0.top.equalTo(searchView.snp.bottom)
+            $0.top.equalToSuperview().offset(115)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(103)
         }
@@ -252,6 +270,43 @@ class LabSearchView: UIView {
             $0.height.equalTo(100)
         }
         adImageView.isHidden = true
+        
+        resultView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(115)
+            $0.leading.trailing.equalToSuperview()
+        }
+        resultView.isHidden = true
+        
+        countLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(12)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(17)
+        }
+        
+        backgroundLabel.snp.makeConstraints {
+            $0.top.equalTo(countLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        resultLabel.snp.makeConstraints {
+            $0.top.equalTo(backgroundLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(19)
+        }
+        
+        labSearchCollectionView.snp.makeConstraints {
+            $0.top.equalTo(resultLabel.snp.bottom).offset(12)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        moreButton.snp.makeConstraints {
+            $0.top.equalTo(resultView.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(33)
+            $0.width.equalTo(136)
+        }
+        moreButton.isHidden = true
     }
     
     private func createItemView(icon: String, title: String, subtitle: String) -> UIView {

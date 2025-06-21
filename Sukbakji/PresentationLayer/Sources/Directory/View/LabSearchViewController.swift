@@ -14,10 +14,12 @@ class LabSearchViewController: UIViewController {
     
     private let labSearchView = LabSearchView()
     private let viewModel = DirectoryViewModel()
+    private let labViewModel = LabViewModel()
     private let disposeBag = DisposeBag()
     
     private let recentSearchKey = "RecentSearchKeywords"
     private var recentKeywords = BehaviorRelay<[String]>(value: [])
+    private var resultHeightConstraint: Constraint?
     
     override func loadView() {
         self.view = labSearchView
@@ -47,7 +49,12 @@ class LabSearchViewController: UIViewController {
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+        labSearchView.deleteButton.addTarget(self, action: #selector(delete_Tapped), for: .touchUpInside)
         labSearchView.cancelButton.addTarget(self, action: #selector(backButton_Tapped), for: .touchUpInside)
+        
+        labSearchView.resultView.snp.makeConstraints { make in
+            resultHeightConstraint = make.height.equalTo(650).constraint
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -84,6 +91,9 @@ extension LabSearchViewController {
         labSearchView.labRecentCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
+        labSearchView.labSearchCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
         recentKeywords
             .bind(to: labSearchView.labRecentCollectionView.rx.items(cellIdentifier: LabRecentCollectionViewCell.identifier, cellType: LabRecentCollectionViewCell.self)) { row, keyword, cell in
                 cell.configure(keyword: keyword)
@@ -98,13 +108,30 @@ extension LabSearchViewController {
             .bind(to: labSearchView.noResultLabel.rx.isHidden)
             .disposed(by: disposeBag)
         
+        labViewModel.labList
+            .subscribe(onNext: { LabList in
+                self.labSearchView.countLabel.text = "\(LabList.count) 건"
+                self.resultHeightConstraint?.update(offset: 88 + 184 * ceil(Double(LabList.count) / 2.0))
+            })
+            .disposed(by: disposeBag)
+        
+        labViewModel.labList
+            .bind(to: labSearchView.labSearchCollectionView.rx.items(cellIdentifier: LabSearchCollectionViewCell.identifier, cellType: LabSearchCollectionViewCell.self)) { row, lab, cell in
+                cell.prepare(labSearch: lab)
+            }
+            .disposed(by: disposeBag)
+        
         labSearchView.labSearchTextField.rx.controlEvent(.editingDidEndOnExit)
             .withLatestFrom(labSearchView.labSearchTextField.rx.text.orEmpty)
             .subscribe(onNext: { [weak self] query in
                 guard !query.isEmpty else { return }
                 self?.saveSearchKeyword(query)
                 self?.labSearchView.labRecentCollectionView.reloadData()
+                self?.labSearchView.recentView.isHidden = true
+                self?.labSearchView.resultView.isHidden = false
+                self?.labSearchView.moreButton.isHidden = false
                 self?.labSearchView.labSearchTextField.text = ""
+                self?.labViewModel.loadLabList(topicName: query, page: 0, size: 6)
             })
             .disposed(by: disposeBag)
     }
@@ -130,6 +157,10 @@ extension LabSearchViewController {
         return UserDefaults.standard.stringArray(forKey: recentSearchKey) ?? []
     }
     
+    @objc private func delete_Tapped() {
+        labSearchView.labSearchTextField.text = ""
+    }
+    
     @objc private func backButton_Tapped() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -148,7 +179,7 @@ extension LabSearchViewController: UICollectionViewDelegateFlowLayout {
                 $0.sizeToFit()
             }
             let size = label.frame.size
-            return CGSize(width: size.width + 52, height: 29)
+            return CGSize(width: size.width + 46, height: 29)
         } else {
             guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
                 return CGSize.zero

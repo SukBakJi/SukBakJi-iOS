@@ -120,6 +120,8 @@
 		C729F0FA2DE1B22600AAABB6 /* CommentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C729F0F92DE1B22600AAABB6 /* CommentListTableViewCell.swift */; };
 		C729F0FC2DE1B3F800AAABB6 /* CommentInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C729F0FB2DE1B3F800AAABB6 /* CommentInputView.swift */; };
 		C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CEED52D258CB500EED814 /* UnivStopView.swift */; };
+		C72FB0602E06C1D0002755F6 /* Lab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FB05F2E06C1D0002755F6 /* Lab.swift */; };
+		C72FB0622E06C441002755F6 /* LabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FB0612E06C441002755F6 /* LabViewModel.swift */; };
 		C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730327B2D295BF800F717D0 /* BottomSheetView.swift */; };
 		C73032802D2974D100F717D0 /* EditUnivCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */; };
 		C7347E3A2C4D452100688768 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E312C4D410200688768 /* Pretendard-Black.otf */; };
@@ -415,6 +417,8 @@
 		C729F0F92DE1B22600AAABB6 /* CommentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListTableViewCell.swift; sourceTree = "<group>"; };
 		C729F0FB2DE1B3F800AAABB6 /* CommentInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputView.swift; sourceTree = "<group>"; };
 		C72CEED52D258CB500EED814 /* UnivStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivStopView.swift; sourceTree = "<group>"; };
+		C72FB05F2E06C1D0002755F6 /* Lab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lab.swift; sourceTree = "<group>"; };
+		C72FB0612E06C441002755F6 /* LabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabViewModel.swift; sourceTree = "<group>"; };
 		C730327B2D295BF800F717D0 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUnivCalendarViewController.swift; sourceTree = "<group>"; };
 		C7347E312C4D410200688768 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
@@ -1508,6 +1512,7 @@
 			children = (
 				C7EAC17A2DFC008F008B7F30 /* Topic.swift */,
 				C7EAC17F2DFC0946008B7F30 /* Review.swift */,
+				C72FB05F2E06C1D0002755F6 /* Lab.swift */,
 			);
 			path = Directory;
 			sourceTree = "<group>";
@@ -1516,6 +1521,7 @@
 			isa = PBXGroup;
 			children = (
 				C7EAC17D2DFC01B8008B7F30 /* DirectoryViewModel.swift */,
+				C72FB0612E06C441002755F6 /* LabViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1822,6 +1828,7 @@
 				C7AA038D2DD50B1100BBE115 /* BoardViewModel.swift in Sources */,
 				C7F61D192DE04EA100B5C3B4 /* MyPostTableViewCell.swift in Sources */,
 				C73828D32D6220F4007A21A0 /* AllDeleteView.swift in Sources */,
+				C72FB0622E06C441002755F6 /* LabViewModel.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,
 				C7DF5E2F2DB09AF600274B4D /* BlockMemberId.swift in Sources */,
@@ -1953,6 +1960,7 @@
 				C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */,
 				91EB93142D8154E300A6BBB0 /* SMSAuthView.swift in Sources */,
 				91EB93152D8154E300A6BBB0 /* SMSAuthViewController.swift in Sources */,
+				C72FB0602E06C1D0002755F6 /* Lab.swift in Sources */,
 				C71AE9BA2CFB60340098FD2A /* FavoriteBoardTableViewCell.swift in Sources */,
 				4168E8552C690BBD00A0F292 /* UserDataManager.swift in Sources */,
 				C7BDEA8D2D1338E000001927 /* UnivViewModel.swift in Sources */,

@@ -17,14 +17,15 @@ struct APIService {
         url: URLConvertible,
         method: HTTPMethod,
         parameters: [String: Any]? = nil,
+        encoding: ParameterEncoding? = nil,
         headers: HTTPHeaders? = nil
     ) -> Single<T> {
         return Single<T>.create { single in
-            let encoding: ParameterEncoding = method == .get ? URLEncoding.default : JSONEncoding.default
+            let finalEncoding: ParameterEncoding = encoding ?? (method == .get ? URLEncoding.default : JSONEncoding.default)
             let request = AF.request(url,
                                      method: method,
                                      parameters: parameters,
-                                     encoding: encoding,
+                                     encoding: finalEncoding,
                                      headers: headers)
                 .responseDecodable(of: type) { response in
                     switch response.result {
@@ -79,6 +80,14 @@ struct APIService {
             "Authorization": "Bearer \(accessToken)"
         ]
         return request(of: type, url: url, method: .post, parameters: parameters, headers: headers)
+    }
+    
+    func postWithTokenAndParams<T: Codable>(of type: T.Type, url: URLConvertible, parameters: [String: Any]?, accessToken: String) -> Single<T> {
+        let headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Authorization": "Bearer \(accessToken)"
+        ]
+        return request(of: type, url: url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
     }
     
     // DELETE 요청 (토큰 포함)

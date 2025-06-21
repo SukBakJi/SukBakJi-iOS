@@ -48,14 +48,6 @@ class LabSearchCollectionViewCell: UICollectionViewCell {
         $0.textColor = .orange600
         $0.font = UIFont(name: "Pretendard-Medium", size: 12)
     }
-    private let labView3 = UIView().then {
-        $0.backgroundColor = .orange50
-        $0.layer.cornerRadius = 4
-    }
-    private let labLabel3 = UILabel().then {
-        $0.textColor = .orange600
-        $0.font = UIFont(name: "Pretendard-Medium", size: 12)
-    }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -94,7 +86,7 @@ class LabSearchCollectionViewCell: UICollectionViewCell {
         self.labView.addSubview(labLabel)
         labLabel.snp.makeConstraints {
             $0.top.equalTo(univLabel.snp.bottom).offset(6)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(18)
         }
         
@@ -123,6 +115,7 @@ class LabSearchCollectionViewCell: UICollectionViewCell {
         professorLabLabel.snp.makeConstraints {
             $0.top.equalTo(professorNameLabel.snp.bottom).offset(4)
             $0.leading.equalTo(professorImageView.snp.trailing).offset(12)
+            $0.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(14)
         }
         
@@ -139,32 +132,13 @@ class LabSearchCollectionViewCell: UICollectionViewCell {
             $0.leading.trailing.equalToSuperview().inset(8)
             $0.height.equalTo(26)
         }
-        
-        self.contentView.addSubview(labView3)
-        labView3.snp.makeConstraints {
-            $0.top.equalTo(professorImageView.snp.bottom).offset(12)
-            $0.leading.equalTo(labView2.snp.trailing).offset(6)
-            $0.height.equalTo(20)
-        }
-        
-        self.labView3.addSubview(labLabel3)
-        labLabel3.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(8)
-            $0.height.equalTo(26)
-        }
     }
     
-    func prepare(favoriteLab: FavoriteLab) {
-        univLabel.text = favoriteLab.universityName
-        labLabel.text = favoriteLab.labName
-        professorNameLabel.text = favoriteLab.professorName
-        professorLabLabel.text = favoriteLab.departmentName
-        labLabel2.text = "#\(favoriteLab.researchTopics[0])"
-        if favoriteLab.researchTopics.count == 1 {
-            labView3.isHidden = true
-        } else {
-            labLabel3.text = "#\(favoriteLab.researchTopics[1])"
-        }
+    func prepare(labSearch: LabSearch) {
+        univLabel.text = labSearch.universityName
+        labLabel.text = labSearch.labName
+        professorNameLabel.text = labSearch.professorName
+        professorLabLabel.text = labSearch.departmentName
+        labLabel2.text = "#\(labSearch.researchTopics[0])"
     }
 }

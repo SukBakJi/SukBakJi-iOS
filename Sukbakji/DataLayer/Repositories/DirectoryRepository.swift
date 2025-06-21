@@ -27,4 +27,13 @@ class DirectoryRepository {
                       "limit": limit]
         return APIService.shared.getWithTokenAndParams(of: APIResponse<[LabReview]>.self, url: url, parameters: params, accessToken: token)
     }
+    
+    func fetchLabsSearch(token: String, topicName: String, page: Int32, size: Int32) -> Single<APIResponse<Lab>> {
+        let url = APIConstants.labsSearch.path
+        let params = [
+            "topicName": topicName,
+            "page": page,
+            "size": size] as [String : Any]
+        return APIService.shared.postWithTokenAndParams(of: APIResponse<Lab>.self, url: url, parameters: params, accessToken: token)
+    }
 }
