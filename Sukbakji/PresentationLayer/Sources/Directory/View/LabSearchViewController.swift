@@ -20,6 +20,7 @@ class LabSearchViewController: UIViewController {
     private let recentSearchKey = "RecentSearchKeywords"
     private var recentKeywords = BehaviorRelay<[String]>(value: [])
     private var resultHeightConstraint: Constraint?
+    private var lastSearchQuery: String = ""
     
     override func loadView() {
         self.view = labSearchView
@@ -112,6 +113,11 @@ extension LabSearchViewController {
             .subscribe(onNext: { LabList in
                 self.labSearchView.countLabel.text = "\(LabList.count) 건"
                 self.resultHeightConstraint?.update(offset: 88 + 184 * ceil(Double(LabList.count) / 2.0))
+                self.labSearchView.noResultView.isHidden = true
+                if LabList.isEmpty {
+                    self.labSearchView.noResultView.isHidden = false
+                    self.labSearchView.changeColor(self.lastSearchQuery)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -125,6 +131,7 @@ extension LabSearchViewController {
             .withLatestFrom(labSearchView.labSearchTextField.rx.text.orEmpty)
             .subscribe(onNext: { [weak self] query in
                 guard !query.isEmpty else { return }
+                self?.lastSearchQuery = query
                 self?.saveSearchKeyword(query)
                 self?.labSearchView.labRecentCollectionView.reloadData()
                 self?.labSearchView.recentView.isHidden = true

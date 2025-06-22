@@ -126,7 +126,7 @@ class LabSearchView: UIView {
         ("Sukbakji_LabSearch", "정확한 대학교명", "석박지대학교"),
         ("Sukbakji_LabSearch2", "다시 확인해 보는 교수명", "석박지 교수"),
         ("Sukbakji_LabSearch3", "철자가 맞는 연구실 이름", "석박지 연구실"),
-        ("Sukbakji_LabSearch4", "알맞은 연구 주제명", "석박지는 어떻게 담겨야 할까?")
+        ("Sukbakji_LabSearch4", "알맞은 연구 주제명", "석박지는 어떻게 담궈야 할까?")
     ]
     lazy var stackView = UIStackView().then {
         $0.axis = .vertical
@@ -164,6 +164,12 @@ class LabSearchView: UIView {
         searchView.addSubview(deleteButton)
         searchView.addSubview(cancelButton)
         
+        contentView.addSubview(noResultView)
+        noResultView.addSubview(searchWarningImageView)
+        noResultView.addSubview(searchWarningLabel)
+        noResultView.addSubview(searchLabel)
+        noResultView.addSubview(stackView)
+        
         contentView.addSubview(recentView)
         recentView.addSubview(noResultLabel)
         recentView.addSubview(recentLabel)
@@ -180,12 +186,6 @@ class LabSearchView: UIView {
             let itemView = createItemView(icon: item.icon, title: item.title, subtitle: item.subtitle)
             stackView.addArrangedSubview(itemView)
         }
-        
-        contentView.addSubview(noResultView)
-        noResultView.addSubview(searchWarningImageView)
-        noResultView.addSubview(searchWarningLabel)
-        noResultView.addSubview(searchLabel)
-        noResultView.addSubview(stackView)
         
         addSubview(adView)
         adView.addSubview(adImageView)
@@ -235,42 +235,6 @@ class LabSearchView: UIView {
             $0.height.width.equalTo(24)
         }
         
-        recentView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(115)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(103)
-        }
-        
-        recentLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.leading.equalToSuperview().offset(24)
-            $0.height.equalTo(19)
-        }
-        
-        labRecentCollectionView.snp.makeConstraints {
-            $0.top.equalTo(recentLabel.snp.bottom).offset(12)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(52)
-        }
-        
-        noResultLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(60)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(17)
-        }
-        
-        adView.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalToSuperview()
-            $0.height.equalTo(124)
-        }
-        
-        adImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(100)
-        }
-        adImageView.isHidden = true
-        
         resultView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(115)
             $0.leading.trailing.equalToSuperview()
@@ -307,6 +271,73 @@ class LabSearchView: UIView {
             $0.width.equalTo(136)
         }
         moreButton.isHidden = true
+        
+        noResultView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(115)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        noResultView.isHidden = true
+        
+        searchWarningImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(125)
+            $0.centerX.equalToSuperview()
+            $0.height.width.equalTo(32)
+        }
+        
+        searchWarningLabel.snp.makeConstraints {
+            $0.top.equalTo(searchWarningImageView.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(21)
+        }
+        
+        searchLabel.snp.makeConstraints {
+            $0.top.equalTo(searchWarningLabel.snp.bottom).offset(8)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(17)
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.top.equalTo(searchLabel.snp.bottom).offset(48)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(232)
+            $0.width.equalTo(184)
+        }
+        
+        recentView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(115)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(103)
+        }
+        
+        recentLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(24)
+            $0.height.equalTo(19)
+        }
+        
+        labRecentCollectionView.snp.makeConstraints {
+            $0.top.equalTo(recentLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(52)
+        }
+        
+        noResultLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(60)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(17)
+        }
+        
+        adView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalToSuperview()
+            $0.height.equalTo(124)
+        }
+        
+        adImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(100)
+        }
+        adImageView.isHidden = true
     }
     
     private func createItemView(icon: String, title: String, subtitle: String) -> UIView {
