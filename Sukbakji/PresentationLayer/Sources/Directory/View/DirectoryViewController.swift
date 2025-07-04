@@ -114,7 +114,7 @@ extension DirectoryViewController {
     }
     
     @objc private func review_Tapped() {
-        let labReviewVC = LabReviewViewController()
+        let labReviewVC = LabReviewListViewController()
         self.navigationController?.pushViewController(labReviewVC, animated: true)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  LabReviewTableViewCell.swift
+//  LabReviewListTableViewCell.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 6/14/25.
@@ -9,9 +9,9 @@ import UIKit
 import Then
 import SnapKit
 
-class LabReviewTableViewCell: UITableViewCell {
+class LabReviewListTableViewCell: UITableViewCell {
     
-    static let identifier = String(describing: LabReviewTableViewCell.self)
+    static let identifier = String(describing: LabReviewListTableViewCell.self)
     
     private let univLabel = UILabel().then {
         $0.textColor = .gray900

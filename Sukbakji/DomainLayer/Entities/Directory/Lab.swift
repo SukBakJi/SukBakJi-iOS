@@ -20,3 +20,12 @@ struct LabSearch : Codable {
     var professorName: String
     var researchTopics: [String]
 }
+
+struct LabInfo : Codable {
+    var professorName: String
+    var universityName: String
+    var departmentName: String
+    var labLink: String
+    var researchTopics: [String]
+    var professorEmail: String
+}

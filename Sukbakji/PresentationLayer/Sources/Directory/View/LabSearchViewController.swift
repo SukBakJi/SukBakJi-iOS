@@ -91,7 +91,6 @@ extension LabSearchViewController {
     private func bindViewModel() {
         labSearchView.labRecentCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
-        
         labSearchView.labSearchCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
@@ -125,6 +124,14 @@ extension LabSearchViewController {
             .bind(to: labSearchView.labSearchCollectionView.rx.items(cellIdentifier: LabSearchCollectionViewCell.identifier, cellType: LabSearchCollectionViewCell.self)) { row, lab, cell in
                 cell.prepare(labSearch: lab)
             }
+            .disposed(by: disposeBag)
+        
+        labSearchView.labSearchCollectionView.rx.modelSelected(LabSearch.self)
+            .subscribe(onNext: { [weak self] labItem in
+                guard let self = self else { return }
+                let labVC = LabViewController(labId: labItem.labId)
+                self.navigationController?.pushViewController(labVC, animated: true)
+            })
             .disposed(by: disposeBag)
         
         labSearchView.labSearchTextField.rx.controlEvent(.editingDidEndOnExit)
