@@ -14,10 +14,14 @@ import SnapKit
 class LabTabViewController: TabmanViewController {
     
     private var viewControllers: Array<UIViewController> = []
+    var labId: Int = 0
+    
     private let tabView = UIView().then {
         $0.backgroundColor = .white
     }
-    var labId: Int = 0
+    private let backgroundLabel = UILabel().then {
+        $0.backgroundColor = .gray100
+    }
     
     init(labId: Int) {
         super.init(nibName: nil, bundle: nil)
@@ -52,11 +56,17 @@ class LabTabViewController: TabmanViewController {
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(40)
         }
+        
+        self.tabView.addSubview(backgroundLabel)
+        backgroundLabel.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1.5)
+        }  
     }
     
     private func setupTabMan() {
         let vc1 = LabInfoViewController(labId: labId)
-        let vc2 = LabReviewViewController()
+        let vc2 = LabReviewViewController(labId: labId)
         
         viewControllers.append(vc1)
         viewControllers.append(vc2)

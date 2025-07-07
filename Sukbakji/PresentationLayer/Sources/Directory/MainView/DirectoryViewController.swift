@@ -82,6 +82,13 @@ extension DirectoryViewController {
                 cell.prepare(favoriteLab: lab)
             }
             .disposed(by: disposeBag)
+        directoryView.favLabCollectionView.rx.modelSelected(FavoriteLab.self)
+            .subscribe(onNext: { [weak self] labItem in
+                guard let self = self else { return }
+                let labVC = LabViewController(labId: labItem.labId)
+                self.navigationController?.pushViewController(labVC, animated: true)
+            })
+            .disposed(by: disposeBag)
         viewModel.topicList
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] topic in

@@ -100,6 +100,7 @@ enum APIConstants {
     case labsId(Int)
     case labsInterestTopics
     case labsFavoriteLab
+    case labsReviewsId(Int)
     case labsReviews
 }
 
@@ -269,6 +270,8 @@ extension APIConstants {
             return APIConstants.makeEndPoint("/labs/mypage/interest-topics")
         case .labsFavoriteLab:
             return APIConstants.makeEndPoint("/labs/mypage/favorite-labs")
+        case .labsReviewsId(let labId):
+            return APIConstants.makeEndPoint("/labs/reviews/\(labId)")
         case .labsReviews:
             return APIConstants.makeEndPoint("/labs/reviews")
         }

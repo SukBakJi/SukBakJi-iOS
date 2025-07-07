@@ -14,8 +14,10 @@ class LabViewModel {
     private let useCase: LabUseCase
     
     let labInfo = PublishSubject<LabInfo>()
+    let labDetail = PublishSubject<LabDetail>()
     let labList = BehaviorRelay<[LabSearch]>(value: [])
     var researchTopicItems = BehaviorRelay<[String]>(value: [])
+    var reviewItems = BehaviorRelay<[LabReview]>(value: [])
     let errorMessage = PublishSubject<String>()
     
     init(useCase: LabUseCase = LabUseCase()) {
@@ -27,6 +29,17 @@ class LabViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] lab in
                 self?.labInfo.onNext(lab)
+            }, onFailure: { [weak self] error in
+                self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadLabDetail(labId: Int) {
+        useCase.fetchLabDetail(labId: labId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] lab in
+                self?.labDetail.onNext(lab)
             }, onFailure: { [weak self] error in
                 self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
             })

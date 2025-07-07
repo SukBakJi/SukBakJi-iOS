@@ -102,7 +102,6 @@ extension FavLabViewController {
             guard let cell = favLabView.favLabTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? FavLabTableViewCell else { continue }
             let labId = lab.labId
             
-            // 셀의 selectButton 상태 업데이트
             if labIds.contains(labId) {
                 cell.selectButton.setImage(UIImage(named: "Sukbakji_Check2"), for: .normal)
             } else {

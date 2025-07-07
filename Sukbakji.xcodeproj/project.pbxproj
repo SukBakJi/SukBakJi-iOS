@@ -69,11 +69,14 @@
 		C70523F12D775442009AED8C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70523F02D775442009AED8C /* UIView+.swift */; };
 		C70523FE2D7757BA009AED8C /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7548F292D147CFF00BA687A /* UITextField+.swift */; };
 		C70523FF2D7757D4009AED8C /* AuthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AADD02C673E42002080E0 /* AuthDataManager.swift */; };
+		C706C9D72E1AD93A0032EC5C /* LabReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C706C9D62E1AD93A0032EC5C /* LabReviewTableViewCell.swift */; };
 		C709CC762DFD4D2400F09780 /* LabReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709CC752DFD4D2400F09780 /* LabReviewListViewController.swift */; };
 		C709CC782DFD724600F09780 /* LabReviewListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709CC772DFD724600F09780 /* LabReviewListTableViewCell.swift */; };
 		C70ADA952D8D011D00BF9C10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C70ADA942D8D011D00BF9C10 /* GoogleService-Info.plist */; };
 		C70BBC192D64EAA7002C26E6 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70BBC182D64EAA7002C26E6 /* MyProfileViewModel.swift */; };
 		C70C313C2D5CC2DC00F17D72 /* HomeReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C313B2D5CC2DC00F17D72 /* HomeReactor.swift */; };
+		C70CB4972E17958100C2025C /* LabInquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4962E17958100C2025C /* LabInquiryView.swift */; };
+		C70CB4992E179F1300C2025C /* LabInquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4982E179F1300C2025C /* LabInquiryViewController.swift */; };
 		C70CF5B12E16E5E300F6B5FF /* LabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CF5B02E16E5E300F6B5FF /* LabUseCase.swift */; };
 		C70DB2812C633CDB00D6014B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2802C633CDB00D6014B /* ChattingViewController.swift */; };
 		C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */; };
@@ -362,11 +365,14 @@
 		C70105E62DE7786B00042072 /* PostWritingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWritingViewController.swift; sourceTree = "<group>"; };
 		C704BD872D2BBE9700954EAD /* EditMyAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyAlarmViewController.swift; sourceTree = "<group>"; };
 		C70523F02D775442009AED8C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		C706C9D62E1AD93A0032EC5C /* LabReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewTableViewCell.swift; sourceTree = "<group>"; };
 		C709CC752DFD4D2400F09780 /* LabReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewListViewController.swift; sourceTree = "<group>"; };
 		C709CC772DFD724600F09780 /* LabReviewListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewListTableViewCell.swift; sourceTree = "<group>"; };
 		C70ADA942D8D011D00BF9C10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C70BBC182D64EAA7002C26E6 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
 		C70C313B2D5CC2DC00F17D72 /* HomeReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReactor.swift; sourceTree = "<group>"; };
+		C70CB4962E17958100C2025C /* LabInquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabInquiryView.swift; sourceTree = "<group>"; };
+		C70CB4982E179F1300C2025C /* LabInquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabInquiryViewController.swift; sourceTree = "<group>"; };
 		C70CF5B02E16E5E300F6B5FF /* LabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabUseCase.swift; sourceTree = "<group>"; };
 		C70DB2802C633CDB00D6014B /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTabViewController.swift; sourceTree = "<group>"; };
@@ -717,7 +723,8 @@
 		7BFB8C9D2C63458300A31B70 /* Directory */ = {
 			isa = PBXGroup;
 			children = (
-				C7D18E4F2DFB2E6D0076A4DE /* View */,
+				C75DE7ED2E1B88EF001C1268 /* MainView */,
+				C7D18E4F2DFB2E6D0076A4DE /* LabView */,
 				C7EAC17C2DFC012E008B7F30 /* ViewModel */,
 			);
 			path = Directory;
@@ -1022,6 +1029,16 @@
 			path = SUITE;
 			sourceTree = "<group>";
 		};
+		C75DE7ED2E1B88EF001C1268 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				C7D18E502DFB2E860076A4DE /* DirectoryViewController.swift */,
+				C7D18E542DFB33E30076A4DE /* TopicCollectionViewCell.swift */,
+				C7D18E522DFB311A0076A4DE /* LabReviewCollectionViewCell.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
 		C763D71E2C3BBA8900201913 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -1191,6 +1208,7 @@
 				C76A86542DFC966B00E2322F /* LabReviewListView.swift */,
 				C7C97B1E2E02D31100347F5C /* LabSearchView.swift */,
 				C7507C3E2E142BB800BB0CF5 /* LabInfoView.swift */,
+				C70CB4962E17958100C2025C /* LabInquiryView.swift */,
 				C7507C402E14348100BB0CF5 /* LabReviewView.swift */,
 			);
 			path = Directory;
@@ -1431,12 +1449,9 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		C7D18E4F2DFB2E6D0076A4DE /* View */ = {
+		C7D18E4F2DFB2E6D0076A4DE /* LabView */ = {
 			isa = PBXGroup;
 			children = (
-				C7D18E502DFB2E860076A4DE /* DirectoryViewController.swift */,
-				C7D18E542DFB33E30076A4DE /* TopicCollectionViewCell.swift */,
-				C7D18E522DFB311A0076A4DE /* LabReviewCollectionViewCell.swift */,
 				C7D03C352DFED3C300FC5636 /* FavLabViewController.swift */,
 				C7D03C372DFED3D600FC5636 /* FavLabTableViewCell.swift */,
 				C709CC752DFD4D2400F09780 /* LabReviewListViewController.swift */,
@@ -1448,9 +1463,11 @@
 				C74A2C872E152D3C007B7DB1 /* LabTabViewController.swift */,
 				C74A2C892E152F8C007B7DB1 /* LabInfoViewController.swift */,
 				C74A2C832E15151A007B7DB1 /* LabTopicCollectionViewCell.swift */,
+				C70CB4982E179F1300C2025C /* LabInquiryViewController.swift */,
 				C74A2C8B2E152FAA007B7DB1 /* LabReviewViewController.swift */,
+				C706C9D62E1AD93A0032EC5C /* LabReviewTableViewCell.swift */,
 			);
-			path = View;
+			path = LabView;
 			sourceTree = "<group>";
 		};
 		C7DF5E2D2DB09ADB00274B4D /* Block */ = {
@@ -1751,6 +1768,7 @@
 				C70CF5B12E16E5E300F6B5FF /* LabUseCase.swift in Sources */,
 				C73032802D2974D100F717D0 /* EditUnivCalendarViewController.swift in Sources */,
 				C750C3942D70C57000BE14EF /* SetAlarmView.swift in Sources */,
+				C706C9D72E1AD93A0032EC5C /* LabReviewTableViewCell.swift in Sources */,
 				91D413592D841EC300020CEC /* ResetPwView.swift in Sources */,
 				C7AA038B2DD506EC00BBE115 /* PostViewModel.swift in Sources */,
 				C73C5C462D5917C500091C5C /* MemberId.swift in Sources */,
@@ -1777,6 +1795,7 @@
 				C7845CFF2DD4B3B3004955A2 /* PostListViewController.swift in Sources */,
 				C74A15B02D5A508200A1698B /* Alarm.swift in Sources */,
 				C7980A862CEF838C00475D94 /* UIViewController+.swift in Sources */,
+				C70CB4992E179F1300C2025C /* LabInquiryViewController.swift in Sources */,
 				C7B7A1682D001D8200D5CE14 /* NavigationBarView.swift in Sources */,
 				C7675F7C2D6981ED00F99294 /* UnivView.swift in Sources */,
 				91FEEB8E2D71A04400D0502D /* SmsDataManager.swift in Sources */,
@@ -1880,6 +1899,7 @@
 				C76A86532DFC964F00E2322F /* FavLabView.swift in Sources */,
 				C70055282DABC40D00520D76 /* TimeHelper+.swift in Sources */,
 				C7BA9BBE2DDAE74F00AF9A43 /* DoctorMenuCollectionViewCell.swift in Sources */,
+				C70CB4972E17958100C2025C /* LabInquiryView.swift in Sources */,
 				91F849112D65AF3C0048B41A /* TOSData.swift in Sources */,
 				C74680752D91352B00A6091E /* DateUtils+.swift in Sources */,
 				C77B49682D7B66A500005ABE /* EmailView.swift in Sources */,

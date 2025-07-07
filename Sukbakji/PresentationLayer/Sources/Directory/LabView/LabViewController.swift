@@ -63,5 +63,23 @@ class LabViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         childVC.didMove(toParent: self)
+        
+        optionNavigationbarView.optionButton.addTarget(self, action: #selector(option_Tapped), for: .touchUpInside)
+    }
+    
+    @objc private func option_Tapped() {
+        let alert = UIAlertController(title: "연구실 정보",
+                                      message: nil,
+                                      preferredStyle: .actionSheet)
+        let inquiry = UIAlertAction(title: "수정 문의하기", style: .default) { _ in
+            let labInquiryVC = LabInquiryViewController(labId: self.labId)
+            self.navigationController?.pushViewController(labInquiryVC, animated: true)
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(inquiry)
+        alert.addAction(cancel)
+
+        present(alert, animated: true)
     }
 }

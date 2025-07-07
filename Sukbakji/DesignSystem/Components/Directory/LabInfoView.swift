@@ -23,7 +23,7 @@ class LabInfoView: UIView {
         $0.layer.borderColor = UIColor.gray100.cgColor
     }
     let professorImageView = UIImageView().then {
-        $0.backgroundColor = .white
+        $0.image = UIImage(named: "Sukbakji_LabImage")
         $0.layer.cornerRadius = 20
         $0.layer.masksToBounds = false
         $0.clipsToBounds = true

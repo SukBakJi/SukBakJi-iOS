@@ -109,18 +109,6 @@ extension LabSearchViewController {
             .disposed(by: disposeBag)
         
         labViewModel.labList
-            .subscribe(onNext: { LabList in
-                self.labSearchView.countLabel.text = "\(LabList.count) 건"
-                self.resultHeightConstraint?.update(offset: 88 + 184 * ceil(Double(LabList.count) / 2.0))
-                self.labSearchView.noResultView.isHidden = true
-                if LabList.isEmpty {
-                    self.labSearchView.noResultView.isHidden = false
-                    self.labSearchView.changeColor(self.lastSearchQuery)
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        labViewModel.labList
             .bind(to: labSearchView.labSearchCollectionView.rx.items(cellIdentifier: LabSearchCollectionViewCell.identifier, cellType: LabSearchCollectionViewCell.self)) { row, lab, cell in
                 cell.prepare(labSearch: lab)
             }
@@ -145,7 +133,23 @@ extension LabSearchViewController {
                 self?.labSearchView.resultView.isHidden = false
                 self?.labSearchView.moreButton.isHidden = false
                 self?.labSearchView.labSearchTextField.text = ""
+                self?.bindResult()
                 self?.labViewModel.loadLabList(topicName: query, page: 0, size: 6)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindResult() {
+        labViewModel.labList
+            .subscribe(onNext: { LabList in
+                self.labSearchView.countLabel.text = "\(LabList.count) 건"
+                self.resultHeightConstraint?.update(offset: 88 + 184 * ceil(Double(LabList.count) / 2.0))
+                self.labSearchView.noResultView.isHidden = true
+                if LabList.isEmpty {
+                    self.labSearchView.moreButton.isHidden = true
+                    self.labSearchView.noResultView.isHidden = false
+                    self.labSearchView.changeColor(self.lastSearchQuery)
+                }
             })
             .disposed(by: disposeBag)
     }

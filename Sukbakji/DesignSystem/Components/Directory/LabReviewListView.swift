@@ -209,7 +209,6 @@ class LabReviewListView: UIView {
     
     @objc private func textFieldTapped() {
         let nextVC = LabSearchViewController()
-        nextVC.modalPresentationStyle = .fullScreen
-        parentVC?.present(nextVC, animated: true, completion: nil)
+        parentVC?.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

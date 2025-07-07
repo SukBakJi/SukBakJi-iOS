@@ -16,7 +16,6 @@ protocol Coordinator {
 class AppCoordinator: Coordinator {
     
     // MARK: - Property
-    
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
@@ -25,6 +24,5 @@ class AppCoordinator: Coordinator {
     }
     
     // MARK: - Start
-    
     func start() {}
 }
