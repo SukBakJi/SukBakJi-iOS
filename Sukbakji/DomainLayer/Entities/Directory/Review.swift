@@ -12,7 +12,7 @@ struct LabDetail : Codable {
     var triangleGraphData: LabTriangle
 }
 
-struct LabReview : Codable {
+struct LabReview : Codable, Equatable {
     var universityName: String
     var departmentName: String
     var professorName: String

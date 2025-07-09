@@ -15,7 +15,7 @@ class LabReviewListViewController: UIViewController {
     private let labReviewListView = LabReviewListView()
     private let viewModel = DirectoryViewModel()
     private let disposeBag = DisposeBag()
-    private var offset:Int = 1
+    private var offset:Int = 3
     
     private var reviewHeightConstraint: Constraint?
     
@@ -69,8 +69,8 @@ extension LabReviewListViewController {
     
     @objc private func more_Tapped() {
         viewModel.loadReviewList(offset: Int32(offset), limit: 3)
-        reviewHeightConstraint?.update(offset: 516 + 145 * (offset * 3))
-        offset += 1
+        reviewHeightConstraint?.update(offset: 516 + 145 * offset)
+        offset += 3
     }
 }
 

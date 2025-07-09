@@ -133,6 +133,7 @@ class LabInfoView: UIView {
     }
     let pageLabel2 = UILabel().then {
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        $0.isUserInteractionEnabled = true
         $0.textColor = .orange700
     }
     let topicView = UIView().then {
@@ -338,6 +339,7 @@ class LabInfoView: UIView {
         pageLabel2.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(pageLabel.snp.trailing).offset(8)
+            $0.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(19)
         }
         

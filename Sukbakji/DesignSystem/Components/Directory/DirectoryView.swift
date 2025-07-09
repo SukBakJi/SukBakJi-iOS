@@ -87,7 +87,6 @@ class DirectoryView: UIView {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(FavoriteLabCollectionViewCell.self, forCellWithReuseIdentifier: FavoriteLabCollectionViewCell.identifier)
         cv.backgroundColor = .clear
-        cv.allowsSelection = false
         
         return cv
     }()

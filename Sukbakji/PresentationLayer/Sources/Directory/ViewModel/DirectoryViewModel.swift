@@ -15,6 +15,7 @@ class DirectoryViewModel {
     let topicList = PublishSubject<Topic>()
     var topicItems = BehaviorRelay<[String]>(value: [])
     let reviewList = BehaviorRelay<[LabReview]>(value: [])
+    let reviewSearchList = BehaviorRelay<[LabReview]>(value: [])
     let errorMessage = PublishSubject<String>()
     
     func loadInterestTopic() {
@@ -41,11 +42,24 @@ class DirectoryViewModel {
             .map { $0.result }
             .subscribe(onSuccess: { [weak self] reviews in
                 guard let self = self else { return }
-                if reviews.isEmpty {
-                } else {
-                    let current = self.reviewList.value
-                    self.reviewList.accept(current + reviews)
-                }
+                let current = self.reviewList.value
+                self.reviewList.accept(current + reviews)
+            }, onFailure: { error in
+                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func loadReviewSearch(professorName: String) {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return
+        }
+        
+        repository.fetchReviewsSearch(token: token, professorName: professorName)
+            .map { $0.result }
+            .subscribe(onSuccess: { [weak self] reviews in
+                guard let self = self else { return }
+                self.reviewSearchList.accept(reviews)
             }, onFailure: { error in
                 self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
             })

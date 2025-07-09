@@ -145,8 +145,8 @@ class LabReviewListTableViewCell: UITableViewCell {
         univLabel.text = String(review.universityName)
         labLabel.text = String(review.departmentName)
         contentLabel.text = String(review.content)
-        labelLabel.text = String(review.leadershipStyle)
-        labelLabel2.text = String(review.salaryLevel)
-        labelLabel3.text = String(review.autonomy)
+        labelLabel.text = "지도력이 " + String(review.leadershipStyle)
+        labelLabel2.text = "인건비가 " + String(review.salaryLevel)
+        labelLabel3.text = "자율성이 " + String(review.autonomy)
     }
 }

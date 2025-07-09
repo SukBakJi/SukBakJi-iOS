@@ -77,6 +77,14 @@ extension FavLabViewController {
             }
             .disposed(by: disposeBag)
         
+        favLabView.favLabTableView.rx.modelSelected(FavoriteLab.self)
+            .subscribe(onNext: { [weak self] labItem in
+                guard let self = self else { return }
+                let labVC = LabViewController(labId: labItem.labId)
+                self.navigationController?.pushViewController(labVC, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
         favLabView.allSelectButton.rx.tap
             .bind { [weak self] in
                 self?.viewModel.toggleSelectState()

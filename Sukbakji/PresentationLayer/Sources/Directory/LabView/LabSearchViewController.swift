@@ -21,6 +21,7 @@ class LabSearchViewController: UIViewController {
     private var recentKeywords = BehaviorRelay<[String]>(value: [])
     private var resultHeightConstraint: Constraint?
     private var lastSearchQuery: String = ""
+    private var size:Int = 8
     
     override func loadView() {
         self.view = labSearchView
@@ -52,6 +53,7 @@ class LabSearchViewController: UIViewController {
         
         labSearchView.deleteButton.addTarget(self, action: #selector(delete_Tapped), for: .touchUpInside)
         labSearchView.cancelButton.addTarget(self, action: #selector(backButton_Tapped), for: .touchUpInside)
+        labSearchView.moreButton.addTarget(self, action: #selector(more_Tapped), for: .touchUpInside)
         
         labSearchView.resultView.snp.makeConstraints { make in
             resultHeightConstraint = make.height.equalTo(650).constraint
@@ -131,10 +133,10 @@ extension LabSearchViewController {
                 self?.labSearchView.labRecentCollectionView.reloadData()
                 self?.labSearchView.recentView.isHidden = true
                 self?.labSearchView.resultView.isHidden = false
-                self?.labSearchView.moreButton.isHidden = false
                 self?.labSearchView.labSearchTextField.text = ""
                 self?.bindResult()
-                self?.labViewModel.loadLabList(topicName: query, page: 0, size: 6)
+                self?.labViewModel.loadLabSearch(topicName: query, page: 0, size: 6) { changed in
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -142,13 +144,18 @@ extension LabSearchViewController {
     private func bindResult() {
         labViewModel.labList
             .subscribe(onNext: { LabList in
-                self.labSearchView.countLabel.text = "\(LabList.count) 건"
-                self.resultHeightConstraint?.update(offset: 88 + 184 * ceil(Double(LabList.count) / 2.0))
+                let newCount = LabList.count
+                self.labSearchView.countLabel.text = "\(newCount) 건"
                 self.labSearchView.noResultView.isHidden = true
+                self.resultHeightConstraint?.update(offset: 88 + 184 * ceil(Double(LabList.count) / 2.0))
                 if LabList.isEmpty {
-                    self.labSearchView.moreButton.isHidden = true
                     self.labSearchView.noResultView.isHidden = false
                     self.labSearchView.changeColor(self.lastSearchQuery)
+                }
+                if LabList.count < 6 {
+                    self.labSearchView.moreButton.isHidden = true
+                } else {
+                    self.labSearchView.moreButton.isHidden = false
                 }
             })
             .disposed(by: disposeBag)
@@ -177,6 +184,18 @@ extension LabSearchViewController {
     
     @objc private func delete_Tapped() {
         labSearchView.labSearchTextField.text = ""
+    }
+    
+    @objc private func more_Tapped() {
+        let currentSize = Int32(size)
+        labViewModel.loadLabSearch(topicName: lastSearchQuery, page: 0, size: currentSize) { [weak self] changed in
+            guard let self = self else { return }
+            if changed {
+                self.size += 2
+            } else {
+                self.labSearchView.moreButton.isEnabled = false
+            }
+        }
     }
     
     @objc private func backButton_Tapped() {

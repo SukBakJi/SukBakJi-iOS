@@ -12,7 +12,7 @@ struct Lab : Codable {
     var totalNumber: Int
 }
 
-struct LabSearch : Codable {
+struct LabSearch : Codable, Equatable {
     var labId: Int
     var labName: String
     var universityName: String

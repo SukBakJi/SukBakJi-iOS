@@ -35,7 +35,6 @@ class FavLabView: UIView {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
         $0.register(FavLabTableViewCell.self, forCellReuseIdentifier: FavLabTableViewCell.identifier)
-        $0.allowsSelection = false
     }
     let deleteButton = UIButton().then {
         $0.clipsToBounds = true

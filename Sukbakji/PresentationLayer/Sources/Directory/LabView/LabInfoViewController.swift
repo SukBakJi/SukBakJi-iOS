@@ -46,11 +46,16 @@ class LabInfoViewController: UIViewController {
     
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        labInfoView.copyButton.addTarget(self, action: #selector(copy_Tapped), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openHomepage))
+        labInfoView.pageLabel2.addGestureRecognizer(tapGesture)
     }
     
     private func setAPI() {
         bindViewModel()
         viewModel.loadLabInfo(labId: labId)
+        viewModel.loadFavoriteLabList(labId: labId, scrapButton: labInfoView.scrapButton)
     }
     
     private func bindViewModel() {
@@ -79,6 +84,22 @@ class LabInfoViewController: UIViewController {
                 cell.prepare(topics: item)
             }
             .disposed(by: disposeBag)
+    }
+    
+    @objc private func copy_Tapped() {
+        guard let text = labInfoView.emailLabel2.text, !text.isEmpty else { return }
+        UIPasteboard.general.string = text
+        showToast(message: "텍스트가 복사되었습니다")
+    }
+    
+    @objc private func openHomepage() {
+        guard let text = labInfoView.pageLabel2.text,
+              let url = URL(string: text),
+              UIApplication.shared.canOpenURL(url) else {
+            print("유효하지 않은 URL입니다.")
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 

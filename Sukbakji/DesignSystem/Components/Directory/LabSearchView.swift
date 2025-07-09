@@ -21,7 +21,7 @@ class LabSearchView: UIView {
     }
     let labSearchTextField = UITextField().then {
         $0.backgroundColor = .gray50
-        $0.placeholder = "지도교수명을 입력해 주세요"
+        $0.placeholder = "학과와 연구 주제로 검색해 보세요"
         $0.setPlaceholderColor(.gray300)
         $0.font = UIFont(name: "Pretendard-Medium", size: 14)
         $0.textColor = .gray900
@@ -270,7 +270,6 @@ class LabSearchView: UIView {
             $0.height.equalTo(33)
             $0.width.equalTo(136)
         }
-        moreButton.isHidden = true
         
         noResultView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(115)
