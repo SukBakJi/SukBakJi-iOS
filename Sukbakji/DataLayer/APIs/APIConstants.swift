@@ -96,10 +96,14 @@ enum APIConstants {
     case mentor
     
     
+    case labsFavoriteToggle(Int)
+    case labsSearch
+    case labsId(Int)
     case labsInterestTopics
     case labsFavoriteLab
+    case labsReviewsId(Int)
+    case labsReviewsSearch
     case labsReviews
-    case labsSearch
 }
 
 extension APIConstants {
@@ -259,15 +263,22 @@ extension APIConstants {
         case .mentor:
             return APIConstants.makeEndPoint("/mentor")
             
-            
+        case .labsFavoriteToggle(let labId):
+            return APIConstants.makeEndPoint("/labs/\(labId)/favorite")
+        case .labsSearch:
+            return APIConstants.makeEndPoint("/labs/search")
+        case .labsId(let labId):
+            return APIConstants.makeEndPoint("/labs/\(labId)")
         case .labsInterestTopics:
             return APIConstants.makeEndPoint("/labs/mypage/interest-topics")
         case .labsFavoriteLab:
             return APIConstants.makeEndPoint("/labs/mypage/favorite-labs")
+        case .labsReviewsId(let labId):
+            return APIConstants.makeEndPoint("/labs/reviews/\(labId)")
+        case .labsReviewsSearch:
+            return APIConstants.makeEndPoint("/labs/reviews/search")
         case .labsReviews:
             return APIConstants.makeEndPoint("/labs/reviews")
-        case .labsSearch:
-            return APIConstants.makeEndPoint("/labs/search")
         }
     }
 }

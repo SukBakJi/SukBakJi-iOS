@@ -87,7 +87,6 @@ class DirectoryView: UIView {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(FavoriteLabCollectionViewCell.self, forCellWithReuseIdentifier: FavoriteLabCollectionViewCell.identifier)
         cv.backgroundColor = .clear
-        cv.allowsSelection = false
         
         return cv
     }()
@@ -142,7 +141,6 @@ class DirectoryView: UIView {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(LabReviewCollectionViewCell.self, forCellWithReuseIdentifier: LabReviewCollectionViewCell.identifier)
         cv.backgroundColor = .clear
-        cv.allowsSelection = false
         cv.showsHorizontalScrollIndicator = false
         
         return cv

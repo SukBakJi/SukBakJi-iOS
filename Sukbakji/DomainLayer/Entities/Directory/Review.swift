@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct LabReview : Codable {
+struct LabDetail : Codable {
+    var review: [LabReview]
+    var triangleGraphData: LabTriangle
+}
+
+struct LabReview : Codable, Equatable {
     var universityName: String
     var departmentName: String
     var professorName: String
@@ -15,4 +20,10 @@ struct LabReview : Codable {
     var leadershipStyle: String
     var salaryLevel: String
     var autonomy: String
+}
+
+struct LabTriangle : Codable {
+    var leadershipAverage: Int
+    var salaryAverage: Int
+    var autonomyAverage: Int
 }

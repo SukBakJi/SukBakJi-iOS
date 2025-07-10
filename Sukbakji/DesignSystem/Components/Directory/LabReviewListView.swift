@@ -1,73 +1,69 @@
 //
-//  LabReviewView.swift
+//  LabReviewListView.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 7/2/25.
+//  Created by jaegu park on 6/14/25.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-class LabReviewView: UIView {
+class LabReviewListView: UIView {
     
     let scrollView = UIScrollView().then {
         $0.contentInsetAdjustmentBehavior = .never
         $0.showsVerticalScrollIndicator = false
     }
     let contentView = UIView()
+    var navigationbarView = NavigationBarView(title: "연구실 후기")
+    let backgroundLabel = UILabel().then {
+        $0.backgroundColor = .gray100
+    }
     let titleView = UIView().then {
         $0.backgroundColor = .clear
     }
     let titleLabel = UILabel().then {
-        $0.text = "연구실의 후기를 확인해 보세요"
+        $0.text = "지도교수명을 검색해 주세요"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = .gray900
     }
     let subTitleLabel = UILabel().then {
-        $0.text = "키워드 3개로 보는 간단 Check"
+        $0.text = "연구실에 대한 정보를 한 눈에 보세요"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14)
-        $0.textColor = .gray500
+        $0.textColor = .gray900
     }
-    let graphView = UIView().then {
+    let folderImageView = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_Folder")
+        $0.alpha = 0.5
+    }
+    let labSearchTextField = UITextField().then {
+        $0.backgroundColor = .gray50
+        $0.placeholder = "지도교수명을 입력해 주세요"
+        $0.setPlaceholderColor(.gray300)
+        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.textColor = .gray900
+        $0.layer.cornerRadius = 12
+    }
+    let tapOverlayButton = UIButton().then {
         $0.backgroundColor = .clear
+        $0.setTitle("", for: .normal)
     }
-    let graphLabel = UILabel().then {
-        $0.text = "간단 Check"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .gray900
-    }
-    let graphImageView = UIImageView().then {
-        $0.image = UIImage(named: "Sukbakji_Statistic")
-    }
-    let statisticLabel = UILabel().then {
-        $0.text = "자율성이 가장 높게 나타났어요"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = .gray900
-    }
-    let statisticLabel2 = UILabel().then {
-        $0.text = "키워드를 통해 간단하게 볼 수 있어요"
-        $0.font = UIFont(name: "Pretendard-Regular", size: 14)
-        $0.textColor = .gray500
-    }
-    let statisticImageView = UIImageView().then {
-        $0.image = UIImage(named: "Sukbakji_Graph")
+    let searchImageView = UIImageView().then {
+        $0.image = UIImage(named: "Sukbakji_SearchImage")
     }
     let reviewView = UIView().then {
         $0.backgroundColor = .clear
     }
     let reviewLabel = UILabel().then {
-        $0.text = "연구실 한줄평"
+        $0.text = "최신 연구실 후기"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         $0.textColor = .gray900
-    }
-    let reviewImageView = UIImageView().then {
-        $0.image = UIImage(named: "Sukbakji_Review")
     }
     let labReviewTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
-        $0.register(LabReviewTableViewCell.self, forCellReuseIdentifier: LabReviewTableViewCell.identifier)
+        $0.register(LabReviewListTableViewCell.self, forCellReuseIdentifier: LabReviewListTableViewCell.identifier)
         $0.allowsSelection = false
     }
     let moreButton = UIButton().then {
@@ -77,7 +73,7 @@ class LabReviewView: UIView {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.gray300.cgColor
         $0.setImage(UIImage(named: "Sukbakji_Down2"), for: .normal)
-        $0.setTitle("연구실 정보 더보기 ", for: .normal)
+        $0.setTitle("연구실 후기 더보기 ", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 11)
         $0.setTitleColor(.gray900, for: .normal)
         $0.semanticContentAttribute = .forceRightToLeft
@@ -99,20 +95,19 @@ class LabReviewView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         
+        addSubview(navigationbarView)
+        addSubview(backgroundLabel)
+        
         contentView.addSubview(titleView)
         titleView.addSubview(titleLabel)
         titleView.addSubview(subTitleLabel)
-        
-        contentView.addSubview(graphView)
-        graphView.addSubview(graphLabel)
-        graphView.addSubview(graphImageView)
-        graphView.addSubview(statisticLabel)
-        graphView.addSubview(statisticLabel2)
-        graphView.addSubview(statisticImageView)
+        titleView.addSubview(folderImageView)
+        titleView.addSubview(labSearchTextField)
+        titleView.addSubview(tapOverlayButton)
+        titleView.addSubview(searchImageView)
         
         contentView.addSubview(reviewView)
         reviewView.addSubview(reviewLabel)
-        reviewView.addSubview(reviewImageView)
         reviewView.addSubview(labReviewTableView)
         
         contentView.addSubview(moreButton)
@@ -120,8 +115,7 @@ class LabReviewView: UIView {
     
     private func setConstraints() {
         scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(40)
-            $0.bottom.leading.trailing.equalToSuperview()
+            $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
@@ -130,10 +124,21 @@ class LabReviewView: UIView {
             $0.bottom.equalTo(moreButton.snp.bottom).offset(120)
         }
         
-        titleView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+        navigationbarView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(95)
+        }
+        
+        backgroundLabel.snp.makeConstraints {
+            $0.top.equalTo(navigationbarView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(82)
+            $0.height.equalTo(1)
+        }
+        
+        titleView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(95)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(130)
         }
         
         titleLabel.snp.makeConstraints {
@@ -148,53 +153,37 @@ class LabReviewView: UIView {
             $0.height.equalTo(17)
         }
         
-        graphView.snp.makeConstraints {
-            $0.top.equalTo(titleView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(344)
+        folderImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(31)
+            $0.trailing.equalToSuperview().inset(15)
+            $0.height.equalTo(87)
+            $0.width.equalTo(107)
         }
         
-        graphLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(28)
-            $0.leading.equalToSuperview().offset(24)
-            $0.height.equalTo(21)
+        labSearchTextField.snp.makeConstraints {
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(48)
         }
+        labSearchTextField.setLeftPadding(52)
+        labSearchTextField.errorfix()
+        labSearchTextField.isUserInteractionEnabled = false
         
-        graphImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(28.5)
-            $0.leading.equalTo(graphLabel.snp.trailing).offset(4)
-            $0.height.width.equalTo(20)
+        tapOverlayButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(82)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(48)
         }
+        tapOverlayButton.addTarget(self, action: #selector(textFieldTapped), for: .touchUpInside)
         
-        statisticLabel.snp.makeConstraints {
-            $0.top.equalTo(graphLabel.snp.bottom).offset(32)
-            $0.leading.equalToSuperview().offset(24)
-            $0.height.equalTo(21)
-        }
-        let fullText = statisticLabel.text ?? ""
-        let changeText = "자율성"
-        let attributedString = NSMutableAttributedString(string: fullText)
-        if let range = fullText.range(of: changeText) {
-            let nsRange = NSRange(range, in: fullText)
-            attributedString.addAttribute(.foregroundColor, value: UIColor.orange700, range: nsRange)
-        }
-        statisticLabel.attributedText = attributedString
-        
-        statisticLabel2.snp.makeConstraints {
-            $0.top.equalTo(statisticLabel.snp.bottom).offset(8)
-            $0.leading.equalToSuperview().offset(24)
-            $0.height.equalTo(17)
-        }
-        
-        statisticImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(statisticLabel2.snp.bottom).offset(28)
-            $0.height.equalTo(177)
-            $0.width.equalTo(274)
+        searchImageView.snp.makeConstraints {
+            $0.centerY.equalTo(labSearchTextField)
+            $0.leading.equalToSuperview().offset(40)
+            $0.height.width.equalTo(24)
         }
         
         reviewView.snp.makeConstraints {
-            $0.top.equalTo(graphView.snp.bottom)
+            $0.top.equalTo(titleView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -204,14 +193,8 @@ class LabReviewView: UIView {
             $0.height.equalTo(21)
         }
         
-        reviewImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(28.5)
-            $0.leading.equalTo(reviewLabel.snp.trailing).offset(4)
-            $0.height.width.equalTo(20)
-        }
-        
         labReviewTableView.snp.makeConstraints {
-            $0.top.equalTo(reviewLabel.snp.bottom).offset(16)
+            $0.top.equalTo(reviewLabel.snp.bottom).offset(4)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
@@ -222,5 +205,10 @@ class LabReviewView: UIView {
             $0.height.equalTo(33)
             $0.width.equalTo(136)
         }
+    }
+    
+    @objc private func textFieldTapped() {
+        let nextVC = LabSearchViewController()
+        parentVC?.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

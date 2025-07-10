@@ -14,27 +14,27 @@ protocol NavigationBarViewDelegate: AnyObject {
 }
 
 final class NavigationBarView: UIView {
-   
-   var backButton = UIButton().then {
-      $0.setImage(UIImage(named: "Sukbakji_Back"), for: .normal)
-   }
-   var titleLabel = UILabel().then {
-      $0.textColor = .gray900
-       $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-   }
-   
-   weak var delegate: NavigationBarViewDelegate?
-   
-   init(title: String) {
-      super.init(frame: .zero)
-      titleLabel.text = title
-      setUI()
-   }
-   
-   required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-   }
-   
+    
+    var backButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Back"), for: .normal)
+    }
+    var titleLabel = UILabel().then {
+        $0.textColor = .gray900
+        $0.font = UIFont(name: "Pretendard-SemiBold", size: 20)
+    }
+    
+    weak var delegate: NavigationBarViewDelegate?
+    
+    init(title: String) {
+        super.init(frame: .zero)
+        titleLabel.text = title
+        setUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setUI() {
         self.backgroundColor = .white
         
@@ -54,7 +54,7 @@ final class NavigationBarView: UIView {
         
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
-   
+    
     @objc private func backButtonTapped() {
         delegate?.didTapBackButton()
     }
