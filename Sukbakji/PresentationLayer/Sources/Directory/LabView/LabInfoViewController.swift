@@ -47,6 +47,7 @@ class LabInfoViewController: UIViewController {
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+        labInfoView.scrapButton.addTarget(self, action: #selector(scrap_Tapped), for: .touchUpInside)
         labInfoView.copyButton.addTarget(self, action: #selector(copy_Tapped), for: .touchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openHomepage))
         labInfoView.pageLabel2.addGestureRecognizer(tapGesture)
@@ -84,6 +85,13 @@ class LabInfoViewController: UIViewController {
                 cell.prepare(topics: item)
             }
             .disposed(by: disposeBag)
+    }
+    
+    @objc private func scrap_Tapped() {
+        let isCurrentlyScrapped = labInfoView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
+        let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
+        labInfoView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
+        viewModel.favoriteLab(labId: labId)
     }
     
     @objc private func copy_Tapped() {

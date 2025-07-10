@@ -57,6 +57,6 @@ class DirectoryRepository {
     func favoriteLabToggle(token: String, labId: Int) -> Single<APIResponse<String>> {
         let url = APIConstants.labsFavoriteToggle(labId).path
         let params = ["labId": labId]
-        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
+        return APIService.shared.postWithTokenAndParams(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
     }
 }

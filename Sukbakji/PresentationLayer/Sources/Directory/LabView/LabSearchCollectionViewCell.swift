@@ -108,6 +108,7 @@ class LabSearchCollectionViewCell: UICollectionViewCell {
         professorLabel.snp.makeConstraints {
             $0.top.equalTo(labView.snp.bottom).offset(16)
             $0.leading.equalTo(professorNameLabel.snp.trailing).offset(4)
+            $0.trailing.lessThanOrEqualToSuperview().inset(16)
             $0.height.equalTo(14)
         }
         
@@ -123,6 +124,7 @@ class LabSearchCollectionViewCell: UICollectionViewCell {
         labView2.snp.makeConstraints {
             $0.top.equalTo(professorImageView.snp.bottom).offset(12)
             $0.leading.equalToSuperview().offset(16)
+            $0.trailing.lessThanOrEqualToSuperview().inset(16)
             $0.height.equalTo(20)
         }
         

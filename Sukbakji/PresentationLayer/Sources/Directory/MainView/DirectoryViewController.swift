@@ -37,6 +37,7 @@ class DirectoryViewController: UIViewController {
         if let tabBarVC = self.tabBarController as? MainTabViewController {
             tabBarVC.customTabBarView.isHidden = false
         }
+        favLabViewModel.loadFavoriteLab()
     }
     
     private func setUI() {
