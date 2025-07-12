@@ -31,7 +31,6 @@ class BoardEnterView: UIView {
     }()
     let titleLabel = UILabel()
     let enterPostTableView = UITableView()
-    let writingButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,8 +69,6 @@ class BoardEnterView: UIView {
         enterPostTableView.register(EnterPostTableViewCell.self, forCellReuseIdentifier: EnterPostTableViewCell.identifier)
         enterPostTableView.allowsSelection = false
         
-        writingButton.setImage(UIImage(named: "Sukbakji_Write"), for: .normal)
-        
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).paddingTop(55).define { flex in
             flex.addItem().marginHorizontal(24).height(48).define { inputContainer in
@@ -84,8 +81,6 @@ class BoardEnterView: UIView {
             flex.addItem(enterPostTableView).marginTop(12).grow(1)
         }
         
-        addSubview(writingButton)
-        
         tapOverlayButton.addTarget(self, action: #selector(textFieldTapped), for: .touchUpInside)
     }
     
@@ -94,12 +89,6 @@ class BoardEnterView: UIView {
         
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
-        
-        writingButton.pin
-            .bottom(120)
-            .right(24)
-            .width(60)
-            .height(60)
     }
     
     func changeColor(_ boardName: String) {

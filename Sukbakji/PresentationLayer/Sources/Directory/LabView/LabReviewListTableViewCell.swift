@@ -130,6 +130,7 @@ class LabReviewListTableViewCell: UITableViewCell {
         labelView3.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(16)
             $0.leading.equalTo(labelView2.snp.trailing).offset(6)
+            $0.trailing.lessThanOrEqualToSuperview().inset(16)
             $0.height.equalTo(20)
         }
         

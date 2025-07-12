@@ -237,6 +237,8 @@
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
+		C7C58DB52E212FA00060A5CC /* ReviewWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C58DB42E212FA00060A5CC /* ReviewWritingView.swift */; };
+		C7C58DB72E2130790060A5CC /* ReviewWritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C58DB62E2130790060A5CC /* ReviewWritingViewController.swift */; };
 		C7C657DD2CFD6891009FFA8E /* FavLabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */; };
 		C7C97B1B2E02D2D300347F5C /* LabSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C97B1A2E02D2D300347F5C /* LabSearchViewController.swift */; };
 		C7C97B1D2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C97B1C2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift */; };
@@ -537,6 +539,8 @@
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
+		C7C58DB42E212FA00060A5CC /* ReviewWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWritingView.swift; sourceTree = "<group>"; };
+		C7C58DB62E2130790060A5CC /* ReviewWritingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWritingViewController.swift; sourceTree = "<group>"; };
 		C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavLabViewModel.swift; sourceTree = "<group>"; };
 		C7C97B1A2E02D2D300347F5C /* LabSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSearchViewController.swift; sourceTree = "<group>"; };
 		C7C97B1C2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1210,6 +1214,7 @@
 				C7507C3E2E142BB800BB0CF5 /* LabInfoView.swift */,
 				C70CB4962E17958100C2025C /* LabInquiryView.swift */,
 				C7507C402E14348100BB0CF5 /* LabReviewView.swift */,
+				C7C58DB42E212FA00060A5CC /* ReviewWritingView.swift */,
 			);
 			path = Directory;
 			sourceTree = "<group>";
@@ -1466,6 +1471,7 @@
 				C70CB4982E179F1300C2025C /* LabInquiryViewController.swift */,
 				C74A2C8B2E152FAA007B7DB1 /* LabReviewViewController.swift */,
 				C706C9D62E1AD93A0032EC5C /* LabReviewTableViewCell.swift */,
+				C7C58DB62E2130790060A5CC /* ReviewWritingViewController.swift */,
 			);
 			path = LabView;
 			sourceTree = "<group>";
@@ -1874,6 +1880,7 @@
 				C750C3962D70C58300BE14EF /* EditAlarmView.swift in Sources */,
 				C7675F782D6981BD00F99294 /* UnivSearchView.swift in Sources */,
 				C7D64B432DD79B8900DD34A0 /* BoardFreeView.swift in Sources */,
+				C7C58DB72E2130790060A5CC /* ReviewWritingViewController.swift in Sources */,
 				C7EAC17B2DFC008F008B7F30 /* Topic.swift in Sources */,
 				412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */,
 				C7B407F12D645B21009B349F /* CalendarRepository.swift in Sources */,
@@ -1967,6 +1974,7 @@
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
 				C74C65DD2D4398C900526D23 /* UIColor+.swift in Sources */,
 				C7F951C22D2A775000D07051 /* AlarmDateCollectionViewCell.swift in Sources */,
+				C7C58DB52E212FA00060A5CC /* ReviewWritingView.swift in Sources */,
 				C74A15AE2D5A506D00A1698B /* AlarmPost.swift in Sources */,
 				C74A15A42D5A4E9100A1698B /* UnivSearch.swift in Sources */,
 				C7D64B4B2DD79C4100DD34A0 /* BoardEnterViewController.swift in Sources */,
