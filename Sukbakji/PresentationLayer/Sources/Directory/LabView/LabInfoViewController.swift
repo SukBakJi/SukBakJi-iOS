@@ -12,7 +12,8 @@ import RxCocoa
 class LabInfoViewController: UIViewController {
     
     private let labInfoView = LabInfoView()
-    private let viewModel = LabViewModel()
+    private let labInfoViewModel = LabInfoViewModel()
+    private let labFavoriteViewModel = LabFavoriteViewModel()
     private let disposeBag = DisposeBag()
     var labId: Int = 0
     
@@ -55,15 +56,15 @@ class LabInfoViewController: UIViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadLabInfo(labId: labId)
-        viewModel.loadFavoriteLabList(labId: labId, scrapButton: labInfoView.scrapButton)
+        labInfoViewModel.loadLabInfo(labId: labId)
+        labFavoriteViewModel.loadFavoriteLabList(labId: labId, scrapButton: labInfoView.scrapButton)
     }
     
     private func bindViewModel() {
-        viewModel.labInfo
+        labInfoViewModel.labInfo
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] lab in
-                self?.viewModel.researchTopicItems.accept(lab.researchTopics)
+                self?.labInfoViewModel.researchTopicItems.accept(lab.researchTopics)
                 self?.labInfoView.nameLabel.text = lab.professorName
                 self?.labInfoView.univLabel.text = lab.universityName
                 self?.labInfoView.departmentLabel.text = lab.departmentName
@@ -79,7 +80,7 @@ class LabInfoViewController: UIViewController {
         labInfoView.labTopicCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
 
-        self.viewModel.researchTopicItems
+        self.labInfoViewModel.researchTopicItems
             .observe(on: MainScheduler.instance)
             .bind(to: labInfoView.labTopicCollectionView.rx.items(cellIdentifier: LabTopicCollectionViewCell.identifier, cellType: LabTopicCollectionViewCell.self)) { index, item, cell in
                 cell.prepare(topics: item)
@@ -91,7 +92,7 @@ class LabInfoViewController: UIViewController {
         let isCurrentlyScrapped = labInfoView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
         let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
         labInfoView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
-        viewModel.favoriteLab(labId: labId)
+        labFavoriteViewModel.favoriteLab(labId: labId)
     }
     
     @objc private func copy_Tapped() {
@@ -113,7 +114,7 @@ class LabInfoViewController: UIViewController {
 
 extension LabInfoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let items = viewModel.researchTopicItems.value
+        let items = labInfoViewModel.researchTopicItems.value
         guard indexPath.item < items.count else {
             return CGSize(width: 40, height: 29) // 기본 사이즈 반환
         }

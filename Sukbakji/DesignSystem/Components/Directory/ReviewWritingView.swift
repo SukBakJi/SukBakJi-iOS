@@ -216,6 +216,21 @@ class ReviewWritingView: UIView {
         $0.setBackgroundColor(.gray200, for: .normal)
         $0.setBackgroundColor(.gray200, for: .disabled)
     }
+    lazy var leadershipButtons: [UIButton: String] = [
+        leadershipButton: "좋았어요",
+        leadershipButton2: "보통이에요",
+        leadershipButton3: "아쉬워요"
+    ]
+    lazy var salaryButtons: [UIButton: String] = [
+        salaryButton: "높아요",
+        salaryButton2: "보통이에요",
+        salaryButton3: "낮아요"
+    ]
+    lazy var autonomyButtons: [UIButton: String] = [
+        autonomyButton: "높아요",
+        autonomyButton2: "보통이에요",
+        autonomyButton3: "낮아요"
+    ]
     
     override init(frame: CGRect) {
         super.init(frame: frame)

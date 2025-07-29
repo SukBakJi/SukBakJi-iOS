@@ -13,7 +13,8 @@ import RxCocoa
 class LabReviewViewController: UIViewController {
     
     private let labReviewView = LabReviewView()
-    private let viewModel = LabViewModel()
+    private let labInfoViewModel = LabInfoViewModel()
+    private let labReviewViewModel = LabReviewViewModel()
     private let disposeBag = DisposeBag()
     var labId: Int = 0
     
@@ -56,14 +57,14 @@ class LabReviewViewController: UIViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadLabDetail(labId: labId)
+        labInfoViewModel.loadLabDetail(labId: labId)
     }
     
     private func bindViewModel() {
-        viewModel.labDetail
+        labInfoViewModel.labDetail
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] lab in
-                self?.viewModel.reviewItems.accept(lab.review)
+                self?.labReviewViewModel.reviewItems.accept(lab.review)
                 self?.setReviewData()
             })
             .disposed(by: disposeBag)
@@ -73,13 +74,13 @@ class LabReviewViewController: UIViewController {
         labReviewView.labReviewTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        viewModel.reviewItems
+        labReviewViewModel.reviewItems
             .subscribe(onNext: { review in
                 self.reviewHeightConstraint?.update(offset: 61 + 153 * review.count)
             })
             .disposed(by: disposeBag)
 
-        viewModel.reviewItems
+        labReviewViewModel.reviewItems
             .observe(on: MainScheduler.instance)
             .bind(to: labReviewView.labReviewTableView.rx.items(cellIdentifier: LabReviewTableViewCell.identifier, cellType: LabReviewTableViewCell.self)) { index, item, cell in
                 cell.prepare(review: item)

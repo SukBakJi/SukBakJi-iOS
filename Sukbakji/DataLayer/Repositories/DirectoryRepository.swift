@@ -33,6 +33,11 @@ class DirectoryRepository {
         return APIService.shared.getWithToken(of: APIResponse<LabDetail>.self, url: url, accessToken: token)
     }
     
+    func PostLabsReviewsId(token: String, lab_id: Int, parameters: [String: Any]?) -> Single<APIResponse<LabDetail>> {
+        let url = APIConstants.labsReviewsId(lab_id).path
+        return APIService.shared.postWithTokenAndParams(of: APIResponse<LabDetail>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
     func fetchReviewsSearch(token: String, professorName: String) -> Single<APIResponse<[LabReview]>> {
         let url = APIConstants.labsReviewsSearch.path
         let params = [

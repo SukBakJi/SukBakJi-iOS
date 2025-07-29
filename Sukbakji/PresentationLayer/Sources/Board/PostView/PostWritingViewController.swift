@@ -29,8 +29,8 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
     private var infoHeightConstraint: Constraint?
     
     private var menu = "박사"
-    private var hiringType = "박사"
-    private var finalEdu = "박사"
+    private var hiringType = ""
+    private var finalEdu = ""
     private var fieldMenu: [String] = ["법무", "인사∙HR", "회계∙세무", "마케팅∙광고∙MD", "개발∙데이터", "디자인", "물류∙무역", "운전∙운송∙배송", "영업", "고객상담∙TM", "금융∙보험", "식∙음료", "고객서비스∙리테일", "엔지니어링∙설계", "제조∙생산", "교육", "건축∙시설", "의료∙바이오", "미디어∙문화∙스포츠", "공공∙복지", "기타"]
     
     override func loadView() {
