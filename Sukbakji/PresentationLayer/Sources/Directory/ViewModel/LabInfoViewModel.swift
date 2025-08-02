@@ -48,13 +48,8 @@ class LabInfoViewModel {
     }
     
     func loadLabSearch(topicName: String, page: Int32, size: Int32, completion: @escaping (Bool) -> Void) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            completion(false)
-            return
-        }
-        
-        repository.fetchLabsSearch(token: token, topicName: topicName, page: page, size: size)
-            .map { $0.result.responseDTOList }
+        useCase.fetchLabSearch(topicName: topicName, page: page, size: size)
+            .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] labs in
                 guard let self = self else { return }
                 let current = self.labList.value
@@ -64,8 +59,8 @@ class LabInfoViewModel {
                 }
                 self.labList.accept(labs)
                 completion(true)
-            }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+            }, onFailure: { [weak self] error in
+                self?.errorMessage.onNext("\(error.localizedDescription)")
                 completion(false)
             })
             .disposed(by: disposeBag)

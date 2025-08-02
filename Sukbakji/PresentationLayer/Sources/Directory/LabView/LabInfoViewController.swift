@@ -92,7 +92,7 @@ class LabInfoViewController: UIViewController {
         let isCurrentlyScrapped = labInfoView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
         let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
         labInfoView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
-        labFavoriteViewModel.favoriteLab(labId: labId)
+        labFavoriteViewModel.postLabFavorite(labId: labId)
     }
     
     @objc private func copy_Tapped() {
