@@ -13,8 +13,7 @@ import RxCocoa
 class LabSearchViewController: UIViewController {
     
     private let labSearchView = LabSearchView()
-    private let viewModel = DirectoryViewModel()
-    private let labViewModel = LabViewModel()
+    private let labInfoViewModel = LabInfoViewModel()
     private let disposeBag = DisposeBag()
     
     private let recentSearchKey = "RecentSearchKeywords"
@@ -110,7 +109,7 @@ extension LabSearchViewController {
             .bind(to: labSearchView.noResultLabel.rx.isHidden)
             .disposed(by: disposeBag)
         
-        labViewModel.labList
+        labInfoViewModel.labList
             .bind(to: labSearchView.labSearchCollectionView.rx.items(cellIdentifier: LabSearchCollectionViewCell.identifier, cellType: LabSearchCollectionViewCell.self)) { row, lab, cell in
                 cell.prepare(labSearch: lab)
             }
@@ -135,14 +134,14 @@ extension LabSearchViewController {
                 self?.labSearchView.resultView.isHidden = false
                 self?.labSearchView.labSearchTextField.text = ""
                 self?.bindResult()
-                self?.labViewModel.loadLabSearch(topicName: query, page: 0, size: 6) { changed in
+                self?.labInfoViewModel.loadLabSearch(topicName: query, page: 0, size: 6) { changed in
                 }
             })
             .disposed(by: disposeBag)
     }
     
     private func bindResult() {
-        labViewModel.labList
+        labInfoViewModel.labList
             .subscribe(onNext: { LabList in
                 let newCount = LabList.count
                 self.labSearchView.countLabel.text = "\(newCount) 건"
@@ -188,7 +187,7 @@ extension LabSearchViewController {
     
     @objc private func more_Tapped() {
         let currentSize = Int32(size)
-        labViewModel.loadLabSearch(topicName: lastSearchQuery, page: 0, size: currentSize) { [weak self] changed in
+        labInfoViewModel.loadLabSearch(topicName: lastSearchQuery, page: 0, size: currentSize) { [weak self] changed in
             guard let self = self else { return }
             if changed {
                 self.size += 2

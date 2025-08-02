@@ -109,7 +109,7 @@
 		C729F0FC2DE1B3F800AAABB6 /* CommentInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C729F0FB2DE1B3F800AAABB6 /* CommentInputView.swift */; };
 		C72CEED62D258CB500EED814 /* UnivStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CEED52D258CB500EED814 /* UnivStopView.swift */; };
 		C72FB0602E06C1D0002755F6 /* Lab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FB05F2E06C1D0002755F6 /* Lab.swift */; };
-		C72FB0622E06C441002755F6 /* LabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FB0612E06C441002755F6 /* LabViewModel.swift */; };
+		C72FB0622E06C441002755F6 /* LabInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FB0612E06C441002755F6 /* LabInfoViewModel.swift */; };
 		C730327C2D295BF800F717D0 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730327B2D295BF800F717D0 /* BottomSheetView.swift */; };
 		C73032802D2974D100F717D0 /* EditUnivCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */; };
 		C7347E3A2C4D452100688768 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7347E312C4D410200688768 /* Pretendard-Black.otf */; };
@@ -237,6 +237,8 @@
 		C7C434EE2C5DFE8900BFB2D2 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */; };
 		C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */; };
 		C7C434F22C5DFF0E00BFB2D2 /* EditPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */; };
+		C7C58DB52E212FA00060A5CC /* ReviewWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C58DB42E212FA00060A5CC /* ReviewWritingView.swift */; };
+		C7C58DB72E2130790060A5CC /* ReviewWritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C58DB62E2130790060A5CC /* ReviewWritingViewController.swift */; };
 		C7C657DD2CFD6891009FFA8E /* FavLabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */; };
 		C7C97B1B2E02D2D300347F5C /* LabSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C97B1A2E02D2D300347F5C /* LabSearchViewController.swift */; };
 		C7C97B1D2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C97B1C2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift */; };
@@ -265,11 +267,12 @@
 		C7DF5E2F2DB09AF600274B4D /* BlockMemberId.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF5E2E2DB09AF600274B4D /* BlockMemberId.swift */; };
 		C7E35A772D73670500632DE3 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E35A762D73670500632DE3 /* MainTabViewController.swift */; };
 		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
+		C7E6988D2E38D6CB00F8F373 /* LabReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6988C2E38D6CB00F8F373 /* LabReviewViewModel.swift */; };
+		C7E6988F2E38E6F800F8F373 /* LabFavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6988E2E38E6F800F8F373 /* LabFavoriteViewModel.swift */; };
 		C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */; };
 		C7EA8CB12D689AB600B25FBC /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EA8CB02D689AB600B25FBC /* CalendarViewModel.swift */; };
 		C7EAC1782DFBEEC5008B7F30 /* DirectoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAC1772DFBEEC5008B7F30 /* DirectoryRepository.swift */; };
 		C7EAC17B2DFC008F008B7F30 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAC17A2DFC008F008B7F30 /* Topic.swift */; };
-		C7EAC17E2DFC01B8008B7F30 /* DirectoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAC17D2DFC01B8008B7F30 /* DirectoryViewModel.swift */; };
 		C7EAC1802DFC0946008B7F30 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAC17F2DFC0946008B7F30 /* Review.swift */; };
 		C7EF6A0D2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EF6A0C2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift */; };
 		C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */; };
@@ -399,7 +402,7 @@
 		C729F0FB2DE1B3F800AAABB6 /* CommentInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputView.swift; sourceTree = "<group>"; };
 		C72CEED52D258CB500EED814 /* UnivStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivStopView.swift; sourceTree = "<group>"; };
 		C72FB05F2E06C1D0002755F6 /* Lab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lab.swift; sourceTree = "<group>"; };
-		C72FB0612E06C441002755F6 /* LabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabViewModel.swift; sourceTree = "<group>"; };
+		C72FB0612E06C441002755F6 /* LabInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabInfoViewModel.swift; sourceTree = "<group>"; };
 		C730327B2D295BF800F717D0 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		C730327F2D2974D100F717D0 /* EditUnivCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUnivCalendarViewController.swift; sourceTree = "<group>"; };
 		C7347E312C4D410200688768 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
@@ -537,6 +540,8 @@
 		C7C434ED2C5DFE8900BFB2D2 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
 		C7C434EF2C5DFF0300BFB2D2 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		C7C434F12C5DFF0E00BFB2D2 /* EditPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPWViewController.swift; sourceTree = "<group>"; };
+		C7C58DB42E212FA00060A5CC /* ReviewWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWritingView.swift; sourceTree = "<group>"; };
+		C7C58DB62E2130790060A5CC /* ReviewWritingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWritingViewController.swift; sourceTree = "<group>"; };
 		C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavLabViewModel.swift; sourceTree = "<group>"; };
 		C7C97B1A2E02D2D300347F5C /* LabSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSearchViewController.swift; sourceTree = "<group>"; };
 		C7C97B1C2E02D2EE00347F5C /* LabSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -565,11 +570,12 @@
 		C7DF5E2E2DB09AF600274B4D /* BlockMemberId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMemberId.swift; sourceTree = "<group>"; };
 		C7E35A762D73670500632DE3 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7E6988C2E38D6CB00F8F373 /* LabReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewViewModel.swift; sourceTree = "<group>"; };
+		C7E6988E2E38E6F800F8F373 /* LabFavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabFavoriteViewModel.swift; sourceTree = "<group>"; };
 		C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivRecruitViewController.swift; sourceTree = "<group>"; };
 		C7EA8CB02D689AB600B25FBC /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		C7EAC1772DFBEEC5008B7F30 /* DirectoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryRepository.swift; sourceTree = "<group>"; };
 		C7EAC17A2DFC008F008B7F30 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
-		C7EAC17D2DFC01B8008B7F30 /* DirectoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewModel.swift; sourceTree = "<group>"; };
 		C7EAC17F2DFC0946008B7F30 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		C7EF6A0C2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFavBoardTableViewCell.swift; sourceTree = "<group>"; };
 		C7EFF5BB2CFB2AFE0019F30D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
@@ -1210,6 +1216,7 @@
 				C7507C3E2E142BB800BB0CF5 /* LabInfoView.swift */,
 				C70CB4962E17958100C2025C /* LabInquiryView.swift */,
 				C7507C402E14348100BB0CF5 /* LabReviewView.swift */,
+				C7C58DB42E212FA00060A5CC /* ReviewWritingView.swift */,
 			);
 			path = Directory;
 			sourceTree = "<group>";
@@ -1466,6 +1473,7 @@
 				C70CB4982E179F1300C2025C /* LabInquiryViewController.swift */,
 				C74A2C8B2E152FAA007B7DB1 /* LabReviewViewController.swift */,
 				C706C9D62E1AD93A0032EC5C /* LabReviewTableViewCell.swift */,
+				C7C58DB62E2130790060A5CC /* ReviewWritingViewController.swift */,
 			);
 			path = LabView;
 			sourceTree = "<group>";
@@ -1502,8 +1510,9 @@
 		C7EAC17C2DFC012E008B7F30 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C7EAC17D2DFC01B8008B7F30 /* DirectoryViewModel.swift */,
-				C72FB0612E06C441002755F6 /* LabViewModel.swift */,
+				C72FB0612E06C441002755F6 /* LabInfoViewModel.swift */,
+				C7E6988C2E38D6CB00F8F373 /* LabReviewViewModel.swift */,
+				C7E6988E2E38E6F800F8F373 /* LabFavoriteViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1713,9 +1722,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sukbakji/Pods-Sukbakji-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sukbakji/Pods-Sukbakji-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1811,7 +1824,7 @@
 				C7AA038D2DD50B1100BBE115 /* BoardViewModel.swift in Sources */,
 				C7F61D192DE04EA100B5C3B4 /* MyPostTableViewCell.swift in Sources */,
 				C73828D32D6220F4007A21A0 /* AllDeleteView.swift in Sources */,
-				C72FB0622E06C441002755F6 /* LabViewModel.swift in Sources */,
+				C72FB0622E06C441002755F6 /* LabInfoViewModel.swift in Sources */,
 				C7EFF5BC2CFB2AFE0019F30D /* APIResponse.swift in Sources */,
 				C7BF189A2D266A1400E48F77 /* UnivCalendarViewController.swift in Sources */,
 				C7DF5E2F2DB09AF600274B4D /* BlockMemberId.swift in Sources */,
@@ -1874,15 +1887,16 @@
 				C750C3962D70C58300BE14EF /* EditAlarmView.swift in Sources */,
 				C7675F782D6981BD00F99294 /* UnivSearchView.swift in Sources */,
 				C7D64B432DD79B8900DD34A0 /* BoardFreeView.swift in Sources */,
+				C7C58DB72E2130790060A5CC /* ReviewWritingViewController.swift in Sources */,
 				C7EAC17B2DFC008F008B7F30 /* Topic.swift in Sources */,
 				412F92302C5C9E120042B834 /* FirstAcademicVerificationViewController.swift in Sources */,
 				C7B407F12D645B21009B349F /* CalendarRepository.swift in Sources */,
+				C7E6988F2E38E6F800F8F373 /* LabFavoriteViewModel.swift in Sources */,
 				C757F82B2D0A9D2000685F1A /* MyAlarmTableViewCell.swift in Sources */,
 				C7AA038F2DD50D9100BBE115 /* PostDetailViewController.swift in Sources */,
 				C7E35A772D73670500632DE3 /* MainTabViewController.swift in Sources */,
 				C77EFB412D9C03CA000C2841 /* NotificationTableViewCell.swift in Sources */,
 				C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */,
-				C7EAC17E2DFC01B8008B7F30 /* DirectoryViewModel.swift in Sources */,
 				C7BA9BC02DDB2A6D00AF9A43 /* DoctorPostTableViewCell.swift in Sources */,
 				C7D18E532DFB311A0076A4DE /* LabReviewCollectionViewCell.swift in Sources */,
 				C7F4552D2C39B8EE00A4D0EE /* AppDelegate.swift in Sources */,
@@ -1953,6 +1967,7 @@
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
 				91D413262D82696500020CEC /* DetailTOSViewController.swift in Sources */,
 				91D413272D82696500020CEC /* TOSViewController.swift in Sources */,
+				C7E6988D2E38D6CB00F8F373 /* LabReviewViewModel.swift in Sources */,
 				C73948B22DD8820A00612461 /* BoardQnATableViewCell.swift in Sources */,
 				C77EFB392D9B8645000C2841 /* FCMTokenManager+.swift in Sources */,
 				417AADB42C606132002080E0 /* SearchTableViewCell.swift in Sources */,
@@ -1967,6 +1982,7 @@
 				412F922E2C5C9D360042B834 /* AcademicVerificationViewController.swift in Sources */,
 				C74C65DD2D4398C900526D23 /* UIColor+.swift in Sources */,
 				C7F951C22D2A775000D07051 /* AlarmDateCollectionViewCell.swift in Sources */,
+				C7C58DB52E212FA00060A5CC /* ReviewWritingView.swift in Sources */,
 				C74A15AE2D5A506D00A1698B /* AlarmPost.swift in Sources */,
 				C74A15A42D5A4E9100A1698B /* UnivSearch.swift in Sources */,
 				C7D64B4B2DD79C4100DD34A0 /* BoardEnterViewController.swift in Sources */,

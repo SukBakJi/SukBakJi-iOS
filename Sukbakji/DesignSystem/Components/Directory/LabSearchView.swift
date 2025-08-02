@@ -106,7 +106,6 @@ class LabSearchView: UIView {
         $0.setTitleColor(.gray900, for: .normal)
         $0.semanticContentAttribute = .forceRightToLeft
     }
-    
     let noResultView = UIView().then {
         $0.backgroundColor = .white
     }

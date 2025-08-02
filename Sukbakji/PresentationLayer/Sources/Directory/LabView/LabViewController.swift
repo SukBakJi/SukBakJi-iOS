@@ -15,6 +15,9 @@ class LabViewController: UIViewController {
     private let classifyView = UIView().then {
         $0.backgroundColor = .white
     }
+    private let writingButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Write"), for: .normal)
+    }
     var labId: Int = 0
     
     init(labId: Int) {
@@ -65,6 +68,14 @@ class LabViewController: UIViewController {
         childVC.didMove(toParent: self)
         
         optionNavigationbarView.optionButton.addTarget(self, action: #selector(option_Tapped), for: .touchUpInside)
+        
+        self.view.addSubview(writingButton)
+        writingButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(120)
+            make.trailing.bottom.equalToSuperview().inset(24)
+            make.width.height.equalTo(60)
+        }
+        writingButton.addTarget(self, action: #selector(writing_Tapped), for: .touchUpInside)
     }
     
     @objc private func option_Tapped() {
@@ -81,5 +92,10 @@ class LabViewController: UIViewController {
         alert.addAction(cancel)
 
         present(alert, animated: true)
+    }
+    
+    @objc private func writing_Tapped() {
+        let reviewWritingVC = ReviewWritingViewController(labId: labId)
+        self.navigationController?.pushViewController(reviewWritingVC, animated: true)
     }
 }

@@ -14,7 +14,8 @@ class DirectoryViewController: UIViewController {
 
     private let directoryView = DirectoryView()
     private let favLabViewModel = FavLabViewModel()
-    private let viewModel = DirectoryViewModel()
+    private let researchTopicviewModel = ResearchTopicViewModel()
+    private let labReviewviewModel = LabReviewViewModel()
     private let disposeBag = DisposeBag()
     
     private var favLabHeightConstraint: Constraint?
@@ -56,8 +57,8 @@ extension DirectoryViewController {
     
     private func setAPI() {
         favLabViewModel.loadFavoriteLab()
-        viewModel.loadInterestTopic()
-        viewModel.loadReviewList(offset: 0, limit: 3)
+        researchTopicviewModel.loadInterestTopic()
+        labReviewviewModel.loadReviewList(offset: 0, limit: 3)
     }
     
     private func bindViewModel() {
@@ -90,14 +91,14 @@ extension DirectoryViewController {
                 self.navigationController?.pushViewController(labVC, animated: true)
             })
             .disposed(by: disposeBag)
-        viewModel.topicList
+        researchTopicviewModel.topicList
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] topic in
-                self?.viewModel.topicItems.accept(topic.topics)
+                self?.researchTopicviewModel.topicItems.accept(topic.topics)
                 self?.setTopicData()
             })
             .disposed(by: disposeBag)
-        viewModel.reviewList
+        labReviewviewModel.reviewList
             .bind(to: directoryView.labReviewCollectionView.rx.items(cellIdentifier: LabReviewCollectionViewCell.identifier, cellType: LabReviewCollectionViewCell.self)) { row, review, cell in
                 cell.prepare(review: review)
             }
@@ -108,7 +109,7 @@ extension DirectoryViewController {
         directoryView.topicCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
 
-        viewModel.topicItems
+        researchTopicviewModel.topicItems
             .observe(on: MainScheduler.instance)
             .bind(to: directoryView.topicCollectionView.rx.items(cellIdentifier: TopicCollectionViewCell.identifier, cellType: TopicCollectionViewCell.self)) { row, topic, cell in
                 cell.prepare(topics: topic)
@@ -129,7 +130,7 @@ extension DirectoryViewController {
 
 extension DirectoryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let items = viewModel.topicItems.value
+        let items = researchTopicviewModel.topicItems.value
         
         if collectionView == directoryView.favLabCollectionView {
             return CGSize(width: 300, height: 172)

@@ -11,20 +11,23 @@ import Then
 
 class BoardViewController: UIViewController {
 
-    let titleView = UIView().then {
+    private let titleView = UIView().then {
         $0.backgroundColor = .white
     }
-    let titleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.text = "게시판"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 22)
         $0.textColor = .gray900
     }
-    let notificationButton = UIButton().then {
+    private let notificationButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Notification"), for: .normal)
         $0.contentMode = .scaleAspectFill
     }
     private let classifyView = UIView().then {
         $0.backgroundColor = .white
+    }
+    private let writingButton = UIButton().then {
+        $0.setImage(UIImage(named: "Sukbakji_Write"), for: .normal)
     }
 
     override func viewDidLoad() {
@@ -79,10 +82,23 @@ class BoardViewController: UIViewController {
         childVC.didMove(toParent: self)
         
         notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
+        
+        self.view.addSubview(writingButton)
+        writingButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(120)
+            make.trailing.bottom.equalToSuperview().inset(24)
+            make.width.height.equalTo(60)
+        }
+        writingButton.addTarget(self, action: #selector(writing_Tapped), for: .touchUpInside)
     }
     
     @objc private func notification_Tapped() {
         let notificationViewController = NotificationViewController()
         self.navigationController?.pushViewController(notificationViewController, animated: true)
+    }
+    
+    @objc private func writing_Tapped() {
+        let postWritingVC = PostWritingViewController()
+        self.navigationController?.pushViewController(postWritingVC, animated: true)
     }
 }

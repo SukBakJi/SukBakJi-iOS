@@ -59,6 +59,7 @@ class PostListViewController: UIViewController {
         } else {
             postListView.noticeButton.addTarget(self, action: #selector(clickNoticeButton2), for: .touchUpInside)
         }
+        postListView.writingButton.addTarget(self, action: #selector(writing_Tapped), for: .touchUpInside)
     }
 }
     
@@ -156,6 +157,11 @@ extension PostListViewController {
         noticeView.alpha = 0
         noticeView.snp.makeConstraints { $0.edges.equalToSuperview() }
         UIView.animate(withDuration: 0.3) { noticeView.alpha = 1 }
+    }
+    
+    @objc private func writing_Tapped() {
+        let postWritingVC = PostWritingViewController()
+        self.navigationController?.pushViewController(postWritingVC, animated: true)
     }
 }
 

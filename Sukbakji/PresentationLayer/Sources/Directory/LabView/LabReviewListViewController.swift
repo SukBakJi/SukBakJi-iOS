@@ -13,7 +13,7 @@ import RxCocoa
 class LabReviewListViewController: UIViewController {
     
     private let labReviewListView = LabReviewListView()
-    private let viewModel = DirectoryViewModel()
+    private let viewModel = LabReviewViewModel()
     private let disposeBag = DisposeBag()
     private var offset:Int = 3
     
