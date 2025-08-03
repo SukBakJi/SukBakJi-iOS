@@ -65,15 +65,4 @@ class MyProfileViewModel {
         })
         .disposed(by: disposeBag)
     }
-    
-    func uploadFCMTokenToServer(fcmToken : String) {
-        useCase.uploadFCMToken(fcmToken: fcmToken)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { message in
-                print("\(message)")
-            }, onFailure: { error in
-                print("FCM 토큰 업로드 실패: \(error.localizedDescription)")
-            })
-            .disposed(by: disposeBag)
-    }
 }

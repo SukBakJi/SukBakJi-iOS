@@ -66,15 +66,6 @@ class HomeUseCase {
             .catchAndReturn(false)
     }
     
-    func uploadFCMToken(fcmToken: String) -> Single<String> {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return .error(NSError(domain: "TokenError", code: 401, userInfo: nil))
-        }
-        
-        return FCMRepository.shared.postFCMToken(token: token, fcmToken: fcmToken)
-            .map { $0.message }
-    }
-    
     private func clearUserCredentials() {
         KeychainHelper.standard.delete(service: "access-token", account: "user")
         KeychainHelper.standard.delete(service: "refresh-token", account: "user")

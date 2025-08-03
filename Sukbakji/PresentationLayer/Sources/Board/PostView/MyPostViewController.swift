@@ -69,7 +69,7 @@ extension MyPostViewController {
     
     private func setAPI() {
         if isPost == 0 {
-            myPostViewModel.loadmyPostList()
+            myPostViewModel.loadMyPostList()
         } else if isPost == 1 {
             myPostViewModel.loadScrapList()
         } else {

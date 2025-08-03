@@ -9,7 +9,6 @@ import RxSwift
 import RxCocoa
 
 class LabInfoViewModel {
-    private let repository = DirectoryRepository()
     private let disposeBag = DisposeBag()
     private let useCase: DirectoryUseCase
     
@@ -18,8 +17,6 @@ class LabInfoViewModel {
     let labList = BehaviorRelay<[LabSearch]>(value: [])
     
     var researchTopicItems = BehaviorRelay<[String]>(value: [])
-    
-    let errorMessage = PublishSubject<String>()
     
     init(useCase: DirectoryUseCase = DirectoryUseCase()) {
         self.useCase = useCase
@@ -30,8 +27,8 @@ class LabInfoViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] lab in
                 self?.labInfo.onNext(lab)
-            }, onFailure: { [weak self] error in
-                self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -41,8 +38,8 @@ class LabInfoViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] lab in
                 self?.labDetail.onNext(lab)
-            }, onFailure: { [weak self] error in
-                self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -59,8 +56,8 @@ class LabInfoViewModel {
                 }
                 self.labList.accept(labs)
                 completion(true)
-            }, onFailure: { [weak self] error in
-                self?.errorMessage.onNext("\(error.localizedDescription)")
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
                 completion(false)
             })
             .disposed(by: disposeBag)

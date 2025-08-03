@@ -8,64 +8,46 @@
 import RxSwift
 import RxCocoa
 
-class ReportViewModel {
-    private let repository = ReportRepository()
+final class ReportViewModel {
+    private let useCase: ReportUseCase
     private let disposeBag = DisposeBag()
     
     let reportResult = PublishSubject<Bool>()
     let blockResult = PublishSubject<Bool>()
     
-    func loadReportPost(postId: Int, reason: String) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let params = [
-            "postId": postId,
-            "reason": reason
-        ] as [String : Any]
-        
-        repository.fetchReportPost(token: token, parameters: params)
+    init(useCase: ReportUseCase = ReportUseCase()) {
+        self.useCase = useCase
+    }
+    
+    func reportPost(postId: Int, reason: String) {
+        useCase.reportPost(postId: postId, reason: reason)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] _ in
-                self?.reportResult.onNext(true)
-            }, onFailure: { [weak self] error in
-                self?.reportResult.onNext(false)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.reportResult.onNext(isSuccess)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
     
-    func loadReportComment(commentId: Int, reason: String) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let params = [
-            "commentId": commentId,
-            "reason": reason
-        ] as [String : Any]
-        
-        repository.fetchReportComment(token: token, parameters: params)
+    func reportComment(commentId: Int, reason: String) {
+        useCase.reportComment(commentId: commentId, reason: reason)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] _ in
-                self?.reportResult.onNext(true)
-            }, onFailure: { [weak self] error in
-                self?.reportResult.onNext(false)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.reportResult.onNext(isSuccess)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
     
-    func loadBlockMemberId(targetMemberId: Int) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        ReportRepository.shared.fetchBlockMember(token: token, targetMemberId: targetMemberId)
+    func blockMember(targetMemberId: Int) {
+        useCase.blockMember(targetMemberId: targetMemberId)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] _ in
-                self?.blockResult.onNext(true)
-            }, onFailure: { [weak self] error in
-                self?.blockResult.onNext(false)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.reportResult.onNext(isSuccess)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

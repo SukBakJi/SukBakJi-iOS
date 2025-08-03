@@ -9,13 +9,10 @@ import RxSwift
 import RxCocoa
 
 class LabFavoriteViewModel {
-    private let repository = DirectoryRepository()
     private let disposeBag = DisposeBag()
     private let useCase: DirectoryUseCase
     
     let favoritePosted = PublishSubject<Bool>()
-    
-    let errorMessage = PublishSubject<String>()
     
     init(useCase: DirectoryUseCase = DirectoryUseCase()) {
         self.useCase = useCase
@@ -31,8 +28,8 @@ class LabFavoriteViewModel {
                     let imageName = isScrapped ? "Sukbakji_Bookmark2" : "Sukbakji_Bookmark"
                     scrapButton.setImage(UIImage(named: imageName), for: .normal)
                 }
-            }, onFailure: { [weak self] error in
-                self?.errorMessage.onNext("\(error.localizedDescription)")
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

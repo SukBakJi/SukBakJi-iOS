@@ -14,9 +14,10 @@ import DropDown
 class PostWritingViewController: UIViewController, UITextViewDelegate {
     
     private var postWritingView = PostWritingView()
-    private let postViewModel = PostViewModel()
+    private let postDetailViewModel = PostDetailViewModel()
     private let boardViewModel = BoardViewModel()
     var disposeBag = DisposeBag()
+    
     private let categoryDrop = DropDown()
     private let fieldDrop = DropDown()
     private var hasStartedEditing = false
@@ -415,7 +416,7 @@ extension PostWritingViewController {
     }
     
     @objc private func enroll_Tapped() {
-        postViewModel.enrollPost(menu: menu, boardName: postWritingView.categoryTextField.text!, title: postWritingView.titleTextField.text!, content: postWritingView.contentTextView.text)
+        postDetailViewModel.createPost(menu: menu, boardName: postWritingView.categoryTextField.text!, title: postWritingView.titleTextField.text!, content: postWritingView.contentTextView.text)
         self.navigationController?.popViewController(animated: true)
     }
     
