@@ -11,13 +11,13 @@ import RxCocoa
 class LabFavoriteViewModel {
     private let repository = DirectoryRepository()
     private let disposeBag = DisposeBag()
-    private let useCase: LabUseCase
+    private let useCase: DirectoryUseCase
     
     let favoritePosted = PublishSubject<Bool>()
     
     let errorMessage = PublishSubject<String>()
     
-    init(useCase: LabUseCase = LabUseCase()) {
+    init(useCase: DirectoryUseCase = DirectoryUseCase()) {
         self.useCase = useCase
     }
     

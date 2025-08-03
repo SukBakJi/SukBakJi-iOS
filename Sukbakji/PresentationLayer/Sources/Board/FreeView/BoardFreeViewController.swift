@@ -13,7 +13,7 @@ import RxCocoa
 class BoardFreeViewController: UIViewController, FavBoardCellDelegate {
     
     private let boardFreeView = BoardFreeView()
-    private let favScrapViewModel = FavScrapViewModel()
+    private let scrapViewModel = ScrapViewModel()
     var disposeBag = DisposeBag()
     
     private var favBoardHeightConstraint: Constraint?
@@ -49,14 +49,14 @@ class BoardFreeViewController: UIViewController, FavBoardCellDelegate {
     }
     
     private func setAPI() {
-        favScrapViewModel.loadBoardsFavorite()
+        scrapViewModel.loadFavoriteBoards()
     }
     
     private func setBind() {
         self.boardFreeView.freeFavoriteBoardTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        favScrapViewModel.boardsFavoriteList
+        scrapViewModel.boardsFavoriteList
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] list in
                 guard let self = self else { return }
@@ -76,7 +76,7 @@ class BoardFreeViewController: UIViewController, FavBoardCellDelegate {
             })
             .disposed(by: disposeBag)
         
-        favScrapViewModel.boardsFavoriteList
+        scrapViewModel.boardsFavoriteList
             .bind(to: boardFreeView.freeFavoriteBoardTableView.rx.items(cellIdentifier: FreeFavBoardTableViewCell.identifier, cellType: FreeFavBoardTableViewCell.self)) { row, favorite, cell in
                 cell.prepare(favorite: favorite)
                 cell.delegate = self
@@ -86,13 +86,13 @@ class BoardFreeViewController: UIViewController, FavBoardCellDelegate {
     
     func fav_Tapped(cell: FreeFavBoardTableViewCell) {
         guard let indexPath = boardFreeView.freeFavoriteBoardTableView.indexPath(for: cell) else { return }
-        let boardId = favScrapViewModel.boardsFavoriteList.value[indexPath.row].boardId
-        favScrapViewModel.favoriteBoard(boardId: boardId, isFav: false)
+        let boardId = scrapViewModel.boardsFavoriteList.value[indexPath.row].boardId
+        scrapViewModel.favoriteBoard(boardId: boardId, isFav: false)
     }
     
     func more_Tapped(cell: FreeFavBoardTableViewCell) {
         guard let indexPath = boardFreeView.freeFavoriteBoardTableView.indexPath(for: cell) else { return }
-        let boardName = favScrapViewModel.boardsFavoriteList.value[indexPath.row].boardName
+        let boardName = scrapViewModel.boardsFavoriteList.value[indexPath.row].boardName
         let postListVC = PostListViewController(title: boardName, buttonTitle: "게시판 공지", isPost: 2, isHidden: true)
         self.navigationController?.pushViewController(postListVC, animated: true)
     }

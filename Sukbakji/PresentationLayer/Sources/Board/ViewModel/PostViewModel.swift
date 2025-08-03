@@ -11,7 +11,7 @@ import RxCocoa
 
 final class PostViewModel {
     private let repository = BoardRepository()
-    private let useCase: PostUseCase
+    private let useCase: BoardUseCase
     private let disposeBag = DisposeBag()
     
     let postDocterList = BehaviorRelay<[Post]>(value: [])
@@ -29,7 +29,7 @@ final class PostViewModel {
     let postDeleted = PublishSubject<Bool>()
     let errorMessage = PublishSubject<String>()
     
-    init(useCase: PostUseCase = PostUseCase()) {
+    init(useCase: BoardUseCase = BoardUseCase()) {
         self.useCase = useCase
     }
     
@@ -117,7 +117,7 @@ final class PostViewModel {
             "content": content!,
         ] as [String : Any]
         
-        repository.fetchCommentEnroll(token: token, parameters: params)
+        repository.fetchCreateComment(token: token, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 NotificationCenter.default.post(name: .isCommentComplete, object: nil)

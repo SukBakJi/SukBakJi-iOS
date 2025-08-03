@@ -1,5 +1,5 @@
 //
-//  ProfileUseCase.swift
+//  HomeUseCase.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 4/14/25.
@@ -7,7 +7,7 @@
 
 import RxSwift
 
-class ProfileUseCase {
+class HomeUseCase {
     private let homeRepository: HomeRepository
     
     init(homeRepository: HomeRepository = HomeRepository.shared) {
@@ -23,19 +23,6 @@ class ProfileUseCase {
                     .map { $0.result }
     }
     
-    func logOut() -> Single<Bool> {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return .just(false)
-        }
-        
-        return homeRepository.fetchLogOut(token: token)
-            .do(onSuccess: { _ in
-                self.clearUserCredentials()
-            })
-            .map { _ in true }
-            .catchAndReturn(false)
-    }
-    
     func editProfile(degree: String, topics: [String]) -> Single<Bool> {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .just(false)
@@ -47,6 +34,19 @@ class ProfileUseCase {
         ]
         
         return homeRepository.fetchEditProfile(token: token, parameters: params)
+            .map { _ in true }
+            .catchAndReturn(false)
+    }
+    
+    func logOut() -> Single<Bool> {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return .just(false)
+        }
+        
+        return homeRepository.fetchLogOut(token: token)
+            .do(onSuccess: { _ in
+                self.clearUserCredentials()
+            })
             .map { _ in true }
             .catchAndReturn(false)
     }

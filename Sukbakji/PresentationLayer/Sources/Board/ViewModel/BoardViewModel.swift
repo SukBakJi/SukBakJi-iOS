@@ -53,7 +53,7 @@ final class BoardViewModel {
     }
     
     func loadBoardSearch(keyword: String, menu: String, boardName: String) {
-        useCase.fetchBoardSearch(keyword: keyword, menu: menu, boardName: boardName)
+        useCase.fetchSearchBoard(keyword: keyword, menu: menu, boardName: boardName)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] detail in
                 self?.boardSearchList.accept(detail)

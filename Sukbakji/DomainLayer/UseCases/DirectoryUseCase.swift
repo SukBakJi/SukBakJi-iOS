@@ -1,5 +1,5 @@
 //
-//  LabUseCase.swift
+//  DirectoryUseCase.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 7/4/25.
@@ -7,7 +7,7 @@
 
 import RxSwift
 
-class LabUseCase {
+class DirectoryUseCase {
     private let directoryRepository: DirectoryRepository
     
     init(directoryRepository: DirectoryRepository = DirectoryRepository.shared) {

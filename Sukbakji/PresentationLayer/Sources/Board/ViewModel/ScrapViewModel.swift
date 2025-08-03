@@ -1,5 +1,5 @@
 //
-//  FavScrapViewModel.swift
+//  ScrapViewModel.swift
 //  Sukbakji
 //
 //  Created by jaegu park on 5/28/25.
@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class FavScrapViewModel {
+final class ScrapViewModel {
     private let repository = BoardRepository()
     private let useCase: BoardUseCase
     private let disposeBag = DisposeBag()
@@ -30,14 +30,14 @@ final class FavScrapViewModel {
         repository.favoriteBoardToggle(token: token, boardId: boardId, isFav: isFav)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
-                self.loadBoardsFavorite()
+                self.loadFavoriteBoards()
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
     
-    func loadBoardsFavorite() {
+    func loadFavoriteBoards() {
         useCase.fetchBoardsFavorite()
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] detail in

@@ -7,10 +7,10 @@ class KeychainHelper {
     
     private init() {}
 
-    /// ✅ Keychain에 `String`을 원본 그대로 저장
+    // Keychain에 `String`을 원본 그대로 저장
     func save(_ value: String, service: String, account: String) {
         guard let data = value.data(using: .utf8) else {
-            print("❌ Keychain 저장 실패 - 데이터를 UTF-8로 변환할 수 없음 (\(service))")
+            print("Keychain 저장 실패 - 데이터를 UTF-8로 변환할 수 없음 (\(service))")
             return
         }
 
@@ -25,7 +25,7 @@ class KeychainHelper {
         let status = SecItemAdd(query as CFDictionary, nil)
     }
 
-    /// ✅ Keychain에서 `String`을 원본 그대로 읽기
+    // Keychain에서 `String`을 원본 그대로 읽기
     func read(service: String, account: String) -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -39,15 +39,15 @@ class KeychainHelper {
         let status = SecItemCopyMatching(query as CFDictionary, &result)
 
         guard status == errSecSuccess, let data = result as? Data else {
-            print("❌ Keychain 읽기 실패 - \(service): \(status)")
+            print("Keychain 읽기 실패 - \(service): \(status)")
             return nil
         }
 
-        let stringValue = String(decoding: data, as: UTF8.self) // 🔹 Base64 변환 없이 직접 UTF-8로 변환
+        let stringValue = String(decoding: data, as: UTF8.self) // Base64 변환 없이 직접 UTF-8로 변환
         return stringValue
     }
 
-    /// ✅ Keychain에서 데이터 삭제
+    // Keychain에서 데이터 삭제
     func delete(service: String, account: String) {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,

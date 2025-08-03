@@ -11,7 +11,7 @@ import RxCocoa
 class LabInfoViewModel {
     private let repository = DirectoryRepository()
     private let disposeBag = DisposeBag()
-    private let useCase: LabUseCase
+    private let useCase: DirectoryUseCase
     
     let labInfo = PublishSubject<LabInfo>()
     let labDetail = PublishSubject<LabDetail>()
@@ -21,7 +21,7 @@ class LabInfoViewModel {
     
     let errorMessage = PublishSubject<String>()
     
-    init(useCase: LabUseCase = LabUseCase()) {
+    init(useCase: DirectoryUseCase = DirectoryUseCase()) {
         self.useCase = useCase
     }
     

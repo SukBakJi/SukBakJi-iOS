@@ -16,7 +16,7 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
     
     private var postDetailView = PostDetailView(title: "")
     private let postViewModel = PostViewModel()
-    private let favScrapViewModel = FavScrapViewModel()
+    private let scrapViewModel = ScrapViewModel()
     private let reportViewModel = ReportViewModel()
     var disposeBag = DisposeBag()
     var postId: Int = 0
@@ -102,7 +102,7 @@ extension PostDetailViewController {
     private func setAPI() {
         setBind()
         postViewModel.loadPostDetail(postId: postId)
-        favScrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
+        scrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
     }
     
     private func setDelegate() {
@@ -306,7 +306,7 @@ extension PostDetailViewController {
         let isCurrentlyScrapped = postDetailView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
         let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
         postDetailView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
-        favScrapViewModel.scrapPost(postId: postId)
+        scrapViewModel.scrapPost(postId: postId)
     }
     
     @objc private func send_Tapped() {
