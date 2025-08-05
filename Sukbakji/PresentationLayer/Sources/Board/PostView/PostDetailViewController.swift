@@ -15,8 +15,8 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     
     private var postDetailView = PostDetailView(title: "")
-    private let postViewModel = PostViewModel()
-    private let favScrapViewModel = FavScrapViewModel()
+    private let postDetailViewModel = PostDetailViewModel()
+    private let scrapViewModel = ScrapViewModel()
     private let reportViewModel = ReportViewModel()
     var disposeBag = DisposeBag()
     var postId: Int = 0
@@ -101,8 +101,8 @@ extension PostDetailViewController {
     
     private func setAPI() {
         setBind()
-        postViewModel.loadPostDetail(postId: postId)
-        favScrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
+        postDetailViewModel.loadPostDetail(postId: postId)
+        scrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
     }
     
     private func setDelegate() {
@@ -111,32 +111,25 @@ extension PostDetailViewController {
     }
     
     private func setBind() {
-        self.postViewModel.postCommentList
+        self.postDetailViewModel.postCommentList
             .observe(on: MainScheduler.instance)
             .bind(to: postDetailView.commentListTableView.rx.items(cellIdentifier: CommentListTableViewCell.identifier, cellType: CommentListTableViewCell.self)) { index, item, cell in
-                let isLast = index == self.postViewModel.postCommentList.value.count - 1
+                let isLast = index == self.postDetailViewModel.postCommentList.value.count - 1
                 cell.prepare(comment: item, isLast: isLast)
                 cell.delegate = self
             }
             .disposed(by: disposeBag)
         
-        postViewModel.postDetail
+        postDetailViewModel.postDetail
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] detail in
-                self?.postViewModel.postCommentList.accept(detail.comments)
+                self?.postDetailViewModel.postCommentList.accept(detail.comments)
                 self?.writerId = detail.memberId
                 self?.postDetailView.labelLabel.text = detail.menu
                 self?.postDetailView.titleLabel.text = detail.title
                 self?.postDetailView.contentLabel.text = detail.content
                 self?.postDetailView.commentLabel.text = "댓글 \(detail.commentCount)"
                 self?.postDetailView.viewLabel.text = "조회수 \(detail.views)"
-            })
-            .disposed(by: disposeBag)
-        
-        postViewModel.errorMessage
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { message in
-                AlertController(message: message).show()
             })
             .disposed(by: disposeBag)
         
@@ -175,7 +168,7 @@ extension PostDetailViewController {
     
     func didTapMoreButton(cell: CommentListTableViewCell) {
         guard let indexPath = postDetailView.commentListTableView.indexPath(for: cell) else { return }
-        self.postViewModel.selectCommentItem = postViewModel.postCommentList.value[indexPath.row]
+        self.postDetailViewModel.selectCommentItem = postDetailViewModel.postCommentList.value[indexPath.row]
 
         let alert = UIAlertController(title: postDetailView.optionNavigationbarView.titleLabel.text,
                                           message: nil,
@@ -195,7 +188,7 @@ extension PostDetailViewController {
             
             for reason in reasons {
                 reasonAlert.addAction(UIAlertAction(title: reason, style: .default) { _ in
-                    self.reportViewModel.loadReportComment(commentId: self.postViewModel.selectCommentItem!.commentId, reason: reason)
+                    self.reportViewModel.reportComment(commentId: self.postDetailViewModel.selectCommentItem!.commentId, reason: reason)
                 })
             }
             reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
@@ -215,7 +208,7 @@ extension PostDetailViewController {
             
             for reason in reasons {
                 reasonAlert.addAction(UIAlertAction(title: reason, style: .default) { _ in
-                    self.reportViewModel.loadBlockMemberId(targetMemberId: self.postViewModel.selectCommentItem!.memberId)
+                    self.reportViewModel.blockMember(targetMemberId: self.postDetailViewModel.selectCommentItem!.memberId)
                 })
             }
             reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
@@ -223,7 +216,7 @@ extension PostDetailViewController {
         }
         let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
             self.postDetailView.commentEditView.isHidden = false
-            self.postDetailView.commentEditView.inputTextView.text = self.postViewModel.selectCommentItem?.content
+            self.postDetailView.commentEditView.inputTextView.text = self.postDetailViewModel.selectCommentItem?.content
             self.currentResponderView = self.postDetailView.commentEditView
             self.postDetailView.commentEditView.inputTextView.becomeFirstResponder()
         }
@@ -234,7 +227,7 @@ extension PostDetailViewController {
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         
-        if self.postViewModel.selectCommentItem?.memberId == memberId {
+        if self.postDetailViewModel.selectCommentItem?.memberId == memberId {
             alert.addAction(edit)
             alert.addAction(delete)
         } else {
@@ -265,7 +258,7 @@ extension PostDetailViewController {
             
             for reason in reasons {
                 reasonAlert.addAction(UIAlertAction(title: reason, style: .default) { _ in
-                    self.reportViewModel.loadReportPost(postId: self.postId, reason: reason)
+                    self.reportViewModel.reportPost(postId: self.postId, reason: reason)
                 })
             }
             reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
@@ -277,7 +270,7 @@ extension PostDetailViewController {
             self.present(alert, animated: true)
         }
         let delete = UIAlertAction(title: "삭제하기", style: .default) { _ in
-            let deleteView = BoardDeleteView(title: "게시물 삭제하기", content: "게시물을 삭제할까요? 삭제 후 복구되지 않습니다", viewModel: self.postViewModel, postId: self.postId)
+            let deleteView = BoardDeleteView(title: "게시물 삭제하기", content: "게시물을 삭제할까요? 삭제 후 복구되지 않습니다", viewModel: self.postDetailViewModel, postId: self.postId)
             
             self.view.addSubview(deleteView)
             deleteView.alpha = 0
@@ -306,16 +299,16 @@ extension PostDetailViewController {
         let isCurrentlyScrapped = postDetailView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
         let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
         postDetailView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
-        favScrapViewModel.scrapPost(postId: postId)
+        scrapViewModel.scrapPost(postId: postId)
     }
     
     @objc private func send_Tapped() {
-        postViewModel.enrollComment(postId: postId, content: postDetailView.commentInputView.inputTextField.text)
+        postDetailViewModel.createComment(postId: postId, content: postDetailView.commentInputView.inputTextField.text ?? "")
         postDetailView.commentInputView.inputTextField.text = ""
     }
     
     @objc private func commentSettingComplete() {
-        postViewModel.loadPostDetail(postId: postId)
+        postDetailViewModel.loadPostDetail(postId: postId)
     }
     
     @objc private func postDeleteComplete() {
@@ -323,7 +316,7 @@ extension PostDetailViewController {
     }
     
     @objc private func updateComment() {
-        postViewModel.loadEditComment(commentId: postViewModel.selectCommentItem!.commentId, content: postDetailView.commentEditView.inputTextView.text)
+        postDetailViewModel.editComment(commentId: postDetailViewModel.selectCommentItem!.commentId, content: postDetailView.commentEditView.inputTextView.text)
     }
 }
 

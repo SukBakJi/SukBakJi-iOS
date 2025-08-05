@@ -9,9 +9,8 @@ import RxSwift
 import RxCocoa
 
 class LabReviewViewModel {
-    private let repository = DirectoryRepository()
     private let disposeBag = DisposeBag()
-    private let useCase: LabUseCase
+    private let useCase: DirectoryUseCase
     
     let reviewList = BehaviorRelay<[LabReview]>(value: [])
     var reviewItems = BehaviorRelay<[LabReview]>(value: [])
@@ -20,9 +19,7 @@ class LabReviewViewModel {
     
     let reviewPosted = PublishSubject<Bool>()
     
-    let errorMessage = PublishSubject<String>()
-    
-    init(useCase: LabUseCase = LabUseCase()) {
+    init(useCase: DirectoryUseCase = DirectoryUseCase()) {
         self.useCase = useCase
     }
     
@@ -33,8 +30,8 @@ class LabReviewViewModel {
                 guard let self = self else { return }
                 let current = self.reviewList.value
                 self.reviewList.accept(current + reviews)
-            }, onFailure: { [weak self] error in
-                self?.errorMessage.onNext("\(error.localizedDescription)")
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -56,8 +53,8 @@ class LabReviewViewModel {
             .subscribe(onSuccess: { [weak self] reviews in
                 guard let self = self else { return }
                 self.reviewSearchList.accept(reviews)
-            }, onFailure: { [weak self] error in
-                self?.errorMessage.onNext("\(error.localizedDescription)")
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

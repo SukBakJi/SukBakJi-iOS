@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     private let favBoardViewModel = FavBoardViewModel()
     private let hotPostViewModel = HotPostViewModel()
     private let favLabViewModel = FavLabViewModel()
-    private let myProfileViewModel = MyProfileViewModel()
+    private let fCMViewModel = FCMViewModel()
     var disposeBag = DisposeBag()
     var reactor: HomeReactor?
     
@@ -93,7 +93,7 @@ extension HomeViewController {
                 print("현재 FCM 토큰: \(token)")
                 // 서버에 토큰 업로드
                 TokenManager.shared.saveFCMToken(token)
-                self.myProfileViewModel.uploadFCMTokenToServer(fcmToken: token)
+                self.fCMViewModel.uploadFCMToken(fcmToken: token)
             }
         }
     }

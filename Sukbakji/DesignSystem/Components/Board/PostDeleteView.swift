@@ -11,7 +11,7 @@ import SnapKit
 
 class BoardDeleteView: UIView {
     
-    private var viewModel = PostViewModel()
+    private var viewModel = PostDetailViewModel()
     private var postId: Int = 0
     
     var mainView = UIView().then {
@@ -52,7 +52,7 @@ class BoardDeleteView: UIView {
         $0.distribution = .fillEqually
     }
     
-    init(title: String, content: String, viewModel: PostViewModel, postId: Int) {
+    init(title: String, content: String, viewModel: PostDetailViewModel, postId: Int) {
         super.init(frame: .zero)
         self.titleLabel.text = title
         self.contentLabel.text = content

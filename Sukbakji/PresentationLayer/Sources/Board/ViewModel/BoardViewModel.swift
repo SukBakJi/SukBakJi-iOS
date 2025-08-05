@@ -5,16 +5,12 @@
 //  Created by jaegu park on 5/15/25.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 
 final class BoardViewModel {
-    private let repository = BoardRepository()
     private let useCase: BoardUseCase
     private let disposeBag = DisposeBag()
-    
-    let latestQnAList = BehaviorRelay<[QnA]>(value: [])
     
     let boardSearchList = BehaviorRelay<[MyPost]>(value: [])
     
@@ -31,64 +27,39 @@ final class BoardViewModel {
     
     var selectPostItem: Post?
     
-    let errorMessage = PublishSubject<String>()
-    
     init(useCase: BoardUseCase = BoardUseCase()) {
         self.useCase = useCase
     }
     
-    func loadLatestQnA() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        BoardRepository.shared.fetchLatestQnA(token: token)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.latestQnAList.accept(response.result)
-            }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
-            })
-            .disposed(by: disposeBag)
-    }
-    
     func loadBoardSearch(keyword: String, menu: String, boardName: String) {
-        useCase.fetchBoardSearch(keyword: keyword, menu: menu, boardName: boardName)
+        useCase.fetchSearchBoard(keyword: keyword, menu: menu, boardName: boardName)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] detail in
-                self?.boardSearchList.accept(detail)
-            }, onFailure: { [weak self] error in
-                self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
+            .subscribe(onSuccess: { [weak self] posts in
+                self?.boardSearchList.accept(posts)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
     
     func loadMenu(menu: String) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        BoardRepository.shared.fetchBoardsMenu(token: token, menu: menu)
+        useCase.fetchBoardMenu(menu: menu)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.categoryList.accept(response)
+            .subscribe(onSuccess: { [weak self] posts in
+                self?.categoryList.accept(posts)
             }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
     
     func loadDoctorMenu() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        BoardRepository.shared.fetchBoardsMenu(token: token, menu: "박사")
+        useCase.fetchBoardMenu(menu: "박사")
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.doctorMenuList.accept(response)
+            .subscribe(onSuccess: { [weak self] posts in
+                self?.doctorMenuList.accept(posts)
             }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -98,16 +69,12 @@ final class BoardViewModel {
     }
     
     func loadMasterMenu() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        BoardRepository.shared.fetchBoardsMenu(token: token, menu: "석사")
+        useCase.fetchBoardMenu(menu: "석사")
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.masterMenuList.accept(response)
+            .subscribe(onSuccess: { [weak self] posts in
+                self?.masterMenuList.accept(posts)
             }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -117,16 +84,12 @@ final class BoardViewModel {
     }
     
     func loadEnterMenu() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        BoardRepository.shared.fetchBoardsMenu(token: token, menu: "진학예정")
+        useCase.fetchBoardMenu(menu: "진학예정")
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.enterMenuList.accept(response)
+            .subscribe(onSuccess: { [weak self] posts in
+                self?.enterMenuList.accept(posts)
             }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

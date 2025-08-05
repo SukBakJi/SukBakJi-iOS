@@ -16,34 +16,26 @@ class BoardRepository {
         return APIService.shared.getWithToken(of: APIResponse<[QnA]>.self, url: url, accessToken: token)
     }
     
+    
+    func fetchCreateBoard(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
+        let url = APIConstants.boardsCreate.path
+        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
     func fetchBoardsMenu(token: String, menu: String) -> Single<[String]> {
         let url = APIConstants.boardsMenu(menu).path
         return APIService.shared.getWithToken(of: [String].self, url: url, accessToken: token)
     }
     
-    func fetchBoardSearch(token: String, keyword: String, menu: String, boardName: String) -> Single<APIResponse<[MyPost]>> {
+    func fetchSearchBoard(token: String, keyword: String, menu: String, boardName: String) -> Single<APIResponse<[MyPost]>> {
         let url = APIConstants.communitySearch.path
         let params = ["keyword": keyword,
                       "menu": menu,
                       "boardName": boardName]
         return APIService.shared.getWithTokenAndParams(of: APIResponse<[MyPost]>.self, url: url, parameters: params, accessToken: token)
     }
-    
-    func fetchBoardEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {
-        let url = APIConstants.boardsCreate.path
-        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: parameters, accessToken: token)
-    }
-    
-    func fetchPostEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<Post>> {
-        let url = APIConstants.postsCreate.path
-        return APIService.shared.postWithToken(of: APIResponse<Post>.self, url: url, parameters: parameters, accessToken: token)
-    }
-    
-    func fetchPostDelete(token: String, postId: Int, parameters: [String: Any]?) -> Single<APIResponse<Post>> {
-        let url = APIConstants.postsDelete(postId).path
-        return APIService.shared.deleteWithToken(of: APIResponse<Post>.self, url: url, parameters: parameters, accessToken: token)
-    }
-    
+
+
     func fetchPostList(token: String, menu: String, boardName: String) -> Single<APIResponse<[Post]>> {
         let url = APIConstants.postsList.path
         let params = ["menu": menu,
@@ -57,22 +49,17 @@ class BoardRepository {
         return APIService.shared.getWithTokenAndParams(of: APIResponse<PostDetail>.self, url: url, parameters: params, accessToken: token)
     }
     
-    func fetchMyPostList(token: String) -> Single<APIResponse<[MyPost]>> {
-        let url = APIConstants.communityPostList.path
-        return APIService.shared.getWithToken(of: APIResponse<[MyPost]>.self, url: url, accessToken: token)
+    func fetchCreatePost(token: String, parameters: [String: Any]?) -> Single<APIResponse<Post>> {
+        let url = APIConstants.postsCreate.path
+        return APIService.shared.postWithToken(of: APIResponse<Post>.self, url: url, parameters: parameters, accessToken: token)
     }
     
-    func fetchScrapList(token: String) -> Single<APIResponse<[MyPost]>> {
-        let url = APIConstants.communityScrapList.path
-        return APIService.shared.getWithToken(of: APIResponse<[MyPost]>.self, url: url, accessToken: token)
+    func fetchDeletePost(token: String, postId: Int, parameters: [String: Any]?) -> Single<APIResponse<Post>> {
+        let url = APIConstants.postsDelete(postId).path
+        return APIService.shared.deleteWithToken(of: APIResponse<Post>.self, url: url, parameters: parameters, accessToken: token)
     }
     
-    func fetchMyCommentList(token: String) -> Single<APIResponse<[MyPost]>> {
-        let url = APIConstants.communityCommentList.path
-        return APIService.shared.getWithToken(of: APIResponse<[MyPost]>.self, url: url, accessToken: token)
-    }
-    
-    func fetchCommentEnroll(token: String, parameters: [String: Any]?) -> Single<APIResponse<CommentPost>> {
+    func fetchCreateComment(token: String, parameters: [String: Any]?) -> Single<APIResponse<CommentPost>> {
         let url = APIConstants.commentsCreate.path
         return APIService.shared.postWithToken(of: APIResponse<CommentPost>.self, url: url, parameters: parameters, accessToken: token)
     }
@@ -82,15 +69,33 @@ class BoardRepository {
         return APIService.shared.putWithToken(of: APIResponse<CommentPost>.self, url: url, parameters: parameters, accessToken: token)
     }
     
+    
+    func fetchMyPostList(token: String) -> Single<APIResponse<[MyPost]>> {
+        let url = APIConstants.communityPostList.path
+        return APIService.shared.getWithToken(of: APIResponse<[MyPost]>.self, url: url, accessToken: token)
+    }
+    
+    func fetchMyCommentList(token: String) -> Single<APIResponse<[MyPost]>> {
+        let url = APIConstants.communityCommentList.path
+        return APIService.shared.getWithToken(of: APIResponse<[MyPost]>.self, url: url, accessToken: token)
+    }
+    
+    
+    func fetchBoardsFavorite(token: String) -> Single<APIResponse<[Favorite]>> {
+        let url = APIConstants.boardsFavorite.path
+        return APIService.shared.getWithToken(of: APIResponse<[Favorite]>.self, url: url, accessToken: token)
+    }
+    
     func favoriteBoardToggle(token: String, boardId: Int, isFav: Bool) -> Single<APIResponse<String>> {
         let url = isFav ? APIConstants.boardsFavoriteAdd(boardId).path : APIConstants.boardsFavoriteRemove(boardId).path
         let params = ["boardId": boardId]
         return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: params, accessToken: token)
     }
     
-    func fetchBoardsFavorite(token: String) -> Single<APIResponse<[Favorite]>> {
-        let url = APIConstants.boardsFavorite.path
-        return APIService.shared.getWithToken(of: APIResponse<[Favorite]>.self, url: url, accessToken: token)
+    
+    func fetchScrapList(token: String) -> Single<APIResponse<[MyPost]>> {
+        let url = APIConstants.communityScrapList.path
+        return APIService.shared.getWithToken(of: APIResponse<[MyPost]>.self, url: url, accessToken: token)
     }
     
     func fetchScrapToggle(token: String, postId: Int) -> Single<APIResponse<String>> {

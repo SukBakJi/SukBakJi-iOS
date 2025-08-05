@@ -1,28 +1,28 @@
 //
-//  LabFavoriteViewModel.swift
+//  ScrapViewModel.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 7/29/25.
+//  Created by jaegu park on 5/28/25.
 //
 
 import RxSwift
 import RxCocoa
 
-class LabFavoriteViewModel {
+final class ScrapViewModel {
+    private let useCase: BoardUseCase
     private let disposeBag = DisposeBag()
-    private let useCase: DirectoryUseCase
     
-    let favoritePosted = PublishSubject<Bool>()
+    let scrapResult = PublishSubject<Bool>()
     
-    init(useCase: DirectoryUseCase = DirectoryUseCase()) {
+    init(useCase: BoardUseCase = BoardUseCase()) {
         self.useCase = useCase
     }
     
-    func loadFavoriteLabList(labId: Int, scrapButton: UIButton) {
-        useCase.fetchLabFavorite()
+    func loadScrapList(postId: Int, scrapButton: UIButton) {
+        useCase.fetchScrap()
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { labs in
-                let isScrapped = labs.contains { $0.labId == labId }
+            .subscribe(onSuccess: { posts in
+                let isScrapped = posts.contains { $0.postId == postId }
                 
                 DispatchQueue.main.async {
                     let imageName = isScrapped ? "Sukbakji_Bookmark2" : "Sukbakji_Bookmark"
@@ -33,15 +33,17 @@ class LabFavoriteViewModel {
             })
             .disposed(by: disposeBag)
     }
-    
-    func postLabFavorite(labId: Int) {
-        useCase.postLabFavorite(labId: labId)
+        
+    func scrapPost(postId: Int) {
+        useCase.createScrap(postId: postId)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] isSuccess in
-                self?.favoritePosted.onNext(isSuccess)
+                self?.scrapResult.onNext(isSuccess)
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
 }
+
+

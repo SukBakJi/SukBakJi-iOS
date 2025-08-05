@@ -10,7 +10,7 @@ import RxCocoa
 
 class MyProfileViewModel {
     private let disposeBag = DisposeBag()
-    private let useCase: ProfileUseCase
+    private let useCase: HomeUseCase
     
     let myProfile = PublishSubject<MyProfile>()
     let errorMessage = PublishSubject<String>()
@@ -21,7 +21,7 @@ class MyProfileViewModel {
     let newPWInput = BehaviorRelay<String>(value: "")
     let confirmPWInput = BehaviorRelay<String>(value: "")
     
-    init(useCase: ProfileUseCase = ProfileUseCase()) {
+    init(useCase: HomeUseCase = HomeUseCase()) {
         self.useCase = useCase
     }
     
@@ -64,16 +64,5 @@ class MyProfileViewModel {
             }
         })
         .disposed(by: disposeBag)
-    }
-    
-    func uploadFCMTokenToServer(fcmToken : String) {
-        useCase.uploadFCMToken(fcmToken: fcmToken)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { message in
-                print("\(message)")
-            }, onFailure: { error in
-                print("FCM 토큰 업로드 실패: \(error.localizedDescription)")
-            })
-            .disposed(by: disposeBag)
     }
 }
