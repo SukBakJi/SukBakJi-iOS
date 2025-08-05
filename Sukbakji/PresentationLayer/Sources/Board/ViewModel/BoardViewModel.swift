@@ -27,6 +27,8 @@ final class BoardViewModel {
     
     var selectPostItem: Post?
     
+    let boardCreated = PublishSubject<Bool>()
+    
     init(useCase: BoardUseCase = BoardUseCase()) {
         self.useCase = useCase
     }
@@ -96,5 +98,16 @@ final class BoardViewModel {
     
     func selectEnterMenu(_ menu: String?) {
         selectEnterMenuItem.accept(menu)
+    }
+    
+    func createBoard(boardName: String, description: String, ) {
+        useCase.createBoard(boardName: boardName, description: description)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.boardCreated.onNext(isSuccess)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
     }
 }

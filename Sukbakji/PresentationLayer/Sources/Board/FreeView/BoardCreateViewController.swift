@@ -13,6 +13,7 @@ import RxCocoa
 class BoardCreateViewController: UIViewController, UITextViewDelegate {
     
     private let boardCreateView = BoardCreateView()
+    
     private var hasStartedEditing = false
     
     private var nameHeightConstraint: Constraint?
@@ -53,6 +54,7 @@ class BoardCreateViewController: UIViewController, UITextViewDelegate {
         
         boardCreateView.nameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         boardCreateView.deleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
+        boardCreateView.makeBoardButton.addTarget(self, action: #selector(create_Tapped), for: .touchUpInside)
     }
 }
 
@@ -155,6 +157,11 @@ extension BoardCreateViewController {
     }
     
     @objc private func textDelete_Tapped() {
+        boardCreateView.nameTextField.text = ""
+        warningName()
+    }
+    
+    @objc private func create_Tapped() {
         boardCreateView.nameTextField.text = ""
         warningName()
     }

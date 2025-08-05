@@ -9,7 +9,6 @@ import RxSwift
 import RxCocoa
 
 class HotPostViewModel {
-    
     private let disposeBag = DisposeBag()
     
     let hotPostList = BehaviorRelay<[HotPost]>(value: [])

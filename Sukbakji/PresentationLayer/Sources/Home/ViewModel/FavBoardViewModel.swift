@@ -9,7 +9,6 @@ import RxSwift
 import RxCocoa
 
 class FavBoardViewModel {
-    
     private let disposeBag = DisposeBag()
     
     let favBoardList = BehaviorRelay<[FavoriteBoard]>(value: [])
