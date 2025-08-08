@@ -55,7 +55,7 @@ final class AlarmViewModel {
         }
         
         let alarmItem = selectAlarmItem
-        repository.fetchAlarmOnOff(token: token, alarmId: alarmItem?.alarmId ?? 0, isOn: isOn)
+        repository.onOffAlarm(token: token, alarmId: alarmItem?.alarmId ?? 0, isOn: isOn)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 var updatedItems = self.alarmItems.value
@@ -81,7 +81,7 @@ final class AlarmViewModel {
             "onoff": 1
         ] as [String : Any]
         
-        repository.fetchAlarmEnroll(token: token, parameters: params)
+        repository.createAlarm(token: token, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.alarmEnrolled.onNext(true)
@@ -107,7 +107,7 @@ final class AlarmViewModel {
             "onoff": onoff!
         ] as [String : Any]
         
-        repository.fetchAlarmEdit(token: token, alarmId: alarmId!, parameters: params)
+        repository.editAlarm(token: token, alarmId: alarmId!, parameters: params)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 NotificationCenter.default.post(name: .isAlarmEditComplete, object: nil)
@@ -122,7 +122,7 @@ final class AlarmViewModel {
             return
         }
 
-        repository.fetchAlarmDelete(token: token, alarmId: alarmId!)
+        repository.deleteAlarm(token: token, alarmId: alarmId!)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { response in
                 self.alarmDeleted.onNext(true)
