@@ -11,10 +11,9 @@ import RxSwift
 import RxCocoa
 
 class BoardMainViewController: UIViewController {
-    
     private let boardView = BoardView()
     private let favBoardViewModel = FavBoardViewModel()
-    private let boardViewModel = BoardViewModel()
+    private let postViewModel = PostViewModel()
     var disposeBag = DisposeBag()
     
     private var latestQnAHeightConstraint: Constraint?
@@ -59,7 +58,7 @@ class BoardMainViewController: UIViewController {
     }
     
     private func setAPI() {
-        boardViewModel.loadLatestQnA()
+        postViewModel.loadLatestQnA()
         favBoardViewModel.loadFavoriteBoard()
     }
     
@@ -67,7 +66,7 @@ class BoardMainViewController: UIViewController {
         self.boardView.qnaTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        boardViewModel.latestQnAList
+        postViewModel.latestQnAList
             .subscribe(onNext: { latestQnAList in
                 if !latestQnAList.isEmpty {
                     self.boardView.qnaContainerView.isHidden = false
@@ -87,7 +86,7 @@ class BoardMainViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        boardViewModel.latestQnAList
+        postViewModel.latestQnAList
             .bind(to: boardView.qnaTableView.rx.items(cellIdentifier: BoardQnATableViewCell.identifier, cellType: BoardQnATableViewCell.self)) { row, qna, cell in
                 cell.prepare(qna: qna)
             }
@@ -148,8 +147,6 @@ class BoardMainViewController: UIViewController {
 extension BoardMainViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let collectionView = scrollView as? UICollectionView else { return }
-        
         let contentOffsetX = scrollView.contentOffset.x
         let contentWidth = scrollView.contentSize.width
         let scrollViewWidth = scrollView.frame.size.width
