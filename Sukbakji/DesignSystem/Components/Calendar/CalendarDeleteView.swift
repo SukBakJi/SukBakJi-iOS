@@ -13,7 +13,8 @@ import RxSwift
 class CalendarDeleteView: UIView {
     
     private var alarmViewModel = AlarmViewModel()
-    private let viewModel = CalendarViewModel()
+    private let univDetailViewModel = UnivDetailViewModel()
+    private let alarmDetailViewModel = AlarmDetailViewModel()
     private var univDelete: UnivDelete?
     weak var delegateViewController: UIViewController?
     
@@ -55,7 +56,6 @@ class CalendarDeleteView: UIView {
         $0.spacing = 12
         $0.distribution = .fillEqually
     }
-    
     let disposeBag = DisposeBag()
     
     init(title: String, content: String, alarmViewModel: AlarmViewModel, univDelete: UnivDelete) {
@@ -111,15 +111,15 @@ class CalendarDeleteView: UIView {
        UIView.animate(withDuration: 0.3, animations: {
           self.alpha = 0
        }) { _ in
-          self.removeFromSuperview() // 애니메이션 후 뷰에서 제거
+          self.removeFromSuperview()
        }
     }
     
     @objc private func delete_Tapped() {
         if alarmViewModel.selectAlarmItem != nil {
-            alarmViewModel.deleteAlarm(alarmId: alarmViewModel.selectAlarmItem?.alarmId)
+            alarmDetailViewModel.deleteAlarm(alarmId: alarmViewModel.selectAlarmItem!.alarmId)
         } else {
-            viewModel.deleteUnivCalendar(memberId: univDelete?.memberId, univId: univDelete?.univId, season: univDelete?.season, method: univDelete?.method)
+            univDetailViewModel.deleteUniv(memberId: univDelete!.memberId, univId: univDelete!.univId, season: univDelete!.season, method: univDelete!.method)
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 0

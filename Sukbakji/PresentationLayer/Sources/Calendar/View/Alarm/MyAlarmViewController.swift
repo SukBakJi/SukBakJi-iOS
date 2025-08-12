@@ -14,7 +14,8 @@ import RxCocoa
 class MyAlarmViewController: UIViewController, MyAlarmCellDelegate {
     
     private let myAlarmView = MyAlarmView()
-    private let viewModel = AlarmViewModel()
+    private let alarmViewModel = AlarmViewModel()
+    private let alarmDetailViewModel = AlarmDetailViewModel()
     private let disposeBag = DisposeBag()
     
     override func loadView() {
@@ -52,14 +53,14 @@ extension MyAlarmViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadMyAlarms()
+        alarmViewModel.loadAlarmList()
     }
     
     private func bindViewModel() {
         myAlarmView.myAlarmTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        viewModel.alarmItems
+        alarmViewModel.alarmList
             .observe(on: MainScheduler.instance)
             .bind(to: myAlarmView.myAlarmTableView.rx.items(cellIdentifier: MyAlarmTableViewCell.identifier, cellType: MyAlarmTableViewCell.self)) { index, item, cell in
                 cell.prepare(alarmList: item)
@@ -70,16 +71,16 @@ extension MyAlarmViewController {
     
     func editButton_Tapped(cell: MyAlarmTableViewCell) {
         guard let indexPath = myAlarmView.myAlarmTableView.indexPath(for: cell) else { return }
-        self.viewModel.selectAlarmItem = viewModel.alarmItems.value[indexPath.row]
-        let viewController = EditMyAlarmViewController(alarmViewModel: self.viewModel)
+        self.alarmViewModel.selectAlarmItem = alarmViewModel.alarmList.value[indexPath.row]
+        let viewController = EditMyAlarmViewController(alarmViewModel: self.alarmViewModel)
         let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 700, bottomSheetPanMinTopConstant: 15, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
     }
     
     func alarmSwitch_Toggled(cell: MyAlarmTableViewCell, isOn: Bool) {
         guard let indexPath = myAlarmView.myAlarmTableView.indexPath(for: cell) else { return }
-        self.viewModel.selectAlarmItem = viewModel.alarmItems.value[indexPath.row]
-        viewModel.toggleAlarm(at: indexPath.row, isOn: isOn)
+        self.alarmViewModel.selectAlarmItem = alarmViewModel.alarmList.value[indexPath.row]
+        alarmViewModel.toggleAlarm(at: indexPath.row, alarmId: alarmViewModel.selectAlarmItem!.alarmId, isOn: isOn)
     }
     
     @objc private func addAlarm_Tapped() {
@@ -88,7 +89,7 @@ extension MyAlarmViewController {
     }
     
     @objc private func alarmSettingComplete() {
-        viewModel.loadMyAlarms()
+        alarmViewModel.loadAlarmList()
         UIView.animate(withDuration: 0.5, animations: {
             self.myAlarmView.alarmCompleteImageView.alpha = 1 // 나타나게
         }) { _ in
@@ -103,7 +104,7 @@ extension MyAlarmViewController {
     }
     
     @objc private func alarmEditComplete() {
-        viewModel.loadMyAlarms()
+        alarmViewModel.loadAlarmList()
     }
 }
 

@@ -14,14 +14,14 @@ import DropDown
 class EditUnivCalendarViewController: UIViewController {
 
     private let editUnivView = EditUnivView()
-    private var viewModel = CalendarViewModel()
     private var univViewModel = UnivViewModel()
+    private var univDetailViewModel = UnivDetailViewModel()
     private let disposeBag = DisposeBag()
     private let drop = DropDown()
     
-    init(calendarViewModel: CalendarViewModel) {
+    init(univViewModel: UnivViewModel) {
         super.init(nibName: nil, bundle: nil)
-        self.viewModel = calendarViewModel
+        self.univViewModel = univViewModel
     }
     
     required init?(coder: NSCoder) {
@@ -101,7 +101,7 @@ extension EditUnivCalendarViewController {
     }
     
     private func setUnivCalendarData() {
-        guard let selectUnivCalendarItem = self.viewModel.selectUnivList else { return }
+        guard let selectUnivCalendarItem = self.univViewModel.selectUnivList else { return }
         let univId = selectUnivCalendarItem.univId
         let season = selectUnivCalendarItem.season
         let method = selectUnivCalendarItem.method
@@ -128,7 +128,7 @@ extension EditUnivCalendarViewController {
     
     private func setAPI() {
         bindViewModel()
-        univViewModel.loadUnivMethod(univId: viewModel.selectUnivList?.univId ?? 0)
+        univViewModel.loadUnivMethod(univId: univViewModel.selectUnivList?.univId ?? 0)
     }
     
     private func bindViewModel() {
@@ -142,8 +142,8 @@ extension EditUnivCalendarViewController {
     }
     
     private func univEditTapped() {
-        guard let selectItem = self.viewModel.selectUnivList else { return }
-        viewModel.editUnivCalendar(univId: selectItem.univId, season: selectItem.season, method: selectItem.method)
+        guard let selectItem = self.univViewModel.selectUnivList else { return }
+        univDetailViewModel.editUniv(univId: selectItem.univId, season: selectItem.season, method: selectItem.method)
         self.presentingViewController?.dismiss(animated: true)
     }
         

@@ -5,137 +5,54 @@
 //  Created by jaegu park on 1/6/25.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 
 final class AlarmViewModel {
-    private let repository = CalendarRepository()
+    private let useCase: CalendarUseCase
     private let disposeBag = DisposeBag()
     
-    let alarmItems = BehaviorRelay<[AlarmList]>(value: [])
+    let alarmList = BehaviorRelay<[AlarmList]>(value: [])
     var selectAlarmItem: AlarmList?
     
     let univItems = BehaviorRelay<[String]>(value: [])
     
-    var patchAlarmItem: AlarmPatch?
+    init(useCase: CalendarUseCase = CalendarUseCase()) {
+        self.useCase = useCase
+    }
     
-    let alarmEnrolled = PublishSubject<Bool>()
-    let alarmDeleted = PublishSubject<Bool>()
+    func loadAlarmList() {
+        useCase.fetchAlarmList()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] alarms in
+                self?.alarmList.accept(alarms)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
+    }
     
-    func loadMyAlarms() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        repository.fetchAlarmList(token: token)
-            .map { $0.result.alarmList }
-            .subscribe(onSuccess: { [weak self] alarmList in
-                self?.alarmItems.accept(alarmList)
+    func toggleAlarm(at index: Int, alarmId: Int, isOn: Bool) {
+        useCase.onOffAlarm(alarmId: alarmId, isOn: isOn)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { isSuccess in
+                var updatedItems = self.alarmList.value
+                updatedItems[index].onoff = isOn ? 1 : 0
+                self.alarmList.accept(updatedItems)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
     
     func loadAlarmUniv() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        repository.fetchAlarmUniv(token: token)
-            .map { $0.result }
-            .subscribe(onSuccess: { [weak self] univList in
-                self?.univItems.accept(univList)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    func toggleAlarm(at index: Int, isOn: Bool) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let alarmItem = selectAlarmItem
-        repository.onOffAlarm(token: token, alarmId: alarmItem?.alarmId ?? 0, isOn: isOn)
+        useCase.fetchAlarmUniv()
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                var updatedItems = self.alarmItems.value
-                updatedItems[index].onoff = isOn ? 1 : 0
-                self.alarmItems.accept(updatedItems)
+            .subscribe(onSuccess: { [weak self] univs in
+                self?.univItems.accept(univs)
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
-    
-    func enrollAlarm(memberId: Int?, univName: String?, name: String?, date: String?, time: String?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let params = [
-            "memberId": memberId!,
-            "univName": univName!,
-            "name": name!,
-            "date": date!,
-            "time": time!,
-            "onoff": 1
-        ] as [String : Any]
-        
-        repository.createAlarm(token: token, parameters: params)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.alarmEnrolled.onNext(true)
-                NotificationCenter.default.post(name: .isAlarmComplete, object: nil)
-            }, onFailure: { error in
-                self.alarmEnrolled.onNext(false)
-                print("오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    func editAlarm(memberId: Int?, alarmId: Int?, univName: String?, name: String?, date: String?, time: String?, onoff: Int?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let params = [
-            "memberId": memberId!,
-            "univName": univName!,
-            "name": name!,
-            "date": date!,
-            "time": time!,
-            "onoff": onoff!
-        ] as [String : Any]
-        
-        repository.editAlarm(token: token, alarmId: alarmId!, parameters: params)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                NotificationCenter.default.post(name: .isAlarmEditComplete, object: nil)
-            }, onFailure: { error in
-                print("오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    func deleteAlarm(alarmId: Int?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-
-        repository.deleteAlarm(token: token, alarmId: alarmId!)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.alarmDeleted.onNext(true)
-                NotificationCenter.default.post(name: .isAlarmDeleteComplete, object: nil)
-            }, onFailure: { error in
-                self.alarmDeleted.onNext(false)
-                print("오류:", error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
-    }
-}
-
-protocol myAlarmSwitchDelegate: AnyObject {
-    func alarmSwitchToggled(cell: MyAlarmTableViewCell, isOn: Bool)
-    func editToggled(cell: MyAlarmTableViewCell)
 }

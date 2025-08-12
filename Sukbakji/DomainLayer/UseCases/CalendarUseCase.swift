@@ -20,7 +20,7 @@ class CalendarUseCase {
         }
         
         return calendarRepository.fetchUpComing(token: token)
-            .map { $0.result.scheduleList }
+            .map { $0.result.scheduleList.filter { $0.dday >= 0 && $0.dday <= 30 } }
     }
     
     func fetchDateSelect(date: String) -> Single<[DateSelectList]> {
@@ -41,22 +41,22 @@ class CalendarUseCase {
             .map { $0.result.universityList }
     }
     
-    func fetchUnivName(univId: Int) -> Single<UnivName> {
+    func fetchUnivName(univId: Int) -> Single<String> {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .error(NSError(domain: "TokenError", code: 401, userInfo: [NSLocalizedDescriptionKey: "토큰이 존재하지 않습니다."]))
         }
         
         return calendarRepository.fetchUnivName(token: token, univId: univId)
-            .map { $0.result }
+            .map { $0.result.univName }
     }
     
-    func fetchUnivMethod(univId: Int) -> Single<[UnivMethodList]> {
+    func fetchUnivMethod(univId: Int) -> Single<[String]> {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .error(NSError(domain: "TokenError", code: 401, userInfo: [NSLocalizedDescriptionKey: "토큰이 존재하지 않습니다."]))
         }
         
         return calendarRepository.fetchUnivMethod(token: token, univId: univId)
-            .map { $0.result.methodList }
+            .map { $0.result.methodList.map { $0.method } }
     }
     
     func fetchUnivList() -> Single<[UnivList]> {
@@ -169,7 +169,7 @@ class CalendarUseCase {
             .catchAndReturn(false)
     }
     
-    func onOffAlarm(alarmId: Int, isOn: Bool, method: String) -> Single<Bool> {
+    func onOffAlarm(alarmId: Int, isOn: Bool) -> Single<Bool> {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .just(false)
         }
@@ -198,7 +198,7 @@ class CalendarUseCase {
             .catchAndReturn(false)
     }
     
-    func deleteAlarm(alarmId: Int, univId: Int, season: String, method: String) -> Single<Bool> {
+    func deleteAlarm(alarmId: Int) -> Single<Bool> {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .just(false)
         }

@@ -12,8 +12,7 @@ import RxSwift
 
 class AllDeleteView: UIView {
     
-    private let viewModel = CalendarViewModel()
-    var univIds: [Int] = []
+    private let univDetailViewModel = UnivDetailViewModel()
     
     var mainView = UIView().then {
        $0.backgroundColor = .white
@@ -58,9 +57,8 @@ class AllDeleteView: UIView {
     
     let disposeBag = DisposeBag()
     
-    init(univIds: [Int]) {
+    init() {
         super.init(frame: .zero)
-        self.univIds = univIds
         setUI()
     }
     
@@ -113,7 +111,7 @@ class AllDeleteView: UIView {
     }
     
     @objc private func delete_Tapped() {
-        viewModel.deleteUnivCalendarAll()
+        univDetailViewModel.deleteAllUniv()
         UIView.animate(withDuration: 0.3, animations: {
            self.alpha = 0
         }) { _ in
