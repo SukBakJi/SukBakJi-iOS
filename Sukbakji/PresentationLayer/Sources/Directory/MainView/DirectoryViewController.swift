@@ -66,6 +66,8 @@ extension DirectoryViewController {
             .disposed(by: disposeBag)
         directoryView.labReviewCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
+        directoryView.topicCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
         
         favLabViewModel.favLabList
             .subscribe(onNext: { favLabList in
@@ -91,28 +93,15 @@ extension DirectoryViewController {
                 self.navigationController?.pushViewController(labVC, animated: true)
             })
             .disposed(by: disposeBag)
-        researchTopicviewModel.topicList
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] topic in
-                self?.researchTopicviewModel.topicItems.accept(topic.topics)
-                self?.setTopicData()
-            })
-            .disposed(by: disposeBag)
-        labReviewviewModel.reviewList
-            .bind(to: directoryView.labReviewCollectionView.rx.items(cellIdentifier: LabReviewCollectionViewCell.identifier, cellType: LabReviewCollectionViewCell.self)) { row, review, cell in
-                cell.prepare(review: review)
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    private func setTopicData() {
-        directoryView.topicCollectionView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
-
         researchTopicviewModel.topicItems
             .observe(on: MainScheduler.instance)
             .bind(to: directoryView.topicCollectionView.rx.items(cellIdentifier: TopicCollectionViewCell.identifier, cellType: TopicCollectionViewCell.self)) { row, topic, cell in
                 cell.prepare(topics: topic)
+            }
+            .disposed(by: disposeBag)
+        labReviewviewModel.reviewList
+            .bind(to: directoryView.labReviewCollectionView.rx.items(cellIdentifier: LabReviewCollectionViewCell.identifier, cellType: LabReviewCollectionViewCell.self)) { row, review, cell in
+                cell.prepare(review: review)
             }
             .disposed(by: disposeBag)
     }

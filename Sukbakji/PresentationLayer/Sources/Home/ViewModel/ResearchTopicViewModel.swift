@@ -13,10 +13,6 @@ final class ResearchTopicViewModel {
     private let useCase: DirectoryUseCase
     private let disposeBag = DisposeBag()
     
-    var selectResearchTopicItem: String?
-    var ResearchTopicItems = BehaviorRelay<[String]>(value: [])
-    
-    let topicList = PublishSubject<Topic>()
     var topicItems = BehaviorRelay<[String]>(value: [])
     
     init(useCase: DirectoryUseCase = DirectoryUseCase()) {
@@ -27,7 +23,7 @@ final class ResearchTopicViewModel {
         useCase.fetchInterestTopics()
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] topics in
-                self?.topicList.onNext(topics)
+                self?.topicItems.accept(topics)
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
             })

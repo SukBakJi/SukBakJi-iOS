@@ -141,13 +141,6 @@ extension ProfileTabViewController {
                 self?.provider = profile.provider
             })
             .disposed(by: disposeBag)
-        
-        viewModel.errorMessage
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { message in
-                AlertController(message: message).show()
-            })
-            .disposed(by: disposeBag)
     }
     
     @objc func didDismissNotification(_ notification: Notification) {

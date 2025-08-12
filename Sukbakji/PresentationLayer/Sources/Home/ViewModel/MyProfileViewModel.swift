@@ -13,6 +13,7 @@ class MyProfileViewModel {
     private let useCase: HomeUseCase
     
     let myProfile = PublishSubject<MyProfile>()
+    var researchTopicItems = BehaviorRelay<[String]>(value: [])
     
     let logoutResult = PublishSubject<Bool>()
     let profileUpdated = PublishSubject<Bool>()

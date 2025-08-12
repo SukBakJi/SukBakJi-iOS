@@ -15,7 +15,6 @@ class EditInfoViewController: UIViewController {
     
     private let editInfoView = EdifInfoView()
     private let viewModel = MyProfileViewModel()
-    private let researchTopicViewModel = ResearchTopicViewModel()
     private let disposeBag = DisposeBag()
     private let drop = DropDown()
     
@@ -140,7 +139,7 @@ extension EditInfoViewController {
             .disposed(by: disposeBag)
 
         /// CollectionView에 들어갈 Cell에 정보 제공
-        self.researchTopicViewModel.ResearchTopicItems
+        self.viewModel.researchTopicItems
             .observe(on: MainScheduler.instance)
             .bind(to: editInfoView.researchTopicCollectionView.rx.items(cellIdentifier: ResearchTopicCollectionViewCell.identifier, cellType: ResearchTopicCollectionViewCell.self)) { index, item, cell in
                 cell.prepare(topics: item)
@@ -157,7 +156,7 @@ extension EditInfoViewController {
         viewModel.myProfile
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
-                self?.researchTopicViewModel.ResearchTopicItems.accept(profile.researchTopics)
+                self?.viewModel.researchTopicItems.accept(profile.researchTopics)
                 self?.topics = profile.researchTopics
                 self?.degree = profile.degreeLevel ?? ""
                 if profile.provider == "APPLE" {
@@ -174,13 +173,6 @@ extension EditInfoViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.errorMessage
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { message in
-                AlertController(message: message).show()
-            })
-            .disposed(by: disposeBag)
-        
         viewModel.profileUpdated
             .subscribe(onNext: { [weak self] success in
                 if success {
@@ -188,12 +180,6 @@ extension EditInfoViewController {
                         self?.navigationController?.popViewController(animated: true)
                     }.show()
                 }
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.errorMessage
-            .subscribe(onNext: { message in
-                AlertController(message: message).show()
             })
             .disposed(by: disposeBag)
     }
@@ -216,7 +202,7 @@ extension EditInfoViewController {
         
         selectResearchTopicVC.selectedTags = topics
         selectResearchTopicVC.completionHandler = { [weak self] data in
-            self?.researchTopicViewModel.ResearchTopicItems.accept(data)
+            self?.viewModel.researchTopicItems.accept(data)
             self?.topics = data
             self?.editInfoView.researchTopicCollectionView.reloadData()
             self?.updateCollectionViewHeight()
@@ -242,7 +228,7 @@ extension EditInfoViewController {
 
 extension EditInfoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let items = researchTopicViewModel.ResearchTopicItems.value
+        let items = viewModel.researchTopicItems.value
         guard indexPath.item < items.count else {
             return CGSize(width: 40, height: 29) // 기본 사이즈 반환
         }

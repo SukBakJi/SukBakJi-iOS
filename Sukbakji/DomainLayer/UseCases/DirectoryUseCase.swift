@@ -14,13 +14,13 @@ class DirectoryUseCase {
         self.directoryRepository = directoryRepository
     }
     
-    func fetchInterestTopics() -> Single<Topic> {
+    func fetchInterestTopics() -> Single<[String]> {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .error(NSError(domain: "TokenError", code: 401, userInfo: [NSLocalizedDescriptionKey: "토큰이 존재하지 않습니다."]))
         }
         
         return directoryRepository.fetchInterestTopics(token: token)
-            .map { $0.result }
+            .map { $0.result.topics }
     }
     
     func fetchLabInfo(labId: Int) -> Single<LabInfo> {
