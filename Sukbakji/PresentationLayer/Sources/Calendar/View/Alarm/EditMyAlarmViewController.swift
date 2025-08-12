@@ -15,7 +15,8 @@ class EditMyAlarmViewController: UIViewController {
     
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     private let editAlarmView = EditAlarmView()
-    private var viewModel = AlarmViewModel()
+    private var alarmViewModel = AlarmViewModel()
+    private let alarmDetailViewModel = AlarmDetailViewModel()
     private let disposeBag = DisposeBag()
     private let drop = DropDown()
 
@@ -23,7 +24,7 @@ class EditMyAlarmViewController: UIViewController {
     
     init(alarmViewModel: AlarmViewModel) {
         super.init(nibName: nil, bundle: nil)
-        self.viewModel = alarmViewModel
+        self.alarmViewModel = alarmViewModel
     }
     
     required init?(coder: NSCoder) {
@@ -110,7 +111,7 @@ extension EditMyAlarmViewController {
     }
     
     private func setMyAlarmData() {
-        guard let selectMyAlarmItem = self.viewModel.selectAlarmItem else { return }
+        guard let selectMyAlarmItem = self.alarmViewModel.selectAlarmItem else { return }
         let alarmUnivName = selectMyAlarmItem.alarmUnivName
         let alarmName = selectMyAlarmItem.alarmName
         let alarmDate = selectMyAlarmItem.alarmDate
@@ -131,12 +132,12 @@ extension EditMyAlarmViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadAlarmUniv()
+        alarmViewModel.loadAlarmUniv()
     }
     
     private func bindViewModel() {
-        viewModel.univItems
-            .subscribe(onNext: { univList in self.drop.dataSource = self.viewModel.univItems.value })
+        alarmViewModel.univItems
+            .subscribe(onNext: { univList in self.drop.dataSource = self.alarmViewModel.univItems.value })
             .disposed(by: disposeBag)
     }
     
@@ -177,13 +178,13 @@ extension EditMyAlarmViewController {
     }
     
     @objc private func alarmEdit_Tapped() {
-        guard let selectItem = self.viewModel.selectAlarmItem else { return }
-        viewModel.editAlarm(memberId: memberId, alarmId: selectItem.alarmId, univName: editAlarmView.univTextField.text, name: editAlarmView.alarmNameTextField.text, date: editAlarmView.dateValue, time: editAlarmView.timeValue, onoff: selectItem.onoff)
+        guard let selectItem = self.alarmViewModel.selectAlarmItem else { return }
+        alarmDetailViewModel.editAlarm(memberId: memberId, alarmId: selectItem.alarmId, univName: editAlarmView.univTextField.text ?? "", name: editAlarmView.alarmNameTextField.text ?? "", date: editAlarmView.dateValue, time: editAlarmView.timeValue, onoff: selectItem.onoff)
         self.presentingViewController?.dismiss(animated: true)
     }
     
     @objc private func alarmDelete_Tapped() {
-        let deleteView = CalendarDeleteView(title: "알람 삭제하기", content: "해당 알람을 삭제할까요? 삭제 후 복구되지 않습\n니다.", alarmViewModel: viewModel, univDelete: UnivDelete(memberId: 0, univId: 0, season: "", method: ""))
+        let deleteView = CalendarDeleteView(title: "알람 삭제하기", content: "해당 알람을 삭제할까요? 삭제 후 복구되지 않습\n니다.", alarmViewModel: alarmViewModel, univDelete: UnivDelete(memberId: 0, univId: 0, season: "", method: ""))
         deleteView.delegateViewController = self
         
         self.view.addSubview(deleteView)

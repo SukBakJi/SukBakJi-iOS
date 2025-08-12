@@ -12,7 +12,7 @@ import RxSwift
 
 class AllDeleteView: UIView {
     
-    private let viewModel = CalendarViewModel()
+    private let univDetailViewModel = UnivDetailViewModel()
     var univIds: [Int] = []
     
     var mainView = UIView().then {
@@ -113,7 +113,7 @@ class AllDeleteView: UIView {
     }
     
     @objc private func delete_Tapped() {
-        viewModel.deleteUnivCalendarAll()
+        univDetailViewModel.deleteAllUniv()
         UIView.animate(withDuration: 0.3, animations: {
            self.alpha = 0
         }) { _ in

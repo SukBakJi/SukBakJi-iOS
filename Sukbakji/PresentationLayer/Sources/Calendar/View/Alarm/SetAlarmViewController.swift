@@ -15,7 +15,8 @@ class SetAlarmViewController: UIViewController {
     
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     private let setAlarmView = SetAlarmView()
-    private let viewModel = AlarmViewModel()
+    private let alarmViewModel = AlarmViewModel()
+    private let alarmDetailViewModel = AlarmDetailViewModel()
     private let disposeBag = DisposeBag()
     private let drop = DropDown()
     
@@ -123,12 +124,12 @@ extension SetAlarmViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadAlarmUniv()
+        alarmViewModel.loadAlarmUniv()
     }
     
     private func bindViewModel() {
-        viewModel.univItems
-            .subscribe(onNext: { univList in self.drop.dataSource = self.viewModel.univItems.value })
+        alarmViewModel.univItems
+            .subscribe(onNext: { univList in self.drop.dataSource = self.alarmViewModel.univItems.value })
             .disposed(by: disposeBag)
     }
     
@@ -202,7 +203,7 @@ extension SetAlarmViewController {
     }
     
     @objc private func set_Tapped() {
-        viewModel.enrollAlarm(memberId: memberId, univName: setAlarmView.univTextField.text, name: setAlarmView.alarmNameTextField.text, date: setAlarmView.dateValue, time: setAlarmView.timeValue)
+        alarmDetailViewModel.createAlarm(memberId: memberId, univName: setAlarmView.univTextField.text ?? "", name: setAlarmView.alarmNameTextField.text ?? "", date: setAlarmView.dateValue, time: setAlarmView.timeValue)
         self.navigationController?.popViewController(animated: true)
     }
     

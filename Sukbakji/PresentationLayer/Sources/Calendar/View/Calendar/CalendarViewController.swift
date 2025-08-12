@@ -13,7 +13,9 @@ import RxCocoa
 class CalendarViewController: UIViewController {
     
     private let calendarView = CalendarView()
-    private let viewModel = CalendarViewModel()
+    private let calendarViewModel = CalendarViewModel()
+    private let univViewModel = UnivViewModel()
+    private let alarmViewModel = AlarmViewModel()
     private let disposeBag = DisposeBag()
     
     private var calendarHeightConstraint: Constraint?
@@ -129,13 +131,13 @@ extension CalendarViewController {
     }
     
     private func setAPI() {
-        viewModel.loadUnivList()
-        viewModel.loadUpComingSchedule()
-        viewModel.loadAlarmList()
+        calendarViewModel.loadUpComing()
+        univViewModel.loadUnivList()
+        alarmViewModel.loadAlarmList()
     }
     
     private func bindViewModel() {
-        viewModel.univList
+        univViewModel.univList
             .subscribe(onNext: { univList in
                 if !univList.isEmpty {
                     self.calendarView.univAlertView.isHidden = true
@@ -152,7 +154,7 @@ extension CalendarViewController {
         calendarView.upComingCalendarCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        viewModel.upComingSchedules
+        calendarViewModel.upComingSchedules
             .subscribe(onNext: { scheduleList in
                 if scheduleList.isEmpty {
                     self.calendarView.upComingCalendarCollectionView.isHidden = true
@@ -164,14 +166,14 @@ extension CalendarViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.upComingSchedules
+        calendarViewModel.upComingSchedules
             .bind(to: calendarView.upComingCalendarCollectionView.rx.items(cellIdentifier: UpComingCalendarCollectionViewCell.identifier, cellType: UpComingCalendarCollectionViewCell.self)) { _, schedule, cell in
                 cell.prepare(upComingList: schedule)
             }
             .disposed(by: disposeBag)
         
-        viewModel.alarmDates
-            .subscribe(onNext: { alarmDates in
+        alarmViewModel.alarmList
+            .subscribe(onNext: { alarmList in
                 self.calendarView.calendarMainCollectionView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -179,13 +181,13 @@ extension CalendarViewController {
         calendarView.calendarDetailTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        viewModel.dateSelectSchedules
+        calendarViewModel.dateSelectSchedules
             .bind(to: calendarView.calendarDetailTableView.rx.items(cellIdentifier: CalendarDetailTableViewCell.identifier, cellType: CalendarDetailTableViewCell.self)) { _, schedule, cell in
                 cell.prepare(dateSelectList: schedule)
             }
             .disposed(by: disposeBag)
         
-        viewModel.dateSelectSchedules
+        calendarViewModel.dateSelectSchedules
             .subscribe(onNext: { scheduleList in
                 if scheduleList.count >= 1 {
                     self.expandHeight(num: scheduleList.count)
@@ -226,7 +228,7 @@ extension CalendarViewController {
                     if let date = self.calendarView.calendar.date(from: components) {
                         let dateString = dateFormatter.string(from: date)
                         // 알람이 있는 날짜인지 확인
-                        if self.viewModel.alarmDates.value.contains(where: { $0.alarmDate == dateString }) {
+                        if self.alarmViewModel.alarmList.value.contains(where: { $0.alarmDate == dateString }) {
                             cell.dotImageView.isHidden = false
                         } else {
                             cell.dotImageView.isHidden = true
@@ -248,9 +250,9 @@ extension CalendarViewController {
                 let reReplacedString = replacedString.replacingOccurrences(of: "년|월", with: "-", options: .regularExpression)
                 
                 if dayNum <= 9 {
-                    viewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
+                    calendarViewModel.loadDateSelect(date: "\(reReplacedString)0\(selectedDay)")
                 } else {
-                    viewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
+                    calendarViewModel.loadDateSelect(date: "\(reReplacedString)\(selectedDay)")
                 }
             })
             .disposed(by: disposeBag)

@@ -16,6 +16,7 @@ class UnivRecruitViewController: UIViewController {
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     private let univRecruitView = UnivRecruitView()
     private let viewModel = UnivViewModel()
+    private let univDetailViewModel = UnivDetailViewModel()
     private let disposeBag = DisposeBag()
     private let drop = DropDown()
     
@@ -136,7 +137,7 @@ extension UnivRecruitViewController {
             .bind { [weak self] in self?.showEnrollAlert() }
             .disposed(by: disposeBag)
         
-        viewModel.univEnrolled
+        univDetailViewModel.univCreated
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSuccess in
                 if isSuccess {
@@ -160,11 +161,11 @@ extension UnivRecruitViewController {
     
     private func showEnrollAlert() {
         AlertController(message: "대학교를 등록하시겠어요?", isCancel: true) { [weak self] in
-            self?.viewModel.enrollUniv(
-                memberId: self?.memberId,
-                univId: self?.univId,
-                season: self?.univRecruitView.recruitTitleLabel.text,
-                method: self?.univRecruitView.recruitTypeTextField.text)
+            self?.univDetailViewModel.createUniv(
+                memberId: self!.memberId,
+                univId: self!.univId!,
+                season: self?.univRecruitView.recruitTitleLabel.text ?? "",
+                method: self?.univRecruitView.recruitTypeTextField.text ?? "")
         }.show()
     }
     

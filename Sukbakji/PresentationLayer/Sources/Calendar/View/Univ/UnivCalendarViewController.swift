@@ -14,8 +14,9 @@ class UnivCalendarViewController: UIViewController, UnivCalendarCellDelegate {
     
     private let memberId = UserDefaults.standard.integer(forKey: "memberID")
     private let univView = UnivView()
-    private let viewModel = CalendarViewModel()
+    private let calendarViewModel = CalendarViewModel()
     private let univViewModel = UnivViewModel()
+    private let univDetailViewModel = UnivDetailViewModel()
     private let disposeBag = DisposeBag()
     
     private var univIds: [Int] = []
@@ -54,26 +55,26 @@ extension UnivCalendarViewController {
     
     private func setAPI() {
         bindViewModel()
-        viewModel.loadUnivList()
+        univViewModel.loadUnivList()
     }
     
     private func bindViewModel() {
         univView.univCalendarTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        viewModel.univList
+        univViewModel.univList
             .subscribe(onNext: { univList in
                 self.univView.allSelectLabel.text = "전체선택 (0/\(univList.count))"
             })
             .disposed(by: disposeBag)
         
-        viewModel.univList
+        univViewModel.univList
             .observe(on: MainScheduler.instance)
             .bind(to: univView.univCalendarTableView.rx.items(cellIdentifier: UnivCalendarTableViewCell.identifier, cellType: UnivCalendarTableViewCell.self)) { index, item, cell in
                 cell.prepare(univList: item)
                 cell.delegate = self
                 
-                self.viewModel.selectedUnivAll
+                self.univDetailViewModel.selectedUnivAll
                     .bind { isSelected in
                         let imageName = isSelected ? "Sukbakji_Check2" : "Sukbakji_Check"
                         cell.selectButton.setImage(UIImage(named: imageName), for: .normal)
@@ -86,14 +87,14 @@ extension UnivCalendarViewController {
         
         univView.allSelectButton.rx.tap
             .bind { [weak self] in
-                self?.viewModel.toggleSelectState()
+                self?.univDetailViewModel.toggleSelectState()
             }
             .disposed(by: disposeBag)
         
         univView.selectCompleteButton.rx.tap
             .bind { [weak self] in
                 guard let self = self else { return }
-                if self.viewModel.selectedUnivAll.value {
+                if self.univDetailViewModel.selectedUnivAll.value {
                     let deleteView = AllDeleteView(univIds: [])
                     
                     self.view.addSubview(deleteView)
@@ -113,7 +114,7 @@ extension UnivCalendarViewController {
             .bind { [weak self] in
                 guard let self = self else { return }
                 let univIds = self.univIds
-                self.viewModel.deleteUnivCalendarSelected(univIds: univIds)
+                self.univDetailViewModel.deleteSelectedUniv(univIds: univIds)
                 self.univIds.removeAll()
             }
             .disposed(by: disposeBag)
@@ -121,7 +122,7 @@ extension UnivCalendarViewController {
     
     func select_Tapped(cell: UnivCalendarTableViewCell) {
         guard let indexPath = univView.univCalendarTableView.indexPath(for: cell) else { return }
-        let univId = viewModel.univList.value[indexPath.row].univId
+        let univId = univViewModel.univList.value[indexPath.row].univId
         
         if univIds.contains(univId) {
             univIds.removeAll { $0 == univId }
@@ -136,7 +137,7 @@ extension UnivCalendarViewController {
     
     func univDelete_Tapped(cell: UnivCalendarTableViewCell) {
         guard let indexPath = univView.univCalendarTableView.indexPath(for: cell) else { return }
-        let univCalendarItem = viewModel.univList.value[indexPath.row]
+        let univCalendarItem = univViewModel.univList.value[indexPath.row]
         let univId = univCalendarItem.univId
         let season = univCalendarItem.season
         let method = univCalendarItem.method
@@ -156,14 +157,14 @@ extension UnivCalendarViewController {
     
     func editButton_Tapped(cell: UnivCalendarTableViewCell) {
         guard let indexPath = univView.univCalendarTableView.indexPath(for: cell) else { return }
-        self.viewModel.selectUnivList = viewModel.univList.value[indexPath.row]
-        let viewController = EditUnivCalendarViewController(calendarViewModel: self.viewModel)
+        self.univViewModel.selectUnivList = univViewModel.univList.value[indexPath.row]
+        let viewController = EditUnivCalendarViewController(univViewModel: self.univViewModel)
         let bottomSheetVC = BottomSheetViewController(contentViewController: viewController, defaultHeight: 430, bottomSheetPanMinTopConstant: 380, isPannedable: true)
         self.present(bottomSheetVC, animated: true)
     }
     
     private func updateUIForSelectedCells() {
-        for (index, univ) in viewModel.univList.value.enumerated() {
+        for (index, univ) in univViewModel.univList.value.enumerated() {
             guard let cell = univView.univCalendarTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? UnivCalendarTableViewCell else { continue }
             let univId = univ.univId
             
@@ -179,9 +180,9 @@ extension UnivCalendarViewController {
     }
     
     @objc private func univEditingComplete() {
-        viewModel.loadUnivList()
+        univViewModel.loadUnivList()
         univView.allSelectButton.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
-        viewModel.selectedUnivAll.accept(false)
+        univDetailViewModel.selectedUnivAll.accept(false)
     }
 }
 

@@ -13,7 +13,8 @@ import RxSwift
 class CalendarDeleteView: UIView {
     
     private var alarmViewModel = AlarmViewModel()
-    private let viewModel = CalendarViewModel()
+    private let univDetailViewModel = UnivDetailViewModel()
+    private let alarmDetailViewModel = AlarmDetailViewModel()
     private var univDelete: UnivDelete?
     weak var delegateViewController: UIViewController?
     
@@ -117,9 +118,9 @@ class CalendarDeleteView: UIView {
     
     @objc private func delete_Tapped() {
         if alarmViewModel.selectAlarmItem != nil {
-            alarmViewModel.deleteAlarm(alarmId: alarmViewModel.selectAlarmItem?.alarmId)
+            alarmDetailViewModel.deleteAlarm(alarmId: alarmViewModel.selectAlarmItem!.alarmId)
         } else {
-            viewModel.deleteUnivCalendar(memberId: univDelete?.memberId, univId: univDelete?.univId, season: univDelete?.season, method: univDelete?.method)
+            univDetailViewModel.deleteUniv(memberId: univDelete!.memberId, univId: univDelete!.univId, season: univDelete!.season, method: univDelete!.method)
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 0

@@ -5,30 +5,32 @@
 //  Created by jaegu park on 12/19/24.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 
 final class UnivViewModel {
-    private let repository = CalendarRepository()
+    private let useCase: CalendarUseCase
     private let disposeBag = DisposeBag()
+    
+    init(useCase: CalendarUseCase = CalendarUseCase()) {
+        self.useCase = useCase
+    }
     
     let univSearchList = BehaviorRelay<[UnivSearchList]>(value: [])
     let selectUnivItem = BehaviorRelay<UnivSearchList?>(value: nil)
     
+    let univList = BehaviorRelay<[UnivList]>(value: [])
+    var selectUnivList: UnivList?
+    
     let recruitTypes = BehaviorRelay<[String]>(value: [])
     
-    let univEnrolled = PublishSubject<Bool>()
-    
     func loadUnivSearch(keyword: String) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        repository.fetchUnivSearch(token: token, keyword: keyword)
-            .map { $0.result.universityList }
+        useCase.fetchUnivSearch(keyword: keyword)
+            .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] univs in
                 self?.univSearchList.accept(univs)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -44,8 +46,8 @@ final class UnivViewModel {
                 return Disposables.create()
             }
             
-            self.repository.fetchUnivName(token: token, univId: univId)
-                .map { $0.result.univName }
+            self.useCase.fetchUnivName(univId: univId)
+                .observe(on: MainScheduler.instance)
                 .subscribe(onSuccess: { univName in
                     observer.onNext(univName)
                     observer.onCompleted()
@@ -59,36 +61,23 @@ final class UnivViewModel {
     }
     
     func loadUnivMethod(univId: Int) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        repository.fetchUnivMethod(token: token, univId: univId)
-            .map { $0.result.methodList.map { $0.method } }
+        useCase.fetchUnivMethod(univId: univId)
+            .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] methods in
                 self?.recruitTypes.accept(methods)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
     
-    func enrollUniv(memberId: Int?, univId: Int?, season: String?, method: String?) {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        let params = [
-            "memberId": memberId!,
-            "univId": univId!,
-            "season": season!,
-            "method": method!
-        ] as [String : Any]
-        
-        repository.fetchUnivEnroll(token: token, parameters: params)
+    func loadUnivList() {
+        useCase.fetchUnivList()
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.univEnrolled.onNext(true)
+            .subscribe(onSuccess: { [weak self] univs in
+                self?.univList.accept(univs)
             }, onFailure: { error in
-                self.univEnrolled.onNext(false)
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

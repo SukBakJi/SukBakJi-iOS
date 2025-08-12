@@ -87,6 +87,7 @@
 		C70FB1362E3F627E00B2770E /* CalendarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB1352E3F627E00B2770E /* CalendarUseCase.swift */; };
 		C71038AB2DDF7DE90087A968 /* MyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71038AA2DDF7DE90087A968 /* MyPostView.swift */; };
 		C71038AD2DDF815A0087A968 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71038AC2DDF815A0087A968 /* MyPostViewController.swift */; };
+		C710BADD2E4B03AB00745BB9 /* AlarmDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C710BADC2E4B03AB00745BB9 /* AlarmDetailViewModel.swift */; };
 		C71223CB2DED5BE000238E4E /* BoardSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71223CA2DED5BE000238E4E /* BoardSearchView.swift */; };
 		C71223CD2DED6E8F00238E4E /* BoardSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71223CC2DED6E8F00238E4E /* BoardSearchViewController.swift */; };
 		C71223CF2DED6EA100238E4E /* BoardSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71223CE2DED6EA100238E4E /* BoardSearchTableViewCell.swift */; };
@@ -174,6 +175,7 @@
 		C757F8292D0A9CF600685F1A /* UnivCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */; };
 		C757F82B2D0A9D2000685F1A /* MyAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */; };
 		C75C0BE12D2D2A05000145F3 /* CalendarDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C0BE02D2D2A05000145F3 /* CalendarDeleteView.swift */; };
+		C76065222E4A44D300533A38 /* UnivDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76065212E4A44D300533A38 /* UnivDetailViewModel.swift */; };
 		C7675F782D6981BD00F99294 /* UnivSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F772D6981BD00F99294 /* UnivSearchView.swift */; };
 		C7675F7A2D6981DD00F99294 /* UnivRecruitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F792D6981DD00F99294 /* UnivRecruitView.swift */; };
 		C7675F7C2D6981ED00F99294 /* UnivView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F7B2D6981ED00F99294 /* UnivView.swift */; };
@@ -390,6 +392,7 @@
 		C70FB1352E3F627E00B2770E /* CalendarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUseCase.swift; sourceTree = "<group>"; };
 		C71038AA2DDF7DE90087A968 /* MyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostView.swift; sourceTree = "<group>"; };
 		C71038AC2DDF815A0087A968 /* MyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewController.swift; sourceTree = "<group>"; };
+		C710BADC2E4B03AB00745BB9 /* AlarmDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDetailViewModel.swift; sourceTree = "<group>"; };
 		C71223CA2DED5BE000238E4E /* BoardSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSearchView.swift; sourceTree = "<group>"; };
 		C71223CC2DED6E8F00238E4E /* BoardSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSearchViewController.swift; sourceTree = "<group>"; };
 		C71223CE2DED6EA100238E4E /* BoardSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -479,6 +482,7 @@
 		C757F8282D0A9CF600685F1A /* UnivCalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		C757F82A2D0A9D2000685F1A /* MyAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlarmTableViewCell.swift; sourceTree = "<group>"; };
 		C75C0BE02D2D2A05000145F3 /* CalendarDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDeleteView.swift; sourceTree = "<group>"; };
+		C76065212E4A44D300533A38 /* UnivDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivDetailViewModel.swift; sourceTree = "<group>"; };
 		C7675F772D6981BD00F99294 /* UnivSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchView.swift; sourceTree = "<group>"; };
 		C7675F792D6981DD00F99294 /* UnivRecruitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivRecruitView.swift; sourceTree = "<group>"; };
 		C7675F7B2D6981ED00F99294 /* UnivView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivView.swift; sourceTree = "<group>"; };
@@ -1001,7 +1005,9 @@
 			children = (
 				C7EA8CB02D689AB600B25FBC /* CalendarViewModel.swift */,
 				C7BDEA8C2D1338E000001927 /* UnivViewModel.swift */,
+				C76065212E4A44D300533A38 /* UnivDetailViewModel.swift */,
 				C7FD93772D2AE5290084DC9C /* AlarmViewModel.swift */,
+				C710BADC2E4B03AB00745BB9 /* AlarmDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1857,6 +1863,7 @@
 				C78479402DF1F9DD00326CC4 /* PostDeleteView.swift in Sources */,
 				C7A78E162DEEDBC3000A890B /* BoardCreateView.swift in Sources */,
 				C757F8212D0A9B3600685F1A /* CalendarMainCollectionViewCell.swift in Sources */,
+				C76065222E4A44D300533A38 /* UnivDetailViewModel.swift in Sources */,
 				C74A15B82D5A56EC00A1698B /* MentorList.swift in Sources */,
 				91D413412D8270B100020CEC /* SignupView.swift in Sources */,
 				C77B496A2D7B66B700005ABE /* LoginView.swift in Sources */,
@@ -1961,6 +1968,7 @@
 				C7D64B392DD7878B00DD34A0 /* BoardViewController.swift in Sources */,
 				C7C434F02C5DFF0300BFB2D2 /* EditInfoViewController.swift in Sources */,
 				C74A2C842E15151A007B7DB1 /* LabTopicCollectionViewCell.swift in Sources */,
+				C710BADD2E4B03AB00745BB9 /* AlarmDetailViewModel.swift in Sources */,
 				415BBC0D2C73442F002768EE /* NetworkAuthManager+.swift in Sources */,
 				C71038AD2DDF815A0087A968 /* MyPostViewController.swift in Sources */,
 				C7F4552F2C39B8EE00A4D0EE /* SceneDelegate.swift in Sources */,
