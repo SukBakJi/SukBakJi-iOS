@@ -9,22 +9,22 @@ import RxSwift
 import RxCocoa
 
 class FavBoardViewModel {
+    private let useCase: HomeUseCase
     private let disposeBag = DisposeBag()
     
     let favBoardList = BehaviorRelay<[FavoriteBoard]>(value: [])
-    let errorMessage = PublishSubject<String>()
+    
+    init(useCase: HomeUseCase = HomeUseCase()) {
+        self.useCase = useCase
+    }
     
     func loadFavoriteBoard() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        HomeRepository.shared.fetchFavoriteBoard(token: token)
+        useCase.fetchFavoriteBoard()
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.favBoardList.accept(response.result)
+            .subscribe(onSuccess: { [weak self] boards in
+                self?.favBoardList.accept(boards)
             }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

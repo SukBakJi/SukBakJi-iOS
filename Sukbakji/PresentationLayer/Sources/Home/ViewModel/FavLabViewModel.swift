@@ -9,24 +9,23 @@ import RxSwift
 import RxCocoa
 
 class FavLabViewModel {
+    private let useCase: DirectoryUseCase
     private let disposeBag = DisposeBag()
     
     let favLabList = BehaviorRelay<[FavoriteLab]>(value: [])
     let selectedLabAll = BehaviorRelay<Bool>(value: false)
     
-    let errorMessage = PublishSubject<String>()
+    init(useCase: DirectoryUseCase = DirectoryUseCase()) {
+        self.useCase = useCase
+    }
     
     func loadFavoriteLab() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        DirectoryRepository.shared.fetchFavoriteLabs(token: token)
+        useCase.fetchLabFavorite()
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.favLabList.accept(response.result)
+            .subscribe(onSuccess: { [weak self] schedules in
+                self?.favLabList.accept(schedules)
             }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

@@ -13,7 +13,7 @@ class MyProfileViewModel {
     private let useCase: HomeUseCase
     
     let myProfile = PublishSubject<MyProfile>()
-    let errorMessage = PublishSubject<String>()
+    
     let logoutResult = PublishSubject<Bool>()
     let profileUpdated = PublishSubject<Bool>()
     let pwChanged = PublishSubject<Bool>()
@@ -30,8 +30,8 @@ class MyProfileViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] profile in
                 self?.myProfile.onNext(profile)
-            }, onFailure: { [weak self] error in
-                self?.errorMessage.onNext("프로필 로딩 실패: \(error.localizedDescription)")
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -41,6 +41,8 @@ class MyProfileViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] success in
                 self?.logoutResult.onNext(success)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
@@ -50,19 +52,20 @@ class MyProfileViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] isSuccess in
                 self?.profileUpdated.onNext(isSuccess)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
     
     func loadChangePW() {
         useCase.changePassword(newPassword: newPWInput.value, confirmPassword: confirmPWInput.value)
-        .observe(on: MainScheduler.instance)
-        .subscribe(onSuccess: { [weak self] isSuccess in
-            self?.pwChanged.onNext(isSuccess)
-            if !isSuccess {
-                self?.errorMessage.onNext("비밀번호 변경 실패")
-            }
-        })
-        .disposed(by: disposeBag)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.pwChanged.onNext(isSuccess)
+            }, onFailure: { error in
+                print("오류:", error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
     }
 }

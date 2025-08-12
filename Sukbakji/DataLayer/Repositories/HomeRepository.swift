@@ -5,7 +5,6 @@
 //  Created by jaegu park on 2/18/25.
 //
 
-import Foundation
 import RxSwift
 
 class HomeRepository {
@@ -21,11 +20,6 @@ class HomeRepository {
         return APIService.shared.getWithToken(of: APIResponse<[HotPost]>.self, url: url, accessToken: token)
     }
     
-    func fetchLogOut(token: String) -> Single<APIResponse<String>> {
-        let url = APIConstants.authLogout.path
-        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)
-    }
-    
     func fetchMyProfile(token: String) -> Single<APIResponse<MyProfile>> {
         let url = APIConstants.userMypage.path
         return APIService.shared.getWithToken(of: APIResponse<MyProfile>.self, url: url, accessToken: token)
@@ -34,6 +28,11 @@ class HomeRepository {
     func fetchEditProfile(token: String, parameters: [String: Any]?) -> Single<APIResponse<EditProfile>> {
         let url = APIConstants.userProfile.path
         return APIService.shared.putWithToken(of: APIResponse<EditProfile>.self, url: url, parameters: parameters, accessToken: token)
+    }
+    
+    func fetchLogOut(token: String) -> Single<APIResponse<String>> {
+        let url = APIConstants.authLogout.path
+        return APIService.shared.postWithToken(of: APIResponse<String>.self, url: url, parameters: nil, accessToken: token)
     }
     
     func fetchChangePW(token: String, parameters: [String: Any]?) -> Single<APIResponse<String>> {

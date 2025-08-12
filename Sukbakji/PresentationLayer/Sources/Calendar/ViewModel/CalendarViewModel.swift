@@ -9,7 +9,6 @@ import RxSwift
 import RxCocoa
 
 class CalendarViewModel {
-    private let calendarView = CalendarView()
     private let useCase: CalendarUseCase
     private let disposeBag = DisposeBag()
     

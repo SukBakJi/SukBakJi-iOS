@@ -5,7 +5,6 @@
 //  Created by jaegu park on 5/15/25.
 //
 
-import Foundation
 import RxSwift
 
 class BoardRepository {
@@ -81,7 +80,7 @@ class BoardRepository {
     }
     
     
-    func fetchBoardsFavorite(token: String) -> Single<APIResponse<[Favorite]>> {
+    func fetchFavoriteBoard(token: String) -> Single<APIResponse<[Favorite]>> {
         let url = APIConstants.boardsFavorite.path
         return APIService.shared.getWithToken(of: APIResponse<[Favorite]>.self, url: url, accessToken: token)
     }
