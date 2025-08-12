@@ -12,17 +12,17 @@ final class UnivViewModel {
     private let useCase: CalendarUseCase
     private let disposeBag = DisposeBag()
     
-    init(useCase: CalendarUseCase = CalendarUseCase()) {
-        self.useCase = useCase
-    }
-    
     let univSearchList = BehaviorRelay<[UnivSearchList]>(value: [])
     let selectUnivItem = BehaviorRelay<UnivSearchList?>(value: nil)
+    
+    let recruitTypes = BehaviorRelay<[String]>(value: [])
     
     let univList = BehaviorRelay<[UnivList]>(value: [])
     var selectUnivList: UnivList?
     
-    let recruitTypes = BehaviorRelay<[String]>(value: [])
+    init(useCase: CalendarUseCase = CalendarUseCase()) {
+        self.useCase = useCase
+    }
     
     func loadUnivSearch(keyword: String) {
         useCase.fetchUnivSearch(keyword: keyword)
@@ -37,27 +37,6 @@ final class UnivViewModel {
     
     func selectUniversity(_ univ: UnivSearchList?) {
         selectUnivItem.accept(univ)
-    }
-    
-    func loadUnivName(univId: Int) -> Observable<String> {
-        return Observable.create { observer in
-            guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-                observer.onCompleted()
-                return Disposables.create()
-            }
-            
-            self.useCase.fetchUnivName(univId: univId)
-                .observe(on: MainScheduler.instance)
-                .subscribe(onSuccess: { univName in
-                    observer.onNext(univName)
-                    observer.onCompleted()
-                }, onFailure: { error in
-                    observer.onError(error)
-                })
-                .disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
     }
     
     func loadUnivMethod(univId: Int) {
@@ -80,5 +59,21 @@ final class UnivViewModel {
                 print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
+    }
+    
+    func loadUnivName(univId: Int) -> Observable<String> {
+        return Observable.create { observer in
+            self.useCase.fetchUnivName(univId: univId)
+                .observe(on: MainScheduler.instance)
+                .subscribe(onSuccess: { univName in
+                    observer.onNext(univName)
+                    observer.onCompleted()
+                }, onFailure: { error in
+                    observer.onError(error)
+                })
+                .disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
     }
 }

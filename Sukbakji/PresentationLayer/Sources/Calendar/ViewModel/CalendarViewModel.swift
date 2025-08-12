@@ -13,12 +13,12 @@ class CalendarViewModel {
     private let useCase: CalendarUseCase
     private let disposeBag = DisposeBag()
     
+    let upComingSchedules = BehaviorRelay<[UpComingList]>(value: [])
+    let dateSelectSchedules = BehaviorRelay<[DateSelectList]>(value: [])
+    
     init(useCase: CalendarUseCase = CalendarUseCase()) {
         self.useCase = useCase
     }
-    
-    let upComingSchedules = BehaviorRelay<[UpComingList]>(value: [])
-    let dateSelectSchedules = BehaviorRelay<[DateSelectList]>(value: [])
     
     func loadUpComing() {
         useCase.fetchUpComing()

@@ -12,10 +12,6 @@ final class UnivDetailViewModel {
     private let useCase: CalendarUseCase
     private let disposeBag = DisposeBag()
     
-    init(useCase: CalendarUseCase = CalendarUseCase()) {
-        self.useCase = useCase
-    }
-    
     let univCreated = PublishSubject<Bool>()
     let univEdited = PublishSubject<Bool>()
     let univDeleted = PublishSubject<Bool>()
@@ -23,6 +19,10 @@ final class UnivDetailViewModel {
     let univAllDeleted = PublishSubject<Bool>()
     
     let selectedUnivAll = BehaviorRelay<Bool>(value: false)
+    
+    init(useCase: CalendarUseCase = CalendarUseCase()) {
+        self.useCase = useCase
+    }
     
     func createUniv(memberId: Int, univId: Int, season: String, method: String) {
         useCase.createUniv(memberId: memberId, univId: univId, season: season, method: method)

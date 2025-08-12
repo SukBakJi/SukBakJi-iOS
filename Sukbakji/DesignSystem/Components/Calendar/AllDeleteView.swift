@@ -13,7 +13,6 @@ import RxSwift
 class AllDeleteView: UIView {
     
     private let univDetailViewModel = UnivDetailViewModel()
-    var univIds: [Int] = []
     
     var mainView = UIView().then {
        $0.backgroundColor = .white
@@ -58,9 +57,8 @@ class AllDeleteView: UIView {
     
     let disposeBag = DisposeBag()
     
-    init(univIds: [Int]) {
+    init() {
         super.init(frame: .zero)
-        self.univIds = univIds
         setUI()
     }
     

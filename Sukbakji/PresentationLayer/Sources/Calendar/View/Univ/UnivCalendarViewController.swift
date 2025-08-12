@@ -95,7 +95,7 @@ extension UnivCalendarViewController {
             .bind { [weak self] in
                 guard let self = self else { return }
                 if self.univDetailViewModel.selectedUnivAll.value {
-                    let deleteView = AllDeleteView(univIds: [])
+                    let deleteView = AllDeleteView()
                     
                     self.view.addSubview(deleteView)
                     deleteView.alpha = 0
@@ -168,12 +168,9 @@ extension UnivCalendarViewController {
             guard let cell = univView.univCalendarTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? UnivCalendarTableViewCell else { continue }
             let univId = univ.univId
             
-            // 셀의 selectButton 상태 업데이트
             if univIds.contains(univId) {
-                // 선택된 상태
                 cell.selectButton.setImage(UIImage(named: "Sukbakji_Check2"), for: .normal)
             } else {
-                // 선택되지 않은 상태
                 cell.selectButton.setImage(UIImage(named: "Sukbakji_Check"), for: .normal)
             }
         }

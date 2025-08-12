@@ -17,13 +17,13 @@ final class AlarmDetailViewModel {
     private let useCase: CalendarUseCase
     private let disposeBag = DisposeBag()
     
-    init(useCase: CalendarUseCase = CalendarUseCase()) {
-        self.useCase = useCase
-    }
-    
     let alarmCreated = PublishSubject<Bool>()
     let alarmEdited = PublishSubject<Bool>()
     let alarmDeleted = PublishSubject<Bool>()
+    
+    init(useCase: CalendarUseCase = CalendarUseCase()) {
+        self.useCase = useCase
+    }
     
     func createAlarm(memberId: Int, univName: String, name: String, date: String, time: String) {
         useCase.createAlarm(memberId: memberId, univName: univName, name: name, date: date, time: time)

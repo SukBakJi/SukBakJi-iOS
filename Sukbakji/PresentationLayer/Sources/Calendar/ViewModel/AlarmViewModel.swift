@@ -12,14 +12,14 @@ final class AlarmViewModel {
     private let useCase: CalendarUseCase
     private let disposeBag = DisposeBag()
     
-    init(useCase: CalendarUseCase = CalendarUseCase()) {
-        self.useCase = useCase
-    }
-    
     let alarmList = BehaviorRelay<[AlarmList]>(value: [])
     var selectAlarmItem: AlarmList?
     
     let univItems = BehaviorRelay<[String]>(value: [])
+    
+    init(useCase: CalendarUseCase = CalendarUseCase()) {
+        self.useCase = useCase
+    }
     
     func loadAlarmList() {
         useCase.fetchAlarmList()
