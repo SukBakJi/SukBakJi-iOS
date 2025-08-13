@@ -9,24 +9,23 @@ import RxSwift
 import RxCocoa
 
 class HotPostViewModel {
+    private let useCase: HomeUseCase
     private let disposeBag = DisposeBag()
     
     let hotPostList = BehaviorRelay<[HotPost]>(value: [])
     var selectPostItem: HotPost?
     
-    let errorMessage = PublishSubject<String>()
+    init(useCase: HomeUseCase = HomeUseCase()) {
+        self.useCase = useCase
+    }
     
     func loadHotPost() {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return
-        }
-        
-        HomeRepository.shared.fetchHotPost(token: token)
+        useCase.fetchHotPost()
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { response in
-                self.hotPostList.accept(response.result)
+            .subscribe(onSuccess: { [weak self] posts in
+                self?.hotPostList.accept(posts)
             }, onFailure: { error in
-                self.errorMessage.onNext("네트워크 오류 발생: \(error.localizedDescription)")
+                print("오류:", error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

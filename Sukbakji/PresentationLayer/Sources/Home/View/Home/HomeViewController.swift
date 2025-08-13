@@ -157,13 +157,6 @@ extension HomeViewController {
                 cell.prepare(favoriteBoard: board)
             }
             .disposed(by: disposeBag)
-
-        favBoardViewModel.errorMessage
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { message in
-                AlertController(message: message).show()
-            })
-            .disposed(by: disposeBag)
     }
     
     private func bindHotPostViewModel() {
@@ -188,13 +181,6 @@ extension HomeViewController {
             .bind(to: homeView.hotPostTableView.rx.items(cellIdentifier: HotPostTableViewCell.identifier, cellType: HotPostTableViewCell.self)) { row, post, cell in
                 cell.prepare(hotPost: post)
             }
-            .disposed(by: disposeBag)
-        
-        hotPostViewModel.errorMessage
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { message in
-                AlertController(message: message).show()
-            })
             .disposed(by: disposeBag)
     }
     
@@ -221,13 +207,6 @@ extension HomeViewController {
             .bind(to: homeView.favLabCollectionView.rx.items(cellIdentifier: FavoriteLabCollectionViewCell.identifier, cellType: FavoriteLabCollectionViewCell.self)) { row, lab, cell in
                 cell.prepare(favoriteLab: lab)
             }
-            .disposed(by: disposeBag)
-        
-        favLabViewModel.errorMessage
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { message in
-                AlertController(message: message).show()
-            })
             .disposed(by: disposeBag)
     }
     

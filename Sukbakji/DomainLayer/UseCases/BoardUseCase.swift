@@ -165,7 +165,7 @@ class BoardUseCase {
             return .error(NSError(domain: "TokenError", code: 401, userInfo: [NSLocalizedDescriptionKey: "토큰이 존재하지 않습니다."]))
         }
         
-        return boardRepository.fetchBoardsFavorite(token: token)
+        return boardRepository.fetchFavoriteBoard(token: token)
                     .map { $0.result }
     }
     

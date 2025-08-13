@@ -14,6 +14,24 @@ class HomeUseCase {
         self.homeRepository = homeRepository
     }
     
+    func fetchFavoriteBoard() -> Single<[FavoriteBoard]> {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return .error(NSError(domain: "TokenError", code: 401, userInfo: [NSLocalizedDescriptionKey: "토큰이 존재하지 않습니다."]))
+        }
+        
+        return homeRepository.fetchFavoriteBoard(token: token)
+                    .map { $0.result }
+    }
+    
+    func fetchHotPost() -> Single<[HotPost]> {
+        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
+            return .error(NSError(domain: "TokenError", code: 401, userInfo: [NSLocalizedDescriptionKey: "토큰이 존재하지 않습니다."]))
+        }
+        
+        return homeRepository.fetchHotPost(token: token)
+                    .map { $0.result }
+    }
+    
     func fetchMyProfile() -> Single<MyProfile> {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .error(NSError(domain: "TokenError", code: 401, userInfo: [NSLocalizedDescriptionKey: "토큰이 존재하지 않습니다."]))
