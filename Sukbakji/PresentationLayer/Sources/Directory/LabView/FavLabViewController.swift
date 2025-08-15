@@ -28,7 +28,6 @@ class FavLabViewController: UIViewController, FavLabCellDelegate {
 
         setUI()
         bindViewModel()
-        setAPI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +36,7 @@ class FavLabViewController: UIViewController, FavLabCellDelegate {
         if let tabBarVC = self.tabBarController as? MainTabViewController {
             tabBarVC.customTabBarView.isHidden = true
         }
+        setAPI()
     }
     
     private func setUI() {
