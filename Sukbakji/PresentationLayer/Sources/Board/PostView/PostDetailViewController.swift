@@ -56,10 +56,6 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
         }
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         postDetailView.optionNavigationbarView.delegate = self
@@ -69,31 +65,6 @@ class PostDetailViewController: UIViewController, CommentCellDelegate {
         postDetailView.scrapButton.addTarget(self, action: #selector(scrap_Tapped), for: .touchUpInside)
         postDetailView.commentEditView.editButton.addTarget(self, action: #selector(updateComment), for: .touchUpInside)
         postDetailView.commentInputView.sendButton.addTarget(self, action: #selector(send_Tapped), for: .touchUpInside)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(commentSettingComplete), name: .isCommentComplete, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(postDeleteComplete), name: .isPostDeleteComplete, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc private func handleKeyboardWillShow(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-              let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
-              let targetView = currentResponderView else { return }
-        
-        UIView.animate(withDuration: duration) {
-            targetView.transform = CGAffineTransform(translationX: 0, y: -keyboardFrame.height)
-        }
-    }
-
-    @objc private func handleKeyboardWillHide(_ notification: Notification) {
-        guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
-              let targetView = currentResponderView else { return }
-        
-        UIView.animate(withDuration: duration) {
-            targetView.transform = .identity
-        }
     }
 }
 
@@ -130,6 +101,28 @@ extension PostDetailViewController {
                 self?.postDetailView.contentLabel.text = detail.content
                 self?.postDetailView.commentLabel.text = "댓글 \(detail.commentCount)"
                 self?.postDetailView.viewLabel.text = "조회수 \(detail.views)"
+            })
+            .disposed(by: disposeBag)
+        
+        postDetailViewModel.postEvent
+            .emit(onNext: { [weak self] event in
+                guard let self = self else { return }
+                switch event {
+                case .deleted:
+                    self.navigationController?.popViewController(animated: true)
+                case .created:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        postDetailViewModel.commentEvent
+            .emit(onNext: { [weak self] event in
+                guard let self = self else { return }
+                switch event {
+                case .created, .edited:
+                    self.postDetailViewModel.loadPostDetail(postId: self.postId)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -215,10 +208,9 @@ extension PostDetailViewController {
             self.present(reasonAlert, animated: true)
         }
         let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
-            self.postDetailView.commentEditView.isHidden = false
-            self.postDetailView.commentEditView.inputTextView.text = self.postDetailViewModel.selectCommentItem?.content
-            self.currentResponderView = self.postDetailView.commentEditView
-            self.postDetailView.commentEditView.inputTextView.becomeFirstResponder()
+            self.postDetailView.switchToEditMode(true) // ⬅︎ 토글만
+                self.postDetailView.commentEditView.inputTextView.text = self.postDetailViewModel.selectCommentItem?.content
+                self.postDetailView.commentEditView.inputTextView.becomeFirstResponder()
         }
         let delete = UIAlertAction(title: "삭제하기", style: .default) { _ in
             let alert = UIAlertController(title: nil, message: "서비스 준비 중입니다.", preferredStyle: .alert)
@@ -303,37 +295,21 @@ extension PostDetailViewController {
     }
     
     @objc private func send_Tapped() {
+        view.endEditing(true)
         postDetailViewModel.createComment(postId: postId, content: postDetailView.commentInputView.inputTextField.text ?? "")
         postDetailView.commentInputView.inputTextField.text = ""
     }
     
-    @objc private func commentSettingComplete() {
-        postDetailViewModel.loadPostDetail(postId: postId)
-    }
-    
-    @objc private func postDeleteComplete() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     @objc private func updateComment() {
+        view.endEditing(true)
         postDetailViewModel.editComment(commentId: postDetailViewModel.selectCommentItem!.commentId, content: postDetailView.commentEditView.inputTextView.text)
-    }
-    
-    private func presentSheet(_ model: ActionSheetModel, handler: @escaping (String) -> Void) {
-        let alert = UIAlertController(title: model.title, message: nil, preferredStyle: .actionSheet)
-        model.actions.forEach { action in
-            let style: UIAlertAction.Style = (action.style == .destructive) ? .destructive : .default
-            alert.addAction(UIAlertAction(title: action.title, style: style, handler: { _ in handler(action.id) }))
-        }
-        alert.addAction(UIAlertAction(title: model.cancelTitle, style: .cancel))
-        present(alert, animated: true)
     }
 }
 
 extension PostDetailViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == postDetailView.commentInputView.inputTextField {
-            currentResponderView = postDetailView.commentInputView
+            postDetailView.switchToEditMode(false)
         }
         postDetailView.commentInputView.inputTextField.updateUnderlineColor(to: .blue400)
         postDetailView.commentInputView.inputTextField.becomeFirstResponder()

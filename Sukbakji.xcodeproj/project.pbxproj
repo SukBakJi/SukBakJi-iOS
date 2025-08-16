@@ -98,9 +98,6 @@
 		C71B4E802DAC0C2B006EACF1 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B4E7F2DAC0C2B006EACF1 /* HomeUseCase.swift */; };
 		C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */; };
 		C71E148D2C44DBEE003AFCB7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */; };
-		C7217E4D2E50660C0013DF22 /* ReportReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7217E4C2E50660C0013DF22 /* ReportReason.swift */; };
-		C7217E502E50666E0013DF22 /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7217E4F2E50666E0013DF22 /* ActionSheet.swift */; };
-		C7217E522E5066F20013DF22 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7217E512E5066F20013DF22 /* AlertBuilder.swift */; };
 		C723A0AC2DF091B300F43A1C /* CommentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C723A0AB2DF091B300F43A1C /* CommentEditView.swift */; };
 		C724B69B2DE6179D00C25C4A /* ScrapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724B69A2DE6179D00C25C4A /* ScrapViewModel.swift */; };
 		C7277D332D5D0C7100E9D14B /* SUITE-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C74C65D92D43970C00526D23 /* SUITE-SemiBold.otf */; };
@@ -407,9 +404,6 @@
 		C71B4E7F2DAC0C2B006EACF1 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		C71E148A2C44DBDF003AFCB7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C71E148C2C44DBEE003AFCB7 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		C7217E4C2E50660C0013DF22 /* ReportReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReason.swift; sourceTree = "<group>"; };
-		C7217E4F2E50666E0013DF22 /* ActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheet.swift; sourceTree = "<group>"; };
-		C7217E512E5066F20013DF22 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 		C723A0AB2DF091B300F43A1C /* CommentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEditView.swift; sourceTree = "<group>"; };
 		C724B69A2DE6179D00C25C4A /* ScrapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapViewModel.swift; sourceTree = "<group>"; };
 		C729F0F72DE1B0CF00AAABB6 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
@@ -878,15 +872,6 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		C7217E4E2E50665F0013DF22 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				C7217E4F2E50666E0013DF22 /* ActionSheet.swift */,
-				C7217E512E5066F20013DF22 /* AlertBuilder.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 		C734BD5D2D6718FB00AE81E9 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1279,7 +1264,6 @@
 		C7AB973E2D63A34200D2DBCA /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				C7217E4E2E50665F0013DF22 /* Common */,
 				C77A79A52E4F38FC00E1B835 /* SignUp */,
 				C7AB97402D63A6A000D2DBCA /* Home */,
 				C7AB97412D63A6B600D2DBCA /* Calendar */,
@@ -1500,7 +1484,6 @@
 			isa = PBXGroup;
 			children = (
 				C7DF5E2E2DB09AF600274B4D /* BlockMemberId.swift */,
-				C7217E4C2E50660C0013DF22 /* ReportReason.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -1877,7 +1860,6 @@
 				C7EAC1782DFBEEC5008B7F30 /* DirectoryRepository.swift in Sources */,
 				C70105E52DE7769300042072 /* UITextView+.swift in Sources */,
 				C729F0FC2DE1B3F800AAABB6 /* CommentInputView.swift in Sources */,
-				C7217E4D2E50660C0013DF22 /* ReportReason.swift in Sources */,
 				C7C379D02D65877E00C224A1 /* HomeView.swift in Sources */,
 				C77EFB3B2D9B8A1E000C2841 /* FCMRepository.swift in Sources */,
 				412BFBE62C52A5E30099E442 /* addBorder+.swift in Sources */,
@@ -1901,7 +1883,6 @@
 				C724B69B2DE6179D00C25C4A /* ScrapViewModel.swift in Sources */,
 				41EE13402C54ABD70037EDD6 /* SignupViewController.swift in Sources */,
 				C74A15A62D5A4F4200A1698B /* UnivMethod.swift in Sources */,
-				C7217E502E50666E0013DF22 /* ActionSheet.swift in Sources */,
 				C750C3922D70C56600BE14EF /* MyAlarmView.swift in Sources */,
 				C723A0AC2DF091B300F43A1C /* CommentEditView.swift in Sources */,
 				41EE13442C54E8270037EDD6 /* UploadCompletedPopUpViewController.swift in Sources */,
@@ -2023,7 +2004,6 @@
 				C7AB97442D63AA1B00D2DBCA /* PWWarning.swift in Sources */,
 				C757F8252D0A9C6B00685F1A /* CalendarDetailTableViewCell.swift in Sources */,
 				C73483652D02A727004B6FA1 /* UILabel+.swift in Sources */,
-				C7217E522E5066F20013DF22 /* AlertBuilder.swift in Sources */,
 				91D413572D83FEA000020CEC /* FindPwViewController.swift in Sources */,
 				C71E148B2C44DBDF003AFCB7 /* HomeViewController.swift in Sources */,
 				C74A15BA2D5A571000A1698B /* MentorPost.swift in Sources */,
