@@ -318,6 +318,16 @@ extension PostDetailViewController {
     @objc private func updateComment() {
         postDetailViewModel.editComment(commentId: postDetailViewModel.selectCommentItem!.commentId, content: postDetailView.commentEditView.inputTextView.text)
     }
+    
+    private func presentSheet(_ model: ActionSheetModel, handler: @escaping (String) -> Void) {
+        let alert = UIAlertController(title: model.title, message: nil, preferredStyle: .actionSheet)
+        model.actions.forEach { action in
+            let style: UIAlertAction.Style = (action.style == .destructive) ? .destructive : .default
+            alert.addAction(UIAlertAction(title: action.title, style: style, handler: { _ in handler(action.id) }))
+        }
+        alert.addAction(UIAlertAction(title: model.cancelTitle, style: .cancel))
+        present(alert, animated: true)
+    }
 }
 
 extension PostDetailViewController: UITextFieldDelegate {
