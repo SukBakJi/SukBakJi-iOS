@@ -94,7 +94,7 @@ class FavoriteLabCollectionViewCell: UICollectionViewCell {
         self.labView.addSubview(labLabel)
         labLabel.snp.makeConstraints {
             $0.top.equalTo(univLabel.snp.bottom).offset(6)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(18)
         }
         

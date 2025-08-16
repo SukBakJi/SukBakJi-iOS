@@ -630,8 +630,7 @@
 		412BFBD42C5224EB0099E442 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				91FEEB862D719DFF00D0502D /* ViewControllers */,
-				91FEEB872D719E1A00D0502D /* Views */,
+				91FEEB862D719DFF00D0502D /* View */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -641,10 +640,8 @@
 			children = (
 				412F92282C5C95450042B834 /* ResearchTopic */,
 				41EE13452C54EC8A0037EDD6 /* AcadmicVerification */,
-				91D413352D826A0D00020CEC /* Models */,
 				91D413362D826A2700020CEC /* Cells */,
-				91EB93112D8154E300A6BBB0 /* ViewControllers */,
-				91EB93132D8154E300A6BBB0 /* Views */,
+				91EB93112D8154E300A6BBB0 /* View */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -771,14 +768,6 @@
 			path = DataManagers;
 			sourceTree = "<group>";
 		};
-		91D413352D826A0D00020CEC /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				91F849102D65AF3C0048B41A /* TOSData.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		91D413362D826A2700020CEC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -791,7 +780,7 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		91EB93112D8154E300A6BBB0 /* ViewControllers */ = {
+		91EB93112D8154E300A6BBB0 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				91D413242D82696500020CEC /* DetailTOSViewController.swift */,
@@ -801,23 +790,10 @@
 				41EE133F2C54ABD70037EDD6 /* SignupViewController.swift */,
 				41EE133D2C54ABB70037EDD6 /* EmailSignUpViewController.swift */,
 			);
-			path = ViewControllers;
+			path = View;
 			sourceTree = "<group>";
 		};
-		91EB93132D8154E300A6BBB0 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				91D413282D82696500020CEC /* DetailTOSView.swift */,
-				91D413402D8270B100020CEC /* SignupView.swift */,
-				91D413292D82696500020CEC /* TOSView.swift */,
-				91EB93122D8154E300A6BBB0 /* SMSAuthView.swift */,
-				91D4133C2D826B2000020CEC /* CompleteView.swift */,
-				91D413422D827A4900020CEC /* EmailSignupView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		91FEEB862D719DFF00D0502D /* ViewControllers */ = {
+		91FEEB862D719DFF00D0502D /* View */ = {
 			isa = PBXGroup;
 			children = (
 				412BFBD72C5225250099E442 /* EmailLoginViewController.swift */,
@@ -826,19 +802,7 @@
 				91D413562D83FEA000020CEC /* FindPwViewController.swift */,
 				91D4135A2D841ECE00020CEC /* ResetPwViewController.swift */,
 			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		91FEEB872D719E1A00D0502D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				C77B49692D7B66B700005ABE /* LoginView.swift */,
-				C77B49672D7B66A500005ABE /* EmailView.swift */,
-				91FEEB752D71782C00D0502D /* FindEmailView.swift */,
-				91D413582D841EC300020CEC /* ResetPwView.swift */,
-				91D413542D83F3D900020CEC /* FindPwView.swift */,
-			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		91FEEB8A2D71A03100D0502D /* SmsAPI */ = {
@@ -860,15 +824,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		C702436A2D3161EF00D6D3C1 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */,
-				C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		C70C313A2D5CC2CF00F17D72 /* Reactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -881,7 +836,6 @@
 			isa = PBXGroup;
 			children = (
 				C74A15BD2D5A573800A1698B /* View */,
-				C702436A2D3161EF00D6D3C1 /* Cell */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1018,7 +972,9 @@
 				C70DB2802C633CDB00D6014B /* ChattingViewController.swift */,
 				C70DB2822C633E8000D6014B /* ChattingTabViewController.swift */,
 				C70DB2842C633F7B00D6014B /* MessageViewController.swift */,
+				C73555042D4BCD86005BDB38 /* MessageRoomTableViewCell.swift */,
 				C70DB2862C633F8600D6014B /* MentoringViewController.swift */,
+				C73555062D4BCD93005BDB38 /* MentoringRoomTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1073,6 +1029,27 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		C77A79A42E4F38C400E1B835 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				91D413282D82696500020CEC /* DetailTOSView.swift */,
+				91D413402D8270B100020CEC /* SignupView.swift */,
+				91D413292D82696500020CEC /* TOSView.swift */,
+				91EB93122D8154E300A6BBB0 /* SMSAuthView.swift */,
+				91D4133C2D826B2000020CEC /* CompleteView.swift */,
+				91D413422D827A4900020CEC /* EmailSignupView.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		C77A79A52E4F38FC00E1B835 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				91F849102D65AF3C0048B41A /* TOSData.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		C77B496F2D7B66D600005ABE /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1083,6 +1060,11 @@
 				91EB930A2D81546500A6BBB0 /* ToastView.swift */,
 				C77B496D2D7B66D600005ABE /* smallTextButton.swift */,
 				C77B496E2D7B66D600005ABE /* SocialAuthButton.swift */,
+				C77B49692D7B66B700005ABE /* LoginView.swift */,
+				C77B49672D7B66A500005ABE /* EmailView.swift */,
+				91FEEB752D71782C00D0502D /* FindEmailView.swift */,
+				91D413582D841EC300020CEC /* ResetPwView.swift */,
+				91D413542D83F3D900020CEC /* FindPwView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1090,8 +1072,9 @@
 		C77C927D2D47D68C00B53F21 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C77B496F2D7B66D600005ABE /* Login */,
 				C7C379CC2D6586C600C224A1 /* Common */,
+				C77A79A42E4F38C400E1B835 /* SignUp */,
+				C77B496F2D7B66D600005ABE /* Login */,
 				C7C379CD2D65873C00C224A1 /* Home */,
 				C7C379CB2D6586B600C224A1 /* Calendar */,
 				C7845CFB2DD4A89B004955A2 /* Board */,
@@ -1281,11 +1264,12 @@
 		C7AB973E2D63A34200D2DBCA /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				C77A79A52E4F38FC00E1B835 /* SignUp */,
 				C7AB97402D63A6A000D2DBCA /* Home */,
 				C7AB97412D63A6B600D2DBCA /* Calendar */,
 				C7AA03852DD5034400BBE115 /* Board */,
 				C7AB97422D63A6BB00D2DBCA /* Chat */,
-				C7DF5E2D2DB09ADB00274B4D /* Block */,
+				C7DF5E2D2DB09ADB00274B4D /* Report */,
 				C7EAC1792DFC007D008B7F30 /* Directory */,
 			);
 			path = Entities;
@@ -1496,12 +1480,12 @@
 			path = LabView;
 			sourceTree = "<group>";
 		};
-		C7DF5E2D2DB09ADB00274B4D /* Block */ = {
+		C7DF5E2D2DB09ADB00274B4D /* Report */ = {
 			isa = PBXGroup;
 			children = (
 				C7DF5E2E2DB09AF600274B4D /* BlockMemberId.swift */,
 			);
-			path = Block;
+			path = Report;
 			sourceTree = "<group>";
 		};
 		C7E35A752D7365B900632DE3 /* Recovered References */ = {
@@ -2225,7 +2209,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Sukbakji/Sukbakji.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = R8ZX684WX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sukbakji/SUKBAKJI/Resources/Info.plist;
@@ -2240,7 +2224,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JKPARK.Sukbakji;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2260,7 +2244,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Sukbakji/Sukbakji.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = R8ZX684WX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sukbakji/SUKBAKJI/Resources/Info.plist;
@@ -2275,7 +2259,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JKPARK.Sukbakji;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

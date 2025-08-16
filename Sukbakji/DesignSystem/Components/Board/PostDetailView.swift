@@ -11,6 +11,14 @@ import SnapKit
 
 class PostDetailView: UIView {
     
+    // 활성/비활성 전환을 위해 보관
+    var tableBottomToInput: Constraint!
+    var tableBottomToEdit: Constraint!
+    
+    // 키보드 레이아웃 가이드용 앵커(오토레이아웃)
+    var inputBottomToKLG: NSLayoutConstraint!
+    var editBottomToKLG: NSLayoutConstraint!
+    
     var optionNavigationbarView = OptionNavigationBarView(title: "", buttonHidden: false)
     let backgroundLabel = UILabel().then {
         $0.backgroundColor = .gray100
@@ -77,7 +85,7 @@ class PostDetailView: UIView {
     
     private func setUI() {
         backgroundColor = .white
-
+        
         addSubview(optionNavigationbarView)
         addSubview(backgroundLabel)
         
@@ -175,19 +183,47 @@ class PostDetailView: UIView {
         
         commentListTableView.snp.makeConstraints {
             $0.top.equalTo(layerView.snp.bottom).offset(12)
-            $0.bottom.equalToSuperview().inset(80)
-            $0.leading.trailing.bottom.equalToSuperview()
+            self.tableBottomToInput = $0.bottom.equalTo(commentInputView.snp.top).constraint
+            self.tableBottomToEdit  = $0.bottom.equalTo(commentEditView.snp.top).constraint
+            self.tableBottomToEdit.deactivate()
+            $0.leading.trailing.equalToSuperview()
         }
         
         commentInputView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(80)
         }
         
         commentEditView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(124)
         }
         commentEditView.isHidden = true
+        
+        inputBottomToKLG = commentInputView.bottomAnchor
+            .constraint(equalTo: keyboardLayoutGuide.topAnchor)
+        editBottomToKLG = commentEditView.bottomAnchor
+            .constraint(equalTo: keyboardLayoutGuide.topAnchor)
+        inputBottomToKLG.isActive = true
+        editBottomToKLG.isActive = false
+    }
+    
+    // 편집 모드 토글 시 테이블 하단 제약과 KLG 연결을 맞바꿈
+    func switchToEditMode(_ on: Bool) {
+        commentInputView.isHidden = on
+        commentEditView.isHidden  = !on
+        
+        if on {
+            tableBottomToInput.deactivate()
+            tableBottomToEdit.activate()
+            inputBottomToKLG.isActive = false
+            editBottomToKLG.isActive  = true
+        } else {
+            tableBottomToEdit.deactivate()
+            tableBottomToInput.activate()
+            editBottomToKLG.isActive  = false
+            inputBottomToKLG.isActive = true
+        }
+        layoutIfNeeded()
     }
 }
