@@ -78,7 +78,7 @@ class BoardUseCase {
                     .map { $0.result }
     }
     
-    func createPost(menu: String, boardName: String, title: String, content: String) -> Single<Bool> {
+    func createPost(menu: BoardMenu, boardName: String, title: String, content: String) -> Single<Bool> {
         guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
             return .just(false)
         }

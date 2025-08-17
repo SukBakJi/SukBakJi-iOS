@@ -36,6 +36,7 @@ class PostDetailView: UIView {
     }
     let scrapButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_Bookmark"), for: .normal)
+        $0.setImage(UIImage(named: "Sukbakji_Bookmark2"), for: .selected)
     }
     let titleLabel = UILabel().then {
         $0.textColor = .gray900

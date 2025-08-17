@@ -270,11 +270,11 @@ class PostWritingView: UIView {
     }
     let buttonView = ButtonView()
     
-    lazy var menuButtons: [UIButton: String] = [
-        menuFirstButton: "박사",
-        menuSecondButton: "석사",
-        menuThirdButton: "진학예정",
-        menuFourthButton: "자유"
+    lazy var menuButtons: [UIButton: BoardMenu] = [
+        menuFirstButton: .doctor,
+        menuSecondButton: .master,
+        menuThirdButton: .free,
+        menuFourthButton: .enter
     ]
     lazy var hiringTypeButtons: [UIButton: String] = [
         hiringTypeFirstButton: "신입",

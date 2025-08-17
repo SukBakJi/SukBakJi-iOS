@@ -18,6 +18,17 @@ enum CommentEvent {
     case edited
 }
 
+struct PostFormState {
+    let category: String?
+    let title: String?
+    let content: String?
+
+    var isValid: Bool {
+        [category, title, content]
+            .allSatisfy { ($0 ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false }
+    }
+}
+
 final class PostDetailViewModel {
     private let useCase: BoardUseCase
     private let disposeBag = DisposeBag()
@@ -30,6 +41,8 @@ final class PostDetailViewModel {
     var postEvent: Signal<PostEvent> { postEventRelay.asSignal() }
     private let commentEventRelay = PublishRelay<CommentEvent>()
     var commentEvent: Signal<CommentEvent> { commentEventRelay.asSignal() }
+    
+    let formState = BehaviorRelay<PostFormState>(value: .init(category: nil, title: nil, content: nil))
     
     init(useCase: BoardUseCase = BoardUseCase()) {
         self.useCase = useCase
@@ -46,7 +59,7 @@ final class PostDetailViewModel {
             .disposed(by: disposeBag)
     }
     
-    func createPost(menu: String, boardName: String, title: String, content: String) {
+    func createPost(menu: BoardMenu, boardName: String, title: String, content: String) {
         useCase.createPost(menu: menu, boardName: boardName, title: title, content: content)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] _ in

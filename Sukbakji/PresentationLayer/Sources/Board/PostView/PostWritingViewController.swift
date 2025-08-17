@@ -20,7 +20,6 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
     
     private let categoryDrop = DropDown()
     private let fieldDrop = DropDown()
-    private var hasStartedEditing = false
     
     private var categoryHeightConstraint: Constraint?
     private var titleHeightConstraint: Constraint?
@@ -29,7 +28,6 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
     private var jobHeightConstraint: Constraint?
     private var infoHeightConstraint: Constraint?
     
-    private var menu = "박사"
     private var hiringType = ""
     private var finalEdu = ""
     private var fieldMenu: [String] = ["법무", "인사∙HR", "회계∙세무", "마케팅∙광고∙MD", "개발∙데이터", "디자인", "물류∙무역", "운전∙운송∙배송", "영업", "고객상담∙TM", "금융∙보험", "식∙음료", "고객서비스∙리테일", "엔지니어링∙설계", "제조∙생산", "교육", "건축∙시설", "의료∙바이오", "미디어∙문화∙스포츠", "공공∙복지", "기타"]
@@ -211,34 +209,60 @@ extension PostWritingViewController {
     
     private func setAPI() {
         bindViewModel()
-        boardViewModel.loadMenu(menu: "박사")
+        boardViewModel.loadCategories(for: .doctor)
     }
     
     private func bindViewModel() {
         boardViewModel.categoryList
-            .subscribe(onNext: { categoryList in self.categoryDrop.dataSource = self.boardViewModel.categoryList.value })
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] categories in
+                self?.categoryDrop.dataSource = categories
+            })
+            .disposed(by: disposeBag)
+        
+        postDetailViewModel.postEvent
+            .emit(onNext: { [weak self] event in
+                guard case .created = event else { return }
+                self?.postWritingView.buttonView.enrollButton.isEnabled = true
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        Observable.combineLatest(
+            postWritingView.categoryTextField.rx.text.orEmpty,
+            postWritingView.titleTextField.rx.text.orEmpty,
+            postWritingView.contentTextView.rx.text.orEmpty
+        )
+        .map { PostFormState(category: $0.0, title: $0.1, content: $0.2) }
+        .bind(to: postDetailViewModel.formState)
+        .disposed(by: disposeBag)
+        
+        postDetailViewModel.formState
+            .map(\.isValid)
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .bind(onNext: { [weak self] enabled in
+                self?.styleEnrollButton(enabled: enabled)
+            })
+            .disposed(by: disposeBag)
+        
+        boardViewModel.selectedMenu
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] menu in
+                self?.boardViewModel.loadCategories(for: menu)
+            })
             .disposed(by: disposeBag)
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        guard !hasStartedEditing else { return }
-        hasStartedEditing = true
-        
-        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: textView, queue: .main) { [weak self] _ in
-            guard let self = self else { return }
-            let isValid = !(textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-            self.updateButtonColor()
-            
-            if isValid {
-                self.deleteWarningContent()
-            } else {
-                self.warningContent()
-            }
+    func textViewDidChange(_ textView: UITextView) {
+        updateButtonColor() // 기존 스타일 로직을 재사용
+        let trimmed = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty {
+            warningContent()
+        } else {
+            deleteWarningContent()
         }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        NotificationCenter.default.removeObserver(self, name: UITextView.textDidChangeNotification, object: textView)
     }
     
     private enum WarningType {
@@ -347,11 +371,15 @@ extension PostWritingViewController {
         }
     }
     
+    private func styleEnrollButton(enabled: Bool) {
+        postWritingView.buttonView.enrollButton.isEnabled = enabled
+        postWritingView.buttonView.enrollButton.setBackgroundColor(enabled ? .orange700 : .gray200, for: .normal)
+        postWritingView.buttonView.enrollButton.setTitleColor(enabled ? .white : .gray500, for: .normal)
+    }
+    
     private func updateButtonColor() {
         let isFormValid = (postWritingView.categoryTextField.text?.isEmpty == false && postWritingView.titleTextField.text?.isEmpty == false && postWritingView.contentTextView.text?.isEmpty == false)
-        postWritingView.buttonView.enrollButton.isEnabled = isFormValid
-        postWritingView.buttonView.enrollButton.setBackgroundColor(isFormValid ? .orange700 : .gray200, for: .normal)
-        postWritingView.buttonView.enrollButton.setTitleColor(isFormValid ? .white : .gray500, for: .normal)
+        styleEnrollButton(enabled: isFormValid)
     }
     
     @objc private func menuButtonTapped(_ sender: UIButton) {
@@ -362,8 +390,7 @@ extension PostWritingViewController {
             button.isEnabled = !isSelected
         }
         if let selectedMenu = postWritingView.menuButtons[sender] {
-            boardViewModel.loadMenu(menu: selectedMenu)
-            menu = selectedMenu
+            boardViewModel.selectedMenu.accept(selectedMenu)
         }
     }
     
@@ -416,7 +443,7 @@ extension PostWritingViewController {
     }
     
     @objc private func enroll_Tapped() {
-        postDetailViewModel.createPost(menu: menu, boardName: postWritingView.categoryTextField.text!, title: postWritingView.titleTextField.text!, content: postWritingView.contentTextView.text)
+        postDetailViewModel.createPost(menu: boardViewModel.selectedMenu.value, boardName: postWritingView.categoryTextField.text!, title: postWritingView.titleTextField.text!, content: postWritingView.contentTextView.text)
         self.navigationController?.popViewController(animated: true)
     }
     
