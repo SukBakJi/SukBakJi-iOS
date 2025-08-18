@@ -31,7 +31,7 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
     
     private var hiringType = ""
     private var finalEdu = ""
-    private let fieldListRelay = BehaviorRelay<[String]>(value: [
+    private let fieldList = BehaviorRelay<[String]>(value: [
         "법무","인사∙HR","회계∙세무","총무∙사무","마케팅∙광고","영업","고객상담",
         "IT∙개발","데이터","디자인","연구∙R&D","물류∙무역","구매","전문직",
         "금융","건설","부동산","엔지니어링","제조∙생산","교육","건축∙시설",
@@ -155,7 +155,7 @@ extension PostWritingViewController {
             .bind(onNext: { [weak self] in self?.categoryDrop.dataSource = $0 })
             .disposed(by: disposeBag)
         
-        fieldListRelay
+        fieldList
             .observe(on: MainScheduler.instance)
             .bind(onNext: { [weak self] in self?.fieldDrop.dataSource = $0 })
             .disposed(by: disposeBag)

@@ -18,7 +18,8 @@ class SetAlarmViewController: UIViewController {
     private let alarmViewModel = AlarmViewModel()
     private let alarmDetailViewModel = AlarmDetailViewModel()
     private let disposeBag = DisposeBag()
-    private let drop = DropDown()
+    private lazy var drop: DropDown = DropDownFactory.make(anchor: setAlarmView.univTextField)
+    private var didSetupDropDowns = false
     
     private var univViewHeightConstraint: Constraint?
     private var alarmNameViewHeightConstraint: Constraint?
@@ -31,9 +32,17 @@ class SetAlarmViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
-        setDrop()
         setAPI()
         hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !didSetupDropDowns {
+            view.layoutIfNeeded()
+            setDropdown()
+            didSetupDropDowns = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,11 +56,6 @@ class SetAlarmViewController: UIViewController {
     
 extension SetAlarmViewController {
     
-    private func setDrop() {
-        initUI()
-        setDropdown()
-    }
-    
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -62,53 +66,12 @@ extension SetAlarmViewController {
         setAlarmView.alarmNameView.snp.makeConstraints { make in
             alarmNameViewHeightConstraint = make.height.equalTo(99).constraint
         }
-        setAlarmView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
         setAlarmView.alarmNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
         setAlarmView.deleteButton.addTarget(self, action: #selector(textDelete_Tapped), for: .touchUpInside)
         setAlarmView.setButton.addTarget(self, action: #selector(set_Tapped), for: .touchUpInside)
     }
     
-    private func initUI() {
-        DropDown.appearance().textColor = .gray900 // 아이템 텍스트 색상
-        DropDown.appearance().selectedTextColor = .orange700 // 선택된 아이템 텍스트 색상
-        DropDown.appearance().backgroundColor = .gray50 // 아이템 팝업 배경 색상
-        DropDown.appearance().selectionBackgroundColor = .orange50 // 선택한 아이템 배경 색상
-        DropDown.appearance().setupCornerRadius(5)
-        DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
-        drop.dismissMode = .automatic // 팝업을 닫을 모드 설정
-        DropDown.appearance().textFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 12)
-    }
-    
     private func setDropdown() {
-        drop.cellHeight = 44
-        drop.anchorView = self.setAlarmView.univTextField
-        drop.bottomOffset = CGPoint(x: 0, y: 45.5 + setAlarmView.univTextField.bounds.height)
-        drop.shadowColor = .clear
-        
-        drop.cellConfiguration = { (index, item) in
-            return "  \(item)" // 앞에 4칸 공백 추가
-        }
-        
-        drop.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
-            cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
-            
-            guard index != (self.drop.dataSource.count) - 1 else { return }
-
-            let separator = UIView()
-            separator.backgroundColor = .gray300
-            separator.translatesAutoresizingMaskIntoConstraints = false
-            cell.addSubview(separator)
-
-            let separatorHeight: CGFloat = 1.5
-            
-            NSLayoutConstraint.activate([
-                separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-                separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
-                separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
-                separator.heightAnchor.constraint(equalToConstant: separatorHeight)
-            ])
-        }
-
         drop.selectionAction = { [weak self] (index, item) in
             self?.setAlarmView.univTextField.text = "\(item)"
             self?.updateButtonColor()
@@ -129,7 +92,12 @@ extension SetAlarmViewController {
     
     private func bindViewModel() {
         alarmViewModel.univItems
-            .subscribe(onNext: { univList in self.drop.dataSource = self.alarmViewModel.univItems.value })
+            .observe(on: MainScheduler.instance)
+            .bind(onNext: { [weak self] in self?.drop.dataSource = $0 })
+            .disposed(by: disposeBag)
+        
+        setAlarmView.dropButton.rx.tap
+            .bind(onNext: { [weak self] in self?.drop.show() })
             .disposed(by: disposeBag)
     }
     
@@ -205,10 +173,6 @@ extension SetAlarmViewController {
     @objc private func set_Tapped() {
         alarmDetailViewModel.createAlarm(memberId: memberId, univName: setAlarmView.univTextField.text ?? "", name: setAlarmView.alarmNameTextField.text ?? "", date: setAlarmView.dateValue, time: setAlarmView.timeValue)
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc private func drop_Tapped() {
-        drop.show()
     }
     
     @objc private func textDelete_Tapped() {

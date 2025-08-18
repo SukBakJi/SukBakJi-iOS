@@ -17,7 +17,8 @@ class EditUnivCalendarViewController: UIViewController {
     private var univViewModel = UnivViewModel()
     private var univDetailViewModel = UnivDetailViewModel()
     private let disposeBag = DisposeBag()
-    private let drop = DropDown()
+    private lazy var drop: DropDown = DropDownFactory.make(anchor: editUnivView.recruitTypeTextField)
+    private var didSetupDropDowns = false
     
     init(univViewModel: UnivViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -35,65 +36,23 @@ class EditUnivCalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUI()
-        setDrop()
         setAPI()
         setUnivCalendarData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !didSetupDropDowns {
+            view.layoutIfNeeded()
+            setDropdown()
+            didSetupDropDowns = true
+        }
     }
 }
 
 extension EditUnivCalendarViewController {
     
-    private func setDrop() {
-        initUI()
-        setDropdown()
-    }
-    
-    private func setUI() {
-        editUnivView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
-    }
-    
-    private func initUI() {
-        DropDown.appearance().textColor = .gray900
-        DropDown.appearance().selectedTextColor = .orange700
-        DropDown.appearance().backgroundColor = .gray50
-        DropDown.appearance().selectionBackgroundColor = .orange50
-        DropDown.appearance().setupCornerRadius(5)
-        DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
-        drop.dismissMode = .automatic
-        DropDown.appearance().textFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 12)
-    }
-    
     private func setDropdown() {
-        drop.cellHeight = 44
-        drop.anchorView = editUnivView.recruitTypeTextField
-        drop.bottomOffset = CGPoint(x: 0, y: 45.5 + editUnivView.recruitTypeTextField.bounds.height)
-        drop.shadowColor = .clear
-        
-        drop.cellConfiguration = { (index, item) in
-            return "  \(item)" // 앞에 4칸 공백 추가
-        }
-        
-        drop.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
-            cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
-            
-            guard index != (self.drop.dataSource.count) - 1 else { return }
-            
-            let separator = UIView()
-            separator.backgroundColor = .gray300
-            separator.translatesAutoresizingMaskIntoConstraints = false
-            cell.addSubview(separator)
-                        
-            let separatorHeight: CGFloat = 1.5
-                        
-            NSLayoutConstraint.activate([
-                separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-                separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
-                separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
-                separator.heightAnchor.constraint(equalToConstant: separatorHeight)
-            ])
-        }
-
         drop.selectionAction = { [weak self] (index, item) in
             self?.editUnivView.recruitTypeTextField.text = "\(item)"
             self?.updateButtonColor()
@@ -133,7 +92,12 @@ extension EditUnivCalendarViewController {
     
     private func bindViewModel() {
         univViewModel.recruitTypes
-            .subscribe(onNext: { univList in self.drop.dataSource = self.univViewModel.recruitTypes.value })
+            .observe(on: MainScheduler.instance)
+            .bind(onNext: { [weak self] in self?.drop.dataSource = $0 })
+            .disposed(by: disposeBag)
+        
+        editUnivView.dropButton.rx.tap
+            .bind(onNext: { [weak self] in self?.drop.show() })
             .disposed(by: disposeBag)
         
         editUnivView.editButton.rx.tap
@@ -159,9 +123,5 @@ extension EditUnivCalendarViewController {
             self.updateButtonColor()
         }
         return true
-    }
-    
-    @objc private func drop_Tapped() {
-        drop.show()
     }
 }

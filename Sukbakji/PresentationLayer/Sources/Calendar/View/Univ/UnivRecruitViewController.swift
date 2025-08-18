@@ -18,7 +18,8 @@ class UnivRecruitViewController: UIViewController {
     private let viewModel = UnivViewModel()
     private let univDetailViewModel = UnivDetailViewModel()
     private let disposeBag = DisposeBag()
-    private let drop = DropDown()
+    private lazy var drop: DropDown = DropDownFactory.make(anchor: univRecruitView.recruitTypeTextField)
+    private var didSetupDropDowns = false
     
     private var univName: String?
     private var univId: Int?
@@ -41,10 +42,16 @@ class UnivRecruitViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
-        initUI()
-        setDropdown()
         setAPI()
-        print(memberId)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !didSetupDropDowns {
+            view.layoutIfNeeded()
+            setDropdown()
+            didSetupDropDowns = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,50 +70,9 @@ extension UnivRecruitViewController {
         univRecruitView.dateSelectLabel.text = "\(univName ?? "") 일정을 선택해 주세요"
         
         univRecruitView.backButton.addTarget(self, action: #selector(clickXButton), for: .touchUpInside)
-        univRecruitView.dropButton.addTarget(self, action: #selector(drop_Tapped), for: .touchUpInside)
-    }
-    
-    private func initUI() {
-        DropDown.appearance().textColor = .gray900 // 아이템 텍스트 색상
-        DropDown.appearance().selectedTextColor = .orange700 // 선택된 아이템 텍스트 색상
-        DropDown.appearance().backgroundColor = .gray50 // 아이템 팝업 배경 색상
-        DropDown.appearance().selectionBackgroundColor = .orange50 // 선택한 아이템 배경 색상
-        DropDown.appearance().setupCornerRadius(5)
-        DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
-        drop.dismissMode = .automatic // 팝업을 닫을 모드 설정
-        DropDown.appearance().textFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 12)
     }
     
     private func setDropdown() {
-        drop.cellHeight = 44
-        drop.anchorView = univRecruitView.recruitTypeTextField
-        drop.bottomOffset = CGPoint(x: 0, y: 45.5 + univRecruitView.recruitTypeTextField.bounds.height)
-        drop.shadowColor = .clear
-        
-        drop.cellConfiguration = { (index, item) in
-            return "  \(item)" // 앞에 4칸 공백 추가
-        }
-        
-        drop.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
-            cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
-            
-            guard index != (self.drop.dataSource.count) - 1 else { return }
-
-            let separator = UIView()
-            separator.backgroundColor = .gray300
-            separator.translatesAutoresizingMaskIntoConstraints = false
-            cell.addSubview(separator)
-
-            let separatorHeight: CGFloat = 1.5 // 원하는 굵기 설정
-            
-            NSLayoutConstraint.activate([
-                separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-                separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
-                separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
-                separator.heightAnchor.constraint(equalToConstant: separatorHeight)
-            ])
-        }
-        
         drop.selectionAction = { [weak self] (index, item) in
             self?.univRecruitView.recruitTypeTextField.text = "\(item)"
             self?.univRecruitView.warningTypeLabel.isHidden = true
@@ -130,7 +96,12 @@ extension UnivRecruitViewController {
     
     private func bindViewModel() {
         viewModel.recruitTypes
-            .subscribe(onNext: { typeList in self.drop.dataSource = self.viewModel.recruitTypes.value })
+            .observe(on: MainScheduler.instance)
+            .bind(onNext: { [weak self] in self?.drop.dataSource = $0 })
+            .disposed(by: disposeBag)
+        
+        univRecruitView.dropButton.rx.tap
+            .bind(onNext: { [weak self] in self?.drop.show() })
             .disposed(by: disposeBag)
         
         univRecruitView.nextButton.rx.tap
@@ -182,10 +153,6 @@ extension UnivRecruitViewController {
             self.updateButtonColor()
         }
         return true
-    }
-    
-    @objc private func drop_Tapped() {
-        drop.show()
     }
     
     @objc private func clickXButton() {
