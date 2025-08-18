@@ -18,8 +18,9 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
     private let boardViewModel = BoardViewModel()
     var disposeBag = DisposeBag()
     
-    private let categoryDrop = DropDown()
-    private let fieldDrop = DropDown()
+    private lazy var categoryDrop: DropDown = DropDownFactory.make(anchor: postWritingView.categoryTextField)
+    private lazy var fieldDrop: DropDown = DropDownFactory.make(anchor: postWritingView.supportFieldTextField)
+    private var didSetupDropDowns = false
     
     private var categoryHeightConstraint: Constraint?
     private var titleHeightConstraint: Constraint?
@@ -30,7 +31,12 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
     
     private var hiringType = ""
     private var finalEdu = ""
-    private var fieldMenu: [String] = ["법무", "인사∙HR", "회계∙세무", "마케팅∙광고∙MD", "개발∙데이터", "디자인", "물류∙무역", "운전∙운송∙배송", "영업", "고객상담∙TM", "금융∙보험", "식∙음료", "고객서비스∙리테일", "엔지니어링∙설계", "제조∙생산", "교육", "건축∙시설", "의료∙바이오", "미디어∙문화∙스포츠", "공공∙복지", "기타"]
+    private let fieldListRelay = BehaviorRelay<[String]>(value: [
+        "법무","인사∙HR","회계∙세무","총무∙사무","마케팅∙광고","영업","고객상담",
+        "IT∙개발","데이터","디자인","연구∙R&D","물류∙무역","구매","전문직",
+        "금융","건설","부동산","엔지니어링","제조∙생산","교육","건축∙시설",
+        "의료∙바이오","미디어∙문화∙스포츠","공공∙복지","기타"
+    ])
     
     override func loadView() {
         self.view = postWritingView
@@ -40,9 +46,16 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         setUI()
-        initUI()
-        setDropdown()
         setAPI()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !didSetupDropDowns {
+            view.layoutIfNeeded()
+            setDropdown()
+            didSetupDropDowns = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,8 +106,6 @@ extension PostWritingViewController {
         postWritingView.finalEduButtons.keys.forEach { button in
             button.addTarget(self, action: #selector(finalEduButtonTapped(_:)), for: .touchUpInside)
         }
-        postWritingView.dropButton.addTarget(self, action: #selector(categoryDrop_Tapped), for: .touchUpInside)
-        postWritingView.dropButton2.addTarget(self, action: #selector(jobDrop_Tapped), for: .touchUpInside)
         postWritingView.titleTextField.addTarget(self, action: #selector(titleTextFieldEdited), for: .editingChanged)
         postWritingView.jobTextField.addTarget(self, action: #selector(jobTextFieldEdited), for: .editingChanged)
         postWritingView.deleteButton.addTarget(self, action: #selector(jobDelete_Tapped), for: .touchUpInside)
@@ -102,82 +113,8 @@ extension PostWritingViewController {
         postWritingView.buttonView.enrollButton.addTarget(self, action: #selector(enroll_Tapped), for: .touchUpInside)
     }
     
-    private func initUI() {
-        DropDown.appearance().textColor = .gray900
-        DropDown.appearance().selectedTextColor = .orange700
-        DropDown.appearance().backgroundColor = .gray50
-        DropDown.appearance().selectionBackgroundColor = .orange50
-        DropDown.appearance().setupCornerRadius(5)
-        DropDown.appearance().setupMaskedCorners(CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner))
-        categoryDrop.dismissMode = .automatic // 팝업을 닫을 모드 설정
-        fieldDrop.dismissMode = .automatic
-        DropDown.appearance().textFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 12)
-    }
-    
     private func setDropdown() {
-        categoryDrop.cellHeight = 44
-        categoryDrop.anchorView = self.postWritingView.categoryTextField
-        categoryDrop.bottomOffset = CGPoint(x: 0, y: 45.5 + postWritingView.categoryTextField.bounds.height)
-        
-        fieldDrop.cellHeight = 44
-        fieldDrop.anchorView = self.postWritingView.supportFieldTextField
-        fieldDrop.bottomOffset = CGPoint(x: 0, y: 45.5 + postWritingView.supportFieldTextField.bounds.height)
-        fieldDrop.dataSource = fieldMenu
-        
-        categoryDrop.cellConfiguration = { (index, item) in
-            return "  \(item)" // 앞에 4칸 공백 추가
-        }
-        fieldDrop.cellConfiguration = { (index, item) in
-            return "  \(item)" // 앞에 4칸 공백 추가
-        }
-        
-        categoryDrop.customCellConfiguration = { [weak self] (index: Index, item: String, cell: DropDownCell) in
-            cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
-            cell.subviews.forEach {
-                if $0.tag == 9999 { $0.removeFromSuperview() }
-            }
-            
-            guard let self = self else { return }
-            guard index != (self.categoryDrop.dataSource.count - 1) else { return }
-            
-            let separator = UIView()
-            separator.tag = 9999
-            separator.backgroundColor = .gray300
-            separator.translatesAutoresizingMaskIntoConstraints = false
-            cell.addSubview(separator)
-            
-            NSLayoutConstraint.activate([
-                separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-                separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
-                separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
-                separator.heightAnchor.constraint(equalToConstant: 1.5)
-            ])
-        }
-        
-        fieldDrop.customCellConfiguration = { [weak self] (index: Index, item: String, cell: DropDownCell) in
-            cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
-            cell.subviews.forEach {
-                if $0.tag == 9999 { $0.removeFromSuperview() }
-            }
-            
-            guard let self = self else { return }
-            guard index != (self.fieldDrop.dataSource.count - 1) else { return }
-            
-            let separator = UIView()
-            separator.tag = 9999
-            separator.backgroundColor = .gray300
-            separator.translatesAutoresizingMaskIntoConstraints = false
-            cell.addSubview(separator)
-            
-            NSLayoutConstraint.activate([
-                separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-                separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
-                separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
-                separator.heightAnchor.constraint(equalToConstant: 1.5)
-            ])
-        }
-        
-        categoryDrop.selectionAction = { [weak self] (index, item) in
+        categoryDrop.selectionAction = { [weak self] index, item in
             self?.postWritingView.categoryTextField.text = "\(item)"
             self?.updateButtonColor()
             self?.postWritingView.categoryTextField.backgroundColor = .gray50
@@ -215,9 +152,12 @@ extension PostWritingViewController {
     private func bindViewModel() {
         boardViewModel.categoryList
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] categories in
-                self?.categoryDrop.dataSource = categories
-            })
+            .bind(onNext: { [weak self] in self?.categoryDrop.dataSource = $0 })
+            .disposed(by: disposeBag)
+        
+        fieldListRelay
+            .observe(on: MainScheduler.instance)
+            .bind(onNext: { [weak self] in self?.fieldDrop.dataSource = $0 })
             .disposed(by: disposeBag)
         
         postDetailViewModel.postEvent
@@ -252,6 +192,14 @@ extension PostWritingViewController {
             .subscribe(onNext: { [weak self] menu in
                 self?.boardViewModel.loadCategories(for: menu)
             })
+            .disposed(by: disposeBag)
+        
+        postWritingView.dropButton.rx.tap
+            .bind(onNext: { [weak self] in self?.categoryDrop.show() })
+            .disposed(by: disposeBag)
+
+        postWritingView.dropButton2.rx.tap
+            .bind(onNext: { [weak self] in self?.fieldDrop.show() })
             .disposed(by: disposeBag)
     }
     
@@ -443,8 +391,16 @@ extension PostWritingViewController {
     }
     
     @objc private func enroll_Tapped() {
-        postDetailViewModel.createPost(menu: boardViewModel.selectedMenu.value, boardName: postWritingView.categoryTextField.text!, title: postWritingView.titleTextField.text!, content: postWritingView.contentTextView.text)
-        self.navigationController?.popViewController(animated: true)
+        guard
+            let boardName = postWritingView.categoryTextField.text, !boardName.isEmpty,
+            let title = postWritingView.titleTextField.text, !title.isEmpty
+        else { return }
+        postDetailViewModel.createPost(
+            menu: boardViewModel.selectedMenu.value,
+            boardName: boardName,
+            title: title,
+            content: postWritingView.contentTextView.text
+        )
     }
     
     @objc private func jobDelete_Tapped() {
@@ -455,13 +411,5 @@ extension PostWritingViewController {
     @objc private func titleDelete_Tapped() {
         postWritingView.titleTextField.text = ""
         warningTitle()
-    }
-    
-    @objc private func categoryDrop_Tapped() {
-        categoryDrop.show()
-    }
-    
-    @objc private func jobDrop_Tapped() {
-        fieldDrop.show()
     }
 }
