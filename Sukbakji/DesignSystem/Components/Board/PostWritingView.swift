@@ -273,8 +273,8 @@ class PostWritingView: UIView {
     lazy var menuButtons: [UIButton: BoardMenu] = [
         menuFirstButton: .doctor,
         menuSecondButton: .master,
-        menuThirdButton: .free,
-        menuFourthButton: .enter
+        menuThirdButton: .enter,
+        menuFourthButton: .free
     ]
     lazy var hiringTypeButtons: [UIButton: String] = [
         hiringTypeFirstButton: "신입",
@@ -283,6 +283,15 @@ class PostWritingView: UIView {
     lazy var finalEduButtons: [UIButton: String] = [
         finalEducationFirstButton: "박사",
         finalEducationSecondButton: "석사"
+    ]
+    lazy var menuButtonArray: [UIButton] = [
+        menuFirstButton, menuSecondButton, menuThirdButton, menuFourthButton
+    ]
+    lazy var hiringTypeButtonArray: [UIButton] = [
+        hiringTypeFirstButton, hiringTypeSecondButton
+    ]
+    lazy var finalEduButtonArray: [UIButton] = [
+        finalEducationFirstButton, finalEducationSecondButton
     ]
     
     override init(frame: CGRect) {

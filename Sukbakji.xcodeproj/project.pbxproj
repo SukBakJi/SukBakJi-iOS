@@ -276,6 +276,7 @@
 		C7E3EF582C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */; };
 		C7E6988D2E38D6CB00F8F373 /* LabReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6988C2E38D6CB00F8F373 /* LabReviewViewModel.swift */; };
 		C7E6988F2E38E6F800F8F373 /* LabFavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6988E2E38E6F800F8F373 /* LabFavoriteViewModel.swift */; };
+		C7E6DEB42E573D9C00EAACCB /* RadioGroup+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6DEB32E573D9C00EAACCB /* RadioGroup+.swift */; };
 		C7E944022D19D4CC0011B58A /* UnivRecruitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */; };
 		C7EA8CB12D689AB600B25FBC /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EA8CB02D689AB600B25FBC /* CalendarViewModel.swift */; };
 		C7EAC1782DFBEEC5008B7F30 /* DirectoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAC1772DFBEEC5008B7F30 /* DirectoryRepository.swift */; };
@@ -586,6 +587,7 @@
 		C7E3EF572C60B9FB00DDC36B /* ResearchTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchTopicCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7E6988C2E38D6CB00F8F373 /* LabReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewViewModel.swift; sourceTree = "<group>"; };
 		C7E6988E2E38E6F800F8F373 /* LabFavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabFavoriteViewModel.swift; sourceTree = "<group>"; };
+		C7E6DEB32E573D9C00EAACCB /* RadioGroup+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RadioGroup+.swift"; sourceTree = "<group>"; };
 		C7E944012D19D4CC0011B58A /* UnivRecruitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivRecruitViewController.swift; sourceTree = "<group>"; };
 		C7EA8CB02D689AB600B25FBC /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		C7EAC1772DFBEEC5008B7F30 /* DirectoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryRepository.swift; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 				C70523F02D775442009AED8C /* UIView+.swift */,
 				C74680742D91352B00A6091E /* DateUtils+.swift */,
 				C70055272DABC40D00520D76 /* TimeHelper+.swift */,
+				C7E6DEB32E573D9C00EAACCB /* RadioGroup+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1975,6 +1978,7 @@
 				C70DB2832C633E8000D6014B /* ChattingTabViewController.swift in Sources */,
 				C7D03C382DFED3D600FC5636 /* FavLabTableViewCell.swift in Sources */,
 				C70DB2872C633F8600D6014B /* MentoringViewController.swift in Sources */,
+				C7E6DEB42E573D9C00EAACCB /* RadioGroup+.swift in Sources */,
 				91D413262D82696500020CEC /* DetailTOSViewController.swift in Sources */,
 				91D413272D82696500020CEC /* TOSViewController.swift in Sources */,
 				C7E6988D2E38D6CB00F8F373 /* LabReviewViewModel.swift in Sources */,

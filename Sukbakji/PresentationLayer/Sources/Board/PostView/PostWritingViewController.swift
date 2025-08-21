@@ -29,6 +29,10 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
     private var jobHeightConstraint: Constraint?
     private var infoHeightConstraint: Constraint?
     
+    private var menuGroup: RadioGroup<BoardMenu>!
+    private var hiringTypeGroup: RadioGroup<String>!
+    private var finalEduGroup: RadioGroup<String>!
+    
     private var hiringType = ""
     private var finalEdu = ""
     private let fieldList = BehaviorRelay<[String]>(value: [
@@ -65,10 +69,6 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
             tabBarVC.customTabBarView.isHidden = true
         }
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 }
 
 extension PostWritingViewController {
@@ -77,6 +77,8 @@ extension PostWritingViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         postWritingView.navigationbarView.delegate = self
         postWritingView.contentTextView.delegate = self
+        postWritingView.titleTextField.delegate = self
+        postWritingView.jobTextField.delegate = self
         
         postWritingView.categoryView.snp.makeConstraints { make in
             categoryHeightConstraint = make.height.equalTo(99).constraint
@@ -97,20 +99,13 @@ extension PostWritingViewController {
             infoHeightConstraint = make.height.equalTo(1).constraint
         }
         
-        postWritingView.menuButtons.keys.forEach { button in
-            button.addTarget(self, action: #selector(menuButtonTapped(_:)), for: .touchUpInside)
-        }
-        postWritingView.hiringTypeButtons.keys.forEach { button in
-            button.addTarget(self, action: #selector(hiringTypeButtonTapped(_:)), for: .touchUpInside)
-        }
-        postWritingView.finalEduButtons.keys.forEach { button in
-            button.addTarget(self, action: #selector(finalEduButtonTapped(_:)), for: .touchUpInside)
-        }
         postWritingView.titleTextField.addTarget(self, action: #selector(titleTextFieldEdited), for: .editingChanged)
         postWritingView.jobTextField.addTarget(self, action: #selector(jobTextFieldEdited), for: .editingChanged)
         postWritingView.deleteButton.addTarget(self, action: #selector(jobDelete_Tapped), for: .touchUpInside)
         postWritingView.deleteButton2.addTarget(self, action: #selector(titleDelete_Tapped), for: .touchUpInside)
         postWritingView.buttonView.enrollButton.addTarget(self, action: #selector(enroll_Tapped), for: .touchUpInside)
+        
+        setupRadioGroups()
     }
     
     private func setDropdown() {
@@ -140,12 +135,37 @@ extension PostWritingViewController {
             self?.deleteWarningSupport()
         }
     }
+    
+    private func setupRadioGroups() {
+        let menuButtons: [UIButton] = postWritingView.menuButtonArray
+        let menuValues: [BoardMenu] = [.doctor, .master, .enter, .free]
+
+        menuGroup = RadioGroup(
+            buttons: menuButtons,
+            values: menuValues,
+            initial: boardViewModel.selectedMenu.value,
+            appearance: .images(
+                selected: UIImage(named: "Sukbakji_RadioButton"),
+                deselected: UIImage(named: "Sukbakji_RadioButton2")
+            )
+        )
+        
+        let hiringButtons = postWritingView.hiringTypeButtonArray
+        let hiringValues = ["신입", "경력"]
+        hiringTypeGroup = RadioGroup(buttons: hiringButtons, values: hiringValues)
+
+        let eduButtons = postWritingView.finalEduButtonArray
+        let eduValues = ["박사", "석사"]
+        finalEduGroup = RadioGroup(buttons: eduButtons, values: eduValues)
+    }
+
 }
     
-extension PostWritingViewController {
+extension PostWritingViewController: UITextFieldDelegate {
     
     private func setAPI() {
         bindViewModel()
+        bindRadioGroups()
         boardViewModel.loadCategories(for: .doctor)
     }
     
@@ -200,6 +220,30 @@ extension PostWritingViewController {
 
         postWritingView.dropButton2.rx.tap
             .bind(onNext: { [weak self] in self?.fieldDrop.show() })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindRadioGroups() {
+        menuGroup
+            .asValueDriver()
+            .drive(boardViewModel.selectedMenu)
+            .disposed(by: disposeBag)
+
+        boardViewModel.selectedMenu
+            .asDriver()
+            .drive(onNext: { [weak self] menu in
+                self?.menuGroup.setSelectedValue(menu)
+            })
+            .disposed(by: disposeBag)
+
+        hiringTypeGroup
+            .asValueDriver()
+            .drive(onNext: { [weak self] v in self?.hiringType = v })
+            .disposed(by: disposeBag)
+
+        finalEduGroup
+            .asValueDriver()
+            .drive(onNext: { [weak self] v in self?.finalEdu = v })
             .disposed(by: disposeBag)
     }
     
@@ -330,42 +374,6 @@ extension PostWritingViewController {
         styleEnrollButton(enabled: isFormValid)
     }
     
-    @objc private func menuButtonTapped(_ sender: UIButton) {
-        for button in postWritingView.menuButtons.keys {
-            let isSelected = (button == sender)
-            let imageName = isSelected ? "Sukbakji_RadioButton" : "Sukbakji_RadioButton2"
-            button.setImage(UIImage(named: imageName), for: .normal)
-            button.isEnabled = !isSelected
-        }
-        if let selectedMenu = postWritingView.menuButtons[sender] {
-            boardViewModel.selectedMenu.accept(selectedMenu)
-        }
-    }
-    
-    @objc private func hiringTypeButtonTapped(_ sender: UIButton) {
-        for button in postWritingView.hiringTypeButtons.keys {
-            let isSelected = (button == sender)
-            let imageName = isSelected ? "Sukbakji_RadioButton" : "Sukbakji_RadioButton2"
-            button.setImage(UIImage(named: imageName), for: .normal)
-            button.isEnabled = !isSelected
-        }
-        if let selectedType = postWritingView.hiringTypeButtons[sender] {
-            hiringType = selectedType
-        }
-    }
-    
-    @objc private func finalEduButtonTapped(_ sender: UIButton) {
-        for button in postWritingView.finalEduButtons.keys {
-            let isSelected = (button == sender)
-            let imageName = isSelected ? "Sukbakji_RadioButton" : "Sukbakji_RadioButton2"
-            button.setImage(UIImage(named: imageName), for: .normal)
-            button.isEnabled = !isSelected
-        }
-        if let selectedEdu = postWritingView.finalEduButtons[sender] {
-            finalEdu = selectedEdu
-        }
-    }
-    
     @objc func titleTextFieldEdited(_ textField: UITextField) {
         updateButtonColor()
         if postWritingView.titleTextField.text?.isEmpty == true {
@@ -383,7 +391,7 @@ extension PostWritingViewController {
         }
     }
     
-    private func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         DispatchQueue.main.async {
             self.updateButtonColor()
         }
