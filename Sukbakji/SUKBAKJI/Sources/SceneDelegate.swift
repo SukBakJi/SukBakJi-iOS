@@ -42,6 +42,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             moveToLogin()
             window?.makeKeyAndVisible()
         }
+        
+        DropDownFactory.configureGlobalAppearance()
     }
     
     // MARK: - 화면 이동

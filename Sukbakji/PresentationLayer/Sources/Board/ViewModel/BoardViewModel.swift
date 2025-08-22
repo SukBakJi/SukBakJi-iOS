@@ -8,6 +8,13 @@
 import RxSwift
 import RxCocoa
 
+enum BoardMenu: String {
+    case doctor = "박사"
+    case master = "석사"
+    case enter  = "진학예정"
+    case free   = "자유"
+}
+
 final class BoardViewModel {
     private let useCase: BoardUseCase
     private let disposeBag = DisposeBag()
@@ -29,6 +36,8 @@ final class BoardViewModel {
     
     let boardCreated = PublishSubject<Bool>()
     
+    let selectedMenu = BehaviorRelay<BoardMenu>(value: .doctor)
+    
     init(useCase: BoardUseCase = BoardUseCase()) {
         self.useCase = useCase
     }
@@ -44,11 +53,11 @@ final class BoardViewModel {
             .disposed(by: disposeBag)
     }
     
-    func loadMenu(menu: String) {
-        useCase.fetchBoardMenu(menu: menu)
+    func loadCategories(for menu: BoardMenu) {
+        useCase.fetchBoardMenu(menu: menu.rawValue)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] posts in
-                self?.categoryList.accept(posts)
+            .subscribe(onSuccess: { [weak self] items in
+                self?.categoryList.accept(items)
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
             })
@@ -100,7 +109,7 @@ final class BoardViewModel {
         selectEnterMenuItem.accept(menu)
     }
     
-    func createBoard(boardName: String, description: String, ) {
+    func createBoard(boardName: String, description: String) {
         useCase.createBoard(boardName: boardName, description: description)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] isSuccess in

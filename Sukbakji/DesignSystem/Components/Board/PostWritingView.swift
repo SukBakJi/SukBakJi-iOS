@@ -39,7 +39,6 @@ class PostWritingView: UIView {
     }
     let menuFirstButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
-        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
         $0.isEnabled = false
     }
     let selectFirstLabel = UILabel().then {
@@ -49,7 +48,6 @@ class PostWritingView: UIView {
     }
     let menuSecondButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
-        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
     let selectSecondLabel = UILabel().then {
         $0.text = "석사"
@@ -58,7 +56,6 @@ class PostWritingView: UIView {
     }
     let menuThirdButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
-        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
     let selectThirdLabel = UILabel().then {
         $0.text = "입학예정"
@@ -67,7 +64,6 @@ class PostWritingView: UIView {
     }
     let menuFourthButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
-        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
     let selectFourthLabel = UILabel().then {
         $0.text = "자유"
@@ -162,7 +158,6 @@ class PostWritingView: UIView {
     }
     let hiringTypeFirstButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
-        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
         $0.isEnabled = false
     }
     let hiringTypeFirstLabel = UILabel().then {
@@ -172,7 +167,6 @@ class PostWritingView: UIView {
     }
     let hiringTypeSecondButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
-        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
     let hiringTypeSecondLabel = UILabel().then {
         $0.text = "경력"
@@ -186,7 +180,6 @@ class PostWritingView: UIView {
     }
     let finalEducationFirstButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .normal)
-        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
         $0.isEnabled = false
     }
     let finalEducationFirstLabel = UILabel().then {
@@ -196,12 +189,17 @@ class PostWritingView: UIView {
     }
     let finalEducationSecondButton = UIButton().then {
         $0.setImage(UIImage(named: "Sukbakji_RadioButton2"), for: .normal)
-        $0.setImage(UIImage(named: "Sukbakji_RadioButton"), for: .disabled)
     }
     let finalEducationSecondLabel = UILabel().then {
         $0.text = "석사"
         $0.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         $0.textColor = .gray900
+    }
+    lazy var contentStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 0
+        $0.alignment = .fill
+        $0.distribution = .fill
     }
     let titleView = UIView().then {
         $0.backgroundColor = .white
@@ -270,11 +268,11 @@ class PostWritingView: UIView {
     }
     let buttonView = ButtonView()
     
-    lazy var menuButtons: [UIButton: String] = [
-        menuFirstButton: "박사",
-        menuSecondButton: "석사",
-        menuThirdButton: "진학예정",
-        menuFourthButton: "자유"
+    lazy var menuButtons: [UIButton: BoardMenu] = [
+        menuFirstButton: .doctor,
+        menuSecondButton: .master,
+        menuThirdButton: .enter,
+        menuFourthButton: .free
     ]
     lazy var hiringTypeButtons: [UIButton: String] = [
         hiringTypeFirstButton: "신입",
@@ -283,6 +281,21 @@ class PostWritingView: UIView {
     lazy var finalEduButtons: [UIButton: String] = [
         finalEducationFirstButton: "박사",
         finalEducationSecondButton: "석사"
+    ]
+    lazy var menuButtonArray: [UIButton] = [
+        menuFirstButton, menuSecondButton, menuThirdButton, menuFourthButton
+    ]
+    lazy var hiringTypeButtonArray: [UIButton] = [
+        hiringTypeFirstButton, hiringTypeSecondButton
+    ]
+    lazy var finalEduButtonArray: [UIButton] = [
+        finalEducationFirstButton, finalEducationSecondButton
+    ]
+    lazy var allRadioButtons = [
+        menuFirstButton, menuSecondButton,
+        menuThirdButton, menuFourthButton,
+        hiringTypeFirstButton, hiringTypeSecondButton,
+        finalEducationFirstButton, finalEducationSecondButton
     ]
     
     override init(frame: CGRect) {
@@ -350,6 +363,11 @@ class PostWritingView: UIView {
         infoView.addSubview(finalEducationFirstLabel)
         infoView.addSubview(finalEducationSecondButton)
         infoView.addSubview(finalEducationSecondLabel)
+        
+        contentsView.addSubview(contentStackView)
+        [supportFieldView, jobView, infoView].forEach { v in
+            contentStackView.addArrangedSubview(v)
+        }
         
         contentsView.addSubview(titleView)
         titleView.addSubview(titleLabel)
@@ -514,10 +532,11 @@ class PostWritingView: UIView {
             $0.centerY.equalTo(warningCategoryImage)
             $0.leading.equalTo(warningCategoryImage.snp.trailing).offset(4)
             $0.height.equalTo(12)
+            $0.bottom.equalToSuperview()
         }
         warningCategoryLabel.isHidden = true
         
-        supportFieldView.snp.makeConstraints {
+        contentStackView.snp.makeConstraints {
             $0.top.equalTo(categoryView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
@@ -556,13 +575,9 @@ class PostWritingView: UIView {
             $0.centerY.equalTo(warningSupportFieldImage)
             $0.leading.equalTo(warningSupportFieldImage.snp.trailing).offset(4)
             $0.height.equalTo(12)
+            $0.bottom.equalToSuperview()
         }
         warningSupportFieldLabel.isHidden = true
-        
-        jobView.snp.makeConstraints {
-            $0.top.equalTo(supportFieldView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
         
         jobLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
@@ -597,13 +612,9 @@ class PostWritingView: UIView {
             $0.centerY.equalTo(warningJobImage)
             $0.leading.equalTo(warningJobImage.snp.trailing).offset(4)
             $0.height.equalTo(12)
+            $0.bottom.equalToSuperview()
         }
         warningJobLabel.isHidden = true
-        
-        infoView.snp.makeConstraints {
-            $0.top.equalTo(jobView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
         
         hiringTypeLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
@@ -665,10 +676,11 @@ class PostWritingView: UIView {
             $0.centerY.equalTo(finalEducationFirstButton)
             $0.leading.equalTo(finalEducationSecondButton.snp.trailing).offset(6)
             $0.height.equalTo(19)
+            $0.bottom.equalToSuperview()
         }
         
         titleView.snp.makeConstraints {
-            $0.top.equalTo(infoView.snp.bottom)
+            $0.top.equalTo(contentStackView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -677,7 +689,7 @@ class PostWritingView: UIView {
             $0.leading.equalToSuperview().offset(24)
             $0.height.equalTo(21)
         }
-        titleLabel.addImageAboveLabel(referenceView: infoView, spacing: 20)
+        titleLabel.addImageAboveLabel(referenceView: contentStackView, spacing: 20)
         
         titleTextField.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(12)
@@ -705,6 +717,7 @@ class PostWritingView: UIView {
             $0.centerY.equalTo(warningTitleImage)
             $0.leading.equalTo(warningTitleImage.snp.trailing).offset(4)
             $0.height.equalTo(12)
+            $0.bottom.equalToSuperview()
         }
         warningTitleLabel.isHidden = true
         
@@ -739,13 +752,14 @@ class PostWritingView: UIView {
             $0.centerY.equalTo(warningContentImage)
             $0.leading.equalTo(warningContentImage.snp.trailing).offset(4)
             $0.height.equalTo(12)
+            $0.bottom.equalToSuperview()
         }
         warningContentLabel.isHidden = true
         
         warningView.snp.makeConstraints {
             $0.top.equalTo(contentView.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(47)
+            $0.bottom.equalTo(warningSubLabel.snp.bottom)
         }
         
         warningImage.snp.makeConstraints {
@@ -763,12 +777,20 @@ class PostWritingView: UIView {
         warningSubLabel.snp.makeConstraints {
             $0.top.equalTo(warningLabel.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(24)
-            $0.height.equalTo(17)
+            $0.trailing.lessThanOrEqualToSuperview().inset(24)
+            $0.bottom.equalToSuperview()
         }
         
         buttonView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(100)
+        }
+        
+        allRadioButtons.forEach {
+            $0.adjustsImageWhenHighlighted = false
+            $0.adjustsImageWhenDisabled = false   // ⬅️ 이게 핵심!
+            $0.setImage($0.image(for: .normal)?.withRenderingMode(.alwaysOriginal), for: .normal)
+            $0.setImage($0.image(for: .normal)?.withRenderingMode(.alwaysOriginal), for: .disabled) // disabled에도 같은 이미지
         }
     }
 }

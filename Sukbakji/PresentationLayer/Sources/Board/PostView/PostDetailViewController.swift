@@ -73,7 +73,7 @@ extension PostDetailViewController {
     private func setAPI() {
         setBind()
         postDetailViewModel.loadPostDetail(postId: postId)
-        scrapViewModel.loadScrapList(postId: postId, scrapButton: postDetailView.scrapButton)
+        scrapViewModel.loadScrapList(postId: postId)
     }
     
     private func setDelegate() {
@@ -119,10 +119,11 @@ extension PostDetailViewController {
         postDetailViewModel.commentEvent
             .emit(onNext: { [weak self] event in
                 guard let self = self else { return }
-                switch event {
-                case .created, .edited:
-                    self.postDetailViewModel.loadPostDetail(postId: self.postId)
-                }
+                self.view.endEditing(true)
+                self.postDetailView.switchToEditMode(false)
+                self.postDetailView.commentInputView.inputTextField.text = nil
+                self.postDetailView.commentEditView.inputTextView.text = nil
+                self.postDetailViewModel.loadPostDetail(postId: self.postId)
             })
             .disposed(by: disposeBag)
         
@@ -157,6 +158,12 @@ extension PostDetailViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        scrapViewModel.isScrapped
+                .drive(onNext: { [weak self] isScrapped in
+                    self?.postDetailView.scrapButton.isSelected = isScrapped
+                })
+                .disposed(by: disposeBag)
     }
     
     func didTapMoreButton(cell: CommentListTableViewCell) {
@@ -295,13 +302,10 @@ extension PostDetailViewController {
     }
     
     @objc private func send_Tapped() {
-        view.endEditing(true)
         postDetailViewModel.createComment(postId: postId, content: postDetailView.commentInputView.inputTextField.text ?? "")
-        postDetailView.commentInputView.inputTextField.text = ""
     }
     
     @objc private func updateComment() {
-        view.endEditing(true)
         postDetailViewModel.editComment(commentId: postDetailViewModel.selectCommentItem!.commentId, content: postDetailView.commentEditView.inputTextView.text)
     }
 }

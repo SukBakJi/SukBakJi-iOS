@@ -12,25 +12,17 @@ final class ScrapViewModel {
     private let useCase: BoardUseCase
     private let disposeBag = DisposeBag()
     
+    private let isScrappedRelay = BehaviorRelay<Bool>(value: false)
+    var isScrapped: Driver<Bool> { isScrappedRelay.asDriver() }
     let scrapResult = PublishSubject<Bool>()
     
-    init(useCase: BoardUseCase = BoardUseCase()) {
-        self.useCase = useCase
-    }
+    init(useCase: BoardUseCase = BoardUseCase()) { self.useCase = useCase }
     
-    func loadScrapList(postId: Int, scrapButton: UIButton) {
+    func loadScrapList(postId: Int) {
         useCase.fetchScrap()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { posts in
-                let isScrapped = posts.contains { $0.postId == postId }
-                
-                DispatchQueue.main.async {
-                    let imageName = isScrapped ? "Sukbakji_Bookmark2" : "Sukbakji_Bookmark"
-                    scrapButton.setImage(UIImage(named: imageName), for: .normal)
-                }
-            }, onFailure: { error in
-                print("오류:", error.localizedDescription)
-            })
+            .map { posts in posts.contains { $0.postId == postId } }
+            .asDriver(onErrorJustReturn: false)
+            .drive(isScrappedRelay)
             .disposed(by: disposeBag)
     }
         
