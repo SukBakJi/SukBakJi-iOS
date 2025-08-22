@@ -22,13 +22,6 @@ class PostWritingViewController: UIViewController, UITextViewDelegate {
     private lazy var fieldDrop: DropDown = DropDownFactory.make(anchor: postWritingView.supportFieldTextField)
     private var didSetupDropDowns = false
     
-    private var categoryHeightConstraint: Constraint?
-    private var titleHeightConstraint: Constraint?
-    private var contentHeightConstraint: Constraint?
-    private var supportFieldHeightConstraint: Constraint?
-    private var jobHeightConstraint: Constraint?
-    private var infoHeightConstraint: Constraint?
-    
     private var menuGroup: RadioGroup<BoardMenu>!
     private var hiringTypeGroup: RadioGroup<String>!
     private var finalEduGroup: RadioGroup<String>!
@@ -80,25 +73,6 @@ extension PostWritingViewController {
         postWritingView.titleTextField.delegate = self
         postWritingView.jobTextField.delegate = self
         
-        postWritingView.categoryView.snp.makeConstraints { make in
-            categoryHeightConstraint = make.height.equalTo(99).constraint
-        }
-        postWritingView.titleView.snp.makeConstraints { make in
-            titleHeightConstraint = make.height.equalTo(99).constraint
-        }
-        postWritingView.contentView.snp.makeConstraints { make in
-            contentHeightConstraint = make.height.equalTo(175).constraint
-        }
-        postWritingView.supportFieldView.snp.makeConstraints { make in
-            supportFieldHeightConstraint = make.height.equalTo(1).constraint
-        }
-        postWritingView.jobView.snp.makeConstraints { make in
-            jobHeightConstraint = make.height.equalTo(1).constraint
-        }
-        postWritingView.infoView.snp.makeConstraints { make in
-            infoHeightConstraint = make.height.equalTo(1).constraint
-        }
-        
         postWritingView.titleTextField.addTarget(self, action: #selector(titleTextFieldEdited), for: .editingChanged)
         postWritingView.jobTextField.addTarget(self, action: #selector(jobTextFieldEdited), for: .editingChanged)
         postWritingView.deleteButton.addTarget(self, action: #selector(jobDelete_Tapped), for: .touchUpInside)
@@ -116,15 +90,7 @@ extension PostWritingViewController {
             self?.postWritingView.categoryTextField.setPlaceholderColor(.gray500)
             self?.postWritingView.categoryTextField.updateUnderlineColor(to: .gray300)
             self?.deleteWarningCategory()
-            if item == "취업후기 게시판" {
-                self?.supportFieldHeightConstraint?.update(offset: 99)
-                self?.jobHeightConstraint?.update(offset: 99)
-                self?.infoHeightConstraint?.update(offset: 170)
-            } else {
-                self?.supportFieldHeightConstraint?.update(offset: 1)
-                self?.jobHeightConstraint?.update(offset: 1)
-                self?.infoHeightConstraint?.update(offset: 1)
-            }
+            self?.applySectionVisibility(forCategory: item)
         }
         
         fieldDrop.selectionAction = { [weak self] (index, item) in
@@ -214,10 +180,25 @@ extension PostWritingViewController: UITextFieldDelegate {
             })
             .disposed(by: disposeBag)
         
-        postWritingView.dropButton.rx.tap
-            .bind(onNext: { [weak self] in self?.categoryDrop.show() })
+        postWritingView.categoryTextField.rx.text
+            .distinctUntilChanged()
+            .asDriver(onErrorDriveWith: .empty())
+            .drive(onNext: { [weak self] text in
+                self?.applySectionVisibility(forCategory: text)
+            })
             .disposed(by: disposeBag)
-
+        
+        postWritingView.dropButton.rx.tap
+            .withLatestFrom(boardViewModel.categoryList) // Observable<[String]>
+            .observe(on: MainScheduler.instance)
+            .bind(onNext: { [weak self] list in
+                guard let self, !list.isEmpty else { return }
+                self.categoryDrop.dataSource = list
+                self.categoryDrop.reloadAllComponents()
+                self.categoryDrop.show()
+            })
+            .disposed(by: disposeBag)
+        
         postWritingView.dropButton2.rx.tap
             .bind(onNext: { [weak self] in self?.fieldDrop.show() })
             .disposed(by: disposeBag)
@@ -226,35 +207,49 @@ extension PostWritingViewController: UITextFieldDelegate {
     private func bindRadioGroups() {
         menuGroup
             .asValueDriver()
-            .drive(boardViewModel.selectedMenu)
-            .disposed(by: disposeBag)
-
-        boardViewModel.selectedMenu
-            .asDriver()
-            .drive(onNext: { [weak self] menu in
-                self?.menuGroup.setSelectedValue(menu)
+            .drive(onNext: { [weak self] value in
+                self?.boardViewModel.selectedMenu.accept(value)
             })
             .disposed(by: disposeBag)
-
+        
         hiringTypeGroup
             .asValueDriver()
             .drive(onNext: { [weak self] v in self?.hiringType = v })
             .disposed(by: disposeBag)
-
+        
         finalEduGroup
             .asValueDriver()
             .drive(onNext: { [weak self] v in self?.finalEdu = v })
             .disposed(by: disposeBag)
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        updateButtonColor() // 기존 스타일 로직을 재사용
-        let trimmed = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed.isEmpty {
-            warningContent()
-        } else {
-            deleteWarningContent()
-        }
+    private enum Section { case supportField, job, info }
+
+    private func setSection(_ section: Section, hidden: Bool, animated: Bool = true) {
+        let view: UIView = {
+            switch section {
+            case .supportField: return postWritingView.supportFieldView
+            case .job:          return postWritingView.jobView
+            case .info:         return postWritingView.infoView
+            }
+        }()
+
+        guard view.isHidden != hidden else { return }
+        let apply = { view.isHidden = hidden }
+        animated ? UIView.animate(withDuration: 0.22, animations: apply) : apply()
+    }
+
+    // 게시판 메뉴에 따른 표시 규칙 (예시는 취업후기만 3개 섹션 표시)
+    private func applySectionVisibility(forCategory name: String?) {
+        let show = isEmploymentReviewCategory(name)
+        setSection(.supportField, hidden: !show)
+        setSection(.job,          hidden: !show)
+        setSection(.info,         hidden: !show)
+    }
+
+    private func isEmploymentReviewCategory(_ name: String?) -> Bool {
+        guard let raw = name else { return false }
+        return raw.trimmingCharacters(in: .whitespacesAndNewlines) == "취업후기 게시판"
     }
     
     private enum WarningType {
@@ -262,43 +257,51 @@ extension PostWritingViewController: UITextFieldDelegate {
         case title
         case support
         case job
+        case content
     }
 
     private func updateWarningUI(for type: WarningType, showWarning: Bool) {
-        var heightConstraint: Constraint?
         var warningImage: UIImageView?
         var warningLabel: UILabel?
         var textField: UITextField?
+        var textView: UITextView?
         
         switch type {
         case .category:
-            heightConstraint = categoryHeightConstraint
             warningImage = postWritingView.warningCategoryImage
             warningLabel = postWritingView.warningCategoryLabel
             textField = postWritingView.categoryTextField
         case .title:
-            heightConstraint = titleHeightConstraint
             warningImage = postWritingView.warningTitleImage
             warningLabel = postWritingView.warningTitleLabel
             textField = postWritingView.titleTextField
         case .support:
-            heightConstraint = supportFieldHeightConstraint
             warningImage = postWritingView.warningSupportFieldImage
             warningLabel = postWritingView.warningSupportFieldLabel
             textField = postWritingView.supportFieldTextField
         case .job:
-            heightConstraint = jobHeightConstraint
             warningImage = postWritingView.warningJobImage
             warningLabel = postWritingView.warningJobLabel
             textField = postWritingView.jobTextField
+        case .content:
+            warningImage = postWritingView.warningContentImage
+            warningLabel = postWritingView.warningContentLabel
+            textView = postWritingView.contentTextView
         }
         
-        heightConstraint?.update(offset: showWarning ? 117 : 99)
         warningImage?.isHidden = !showWarning
         warningLabel?.isHidden = !showWarning
-        textField?.backgroundColor = showWarning ? .warning50 : .gray50
-        textField?.setPlaceholderColor(showWarning ? .warning400 : .gray500)
-        textField?.updateUnderlineColor(to: showWarning ? .warning400 : .gray300)
+        
+        if let tf = textField {
+            tf.backgroundColor = showWarning ? .warning50 : .gray50
+            tf.setPlaceholderColor(showWarning ? .warning400 : .gray500)
+            tf.updateUnderlineColor(to: showWarning ? .warning400 : .gray300)
+        }
+        if let tv = textView {
+            tv.backgroundColor = showWarning ? .warning50 : .gray50
+            tv.textColor = showWarning ? .warning400 : .gray900
+            tv.updateUnderlineColor(to: showWarning ? .warning400 : .gray300)
+        }
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
@@ -338,29 +341,11 @@ extension PostWritingViewController: UITextFieldDelegate {
     }
     
     private func warningContent() {
-        contentHeightConstraint?.update(offset: 193)
-        postWritingView.warningContentImage.isHidden = false
-        postWritingView.warningContentLabel.isHidden = false
-        postWritingView.contentTextView.backgroundColor = .warning50
-        postWritingView.contentTextView.textColor = .warning400
-        postWritingView.contentTextView.updateUnderlineColor(to: .warning400)
-        
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
-        }
+        updateWarningUI(for: .content, showWarning: true)
     }
     
     private func deleteWarningContent() {
-        contentHeightConstraint?.update(offset: 175)
-        postWritingView.warningContentImage.isHidden = true
-        postWritingView.warningContentLabel.isHidden = true
-        postWritingView.contentTextView.backgroundColor = .gray50
-        postWritingView.contentTextView.textColor = .gray900
-        postWritingView.contentTextView.updateUnderlineColor(to: .gray300)
-        
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded() // 레이아웃 변경 애니메이션 적용
-        }
+        updateWarningUI(for: .content, showWarning: false)
     }
     
     private func styleEnrollButton(enabled: Bool) {
@@ -396,6 +381,16 @@ extension PostWritingViewController: UITextFieldDelegate {
             self.updateButtonColor()
         }
         return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        updateButtonColor() // 기존 스타일 로직을 재사용
+        let trimmed = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty {
+            warningContent()
+        } else {
+            deleteWarningContent()
+        }
     }
     
     @objc private func enroll_Tapped() {

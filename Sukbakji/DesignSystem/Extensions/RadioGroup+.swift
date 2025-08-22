@@ -35,11 +35,6 @@ final class RadioGroup<Value: Equatable> {
     private let disposeBag = DisposeBag()
     private let appearance: Appearance
     
-    /// - Parameters:
-    ///   - buttons: 같은 그룹의 버튼들(순서 중요)
-    ///   - values: 각 버튼이 대표하는 도메인 값(순서 동일)
-    ///   - initial: 초기 선택값(없으면 0번)
-    ///   - appearance: 선택/미선택 이미지 전략
     init(
         buttons: [UIButton],
         values: [Value],
