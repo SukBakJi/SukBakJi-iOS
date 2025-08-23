@@ -138,6 +138,7 @@
 		C73948B22DD8820A00612461 /* BoardQnATableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73948B12DD8820A00612461 /* BoardQnATableViewCell.swift */; };
 		C73948B42DD8833E00612461 /* FavoriteBoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73948B32DD8833E00612461 /* FavoriteBoardCollectionViewCell.swift */; };
 		C73948B62DD88D8900612461 /* QnA.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73948B52DD88D8900612461 /* QnA.swift */; };
+		C73985202E5A25F600666505 /* Report+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739851F2E5A25F600666505 /* Report+.swift */; };
 		C73C5C462D5917C500091C5C /* MemberId.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C5C452D5917C500091C5C /* MemberId.swift */; };
 		C74680752D91352B00A6091E /* DateUtils+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74680742D91352B00A6091E /* DateUtils+.swift */; };
 		C74A15942D5A477000A1698B /* FavoriteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74A15932D5A477000A1698B /* FavoriteBoard.swift */; };
@@ -438,6 +439,7 @@
 		C73948B12DD8820A00612461 /* BoardQnATableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardQnATableViewCell.swift; sourceTree = "<group>"; };
 		C73948B32DD8833E00612461 /* FavoriteBoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		C73948B52DD88D8900612461 /* QnA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnA.swift; sourceTree = "<group>"; };
+		C739851F2E5A25F600666505 /* Report+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Report+.swift"; sourceTree = "<group>"; };
 		C73C5C452D5917C500091C5C /* MemberId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberId.swift; sourceTree = "<group>"; };
 		C74680742D91352B00A6091E /* DateUtils+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateUtils+.swift"; sourceTree = "<group>"; };
 		C74A15932D5A477000A1698B /* FavoriteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBoard.swift; sourceTree = "<group>"; };
@@ -669,6 +671,7 @@
 				C74680742D91352B00A6091E /* DateUtils+.swift */,
 				C70055272DABC40D00520D76 /* TimeHelper+.swift */,
 				C7E6DEB32E573D9C00EAACCB /* RadioGroup+.swift */,
+				C739851F2E5A25F600666505 /* Report+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2026,6 +2029,7 @@
 				C709CC782DFD724600F09780 /* LabReviewListTableViewCell.swift in Sources */,
 				C77EFB3D2D9C02B3000C2841 /* NotificationViewController.swift in Sources */,
 				415BBC0B2C7343F8002768EE /* AuthInterceptor+.swift in Sources */,
+				C73985202E5A25F600666505 /* Report+.swift in Sources */,
 				C7F951BE2D2A523500D07051 /* SetAlarmViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

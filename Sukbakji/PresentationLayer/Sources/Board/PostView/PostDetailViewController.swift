@@ -175,44 +175,16 @@ extension PostDetailViewController {
                                           preferredStyle: .actionSheet)
         
         let report = UIAlertAction(title: "댓글 신고하기", style: .default) { _ in
-            let reasonAlert = UIAlertController(title: "댓글 신고하기", message: nil, preferredStyle: .actionSheet)
-            let reasons = [
-                "욕설/비하",
-                "유출/사칭/사기",
-                "상업적 광고 및 판매",
-                "음란물/불건전한 대화 및 만남",
-                "게시판 주제에 부적절함",
-                "정당/정치인 비하 및 선거운동",
-                "낚시/도배"
-            ]
-            
-            for reason in reasons {
-                reasonAlert.addAction(UIAlertAction(title: reason, style: .default) { _ in
-                    self.reportViewModel.reportComment(commentId: self.postDetailViewModel.selectCommentItem!.commentId, reason: reason)
-                })
+            let sheet = ReportActionFactory.makeReportSheet(title: "댓글 신고하기") { [weak self] reason in
+                self?.reportViewModel.reportComment(commentId: self!.postDetailViewModel.selectCommentItem!.commentId, reason: reason.rawValue)
             }
-            reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
-            self.present(reasonAlert, animated: true)
+            self.present(sheet, animated: true)
         }
         let block = UIAlertAction(title: "유저 차단하기", style: .default) { _ in
-            let reasonAlert = UIAlertController(title: "유저 차단하기", message: nil, preferredStyle: .actionSheet)
-            let reasons = [
-                "욕설/비하",
-                "유출/사칭/사기",
-                "상업적 광고 및 판매",
-                "음란물/불건전한 대화 및 만남",
-                "게시판 주제에 부적절함",
-                "정당/정치인 비하 및 선거운동",
-                "낚시/도배"
-            ]
-            
-            for reason in reasons {
-                reasonAlert.addAction(UIAlertAction(title: reason, style: .default) { _ in
-                    self.reportViewModel.blockMember(targetMemberId: self.postDetailViewModel.selectCommentItem!.memberId)
-                })
+            let sheet = ReportActionFactory.makeReportSheet(title: "유저 차단하기") { [weak self] reason in
+                self?.reportViewModel.blockMember(targetMemberId: self!.postDetailViewModel.selectCommentItem!.memberId)
             }
-            reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
-            self.present(reasonAlert, animated: true)
+            self.present(sheet, animated: true)
         }
         let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
             self.postDetailView.switchToEditMode(true) // ⬅︎ 토글만
@@ -244,24 +216,10 @@ extension PostDetailViewController {
                                           preferredStyle: .actionSheet)
         
         let report = UIAlertAction(title: "신고하기", style: .default) { _ in
-            let reasonAlert = UIAlertController(title: "신고하기", message: nil, preferredStyle: .actionSheet)
-            let reasons = [
-                "욕설/비하",
-                "유출/사칭/사기",
-                "상업적 광고 및 판매",
-                "음란물/불건전한 대화 및 만남",
-                "게시판 주제에 부적절함",
-                "정당/정치인 비하 및 선거운동",
-                "낚시/도배"
-            ]
-            
-            for reason in reasons {
-                reasonAlert.addAction(UIAlertAction(title: reason, style: .default) { _ in
-                    self.reportViewModel.reportPost(postId: self.postId, reason: reason)
-                })
-            }
-            reasonAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
-            self.present(reasonAlert, animated: true)
+            let sheet = ReportActionFactory.makeReportSheet(title: "신고하기") { [weak self] reason in
+                self?.reportViewModel.reportPost(postId: self!.postId, reason: reason.rawValue)
+                }
+            self.present(sheet, animated: true)
         }
         let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
             let alert = UIAlertController(title: nil, message: "서비스 준비 중입니다.", preferredStyle: .alert)
@@ -295,9 +253,6 @@ extension PostDetailViewController {
     }
     
     @objc private func scrap_Tapped() {
-        let isCurrentlyScrapped = postDetailView.scrapButton.image(for: .normal) == UIImage(named: "Sukbakji_Bookmark2")
-        let newImageName = isCurrentlyScrapped ? "Sukbakji_Bookmark" : "Sukbakji_Bookmark2"
-        postDetailView.scrapButton.setImage(UIImage(named: newImageName), for: .normal)
         scrapViewModel.scrapPost(postId: postId)
     }
     
