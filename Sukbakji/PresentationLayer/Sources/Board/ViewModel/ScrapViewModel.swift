@@ -27,10 +27,11 @@ final class ScrapViewModel {
     }
         
     func scrapPost(postId: Int) {
+        let next = !isScrappedRelay.value
         useCase.createScrap(postId: postId)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] isSuccess in
-                self?.scrapResult.onNext(isSuccess)
+                if isSuccess { self?.isScrappedRelay.accept(next) }
             }, onFailure: { error in
                 print("오류:", error.localizedDescription)
             })

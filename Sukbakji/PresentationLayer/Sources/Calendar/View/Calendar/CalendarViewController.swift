@@ -17,6 +17,7 @@ class CalendarViewController: UIViewController {
     private let univViewModel = UnivViewModel()
     private let alarmViewModel = AlarmViewModel()
     private let disposeBag = DisposeBag()
+    private let isLoading = BehaviorRelay<Bool>(value: false)
     
     private var calendarHeightConstraint: Constraint?
     private var dateSelectHeightConstraint: Constraint?
@@ -42,13 +43,7 @@ class CalendarViewController: UIViewController {
         if let tabBarVC = self.tabBarController as? MainTabViewController {
             tabBarVC.customTabBarView.isHidden = false
         }
-        callAPI()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        self.calendarHeightConstraint?.update(offset: calendarView.calendarMainCollectionView.contentSize.height + 65)
+        setAPI()
     }
 }
 
@@ -57,6 +52,7 @@ extension CalendarViewController {
     private func setUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
 
+        calendarView.calendarDetailTableView.isScrollEnabled = false
         calendarView.calendarBackgroundView.snp.makeConstraints { make in
             calendarHeightConstraint = make.height.equalTo(300).constraint
         }
@@ -68,8 +64,6 @@ extension CalendarViewController {
         calendarView.mypageButton.addTarget(self, action: #selector(schoolCalendar_Tapped), for: .touchUpInside)
         calendarView.univSettingButton.addTarget(self, action: #selector(schoolSetting_Tapped), for: .touchUpInside)
         calendarView.alarmButton.addTarget(self, action: #selector(alarm_Tapped), for: .touchUpInside)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(alarmSettingComplete), name: .isAlarmComplete, object: nil)
     }
     
     @objc private func notification_Tapped() {
@@ -119,24 +113,49 @@ extension CalendarViewController {
     
 extension CalendarViewController {
     
-    private func callAPI() {
-        calendarView.activityIndicator.startAnimating()
-        DispatchQueue.global().async {
-            sleep(1)
-            DispatchQueue.main.async {
-                self.setAPI()
-                self.calendarView.activityIndicator.stopAnimating()
-            }
-        }
-    }
-    
     private func setAPI() {
         calendarViewModel.loadUpComing()
         univViewModel.loadUnivList()
         alarmViewModel.loadAlarmList()
+        
+        Observable
+            .combineLatest(
+                calendarViewModel.upComingSchedules.take(1),
+                univViewModel.univList.take(1),
+                alarmViewModel.alarmList.take(1)
+            )
+            .do(onSubscribe: { [weak self] in
+                self?.isLoading.accept(true)
+            }, onDispose: { [weak self] in
+                // 정상/에러 상관없이 구독 종료 시 로딩 해제
+                self?.isLoading.accept(false)
+            })
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                // 필요 시 추가 후처리 가능 (없으면 비워두기)
+            }, onError: { _ in
+                // 에러 시에도 로딩은 onDispose에서 내려가므로 여기서는 알림만
+                // self?.showToast("불러오기에 실패했어요") 등
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindViewModel() {
+        isLoading
+          .asDriver()
+          .drive(calendarView.activityIndicator.rx.isAnimating)
+          .disposed(by: disposeBag)
+
+        calendarView.calendarMainCollectionView.rx.observe(CGSize.self, "contentSize")
+            .compactMap { $0?.height }
+            .map { $0 + 65 } // 기존 상수 보정치 유지
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] h in
+                self?.calendarHeightConstraint?.update(offset: h)
+                self?.view.layoutIfNeeded()
+            })
+            .disposed(by: disposeBag)
+        
         univViewModel.univList
             .subscribe(onNext: { univList in
                 if !univList.isEmpty {
@@ -187,14 +206,20 @@ extension CalendarViewController {
             }
             .disposed(by: disposeBag)
         
-        calendarViewModel.dateSelectSchedules
-            .subscribe(onNext: { scheduleList in
-                if scheduleList.count >= 1 {
-                    self.expandHeight(num: scheduleList.count)
-                } else {
-                    self.reduceHeight()
-                }
-                self.view.layoutIfNeeded()
+        calendarView.calendarDetailTableView.rx.observe(CGSize.self, "contentSize")
+            .compactMap { $0?.height }
+            .map { max($0, 8) } // 최소 높이 8 유지(기존 로직 반영)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] h in
+                self?.dateSelectHeightConstraint?.update(offset: h)
+                self?.view.layoutIfNeeded()
+            })
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.isAlarmComplete)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.alarmSettingComplete()
             })
             .disposed(by: disposeBag)
     }
@@ -273,20 +298,6 @@ extension CalendarViewController {
                 }
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func expandHeight(num: Int) {
-        let addHeight: CGFloat = CGFloat(44 * num + 8)
-        
-        self.dateSelectHeightConstraint?.update(offset: addHeight)
-        self.view.layoutIfNeeded()
-    }
-    
-    private func reduceHeight() {
-        let minusHeight: CGFloat = 8
-        
-        self.dateSelectHeightConstraint?.update(offset: minusHeight)
-        self.view.layoutIfNeeded()
     }
 }
 
