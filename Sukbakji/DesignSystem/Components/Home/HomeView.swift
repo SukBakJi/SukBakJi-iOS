@@ -199,6 +199,7 @@ class HomeView: UIView {
         cv.register(FavoriteLabCollectionViewCell.self, forCellWithReuseIdentifier: FavoriteLabCollectionViewCell.identifier)
         cv.backgroundColor = .clear
         cv.allowsSelection = false
+        cv.showsHorizontalScrollIndicator = false
         
         return cv
     }()

@@ -11,17 +11,14 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 import FirebaseMessaging
-import SwiftUI
 
 class HomeViewController: UIViewController {
     
     private let homeView = HomeView()
-    private let favBoardViewModel = FavBoardViewModel()
-    private let hotPostViewModel = HotPostViewModel()
-    private let favLabViewModel = FavLabViewModel()
     private let fCMViewModel = FCMViewModel()
     var disposeBag = DisposeBag()
-    var reactor: HomeReactor?
+    var profileReactor: ProfileReactor?
+    var homeReactor: HomeReactor?
     
     private var favBoardHeightConstraint: Constraint?
     private var hotPostHeightConstraint: Constraint?
@@ -35,9 +32,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
-        setBind()
-        self.reactor = HomeReactor()
-        bind(reactor: reactor!)
+        self.profileReactor = ProfileReactor()
+        self.homeReactor = HomeReactor(homeUseCase: HomeUseCase(), dirUseCase: DirectoryUseCase())
+        bind(reactor: profileReactor!)
+        bind(reactor: homeReactor!)
         getFCMToken()
     }
     
@@ -47,7 +45,7 @@ class HomeViewController: UIViewController {
         if let tabBarVC = self.tabBarController as? MainTabViewController {
             tabBarVC.customTabBarView.isHidden = false
         }
-        setAPI()
+        homeReactor?.action.onNext(.viewWillAppear)
     }
 }
 
@@ -66,23 +64,30 @@ extension HomeViewController {
             favLabHeightConstraint = make.height.equalTo(200).constraint
         }
         
-        homeView.notificationButton.addTarget(self, action: #selector(notification_Tapped), for: .touchUpInside)
-        homeView.mypageButton.addTarget(self, action: #selector(info_Tapped), for: .touchUpInside)
-        homeView.favBoardButton.addTarget(self, action: #selector(moveToBoard), for: .touchUpInside)
         homeView.adCollectionView.delegate = self
         homeView.adCollectionView.dataSource = self
-    }
-    
-    private func setBind() {
-        bindFavoriteBoardViewModel()
-        bindHotPostViewModel()
-        bindFavoriteLabViewModel()
-    }
-    
-    private func setAPI() {
-        favBoardViewModel.loadFavoriteBoard()
-        hotPostViewModel.loadHotPost()
-        favLabViewModel.loadFavoriteLab()
+        
+        homeView.notificationButton.rx.tap
+            .bind(onNext: { [weak self] in
+                let vc = NotificationViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        homeView.mypageButton.rx.tap
+            .bind(onNext: { [weak self] in
+                let vc = MypageViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        homeView.favBoardButton.rx.tap   // 기존 moveToBoard()
+            .bind(onNext: { [weak self] in
+                guard let tabBar = self?.tabBarController as? MainTabViewController
+                else { return }
+                tabBar.switchToTab(index: 2)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func getFCMToken() {
@@ -98,7 +103,7 @@ extension HomeViewController {
         }
     }
     
-    func bind(reactor: HomeReactor) {
+    func bind(reactor: ProfileReactor) {
         // Action: View가 나타나면 API 요청
         reactor.action.onNext(.getUserName)
         reactor.action.onNext(.getViewSchedule)
@@ -130,105 +135,84 @@ extension HomeViewController {
             .disposed(by: disposeBag)
     }
     
-    private func bindFavoriteBoardViewModel() {
-        self.homeView.favBoardTableView.rx.setDelegate(self)
+    private func bind(reactor: HomeReactor) {
+        homeView.favBoardTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
-        
-        favBoardViewModel.favBoardList
-            .subscribe(onNext: { favBoardList in
-                if !favBoardList.isEmpty {
-                    self.homeView.favBoardContainerView.isHidden = false
-                    self.homeView.noFavBoard.isHidden = true
-                    self.homeView.noFavBoardLabel.isHidden = true
-                } else {
-                    self.homeView.favBoardContainerView.isHidden = true
-                    self.homeView.noFavBoard.isHidden = false
-                    self.homeView.noFavBoardLabel.isHidden = false
-                }
-                
-                if favBoardList.count == 1 {
-                    self.favBoardHeightConstraint?.update(offset: 56)
-                }
-            })
+        homeView.hotPostTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
-
-        favBoardViewModel.favBoardList
-            .bind(to: homeView.favBoardTableView.rx.items(cellIdentifier: FavoriteBoardTableViewCell.identifier, cellType: FavoriteBoardTableViewCell.self)) { row, board, cell in
-                cell.prepare(favoriteBoard: board)
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindHotPostViewModel() {
-        self.homeView.hotPostTableView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
-        
-        hotPostViewModel.hotPostList
-            .subscribe(onNext: { hotPostList in
-                if !hotPostList.isEmpty {
-                    self.homeView.noHotPost.isHidden = true
-                } else {
-                    self.homeView.noHotPost.isHidden = false
-                }
-                
-                if hotPostList.count >= 2 {
-                    self.hotPostHeightConstraint?.update(offset: 383)
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        hotPostViewModel.hotPostList
-            .bind(to: homeView.hotPostTableView.rx.items(cellIdentifier: HotPostTableViewCell.identifier, cellType: HotPostTableViewCell.self)) { row, post, cell in
-                cell.prepare(hotPost: post)
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindFavoriteLabViewModel() {
         homeView.favLabCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        favLabViewModel.favLabList
-            .subscribe(onNext: { favLabList in
-                if !favLabList.isEmpty {
-                    self.homeView.noFavLab.isHidden = true
-                    self.homeView.noFavLabLabel.isHidden = true
-                    self.homeView.favLabProgressView.isHidden = false
-                    self.favLabHeightConstraint?.update(offset: 275)
-                } else {
-                    self.homeView.noFavLab.isHidden = false
-                    self.homeView.noFavLabLabel.isHidden = false
-                    self.homeView.favLabProgressView.isHidden = true
-                }
+        reactor.state.map(\.favBoards)
+            .bind(to: homeView.favBoardTableView.rx.items(
+                cellIdentifier: FavoriteBoardTableViewCell.identifier,
+                cellType: FavoriteBoardTableViewCell.self)
+            ) { _, item, cell in
+                cell.prepare(favoriteBoard: item)
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state.map(\.hotPosts)
+            .bind(to: homeView.hotPostTableView.rx.items(
+                cellIdentifier: HotPostTableViewCell.identifier,
+                cellType: HotPostTableViewCell.self)
+            ) { _, item, cell in
+                cell.prepare(hotPost: item)
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state.map(\.favLabs)
+            .bind(to: homeView.favLabCollectionView.rx.items(
+                cellIdentifier: FavoriteLabCollectionViewCell.identifier,
+                cellType: FavoriteLabCollectionViewCell.self)
+            ) { _, item, cell in
+                cell.prepare(favoriteLab: item)
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state.map(\.isFavBoardEmpty)
+            .map { $0 } // true면 숨김
+            .bind(to: homeView.favBoardContainerView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map(\.isFavBoardEmpty)
+            .subscribe(onNext: { [weak self] isEmpty in
+                self?.homeView.noFavBoard.isHidden = !isEmpty
+                self?.homeView.noFavBoardLabel.isHidden = !isEmpty
             })
             .disposed(by: disposeBag)
         
-        favLabViewModel.favLabList
-            .bind(to: homeView.favLabCollectionView.rx.items(cellIdentifier: FavoriteLabCollectionViewCell.identifier, cellType: FavoriteLabCollectionViewCell.self)) { row, lab, cell in
-                cell.prepare(favoriteLab: lab)
-            }
+        reactor.state.map(\.isHotPostEmpty)
+            .map { !$0 } // 비어있지 않으면 'noHotPost' 감춤
+            .bind(to: homeView.noHotPost.rx.isHidden)
             .disposed(by: disposeBag)
-    }
-    
-    @objc private func notification_Tapped() {
-        let notificationViewController = NotificationViewController()
-        self.navigationController?.pushViewController(notificationViewController, animated: true)
-    }
-    
-    @objc private func info_Tapped() {
-        let mypageViewController = MypageViewController()
-        self.navigationController?.pushViewController(mypageViewController, animated: true)
-    }
-    
-    @objc private func hot_Tapped() {
-        let postListVC = PostListViewController(title: "HOT 게시판", buttonTitle: "HOT 게시판 선정 기준 안내드립니다", isPost: 0, isHidden: true)
-        self.navigationController?.pushViewController(postListVC, animated: true)
-    }
-    
-    @objc func moveToBoard() {
-        if let tabBarVC = self.tabBarController as? MainTabViewController {
-            tabBarVC.switchToTab(index: 2)
-        }
+        
+        reactor.state.map(\.isFavLabEmpty)
+            .map { $0 }
+            .bind(to: homeView.favLabProgressView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map(\.favBoards.count)
+            .subscribe(onNext: { [weak self] count in
+                if count == 1 { self?.favBoardHeightConstraint?.update(offset: 56) }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state.map(\.hotPosts.count)
+            .subscribe(onNext: { [weak self] count in
+                if count >= 2 { self?.hotPostHeightConstraint?.update(offset: 383) }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state.map(\.favLabs.isEmpty)
+            .subscribe(onNext: { [weak self] isEmpty in
+                if !isEmpty { self?.favLabHeightConstraint?.update(offset: 275) }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state.compactMap(\.errorMessage)
+            .subscribe(onNext: { AlertController(message: $0).show() })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -239,7 +223,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AdvertiseCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: AdvertiseCollectionViewCell.identifier, for: indexPath) as! AdvertiseCollectionViewCell
-                
+        
         return cell
     }
     
@@ -251,9 +235,9 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDe
             let contentWidth = scrollView.contentSize.width
             let scrollViewWidth = scrollView.frame.size.width
             let progress = Float(contentOffsetX / (contentWidth - scrollViewWidth))
-
+            
             homeView.favLabProgressView.setProgress(progress, animated: true)
-
+            
             if contentOffsetX + scrollViewWidth >= contentWidth {
                 homeView.favLabProgressView.setProgress(1.0, animated: true)
             }
@@ -270,11 +254,11 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UIScrollViewDe
 }
 
 extension HomeViewController: UITableViewDelegate {
-   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       if tableView == homeView.favBoardTableView {
-           return 56
-       } else {
-           return 147
-       }
-   }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView == homeView.favBoardTableView {
+            return 56
+        } else {
+            return 147
+        }
+    }
 }

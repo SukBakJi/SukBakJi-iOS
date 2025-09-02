@@ -73,7 +73,7 @@
 		C709CC782DFD724600F09780 /* LabReviewListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709CC772DFD724600F09780 /* LabReviewListTableViewCell.swift */; };
 		C70ADA952D8D011D00BF9C10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C70ADA942D8D011D00BF9C10 /* GoogleService-Info.plist */; };
 		C70BBC192D64EAA7002C26E6 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70BBC182D64EAA7002C26E6 /* MyProfileViewModel.swift */; };
-		C70C313C2D5CC2DC00F17D72 /* HomeReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C313B2D5CC2DC00F17D72 /* HomeReactor.swift */; };
+		C70C313C2D5CC2DC00F17D72 /* ProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C313B2D5CC2DC00F17D72 /* ProfileReactor.swift */; };
 		C70CB4972E17958100C2025C /* LabInquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4962E17958100C2025C /* LabInquiryView.swift */; };
 		C70CB4992E179F1300C2025C /* LabInquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4982E179F1300C2025C /* LabInquiryViewController.swift */; };
 		C70CF5B12E16E5E300F6B5FF /* DirectoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CF5B02E16E5E300F6B5FF /* DirectoryUseCase.swift */; };
@@ -183,6 +183,7 @@
 		C7675F7E2D6981FF00F99294 /* EditUnivView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F7D2D6981FF00F99294 /* EditUnivView.swift */; };
 		C76A86532DFC964F00E2322F /* FavLabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A86522DFC964F00E2322F /* FavLabView.swift */; };
 		C76A86552DFC966B00E2322F /* LabReviewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A86542DFC966B00E2322F /* LabReviewListView.swift */; };
+		C76B45CA2E65C73B00B20C21 /* HomeReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B45C92E65C73A00B20C21 /* HomeReactor.swift */; };
 		C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */; };
 		C77B49682D7B66A500005ABE /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77B49672D7B66A500005ABE /* EmailView.swift */; };
 		C77B496A2D7B66B700005ABE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77B49692D7B66B700005ABE /* LoginView.swift */; };
@@ -381,7 +382,7 @@
 		C709CC772DFD724600F09780 /* LabReviewListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewListTableViewCell.swift; sourceTree = "<group>"; };
 		C70ADA942D8D011D00BF9C10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C70BBC182D64EAA7002C26E6 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
-		C70C313B2D5CC2DC00F17D72 /* HomeReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReactor.swift; sourceTree = "<group>"; };
+		C70C313B2D5CC2DC00F17D72 /* ProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReactor.swift; sourceTree = "<group>"; };
 		C70CB4962E17958100C2025C /* LabInquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabInquiryView.swift; sourceTree = "<group>"; };
 		C70CB4982E179F1300C2025C /* LabInquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabInquiryViewController.swift; sourceTree = "<group>"; };
 		C70CF5B02E16E5E300F6B5FF /* DirectoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryUseCase.swift; sourceTree = "<group>"; };
@@ -493,6 +494,7 @@
 		C7675F7D2D6981FF00F99294 /* EditUnivView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUnivView.swift; sourceTree = "<group>"; };
 		C76A86522DFC964F00E2322F /* FavLabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavLabView.swift; sourceTree = "<group>"; };
 		C76A86542DFC966B00E2322F /* LabReviewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReviewListView.swift; sourceTree = "<group>"; };
+		C76B45C92E65C73A00B20C21 /* HomeReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReactor.swift; sourceTree = "<group>"; };
 		C76BB2322D12CCA9003755E8 /* UnivSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSearchViewController.swift; sourceTree = "<group>"; };
 		C77B49672D7B66A500005ABE /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		C77B49692D7B66B700005ABE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -835,7 +837,8 @@
 		C70C313A2D5CC2CF00F17D72 /* Reactor */ = {
 			isa = PBXGroup;
 			children = (
-				C70C313B2D5CC2DC00F17D72 /* HomeReactor.swift */,
+				C70C313B2D5CC2DC00F17D72 /* ProfileReactor.swift */,
+				C76B45C92E65C73A00B20C21 /* HomeReactor.swift */,
 			);
 			path = Reactor;
 			sourceTree = "<group>";
@@ -919,6 +922,8 @@
 		C73673662DA4E77600F88C63 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C7DA37532CFCD4E900B26549 /* FavBoardViewModel.swift */,
+				C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */,
 				C7F61D1A2DE05BD200B5C3B4 /* MyPostViewModel.swift */,
 				C7AA038A2DD506EC00BBE115 /* PostViewModel.swift */,
 				C7D15DF82E3FC850003F19AE /* PostDetailViewModel.swift */,
@@ -942,9 +947,6 @@
 		C74A159C2D5A4A7600A1698B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C7DA37532CFCD4E900B26549 /* FavBoardViewModel.swift */,
-				C7DA37512CFCD33A00B26549 /* HotPostViewModel.swift */,
-				C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */,
 				C70BBC182D64EAA7002C26E6 /* MyProfileViewModel.swift */,
 				C73483662D02E500004B6FA1 /* ResearchTopicViewModel.swift */,
 				C7D15DF62E3FB75E003F19AE /* FCMViewModel.swift */,
@@ -1524,6 +1526,7 @@
 				C72FB0612E06C441002755F6 /* LabInfoViewModel.swift */,
 				C7E6988C2E38D6CB00F8F373 /* LabReviewViewModel.swift */,
 				C7E6988E2E38E6F800F8F373 /* LabFavoriteViewModel.swift */,
+				C7C657DC2CFD6891009FFA8E /* FavLabViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1785,6 +1788,7 @@
 				C76A86552DFC966B00E2322F /* LabReviewListView.swift in Sources */,
 				C77B49722D7B66D600005ABE /* CommonTextFieldView.swift in Sources */,
 				C7EF6A0D2DDDF74800BB9C9B /* FreeFavBoardTableViewCell.swift in Sources */,
+				C76B45CA2E65C73B00B20C21 /* HomeReactor.swift in Sources */,
 				C70105E42DE76A8100042072 /* PostWritingView.swift in Sources */,
 				C7D64B372DD7851F00DD34A0 /* BoardView.swift in Sources */,
 				91D4133D2D826B2000020CEC /* CompleteView.swift in Sources */,
@@ -2023,7 +2027,7 @@
 				C7FD93782D2AE5290084DC9C /* AlarmViewModel.swift in Sources */,
 				C729F0F82DE1B0CF00AAABB6 /* PostDetailView.swift in Sources */,
 				4168E84C2C68ACC500A0F292 /* ResearchTopicDataManager.swift in Sources */,
-				C70C313C2D5CC2DC00F17D72 /* HomeReactor.swift in Sources */,
+				C70C313C2D5CC2DC00F17D72 /* ProfileReactor.swift in Sources */,
 				C76BB2332D12CCA9003755E8 /* UnivSearchViewController.swift in Sources */,
 				C79A76242DDB7DF000EABA15 /* EnterMenuCollectionViewCell.swift in Sources */,
 				C709CC782DFD724600F09780 /* LabReviewListTableViewCell.swift in Sources */,

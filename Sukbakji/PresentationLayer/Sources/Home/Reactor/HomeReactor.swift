@@ -2,118 +2,80 @@
 //  HomeReactor.swift
 //  Sukbakji
 //
-//  Created by jaegu park on 2/12/25.
+//  Created by jaegu park on 9/1/25.
 //
 
 import Foundation
-import ReactorKit
 import RxSwift
-import Alamofire
+import RxCocoa
+import ReactorKit
 
 final class HomeReactor: Reactor {
-    let initialState = State()
-    let apiService = APIService()
-    private var viewModel = UnivViewModel()
-    
     enum Action {
-        case getUserName
-        case getViewSchedule
-        case getMemberID
+        case viewWillAppear
     }
-
     enum Mutation {
-        case setUserName(MyProfile)
-        case setViewSchedule(UpComing?)
-        case setUnivName(String)
-        case setMemberID(Int)
-        case setError(String)
+        case setLoading(Bool)
+        case setFavBoards([FavoriteBoard])
+        case setHotPosts([HotPost])
+        case setFavLabs([FavoriteLab])
+        case setError(String?)
+    }
+    struct State {
+        var favBoards: [FavoriteBoard] = []
+        var hotPosts: [HotPost] = []
+        var favLabs: [FavoriteLab] = []
+        var isLoading: Bool = false
+        var errorMessage: String? = nil
+        // 파생 상태(VC if/else 제거)
+        var isFavBoardEmpty: Bool { favBoards.isEmpty }
+        var isHotPostEmpty: Bool { hotPosts.isEmpty }
+        var isFavLabEmpty: Bool { favLabs.isEmpty }
     }
 
-    struct State {
-        var nameLabel: String?
-        var upComingDate: String?
-        var upComingTitle: String?
-        var memberID: Int?
-        var errorMessage: String?
-    }
-    
-    private func fetchData<T: Codable>(
-        _ type: APIResponse<T>.Type,
-        url: URLConvertible,
-        token: String,
-        mutation: @escaping (T) -> Mutation
-    ) -> Observable<Mutation> {
-        return apiService.getWithToken(of: APIResponse<T>.self, url: url, accessToken: token)
-            .asObservable()
-            .map { response in
-                if response.code == "COMMON200" {
-                    return mutation(response.result)
-                } else {
-                    return .setError(response.message)
-                }
-            }
+    let initialState = State()
+    private let homeUseCase: HomeUseCase
+    private let dirUseCase: DirectoryUseCase
+
+    init(homeUseCase: HomeUseCase, dirUseCase: DirectoryUseCase) {
+        self.homeUseCase = homeUseCase
+        self.dirUseCase = dirUseCase
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
-        guard let token = KeychainHelper.standard.read(service: "access-token", account: "user") else {
-            return .empty()
-        }
-
         switch action {
-        case .getUserName:
-            return fetchData(APIResponse<MyProfile>.self, url: APIConstants.userMypage.path, token: token) { profile in
-                    .setUserName(profile)
-            }
-        case .getViewSchedule:
-            return fetchData(APIResponse<UpComing>.self, url: APIConstants.calendarSchedule.path, token: token) { schedule in
-                return .setViewSchedule(schedule)
-            }
-            .flatMap { mutation -> Observable<Mutation> in
-                switch mutation {
-                case .setViewSchedule(let upComing):
-                    guard let first = upComing?.scheduleList.first else {
-                        return Observable.just(mutation)
-                    }
-                    return Observable.concat([
-                        Observable.just(mutation),
-                        self.viewModel.loadUnivName(univId: first.univId)
-                            .map { .setUnivName($0) }
-                    ])
-                default:
-                    return Observable.just(mutation)
-                }
-            }
-        case .getMemberID:
-            return fetchData(APIResponse<MemberId>.self, url: APIConstants.calendarMember.path, token: token) { response in
-                    .setMemberID(response.memberId)
-            }
+        case .viewWillAppear:
+            let start = Observable.just(Mutation.setLoading(true))
+            let boards = homeUseCase.fetchFavoriteBoard().asObservable()
+                .map(Mutation.setFavBoards)
+                .catch { .just(.setError($0.localizedDescription)) }
+            let posts = homeUseCase.fetchHotPost().asObservable()
+                .map(Mutation.setHotPosts)
+                .catch { .just(.setError($0.localizedDescription)) }
+            let labs = dirUseCase.fetchLabFavorite().asObservable()
+                .map(Mutation.setFavLabs)
+                .catch { .just(.setError($0.localizedDescription)) }
+            let end = Observable.just(Mutation.setLoading(false))
+            return .concat([start, .merge(boards, posts, labs), end])
         }
     }
 
     func reduce(state: State, mutation: Mutation) -> State {
-        var newState = state
+        var s = state
         switch mutation {
-        case .setUserName(let profile):
-            newState.nameLabel = (profile.name ?? "석박지") + "님, 반가워요!"
-        case .setViewSchedule(let upComing):
-            guard let first = upComing?.scheduleList.first else {
-                newState.upComingDate = "대학교를 설정하고\n일정을 확인해 보세요!"
-                newState.upComingTitle = ""
-                return newState
-            }
-            newState.upComingDate = "D-\(first.dday)"
-            newState.upComingTitle = first.content
-            
-        case .setUnivName(let univName):
-            if let title = state.upComingTitle {
-                newState.upComingTitle = "\(univName) \(title)"
-            }
-        case .setMemberID(let id):
-            newState.memberID = id
-            UserDefaults.standard.set(id, forKey: "memberID")
-        case .setError(let message):
-            newState.errorMessage = message
+        case let .setLoading(f): s.isLoading = f
+        case let .setFavBoards(v): s.favBoards = v
+        case let .setHotPosts(v):  s.hotPosts = v
+        case let .setFavLabs(v):   s.favLabs = v
+        case let .setError(msg):   s.errorMessage = msg
         }
-        return newState
+        return s
     }
 }
+
+private extension Array {
+    subscript(safe index: Index) -> Element? {
+        indices.contains(index) ? self[index] : nil
+    }
+}
+
